@@ -27,3 +27,4 @@ gem 'rdiscount', '~> 2.0.7', :platforms => [:ruby]
 gem 'nokogiri', '~> 1.5.10'
 gem 'unicode', '~> 0.4.4'
 gem 'eventmachine', '~> 1.0.4'
+gem 'celluloid', '~> 0.16.0'

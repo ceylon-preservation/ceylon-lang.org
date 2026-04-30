@@ -8,7 +8,6 @@
 /_site
 /_tmp
 /.awestruct
-/Gemfile.lock
 /.bin
 /.bundle
 
