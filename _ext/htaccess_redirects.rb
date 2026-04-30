@@ -5,17 +5,31 @@ class HtaccessRedirects
 
     rules = parse(htaccess)
     existing_paths = build_page_index(site)
+    cloudflare_lines = []
 
     rules.each do |rule|
       if rule[:wildcard]
         expand_wildcard(site, rule, existing_paths)
+        resolved_to = resolve_target_prefix(rule[:to])
+        from_path = rule[:from].start_with?('/') ? rule[:from] : "/#{rule[:from]}"
+        to_path = resolved_to.start_with?('/') ? resolved_to : "/#{resolved_to}"
+        cloudflare_lines << "#{from_path}/* #{to_path}/:splat 302"
       else
-        add_redirect(site, rule[:from], rule[:to], existing_paths)
+        from_url = rule[:from].start_with?('/') ? rule[:from] : "/#{rule[:from]}"
+        cloudflare_lines << "#{from_url} #{rule[:to]} 302"
       end
     end
+
+    generate_redirects_file(site, cloudflare_lines)
   end
 
   private
+
+  def generate_redirects_file(site, lines)
+    output_dir = site.config.output_dir
+    FileUtils.mkdir_p(output_dir)
+    File.write(File.join(output_dir, '_redirects'), lines.join("\n") + "\n")
+  end
 
   def add_redirect(site, from, to, existing_paths)
     if from.end_with?('.html')
