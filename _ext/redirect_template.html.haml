@@ -1,0 +1,11 @@
+---
+layout: nil
+---
+!!! 5
+%html
+  %head
+    %meta{ :'http-equiv' => 'refresh', :content => "0;#{page.redirect_target}" }
+    %link{ :rel => 'canonical', :href => page.redirect_target }
+  %body
+    Redirecting to
+    %a{ :href => page.redirect_target }= page.redirect_target

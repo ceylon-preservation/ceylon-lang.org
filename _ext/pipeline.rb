@@ -1,3 +1,4 @@
+require 'htaccess_redirects'
 require 'toc'
 require 'mytagger'
 require 'mypaginator'
@@ -37,6 +38,7 @@ Awestruct::Extensions::Pipeline.new do
   extension Awestruct::Extensions::MainAtomizer.new( :posts, '/blog/blog.atom' )
   extension Awestruct::Extensions::MultiAtomizer.new( :posts, 'author', '/blog/authors' )
 
+  extension HtaccessRedirects.new
   extension Awestruct::Extensions::Indexifier.new
   extension Awestruct::Extensions::MyDisqus.new
   helper Awestruct::Extensions::Partial
