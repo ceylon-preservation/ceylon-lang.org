@@ -1,0 +1,39 @@
+name: Build site
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Cache Docker image
+        uses: actions/cache@v4
+        with:
+          path: /tmp/docker-image.tar
+          key: docker-${{ hashFiles('Dockerfile', 'Gemfile', 'Gemfile.lock') }}
+
+      - name: Load cached image or build
+        run: |
+          if [ -f /tmp/docker-image.tar ]; then
+            docker load < /tmp/docker-image.tar
+          else
+            docker build -t ceylon-site .
+            docker save ceylon-site > /tmp/docker-image.tar
+          fi
+
+      - name: Build site
+        run: just build
+
+      - name: Upload site artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: _site/
