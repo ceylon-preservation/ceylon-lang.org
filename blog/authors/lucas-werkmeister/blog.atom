@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<feed xml:lang="en-US" xmlns="http://www.w3.org/2005/Atom">
+  <id>http://localhost:4242/blog/lucas-werkmeister/</id>
+  <title>Blog of Lucas Werkmeister</title>
+  <updated>2016-07-18T00:00:00+00:00</updated>
+  <link href="http://localhost:4242/blog/authors/lucas-werkmeister/blog.atom" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4242/" rel="alternate" type="text/html" />
+  <entry>
+    <id>http://localhost:4242/blog/2016/07/18/typescript-status-report</id>
+    <title>Status Report: Ceylon TypeScript Loader GSoC project</title>
+    <updated>2016-07-18T00:00:00+00:00</updated>
+    <link href="http://localhost:4242/blog/2016/07/18/typescript-status-report" rel="alternate" type="text/html" />
+    <author>
+      <name>Lucas Werkmeister</name>
+    </author>
+    <summary>
+      TL;DR: coming along, won’t be done in time for official GSoC deadline, I’ll just keep working.
+      
+      (Note: this is a GSoC status report.
+      The entire project is work in progress, and if you’re looking for a something finished, you’ll have to wait until the project is released, at which point there will be a proper announcement.)
+      
+      For this year’s Google Summer of Code, I am working on adding TypeScript support to the Ceylon JavaScript backend.
+      The goal is to have a tool that, given a TypeScript module (one or more files), produces a Ceylon module for the JavaScript backend.
+      The JS code of that module...
+    </summary>
+    <content type="html">
+      &lt;p&gt;TL;DR: coming along, won’t be done in time for official GSoC deadline, I’ll just keep working.&lt;/p&gt;
+      
+      &lt;p&gt;(Note: this is a GSoC status report.
+      The entire project is work in progress, and if you’re looking for a something finished, you’ll have to wait until the project is released, at which point there will be a proper announcement.)&lt;/p&gt;
+      
+      &lt;p&gt;For this year’s Google Summer of Code, I am working on adding TypeScript support to the Ceylon JavaScript backend.
+      The goal is to have a tool that, given a TypeScript module (one or more files), produces a Ceylon module for the JavaScript backend.
+      The JS code of that module will just be the TypeScript compiler’s output (plus possibly some metamodel stuff),
+      but the tool will also add model information that will allow you to use the TypeScript module from Ceylon like any other Ceylon module,
+      without needing to use &lt;code&gt;dynamic&lt;/code&gt; blocks or having to declare your own dynamic interfaces.&lt;/p&gt;
+      
+      &lt;p&gt;I actually started work on this tool a few months before GSoC, in January this year.
+      I wrote the first iteration of the program in TypeScript in order to be able to interact with the TypeScript compiler
+      (which is also written in TypeScript).
+      The goal of that first iteration is just to be able to load the TypeScript compiler itself,
+      so that I can then use that module (&lt;code&gt;tsc&lt;/code&gt;) from Ceylon
+      and write the second (and probably final) iteration of the program in Ceylon.&lt;/p&gt;
+      
+      &lt;p&gt;This first iteration of the program was mostly finished,
+      at least good enough that I could start writing the second iteration,
+      shortly after the GSoC work period officially started.
+      I had hoped to start with the second iteration exactly at the start of GSoC,
+      but while there had been good progress with my own simple test module,
+      &lt;code&gt;tsc&lt;/code&gt; held a couple of nasty surprises that I hadn’t anticipated and that I had to work around.
+      It also turned out that I had made a couple of very bad decisions early on:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;
+      &lt;p&gt;I chose to operate on the parsed syntax tree instead of the typechecker model.
+      How I ever expected this to work, I have no idea, but problems quickly became obvious:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;When I see a type reference, like &lt;code&gt;Element&lt;/code&gt;, I have to know if this refers to a type parameter,
+      a type from the same module, or perhaps one from another module.
+      The type I store in the model must be fully qualified.&lt;/li&gt;
+      &lt;li&gt;To represent a type with type arguments, the JS model lists the type arguments along with their type parameter name.
+      So to transform a type like &lt;code&gt;Array&amp;lt;string&amp;gt;&lt;/code&gt;, I have to know that &lt;code&gt;Array&lt;/code&gt;’s first type parameter is called &lt;code&gt;Element&lt;/code&gt;.&lt;/li&gt;
+      &lt;li&gt;TypeScript features type inference.
+      Of course, I have to know the inferred type so that I can put it into the model.&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;p&gt;To get a first version out quickly, I just wrote directly to the &lt;code&gt;-model.js&lt;/code&gt; file.
+      The model is mostly JSON, so this meant some ugly manual comma management
+      when it turned out there are some declarations where I don’t emit anything
+      (such as index signatures).&lt;/p&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;p&gt;There are some lovely commit messages in the &lt;a href=&quot;https://github.com/lucaswerkmeister/ctsl/commits&quot;&gt;git log&lt;/a&gt;,
+      with phrases like “totally hacky”, “should be enough for now”,
+      “this is where it all falls apart”, “add fake support”, “horrible hack”, and
+      “How could I possibly ever think that it’s possible to write this loader without access to tsc’s model, purely based on the AST?”
+      I am very glad that I get to learn from these mistakes in the second iteration :)&lt;/p&gt;
+      
+      &lt;p&gt;Now, writing the second iteration also turned out to be trickier than I’d thought.
+      I had (still have) a Ceylon version of the TypeScript compiler, the &lt;code&gt;tsc&lt;/code&gt; module,
+      but it’s difficult to work with from Ceylon.
+      Two problems mainly held me up:&lt;/p&gt;
+      
+      &lt;ol&gt;
+      &lt;li&gt;TypeScript supports optional members: &lt;code&gt;{ name?: string }&lt;/code&gt; is the type of a value that might have a member &lt;code&gt;name&lt;/code&gt; (containing a &lt;code&gt;string&lt;/code&gt;),
+      but might also have no such member (&lt;code&gt;undefined&lt;/code&gt;).
+      The Ceylon runtime doesn’t like this at all and breaks in many different and difficult-to-debug ways;
+      the only solution I found was to not emit such members at all.
+      To access them without “attribute does not exist” typechecker errors,
+      I use &lt;code&gt;eval&lt;/code&gt; inside &lt;code&gt;dynamic&lt;/code&gt; blocks, which leads us to the second problem.&lt;/li&gt;
+      &lt;li&gt;Whenever a dynamic value (such as the return value of an &lt;code&gt;eval&lt;/code&gt; call) is assigned to a Ceylon type,
+      the runtime “dresses” the value with the type that it’s being assigned to (adds RTTI).
+      If this is not the most precise type of the value
+      (say, you dressed the value with &lt;code&gt;Node&lt;/code&gt; and later want to use it as a &lt;code&gt;VariableDeclaration&lt;/code&gt;),
+      you have to jump through some hoops to fix this – a simple &lt;code&gt;assert (is VariableDeclaration node)&lt;/code&gt; won’t work,
+      since Ceylon doesn’t like to narrow these dressed types.&lt;/li&gt;
+      &lt;/ol&gt;
+      
+      
+      &lt;p&gt;I now have workarounds for both problems, but they took a while to find,
+      and of course I shouldn’t have to work around them in the first place,
+      so I’ll have to teach the Ceylon JS backend to “do the right thing” eventually.
+      (I also have to do that in many other cases, since the Ceylon JS “ABI” differs significantly from plain JS –
+      Ceylon classes aren’t instantiated with &lt;code&gt;new&lt;/code&gt;, toplevel values compile to functions, arrays aren’t arrays, etc. etc.)&lt;/p&gt;
+      
+      &lt;p&gt;Right now, the second iteration supports:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;toplevel values,&lt;/li&gt;
+      &lt;li&gt;toplevel functions (no parameters), and&lt;/li&gt;
+      &lt;li&gt;the &lt;code&gt;string&lt;/code&gt; type.&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;p&gt;That’s it. &lt;em&gt;But&lt;/em&gt;, unlike the first iteration, it supports this without needing to add any JS code
+      (I’ve already taught the compiler to access the toplevel values as values and not functions).
+      Currently, some JS code is added (metamodel stuff), but I’m not sure if I’ll actually keep that.
+      We could say that what, are you crazy, why would TypeScript modules support the metamodel?,
+      and then the JS file would just be the unaltered &lt;code&gt;tsc&lt;/code&gt; output, and the tool would only add the &lt;code&gt;-model.js&lt;/code&gt; file.
+      This would probably make working with declaration files easier
+      (where the JS isn’t generated by &lt;code&gt;tsc&lt;/code&gt; – one of many problems I haven’t even begun to think about yet).&lt;/p&gt;
+      
+      &lt;p&gt;I’m fairly confident that I’ll be able to add support for most “basic” features –
+      type references and other primitive types, type parameters and arguments, parameters,
+      classes, interfaces, methods, attributes – without too much trouble.
+      After that, all bets are off.
+      TypeScript supports some crazy features, like string types (&lt;code&gt;&quot;foo&quot; | &quot;bar&quot; | &quot;baz&quot;&lt;/code&gt; is a valid type)
+      and type guards (&lt;code&gt;pet is Fish&lt;/code&gt; is a valid return type, a weird inversion of Ceylon’s &lt;code&gt;is Fish pet&lt;/code&gt; conditions),
+      and I have no idea how well we can support them.
+      I will also need to make more changes to the JS backend and runtime,
+      and I don’t know how difficult those will be.&lt;/p&gt;
+      
+      &lt;p&gt;There are about four weeks left before the official GSoC deadline, and I’ll be on vacation for one of them.
+      I hope that the “basic” support will be done until then, but there’s zero chance that the project will be in shippable state.
+      I’m not too worried about that – I’ve worked on the project before GSoC started, I’ll continue to work on it after GSoC ends,
+      just like I did with &lt;code&gt;ceylon.ast&lt;/code&gt; two years ago.
+      And, just like two years ago, I should have more time after GSoC ends,
+      because GSoC is actually scheduled pretty weirdly for me,
+      where I still have lectures for most of it and it barely overlaps with my semester break.
+      I should be free to work on this project for most of August, September, and the first half of October,
+      and hope to arrive at something that can actually be released somewhere before the end of that period.&lt;/p&gt;
+    </content>
+  </entry>
+</feed>

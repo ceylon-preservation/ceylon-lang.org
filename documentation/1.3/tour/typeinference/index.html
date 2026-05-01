@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Type aliases and type inference</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.3/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.3/tour">Tour of Ceylon</a></h3>
+            
+            <ol>
+            <li><a href="/documentation/1.3/tour/basics">Basics</a></li>
+            <li><a href="/documentation/1.3/tour/classes">Classes</a></li>
+            <li><a href="/documentation/1.3/tour/attributes-control-structures">Attributes and variables, control structures</a></li>
+            <li><a href="/documentation/1.3/tour/inheritance">Inheritance, refinement, and interfaces</a></li>
+            <li><a href="/documentation/1.3/tour/anonymous-member-classes">Anonymous and member classes</a></li>
+            <li><a href="/documentation/1.3/tour/sequences">Streams, sequences, and tuples</a></li>
+            <li><a href="/documentation/1.3/tour/typeinference">Type aliases and type inference</a></li>
+            <li><a href="/documentation/1.3/tour/types">Union, intersection, and enumerated types</a></li>
+            <li><a href="/documentation/1.3/tour/generics">Generics</a></li>
+            <li><a href="/documentation/1.3/tour/modules">Packages and modules</a></li>
+            <li><a href="/documentation/1.3/tour/functions">Functions</a></li>
+            <li><a href="/documentation/1.3/tour/named-arguments">Named arguments</a></li>
+            <li><a href="/documentation/1.3/tour/comprehensions">Comprehensions</a></li>
+            <li><a href="/documentation/1.3/tour/language-module">Language module</a></li>
+            <li><a href="/documentation/1.3/tour/initialization">Initialization and constructors</a></li>
+            <li><a href="/documentation/1.3/tour/annotations">Annotations and the metamodel</a></li>
+            <li><a href="/documentation/1.3/tour/interop">Interoperation with Java</a></li>
+            <li><a href="/documentation/1.3/tour/dynamic">Dynamic typing and interoperation with JavaScript</a></li>
+            </ol>
+            
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.3/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.3/examples">Examples</a></h3>
+            
+            <!-- ### [Tutorial videos](/documentation/1.3/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.3/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.3/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.3/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.3/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide_for_intellij"><a href="/documentation/1.3/ide/intellij">Ceylon IDE for IntelliJ</a></h3>
+            
+            <h3 id="ceylon_ide_for_eclipse"><a href="/documentation/1.3/ide/eclipse">Ceylon IDE for Eclipse</a></h3>
+            
+            <h3 id="vertx"><a href="http://vertx.io/docs/vertx-core/ceylon/">Vert.x</a></h3>
+          </div>
+          <div class="point-dark-bottom">
+             
+          </div>
+          <div class="point-light-top"></div>
+          <div class="toc">
+            <ul>
+<li><a href="#type_aliases">Type aliases
+            </a></li>
+<li><a href="#member_class_aliases_and_class_alias_refinement">Member class aliases and class alias refinement
+            </a></li>
+<li><a href="#type_inference">Type inference
+            </a></li>
+<ul>
+<li><a href="#_left_to_right_type_inference">"Left to right" type inference
+            </a></li>
+<li><a href="#type_inference_for_streams">Type inference for streams
+            </a></li>
+<li><a href="#gotcha">Gotcha!
+            </a></li>
+<li><a href="#anonymous_classes_and_type_inference">Anonymous classes and type inference
+            </a></li>
+<li><a href="#tip_explicitly_specifying_an_anonymous_class_type">Tip: explicitly specifying an anonymous class type
+            </a></li>
+</ul>
+<li><a href="#there_s_more">There's more...
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+          </div>
+          <div class="point-light-end"></div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Tour of Ceylon
+          </div>
+        </div>
+        <div id="core-page">
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.3/tour/typeinference.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.3/tour/typeinference.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="type_aliases_and_type_inference">Type aliases and type inference</h1>
+          
+          <p id="this_is_the_seventh_step...">This is the seventh step in the Tour of Ceylon. The
+          <a href="../sequences">previous installment</a> introduced various kinds of iterable
+          objects. Now it's time to explore Ceylon's type system in more detail.</p>
+          
+          <p id="in_this_chapter_were_going...">In this chapter, we're going to discuss <em>type aliases</em> and <em>local type
+          inference</em>, two features of the language that help reduce the verbosity
+          of statically typed code.</p>
+          
+          <h2 id="type_aliases">Type aliases
+          </h2>
+          
+          
+          <p id="its_often_useful_to_provide...">It's often useful to provide a shorter or more semantic name to an existing
+          class or interface type, especially if the class or interface is a
+          parameterized type. For this, we use a <em>type alias</em>.</p>
+          
+          <p id="to_define_an_alias_for...">To define an alias for a class or interface, we use a fat arrow, for example:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>interface People =&gt; Set&lt;Person&gt;;
+</code></pre>
+          
+          <p id="a_class_alias_must_declare...">A class alias must declare its formal parameters:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:ArrayList -->
+          
+          
+          <pre data-language="ceylon"><code>class People({Person*} people) =&gt; ArrayList&lt;Person&gt;(people);
+</code></pre>
+          
+          <p id="if_you_need_to_create...">If you need to create an alias for a union or intersection type you have to
+          use the <code>alias</code> keyword:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>alias Num =&gt; Float|Integer;
+</code></pre>
+          
+          <p id="note_the_reason_for_the...">Note: the reason for the difference in syntax is that we can extend or
+          satisfy a class or interface alias, but we can't inherit from a type alias
+          declared using the <code>alias</code> keyword.</p>
+          
+          <p id="a_type_alias_may_be...">A type alias may be parameterized, and have type constraints, which we'll
+          <a href="../generics/#generic_type_constraints">learn about later</a>:</p>
+          
+          <!-- try-post:
+              Named<Float> zero = Named("Zero", 0.0);   
+          -->
+          
+          
+          <pre data-language="ceylon"><code>class Named&lt;Value&gt;(String name, Value val) 
+        given Value satisfies Object
+        =&gt; Entry&lt;String,Value&gt;(name,val);
+</code></pre>
+          
+          <p id="type_aliases_help_us_reduce...">Type aliases help us reduce verbosity, because instead of repeatedly writing
+          out the same generic type, for example <code>Set&lt;Person&gt;</code>, we can use a snappier
+          alias, such as <code>People</code>. But in some cases, as we're about to see below,
+          Ceylon lets us omit the type altogether.</p>
+          
+          <p id="a_toplevel_type_alias_or...">A toplevel type alias or a type alias belonging to a class or interface may
+          be <code>shared</code>.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared interface People =&gt; Set&lt;Person&gt;;
+</code></pre>
+          
+          <h2 id="member_class_aliases_and_class_alias_refinement">Member class aliases and class alias refinement
+          </h2>
+          
+          
+          <p id="when_it_comes_to_class...">When it comes to class aliases, Ceylon has one more trick up its sleeves.
+          Cast your mind back to what we learned about member classes in the
+          <a href="../anonymous-member-classes#member_classes_and_member_class_refinement">fifth leg of the tour</a>.
+          What we saw there with ordinary classes also applies to class aliases.</p>
+          
+          <p id="a_type_alias_may_be_nested...">A type alias may be nested inside a class or interface. In the case of a
+          class alias, it is considered a member of the class or interface:</p>
+          
+          <pre data-language="ceylon"><code>class BufferedReader(Reader reader)
+        satisfies Reader {
+    shared default class Buffer()
+        =&gt; MutableList&lt;Character&gt;();
+    ...
+}
+</code></pre>
+          
+          <p id="now_if_the_class_alias...">Now, if the class alias is annotated <code>default</code>, it may be refined, either
+          by an inner alias of a subclass of the original aliased class:</p>
+          
+          <pre data-language="ceylon"><code>class BufferedFileReader(File file)
+        extends BufferedReader(FileReader(file)) {
+    shared actual class Buffer()
+        =&gt; MutableLinkedList&lt;Character&gt;();
+    ...
+}
+</code></pre>
+          
+          <p id="or_by_an_inner_subclass...">Or by an inner subclass of the original aliased class:</p>
+          
+          <pre data-language="ceylon"><code>class BufferedFileReader(File file)
+        extends BufferedReader(FileReader(file)) {
+    shared actual class Buffer()
+            extends super.Buffer() {  
+        ...
+    }
+    ...
+}
+</code></pre>
+          
+          <p id="alternatively_we_could_have_written...">(Alternatively, we could have written <code>extends MutableList&lt;Character&gt;()</code>
+          instead of <code>extends super.Buffer()</code>, since both expression refer to the
+          same class type.)</p>
+          
+          <h2 id="type_inference">Type inference
+          </h2>
+          
+          
+          <p id="so_far_weve_always_been...">So far, we've always been explicitly specifying the type of every declaration.
+          This generally makes code, especially example code, much easier to read and
+          understand.</p>
+          
+          <p id="however_ceylon_does_have_the...">However, Ceylon does have the ability to infer the type of a local variable
+          or the return type of a local method. Just place the keyword <code>value</code> (in the
+          case of a local value) or <code>function</code> (in the case of a local function) in
+          place of the type declaration.</p>
+          
+          <!-- try-pre:
+              Float pi = 3.14159;
+              class Polar(Float angle, Float radius) {}
+          
+          -->
+          
+          
+          <!-- cat-id: Point -->
+          
+          
+          <!-- cat-id: Polar -->
+          
+          
+          <!-- cat: Float pi = 3.14159; -->
+          
+          
+          <!-- cat: void m() { -->
+          
+          
+          <pre data-language="ceylon"><code>value polar = Polar(pi, 2.0);
+value operators = { "+", "-", "*", "/" };
+function add(Integer x, Integer y) =&gt; x+y;
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="there_are_some_restrictions_applying...">There are some restrictions applying to this feature. You can't use <code>value</code>
+          or <code>function</code>:</p>
+          
+          <ul>
+          <li>for declarations annotated <code>shared</code>,</li>
+          <li>for declarations annotated <code>formal</code>,</li>
+          <li>to declare a parameter, or</li>
+          <li>for a <a href="../basics/#fat_arrows_and_forward_declaration">forward declaration</a>,
+          where the value is specified later in the block of statements.</li>
+          </ul>
+          
+          
+          <p id="note_this_last_restriction_will...">(Note, this last restriction will be removed in a future version of the
+          language!)</p>
+          
+          <h3 id="_left_to_right_type_inference">"Left to right" type inference
+          </h3>
+          
+          
+          <p id="these_restrictions_mean_that_ceylons...">These restrictions mean that Ceylon's type inference rules are quite simple.
+          Type inference is purely "right-to-left" and "top-to-bottom". The type of any
+          expression is already known without needing to look to any types declared
+          to the left of the <code>=</code> specifier, or further down the block of statements.</p>
+          
+          <ul>
+          <li>The inferred type of a reference declared <code>value</code> is just the type of the
+          expression assigned to it using <code>=</code>.</li>
+          <li>The inferred type of a getter declared <code>value</code> is just the union of the
+          returned expression types appearing in the getter's <code>return</code> statements
+          (or <code>Nothing</code> if the getter has no <code>return</code> statement).</li>
+          <li>The inferred type of a method declared <code>function</code> is just the union of the
+          returned expression types appearing in the method's <code>return</code> statements
+          (or <code>Nothing</code> if the method has no <code>return</code> statement).</li>
+          </ul>
+          
+          
+          <p id="for_example">For example:</p>
+          
+          <pre data-language="ceylon"><code>function parseIntegerOrFloat(String text) {
+    if ('.' in text) {
+        return parseFloat(text);
+    }
+    else {
+        return parseInteger(text);
+    }
+}
+</code></pre>
+          
+          <p id="the_inferred_return_type_of...">The inferred return type of <code>parseIntegerOrFloat()</code> is <code>Integer|Float?</code>,
+          since <code>parseInteger()</code> returns <code>Integer?</code> and <code>parseFloat()</code> returns
+          <code>Float?</code>.</p>
+          
+          <h3 id="type_inference_for_streams">Type inference for streams
+          </h3>
+          
+          
+          <p id="what_about_iterable_enumeration_expressions...">What about iterable enumeration expressions like this, which we first
+          <a href="../sequences/#streams_iterables">met in the last chapter</a>:</p>
+          
+          <!-- try-pre:
+              abstract class Point() of Polar | Cartesian { }
+              class Polar(radius, angle) extends Point() {
+                  shared Float radius;
+                  shared Float angle;
+              }
+              class Cartesian(x, y) extends Point() {
+                  shared Float x;
+                  shared Float y;
+              }
+          
+          -->
+          
+          
+          <!-- cat-id: Point -->
+          
+          
+          <!-- cat-id: Polar -->
+          
+          
+          <!-- cat: void m() { -->
+          
+          
+          <pre data-language="ceylon"><code>value coords  = { Polar(0.0, 0.0), Cartesian(1.0, 2.0) };
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="what_type_is_inferred_for...">What type is inferred for <code>coords</code>? You might answer:</p>
+          
+          <blockquote><p id="x_where_x_is_the..."><code>{X+}</code> where <code>X</code> is the common superclass or super-interface
+          of all the element types.</p></blockquote>
+          
+          <p id="but_that_cant_be_right...">But that can't be right, since there might be more than one common
+          supertype, and supertypes have no well-defined linearization (order).</p>
+          
+          <p id="the_correct_answer_is_that...">The correct answer is that the inferred type is <code>{X+}</code> where <code>X</code> is the
+          union of all the element expression types. In this case, the type is
+          <code>{Polar|Cartesian+}</code>.</p>
+          
+          <p id="now_since_iterablet_is_covariant...">Now, since <code>Iterable&lt;T&gt;</code> is
+          <a href="../generics#covariance_and_contravariance">covariant</a> in <code>T</code>, and since
+          a union type is the most precise common supertype of any two types, it
+          turns out that <code>coords</code> is of type <code>{X+}</code> <em>for every</em> <code>X</code> in the set of
+          common supertypes of the element types. That this even works out is due
+          to a property of Ceylon's type system called <em>principal typing</em>.</p>
+          
+          <p id="thus_the_following_code_is...">Thus, the following code is well-typed:</p>
+          
+          <!-- try-pre:
+              abstract class Point() of Polar | Cartesian { }
+              class Polar(radius, angle) extends Point() {
+                  shared Float radius;
+                  shared Float angle;
+              }
+              class Cartesian(x, y) extends Point() {
+                  shared Float x;
+                  shared Float y;
+              }
+          
+          -->
+          
+          
+          <!-- cat-id: Point -->
+          
+          
+          <!-- cat-id: Polar -->
+          
+          
+          <!-- cat: void m() { -->
+          
+          
+          <pre data-language="ceylon"><code>value coords =
+        { Polar(0.0, 0.0), 
+          Cartesian(1.0, 2.0) }; //type {Polar|Cartesian+}
+{Point+} points = coords;
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="as_is_the_following_code">As is the following code:</p>
+          
+          <!-- try-post:
+              print(numbers);
+          -->
+          
+          
+          <!-- cat: void m() { -->
+          
+          
+          <pre data-language="ceylon"><code>value nums = { 12.0, 1, -3, "0" }; //type {Float|Integer|String+}
+{Object+} objects = nums;
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="what_about_iterables_that_produce...">What about iterables that produce <code>null</code>s? Well, do you
+          <a href="../basics#dealing_with_objects_that_arent_there">remember</a> the type of
+          <code>null</code> was <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Null.type.html"><code>Null</code></a>?</p>
+          
+          <!-- try-post:
+              print(str);
+          -->
+          
+          
+          <!-- cat: void m() { -->
+          
+          
+          <pre data-language="ceylon"><code>{String?*} strings = { null, "Hello", "World" };
+String? str = strings.first;
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="the_type_of_the_attribute...">The type of the attribute <code>first</code> of <code>Iterable&lt;Element&gt;</code> is <code>Element?</code>.
+          Here, we have an <code>Iterable&lt;String?&gt;</code>. Substituting <code>String?</code> for <code>Element</code>,
+          we get the type <code>String??</code>, that is, <code>Null|Null|String</code>, which is simply
+          <code>Null|String</code>, written <code>String?</code>. Of course, since the compiler can figure
+          out that kind of thing for us, we could have simply written:</p>
+          
+          <!-- try-post:
+              print(str);
+          -->
+          
+          
+          <!-- cat: void m() { -->
+          
+          
+          <pre data-language="ceylon"><code>value strings = { null, "Hello", "World" }; //type {Null|String|String+} i.e. {String?+}
+value str = strings.first; //type String?
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="the_same_thing_works_out...">The same thing works out for sequences:</p>
+          
+          <!-- try-post:
+              print(str);
+          -->
+          
+          
+          <!-- cat: void m() { -->
+          
+          
+          <pre data-language="ceylon"><code>value strings = [null, "Hello", "World"]; //type [Null,String,String]
+value str = strings[0]; //type String?
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="its_interesting_just_how_useful...">It's interesting just how useful union types turn out to be. Even if you only
+          rarely write code with explicit union type declarations, they're still there,
+          under the covers, helping the compiler solve some hairy, otherwise-ambiguous,
+          typing problems.</p>
+          
+          <p id="note_that_what_weve_just...">Note that what we've just seen is really just a special case of the algorithm
+          Ceylon uses for <em>generic type argument inference</em>, and all of the above works
+          just as well for <a href="../generics">user-written generic types</a> as it does for
+          <code>Iterable</code>.</p>
+          
+          <h3 id="gotcha">Gotcha!
+          </h3>
+          
+          
+          <p id="very_occasionally_this_collapsing_behavior...">Very occasionally, this "collapsing" behavior of unions of <code>Null</code>s—that
+          <code>Null|Null|T</code> is just <code>Null|T</code>—is inconvenient. Imagine that we wanted
+          to have a <code>Map</code> that distinguished between:</p>
+          
+          <ul>
+          <li>a key for which the map has no entry, and</li>
+          <li>a key for which the map has an entry with a no item.</li>
+          </ul>
+          
+          
+          <p id="we_might_try_to_use...">We might try to use a <code>Map&lt;String,Item?&gt;</code> for this. But then <code>map.get(key)</code>
+          would simply return <code>null</code> in <em>both</em> of the above cases, so how could we
+          distinguish between them? One way would be to call <code>map.defines(key)</code>, but
+          that would result in an additional lookup.</p>
+          
+          <p id="in_practice_what_we_actually...">In practice, what we actually do is call
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Map.type.html#getOrDefault"><code>Map.getOrDefault()</code></a>,
+          but, for the sake of argument, let's pretend that <code>getOrDefault()</code> isn't there,
+          and ask how else we could solve the problem.</p>
+          
+          <p id="theres_two_idioms_that_we...">There's two idioms that we could use to handle this situation. The first uses
+          a "wrapper" object for each entry:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>class Maybe(shared Item? item) {}
+Map&lt;String,Maybe&lt;Item&gt;&gt; map 
+        = HashMap&lt;String,Maybe&lt;Item&gt;&gt;();
+
+void put(String key, Item? item) 
+        =&gt; map.put(key, Maybe(item));
+
+Item? get(String key, Item? defaultItem) {
+    if (exists maybe = map[key]) {
+        return maybe.item;
+    }
+    else {
+        //no entry
+        return defaultItem;
+    }
+}
+</code></pre>
+          
+          <p id="the_second_idiom_is_more...">The second idiom is more efficient. It uses the unit type pattern:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>abstract class Nil() of nil {}
+object nil extends Nil() {}
+Map&lt;String,Item|Nil&gt; map 
+        = HashMap&lt;String,Item|Nil&gt;();
+
+void put(String key, Item? item) 
+        =&gt; map.put(key, item else nil);
+
+Item? get(String key, Item? defaultItem) {
+    if (!is Nil item = map[key]) {
+        return item else defaultItem;
+    }
+    else {
+        //entry with no item
+        return null;
+    }
+}
+</code></pre>
+          
+          <p id="these_idioms_sometimes_arise_in...">These idioms sometimes arise in problems like caching.</p>
+          
+          <h3 id="anonymous_classes_and_type_inference">Anonymous classes and type inference
+          </h3>
+          
+          
+          <p id="since_an_anonymous_class_arent...">Since an anonymous class aren't supposed to be referred to be name,
+          Ceylon replaces anonymous classes with the intersection of their
+          supertypes when performing type inference:</p>
+          
+          <pre data-language="ceylon"><code>interface Foo {}
+interface Bar {}
+object foobar satisfies Foo &amp; Bar {}
+value fb = foobar; //inferred type Basic&amp;Foo&amp;Bar
+value fbs = { foobar, foobar }; //inferred type {Basic&amp;Foo&amp;Bar+}
+</code></pre>
+          
+          <p id="if_we_want_to_avoid...">If we want to avoid this behavior, we can't use type inference.</p>
+          
+          <h3 id="tip_explicitly_specifying_an_anonymous_class_type">Tip: explicitly specifying an anonymous class type
+          </h3>
+          
+          
+          <p id="if_you_really_need_to...">If you <em>really</em> need to the exact type of the the anonymous class,
+          you'll need to specify the type explicitly.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>\Ifoobar fb = foobar; //inferred type Basic&amp;Foo&amp;Bar
+{\Ifoobar+} fbs = { foobar, foobar }; //inferred type {Basic&amp;Foo&amp;Bar+}
+</code></pre>
+          
+          <p id="its_extremely_rare_that_this...">It's <em>extremely</em> rare that this is useful.</p>
+          
+          <h2 id="there_s_more">There's more...
+          </h2>
+          
+          
+          <p id="next_well_explore_some_more...">Next we'll explore some more details of the type system, starting with
+          <a href="../types">union types, intersection types, enumerated types, and type switching</a>.
+          Then, after that, we'll be ready to discuss <a href="../generics">generic types</a>.</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

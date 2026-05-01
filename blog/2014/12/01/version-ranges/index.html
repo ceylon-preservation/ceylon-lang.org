@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Useless lying version ranges</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2014/11/03/plan/">New features coming soon</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2014/12/29/destructuring/">Tuple and entry destructuring</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="useless_lying_version_ranges">
+            Useless lying version ranges
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              01 Dec 2014
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/modularity/">
+                modularity
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <p id="a_frequent_request_from_the...">A frequent request from the Ceylon community is support for
+            version ranges in expressing module dependencies. There's no
+            doubt that our current module system is too inflexible in
+            terms of dependency resolution in the face of version
+            conflicts, and I have some reasonable ideas about how to
+            address that problem without needing version ranges. But I
+            would like to document precisely why I think version ranges
+            are strictly-speaking useless at best, and harmful at worst.</p>
+            
+            <p id="first_a_philosophical_point_version...">First, a philosophical point: version ranges encourage module
+            authors to make untested or untestable claims about their
+            modules, such as:</p>
+            
+            <blockquote><p id="mymodule_is_compatible_with_otherdependency..."><code>my.module</code> is compatible with  <code>other.dependency</code>
+            version 2.x.</p></blockquote>
+            
+            <p id="yeah_right_cos_youve_actually...">Yeah, right, 'cos you've <em>actually tested</em> <code>my.module</code> with
+            every single minor version and point release of
+            <code>other.dependency</code>, including all the versions that have not
+            even been released yet! Sorry, but I simply don't believe
+            you and I have to assume you're lying to me. <em>Almost nobody</em>
+            tests their program or library with many different versions
+            of its dependencies, and it's easy to see why they don't: as
+            soon as we have a program with several dependencies, we face
+            a factorial explosion of dependency version combinations.</p>
+            
+            <p id="ok_sure_you_might_argue...">OK, sure, you might argue, but version ranges are still
+            <em>better than nothing</em>. Alright, alright. I'm not the kind of
+            guy who much buys into the notion that something broken is
+            better than nothing, but I realize I'm in the minority on
+            that one, 'cos, y'know, <em>worse is better</em>, as the neckbeards
+            keep telling me.</p>
+            
+            <p id="so_lets_see_what_we...">So let's see what we could do to make the most of version
+            ranges. Let's consider the problem first from the point of
+            view of two library authors assigning version ranges to their
+            modules, and then from the point of view of the program or
+            person assembling these modules.</p>
+            
+            <p id="lets_suppose_my_library_xy...">Let's suppose my library <code>x.y</code> depends on <code>org.hibernate</code>. I
+            tested and released <code>x.y</code> with the then-current version of
+            <code>org.hibernate</code>, which was <code>4.1.3</code>. What version range would
+            I have chosen when declaring this dependency?</p>
+            
+            <ul>
+            <li>Well, for the lower bound I decided to lie and write
+            <code>4.1.0</code>. Typically, I hadn't actually <em>tested</em> <code>x.y</code> with
+            versions <code>4.1.0</code>, <code>4.1.1</code> and <code>4.1.2</code>, but I had been
+            using <code>4.1.2</code> in development at one stage and it seemed to
+            work, and I didn't see any particular reason it wouldn't
+            also work with <code>4.1.0</code> and <code>4.1.1</code>. On the other hand,
+            maybe I could have just picked <code>4.1.3</code>. (It's not going to
+            matter for the rest of this argument.)</li>
+            <li>For the upper bound, I had no clue. How could I possibly
+            have known at the time which future unreleased version of
+            <code>org.hibernate</code> would break my library? Assigning the
+            upper bound of <code>4.1.3</code> would have seemed much too
+            restrictive, so what I did was assume that <code>org.hibernate</code>
+            is following the completely untestable
+            <a href="http://semver.org/">semantic versioning</a> standard, and
+            that future versions of Hibernate 4.x would not have any
+            bugs.</li>
+            </ul>
+            
+            
+            <p id="thus_i_arrived_at_the...">Thus, I arrived at the version range <code>4.[1.0-]</code> using some
+            imaginary syntax I just pulled out of my ahem, excuse me,
+            invented for the sake of argument.</p>
+            
+            <p id="a_critical_thing_to_notice...">A critical thing to notice here is that, from the point of
+            view of the library authors, there is <em>no reasonable way to
+            determine an accurate upper bound to the version range</em>.
+            This is utterly typical and normal and is the case for
+            almost any library author!</p>
+            
+            <p id="now_sometime_later_you_released...">Now, sometime later, you released your library <code>a.b</code>, which
+            also depends on <code>org.hibernate</code>. At this point, the current
+            release of <code>org.hibernate</code> was <code>4.2.0</code>. Quite atypically,
+            you actually <em>do</em> test your library with a previous version
+            of its dependency, and so you know that it is actually
+            compatible with <code>4.1.5</code> (the latest release of <code>4.1.x</code>).
+            Thus, you arrive at the version range <code>4.[1.5-]</code>.</p>
+            
+            <p id="now_suppose_some_poor_soul...">Now suppose some poor soul wants to use both our libraries
+            together in their program, thus taking advantage of the bugs
+            in both of them. So now, when assembling the program, what
+            version of  <code>org.hibernate</code> should the module system choose.
+            Let's consider the reasonable options:</p>
+            
+            <ul>
+            <li>Pick the latest release that fits the version ranges, that
+            is, the latest release of 4.x. This approach means that a
+            new release of <code>org.hibernate</code> can break our application.
+            We're picking a release which hasn't been tested with
+            either <code>x.y</code> or <code>a.b</code>. Not acceptable.</li>
+            <li>Pick the earliest release that fits the version ranges, in
+            this case <code>4.1.5</code>. This is better. At least there's a
+            chance that one of the libraries (in this case, <code>a.b</code>) has
+            actually been tested with this version. Still, according
+            to this strategy the system could in general pick a
+            dependency version that's earlier than all the current
+            versions when the libraries were developed. That seems
+            quite suboptimal.</li>
+            <li>Pick 4.2.0, since that was the current version of
+            <code>org.hibernate</code> when one of the libraries was developed,
+            so we <em>know for a fact</em> that it works with at least one of
+            the libraries, and it's newer that the version that the
+            other library was developed with. This seems to me like
+            it's by far the most robust and natural strategy.</li>
+            </ul>
+            
+            
+            <p id="there_are_some_variations_on...">There are some variations on this scenario, which raise
+            other possible choices, and I'm going to let you experiment
+            with the variations yourself, and see how it affects the
+            conclusion. But as far as I can tell, there's essentially
+            no common scenario in which the third strategy isn't at
+            least as good as any other possible strategy.</p>
+            
+            <p id="and_now_note_that_this...">And now note that this third strategy doesn't actually use
+            version ranges at all! We can write down this strategy
+            without reference to version ranges. It just says: pick the
+            latest version of the dependency among the versions with
+            which the libraries were developed. Version ranges don't
+            really add any useful additional information to that,
+            especially in light of the fact that upper bounds are
+            essentially impossible to determine, and even lower bounds
+            often lie. Why inject additional inaccurate information into
+            the mix when we already have an algorithm that produces a
+            result without depending on guesses and lies and
+            unverifiable assumptions? (I apologize for going all logical
+            positivist on your arse.)</p>
+            
+            <p id="what_do_you_think_am...">What do you think? Am I wrong? Is there some reasonably
+            common scenario where the module system can be expected to
+            produce a better outcome with the addition of version range
+            information? Is there a scenario in which upper bound
+            information <em>doesn't</em> lie? Is there a strategy involving
+            version ranges that is unambiguously better than my
+            admittedly unsophisticated "pick the latest version"
+            approach?</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2014/12/01/version-ranges/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Positional argument lists</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.3/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.3/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.3/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.3/examples">Examples</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.3/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.3/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.3/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.3/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.3/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide_for_intellij"><a href="/documentation/1.3/ide/intellij">Ceylon IDE for IntelliJ</a></h3>
+            
+            <h3 id="ceylon_ide_for_eclipse"><a href="/documentation/1.3/ide/eclipse">Ceylon IDE for Eclipse</a></h3>
+            
+            <h3 id="vertx"><a href="http://vertx.io/docs/vertx-core/ceylon/">Vert.x</a></h3>
+          </div>
+          <div class="point-dark-bottom">
+             
+          </div>
+          <div class="point-light-top"></div>
+          <div class="toc">
+            <ul>
+<li><a href="#usage">Usage
+            </a></li>
+<li><a href="#description">Description
+            </a></li>
+<ul>
+<li><a href="#listed_arguments">Listed arguments
+            </a></li>
+<li><a href="#spread_arguments">Spread arguments
+            </a></li>
+<li><a href="#comprehension_arguments">Comprehension arguments
+            </a></li>
+</ul>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+          </div>
+          <div class="point-light-end"></div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+          </div>
+        </div>
+        <div id="core-page">
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.3/reference/expression/positional-argument-list.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.3/reference/expression/positional-argument-list.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="positional_argument_lists">Positional argument lists</h1>
+          
+          <p id="a_positional_argument_list_is...">A positional argument list is not an expression itself,
+          but is used in the formation of
+          <a href="../invocation/">invocation expressions</a> and <a href="../tuple/">tuple</a> and
+          <a href="../iterable/">iterable</a> enumerations.</p>
+          
+          <h2 id="usage">Usage
+          </h2>
+          
+          
+          <p id="a_positional_argument_list_is_simply...">A <em>positional argument list</em> is simply a series of expressions, separated by
+          commas. This example shows a positional invocation of a <code>put</code> function:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>put(1, "one");
+</code></pre>
+          
+          <h2 id="description">Description
+          </h2>
+          
+          
+          <p id="the_position_of_each_argument...">The position of each argument within the argument list identifies the
+          corresponding parameter in the
+          <a href="../../structure/parameter-list">parameter list</a> of the <code>Callable</code>
+          being invoked. This is in contrast to named argument lists,
+          where the correspondence between argument and parameter is
+          done using the parameter's name.</p>
+          
+          <p id="there_are_three_kinds_of...">There are three kinds of argument that can appear in a
+          positional argument list</p>
+          
+          <ul>
+          <li>
+<a href="#listed_arguments">listed arguments</a>,</li>
+          <li>
+<a href="#spread_arguments">spread arguments</a>,</li>
+          <li><a href="#comprehension_arguments">comprehension arguments</a></li>
+          </ul>
+          
+          
+          <h3 id="listed_arguments">Listed arguments
+          </h3>
+          
+          
+          <p id="listed_arguments_are_simply_expressions...">Listed arguments are simply expressions which
+          are evaluated to give the argument to the corresponding parameter.</p>
+          
+          <pre data-language="ceylon"><code>print("hello world");
+HashSet(1, 2, 3);
+</code></pre>
+          
+          <p id="if_the_last_parameter_is...">If the last parameter is
+          <a href="../../structure/parameter-list#variadic_methods_and_varargs">variadic</a>
+          then it can accept multiple
+          listed arguments (for example, in the <code>HashSet</code> instantiation
+          above).</p>
+          
+          <h3 id="spread_arguments">Spread arguments
+          </h3>
+          
+          
+          <p id="a_spread_argument_assigns_the...">A spread argument assigns the elements of an iterable or tuple object to
+          <em>one or more</em> parameters. Spread arguments are distinguished from
+          normal listed arguments by a preceeding star (<code>*</code>):</p>
+          
+          <pre data-language="ceylon"><code>HashSet(*elements);
+</code></pre>
+          
+          <p id="spread_arguments_are_useful_when...">Spread arguments are useful when you have an iterable or
+          sequential reference which you want to pass as the argument to
+          a <a href="../../structure/parameter-list#variadic_methods_and_varargs">variadic parameter</a>.
+          Since you cannot use listed arguments
+          (because you don't know what the elements of the reference are)
+          you have to use a spread.</p>
+          
+          <p id="a_spread_iterable_can_assigns...">A spread <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Iterable.type.html"><code>Iterable</code></a>
+          can assigns a single <code>Iterable</code> argument to a variadic parameter:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>void spreadIterable(String* names) {
+    // note names is a variadic parameter
+}
+
+{String*} names = { "Tom", "Gavin" };
+
+// Invocation using listed arguments
+spreadIterable("Tom", "Gavin");
+
+// Invocation using a spread iterable argument
+spreadIterable(*names);
+</code></pre>
+          
+          <p id="if_the_argument_is_not...">If the argument is not already assignable to <code>Sequential</code> it is converted
+          to a <code>Sequential</code> before being passed to the function (because
+          within a variadic function, the variadic parameter has
+          <code>Sequential</code> or <code>Sequence</code> type, depending on the varidacity).</p>
+          
+          <p id="you_can_also_spread_a...">You can also spread a <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Tuple.type.html"><code>Tuple</code></a>
+          over <em>more than one</em> parameter. In other words a single argument can be used to
+          provide the values of more than one parameter:</p>
+          
+          <p id="unlike_iterable_arguments_spreading_tuple...">Unlike <code>Iterable</code> arguments, Spreading <code>Tuple</code> arguments is not just
+          limited to invocations with variadic parameters:</p>
+          
+          <pre data-language="ceylon"><code>print(*["hello world"]);
+</code></pre>
+          
+          <p id="it_works_with_variadic_parameters...">It works with <a href="../../structure/parameter-list#variadic_methods_and_varargs">variadic parameters</a>
+          too, of course:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>void spreadTuple(String name, Integer* numbers) {
+    // note numbers is a variadic parameter
+}
+
+[String, Integer] tup = ["Tom", 1234];
+
+// A spread tuple
+spreadTuple(*tup);
+
+// Variations
+spreadTuple(*["Dick"]);
+spreadTuple(*["Harry", 123, 466]);
+spreadTuple(*["Alice"]);
+spreadTuple("Eve", *[123, 466]);
+</code></pre>
+          
+          <h3 id="comprehension_arguments">Comprehension arguments
+          </h3>
+          
+          
+          <p id="a_comprehension_is_a_shorthand...">A comprehension is a shorthand way of creating an
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Iterable.type.html"><code>Iterable</code></a>
+          to be passed as an argument.</p>
+          
+          <pre data-language="ceylon"><code>Integer sum({Integer*} values) {
+    // ...
+}
+
+value sumOfEvens = sum(for (x in 0..50) 2*x);
+</code></pre>
+          
+          <p id="the_values_produced_by_the...">The values produced by the iterable are constructed using
+          <code>for</code> and <code>if</code> clauses and an expression:</p>
+          
+          <ul>
+          <li>A <code>for</code> clause introduces an iteration variable and a
+          source iterable.</li>
+          <li>An <code>if</code> clause specifies a condition used to filter
+          values from the resulting <code>Iterable</code>.</li>
+          <li>The expression transforms the iteration variable(s)</li>
+          </ul>
+          
+          
+          <p id="so_in_the_example_above">So in the example above:</p>
+          
+          <pre data-language="ceylon"><code>value sumOfEvens = sum(
+    for (x in 0..50) // the source iterable is 0..50
+        2*x); // the expression doubles the iteration variable
+</code></pre>
+          
+          <p id="we_could_produce_the_same...">We could produce the same stream of even numbers like this:</p>
+          
+          <pre data-language="ceylon"><code>value sumOfEvens = sum(
+    for (x in 0..100) // the source iterable is 0..100
+        if (x%2 == 0) // we select only the even numbers
+            x); // and the expression is the number we selected
+</code></pre>
+          
+          <p id="comprehensions_with_multiple_for_and...">Comprehensions with multiple <code>for</code> and <code>if</code> clauses are permitted:</p>
+          
+          <pre data-language="ceylon"><code>sum(
+    for (x in 0..100)
+        for (y in 0..x)
+            x*y);
+</code></pre>
+          
+          <p id="the_iterables_created_by_comprehension...">The <code>Iterable</code>s created by comprehension arguments are <em>lazy</em>,
+          so each element is only evaluated when required.</p>
+          
+          <p id="it_is_common_to_use...">It is common to use a comprehension argument in an
+          <a href="../iterable">iterable enumeration</a>:</p>
+          
+          <pre data-language="ceylon"><code>value names = {for (person in people) person.name};
+</code></pre>
+          
+          <p id="comprehensions_support_destructuring">Comprehensions support <a href="../../statement/destructure">destructuring</a>:</p>
+          
+          <pre data-language="ceylon"><code>value distances = {for ([x, y] in points) sqrt(x^2+y^2)};
+</code></pre>
+          
+          <p id="since_ceylon_122_for_comprehensions...">Since Ceylon 1.2.2 <code>for</code> comprehensions support iteration over Java <code>java.lang::Iterable</code>s
+          and array types.</p>
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li>The reference on <a href="../invocation">invocation</a>
+</li>
+          <li>The reference on <a href="../named-argument-list/">named argument lists</a>
+</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

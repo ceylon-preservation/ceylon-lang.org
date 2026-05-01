@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Building with Maven</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.3/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.3/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.3/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.3/examples">Examples</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.3/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.3/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.3/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.3/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.3/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide_for_intellij"><a href="/documentation/1.3/ide/intellij">Ceylon IDE for IntelliJ</a></h3>
+            
+            <h3 id="ceylon_ide_for_eclipse"><a href="/documentation/1.3/ide/eclipse">Ceylon IDE for Eclipse</a></h3>
+            
+            <h3 id="vertx"><a href="http://vertx.io/docs/vertx-core/ceylon/">Vert.x</a></h3>
+          </div>
+          <div class="point-dark-bottom">
+             
+          </div>
+          <div class="point-light-top"></div>
+          <div class="toc">
+            <ul>
+<li><a href="#configuring_maven_for_a_ceylon_module">Configuring Maven for a Ceylon module
+            </a></li>
+<li><a href="#dependencies">Dependencies
+            </a></li>
+<li><a href="#inter_project_dependencies">Inter-project dependencies
+            </a></li>
+<li><a href="#tests">Tests
+            </a></li>
+<li><a href="#jvm_or_javascript_backend">JVM or JavaScript backend
+            </a></li>
+<li><a href="#overriding_phases">Overriding phases
+            </a></li>
+<li><a href="#depending_on_ceylon_herd_modules">Depending on Ceylon Herd modules
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+          </div>
+          <div class="point-light-end"></div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+          </div>
+        </div>
+        <div id="core-page">
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.3/reference/interoperability/maven.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.3/reference/interoperability/maven.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="building_with_maven">Building with Maven</h1>
+          
+          <p id="you_can_build_your_ceylon...">You can build your Ceylon modules with Maven if you want. This is most useful if you have a mix
+          of Java and Ceylon modules in your project, which depend on one another. Everything works out of
+          the box and the Ceylon and Java projects play together well.</p>
+          
+          <h2 id="configuring_maven_for_a_ceylon_module">Configuring Maven for a Ceylon module
+          </h2>
+          
+          
+          <p id="you_can_use_the_maven...">You can use the <a href="https://github.com/ceylon/ceylon-maven-plugin/">Maven Ceylon plugin</a> by adding these
+          lines to your <code>pom.xml</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="html"><code>&lt;build&gt;
+  &lt;plugins&gt;
+    &lt;plugin&gt;
+      &lt;groupId&gt;org.ceylon-lang&lt;/groupId&gt;
+      &lt;artifactId&gt;ceylon-maven-plugin&lt;/artifactId&gt;
+      &lt;version&gt;1.3.3&lt;/version&gt;
+      &lt;configuration&gt;
+        &lt;!-- 
+         This is required if you intend to have Java modules that depend
+         on this Ceylon module, or if you want to publish your Ceylon module
+         using Maven.
+        --&gt;
+        &lt;explode&gt;true&lt;/explode&gt;
+      &lt;/configuration&gt;
+      &lt;!-- This plugs the Ceylon plugin into the compile, compileTest, test phases --&gt;
+      &lt;extensions&gt;true&lt;/extensions&gt;
+    &lt;/plugin&gt;
+  &lt;/plugins&gt;
+&lt;/build&gt;
+</code></pre>
+          
+          <p id="the_maven_ceylon_plugin_will...">The Maven Ceylon plugin will hook into your regular Maven lifecycles to compile modules, tests
+          and run tests.</p>
+          
+          <p id="just_place_your_ceylon_module...">Just place your Ceylon module in the <code>src/main/ceylon</code> source folder, but make sure that the
+          module coordinates defined in the <code>pom.xml</code> and the <code>module.ceylon</code> match. For example, if you
+          define your Ceylon module as <code>com.foo.bar</code> then your <code>groupId</code> should be <code>com.foo</code> and your
+          <code>artifactId</code> should be <code>bar</code>. If you want to customize your Maven coordinates you can do it too:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>module com.foo.bar
+ maven:"my-group:my-artifact" 
+ "1.2"{} 
+</code></pre>
+          
+          <p id="note_that_you_can_only...">Note that you can only define a single Ceylon module per Maven module if you intend to publish
+          the module using Maven. The plugin supports defining more than one Ceylon module per Maven module
+          but that is not the recommended workflow.</p>
+          
+          <h2 id="dependencies">Dependencies
+          </h2>
+          
+          
+          <p id="all_dependencies_declared_in_the...">All dependencies declared in the Ceylon module descriptor should be present in the <code>pom.xml</code> as well,
+          because Maven will use the <code>pom.xml</code> when publishing the module to Maven repositories and so the <code>compile</code>
+          phase of the plugin will check that they are equal.</p>
+          
+          <p id="the_implicit_ceylonlanguage_dependency_also...">The implicit <code>ceylon.language</code> dependency also has to be explicitly declared in your <code>pom.xml</code>.</p>
+          
+          <p id="for_example_the_following_ceylon...">For example, the following Ceylon module:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>module com.foo.bar
+ maven:"my-group:my-artifact" 
+ "1.2"{
+ import ceylon.collection "1.3.3";
+} 
+</code></pre>
+          
+          <p id="should_be_declared_like_this...">Should be declared like this in your <code>pom.xml</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="html"><code>&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;groupId&gt;my-group&lt;/groupId&gt;
+  &lt;artifactId&gt;my-artifact&lt;/artifactId&gt;
+  &lt;version&gt;1.2&lt;/version&gt;
+  &lt;packaging&gt;jar&lt;/packaging&gt;
+  &lt;name&gt;my-artifact&lt;/name&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.ceylon-lang&lt;/groupId&gt;
+      &lt;artifactId&gt;ceylon.collection&lt;/artifactId&gt;
+      &lt;version&gt;1.3.3&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.ceylon-lang&lt;/groupId&gt;
+      &lt;artifactId&gt;ceylon.language&lt;/artifactId&gt;
+      &lt;version&gt;1.3.3&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+  &lt;build&gt;
+    &lt;plugins&gt;
+      &lt;plugin&gt;
+        &lt;groupId&gt;org.ceylon-lang&lt;/groupId&gt;
+        &lt;artifactId&gt;ceylon-maven-plugin&lt;/artifactId&gt;
+        &lt;version&gt;1.3.3&lt;/version&gt;
+        &lt;configuration&gt;
+          &lt;explode&gt;true&lt;/explode&gt;
+        &lt;/configuration&gt;
+        &lt;extensions&gt;true&lt;/extensions&gt;
+      &lt;/plugin&gt;
+    &lt;/plugins&gt;
+  &lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+          
+          <h2 id="inter_project_dependencies">Inter-project dependencies
+          </h2>
+          
+          
+          <p id="to_make_your_ceylon_module...">To make your Ceylon module depend on another Maven module, simply declare the
+          dependency in your <code>pom.xml</code> as you would normally, and in the <code>module.ceylon</code>
+          descriptor as a regular dependency:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="html"><code>&lt;dependency&gt;
+  &lt;groupId&gt;my-group&lt;/groupId&gt;
+  &lt;artifactId&gt;other-module&lt;/artifactId&gt;
+  &lt;version&gt;1.2&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+          
+          <p id="and">And:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>module com.foo.bar
+ maven:"my-group:my-artifact" 
+ "1.2"{
+ import maven:"my-group:other-module" "1.2";
+} 
+</code></pre>
+          
+          <p id="to_make_another_java_module...">To make another Java module depend on your Ceylon module, simply declare the
+          dependency in your <code>pom.xml</code> as you would normally:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="html"><code>&lt;dependency&gt;
+  &lt;groupId&gt;my-group&lt;/groupId&gt;
+  &lt;artifactId&gt;my-artifact&lt;/artifactId&gt;
+  &lt;version&gt;1.2&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+          
+          <h2 id="tests">Tests
+          </h2>
+          
+          
+          <p id="declare_your_test_module_in...">Declare your test module in <code>src/test/ceylon</code> and run <code>mvn test</code>, which will invoke the <code>ceylon test</code>
+          tool on your test module. You can generate reports as usual with:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="html"><code>&lt;reporting&gt;
+  &lt;plugins&gt;
+    &lt;plugin&gt;
+      &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+      &lt;artifactId&gt;maven-surefire-report-plugin&lt;/artifactId&gt;
+      &lt;version&gt;2.19.1&lt;/version&gt;
+    &lt;/plugin&gt;
+  &lt;/plugins&gt;
+&lt;/reporting&gt;
+</code></pre>
+          
+          <p id="note_that_your_test_modules...">Note that your test module's coordinates or dependencies do not need to match the dependencies declared
+          in the <code>pom.xml</code>, so you don't need to declare any <code>test</code> dependencies in the <code>pom.xml</code>.</p>
+          
+          <h2 id="jvm_or_javascript_backend">JVM or JavaScript backend
+          </h2>
+          
+          
+          <p id="the_maven_ceylon_plugin_supports...">The Maven Ceylon plugin supports both JVM and JS modules, either single-backend or multi-backend.</p>
+          
+          <h2 id="overriding_phases">Overriding phases
+          </h2>
+          
+          
+          <p id="the_maven_ceylon_plugin_will_hook...">The Maven Ceylon plugin will hook into the proper phases by default, but you can override them by
+          specifying the set of phases:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="html"><code>&lt;execution&gt;
+  &lt;goals&gt;
+    &lt;goal&gt;compile&lt;/goal&gt;
+    &lt;goal&gt;compile-js&lt;/goal&gt;
+    &lt;goal&gt;testCompile&lt;/goal&gt;
+    &lt;goal&gt;testCompile-js&lt;/goal&gt;
+    &lt;goal&gt;test&lt;/goal&gt;
+    &lt;goal&gt;test-js&lt;/goal&gt;
+  &lt;/goals&gt;
+&lt;/execution&gt;
+</code></pre>
+          
+          <p id="see_the_maven_ceylon_plugin...">See the <a href="for%20more%20information">Maven Ceylon plugin documentation</a>.</p>
+          
+          <h2 id="depending_on_ceylon_herd_modules">Depending on Ceylon Herd modules
+          </h2>
+          
+          
+          <p id="sometimes_ceylon_herd_will_have...">Sometimes Ceylon Herd will have modules not published in Maven Central, but you can use Herd
+          as a Maven repository by adding this to your <code>pom.xml</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="html"><code>&lt;repositories&gt;
+  &lt;repository&gt;
+    &lt;id&gt;herd&lt;/id&gt;
+    &lt;name&gt;Herd Maven repo&lt;/name&gt;
+    &lt;url&gt;https://modules.ceylon-lang.org/maven/1/&lt;/url&gt;
+  &lt;/repository&gt;
+&lt;/repositories&gt;
+</code></pre>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

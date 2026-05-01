@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Ceylon IDE M3.2 released</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2012/08/13/latest-news/">Latest news</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2012/09/13/destructuring/">Destructuring considered harmful</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="ceylon_ide_m32_released">
+            Ceylon IDE M3.2 released
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/stephane-epardaud/">Stéphane Épardaud</a>
+            </div>
+            <div class="date">
+              16 Aug 2012
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/release/">
+                release
+              </a>
+              <a href="/blog/tags/progress/">
+                progress
+              </a>
+              <a href="/blog/tags/m3/">
+                M3
+              </a>
+              <a href="/blog/tags/ide/">
+                ide
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <p id="gavin_sjur_and_tomáš_have...">Gavin, Sjur and Tomáš have been hard at work all summer to deliver a much-improved version
+            of the Ceylon IDE. This release support exactly the same language constructs and features
+            the same JVM backend compiler as the M3.1 release, so it's 100% compatible with it. But
+            while the backend is the same, the UI is much improved, as you can see from the following
+            change log and screen shots.</p>
+            
+            <h2 id="no_more_dependence_on_imp">No more dependence on IMP</h2>
+            
+            <p id="we_recommend_removing_imp_from...">We recommend removing IMP from your Eclipse installation.</p>
+            
+            <h2 id="ceylon_explorer_view">Ceylon Explorer view</h2>
+            
+            <p id="the_ceylon_explorer_view_presents...">The <em>Ceylon Explorer View</em> presents packages as children of the
+            containing modules. You should reset your <em>Ceylon Perspective</em> after
+            updating the IDE on order to get the <em>Ceylon Explorer</em> in place of JDT's
+            <em>Package Explorer</em>.</p>
+            
+            <p class="screenshot" id="">
+                <img src="/images/screenshots/m3.2/explorer-view.png" title="Ceylon Explorer view">
+            </p>
+            
+            
+            <h2 id="awesome_documentation_hover">Awesome documentation hover</h2>
+            
+            <p id="hover_over_the_name_of...">Hover over the name of a Ceylon or Java declaration to see the
+            gorgeous new hover info. Click in it to browse to other related
+            declarations.</p>
+            
+            <p class="screenshot">
+                <img src="/images/screenshots/m3.2/hover-popup.png" title="Documentation hover">
+            </p>
+            
+            
+            <h2 id="code_popup">Code popup</h2>
+            
+            <p id="ctrl_p_or_show_code..."><code>Ctrl-P</code>, or "Show Code" pops up an information control containing
+            the code of the referenced declaration. <code>Ctrl-P</code> again opens an
+            editor. Hyperlink navigation from the Code popup is also possible.</p>
+            
+            <p class="screenshot">
+                <img src="/images/screenshots/m3.2/source-popup.png" title="Source popup">
+            </p>
+            
+            
+            <h2 id="hierarchy_and_outline_popups">Hierarchy and Outline popups</h2>
+            
+            <p id="as_before_ctrl_t_and...">As before, <code>Ctrl-T</code> and <code>Ctrl-O</code> open the popup <em>Hierarchy</em> and
+            <em>Outline</em> views. These now look a lot prettier, and they are also more
+            functional. You can filter the contents by typing inside them, and
+            they remember their bounds. The <em>Hierarchy View</em> is also much better
+            integrated with Java stuff. <code>Ctrl-T</code> inside the open <em>Hierarchy View</em>
+            cycles between <em>Hierarchy View</em>, <em>Supertypes View</em>, and <em>Subtypes
+            View</em>. These popups have configurable background colors.</p>
+            
+            <p class="screenshot">
+                <img src="/images/screenshots/m3.2/type-hierarchy-popup.png" title="Hierarchy popup">
+                <img src="/images/screenshots/m3.2/outline-popup.png" title="Outline popup">
+            </p>
+            
+            
+            <h2 id="auto_addition_of_needed_imports">Auto-addition of needed imports</h2>
+            
+            <p id="refactorings_quick_fixes_and_autocompletions...">Refactorings, quick fixes, and autocompletions now add any needed
+            imports to the top of the source file. In addition, autocompletion
+            will propose declarations from any imported module, even if the
+            package is not imported in the current unit.</p>
+            
+            <h2 id="new_quick_fixesassists">New Quick Fixes/Assists</h2>
+            
+            <p id="thanks_to_sjur_and_tomáš...">Thanks to Sjur and Tomáš, we now have some new quick fixes and assists:</p>
+            
+            <ul>
+            <li>convert if/else to then/else, then/else to if/else</li>
+            <li>invert if/else</li>
+            <li>add type constraint to type parameter</li>
+            </ul>
+            
+            
+            <h2 id="clean_imports">Clean Imports</h2>
+            
+            <p id="clean_imports_now_automatically_fills..."><em>Clean Imports</em> now automatically fills in missing imports if
+            unambiguous, and prompts the user to choose a declaration to import if
+            ambiguous.</p>
+            
+            <h2 id="terminate_statement">Terminate Statement</h2>
+            
+            <p id="ctrl_2_adds_any_necessary..."><code>Ctrl-2</code> adds any necessary semicolon, closing parens, and closing
+            braces to terminate the statement at the current line. This feature is
+            almost magical in how good it is at guessing where the closing
+            punctuation needs to go.</p>
+            
+            <h2 id="mark_occurrences">Mark occurrences</h2>
+            
+            <p id="occurrence_marking_is_now_enabled...">Occurrence marking is now enabled by default and works like JDT (the
+            declaration to highlight is the one under the caret).</p>
+            
+            <p class="screenshot">
+                <img src="/images/screenshots/m3.2/highlight.png" title="Mark occurences">
+            </p>
+            
+            
+            <h2 id="proposals_popups">Proposals popups</h2>
+            
+            <p id="completions_proposals_and_quick_fixassist...">Completions proposals and quick fix/assist proposal popups now have
+            syntax highlighting. Typing a "." automatically activates the
+            completion proposal window. When only one completion proposal is
+            available, it is automatically applied.</p>
+            
+            <p class="screenshot">
+                <img src="/images/screenshots/m3.2/completion.png" title="Completion popup">
+            </p>
+            
+            
+            <h2 id="select_enclosingrestore_previous_selection">Select Enclosing/Restore Previous Selection</h2>
+            
+            <p id="ctrl_shift_up_expands_the..."><code>Ctrl-shift-up</code> expands the selection to the containing expression or
+            program element. <code>Ctrl-shift-down</code> takes you back to the previous
+            selection.</p>
+            
+            <p id="also_ctrl_shift_p_takes...">Also <code>Ctrl-Shift-P</code> takes you to the matching bracket and <em>Show In</em> now works.</p>
+            
+            <p class="screenshot">
+                <img src="/images/screenshots/m3.2/expand-selection.png" title="Select enclosing selection">
+            </p>
+            
+            
+            <h2 id="outline_view">Outline View</h2>
+            
+            <p id="there_is_now_a_popup...">There is now a popup context menu on <em>Outline View</em> nodes. The selected
+            node now follows the editor caret location.</p>
+            
+            <p id="tomáš_added_a_toolbar_to...">Tomáš added a toolbar to the <em>Outline View</em>, letting you
+            filter out local declarations and expand/collapse all nodes.</p>
+            
+            <p class="screenshot">
+                <img src="/images/screenshots/m3.2/outline-view.png" title="Outline view">
+            </p>
+            
+            
+            <h2 id="open_ceylon_declaration__open_type">Open Ceylon Declaration / Open Type</h2>
+            
+            <p id="the_default_keyboard_binding_for...">The default keyboard binding for Open Ceylon Declaration is now
+            <code>Ctrl-Shift-O</code> instead of <code>Ctrl-Shift-C</code>. This is more ergonomic and
+            works even inside the Java editor. Inside the Ceylon perspective,
+            <code>Ctrl-Shift-T</code> opens the Open Type dialog, which lets you choose
+            between Ceylon <em>and</em> Java types in one dialog (a very slow-to-load
+            dialog, but hey...).</p>
+            
+            <p id="f3_open_selected_declaration_now..."><code>F3</code> (Open Selected Declaration) now handles Java declarations.</p>
+            
+            <p class="screenshot">
+                <img src="/images/screenshots/m3.2/open-type.png" title="Open type">
+            </p>
+            
+            
+            
+            
+            <p class="screenshot">
+                <img src="/images/screenshots/m3.2/open-declaration.png" title="Open declaration">
+            </p>
+            
+            
+            <h2 id="support_for_multiple_module_repositories">Support for multiple module repositories</h2>
+            
+            <p id="the_new_project_wizard_and...">The <em>New Project wizard</em> and <em>Ceylon Preferences page</em> now let you configure
+            multiple module repositories for a project.</p>
+            
+            <p class="screenshot">
+                <img src="/images/screenshots/m3.2/new-project.png" title="New project">
+            </p>
+            
+            
+            <h2 id="backend_errors">Backend errors</h2>
+            
+            <p id="errors_from_the_compiler_backend...">Errors from the compiler backend now show up in the <em>Problems View</em> and
+            vertical ruler, and compiler progress is visible in the <em>Progress View</em>
+            and status bar. The 80s-style scrolling console is gone.</p>
+            
+            <h2 id="progress">Progress</h2>
+            
+            <p id="building_the_completion_proposals_and...">Building the completion proposals and hierarchy for the first time is
+            now expensive because it involves trawling the whole JDK.
+            You get a nice progress bar in the status bar of the main window.</p>
+            
+            <h2 id="parser_lifecycle">Parser lifecycle</h2>
+            
+            <p id="code_is_lexedparsed_synchronously_on...">Code is lexed/parsed synchronously on every keypress, and
+            lexed/parsed+typechecked synchronously on every keypress when the
+            completions proposals window is open. This results in much more
+            responsive syntax highlighting and fixes some wierd behavior in the
+            completion proposals window. When the completions proposal window is
+            not open, typechecking still happens in a background job as before.</p>
+            
+            <h1 id="download_it_today">Download it today</h1>
+            
+            <p id="the_ceylon_ide_is_available...">The <a href="/documentation/current/ide">Ceylon IDE</a> is available today from our <a href="/documentation/current/ide/install">update site</a>
+            or from Eclipse Marketplace:</p>
+            
+            <table>
+                <tr>
+                    <td>
+                    <a href="http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=185799" title="Drag and drop into a running Eclipse Indigo workspace to install Ceylon IDE">
+                      <img src="http://marketplace.eclipse.org/misc/installbutton.png" style="vertical-align: middle; float: right; margin-right: 0.5em">
+                    </a>
+                    </td>
+                    <td>Ceylon IDE</td>
+                    <td>Eclipse Indigo</td>
+                    <td>
+                    <a href="http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=185799" title="Drag and drop into a running Eclipse Indigo workspace to install Ceylon IDE" style="font-weight:bold;text-decoration:none"> 
+                      drag and drop into a running Eclipse workspace
+                    </a>
+                    </td>
+                </tr>
+            </table>
+            
+            
+            <p id="after_installing_go_to_help...">After installing, go to <code>Help &gt; Welcome to Ceylon</code> to get started.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2012/08/16/ceylon-ide-m3_2/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

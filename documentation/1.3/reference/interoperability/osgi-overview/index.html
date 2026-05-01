@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Ceylon and OSGi</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.3/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.3/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.3/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.3/examples">Examples</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.3/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.3/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.3/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.3/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.3/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide_for_intellij"><a href="/documentation/1.3/ide/intellij">Ceylon IDE for IntelliJ</a></h3>
+            
+            <h3 id="ceylon_ide_for_eclipse"><a href="/documentation/1.3/ide/eclipse">Ceylon IDE for Eclipse</a></h3>
+            
+            <h3 id="vertx"><a href="http://vertx.io/docs/vertx-core/ceylon/">Vert.x</a></h3>
+          </div>
+          <div class="point-dark-bottom">
+             
+          </div>
+          <div class="point-light-top"></div>
+          <div class="toc">
+            <ul><ul>
+<li><a href="#installing_the_ceylon_distribution_and_sdk_in_an_osgi_container">Installing the Ceylon distribution and SDK in an OSGi container
+            </a></li>
+<li><a href="#osgi_metadata_management">OSGi metadata management
+            </a></li>
+<li><a href="#ceylon_metamodel_registration">Ceylon metamodel registration
+            </a></li>
+</ul></ul>
+            
+            
+            <p id=""></p>
+          </div>
+          <div class="point-light-end"></div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+          </div>
+        </div>
+        <div id="core-page">
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.3/reference/interoperability/osgi-overview.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.3/reference/interoperability/osgi-overview.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="ceylon_and_osgi">Ceylon and OSGi</h1>
+          
+          <p id="ceylon_modules_may_be_deployed...">Ceylon modules may be deployed in an OSGi container, and may
+          interoperate with native OSGi modules. For example, Ceylon IDE
+          for Eclipse is partially written in Ceylon, and integrates with
+          the Eclipse environment using OSGi.</p>
+          
+          <h3 id="installing_the_ceylon_distribution_and_sdk_in_an_osgi_container">Installing the Ceylon distribution and SDK in an OSGi container
+          </h3>
+          
+          
+          <p id="in_order_to_be_able...">In order to be able to resolve and start Ceylon module archives
+          (<code>.car</code> files) inside an OSGi container, you will first need to
+          install, in the OSGi container, all the bundles of the Ceylon
+          distribution and SDK.</p>
+          
+          <p id="these_bundles_are_available_in...">These bundles are available in a dedicated location on the
+          Ceylon language web site under various delivery forms:</p>
+          
+          <ul>
+          <li>OSGi bundle repositories (OBR and R5 XML), for Felix-based
+          containers for example,</li>
+          <li>P2 repositories for Eclipse development or deployment to
+          an Equinox container,</li>
+          <li>Zip archives for direct deployment inside containers,</li>
+          <li>Apache Karaf (aka JBoss Fuse)
+          <a href="http://karaf.apache.org/manual/latest/users-guide/provisioning.html">features</a>.</li>
+          </ul>
+          
+          
+          <p id="the_osgi_interoperability_reference_gives...">The OSGi interoperability reference gives more details about the
+          <a href="../osgi#retrieving_the_ceylon_distribution_and_sdk_for_osgi">URLs providing these packages</a>,
+          as well as
+          <a href="../osgi#installing_the_ceylon_distribution_and_sdk_in_an_osgi_container">how to install</a>
+          these bundles, for various containers.</p>
+          
+          <h3 id="osgi_metadata_management">OSGi metadata management
+          </h3>
+          
+          
+          <p id="module_archives_generated_for_execution..."><a href="./modules#module_archives_and_module_repositories">Module archives</a>
+          generated for execution on the Java virtual machine already
+          contain the OSGi metadata that can be deduced from the Ceylon
+          module descriptor.</p>
+          
+          <p id="more_precisely_for_the_following...">More precisely, for the following module descriptor:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>native("jvm") module example.pureCeylon "3.1.0" {
+    import ceylon.locale "1.2.2";
+    import java.base "7";
+    shared import ceylon.net "1.2.2";
+}
+</code></pre>
+          
+          <p id="the_following_osgi_metadata_will...">the following OSGi metadata will be automatically generated
+          in the module archive <code>META-INF/MANIFEST.MF</code> entry:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Bundle-SymbolicName: example.pureCeylon
+Bundle-Version: 3.1.0.v20160311-1742
+Export-Package: example.pureCeylon;version=3.1.0
+Require-Bundle: com.redhat.ceylon.dist;bundle-version=1.2.2;visibility
+ :=reexport,ceylon.locale;bundle-version=1.2.2,ceylon.net;bundle-versi
+ on=1.2.2;visibility:=reexport,ceylon.language;bundle-version=1.2.2;vi
+ sibility:=reexport
+Require-Capability: osgi.ee;filter:="(&amp;(osgi.ee=JavaSE)(version&gt;=1.7))"
+</code></pre>
+          
+          <p id="the_ceylon_module_imports_are...">The Ceylon module imports are translated into a <code>Require-Bundle</code>
+          header, and <code>shared</code> imports are translated into a <code>reexport</code>
+          directive. The <code>java.base "7"</code> import is translated into a
+          <code>Require-Capability</code> header that requires the same Java version.</p>
+          
+          <p id="note_that_the_comredhatceylondist_bundle...">Note that the <code>com.redhat.ceylon.dist</code> bundle is systematically
+          and implicitly added as a dependency to all generated Ceylon
+          archives.</p>
+          
+          <p id="however_it_is_also_possible...">However it is also possible to customize the OSGi metadata of
+          the generated archive in two ways:</p>
+          
+          <ol>
+          <li>Additional manifest entries or resources (such as a
+          declarative service descriptor) can be added by simply adding
+          resources as explained <a href="#meta_inf_and_web_inf">below</a>.</li>
+          <li>Module imports that correspond to <strong>dependencies provided
+          by the OSGi container</strong> (such as the OSGi framework bundle
+          or any bundle assumed to be available in the OSGi container)
+          should be omitted from the generated <code>Require-Bundle</code> header.
+          The <code>--osgi-provided-bundles=&lt;modules&gt;</code> option of the
+          <code>ceylon compile</code> command allows specifying those modules.
+          The same list can also be specified in the
+          <a href="http://www.ceylon-lang.org/documentation/1.2/reference/tool/config#_compiler_section">compiler section</a>
+          of the configuration file.</li>
+          </ol>
+          
+          
+          <p id="generally_once_omitted_from_the...">Generally, once omitted from the <code>Require-Bundle</code> header,
+          the dependencies to provided bundles should be declared in
+          an <code>Import-Package</code> header added in the
+          <a href="#meta_inf_and_web_inf"><code>MANIFEST.MF</code> resource</a>, as mentioned
+          in point 1.</p>
+          
+          <h3 id="ceylon_metamodel_registration">Ceylon metamodel registration
+          </h3>
+          
+          
+          <p id="in_order_to_be_able_to...">In order to be able to fully leverage the power of the Ceylon
+          language, the metamodel should be initialized for each module
+          used by a Ceylon application. It is automatically performed
+          when running from the command line through the <code>ceylon run</code>
+          command, but in an OSGi container it should be done when
+          starting the Ceylon module. The Ceylon OSGi distribution
+          provides an easy way to register the metamodel for a module,
+          as well as for all the modules transitively imported.</p>
+          
+          <p id="this_can_be_done_by...">This can be done by adding an OSGi activator class to the
+          Ceylon module, that performs this metamodel registration.
+          The <code>com.redhat.ceylon.dist</code> OSGi bundle, implicitly
+          required by all Ceylon modules, already provides such an
+          activator class: <code>com.redhat.ceylon.dist.osgi.Activator</code>.</p>
+          
+          <p id="so_if_you_dont_need...">So if you don't need to do anything else in your OSGi Ceylon
+          bundle at startup, you can simply add the following line to
+          your <a href="#meta_inf_and_web_inf"><code>MANIFEST.MF</code> resource</a>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Bundle-Activator: com.redhat.ceylon.dist.osgi.Activator
+</code></pre>
+          
+          <p id="alternatively_if_you_need_to...">Alternatively, if you need to perform some sort initialization
+          in your Ceylon module bundle startup, you can also define an
+          <code>Activator</code> class that will delegate to the default
+          <code>com.redhat.ceylon.dist.osgi.Activator</code>. In this case, you'll
+          need to follow these three steps.</p>
+          
+          <p id="first_explicitly_import_the_comredhatceylondist...">First, explicitly import the <code>com.redhat.ceylon.dist</code> module
+          in your module descriptor:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>native("jvm") module example.withActivator "1.0.0" {
+    shared import com.redhat.ceylon.dist "1.2.2";
+    import java.base "7";
+}
+</code></pre>
+          
+          <p id="next_add_the_following_class...">Next, add the following class to your module:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>import com.redhat.ceylon.dist.osgi {
+    DefaultActivator = Activator
+}
+import org.osgi.framework {
+    BundleContext
+}
+
+shared class Activator() extends DefaultActivator() {
+    shared actual void start(BundleContext context) {
+        // do module startup stuff
+        super.start(context); // perform the metamodel registration
+    }
+    shared actual void stop(BundleContext context) {
+        // do module shutdown stuff
+        super.stop(context);
+    }
+}
+</code></pre>
+          
+          <p id="finally_add_the_following_line...">Finally, Add the following line to your
+          <code>example/withActivator/ROOT/META-INF/MANIFEST.MF</code> resource:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Bundle-Activator: example.withActivator.Activator
+</code></pre>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

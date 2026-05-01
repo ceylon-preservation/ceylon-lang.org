@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Invocation</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.0/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.0/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.0/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="tutorial_videos"><a href="/documentation/1.0/videos">Tutorial Videos</a></h3>
+            
+            <h3 id="language_specification"><a href="/documentation/1.0/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.0/reference">Reference</a></h3>
+            
+            <ul>
+<li><a href="#usage">Usage
+            </a></li>
+<li><a href="#description">Description
+            </a></li>
+<ul>
+<li><a href="#function_and_method_invocation">Function and method invocation
+            </a></li>
+<li><a href="#class_invocation">Class invocation
+            </a></li>
+<li><a href="#indirect_invocation">Indirect invocation
+            </a></li>
+<li><a href="#multiple_argument_lists">Multiple argument lists
+            </a></li>
+<li><a href="#tuple_and_iterable_enumeration">Tuple and Iterable enumeration
+            </a></li>
+</ul>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.0/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.0/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.0/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+            <span style="color:#8d5e0b">(1.0)</span>
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_10_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.0, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <h1 id="invocation">Invocation</h1>
+          
+          <p id="invocation_is_the_act_of...">Invocation is the act of calling something that is
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/Callable.type.html"><code>Callable</code></a>.</p>
+          
+          <h2 id="usage">Usage
+          </h2>
+          
+          
+          <p id="invocation_using_a_positional_argument...">Invocation using a <em>positional argument list</em>, in parentheses:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>put(1, "one")
+</code></pre>
+          
+          <p id="invocation_using_a_named_argument...">Invocation using a <em>named argument list</em>, in braces:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>put {
+    integer=1;
+    name="one;
+}
+</code></pre>
+          
+          <h2 id="description">Description
+          </h2>
+          
+          
+          <p id="the_thing_that_is_being...">The thing that is being invoked is called the <em>primary</em> of the invocation.
+          It is followed by an <a href="../argument-list/">argument list</a>.</p>
+          
+          <p id="the_type_of_an_invocation...">The type of an invocation expression is the return type of the
+          <a href="../../structure/function#callable_type">callable type</a> of the primary.
+          For example, the return type of a function being invoked, or the type of
+          a class being instantiated.</p>
+          
+          <h3 id="function_and_method_invocation">Function and method invocation
+          </h3>
+          
+          
+          <p id="function_and_method_invocation_is...">Function and method invocation is <em>direct</em> invocation, and therefore
+          supports named argument lists.</p>
+          
+          <h3 id="class_invocation">Class invocation
+          </h3>
+          
+          
+          <p id="invoking_a_class_instantiating_it...">Invoking a class (<em>instantiating</em> it) creates a new instance of the class.</p>
+          
+          <p id="class_invocation_is_a_direct...">Class invocation is a <em>direct</em> invocation, and therefore supports
+          named argument lists.</p>
+          
+          <h3 id="indirect_invocation">Indirect invocation
+          </h3>
+          
+          
+          <p id="you_can_invoke_a_value...">You can invoke a <a href="../../structure/value/">value</a> that has a
+          <code>Callable</code> type:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Callable&lt;Anything, []&gt; fn = // ...
+Anything result = fn();
+</code></pre>
+          
+          <p id="because_the_callable_type_does...">Because the <code>Callable</code> type does not retain any information about
+          the parameter names, and cannot use a named argument invocation;
+          only positional arguments.</p>
+          
+          <p id="the_callable_type_can_encode...">The <code>Callable</code> type can encode information about
+          <a href="../../structure/parameter-list/#defaulted_parameters">defaulted parameters</a>, so the
+          invocation need not specify arguments for parameters which are defaulted:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Callable&lt;Anything, [String=]&gt; defaulted = // ...
+variable Anything result = defaulted();
+result = defaulted("an argument");
+</code></pre>
+          
+          <h3 id="multiple_argument_lists">Multiple argument lists
+          </h3>
+          
+          
+          <p id="because_a_callable_can_itself...">Because a <code>Callable</code> can itself have a <code>Callable</code> return type you sometimes see
+          invocations with multiple parameter lists:</p>
+          
+          <pre data-language="ceylon"><code>String(String)(Integer) higher = // ...
+String result = higher(1)("");
+</code></pre>
+          
+          <p id="note_that_the_type_abbreviation...">Note that the <a href="../../structure/type-abbreviation/">type abbreviation</a>
+          for <code>Callable</code> means that the argument lists appear in
+          reversed order because <code>String(String)(Integer)</code>
+          is parsed as <code>Callable&lt;Callable&lt;String, [String]&gt;, [Integer]&gt;</code></p>
+          
+          <p id="named_argument_lists_are_only...">Named argument lists are only allowed as the first argument list in
+          an invocation using multiple argument lists, because the second
+          invocation is an <a href="#indirect_invocation">indirect invocation</a>.</p>
+          
+          <h3 id="tuple_and_iterable_enumeration">Tuple and Iterable enumeration
+          </h3>
+          
+          
+          <p id="technically_tuple_and_iterable_enumerations...">Technically, <a href="../tuple">tuple</a> and <a href="../iterable/">iterable</a>
+          enumerations are also invocations.</p>
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li>
+<a href="/documentation/current/spec/html_single/index.html#invocationexpressions">Invocation expressions</a> in
+          the Ceylon language specification</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Ceylon in the browser (again)</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2016/02/11/ceylon-1-2-1/">Ceylon 1.2.1 is now available</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2016/02/22/ceylon-test-new-and-noteworthy/">ceylon.test new and noteworthy</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="ceylon_in_the_browser_again">
+            Ceylon in the browser (again)
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/bastien-jansen/">Bastien Jansen</a>
+            </div>
+            <div class="date">
+              15 Feb 2016
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/ceylon-js/">
+                ceylon-js
+              </a>
+              <a href="/blog/tags/sdk/">
+                sdk
+              </a>
+              <a href="/blog/tags/interop/">
+                interop
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <p id="as_you_might_or_might...">As you might (or might not) know, Ceylon is more than a JVM language. It has been possible to compile Ceylon code
+            to JavaScript <a href="/blog/2011/12/31/compiling-ceylon-2-js/">for a long time</a>, but other platforms
+            such as <a href="https://github.com/jvasileff/ceylon-dart">Dart</a> or <a href="https://github.com/sadmac7000/org.americanteeth.ceylon_llvm">LLVM</a>
+            are around the corner.</p>
+            
+            <p id="having_a_js_backend_means...">Having a JS backend means that you can actually write Ceylon code that can be
+            <a href="/blog/2013/02/26/ceylon-in-the-browser/">run in a web browser</a>, giving the opportunity to share code
+            between the server and the client. The <a href="https://try.ceylon-lang.org">web IDE</a> is a very good example of this. Up until now,
+            using Ceylon in a browser wasn't really straightforward though. The good news is, Ceylon 1.2.1 brought two major
+            features that overcome this problem:</p>
+            
+            <ul>
+            <li>a <a href="https://modules.ceylon-lang.org/repo/1/ceylon/net/1.2.1/module-doc/api/http/server/endpoints/RepositoryEndpoint.type.html">RepositoryEndpoint</a> in <code>ceylon.net</code> on the server side</li>
+            <li>a new JS module <a href="https://herd.ceylon-lang.org/modules/ceylon.interop.browser">ceylon.interop.browser</a> on the client side</li>
+            </ul>
+            
+            
+            <p id="lets_see_how_these_fit...">Let's see how these fit together.</p>
+            
+            <h2 id="creating_a_new_project">Creating a new project</h2>
+            
+            <p id="first_things_first_we_need...">First things first, we need an empty project that will hold two modules:</p>
+            
+            <ul>
+            <li>
+<p id="comacmeclient_is_a_nativejs_module..."><code>com.acme.client</code> is a <code>native("js")</code> module that imports <code>ceylon.interop.browser</code>:</p>
+            
+            <p id="nativejs_module_comacmeclient_100_...">  native("js")
+              module com.acme.client "1.0.0" {
+                  import ceylon.interop.browser "1.2.1-1";
+              }</p>
+</li>
+            <li>
+<p id="comacmeserver_is_a_nativejvm_module..."><code>com.acme.server</code> is a <code>native("jvm")</code> module that imports <code>ceylon.net</code>:</p>
+            
+            <p id="nativejvm_module_comacmeserver_100_...">  native("jvm")
+              module com.acme.server "1.0.0" {
+                  import ceylon.net "1.2.1";
+              }</p>
+</li>
+            </ul>
+            
+            
+            <h2 id="serving_ceylon_modules">Serving Ceylon modules</h2>
+            
+            <p id="in_order_to_run_comacmeclient...">In order to run <code>com.acme.client</code> in a browser, we have to import it from an HTML file. The recommended way is to use
+            <a href="http://requirejs.org/">RequireJS</a>:</p>
+            
+            <pre data-language="html"><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Hello from Ceylon!&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="container"&gt;
+    &lt;/div&gt;
+    &lt;script src="//requirejs.org/docs/release/2.1.22/minified/require.js"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript"&gt;
+    require.config({
+        baseUrl : 'modules'
+    });
+    require(
+            [ 'com/acme/client/1.0.0/com.acme.client-1.0.0' ],
+            function(app) {
+                app.run();
+            }
+    );
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+            
+            <p id="here_we_tell_requirejs_to...">Here, we tell RequireJS to use the prefix <code>modules</code> when downloading artifacts from the server, which means
+            we need something on a server that will listen on <code>/modules</code>, parse module names and serve the correct artifact.</p>
+            
+            <h3 id="option_1_using_a_ceylon_server">Option 1: using a Ceylon server</h3>
+            
+            <p id="ceylon_sdk_121_introduced_a...">Ceylon SDK 1.2.1 introduced a new endpoint named <code>RepositoryEndpoint</code>, that uses a <code>RepositoryManager</code> to look
+            up module artifacts in one or more Ceylon repositories, like the compiler or Ceylon IDE do:</p>
+            
+            <pre data-language="ceylon"><code>import ceylon.net.http.server.endpoints {
+    RepositoryEndpoint
+}
+import ceylon.net.http.server {
+    newServer
+}
+
+"Run the module `com.acme.server`."
+shared void run() {
+    value modulesEp = RepositoryEndpoint("/modules");
+    value server = newServer { modulesEp };
+
+    server.start();
+}
+</code></pre>
+            
+            <p id="by_default_this_endpoint_will...">By default, this endpoint will look for artifacts in your local Ceylon repository, but also in the compiler's output
+            directory. This greatly simplifies our development workflow, because each time we modify files in <code>com.acme.client</code>,
+            Ceylon IDE will rebuild the JS artifacts, which can then be immediately refreshed in the browser.</p>
+            
+            <p id="finally_to_serve_static_files...">Finally, to serve static files (HTML, CSS, images etc), we need a second endpoint that uses <code>serveStaticFile</code>
+            to look up files in the <code>www</code> folder, and serve <code>index.html</code> by default:</p>
+            
+            <pre data-language="ceylon"><code>function mapper(Request req) 
+        =&gt; req.path == "/" then "/index.html" else req.path;
+
+value staticEp = AsynchronousEndpoint(
+    startsWith("/"), 
+    serveStaticFile("www", mapper),
+    {get}
+);
+
+value server = newServer { modulesEp, staticEp };
+</code></pre>
+            
+            <p id="if_we_start_the_server...">If we start the server and open <code>http://localhost:8080/</code>, we can see in the web inspector that the modules
+            are correctly loaded:</p>
+            
+            <p id=""><img src="/images/screenshots/ceylon-browser/network.png" height="273"></p>
+            
+            <h3 id="option_2_using_static_http_servers">Option 2: using static HTTP servers</h3>
+            
+            <p id="option_1_is_interesting_if...">Option 1 is interesting if you already have a backend written in Ceylon. Otherwise, it might be a little
+            too heavy because you're basically starting a Ceylon server just to serve static files. Luckily, there's
+            a way to create a standard Ceylon repository containing a module and all its dependencies:
+            <a href="http://ceylon-lang.org/documentation/current/reference/tool/ceylon/subcommands/ceylon-copy.html"><code>ceylon copy</code></a>.</p>
+            
+            <pre data-language="shell"><code>ceylon copy --with-dependencies com.acme.client
+</code></pre>
+            
+            <p id="this_command_will_copy_the...">This command will copy the module <code>com.acme.client</code> and all its dependencies to a given folder (by default
+            <code>./modules</code>), preserving a repository layout like the one RequireJs expects. This means we can start httpd
+            or nginx and bind them directly on the project folder. Modules will be loaded from <code>./modules</code>, we just have
+            to configure the server to look for other files in the <code>www</code> directory.</p>
+            
+            <p id="attention_though_each_time_we...">Attention though, each time we modify dependencies of <code>com.acme.client</code>, we will have to run <code>ceylon copy</code> again
+            to update the local repository.</p>
+            
+            <p id="option_2_is_clearly_the...">Option 2 is clearly the way to go for client apps that don't require a backend. Like option 1, it doesn't force
+            you to publish artifacts in <code>~/.ceylon/repo</code>.</p>
+            
+            <p id="of_course_if_you_are...">Of course, if you are running a local Ceylon JS application, and your browser allows you to include files directly from
+            the filesystem, you can also avoid the HTTP server and load everything for the filesystem.</p>
+            
+            <h2 id="using_browser_apis">Using browser APIs</h2>
+            
+            <p id="now_that_we_have_bootstrapped...">Now that we have bootstrapped a Ceylon application running in a browser, it's time to do actual things
+            that leverage browser APIs. To do this, we'll use the brand new <code>ceylon.interop.browser</code> which was
+            introduced in the Ceylon SDK 1.2.1 a few days ago. Basically, it's a set of
+            <a href="/blog/2014/10/13/dynamic-interfaces/"><code>dynamic</code> interfaces</a> that
+            allow wrapping native JS objects returned by the browser in nice typed Ceylon instances. For example, this
+            interface represents the browser's <code>Document</code>:</p>
+            
+            <pre data-language="ceylon"><code>shared dynamic Document satisfies Node &amp; GlobalEventHandlers {
+    shared formal String \iURL;
+    shared formal String documentURI;
+    ...
+    shared formal HTMLCollection getElementsByTagName(String localName);
+    shared formal HTMLCollection getElementsByClassName(String classNames);
+    ...
+}
+</code></pre>
+            
+            <p id="an_instance_of_document_can...">An instance of <code>Document</code> can be retrieved via the toplevel object <code>document</code>, just like in JavaScript:</p>
+            
+            <pre data-language="ceylon"><code>shared Document document =&gt; window.document;
+</code></pre>
+            
+            <p id="note_that_window_is_also...">Note that <code>window</code> is also a toplevel instance of the dynamic interface <code>Window</code>.</p>
+            
+            <p id="ceyloninteropbrowser_contains_lots_of_interfaces..."><code>ceylon.interop.browser</code> contains lots of interfaces related to:</p>
+            
+            <ul>
+            <li><a href="https://www.w3.org/TR/dom/#nodes">DOM nodes</a></li>
+            <li><a href="https://www.w3.org/TR/dom/#events">DOM events</a></li>
+            <li><a href="https://www.w3.org/TR/dom/#traversal">DOM traversal</a></li>
+            <li><a href="https://www.w3.org/TR/XMLHttpRequest/">XMLHttpRequest</a></li>
+            </ul>
+            
+            
+            <p id="making_an_ajax_call_retrieving...">Making an AJAX call, retrieving the result and adding it to a <code>&lt;div&gt;</code> is now super easy in Ceylon:</p>
+            
+            <pre data-language="ceylon"><code>import ceylon.interop.browser.dom {
+    document,
+    Event
+}
+import ceylon.interop.browser {
+    newXMLHttpRequest
+}
+
+shared void run() {
+    value req = newXMLHttpRequest();
+
+    req.onload = void (Event evt) {
+        if (exists container = document.getElementById("container")) {
+            value title = document.createElement("h1");
+            title.textContent = "Hello from Ceylon";
+            container.appendChild(title);
+
+            value content = document.createElement("p");
+            content.innerHTML = req.responseText;
+            container.appendChild(content);
+        }
+    };
+
+    req.open("GET", "/msg.txt");
+    req.send();
+}
+</code></pre>
+            
+            <h2 id="going_further">Going further</h2>
+            
+            <p id="dynamic_interfaces_are_really_nice...">Dynamic interfaces are really nice when it comes to using JavaScript objects in Ceylon. They are somewhat
+            similar to TypeScript's <a href="https://github.com/DefinitelyTyped/DefinitelyTyped">type definitions</a>, which means
+            in theory, it is possible to use any JavaScript framework directly from Ceylon, provided that someone writes dynamic
+            interfaces for its API.</p>
+            
+            <p id="the_ceylon_team_is_currently...">The Ceylon team is currently looking for ways to <a href="https://github.com/ceylon/ceylon/issues/3041">load TypeScript definitions and make them available to Ceylon modules</a>,
+            which would greatly simplify the process of adding support for a new framework/API.</p>
+            
+            <p id="the_complete_source_code_for...">The <a href="https://github.com/bjansen/ceylon-browser-demo">complete source code</a> for this article is available on GitHub.</p>
+            
+            <p id="a_live_example_is_available...">A <a href="http://try.ceylon-lang.org/?gist=c7e291bc337b5b260de4">live example</a> is available on the Web IDE.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2016/02/15/ceylon-browser-again/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

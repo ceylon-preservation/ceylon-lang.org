@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Modules in Ceylon</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2011/07/20/progress-report/">Ceylon progress report</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2011/07/22/blog-system/">We now have a blog system and decent structure</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="modules_in_ceylon">
+            Modules in Ceylon
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              21 Jul 2011
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/design/">
+                design
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <p id="built_in_support_for_modularity...">Built-in support for <em>modularity</em> is a major goal of the Ceylon project, but what am I really
+            talking about when I use this word? Well, I suppose there's multiple layers to this:</p>
+            
+            <ol>
+            <li>Language-level support for a unit of visibility that is bigger than a package, but smaller
+            than "all packages".</li>
+            <li>A module descriptor format that expresses dependencies between specific
+            <em>versions</em> of modules.</li>
+            <li>A built-in module archive format and module repository layout that is understood by all
+            tools written for the language, from the compiler, to the IDE, to the runtime.</li>
+            <li>A runtime that features a peer-to-peer classloading (one classloader per module) and the
+            ability to manage multiple versions of the same module.</li>
+            <li>An ecosystem of remote module repositories where folks can share code with others.</li>
+            </ol>
+            
+            
+            <p id="im_not_going_to_get...">I'm not going to get into a whole lot of fine detail of this, partly because what I have written
+            down in the language spec today will probably change by the time you actually get to use any of
+            this stuff, but let me give you a taste of the overall architecture proposed.</p>
+            
+            <h3 id="module_level_visibility">Module-level visibility</h3>
+            
+            <p id="a_package_in_ceylon_may...">A package in Ceylon may be shared or unshared. An unshared package (the default) is visible
+            only to the module which contains the package. We can make the package |shared| by providing
+            a <em>package descriptor</em>:</p>
+            
+            <pre class="brush:ceylon">
+Package package { 
+    name = 'org.hibernate.query'; 
+    shared = true; 
+    doc = "The typesafe query API."; 
+}</pre>
+            
+            
+            <p id="note_the_package_descriptor_syntax...">(Note: The package descriptor syntax has since <a href="/documentation/current/tour/modules.md">changed</a></p>
+            
+            <p id="alert_readers_will_notice_that...">(Alert readers will notice that this is just a snippet of Ceylon code, using the "declarative"
+            object builder syntax.)</p>
+            
+            <p id="a_shared_package_defines_part...">A shared package defines part of the "public" API of the module. Other modules can directly
+            access <code>shared</code> declarations in a shared package.</p>
+            
+            <h3 id="module_descriptors">Module descriptors</h3>
+            
+            <p id="a_module_must_explicitly_specify...">A module must explicitly specify the other modules on which it depends. This is accomplished
+            via a <em>module descriptor</em>:</p>
+            
+            <pre class="brush:ceylon">
+Module module { 
+    name = 'org.hibernate'; 
+    version = '3.0.0.beta'; 
+    doc = "The best-ever ORM solution!"; 
+    license = 'http://www.gnu.org/licenses/lgpl.html'; 
+    Import {
+        name = 'ceylon.language'; 
+        version = '1.0.1'; 
+        export = true;
+    }, 
+    Import {
+        name = 'java.sql'; 
+        version = '4.0';
+    }
+}</pre>
+            
+            
+            <p id="note_the_module_descriptor_syntax...">(<strong>Note:</strong> The module descriptor syntax has since <a href="/documentation/current/tour/modules.md">changed</a></p>
+            
+            <p id="a_module_may_be_runnable...">A module may be <em>runnable</em>. A runnable module must specify a |run()| method in the module descriptor:</p>
+            
+            <pre class="brush:ceylon">
+Module module { 
+    name = 'org.hibernate.test'; 
+    version = '3.0.0.beta'; 
+    doc = "The test suite for Hibernate";
+    license = 'http://www.gnu.org/licenses/lgpl.html'; 
+    void run() {
+        TestSuite().run();
+    } 
+    Import {
+        name = 'org.hibernate'; version = '3.0.0.beta';
+    }
+}</pre>
+            
+            
+            <p id="note_the_module_descriptor_syntax_has...">(<strong>Note:</strong> The module descriptor syntax has since <a href="/documentation/current/tour/modules.md">changed</a></p>
+            
+            <h3 id="module_archives_and_module_repositories">Module archives and module repositories</h3>
+            
+            <p id="a_module_archive_packages_together...">A module archive packages together compiled |.class| files, package descriptors, and module
+            descriptors into a Java-style <code>jar</code> archive with the extension <code>car</code>. The Ceylon compiler
+            doesn't usually produce individual |.class| files in a directory. Instead, it directly produces
+            module archives.</p>
+            
+            <p id="module_archives_live_in_module...">Module archives live in <em>module repositories</em>. A module repository is a well-defined directory
+            structure with a well-defined location for each module. A module repository may be either <em>local</em>
+            (on the filesystem) or <em>remote</em> (on the Internet). Given a list of module repositories,
+            the Ceylon compiler can automatically locate dependencies mentioned in the module descriptor of
+            the module it is compiling. And when it finishes compiling the module, it puts the resulting module
+            archive in the right place in a local module repository.</p>
+            
+            <p id="the_architecture_also_includes_support...">(The architecture also includes support for source directories, source archives, and module
+            documentation directories, but I'm not going to cover all that today.)</p>
+            
+            <h3 id="module_runtime">Module runtime</h3>
+            
+            <p id="ceylons_module_runtime_is_based...">Ceylon's module runtime is based on <a href="http://in.relation.to/Bloggers/ModularizedJavaWithJBossModules">JBoss Modules</a>,
+            a technology that also exists at the very core of JBoss 7. Given a list of module repositories,
+            the runtime automatically locates a module archive and its versioned dependencies in the repositories,
+            even downloading module archives from remote repositories if necessary.</p>
+            
+            <p id="normally_the_ceylon_runtime_is...">Normally, the Ceylon runtime is invoked by specifying the name of a runnable module at the command line.</p>
+            
+            <h3 id="module_repository_ecosystem">Module repository ecosystem</h3>
+            
+            <p id="one_of_the_nice_advantages...">One of the nice advantages of this architecture is that it's possible to run a module
+            "straight off the internet", just by typing, for example:</p>
+            
+            <pre data-language="ceylon"><code>ceylon run org.jboss.ceylon.demo -rep http://jboss.org/ceylon/modules
+</code></pre>
+            
+            <p id="note_the_command_line_tools...">(<strong>Note:</strong> The command line tools have since <a href="/documentation/current/reference/tool/ceylon">changed</a>,
+            and the above command would now be
+            <code>ceylon run org.jboss.ceylon.demo --rep=http://jboss.org/ceylon/modules</code>)</p>
+            
+            <p id="and_all_required_dependencies_get...">And all required dependencies get automatically downloaded as needed.</p>
+            
+            <p id="red_hat_will_maintain_a...">Red Hat will maintain a central public module repository where the community can contribute
+            reusable modules. Of course, the module repository format will be an open standard, so any
+            organization can maintain its own public module repository.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2011/07/21/modules/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

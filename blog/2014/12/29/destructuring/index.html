@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Tuple and entry destructuring</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2014/12/01/version-ranges/">Useless lying version ranges</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2015/02/10/uk-jug-tour/">UK JUG tour</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="tuple_and_entry_destructuring">
+            Tuple and entry destructuring
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              29 Dec 2014
+            </div>
+            <div class="tags">
+            </div>
+          </div>
+          <div class="body">
+            <p id="the_next_release_of_ceylon...">The next release of Ceylon features an interesting range of
+            new language features, including constructors, <code>if</code> and
+            <code>switch</code> expression, <code>let</code> and <code>object</code> expressions, and
+            <em>destructuring</em> of tuples and entries. In this post, I'm
+            going to describe our new syntax for destructuring.</p>
+            
+            <p id="a_destructuring_statement_looks_a...">A destructuring statement looks a lot like a normal value
+            declaration, except that where we would expect to see the
+            value name, a <em>pattern</em> occurs instead.</p>
+            
+            <p id="an_entry_pattern_is_indicated...">An <em>entry</em> pattern is indicated using the skinny arrow <code>-&gt;</code>
+            we use to construct entries:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>String-&gt;Integer entry = "one"-&gt;1;
+value key-&gt;item = entry;    //destructure the Entry
+</code></pre>
+            
+            <p id="a_tuple_pattern_is_indicated...">A <em>tuple pattern</em> is indicated with brackets:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>[String,Integer] pair = ["one",1];
+value [first,second] = pair;    //destructure the Tuple
+</code></pre>
+            
+            <p id="the_pattern_variables_key_item...">The <em>pattern variables</em>, <code>key</code>, <code>item</code>, <code>first</code>, and <code>second</code>
+            are just regular local values.</p>
+            
+            <p id="we_can_nest_tuple_and...">We can nest tuple and entry patterns:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>String-&gt;[String,Integer] entry = "one"-&gt;["one",1];
+value key-&gt;[first,second] = entry;
+</code></pre>
+            
+            <p id="a_tuple_pattern_may_have...">A tuple pattern may have a tail variable, indicated with a
+            <code>*</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>[String+] ints = 1..100;
+value [first,*rest] = ints;    //destructure the Sequence
+</code></pre>
+            
+            <p id="this_syntax_resembles_the_spread...">(This syntax resembles the spread operator.)</p>
+            
+            <p id="patterns_may_optionally_indicate_an...">Patterns may optionally indicate an explicit type:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>value String key-&gt;[String first, Integer second] = entry;
+</code></pre>
+            
+            <p id="pattern_based_destructuring_can_occur...">Pattern-based destructuring can occur in a number of other
+            places in the language. A pattern can occur in a <code>for</code> loop:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>for ([x, y] in points) { ... }
+
+for (key-&gt;item in map) { ... }
+</code></pre>
+            
+            <p id="or_in_an_exists_or...">Or in an <code>exists</code> or <code>nonempty</code> condition:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>if (exists index-&gt;item = stream.indexed.first) { ... }
+
+if (nonempty [first,*rest] = sequence) { ... }
+</code></pre>
+            
+            <p id="or_in_a_let_expression">Or in a <code>let</code> expression:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>value dist = let ([x,y] = point) sqrt(x^2+y^2);
+</code></pre>
+            
+            <p id="you_might_wonder_why_we...">You might wonder why we decided to introduce this syntax, or
+            at least, why we decided to do it <em>now</em>. Well, I suppose the
+            simple answer is that it always felt a bit incomplete or
+            unfinished to have a language with tuples but no convenient
+            destructuring syntax for them. Especially when we did already
+            have destructuring for entries, but only in <code>for</code>, as a
+            special case.</p>
+            
+            <p id="but_looking_into_the_future...">But looking into the future, you could also choose to see
+            this as us dipping our toes in the water of eventual support
+            for <em>pattern matching</em>. I remain ambivalent about pattern
+            matching, and it's certainly not something we find that the
+            language is missing or needs, but lots of folks tell us they
+            like it in other languages, so we're keeping our options
+            open. Fortunately, the syntax described above will scale
+            nicely to more complex patterns in a full pattern matching
+            facility.</p>
+            
+            <p id="this_functionality_is_already_implemented...">This functionality is already implemented and available in
+            github.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2014/12/29/destructuring/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

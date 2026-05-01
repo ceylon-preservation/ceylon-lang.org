@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Packages and modules</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.1/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.1/tour">Tour of Ceylon</a></h3>
+            
+            <ol>
+            <li><a href="/documentation/1.1/tour/basics">Basics</a></li>
+            <li><a href="/documentation/1.1/tour/classes">Classes</a></li>
+            <li><a href="/documentation/1.1/tour/attributes-control-structures">Attributes and variables, control structures</a></li>
+            <li><a href="/documentation/1.1/tour/inheritance">Inheritance, refinement, and interfaces</a></li>
+            <li><a href="/documentation/1.1/tour/anonymous-member-classes">Anonymous and member classes</a></li>
+            <li><a href="/documentation/1.1/tour/sequences">Streams, sequences, and tuples</a></li>
+            <li><a href="/documentation/1.1/tour/typeinference">Type aliases and type inference</a></li>
+            <li><a href="/documentation/1.1/tour/types">Union, intersection, and enumerated types</a></li>
+            <li><a href="/documentation/1.1/tour/generics">Generics</a></li>
+            <li><a href="/documentation/1.1/tour/modules">Packages and modules</a></li>
+            <li><a href="/documentation/1.1/tour/functions">Functions</a></li>
+            <li><a href="/documentation/1.1/tour/named-arguments">Named arguments</a></li>
+            <li><a href="/documentation/1.1/tour/comprehensions">Comprehensions</a></li>
+            <li><a href="/documentation/1.1/tour/language-module">Language module</a></li>
+            <li><a href="/documentation/1.1/tour/initialization">Initialization</a></li>
+            <li><a href="/documentation/1.1/tour/annotations">Annotations and the metamodel</a></li>
+            <li><a href="/documentation/1.1/tour/interop">Interoperation with Java</a></li>
+            <li><a href="/documentation/1.1/tour/dynamic">Dynamic typing</a></li>
+            </ol>
+            
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.1/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <!-- ### [Tutorial videos](/documentation/1.1/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.1/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.1/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.1/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.1/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.1/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Tour of Ceylon (1.1)
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_11_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.1, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <h1 id="packages_and_modules">Packages and modules</h1>
+          
+          <p id="this_is_the_tenth_part...">This is the tenth part of the Tour of Ceylon. If you found the
+          <a href="../generics">previous part</a> on generic types a little overwhelming, don't
+          worry; this part is going to cover some material which should be much easier
+          going. We're turning our attention to a very different subject: modularity.
+          We're going to learn about <em>packages</em> and <em>modules</em>.</p>
+          
+          <h2 id="packages_and_imports">Packages and imports</h2>
+          
+          <p id="theres_no_package_statement_in...">There's no <code>package</code> statement in Ceylon source files. The compiler determines
+          the package and module to which a toplevel program element belongs by the
+          location of the source file in which it is declared. A class named <code>Hello</code> in
+          the package <code>org.jboss.hello</code> must be defined in the file
+          <code>source/org/jboss/hello/Hello.ceylon</code> where <code>source</code> is the source directory.</p>
+          
+          <p id="when_a_source_file_in...">When a source file in one package refers to a toplevel program element in
+          another package, it must explicitly import that program element. Ceylon,
+          unlike Java, does not support the use of qualified names within the source
+          file. We can't write <code>org.jboss.hello.Hello</code> in Ceylon.</p>
+          
+          <p id="the_syntax_of_the_import...">The syntax of the <code>import</code> statement is slightly different to Java. To import
+          a program element, we write:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:pedagogical -->
+          
+          
+          <pre data-language="ceylon"><code>import com.redhat.polar.core { Polar }
+</code></pre>
+          
+          <p id="to_import_several_program_elements...">To import several program elements from the same package, we write:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:pedagogical -->
+          
+          
+          <pre data-language="ceylon"><code>import com.redhat.polar.core { Polar, pi }
+</code></pre>
+          
+          <p id="to_import_all_toplevel_program...">To import all toplevel program elements of a package, we write:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:pedagogical -->
+          
+          
+          <pre data-language="ceylon"><code>import com.redhat.polar.core { ... }
+</code></pre>
+          
+          <p id="to_resolve_a_name_conflict...">To resolve a name conflict, we can rename an imported declaration:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:pedagogical -->
+          
+          
+          <pre data-language="ceylon"><code>import com.redhat.polar.core { PolarCoord=Polar }
+</code></pre>
+          
+          <p id="we_think_renaming_is_a...">We think renaming is a much cleaner solution than the use of qualified
+          names. We can even rename members of type:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:pedagogical -->
+          
+          
+          <pre data-language="ceylon"><code>import com.redhat.polar.core { Polar { r=radius, theta=angle } }
+</code></pre>
+          
+          <p id="now_heres_a_big_gotcha...">Now here's a big gotcha for folks new to Ceylon.</p>
+          
+          <h3 id="gotcha">Gotcha!</h3>
+          
+          <p id="as_were_about_to_see...">As we're about to see, importing a program element from a different
+          module is <em>always</em> a two step process:</p>
+          
+          <ol>
+          <li>
+<em>import the module</em> containing the program element in the module
+          descriptor (<code>module.ceylon</code> file) of the module containing the
+          source file, and then</li>
+          <li>
+<em>import the program element</em> in the source file.</li>
+          </ol>
+          
+          
+          <p id="one_import_statement_is_not...">One <code>import</code> statement is not enough!</p>
+          
+          <p id="in_particular_this_means_that...">In particular, this means that you <em>simply can't</em> import a program
+          element defined in a module when you're playing around with code
+          occurring outside a well-defined module (code in the "default" module).</p>
+          
+          <p id="with_that_in_mind_its...">With that in mind, it's definitely time to learn how to define modules
+          and dependencies between modules.</p>
+          
+          <h2 id="modularity">Modularity</h2>
+          
+          <p id="modularity_is_of_central_importance...">Modularity is of central importance to the Ceylon language. But what
+          does this word even mean? Well, a program is modular if it's composed
+          of more than one module. Separate modules are:</p>
+          
+          <ul>
+          <li>independently distributed,</li>
+          <li>maintained by different teams, and</li>
+          <li>released according to independent schedules.</li>
+          </ul>
+          
+          
+          <p id="therefore_we_can_often_identify...">Therefore, we can often identify the modules that comprise our program
+          by looking at how the program is maintained, released, and distributed.</p>
+          
+          <p id="a_module_has">A module has:</p>
+          
+          <ul>
+          <li>has a well-defined public API, and an inaccessible internal
+          implementation,</li>
+          <li>a well-defined version, and</li>
+          <li>well-defined dependencies upon versions of collaborating modules.</li>
+          </ul>
+          
+          
+          <h2 id="the_module_system">The module system</h2>
+          
+          <p id="there_are_several_layers_to...">There are several layers to the module system in Ceylon:</p>
+          
+          <ul>
+          <li>Language-level support for a unit of visibility that is bigger than a
+          package, but smaller than "all packages".</li>
+          <li>A module descriptor format that expresses dependencies between specific
+          versions of modules.</li>
+          <li>A built-in module archive format and module repository layout that is
+          understood by all tools written for the language, from the compiler,
+          to the IDE, to the runtime.</li>
+          <li>A runtime that features peer-to-peer classloading (one classloader per
+          module) and the ability to manage multiple versions of the same module.</li>
+          <li>An ecosystem of remote module repositories where folks can share code
+          with others.</li>
+          </ul>
+          
+          
+          <p id="ceylons_module_system_has_two...">Ceylon's module system has two levels of granularity: packages and modules.
+          Each package within a module has its own namespace and well-defined API.
+          For many simple modules, this is overkill, and thus it's perfectly
+          acceptable for a module to have just one package. But more complex
+          modules, with their own internal subsystems, often benefit from the
+          additional level of granularity.</p>
+          
+          <h2 id="module_level_visibility_and_package_descriptors">Module-level visibility and package descriptors</h2>
+          
+          <p id="a_package_in_ceylon_may...">A package in Ceylon may be shared or unshared. An unshared package
+          (the default) is visible only to the module which contains the package.
+          We can make the package shared by providing a <em>package descriptor</em>:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none-->
+          
+          
+          <pre data-language="ceylon"><code>"The typesafe query API."
+shared package org.hibernate.query;
+</code></pre>
+          
+          <p id="a_shared_package_defines_part...">A <code>shared</code> package defines part of the "public" API of the module. Other
+          modules can directly access shared declarations in a <code>shared</code> package.</p>
+          
+          <p id="a_package_descriptor_must_be...">A package descriptor must be defined in a source file named <code>package.ceylon</code>
+          placed in the same directory as the other source files for the package. In
+          this case, the package descriptor must occur in the file
+          <code>source/org/hibernate/query/package.ceylon.</code></p>
+          
+          <h2 id="dependencies_and_module_descriptors">Dependencies and module descriptors</h2>
+          
+          <p id="a_module_must_explicitly_specify...">A module must explicitly specify the other modules on which it depends.
+          This is accomplished via a <em>module descriptor</em>:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none-->
+          
+          
+          <pre data-language="ceylon"><code>"The best-ever ORM solution!"
+license ("http://www.gnu.org/licenses/lgpl.html")
+module org.hibernate "3.0.0.beta" {
+    import ceylon.collection "1.0.0";
+    import java.base "7";
+    shared import java.jdbc "7";
+}
+</code></pre>
+          
+          <p id="a_module_import_annotated_shared...">A module <code>import</code> annotated <code>shared</code> is implicitly inherited by every
+          module which imports the module with the <code>shared</code> module <code>import</code>.</p>
+          
+          <p id="a_module_descriptor_must_be...">A module descriptor must be defined in a source file named <code>module.ceylon</code>
+          placed in the same directory as the other source files for the root package
+          of the module. In this case, the module descriptor must occur in the file
+          <code>source/org/hibernate/module.ceylon.</code></p>
+          
+          <!--
+          A module may be *runnable*. A runnable module must specify a `run()` method in 
+          the module descriptor:
+          
+          -->
+          
+          
+          <!-- check:none:Quoted-->
+          
+          
+          <!--
+              "The test suite for Hibernate"
+              license ("http://www.gnu.org/licenses/lgpl.html")
+              module org.hibernate.test "3.0.0.beta" {
+                  import org.hibernate "3.0.0.beta";
+                  void run() {
+                      TestSuite().run();
+                  }
+              }
+          -->
+          
+          
+          <h2 id="module_archives_and_module_repositories">Module archives and module repositories</h2>
+          
+          <p id="when_compiled_for_execution_on...">When compiled for execution on the Java virtual machine, a module compiles
+          to a <em>module archive</em>. The module archive packages together compiled <code>.class</code>
+          files, package descriptors, and module descriptors into a Java-style <code>jar</code>
+          archive with the extension <code>.car</code>.</p>
+          
+          <p id="a_car_module_archive_also...">A <code>.car</code> module archive also includes OSGi and Maven metadata.</p>
+          
+          <p id="the_ceylon_compiler_never_produces...">The Ceylon compiler never produces individual <code>.class</code> files in a directory.</p>
+          
+          <p id="when_compiled_for_execution_on_a...">When compiled for execution on a JavaScript virtual machine, the module
+          compiles to a <code>.js</code> file, called a <em>module script</em>. This module script
+          follows a standard called Common JS Modules, which allows the script to
+          be used in node.js or with require.js.</p>
+          
+          <p id="module_archives_and_module_scripts...">Module archives and module scripts live in <em>module repositories</em>. A module
+          repository is a well-defined directory structure with a well-defined location
+          for each module. A module repository may be either local (on the filesystem)
+          or remote (on the Internet). Given a list of module repositories, the Ceylon
+          compiler can automatically locate dependencies mentioned in the module
+          descriptor of the module it is compiling. And when it finishes compiling the
+          module, it puts the resulting module archive in the right place in a local
+          module repository.</p>
+          
+          <p id="the_architecture_also_includes_support...">The architecture also includes support for source directories, source
+          archives, and module documentation directories.</p>
+          
+          <h3 id="developing_modules_in_ceylon_ide">Developing modules in Ceylon IDE</h3>
+          
+          <p id="to_get_started_with_modules...">To get started with modules in Ceylon IDE, go to <code>Help &gt; Cheat Sheets...</code>,
+          open the <code>Ceylon</code> item, and run the <code>Introduction to Ceylon Modules</code> cheat sheet,
+          which will guide you step-by-step through the process of creating a module,
+          defining its dependencies, and exporting it to a module repository.</p>
+          
+          <p id="the_ceylon_repository_explorer_may...">The Ceylon Repository Explorer may be accessed via
+          <code>Window &gt; Show View &gt; Ceylon Repository Explorer</code> when in the Ceylon
+          perspective.</p>
+          
+          <p id="a_wizard_to_create_a...">A wizard to create a new module, and add its dependencies can be found
+          at <code>File &gt; New &gt; Ceylon Module</code>.</p>
+          
+          <p id="to_change_the_imports_of...">To change the imports of an existing module, you can select the module
+          in the Ceylon Explorer, got to <code>File &gt; Properties</code>, and select the
+          <code>Ceylon Module</code> properties page.</p>
+          
+          <p id="under_file__export_...">Under <code>File &gt; Export... &gt; Ceylon</code>, you'll find two very useful wizards:</p>
+          
+          <ul>
+          <li>a wizard to export a Ceylon module defined in a workspace project to
+          a local module repository, and</li>
+          <li>a wizard to add a Java <code>.jar</code> archive to a Ceylon module repository.</li>
+          </ul>
+          
+          
+          <h3 id="examples_compiling_against_a_local_or_remote_repository">Examples: Compiling against a local or remote repository</h3>
+          
+          <p id="lets_suppose_you_are_writing...">Let's suppose you are writing <code>net.example.foo</code>. Your project
+          directory might be layed out like this:</p>
+          
+          <pre><code>README
+source/
+  net/
+    example/
+      foo/
+        Foo.ceylon
+        FooService.ceylon
+        module.ceylon
+documentation/
+  manual.html
+</code></pre>
+          
+          <p id="here_the_source_code_is...">Here, the source code is in a directory called <code>source</code> (which is the default and
+          saves us having to pass a <code>--src</code> command line option to
+          <a href="/documentation/current/reference/tool/ceylon/subcommands/ceylon-compile.html"><code>ceylon compile</code></a>).
+          From the project directory (the directory which contains the <code>source</code> directory)
+          you can compile using the command</p>
+          
+          <pre data-language="shell"><code>ceylon compile net.example.foo
+</code></pre>
+          
+          <p id="this_command_will_compile_the...">This command will compile the source code files (<code>Foo.ceylon</code> and <code>FooService.ceylon</code>)
+          into a module archive and publish it to the default output repository, <code>modules</code>.
+          (you'd use the <code>--out build</code> option to publish to <code>build</code> instead). Now your project
+          directory looks something like this:</p>
+          
+          <pre><code>README
+source/
+  net/
+    example/
+      foo/
+        Foo.ceylon
+        FooService.ceylon
+        module.ceylon
+modules/
+  net/
+    example/
+      foo/
+        1.0/
+          net.example.foo-1.0.car
+          net.example.foo-1.0.car.sha1
+          net.example.foo-1.0.src
+          net.example.foo-1.0.src.sha1
+documentation/
+  manual.html
+</code></pre>
+          
+          <p id="the_src_is_file_is...">The <code>.src</code> is file is the source archive
+          which can be used by tools such as the IDE, for source code browsing. The
+          <code>.sha1</code> files each contains a checksum of the like-named <code>.car</code> file and can
+          be used to detect corrupted archives.</p>
+          
+          <p id="you_can_generate_api_documentation...">You can generate API documentation using
+          <a href="/documentation/current/reference/tool/ceylon/subcommands/ceylon-doc.html"><code>ceylon doc</code></a>
+          like this:</p>
+          
+          <pre data-language="shell"><code>ceylon doc net.example.foo
+</code></pre>
+          
+          <p id="this_will_create_a">This will create a</p>
+          
+          <pre data-language="shell"><code>modules/net/example/foo/1.0/module-doc/
+</code></pre>
+          
+          <p id="directory_containing_the_documentation">directory containing the documentation.</p>
+          
+          <p id="now_lets_suppose_your_project...">Now, let's suppose your project gains a dependency on <code>com.example.bar</code>
+          version 3.1.4.
+          Having declared that module and version as a dependency in your <code>module.ceylon</code>
+          <a href="#dependencies_and_module_descriptors">descriptor</a> you'd need to tell
+          <code>ceylon compile</code> which repositories to look in to find the dependencies.</p>
+          
+          <p id="one_possibility_is_that_you...">One possibility is that you already have a repository containing
+          <code>com.example.bar/3.1.4</code> locally on your machine. If it's in your default
+          repository (<code>~/.ceylon/repo</code>) then you don't need to do anything, the same
+          commands will work:</p>
+          
+          <pre data-language="shell"><code>ceylon compile net.example.foo
+</code></pre>
+          
+          <p id="alternatively_if_you_have_some...">Alternatively if you have some other local repository you can specify it
+          using the <code>--rep</code> option.</p>
+          
+          <p id="the_ceylon_herd_is_an...">The <a href="https://herd.ceylon-lang.org/">Ceylon Herd</a> is an online
+          module repository which contains open source Ceylon modules. As it happens,
+          the Herd is one of the default repositories <code>ceylon compile</code> knows about. So if
+          <code>com.example.bar/3.1.4</code> is in the Herd then the command to compile
+          <code>net.example.foo</code> would remain pleasingly short</p>
+          
+          <pre data-language="shell"><code>ceylon compile net.example.foo
+</code></pre>
+          
+          <p id="thats_right_its_the_same...">(that's right, it's the same as before). By the way, you can disable the default
+          repositories with the <code>--no-default-repositories</code> option if you want to.</p>
+          
+          <p id="if_comexamplebar314_were_in_another...">If <code>com.example.bar/3.1.4</code> were in <em>another</em> repository, say <code>http://repo.example.com</code>,
+          then the command would become</p>
+          
+          <pre data-language="shell"><code>ceylon compile
+  --rep http://repo.example.com 
+  net.example.foo
+</code></pre>
+          
+          <p id="were_breaking_the_command_across...">(we're breaking the command across multiple lines for clarity here, you would
+          need to write the command on a single line). You can specify multiple <code>--rep</code>
+          options as necessary if you have dependencies coming from multiple repositories.</p>
+          
+          <p id="when_you_are_ready_you...">When you are ready, you can publish the module somewhere other people can use
+          it. Let's say that you want to publish to <code>http://ceylon.example.net/repo</code>.
+          You can just compile again, this time specifying an <code>--out</code> option</p>
+          
+          <pre data-language="shell"><code>ceylon compile
+  --rep http://repo.example.com 
+  --out http://ceylon.example.net/repo
+  net.example.foo
+</code></pre>
+          
+          <p id="its_worth_noting_that_by...">It's worth noting that by taking advantage of the sensible defaults for
+          things like source code directory and output repository, as we have here,
+          you save yourself a lot of typing.</p>
+          
+          <h2 id="module_runtime">Module runtime</h2>
+          
+          <p id="ceylons_module_runtime_is_based...">Ceylon's module runtime is based on JBoss Modules, a technology that also
+          exists at the very core of JBoss AS 7. Given a list of module repositories,
+          the runtime automatically locates a module archive and its versioned
+          dependencies in the repositories, even downloading module archives from
+          remote repositories if necessary.</p>
+          
+          <p id="normally_the_ceylon_runtime_is...">Normally, the Ceylon runtime is invoked by specifying the name of a runnable
+          module at the command line.</p>
+          
+          <h3 id="examples_running_against_a_local_or_remote_repository">Examples: Running against a local or remote repository</h3>
+          
+          <p id="lets_continue_the_example_we...">Let's continue the example we had before where <code>net.example.foo</code> version 1.0
+          was published to http://ceylon.example.net/repo. Now suppose you want to run
+          the module (possibly from another computer).</p>
+          
+          <p id="if_the_dependencies_comexamplebar314_from...">If the dependencies (<code>com.example.bar/3.1.4</code> from before) can be
+          found in the default repositories the
+          <a href="/documentation/current/reference/tool/ceylon/subcommands/ceylon-run.html"><code>ceylon run</code></a> command is:</p>
+          
+          <pre data-language="shell"><code>ceylon run
+  --rep http://ceylon.example.net/repo
+  net.example.foo/1.0
+</code></pre>
+          
+          <p id="you_can_pass_options_too...">You can pass options too (which are available to the program via the
+          top level <code>process</code> object):</p>
+          
+          <pre data-language="shell"><code>ceylon run
+  --rep http://ceylon.example.net/repo
+  net.example.foo/1.0
+  my options
+</code></pre>
+          
+          <p id="if_one_of_the_dependencies...">If one of the dependencies isn't available from a default repository you will
+          need to specify a repository that contains it using another <code>--rep</code>:</p>
+          
+          <pre data-language="shell"><code>ceylon run
+  --rep http://ceylon.example.net/repo
+  --rep http://repo.example.com
+  net.example.foo/1.0
+  my options
+</code></pre>
+          
+          <p id="the_easiest_case_though_is...">The easiest case though, is where the module and its dependencies are all in one
+          (or more) of the default repositories (such as the Herd or <code>~/.ceylon/repo</code>):</p>
+          
+          <pre data-language="shell"><code>ceylon run net.example.foo/1.0
+</code></pre>
+          
+          <h2 id="module_repository_ecosystem">Module repository ecosystem</h2>
+          
+          <p id="one_of_the_nice_advantages...">One of the nice advantages of this architecture is that it's possible to run a
+          module "straight off the internet", just by typing, for example:</p>
+          
+          <pre data-language="shell"><code>ceylon run --rep http://jboss.org/ceylon/modules org.jboss.ceylon.demo/1.0
+</code></pre>
+          
+          <p id="and_all_required_dependencies_get...">And all required dependencies get automatically downloaded as needed.</p>
+          
+          <p id="ceylon_herd_is_a_central..."><a href="https://herd.ceylon-lang.org">Ceylon Herd</a> is a central community module
+          repository where anyone can contribute reusable modules. Of course, the module
+          repository format is an open standard, so any organization can maintain its own
+          public module repository.</p>
+          
+          <h2 id="resources">Resources</h2>
+          
+          <p id="to_include_resources_in_a...">To include resources in a module archive, you must place them in a <em>resource
+          directory</em>, named <code>resource</code> by default:</p>
+          
+          <pre><code>README
+source/
+  net/
+    example/
+      foo/
+        Foo.ceylon
+        FooService.ceylon
+        module.ceylon
+resource/
+  net/
+    example/
+      foo/
+        foo.properties
+</code></pre>
+          
+          <p id="resources_in_the_subdirectory_resourcenetexamplefoo...">Resources in the subdirectory <code>resource/net/example/foo</code> are packaged into
+          the module archive for the module <code>net.example.foo</code>, and into a directory
+          of the module respository where they're accessible to the JavaScript runtime.</p>
+          
+          <p id="at_runtime_the_resource_may...">At runtime, the resource may be loaded by calling
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/meta/declaration/Module.type.html#resourceByPath"><code>resourceByPath()</code></a>
+          on the <code>Module</code> object representing the module to which the resource belongs:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>assert (exists Resource resource 
+        = `module net.example.foo`.resourceByPath("foo.properties"));
+String text = resource.textContent();
+</code></pre>
+          
+          <p id="alternatively_you_may_identify_the...">Alternatively, you may identify the resource by a fully qualified path beginning
+          with <code>/</code>, for example:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>assert (exists Resource resource 
+        = `module net.example.foo`.resourceByPath("/net/example/foo/foo.properties");
+</code></pre>
+          
+          <h2 id="theres_more">There's more</h2>
+          
+          <p id="next_were_going_to_look...">Next we're going to look at Ceylon's support for <a href="../functions">higher order functions</a>.</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

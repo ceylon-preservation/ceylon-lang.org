@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: How we test Ceylon</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2012/01/26/generic-enumerated-types/">Generics and enumerated types</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2012/02/19/mini-status-update/">Mini-status update</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="how_we_test_ceylon">
+            How we test Ceylon
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/stephane-epardaud/">Stéphane Épardaud</a>
+            </div>
+            <div class="date">
+              02 Feb 2012
+            </div>
+            <div class="tags">
+            </div>
+          </div>
+          <div class="body">
+            <p id="writing_a_new_language_is...">Writing a new language is a lot about the ideas that go into the language, and then a lot about implementation.</p>
+            
+            <p id="in_the_case_of_ceylon...">In the case of Ceylon, a lot of effort went into thinking, discussions, negotiations, explanations, and eventually
+            trying and documentation, in the form of a specification. Then there's work to be done on the AntLR grammar, the Abstract
+            Syntax Tree (AST) that the parser/lexer give us, and then the typechecking phase until finally we get to the backend
+            (backends, in our case: Java bytecode and JavaScript).</p>
+            
+            <p id="but_were_not_stopping_at...">But we're not stopping at the language, we're also developing a whole SDK, with an API, tools (<code>ceylond</code>, <code>ceylonc</code>,
+            <code>ceylon</code>), a module system, and an IDE.</p>
+            
+            <p id="naturally_while_were_in_the...">Naturally, while we're in the process of implementing all this stuff, we spend a fair amount of time discovering new
+            problems, new solutions, and refactoring a lot of code to make it fitter. The number of interdependent pieces in all
+            this — and the expectation of high-quality — is such that we have to have a proper test suite for these things and,
+            rest assured: we do. If you've ever wondered how new languages are tested, read on to see how we test the Ceylon
+            implementation.</p>
+            
+            <h2 id="type_checker_and_parser_tests">Type-checker and parser tests</h2>
+            
+            <p id="the_first_tests_in_the...">The first tests in the tool chain concern the very early phase of compiling Ceylon: checking that good code compiles,
+            bad code does not compile, and that the type system reasons about types the way we expect it to. We currently have
+            1251 such checks, quite smartly done using compiler annotations such as <code>@error</code> to mark an AST node where we expect
+            an error, and <code>@type["Foo"]</code> to make sure the AST node is of type <code>Foo</code>.</p>
+            
+            <p id="here_is_a_brief_example...">Here is a brief example where we make sure we can't return a value from a <code>void</code> method:</p>
+            
+            <pre data-language="ceylon"><code>void cannotReturnValue() {
+    if ("Hello"=="Goodbye") {
+        @error return var;
+    }
+}
+</code></pre>
+            
+            <p id="and_another_example_where_we...">And another example where we make sure that the type inference is correct:</p>
+            
+            <pre data-language="ceylon"><code>@type["Sequence&lt;String&gt;|Sequence&lt;Integer&gt;"] value ut = f({ "aaa" },{ 1 });
+</code></pre>
+            
+            <p id="the_tests_will_walk_the...">The tests will walk the AST and when they see one of these annotations, they check that an error is
+            reported on the node, or that the node type is as we expected.</p>
+            
+            <h2 id="java_bytecode_generation_tests">Java bytecode generation tests</h2>
+            
+            <p id="in_the_java_bytecode_compiler...">In the Java bytecode compiler backend, we generate Java bytecode, but as <a href="/blog/2011/12/08/let-it-work/">previously described</a>
+            we are plugged in the <code>javac</code> compiler, and we feed it (pseudo-) Java AST. This turns out to be again very useful since
+            it's much easier to compare Java source code than byte code (for humans). So we have tests that try to compile a small Ceylon
+            file, typically one per feature, and then we compare the Java code generated with the Java code we expect. For example, to make
+            sure we can create a class in Ceylon, we write this test:</p>
+            
+            <pre data-language="ceylon"><code>class Klass() {}
+</code></pre>
+            
+            <p id="and_we_see_if_it...">And we see if it generates the following Java code:</p>
+            
+            <pre data-language="java"><code>package com.redhat.ceylon.compiler.java.test.structure.klass;
+
+class Klass {
+    Klass() {
+    }
+}
+</code></pre>
+            
+            <p id="we_currently_have_around_250...">We currently have around 250 tests like these. This might seem a small number, but it's the number of files we're comparing,
+            so for example when we test numeric operation optimisation, we have one test with 350 lines of Ceylon numeric operator tests
+            to be tested. We have 100% coverage of the each feature promised on the roadmap.</p>
+            
+            <p id="of_course_occasionally_we_have...">Of course, occasionally we have bugs for things that are corner cases, so for each bug reported we have one such test as well.</p>
+            
+            <h2 id="model_loader_tests">Model loader tests</h2>
+            
+            <p id="the_compiler_is_not_only...">The compiler is not only generating bytecode, though. It's also loading bytecode. By the truck-load. Since it's an incremental
+            compiler, it needs to be able to load compiled Ceylon bytecode and map it into a model that the type-checker can work with. The
+            piece that loads bytecode (using three different reflection libaries: Javac, Java Reflection and Eclipse JDT) is called the
+            <em>model loader</em>.</p>
+            
+            <p id="those_get_their_own_tests...">Those get their own tests. We write two files. The first includes code we will compile:</p>
+            
+            <pre data-language="ceylon"><code>shared class Klass() {
+}
+</code></pre>
+            
+            <p id="and_the_second_will_reference...">And the second will reference declarations from the first file:</p>
+            
+            <pre data-language="ceylon"><code>Klass klass = Klass();
+</code></pre>
+            
+            <p id="but_because_we_compile_the...">But because we compile the second one on its own, it will load the model for the first file from the compiled bytecode
+            (incremental compilation). The test
+            will then compare the model representation for <code>Klass</code> that we got during the first compilation (when we were compiling <code>Klass</code>)
+            with the model representation we loaded for <code>Klass</code> during the second compilation. The first model will come directly from the
+            typechecker after parsing the AST, while the second will come from the model loader. By walking both recursively and checking
+            that they are completely equivalent, we ensure that we produce the right model when loading it from bytecode.</p>
+            
+            <p id="we_have_currently_11_such...">We have currently 11 such tests, but once again, do not be fooled by the low number of tests here, there's only a certain number of
+            things we can test here: class, interface, method, attribute declarations and their signatures. We're not testing things like
+            statements or expressions, only signatures of declarations. And for each declaration we have recursive tests that check every
+            property of the model object (of which there are many).</p>
+            
+            <p id="incidentally_we_dont_just_load...">Incidentally, we don't just load Ceylon bytecode, we also load Java bytecode, for interoperability with Java classes, and since
+            the <code>ceylon.language</code> module is currently hand-written in Java, none of the Ceylon code could be compiled if the model loader wasn't
+            able to load a model from its bytecode. So it gets a lot of testing everywhere.</p>
+            
+            <h2 id="interoperability_tests">Interoperability tests</h2>
+            
+            <p id="as_i_mentioned_previously_ceylon...">As I mentioned previously, Ceylon is fully interoperable with Java, so we have tests that make sure that we can import Java modules,
+            packages, types, call their methods, read their fields, implement Java interfaces, etc…</p>
+            
+            <p id="we_currently_have_10_tests...">We currently have 10 tests for this, each including all the variations on a theme (static methods, fields, constructors…).</p>
+            
+            <h2 id="recovery_tests">Recovery tests</h2>
+            
+            <p id="we_have_a_few_tests...">We have a few tests to make sure the compiler backend doesn't crash on unparseable input, or on Ceylon code that is improperly typed.</p>
+            
+            <h2 id="module_system">Module system</h2>
+            
+            <p id="we_have_34_tests_that...">We have 34 tests that make sure that the compiler produces <code>.car</code> files, source archives and MD5 checksums in the right place, that it
+            can save and find them back locally, or via HTTP, that we can load <code>.jar</code> modules, and that we they contain what is expected. We also
+            test that we can resolve dependency graphs, cache HTTP files and check the MD5 checksums.</p>
+            
+            <h2 id="runtime_behaviour_tests">Runtime behaviour tests</h2>
+            
+            <blockquote><p id="however_beautiful_the_strategy_you...">However beautiful the strategy, you should occasionally look at the results — Sir Winston Churchill</p></blockquote>
+            
+            <p id="we_have_about_20_tests...">We have about 20 tests that make sure that we can invoke the Ceylon compiler, on any number of files, including incrementally. We test
+            that we can run Ceylon programs. We also test that the runtime behaviour of statements is correct (it's not enough to check that the
+            <code>for</code> loop is compiled to a certain Java bytecode, we want to make sure it runs as we think it should).</p>
+            
+            <h2 id="tool_tests">Tool tests</h2>
+            
+            <p id="we_have_a_few_tests_that...">We have a few tests that check that <code>ceylond</code> (our documentation generator) is able to produce documentation, and that it produces it
+            correctly, while using the model loader (using Java Reflection, unlike the compiler which uses Javac Reflection).</p>
+            
+            <p id="we_have_a_few_manual...">We have a few manual tests (we need to automate that) to check that our ant tasks run as expected.</p>
+            
+            <h2 id="ceylonlanguage_tests">
+<code>ceylon.language</code> tests</h2>
+            
+            <p id="last_but_not_least_we...">Last but not least, we have 633 runtime tests written in Ceylon that check that the <code>ceylon.language</code> API behaves as expected, which
+            is the ultimate test, since it effectively requires all the pieces previously described to work in order to do anything.</p>
+            
+            <p id="we_even_have_one_test...">We even have one test which attemps to compile the Ceylon reference implementation of <code>ceylon.language</code>, which the typechecker handles,
+            but the backend doesn't yet. Once that one passes, we'll be ready for Ceylon 1.0.</p>
+            
+            <h1 id="about_speed">About speed</h1>
+            
+            <p id="ive_recently_had_a_discussion...">I've recently had a discussion about the speed of test execution with the Ceylon team, and was shocked to discover that while I was
+            complaining that the Java backend compiler was taking 40 seconds to run, some of my colleagues had to wait more than 2 minutes for the
+            same tests!</p>
+            
+            <p id="were_now_looking_at_running...">We're now looking at running some of those tests in parallel to speed things up on multi-core systems, but unfortunately it doesn't
+            look like we'll be able to run them in parallel using Eclipse. We should be able to do it using Ant, though.</p>
+            
+            <h1 id="on_breaking_tests">On breaking tests</h1>
+            
+            <p id="we_break_tests_all_the...">We break tests all the time. Most of the time when we fix a bug or add a feature we break a given number of tests. Sometimes we fix
+            a bigger bug and break most of the tests. This is great: we can find the cause of the breakage straight away thanks to all these
+            tests. Sometimes though, it takes a <a href="https://plus.google.com/u/0/103036382695763273919/posts/J2pzscRCYxJ">little bit of work</a>
+            to fix the tests we broke :)</p>
+            
+            <h1 id="conclusion">Conclusion</h1>
+            
+            <p id="weve_an_awful_lot_of...">We've an awful lot of tests, and we test (almost) everything. Those that are missing will get automated as soon as possible so we can
+            forget about them, because that's what tests are for: when we fix a bug or add a feature, we know it works, and we know we didn't break
+            anything. This is both priceless and fundamental for a new language.</p>
+            
+            <h2 id="note">Note</h2>
+            
+            <p id="since_this_post_was_originally...">Since this post was originally written:</p>
+            
+            <ul>
+            <li>
+<code>ceylonc</code> has become <code>ceylon compile</code>.</li>
+            <li>
+<code>ceylond</code> has become <code>ceylon doc</code>.</li>
+            </ul>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2012/02/02/how-we-test-ceylon/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

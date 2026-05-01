@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Introduction to Ceylon</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.1/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.1/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.1/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <!--  ### [Tutorial videos](/documentation/1.1/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.1/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.1/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.1/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.1/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.1/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Learn (1.1)
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_11_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.1, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <h1 id="introduction_to_ceylon">Introduction to Ceylon</h1>
+          
+          <h2 id="actions">Actions</h2>
+          
+          <ul>
+          <li>convert to Devoxx template</li>
+          <li>decide whether to use Mac for both pres and demo or stay agnostic</li>
+          <li>add hierarchical structure examples</li>
+          <li>currently at 45 slides, 5 less and we should be good assuming a quick demo</li>
+          </ul>
+          
+          
+          <h2 id="presentation">Presentation</h2>
+          
+          <h3 id="an_introduction_to_ceylon_say_more_more_clearly">An introduction to Ceylon: say more, more clearly</h3>
+          
+          <p id="stéphane_épardaud_emmanuel_bernard">Stéphane Épardaud, Emmanuel Bernard</p>
+          
+          <h3 id="executive_summary">Executive summary</h3>
+          
+          <ul>
+          <li>What is Ceylon</li>
+          <li>Why Ceylon</li>
+          <li>Features and feel</li>
+          <li>The community</li>
+          <li>Status</li>
+          </ul>
+          
+          
+          <h3 id="about_stéphane_épardaud">About Stéphane Épardaud</h3>
+          
+          <ul>
+          <li>Riviera JUG team</li>
+          <li>Open-Source projects
+          
+          <ul>
+          <li>RESTEasy, Ceylon</li>
+          <li>jax-doclets, Play! modules, Stamps.js</li>
+          </ul>
+          </li>
+          <li>Ceylon contributor since…
+          
+          <ul>
+          <li>13 May 2011 (one month after Ceylon hit SlashDot)</li>
+          <li>Compiler, ceylondoc</li>
+          </ul>
+          </li>
+          </ul>
+          
+          
+          <h3 id="about_emmanuel_bernard">About Emmanuel Bernard</h3>
+          
+          <ul>
+          <li>Hibernate</li>
+          <li>JCP</li>
+          <li>Podcasts
+          
+          <ul>
+          <li><a href="http://asylum.jboss.org">JBoss Community Asylum</a></li>
+          <li><a href="http://lescastcodeurs.com">Les Cast Codeurs</a></li>
+          </ul>
+          </li>
+          <li><p id="the_rest_is_at_httpemmanuelbernardcom">The rest is at <a href="http://emmanuelbernard.com">http://emmanuelbernard.com</a></p></li>
+          <li><p id="emmanuelbernard"><a href="http://twitter.com/emmanuelbernard">@emmanuelbernard</a></p></li>
+          </ul>
+          
+          
+          <h3 id="origins_of_ceylon">Origins of Ceylon</h3>
+          
+          <ul>
+          <li>Seeded by Gavin King</li>
+          <li>Improve upon frustrations of Java</li>
+          <li>Help by others at JBoss
+          
+          <ul>
+          <li>Max, Emmanuel, Pete etc</li>
+          </ul>
+          </li>
+          <li>Goals
+          
+          <ul>
+          <li>on the JVM</li>
+          <li>in the spirit of Java</li>
+          <li>practical</li>
+          </ul>
+          </li>
+          <li>Slashdotted ( with no website :) )</li>
+          </ul>
+          
+          
+          <h3 id="goals">Goals</h3>
+          
+          <ul>
+          <li>Easy to learn</li>
+          <li>Less verbose but as readable
+          
+          <ul>
+          <li>Native representation for hierarchical data
+          
+          <ul>
+          <li>XML, UI, etc</li>
+          </ul>
+          </li>
+          </ul>
+          </li>
+          <li>Better type safety
+          
+          <ul>
+          <li>including more functional</li>
+          </ul>
+          </li>
+          <li>New SDK (ie new platform)</li>
+          <li>Support meta-programming</li>
+          <li>Modular at its core</li>
+          </ul>
+          
+          
+          <h3 id="introduction_to_ceylon-2">Introduction to Ceylon</h3>
+          
+          <h3 id="a_boring_class_looks_familiar">A boring class: looks familiar?</h3>
+          
+          <ul>
+          <li>Looks familiar, right?</li>
+          </ul>
+          
+          
+          <pre data-language="ceylon"><code>class Rectangle() {
+    Integer width = +0;
+    Integer height = +0;
+
+    Integer area() {
+        return width * height;
+    }
+}
+</code></pre>
+          
+          <h3 id="a_real_ceylon_class">A Real Ceylon class</h3>
+          
+          <ul>
+          <li>No surprise</li>
+          </ul>
+          
+          
+          <pre data-language="ceylon"><code>shared class Rectangle(Integer width, 
+                       Integer height) {
+
+    shared Integer width = width;
+    shared Integer height = height;
+
+    shared Integer area() {
+        return width * height;
+    }
+}
+</code></pre>
+          
+          <h3 id="where_is_my_constructor">Where is my constructor?</h3>
+          
+          <ul>
+          <li>In the class body</li>
+          </ul>
+          
+          
+          <pre data-language="ceylon"><code>shared class Rectangle(Integer width, 
+                       Integer height){
+    // it is here!
+    if (width == 0 || height == 0) {
+        throw;
+    }
+    shared Integer width = width;
+    shared Integer height = height;
+
+    shared Integer area(){
+        return width * height;
+    }
+}
+</code></pre>
+          
+          <h3 id="first_differences">First differences</h3>
+          
+          <ul>
+          <li>Simpler access rules
+          
+          <ul>
+          <li>No <code>protected</code>, <code>package</code>, <code>private</code>
+</li>
+          <li>
+<code>shared</code> = public-ish, otherwise scope-private</li>
+          </ul>
+          </li>
+          </ul>
+          
+          
+          <p id=""><img src="/images/presentation/shared.png" title="shared" alt="shared"></p>
+          
+          <ul>
+          <li>Constructor is the class body</li>
+          <li>Integer type for positive whole numbers</li>
+          </ul>
+          
+          
+          <h3 id="attributes">Attributes</h3>
+          
+          <ul>
+          <li>Getter / setter without carpal tunnel syndrome</li>
+          </ul>
+          
+          
+          <pre data-language="ceylon"><code>class Cat() {
+    Integer birthRank = 1;
+    variable Integer radius := 2;
+    radius++;
+    Integer waistSize {
+        return radius * 6;
+    }
+    assign waistSize {
+        radius := waistSize / 6;
+    }
+}
+</code></pre>
+          
+          <ul>
+          <li>
+<strong>add the following as arrows on the code or as three slides with bold for the
+          area being spoken of</strong>
+          
+          <ul>
+          <li>Immutable by default</li>
+          <li>unless marked<code>variable</code>
+</li>
+          <li>assigned with <code>:=</code>
+</li>
+          </ul>
+          </li>
+          </ul>
+          
+          
+          <h3 id="inheritance">Inheritance</h3>
+          
+          <pre data-language="ceylon"><code>shared class Point(Integer x, Integer y) {
+    shared Integer x = x;
+    shared Integer y = y;
+}
+
+shared class Point3D(Integer x, Integer y, Integer z)
+       extends Point(x, y) {
+    shared Integer z = z;
+}
+</code></pre>
+          
+          <h3 id="abstractions">Abstractions</h3>
+          
+          <ul>
+          <li>Method, attributes and classes can be overridden
+          
+          <ul>
+          <li>factory pattern</li>
+          </ul>
+          </li>
+          <li>Can't override by default
+          
+          <ul>
+          <li>
+<code>default</code>: can be overridden, has a default impl</li>
+          <li>
+<code>formal</code>: must be overridden, with no default impl</li>
+          </ul>
+          </li>
+          <li>
+<code>@Override</code> in Java =&gt; <code>actual</code> in Ceylon
+          
+          <ul>
+          <li>non optional</li>
+          </ul>
+          </li>
+          </ul>
+          
+          
+          <h3 id="abstractions_example">Abstractions (example)</h3>
+          
+          <pre data-language="ceylon"><code>abstract class Shape() {
+    shared formal Integer area();
+    // magic: this is toString()
+    shared actual default String string {
+        return "Abstract area: " area.string " m^2";
+    }
+}
+
+class Square(Integer width) extends Shape() {
+    shared actual Integer area() { 
+        return width * width;
+    }
+    shared actual String string = 
+        "Square area: " area.string " m^2";
+}
+</code></pre>
+          
+          <h3 id="overloading">Overloading</h3>
+          
+          <ul>
+          <li>No Overloading
+          
+          <ul>
+          <li>WTF!?</li>
+          </ul>
+          </li>
+          <li>Overloading is evil</li>
+          </ul>
+          
+          
+          <h3 id="you_need_overloading_for">You need overloading for...</h3>
+          
+          <ul>
+          <li>To support optional parameters
+          
+          <ul>
+          <li>Ceylon has them</li>
+          <li>even named-parameters</li>
+          </ul>
+          </li>
+          <li>To work on different (sub)types of parameters
+          
+          <ul>
+          <li>not safe if a new type is introduced</li>
+          <li>Ceylon has union types and type cases</li>
+          </ul>
+          </li>
+          </ul>
+          
+          
+          <h3 id="optional_and_named_parameters">Optional and named parameters</h3>
+          
+          <pre data-language="ceylon"><code>class Rectangle(Integer width = 2,
+                Integer height = 3) {
+    shared Integer area(){
+        return width * height;
+    }
+}
+
+void method(){
+    Rectangle rectangle = Rectangle();
+    Rectangle rectangle2 = Rectangle {
+        width = 3;
+        height = 4;
+    };
+}
+</code></pre>
+          
+          <h3 id="type_based_switch_case">Type based switch case</h3>
+          
+          <pre data-language="ceylon"><code>void workWithRectangle(Rectangle rect){}
+void workWithCircle(Circle circle){}
+void workWithFigure2D(Figure2D fig){}
+ 
+void supportsSubTyping(Shape fig) {
+    switch(fig)
+    case(is Rectangle) {
+        workWithRectangle(fig);
+    }
+    case(is Circle) {
+        workWithCircle(fig);
+    }
+    case(is Figure2D) {
+        workWithFigure2D(fig);
+    }
+}
+</code></pre>
+          
+          <h3 id="hierarchical_structure">Hierarchical structure</h3>
+          
+          <ul>
+          <li>speaking of named parameters</li>
+          </ul>
+          
+          
+          <pre data-language="ceylon"><code>Table table = Table {
+    title="Squares";
+    rows=5;
+    border = Border {
+        padding=2;
+        weight=1;
+    };
+    Column {
+        heading="x";
+        width=10;
+        String content(Integer row) {
+            return row.string;
+        }
+    },
+    Column {
+        heading="x**2";
+        width=12;
+        String content(Integer row) {
+            return (row**2).string;
+        }
+    }
+};
+</code></pre>
+          
+          <h3 id="interfaces">Interfaces</h3>
+          
+          <pre data-language="ceylon"><code>interface Figure3D {
+    shared formal Float area;
+    shared formal Float depth;
+    shared formal Float volume;
+}
+
+class Cube(Float width) satisfies Figure3D {
+    shared actual Float area = width * width;
+    shared actual Float depth = width;
+    shared actual Float volume = area * depth;
+}
+
+class Cylinder(Integer radius, Float depth) 
+        satisfies Figure3D {
+    shared actual Float area = 3.14 * radius ** 2;
+    shared actual Float depth = depth;
+    shared actual Float volume = area * depth;
+}
+</code></pre>
+          
+          <h3 id="interfaces_with_default_impls">Interfaces with default impls</h3>
+          
+          <pre data-language="ceylon"><code>interface Figure3D {
+    shared formal Float area;
+    shared formal Float depth;
+    shared Float volume {
+        return depth * area;
+    }
+}
+
+class Cube(Float width) satisfies Figure3D {
+    shared actual Float area = width * width;
+    shared actual Float depth = width;
+}
+
+class Cylinder(Integer radius, Float depth)
+        satisfies Figure3D {
+    shared actual Float area = 3.14 * radius ** 2;
+    shared actual Float depth = depth;
+}
+</code></pre>
+          
+          <h3 id="omg_multiple_inheritance_mess">OMG multiple inheritance mess?</h3>
+          
+          <ul>
+          <li>No state (initialization)
+          
+          <ul>
+          <li>Ordering issues</li>
+          <li>A single superclass</li>
+          </ul>
+          </li>
+          <li>Must redefine a method <code>C.a()</code>
+          
+          <ul>
+          <li>if defined in super-interfaces <code>I1.a()</code> et <code>I2.a()</code>
+</li>
+          <li>resolution would otherwise be ambiguous</li>
+          </ul>
+          </li>
+          </ul>
+          
+          
+          <h3 id="ceylon_is_extremely_regular">Ceylon is extremely regular</h3>
+          
+          <pre data-language="ceylon"><code>Integer attribute = 1;
+Integer attribute2 { return 2; }
+void method(){}
+interface Interface{}
+
+class Class(Integer x){
+    Integer attribute = x;
+    Integer attribute2 { return x; }
+    class InnerClass(){}
+    interface InnerInterface{}
+
+    void method(Integer y){
+        Integer attribute = x;
+        Integer attribute2 { return y; }
+        class LocalClass(){}
+        interface LocalInterface{}
+        void innerMethod(Integer y){}
+    }
+}
+</code></pre>
+          
+          <h3 id="a_few_types_examples">A few types examples</h3>
+          
+          <pre data-language="ceylon"><code>void types(){
+    Integer i = -20;
+    Integer n = 10.times(2); // no primitive types
+    Float f = 3.14;
+    String[] s = {"foo", "bar"}; // inference
+    Number[] r = 1..2;   // intervals
+    Boolean b = true;    // enumerated type
+    Cube cube = Cube(2); // constructor
+    // inference
+    function makeCube(Integer width){ 
+        return Cube(width);
+    }
+    value cube2 = makeCube(3);
+}
+</code></pre>
+          
+          <h3 id="death_to_npes">Death to NPEs</h3>
+          
+          <p><img src="http://dessert.philipp-soehnlein.de/wp-content/postmaster-attachments/11-24-2009-104650.jpg" title="Geek And Poke" alt="Geek And Poke"></p>
+          
+          <h3 id="type_safety">Type safety</h3>
+          
+          <pre data-language="ceylon"><code>void typeSafety() {
+    // optional?
+    Cube? cubeOrNoCube() { return null; }
+    Cube? cube = cubeOrNoCube();
+
+    print(cube.area.string); // compile error
+
+    if (exists cube) {
+        print(cube.area.string);
+    } else {
+        print("Got no cube");
+    }
+}
+</code></pre>
+          
+          <h3 id="some_sugar_on_top">Some sugar on top</h3>
+          
+          <pre data-language="ceylon"><code>void typeSafety(){
+    // default value
+    Cube cube2 = cubeOrNoCube() ? Cube(3);
+
+    // nullsafe access
+    Integer? area = maybeCube?.area;
+
+    // nullsafe array access
+    Cube[]? maybeList = cubeList();
+    Cube? c = maybeList?[2];
+}
+</code></pre>
+          
+          <h3 id="iterations">Iterations</h3>
+          
+          <pre data-language="ceylon"><code>void dealingWithLists() {
+    Cube[] list = cubeList();
+    if (nonempty list) {
+        print(list.first.string);
+    }
+    // sequence
+    for (Cube cube in list) {
+        print(cube.string);
+    } else{
+        print("No cubes!");
+    }
+    // range
+    for (Integer n in +0..+10) {
+        print(n.string);
+    }
+}
+</code></pre>
+          
+          <h3 id="operations_on_lists">Operations on lists</h3>
+          
+          <pre data-language="ceylon"><code>void dealingWithLists() {
+    Integer[] numbers = {1,2,3};
+    // slices
+    Integer[] subList = numbers[1..2];
+    Integer[] rest = numbers[1...];
+    // map/spread
+    Integer[] successors = numbers[].successor;
+}
+</code></pre>
+          
+          <h3 id="operator_overloading">Operator "overloading"</h3>
+          
+          <ul>
+          <li><p id="almost_the_same_as_in...">Almost the same as in Java</p></li>
+          <li>
+<p id="interface_based_fixed_set">Interface based (fixed set)</p>
+          
+          <ul>
+          <li>==, != on Equality.equals()</li>
+          <li>&lt; on Comparable.smallerThan()</li>
+          <li>lhs[i] on Correspondence.item()</li>
+          <li>++ on Ordinal.successor</li>
+          <li>* on Numeric.times()</li>
+          </ul>
+          </li>
+          <li>No symbols as method name</li>
+          </ul>
+          
+          
+          <h3 id="some_of_typing">(some of) Typing</h3>
+          
+          <h3 id="union_type">Union type</h3>
+          
+          <ul>
+          <li>To be able to hold values among a list of types</li>
+          <li>We must check the actual type before use</li>
+          <li><code>TypeA|TypeB</code></li>
+          <li>
+<code>Type?</code> is an alias for <code>Type|Nothing</code>
+</li>
+          </ul>
+          
+          
+          <h3 id="union_type_example">Union type example</h3>
+          
+          <pre data-language="ceylon"><code>class Apple() {
+    shared void eat() {}
+}
+
+class Broccoli() {
+    shared void throwAway() {}
+}
+
+void unions() {
+    Sequence&lt;Apple|Broccoli&gt; plate = {Apple(), Broccoli()};
+    for (Apple|Broccoli food in plate) {
+        print(box.string);
+        if (is Apple box) {
+            box.eat();
+        } else if (is Broccoli box) {
+            box.throwAway();
+        }
+    }
+}
+</code></pre>
+          
+          <h3 id="intersection_type">Intersection type</h3>
+          
+          <pre data-language="ceylon"><code>interface Food {
+    shared formal void eat(); 
+}
+
+interface Drink {
+    shared formal void drink(); 
+}
+
+class Guinness() satisfies Food &amp; Drink {
+    shared actual void drink() {}
+    shared actual void eat() {}
+}
+
+void intersections(){
+    Food &amp; Drink specialStuff = Guinness();
+    specialStuff.drink();
+    specialStuff.eat();
+}
+</code></pre>
+          
+          <h3 id="type_parameters">Type parameters</h3>
+          
+          <ul>
+          <li>Constraints:
+          
+          <ul>
+          <li>Upper bounds (satisfies)</li>
+          <li>Lower bounds (abstracts)</li>
+          <li>Enumerated bounds (of <code>X|Y</code>)</li>
+          <li>Self bounds (of <code>Self</code>)</li>
+          <li>Parameter bounds (of <code>T(String param)</code>)</li>
+          </ul>
+          </li>
+          <li>Variance (<code>in/out</code>)</li>
+          <li>Parameter type sequence (<code>T...</code>)</li>
+          <li>Reified parameter types</li>
+          </ul>
+          
+          
+          <h3 id="a_lot_more_features">A lot more features</h3>
+          
+          <ul>
+          <li>Type parameters</li>
+          <li>Singletons and anonymous classes</li>
+          <li>Introductions</li>
+          <li>Attribute and method references</li>
+          <li>Closures</li>
+          <li>Partial application</li>
+          <li>Annotations</li>
+          <li>Type aliases</li>
+          <li>Meta-model</li>
+          <li>Interception</li>
+          </ul>
+          
+          
+          <h3 id="modularity">Modularity</h3>
+          
+          <p><img src="/images/presentation/scopes.png" title="Scoping" alt="Scoping"></p>
+          
+          <ul>
+          <li>Core to the language</li>
+          <li>Integrated in the tool chain</li>
+          </ul>
+          
+          
+          <h3 id="tool_chain_removed">Tool chain (REMOVED)</h3>
+          
+          <ul>
+          <li>Compiler: <code>ceylon compile</code>
+          
+          <ul>
+          <li>Takes Java and Ceylon code</li>
+          <li>Produces a .car</li>
+          </ul>
+          </li>
+          <li>Launcher: <code>ceylon run</code>
+          
+          <ul>
+          <li>Takes a pkg.Name/version to run it</li>
+          </ul>
+          </li>
+          <li>Documentation generator: <code>ceylon doc</code>
+          
+          <ul>
+          <li>Takes a pkg.Name/version to generate the docs</li>
+          </ul>
+          </li>
+          <li>Eclipse Plugin</li>
+          </ul>
+          
+          
+          <h3 id="demo">Demo!</h3>
+          
+          <h3 id="community">Community</h3>
+          
+          <ul>
+          <li>Had a semi public status</li>
+          <li>A few oldies from JBoss: Gavin, Emmanuel…</li>
+          <li>Some new blood: Stef, Tako</li>
+          <li>And (very) active contributors
+          
+          <ul>
+          <li>Gary, Andrew, Tom, David (Serli), Flavio, Sergej, Ben…</li>
+          </ul>
+          </li>
+          </ul>
+          
+          
+          <h3 id="future">Future</h3>
+          
+          <ul>
+          <li>One website</li>
+          <li>Three milestones</li>
+          <li>M1 (almost done)
+          
+          <ul>
+          <li>Project will become “public”</li>
+          <li>Java interoperability</li>
+          <li>All the tools (with the IDE)</li>
+          </ul>
+          </li>
+          </ul>
+          
+          
+          <h3 id="m2__m3">M2 &amp; M3</h3>
+          
+          <ul>
+          <li>M2
+          
+          <ul>
+          <li>Interfaces with concrete members</li>
+          <li>Reified methods</li>
+          <li>Introductions</li>
+          <li>Switch</li>
+          <li>Default value parameters</li>
+          </ul>
+          </li>
+          <li>M3
+          
+          <ul>
+          <li>Annotations</li>
+          <li>Reified type parameters</li>
+          <li>Interception</li>
+          <li>Meta-model</li>
+          </ul>
+          </li>
+          </ul>
+          
+          
+          <h3 id="qa">Q&amp;A</h3>
+          
+          <ul>
+          <li>Questions! Answers?</li>
+          <li>
+<a href="http://ceylon-lang.org">http://ceylon-lang.org</a>
+          
+          <ul>
+          <li>coming very soon!</li>
+          </ul>
+          </li>
+          <li>
+<a href="http://in.relation.to/Tutorials/IntroductionToCeylon">http://in.relation.to/Tutorials/IntroductionToCeylon</a>
+          
+          <ul>
+          <li>12 parts tutorial</li>
+          </ul>
+          </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

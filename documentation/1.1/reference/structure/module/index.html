@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Modules</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.1/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.1/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.1/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.1/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.1/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.1/reference">Reference</a></h3>
+            
+            <ul>
+<li><a href="#usage">Usage
+            </a></li>
+<li><a href="#description">Description
+            </a></li>
+<ul>
+<li><a href="#member_packages">Member packages
+            </a></li>
+<li><a href="#descriptor">Descriptor
+            </a></li>
+<li><a href="#distribution">Distribution
+            </a></li>
+<li><a href="#legacy_modules">Legacy modules
+            </a></li>
+<li><a href="#metamodel">Metamodel
+            </a></li>
+</ul>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.1/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.1/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.1/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference (1.1)
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_11_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.1, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <h1 id="modules">Modules</h1>
+          
+          <p id="a_module_is_a_set...">A <em>module</em> is a set of <a href="../package">packages</a> together with a
+          <a href="#descriptor">module descriptor</a>. A module is packaged as a
+          <em>module archive</em>, which serves as a unit of distribution.</p>
+          
+          <h2 id="usage">Usage
+          </h2>
+          
+          
+          <p id="an_example_module_descriptor">An example module descriptor:</p>
+          
+          <!-- check:none -->
+          
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>module com.example.foo "1.2.0" {
+    import com.example.bar "3.4.1";
+}
+</code></pre>
+          
+          <p id="this_would_occur_in_the...">This would occur in the source file
+          <code>&lt;source-dir&gt;/com/example/foo/module.ceylon</code> where <code>&lt;source-dir&gt;</code>
+          is a directory containing ceylon source code, conventionally
+          <code>source</code>.</p>
+          
+          <h2 id="description">Description
+          </h2>
+          
+          
+          
+          
+          <h3 id="member_packages">Member packages
+          </h3>
+          
+          
+          <p id="the_names_of_the_packages...">The names of the packages in a module must begin with the name
+          of the module, so for example in a module called <code>com.example.foo</code>
+          all package names must begin <code>com.example.foo</code>.</p>
+          
+          <h3 id="descriptor">Descriptor
+          </h3>
+          
+          
+          <p id="the_module_descriptor_holds_metadata...">The module descriptor holds metadata about the module and is
+          declared in a source file called
+          <code>module.ceylon</code> in the base package of the module (that is the
+          package whose name is the same as the module name). Here's an
+          example:</p>
+          
+          <!-- check:none -->
+          
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>"An example module."
+module com.example.foo "1.2.0" {
+    import com.example.bar "3.4.1";
+    import org.example.whizzbang "0.5";
+}
+</code></pre>
+          
+          <p id="the_module_declaration_may_be...">The <code>module</code> declaration may be preceeded by <a href="../annotation">annotations</a>,
+          including:</p>
+          
+          <ul>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/index.html#doc"><code>doc</code></a>
+          to let you to specify module-level documentation,</li>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/index.html#license"><code>license</code></a>
+          to let you specify the module's license,</li>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/index.html#by"><code>by</code></a>
+          to document the module's author or authors.</li>
+          </ul>
+          
+          
+          <p id="the_module_declaration_itself_starts...">The module declaration itself starts with the <code>module</code> keyword
+          followed by the module name and version and a list of <code>import</code>s
+          enclosed in braces.</p>
+          
+          <p id="each_dependency_of_the_module...">Each dependency of the module must be declared with an <code>import</code>
+          declaration specifying the module name of the dependency and
+          its version.</p>
+          
+          <p id="the_import_declarations_can_also...">The <code>import</code> declarations can also be annotated. Annotations
+          particularly worth noting are:</p>
+          
+          <ul>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/index.html#shared"><code>shared</code></a> to mark the
+          imported module as also being exported to clients of this
+          module. If your module uses types from an imported module in
+          its API then the <code>import</code> for that module must be annotated
+          <code>shared</code> in the module descriptor.</li>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/index.html#optional"><code>optional</code></a> to mark
+          the imported module as being an optional dependency.</li>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/index.html#doc"><code>doc</code></a>,
+          if there is something about the dependency which is worthy of documentation.</li>
+          </ul>
+          
+          
+          <h3 id="distribution">Distribution
+          </h3>
+          
+          
+          <p id="modules_are_distributed_in_car...">Modules are distributed in <code>.car</code> files, which are essentially
+          <code>.jar</code> files with a different extension, and with a
+          <a href="#descriptor">module descriptor</a>.</p>
+          
+          <p id="modules_are_kept_in_a...">Modules are kept in a <a href="../../repository">module repository</a>. The
+          list of module repositories to use is passed to
+          <a href="/documentation/current/reference/tool/ceylon/subcommands/ceylon-compile.html"><code>ceylon compile</code></a>,
+          <a href="#/documentation/current/reference/tool/ceylon/subcommands/ceylon-run.html"><code>ceylon run</code></a>,
+          and <a href="../../../reference/#tools">other tools</a>.</p>
+          
+          <h3 id="legacy_modules">Legacy modules
+          </h3>
+          
+          
+          <p id="for_interoperability_with_java_its...">For interoperability with Java it's possible to convert Java <code>.jar</code> files into Ceylon
+          compatible modules. But for that they need a module descriptor telling Ceylon what it
+          needs to know.</p>
+          
+          <p id="if_there_is_any_module...">If there is any module descriptor in the jar in the following locations, it will be used:</p>
+          
+          <ul>
+          <li>
+<code>META-INF/jbossmodules/module/name/version/module.xml</code> in the jar, or</li>
+          <li>
+<code>META-INF/jbossmodules/module/name/version/module.properties</code> in the jar, or</li>
+          <li>
+<code>META-INF/MANIFEST.MF</code> for OSGi modules in the jar, or</li>
+          <li>
+<code>META-INF/maven/module/name/pom.xml</code> for Maven modules in the jar.</li>
+          </ul>
+          
+          
+          <p id="if_there_are_no_module...">If there are no module descriptors in the jar, you can provide one externally:</p>
+          
+          <ul>
+          <li>Using a <code>module.properties</code> file whose format is explained <a href="../module-properties">here</a>
+</li>
+          <li>Or using a JBoss Modules <code>module.xml</code> file whose detailed explanation can be found
+          <a href="https://docs.jboss.org/author/display/MODULES/Module+descriptors">here</a>
+</li>
+          </ul>
+          
+          
+          <p id="in_both_cases_the_file...">In both cases the file must be placed in the same folder as the <code>.jar</code> file it belongs to.
+          The name of the <code>.jar</code> file itself and the folder structure must adhere to the same rules
+          as those for <code>.car</code> files.</p>
+          
+          <p id="alternatively_you_can_use_a...">Alternatively, you can use a <a href="../../interoperability/ceylon-on-jvm#flat_repositories">flat repository</a>
+          to define external <code>module.xml</code> or <code>module.properties</code> descriptors in a flat folder.</p>
+          
+          <h3 id="metamodel">Metamodel
+          </h3>
+          
+          
+          <p id="modules_can_be_manipulated_at...">Modules can be manipulated at runtime via their representation as
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/meta/declaration/Module.type.html"><code>Module</code></a> instances.
+          A module's <code>import</code> declarations are represented as
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/meta/declaration/Import.type.html"><code>Import</code></a> instances.
+          The <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/meta/modules.object.html"><code>modules</code></a> object can be
+          used to list the modules currently loaded in the virtual machine.</p>
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li>Modules contain <a href="../package">packages</a>
+</li>
+          <li><a href="../../repository">Module repositories</a></li>
+          <li>
+<a href="/documentation/current/spec/html_single/index.html#modulesystem">Module system</a>
+          in the Ceylon specification</li>
+          <li>
+<a href="/documentation/1.0/tour/modules/">Packages and modules</a> in the tour</li>
+          <li>
+<a href="/documentation/current/reference/tool/ceylon/subcommands/ceylon-import-jar.html"><code>ceylon import-jar</code></a> command</li>
+          <li>
+<a href="../../tool/ant-ceylon-import-jar"><code>&lt;ceylon-import-jar&gt;</code></a> ant task</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

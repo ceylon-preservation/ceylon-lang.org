@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Generics</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.3/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.3/tour">Tour of Ceylon</a></h3>
+            
+            <ol>
+            <li><a href="/documentation/1.3/tour/basics">Basics</a></li>
+            <li><a href="/documentation/1.3/tour/classes">Classes</a></li>
+            <li><a href="/documentation/1.3/tour/attributes-control-structures">Attributes and variables, control structures</a></li>
+            <li><a href="/documentation/1.3/tour/inheritance">Inheritance, refinement, and interfaces</a></li>
+            <li><a href="/documentation/1.3/tour/anonymous-member-classes">Anonymous and member classes</a></li>
+            <li><a href="/documentation/1.3/tour/sequences">Streams, sequences, and tuples</a></li>
+            <li><a href="/documentation/1.3/tour/typeinference">Type aliases and type inference</a></li>
+            <li><a href="/documentation/1.3/tour/types">Union, intersection, and enumerated types</a></li>
+            <li><a href="/documentation/1.3/tour/generics">Generics</a></li>
+            <li><a href="/documentation/1.3/tour/modules">Packages and modules</a></li>
+            <li><a href="/documentation/1.3/tour/functions">Functions</a></li>
+            <li><a href="/documentation/1.3/tour/named-arguments">Named arguments</a></li>
+            <li><a href="/documentation/1.3/tour/comprehensions">Comprehensions</a></li>
+            <li><a href="/documentation/1.3/tour/language-module">Language module</a></li>
+            <li><a href="/documentation/1.3/tour/initialization">Initialization and constructors</a></li>
+            <li><a href="/documentation/1.3/tour/annotations">Annotations and the metamodel</a></li>
+            <li><a href="/documentation/1.3/tour/interop">Interoperation with Java</a></li>
+            <li><a href="/documentation/1.3/tour/dynamic">Dynamic typing and interoperation with JavaScript</a></li>
+            </ol>
+            
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.3/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.3/examples">Examples</a></h3>
+            
+            <!-- ### [Tutorial videos](/documentation/1.3/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.3/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.3/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.3/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.3/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide_for_intellij"><a href="/documentation/1.3/ide/intellij">Ceylon IDE for IntelliJ</a></h3>
+            
+            <h3 id="ceylon_ide_for_eclipse"><a href="/documentation/1.3/ide/eclipse">Ceylon IDE for Eclipse</a></h3>
+            
+            <h3 id="vertx"><a href="http://vertx.io/docs/vertx-core/ceylon/">Vert.x</a></h3>
+          </div>
+          <div class="point-dark-bottom">
+             
+          </div>
+          <div class="point-light-top"></div>
+          <div class="toc">
+            <ul>
+<li><a href="#generic_types">Generic types
+            </a></li>
+<ul>
+<li><a href="#type_parameters">Type parameters
+            </a></li>
+<li><a href="#type_arguments">Type arguments
+            </a></li>
+<li><a href="#type_argument_inference">Type argument inference
+            </a></li>
+<li><a href="#default_type_arguments">Default type arguments
+            </a></li>
+<li><a href="#gotcha">Gotcha!
+            </a></li>
+</ul>
+<li><a href="#covariance_and_contravariance">Covariance and contravariance
+            </a></li>
+<ul>
+<li><a href="#variant_and_invariant_generic_types">Variant and invariant generic types
+            </a></li>
+<li><a href="#using_declaration_site_variance">Using declaration-site variance
+            </a></li>
+<li><a href="#gotcha">Gotcha!
+            </a></li>
+<li><a href="#wildcard_types">Wildcard types
+            </a></li>
+<li><a href="#covariance_and_contravariance_with_unions_and_intersections">Covariance and contravariance with unions and intersections
+            </a></li>
+</ul>
+<li><a href="#generics_and_inheritance">Generics and inheritance
+            </a></li>
+<li><a href="#generic_type_constraints">Generic type constraints
+            </a></li>
+<ul>
+<li><a href="#upper_bound_type_constraints">Upper bound type constraints
+            </a></li>
+<li><a href="#enumerated_bound_type_constraints">Enumerated bound type constraints
+            </a></li>
+<li><a href="#gotcha">Gotcha!
+            </a></li>
+<li><a href="#multiple_type_constraints">Multiple type constraints
+            </a></li>
+</ul>
+<li><a href="#fully_reified_generic_types">Fully reified generic types
+            </a></li>
+<li><a href="#there_s_more">There's more...
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+          </div>
+          <div class="point-light-end"></div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Tour of Ceylon
+          </div>
+        </div>
+        <div id="core-page">
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.3/tour/generics.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.3/tour/generics.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="generics">Generics</h1>
+          
+          <p id="this_is_the_ninth_part...">This is the ninth part of the Tour of Ceylon. The <a href="../types">previous leg</a>
+          covered intersection types, union types, and enumerated types. In this part
+          we're looking at <em>generic</em> types.</p>
+          
+          <p id="inheritance_and_subtyping_are_a..."><a href="../inheritance">Inheritance and subtyping</a> are a powerful tool for abstracting
+          over types. But this tool has its limitations. It can't help us express generic
+          container types like collections. For this problem we need parameterized types.
+          We've seen plenty of parameterized types already—for example,
+          <a href="../sequences">iterables, sequences, and tuples</a>—but now let's explore a
+          few more details.</p>
+          
+          <h2 id="generic_types">Generic types
+          </h2>
+          
+          
+          <p id="programming_with_generic_types_is...">Programming with generic types is one of the most difficult parts of Java.
+          That's still true, to some extent, in Ceylon. But because the Ceylon language
+          and SDK were designed for generics from the ground up, Ceylon is able to
+          alleviate the most painful aspects of Java's bolted-on-later model.</p>
+          
+          <p id="there_are_two_kinds_of...">There are two kinds of things which may be generic:</p>
+          
+          <ul>
+          <li>a class, interface, or type alias, or</li>
+          <li>a function.</li>
+          </ul>
+          
+          
+          <h3 id="type_parameters">Type parameters
+          </h3>
+          
+          
+          <p id="just_like_in_java_only...">Just like in Java, only types and methods may declare type parameters. Also
+          just like in Java, type parameters are listed before ordinary parameters,
+          enclosed in angle brackets.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared interface Iterator&lt;out Element&gt; { ... }
+</code></pre>
+          
+          <br>
+          
+          
+          
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared class Singleton&lt;out Element&gt;(Element element)
+        extends Object()
+        satisfies [Element+]
+        given Element satisfies Object { ... }
+</code></pre>
+          
+          <br>
+          
+          
+          
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared Value sum&lt;Value&gt;({Value+} values) 
+        given Value satisfies Summable&lt;Value&gt; { ... }
+</code></pre>
+          
+          <br>
+          
+          
+          
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared &lt;Key-&gt;Item&gt;[] zip&lt;Key,Item&gt;({Key*} keys, {Item*} items)
+        given Key satisfies Object
+        given Item satisfies Object { ... }
+</code></pre>
+          
+          <p id="as_you_can_see_the...">As you can see, the convention in Ceylon is to use meaningful names for type
+          parameters (in other languages the usual convention is to use single letter
+          names).</p>
+          
+          <h3 id="type_arguments">Type arguments
+          </h3>
+          
+          
+          <p id="unlike_java_we_always_do...">Unlike Java, we always do need to specify type arguments in a type declaration
+          (there are no <em>raw types</em> in Ceylon). The following will not compile:</p>
+          
+          <pre data-language="ceylon"><code>value strings = {"hello", "world"};
+Iterator it = strings.iterator();   //error: missing type argument to parameter Element of Iterable
+</code></pre>
+          
+          <p id="instead_we_have_to_provide...">Instead, we have to provide a type argument like this:</p>
+          
+          <pre data-language="ceylon"><code>value strings = {"hello", "world"};
+Iterator&lt;String&gt; it = strings.iterator();
+</code></pre>
+          
+          <p id="on_the_other_hand_it...">On the other hand, it would be very annoying if we always had to specify all
+          type arguments explicitly everywhere.</p>
+          
+          <h3 id="type_argument_inference">Type argument inference
+          </h3>
+          
+          
+          <p id="fortunately_we_dont_need_to...">Fortunately, we don't need to explicitly specify type arguments in most method
+          invocations or class instantiations. We don't usually need to write:</p>
+          
+          <!-- check:none -->
+          
+          
+          <pre data-language="ceylon"><code>Array&lt;String&gt; strings = Array&lt;String&gt; { "Hello", "World" };
+{String|Integer*} things = interleave&lt;String|Integer,Null&gt;(strings, 0..2);
+</code></pre>
+          
+          <p id="instead_its_very_often_possible...">Instead, it's very often possible to infer the type arguments from the ordinary
+          arguments.</p>
+          
+          <!-- check:none -->
+          
+          
+          <pre data-language="ceylon"><code>value strings = Array { "Hello", "World" }; // type Array&lt;String&gt;
+value things = interleave(strings, 0..2); // type {String|Integer*}
+</code></pre>
+          
+          <p id="the_generic_type_argument_inference...">The generic type argument inference algorithm is slightly involved, so you
+          should refer to the <a href="/documentation/current/spec/html_single/index.html#typeargumentinference">language specification</a>
+          for a complete definition. But essentially what happens is that Ceylon
+          infers a type argument by combining the types of corresponding arguments
+          using union in the case of a covariant type parameter, or intersection
+          in the case of a contravariant type parameter.</p>
+          
+          <!--try:
+              class Polar(Float angle, Float radius) { }
+              class Cartesian(Float x, Float y) { }
+          
+              value points = Array { Polar(0.7854, 0.5), Cartesian(-1.0, 2.5) }; // type Array<Polar|Cartesian>
+              value things = zipEntries(1..points.size, points); // type {<Integer->Polar|Cartesian>*}
+          -->
+          
+          
+          <!-- check:none -->
+          
+          
+          <pre data-language="ceylon"><code>value points = Array { Polar(pi/4, 0.5), Cartesian(-1.0, 2.5) }; // type Array&lt;Polar|Cartesian&gt;
+value entries = zipEntries(1..points.size, points); // type {&lt;Integer-&gt;Polar|Cartesian&gt;*}
+</code></pre>
+          
+          <p id="theres_one_more_way_to...">There's one more way to avoid having to write in type arguments explicitly.</p>
+          
+          <h3 id="default_type_arguments">Default type arguments
+          </h3>
+          
+          
+          <p id="a_type_parameter_may_have...">A type parameter may have a default argument.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared interface Iterable&lt;out Element, out Absent=Null&gt; ...
+</code></pre>
+          
+          <p id="if_a_type_parameter_has...">If a type parameter has a default argument, we're allowed to leave out the
+          type argument to that type parameter when we supply a type argument list.
+          Therefore:</p>
+          
+          <ul>
+          <li>
+<code>Iterable&lt;String&gt;</code> means <code>Iterable&lt;String,Null&gt;</code>, and</li>
+          <li>
+<code>Iterable&lt;&gt;</code> means <code>Iterable&lt;Anything,Null&gt;</code>.</li>
+          </ul>
+          
+          
+          <p id="note_that_we_needed_to...">Note that we needed to explicitly specify the pointy brackets
+          in <code>Iterable&lt;&gt;</code>.</p>
+          
+          <h3 id="gotcha">Gotcha!
+          </h3>
+          
+          
+          <p id="default_type_arguments_are_always...">Default type arguments are always ignored when type arguments are inferred.</p>
+          
+          <p id="suppose_i_have_a_generic...">Suppose I have a generic class with a default argument:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>class Container&lt;out Element=Anything&gt;(Element* elements) {}
+</code></pre>
+          
+          <p id="lets_instantiate_this_class_without...">Let's instantiate this class without any arguments:</p>
+          
+          <!-- try-pre:
+             class Container<out Element=Anything>(Element* elements) {}
+          -->
+          
+          
+          <pre data-language="ceylon"><code>value container = Container();
+</code></pre>
+          
+          <p id="you_might_imagine_that_this...">You might imagine that this instantiation would produce a
+          <code>Container&lt;Anything&gt;</code>, since <code>Anything</code> is the default type
+          argument for <code>Element</code>. But that's not correct. In fact, the
+          instantiation produces a <code>Container&lt;Nothing&gt;</code>, according to the
+          usual rules for type argument inference of a covariant type
+          parameter. To get a <code>Container&lt;Anything&gt;</code>, we could need to
+          write:</p>
+          
+          <!-- try-pre:
+              class Container<out Element=Anything>(Element* elements) {}
+          -->
+          
+          
+          <pre data-language="ceylon"><code>value container = Container&lt;&gt;();
+</code></pre>
+          
+          <p id="where_the_pointy_brackets_act...">Where the pointy brackets act to disable type inference.</p>
+          
+          <h2 id="covariance_and_contravariance">Covariance and contravariance
+          </h2>
+          
+          
+          <p id="ceylon_eliminates_mostly_one_of...">Ceylon eliminates, <a href="../interop/#wildcards_and_raw_types_are_represented_using_use_site_variance">mostly</a>, one of the bits of Java
+          generics that's hardest to get your head around: wildcard types. Wildcard
+          types were Java's solution to the problem of <em>covariance</em> in a generic type
+          system. Let's meet the idea of covariance, and then see how covariance works
+          in Ceylon.</p>
+          
+          <h3 id="variant_and_invariant_generic_types">Variant and invariant generic types
+          </h3>
+          
+          
+          <p id="it_all_starts_with_the...">It all starts with the intuitive expectation that a collection of <code>Geek</code>s is
+          a collection of <code>Person</code>s. That's a reasonable intuition, but, if collections
+          are be mutable, it turns out to be incorrect. Consider the following possible
+          definition of <code>Collection</code>:</p>
+          
+          <!-- check:none -->
+          
+          
+          <pre data-language="ceylon"><code>interface Collection&lt;Element&gt; {
+    shared formal Iterator&lt;Element&gt; iterator();
+    shared formal void add(Element x);
+}
+</code></pre>
+          
+          <p id="and_lets_suppose_that_geek...">And let's suppose that <code>Geek</code> is a subtype of <code>Person</code>. Reasonable.</p>
+          
+          <p id="the_intuitive_expectation_is_that...">The intuitive expectation is that the following code should work:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none -->
+          
+          
+          <pre data-language="ceylon"><code>Collection&lt;Geek&gt; geeks = ... ;
+Collection&lt;Person&gt; people = geeks;    //compiler error
+for (person in people) { ... }
+</code></pre>
+          
+          <p id="this_code_is_frankly_perfectly...">This code is, frankly, perfectly reasonable taken at face value. Yet in both
+          Java and Ceylon, this code results in a compile-time error at the second line,
+          where the <code>Collection&lt;Geek&gt;</code> is assigned to a <code>Collection&lt;Person&gt;</code>. Why?
+          Well, because if we let the assignment through, the following code would also
+          compile:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none -->
+          
+          
+          <pre data-language="ceylon"><code>Collection&lt;Geek&gt; geeks = ... ;
+Collection&lt;Person&gt; people = geeks;    //compiler error
+people.add( Person("Fonzie") );
+</code></pre>
+          
+          <p id="we_cant_let_that_code...">We can't let that code by—Fonzie isn't a <code>Geek</code>!</p>
+          
+          <p id="using_big_words_we_say...">Using big words, we say that <code>Collection</code> is <em>invariant</em> in <code>Element</code>. Or, when
+          we're not trying to impress people with opaque terminology, we say that
+          <code>Collection</code> both:</p>
+          
+          <ul>
+          <li>
+<em>produces</em> <code>Element</code>s, via the <code>iterator()</code> method, and</li>
+          <li>
+<em>consumes</em> <code>Element</code>s, via the <code>add()</code> method.</li>
+          </ul>
+          
+          
+          <p id="now_in_java_we_can...">Now, in Java, we can use a <em>wildcard</em> to obtain:</p>
+          
+          <ul>
+          <li>a covariant type, for example, <code>Collection&lt;? extends Person&gt;</code>, one that only
+          produces <code>Element</code>s, or</li>
+          <li>a contravariant type, for example, <code>Collection&lt;? super Geek&gt;</code>, one that only
+          consumes <code>Element</code>s.</li>
+          </ul>
+          
+          
+          <p id="ceylon_also_has_wildcard_types...">Ceylon also has wildcard types, though with a <a href="#wildcard_types">much nicer syntax</a>,
+          but they're mainly used for interoperation with Java. In pure Ceylon code, we
+          use a different approach to produce covariance or contravariance.</p>
+          
+          <h3 id="using_declaration_site_variance">Using declaration-site variance
+          </h3>
+          
+          
+          <p id="were_going_to_refactor_collection...">We're going to refactor <code>Collection</code> into a pure producer interface and a pure
+          consumer interface:</p>
+          
+          <!-- check:none -->
+          
+          
+          <pre data-language="ceylon"><code>interface Producer&lt;out Output&gt; {
+    shared formal Iterator&lt;Output&gt; iterator();
+}
+interface Consumer&lt;in Input&gt; {
+    shared formal void add(Input x);
+}
+</code></pre>
+          
+          <p id="notice_that_weve_annotated_the...">Notice that we've annotated the type parameters of these interfaces.</p>
+          
+          <ul>
+          <li>The <code>out</code> annotation specifies that <code>Producer</code> is covariant in <code>Output</code>;
+          that it produces instances of <code>Output</code>, but never consumes instances of <code>Output</code>.</li>
+          <li>The <code>in</code> annotation specifies that <code>Consumer</code> is contravariant in <code>Input</code>;
+          that it consumes instances of <code>Input</code>, but never produces instances of <code>Input</code>.</li>
+          </ul>
+          
+          
+          <p id="the_ceylon_compiler_validates_the...">The Ceylon compiler validates the schema of the type declaration to ensure
+          that the variance annotations are satisfied. If you try to declare an <code>add()</code>
+          method on <code>Producer</code>, a compilation error results. If you try to declare an
+          <code>iterate()</code> method on <code>Consumer</code>, you get a similar compilation error.</p>
+          
+          <p id="now_lets_see_what_that...">Now, let's see what that buys us:</p>
+          
+          <ul>
+          <li>Since <code>Producer</code> is covariant in its type parameter <code>Output</code>, and since
+          <code>Geek</code> is a subtype of <code>Person</code>, Ceylon lets you assign <code>Producer&lt;Geek&gt;</code> to
+          <code>Producer&lt;Person&gt;</code>.</li>
+          <li>Furthermore, since <code>Consumer</code> is contravariant in its type parameter <code>Input</code>,
+          and since <code>Geek</code> is a subtype of <code>Person</code>, Ceylon lets you assign
+          <code>Consumer&lt;Person&gt;</code> to <code>Consumer&lt;Geek&gt;</code>.</li>
+          </ul>
+          
+          
+          <p id="we_can_define_our_collection...">We can define our <code>Collection</code> interface as a mixin of <code>Producer</code> with <code>Consumer</code>.</p>
+          
+          <!-- try-pre:
+              interface Producer<out Output> {
+                  shared formal Iterator<Output> iterator();
+              }
+              interface Consumer<in Input> {
+                  shared formal void add(Input x);
+              }
+          
+          -->
+          
+          
+          <!-- check:none -->
+          
+          
+          <pre data-language="ceylon"><code>interface Collection&lt;Element&gt;
+        satisfies Producer&lt;Element&gt; &amp; Consumer&lt;Element&gt; {}
+</code></pre>
+          
+          <p id="notice_that_collection_remains_invariant...">Notice that <code>Collection</code> remains invariant in <code>Element</code>. If we tried to add a
+          variance annotation to <code>Element</code> in <code>Collection</code>, a compile time error would
+          result, because the annotation would contradict the variance annotation of
+          either <code>Producer</code> or <code>Consumer</code>.</p>
+          
+          <p id="now_the_following_code_finally...">Now, the following code finally compiles:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none -->
+          
+          
+          <pre data-language="ceylon"><code>Collection&lt;Geek&gt; geeks = ... ;
+Producer&lt;Person&gt; people = geeks;
+for (person in people) { ... }
+</code></pre>
+          
+          <p id="which_matches_our_original_intuition">Which matches our original intuition.</p>
+          
+          <p id="the_following_code_also_compiles">The following code also compiles:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none -->
+          
+          
+          <pre data-language="ceylon"><code>Collection&lt;Person&gt; people = ... ;
+Consumer&lt;Geek&gt; geekConsumer = people;
+geekConsumer.add( Geek("James") );
+</code></pre>
+          
+          <p id="which_is_also_intuitively_correct—james...">Which is also intuitively correct—<code>James</code> is most certainly a <code>Person</code>!</p>
+          
+          <p id="theres_two_additional_things_that...">There's two additional things that follow from the definition of covariance
+          and contravariance:</p>
+          
+          <ul>
+          <li>
+<code>Producer&lt;Anything&gt;</code> is a supertype of <code>Producer&lt;T&gt;</code> for any type <code>T</code>, and</li>
+          <li>
+<code>Consumer&lt;Nothing&gt;</code> is a supertype of <code>Consumer&lt;T&gt;</code> for any type <code>T</code>.</li>
+          </ul>
+          
+          
+          <p id="these_invariants_can_be_very...">These invariants can be very helpful if you need to abstract over all
+          <code>Producer</code>s or all <code>Consumer</code>s.</p>
+          
+          <p id="youre_unlikely_to_spend_much...">You're unlikely to spend much time writing your own collection classes, since
+          the Ceylon SDK has a powerful collections framework built in. But you'll still
+          appreciate Ceylon's approach to covariance as a user of the built-in collection
+          types.</p>
+          
+          <h3 id="gotcha">Gotcha!
+          </h3>
+          
+          
+          <p id="sadly_declaration_site_variance_doesnt...">Sadly, declaration site variance doesn't help us when we interoperate with
+          native Java code, where all generic classes and interfaces are invariant, and
+          <em>wildcards</em> are used to recover covariance or contravariance in method
+          signatures.</p>
+          
+          <p id="therefore_youll_sometimes_need_to...">Therefore, you'll sometimes need to use wildcards when interoperating with
+          Java libraries.</p>
+          
+          <h3 id="wildcard_types">Wildcard types
+          </h3>
+          
+          
+          <p id="we_dont_recommend_the_use...">We don't recommend the use of wildcard types in pure Ceylon code, but you
+          still need to be aware of their existence if you ever plan to call native
+          Java classes from Ceylon.</p>
+          
+          <p id="this_java_method_signature">This Java method signature:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>//Java
+void java(Map&lt;? super String, ? extends Widget&gt; map) { ... }
+</code></pre>
+          
+          <p id="would_be_written_like_this...">Would be written like this in Ceylon:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>//Ceylon
+void java(Map&lt;in String, out Widget&gt; map) { ... }
+</code></pre>
+          
+          <p id="here_we_see_a_wildcarded...">Here, we see a wildcarded type:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Map&lt;in String, out Widget&gt;
+</code></pre>
+          
+          <p id="the_wildcards_in_string_and...">The wildcards <code>in String</code> and <code>out Widget</code> make the following
+          code well-typed:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>//assigns a Map&lt;Object,MoveableWidget&gt; to Map&lt;in String, out Widget&gt;
+java(HashMap&lt;Object,MoveableWidget&gt;());
+</code></pre>
+          
+          <p id="since_object_is_a_supertype...">Since <code>Object</code> is a supertype of <code>String</code> and <code>MoveableWidget</code> is a subtype
+          of <code>Widget</code>, <code>Map&lt;Object,MoveableWidget&gt;</code> is assignable to the wildcard type
+          <code>Map&lt;in String, out Widget&gt;</code>.</p>
+          
+          <p id="if_you_didnt_follow_this...">If you didn't follow this section, don't worry. You might not ever even
+          need to use a wildcard type in Ceylon. We have bigger fish to fry.</p>
+          
+          <h3 id="covariance_and_contravariance_with_unions_and_intersections">Covariance and contravariance with unions and intersections
+          </h3>
+          
+          
+          <p id="theres_a_couple_of_interesting...">There's a couple of interesting relationships that arise when we introduce
+          union and intersection types into the picture.</p>
+          
+          <p id="first_consider_a_covariant_type...">First, consider a covariant type like <code>Producer&lt;Element&gt;</code>. Then for any types
+          <code>X</code> and <code>Y</code>:</p>
+          
+          <ul>
+          <li>
+<code>Producer&lt;X&gt;|Producer&lt;Y&gt;</code> is a subtype of <code>Producer&lt;X|Y&gt;</code> , and</li>
+          <li>
+<code>Producer&lt;X&gt;&amp;Producer&lt;Y&gt;</code> is the same as <code>Producer&lt;X&amp;Y&gt;</code>.</li>
+          </ul>
+          
+          
+          <p id="next_consider_a_contravariant_type...">Next, consider a contravariant type like <code>Consumer&lt;Element&gt;</code>. Then for any
+          types <code>X</code> and <code>Y</code>:</p>
+          
+          <ul>
+          <li>
+<code>Consumer&lt;X&gt;|Consumer&lt;Y&gt;</code> is a subtype of <code>Consumer&lt;X&amp;Y&gt;</code> , and</li>
+          <li>
+<code>Consumer&lt;X&gt;&amp;Consumer&lt;Y&gt;</code> is the same as <code>Consumer&lt;X|Y&gt;</code>.</li>
+          </ul>
+          
+          
+          <p id="its_worth_coming_back_to...">It's worth coming back to this section later, and trying to develop some
+          intuition about exactly why these relationships are correct and what they
+          mean. But don't waste time on that now. We've got bigger fish to fry!</p>
+          
+          <h2 id="generics_and_inheritance">Generics and inheritance
+          </h2>
+          
+          
+          <p id="consider_the_following_classes">Consider the following classes:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>class LinkedList() 
+        satisfies List&lt;Object&gt; { ... }
+
+class LinkedStringList() 
+        extends LinkedList() 
+        satisfies List&lt;String&gt; { ... }
+</code></pre>
+          
+          <p id="this_kind_of_inheritance_is...">This kind of inheritance is illegal in Java. A class can't inherit the
+          same type more than once, with different type arguments. We say that
+          Java supports only <em>single instantiation inheritance</em>.</p>
+          
+          <p id="ceylon_is_less_restrictive_here...">Ceylon is less restrictive here. The above code is perfectly legal if
+          (and only if) the interface <code>List&lt;Element&gt;</code> is covariant in its type
+          parameter <code>Element</code>, that is, if it's declared like this:</p>
+          
+          <!-- try:
+              interface List<out Element> { }
+          
+              class LinkedList() 
+                      satisfies List<Object> { }
+              
+              class LinkedStringList() 
+                      extends LinkedList() 
+                      satisfies List<String> { }
+          
+          -->
+          
+          
+          <pre data-language="ceylon"><code>interface List&lt;out Element&gt; { ... }
+</code></pre>
+          
+          <p id="we_say_that_ceylon_features...">We say that Ceylon features <em>principal instantiation inheritance</em>.
+          Even the following code is legal:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>interface ListOfSomething 
+        satisfies List&lt;Something&gt; {}
+
+interface ListOfSomethingElse 
+        satisfies List&lt;SomethingElse&gt; {}
+
+class MyList() satisfies 
+        ListOfSomething &amp; ListOfSomethingElse { ... }
+</code></pre>
+          
+          <p id="then_the_following_is_legal...">Then the following is legal and well-typed:</p>
+          
+          <!-- try-pre:
+              interface Something {}
+              interface SomethingElse {}
+              interface List<out Element> { }
+              interface ListOfSomething satisfies List<Something> {}
+              interface ListOfSomethingElse satisfies List<SomethingElse> {}
+              class MyList() satisfies ListOfSomething & ListOfSomethingElse {}
+          
+          -->
+          
+          
+          <pre data-language="ceylon"><code>List&lt;Something&amp;SomethingElse&gt; list = MyList();
+</code></pre>
+          
+          <p id="please_pause_here_and_take...">Please pause here, and take the  time to notice how ridiculously
+          awesome this is. We never actually explicitly mentioned that
+          <code>MyList()</code> was a <code>List&lt;Something&amp;SomethingElse&gt;</code>. The compiler just
+          figured it out for us.</p>
+          
+          <p id="note_that_when_you_inherit...">Note that when you inherit the same type more than once, you might
+          need to refine some of its members, in order to satisfy all inherited
+          signatures. Don't worry, the compiler will notice and force you to do
+          it.</p>
+          
+          <h2 id="generic_type_constraints">Generic type constraints
+          </h2>
+          
+          
+          <p id="very_commonly_when_we_write...">Very commonly, when we write a parameterized type, we want to be able to
+          invoke methods or evaluate attributes upon instances of the type parameter.
+          For example, if we were writing a parameterized type <code>Set&lt;Element&gt;</code>, we would
+          need to be able to compare instances of <code>Element</code> using <code>==</code> to see if a
+          certain instance of <code>Element</code> is contained in the <code>Set</code>. Since <code>==</code> is
+          defined for expressions of type
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Object.type.html"><code>Object</code></a>,
+          we need some way to assert that <code>Element</code> is a subtype of <code>Object</code>. This is
+          an example of a <em>type constraint</em>—in fact, it's an example of the most
+          common kind of type constraint, an <em>upper bound</em>.</p>
+          
+          <h3 id="upper_bound_type_constraints">Upper bound type constraints
+          </h3>
+          
+          
+          <p id="an_upper_bound_type_constraint...">An upper bound type constraint restricts the arguments of a type parameter
+          to subtypes of a certain type.</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none -->
+          
+          
+          <pre data-language="ceylon"><code>shared class Set&lt;out Element&gt;(Element* elements)
+        given Element satisfies Object {
+    ...
+
+    shared Boolean contains(Object obj) {
+        if (is Element obj) {
+            return obj in bucket(obj.hash);
+        }
+        else {
+            return false;
+        }
+    }
+
+}
+</code></pre>
+          
+          <p id="now_a_type_argument_to...">Now, a type argument to <code>Element</code> must be a subtype of <code>Object</code>.</p>
+          
+          <!-- try-pre:
+              class Set<out Element>(Element* elements)
+                      given Element satisfies Object { }
+          
+          -->
+          
+          
+          <!-- check:none: Demos error -->
+          
+          
+          <pre data-language="ceylon"><code>Set&lt;String&gt; set1 = Set("C", "Java", "Ceylon"); //ok
+Set&lt;String?&gt; set2 = Set("C", "Java", "Ceylon", null); //compile error
+</code></pre>
+          
+          <h3 id="enumerated_bound_type_constraints">Enumerated bound type constraints
+          </h3>
+          
+          
+          <p id="a_second_kind_of_type...">A second kind of type constraint is an <em>enumerated bound</em>, which
+          constrains the type argument to be one of an enumerated list of types.
+          It lets us write an exhaustive switch on the type parameter:</p>
+          
+          <!-- try: pre
+              function sqrt(Float x) => x^0.5;
+          -->
+          
+          
+          <!-- try: post
+          
+              print(sqrt(3));
+              print(sqrt(9.0));
+          -->
+          
+          
+          <pre data-language="ceylon"><code>Float sqr&lt;Value&gt;(Value x, Value y)
+        given Value of Float | Integer {
+    switch (x)
+    case (is Float) {
+        assert (is Float y);
+        return sqrt(x^2+y^2);
+    }
+    case (is Integer) {
+        assert (is Integer y);
+        return sqrt((x^2+y^2).float);
+    }
+}
+</code></pre>
+          
+          <p id="this_is_one_of_the...">This is one of the workarounds we <a href="../classes/#living_without_overloading">mentioned earlier</a>
+          for Ceylon's lack of overloading.</p>
+          
+          <h3 id="gotcha">Gotcha!
+          </h3>
+          
+          
+          <p id="an_enumerated_bound_like_given...">An enumerated bound like <code>given Value of Float|Integer</code> doesn't make
+          <code>Value</code> a <em>subtype</em> of the union type <code>Float|Integer</code>. However, the
+          union type does <em>cover</em> the type parameter <code>Value</code>. So you can assign
+          <code>Value</code> to <code>Float|Integer</code> with the help of the <code>of</code> operator:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>void fun&lt;Value&gt;(Value val) 
+        given Value of Float|Integer {
+    Float|Integer floatOrInteger 
+            = val of Float|Integer;
+    ...
+}
+</code></pre>
+          
+          <p id="this_is_the_same_thing...">This is the same thing we've <a href="../types/#coverage_and_the_of_operator">already seen</a>
+          for other enumerated types.</p>
+          
+          <h3 id="multiple_type_constraints">Multiple type constraints
+          </h3>
+          
+          
+          <p id="when_we_declare_multiple_constraints...">When we declare multiple constraints on a type parameter, we must declare
+          them as part of the same <code>given</code> declaration:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>given Value of Float | Integer satisfies Ordinal&lt;Value&gt; &amp; Comparable&lt;Value&gt;
+</code></pre>
+          
+          <p id="in_ceylon_a_generic_type...">In Ceylon, a generic type parameter is considered a perfectly normal type,
+          so a type constraint declaration looks a lot like an interface declaration,
+          with the same syntax for the <code>of</code> and <code>satisfies</code> clauses. This is another
+          way in which Ceylon is more regular than some other C-like languages.</p>
+          
+          <!--
+          Finally, the fourth kind of type constraint, which is much less common, and 
+          which most people find much more confusing, is a *lower bound*. A lower 
+          bound is the opposite of an upper bound. It says that a type parameter is 
+          a *supertype* of some other type. There's only really one situation where 
+          this is useful. Consider adding a `union()` operation to our `Set` interface. 
+          We might try the following:
+          -->
+          
+          
+          <!-- check:none -->
+          
+          
+          <!--
+              shared class Set<out Element>(Element* elements)
+                      given Element satisfies Object {
+                  ...
+                   
+                  shared Set<Element> union(Set<Element> set) {   //compile error
+                      return ....
+                  }
+                   
+              }
+          
+          This doesn't compile because we can't use the covariant type parameter `T` 
+          in the type declaration of a method parameter. The following declaration 
+          would compile:
+          -->
+          
+          
+          <!-- check:none -->
+          
+          
+          <!--
+              shared class Set<out Element>(Element* elements)
+                      given Element satisfies Object {
+                  ...
+                   
+                  shared Set<Object> union(Set<Object> set) {
+                      return ....
+                  }
+                   
+              }
+          
+          But, unfortunately, we get back a `Set<Object>` no matter what kind of 
+          set we pass in. A lower bound is the solution to our dilemma:
+          -->
+          
+          
+          <!-- check:none -->
+          
+          
+          <!--
+              shared class Set<out Element>(Element* elements)
+                      given Element satisfies Object {
+                  ...
+                   
+                  shared Set<UnionElement> union(Set<UnionElement> set)
+                          given UnionElement abstracts Element {
+                      return ...
+                  }
+                   
+              }
+          
+          With type inference, the compiler chooses an appropriate type argument to 
+          `UnionElement` for the given argument to `union()`:
+          -->
+          
+          
+          <!-- check:none -->
+          
+          
+          <!--
+              Set<String> strings = Set("abc", "xyz") ;
+              Set<String> moreStrings = Set("foo", "bar", "baz");
+              Set<String> allTheStrings = strings.union(moreStrings);
+              Set<Decimal> decimals = Set(1.2.decimal, 3.67.decimal) ;
+              Set<Float> floats = Set(0.33, 22.0, 6.4);
+              Set<Number<out Anything>> allTheNumbers = decimals.union(floats);
+              Set<Point> points = Set( Polar(pi,3.5), Cartesian(1.0, -2.0) );
+              Set<Object> objects = Set("Gavin", 12, true);
+              Set<Object> allTheObjects = points.union(objects);
+          -->
+          
+          
+          
+          
+          <h2 id="fully_reified_generic_types">Fully reified generic types
+          </h2>
+          
+          
+          <p id="the_root_cause_of_very...">The root cause of very many problems when working with generic types in
+          Java is <em>type erasure</em>. Generic type parameters and arguments are discarded
+          by the compiler, and simply aren't available at runtime. So the following,
+          perfectly sensible, code fragments just wouldn't compile in Java:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none -->
+          
+          
+          <pre data-language="ceylon"><code>if (is List&lt;Person&gt; list) { ... }
+if (is Element obj) { ... }
+</code></pre>
+          
+          <p id="where_element_is_a_generic...">(Where <code>Element</code> is a generic type parameter.)</p>
+          
+          <p id="ceylons_type_system_has_reified...">Ceylon's type system has <em>reified generic type arguments</em>. Like Java, the
+          Ceylon compiler performs erasure, discarding type parameters from the schema
+          of the generic type. On the JavaScript platform, types are discarded when
+          producing JavaScript source. But unlike Java, type arguments are <em>reified</em>
+          (available at runtime). Types are even reified when executing on a JavaScript
+          virtual machine!</p>
+          
+          <p id="so_the_code_fragments_above...">So the code fragments above compile and function as expected on both
+          platforms. Via the metamodel, you're even able to use reflection to discover
+          the type arguments of an instance of a generic type at runtime.</p>
+          
+          <p id="now_of_course_generic_type...">Now of course, generic type arguments aren't checked for typesafety by the
+          underlying virtual machine at runtime, but that's just not really strictly
+          necessary since the compiler has already checked and proved the soundness
+          of the code. They <em>are</em>, however, checked at runtime whenever you use a type
+          <code>assert</code>ion to narrow the type of a value.</p>
+          
+          <h2 id="there_s_more">There's more...
+          </h2>
+          
+          
+          <p id="now_were_ready_to_look...">Now we're ready to look at a really important feature of the language:
+          <a href="../modules">modularity</a>.</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Java Reflection oddities with inner and enum class constructor parameters</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2013/05/07/judcon/">JUDCon Boston 2013</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2013/07/18/ceylon-ide-performance-improvements/">Ceylon IDE performance improvements</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="java_reflection_oddities_with_inner_and_enum_class_constructor_parameters">
+            Java Reflection oddities with inner and enum class constructor parameters
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/stephane-epardaud/">Stéphane Épardaud</a>
+            </div>
+            <div class="date">
+              14 May 2013
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/java/">
+                java
+              </a>
+              <a href="/blog/tags/code/">
+                code
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <p id="note_edited_on_1652013_to..."><strong>Note: edited on 16/5/2013 to add info about enum constructors as well.</strong></p>
+            
+            <h1 id="about_java_inner_classes">About Java inner classes</h1>
+            
+            <p id="java_allows_member_classes_classes...">Java allows member classes (classes that are defined inside other classes), local classes
+            (classes that are defined inside statement blocks) and anonymous classes (classes with no
+            names):</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="java"><code>class Outer {
+    Object anonymous = new Object(){}; // this is an anonymous class
+
+    // anonymous initialisation block
+    {
+        // this is a local class
+        class Local{}
+        Local l = new Local();
+    }
+
+    Outer() {
+        // this is a local named class in a constructor
+        class Local{}
+        Local l = new Local();
+    }
+
+    void method() {
+        // this is a local named class in a method
+        class Local{}
+        Local l = new Local();
+    }
+
+    // this is a member class
+    class Inner{}
+    Inner i = new Inner();
+}
+</code></pre>
+            
+            <p id="the_java_language_specification_classifies...">The <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-8.html#jls-8.1.3">Java Language Specification</a>
+            classifies member, local and anonymous classes as <em>inner classes</em>.</p>
+            
+            <h1 id="implementation_“details”">Implementation “details”</h1>
+            
+            <p id="what_the_java_language_or...">What the Java Language or Virtual Machine specifications do not tell you is <em>how</em> they are implemented.
+            Some of it is explained already in <a href="http://www.dzone.com/links/r/java_secret_generated_methods.html">other articles</a>,
+            such as how the Java compiler generates <em>synthetic</em> methods to allow these members classes access to
+            private fields, which would not be allowed by the JVM.</p>
+            
+            <p id="another_implementation_detail_of_inner...">Another implementation detail of inner classes that is handy to know is that inner class constructors
+            take extra <em>synthetic</em> parameters. It is relatively
+            <a href="http://thecodersbreakfast.net/index.php?post/2011/09/26/Inner-classes-and-the-myth-of-the-default-constructor">well-known</a>
+            that the first synthetic parameter of an inner class constructor will be its enclosing instance, which
+            it will store in a <code>this$X</code> synthetic field. This is valid for all three kinds of inner classes: member,
+            local and anonymous.</p>
+            
+            <p id="but_it_is_generally_not...">But it is generally not known that local classes who <em>capture</em> non-constant final variables will require
+            all these variables to be passed as extra synthetic constructor parameters (captured constant final
+            variables will be inlined and not generate extra synthetic constructor parameters):</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="java"><code>class Outer {
+    void method() {
+        final String constant = "foo";
+        final String nonConstant = "foo".toUpperCase();
+        class Local{
+            /* synthetic fields and constructor: 
+
+            Outer this$0;
+            String nonConstant;
+
+            Local(Outer this$0, String nonConstant){
+                this.this$0 = this$0;
+                this.nonConstant = nonConstant;
+            }
+            */
+        }
+        Local l = new Local();
+    }
+}
+</code></pre>
+            
+            <h1 id="another_example_java_enum_classes">Another example: Java enum classes</h1>
+            
+            <p id="java_allows_you_to_create...">Java allows you to create enumeration classes, which is essentially little more than syntactic sugar to
+            help you define a list of singleton values of a given type.</p>
+            
+            <p id="the_following_java_code">The following Java code:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="java"><code>enum Colours {
+    RED, BLUE;
+}
+</code></pre>
+            
+            <p id="is_essentially_equivalent_to">Is essentially equivalent to:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="java"><code>final class Colours extends java.lang.Enum {
+    public final static Colours RED = new Colours("RED", 0);
+    public final static Colours BLUE = new Colours("BLUE", 1);
+
+    private final static values = new Colours[]{ RED, BLUE };
+
+    private Colours(String name, int sequence){
+        super(name, sequence);
+    }
+
+    public static Colours[] values(){
+        return values;
+    }
+
+    public static Colours valueOf(String name){
+        return (Colours)java.lang.Enum.valueOf(Colours.class, name);
+    }
+}
+</code></pre>
+            
+            <p id="as_you_can_see_it...">As you can see, it saves quite some code, but also adds <em>synthetic</em> fields, methods and constructor parameters. If you
+            had defined your own constructor, with its own set of parameters, like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="java"><code>enum Colours {
+    RED("rouge"), BLUE("bleu");
+
+    public final String french;
+
+    Colours(String french){
+        this.french = french;
+    }
+}
+</code></pre>
+            
+            <p id="you_would_have_gotten_the...">You would have gotten the following Java code generated:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="java"><code>final class Colours extends java.lang.Enum {
+    public final static Colours RED = new Colours("RED", 0, "rouge");
+    public final static Colours BLUE = new Colours("BLUE", 1, "bleu");
+
+    private final static values = new Colours[]{ RED, BLUE };
+
+    public final String french;
+
+    private Colours(String name, int sequence, String french){
+        super(name, sequence);
+        this.french = french;
+    }
+
+    public static Colours[] values(){
+        return values;
+    }
+
+    public static Colours valueOf(String name){
+        return (Colours)java.lang.Enum.valueOf(Colours.class, name);
+    }
+}
+</code></pre>
+            
+            <p id="luckily_enums_can’t_be_inner...">Luckily, enums can’t be inner classes, so they will not have an extra synthetic parameter inserted for
+            the container instance to add to those two.</p>
+            
+            <h1 id="ok_but_why_should_i_care">OK, but why should I care?</h1>
+            
+            <p id="in_most_cases_you_don’t...">In most cases you don’t care, other than for your own curiosity. But if you’re doing Java reflection with inner or enum classes,
+            there are a few things you should know, and because I haven’t found them listed or specified online, I thought it would
+            be important to make a list of things to help others figure it out, because different compilers will produce different
+            results in the Java reflection API.</p>
+            
+            <p id="the_question_is_what_happens...">The question is what happens when you use Java reflection to get a <code>java.lang.reflect.Constructor</code> instance for inner or enum
+            class constructors? In particular, what happens with the methods that allow you to access the parameter types (pre-generics:
+            <code>getParameterTypes()</code>), the generic parameter types (post-generics: <code>getGenericParameterTypes()</code>) and annotations
+            (<code>getParameterAnnotations()</code>), and the answer is: <em>it depends</em>.</p>
+            
+            <p id="suppose_the_following_java_classes">Suppose the following Java classes:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="java"><code>class Outer {
+    class Inner {
+        Inner(){}
+        Inner(String param){}
+        Inner(@Deprecated Integer param){}
+    }
+}
+enum class Enum {
+    ;// yes this is required
+    Enum(){}
+    Enum(String param){}
+    Enum(@Deprecated Integer param){}
+}
+</code></pre>
+            
+            <p id="here_are_the_size_of...">Here are the size of the arrays returned by these three reflection methods, on each of our
+            constructor, and how they differ depending on the Java compiler used:</p>
+            
+            <table style="font-size: smaller;">
+             <tr>
+              <th></th>
+              <th><tt>Outer.Inner.class<br> .getDeclaredConstructor()</tt></th>
+              <th><tt>Outer.Inner.class<br> .getDeclaredConstructor(<br>  String.class)</tt></th>
+              <th><tt>Outer.Inner.class<br> .getDeclaredConstructor(<br>  Integer.class)</tt></th>
+             </tr>
+             <tr>
+              <td><tt>getParameterTypes()<br> .length</tt></td>
+              <td>1</td>
+              <td>2</td>
+              <td>2</td>
+             </tr>
+             <tr>
+              <td>
+<tt>getGenericParameterTypes()<br> .length</tt> compiled with Eclipse</td>
+              <td>1</td>
+              <td>2</td>
+              <td>2</td>
+             </tr>
+             <tr>
+              <td>
+<tt>getGenericParameterTypes()<br> .length</tt> compiled with Javac</td>
+              <td>0</td>
+              <td>1</td>
+              <td>1</td>
+             </tr>
+             <tr>
+              <td><tt>getParameterAnnotations()<br> .length</tt></td>
+              <td>1</td>
+              <td>2</td>
+              <td>1</td>
+             </tr>
+            </table>
+            
+            
+            <p id="and_the_results_are_consistent...">And the results are consistent for our enum class:</p>
+            
+            <table style="font-size: smaller;">
+             <tr>
+              <th></th>
+              <th><tt>Enum.class<br> .getDeclaredConstructor()</tt></th>
+              <th><tt>Enum.class<br> .getDeclaredConstructor(<br>  String.class)</tt></th>
+              <th><tt>Enum.class<br> .getDeclaredConstructor(<br>  Integer.class)</tt></th>
+             </tr>
+             <tr>
+              <td><tt>getParameterTypes()<br> .length</tt></td>
+              <td>2</td>
+              <td>3</td>
+              <td>3</td>
+             </tr>
+             <tr>
+              <td>
+<tt>getGenericParameterTypes()<br> .length</tt> compiled with Eclipse</td>
+              <td>2</td>
+              <td>3</td>
+              <td>3</td>
+             </tr>
+             <tr>
+              <td>
+<tt>getGenericParameterTypes()<br> .length</tt> compiled with Javac</td>
+              <td>0</td>
+              <td>1</td>
+              <td>1</td>
+             </tr>
+             <tr>
+              <td><tt>getParameterAnnotations()<br> .length</tt></td>
+              <td>2</td>
+              <td>3</td>
+              <td>1</td>
+             </tr>
+            </table>
+            
+            
+            <p id="as_you_can_see_the...">As you can see, the synthetic parameters are always included in <code>getParameterTypes()</code>,
+            but are only included in <code>getGenericParameterTypes()</code> when compiled with Eclipse.</p>
+            
+            <p id="getparameterannotations_on_the_other_hand..."><code>getParameterAnnotations()</code> on the other hand, will always include synthetic parameters
+            except when at least one of your constructor parameters are annotated.</p>
+            
+            <p id="with_this_info_you_now...">With this info, you now understand the differences between the results of these methods,
+            but so far I still haven’t found a way to determine which parameter is synthetic or not,
+            because although you can make a good guess for the <code>this$X</code> synthetic parameter, which
+            is required by every inner class, you have no way of knowing the number of non-constant
+            captured variables that will end up as synthetic parameters to local class constructors.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2013/05/14/java-reflection-oddities/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

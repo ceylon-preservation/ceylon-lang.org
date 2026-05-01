@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Latest news</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2012/07/12/tricks-with-iterable/">Tricks with iterable objects</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2012/08/16/ceylon-ide-m3_2/">Ceylon IDE M3.2 released</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="latest_news">
+            Latest news
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/stephane-epardaud/">Stéphane Épardaud</a>
+            </div>
+            <div class="date">
+              13 Aug 2012
+            </div>
+            <div class="tags">
+            </div>
+          </div>
+          <div class="body">
+            <p id="i_figure_its_summer_you...">I figure it's summer, you might think we're all at the pool enjoying the sun,
+            but that's not quite how it is: we've been busy doing all sorts of things,
+            such as preparing a new Ceylon IDE version that has tons of fixes, new features,
+            improved performance that we will release shortly. We're also hard at work on
+            <a href="/documentation/1.0/roadmap/#milestone_4">the next milestone</a> and the
+            <a href="https://github.com/ceylon/ceylon-sdk">Ceylon SDK</a>, but that's not why I'm writing
+            today.</p>
+            
+            <h2 id="website_news">Website news</h2>
+            
+            <p id="did_you_know_you_could...">Did you know you could compile Ceylon to JavaScript? No? Well, you can, we're not
+            only available on the JVM platform. We have this
+            <a href="/documentation/1.0/reference/tool/ceylonc-js/">awesome JavaScript compiler</a>
+            that supports the same features as the JVM backend compiler. We even started shipping
+            the SDK modules for both JVM and JavaScript backends on <a href="https://herd.ceylon-lang.org">Herd</a>.</p>
+            
+            <p id="now_you_may_be_wondering...">Now, you may be wondering why you should care about JavaScript, and here's why: you
+            can now try and run Ceylon code in your browser! We have an <a href="http://try.ceylon-lang.org">online <em>IDE</em></a>
+            that's pretty awesome for discovering the language. Now, IDE is stretching the term a bit, <em>but</em>:
+            it supports syntax colouring and auto-completion! Seriously: just try your hand at that Ctrl-Space
+            key combo and explore the Ceylon API as you learn. No strings attached. It's still a bit slow,
+            but our engineers are stilling hammering and soldering it as we speak, so expect it to
+            go a lot faster once it realises how deadly we can be to slow code.</p>
+            
+            <p id="and_thats_not_all_see...">And that's not all, see? We even went ahead and plugged in that IDE in our documentation.
+            Seriously! All the code examples in the <a href="/documentation/1.0/introduction">introduction</a>
+            and <a href="/documentation/1.0/tour">tour</a> have this neat and cute <em>Try</em> button that begs to be
+            pressed on in order to show you that Ceylon is not just nice on paper: it's nice on your
+            server and on your browser. How cool is that?</p>
+            
+            <!-- cat: void m() { -->
+            
+            
+            <pre data-language="ceylon"><code>String[] names = { "Tom", "Dick", "Harry" };
+for (name in names) {
+    print("Hello, " name "!");
+}
+</code></pre>
+            
+            <!-- cat: } -->
+            
+            
+            <h2 id="ceylon_needs_you">Ceylon needs you</h2>
+            
+            <p id="the_other_thing_i_wanted...">The other thing I wanted to talk about is what you can do to help drive Ceylon forward. You already
+            know <a href="/code/">Ceylon is open-source</a> and everything happens in the open. We have a wonderful
+            <a href="/community/">community</a> working on the many parts that we call Ceylon as a whole.</p>
+            
+            <p id="here_are_a_few_of...">Here are a few of the things I really love about the Ceylon community:</p>
+            
+            <ul>
+            <li>It's <strong>open</strong>. Not just open-source, but really really open: the discussions happen on public mailing-lists,
+            the issue trackers are public, and <em>everyone</em> can pitch in for ideas, discussions, constructive criticism,
+            opinions and advice. Obviously the core committers have more weight in the matter if there is no clear
+            consensus on discussions, but more often than not, even fly-by commenters can have a pretty big influence
+            on the project if they provide good ideas or comments and are willing to convince us.</li>
+            <li>It's a <strong>hacker-fest</strong>. Our unofficial manifesto is <a href="http://programming-motherfucker.com">programming motherfucker</a>.
+            Obviously we love beautifuly designed things, but we hate over-engineered things and in general value more
+            "getting things done" than "getting in the way". We could call it <em>pragmatic programming</em>: whatever needs to
+            be done, we do. We have people that prefer Maven and others Ant, so some projects support both build systems.
+            We use tools that allow everyone to work without fighting, such as git or github. As much as we can, we try to
+            make contributions easy and agreeable — after all, if you're doing this in your free time, it should be fun!</li>
+            <li>It's incredibly <strong>diverse</strong>. You like client GUI work?
+            <a href="https://github.com/ceylon/ceylon-ide-eclipse">Try the Ceylon IDE project</a>. You like visitors, AntLR and
+            type analysis? <a href="https://github.com/ceylon/ceylon-spec">Try the compiler frontend</a> (aka ceylon-spec
+            aka <em>the typechecker</em>). You like generating Java AST or JavaScript?
+            <a href="https://github.com/ceylon/ceylon-compiler">Try the compiler backends</a>. If you're into Web things, perhaps
+            ceylondoc (our API documentation
+            generator), our <a href="https://github.com/ceylon/ceylon-web-ide-backend">Web IDE</a> or even
+            <a href="https://github.com/ceylon/ceylon-herd">Herd</a> (our module repository) would be your thing? Want to start a .NET backend?
+            We can help you with that (someone already started). Want to see Ceylon run in another IDE? We will help you.
+            Want to work on a kick-ass brand-new modern SDK? Well, <a href="https://github.com/ceylon/ceylon-sdk">why don't you</a>?
+            There's stuff to like for everyone's tastes.</li>
+            <li>It's <strong>fun</strong>, it's <strong>challenging</strong>, and it's <strong>changing the world</strong>. What good is working on something if you're waking up
+            in the morning dreading the day ahead? We do interesting things. We do things that very few have done before.
+            After all, not everyone writes new languages (even though it may appear to be the case), and not every new
+            language has a scope as broad and ambitious as Ceylon. And we do it in a good spirit: it's important to have
+            fun with your colleagues-in-open-source. And we learn a lot, we certainly do. Most of us had never done what
+            we're working on before, so it's certainly an experience that makes you better. And best of all: we're changing
+            the world. This is not some project that only a handful will use. Our goal is to make everyone use Ceylon, so
+            whatever you put in there, whatever little or big thing you contribute, actually ends up being used by a lot of
+            people. That's something to be proud of.</li>
+            </ul>
+            
+            
+            <p id="all_of_this_to_say...">All of this to say: we have a great community and a great project, and we'd love to welcome <strong>you</strong> aboard!
+            <a href="http://groups.google.com/group/ceylon-dev">Get in touch with us</a>
+            and we'll help you find the project you will love, and get started with things to do: easy at first,
+            then more and more challenging as you become more expert in the project than we are.</p>
+            
+            <p id="come_and_have_fun_with...">Come and have fun with us changing the world!</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2012/08/13/latest-news/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

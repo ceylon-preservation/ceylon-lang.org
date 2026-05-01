@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Classes</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.1/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.1/tour">Tour of Ceylon</a></h3>
+            
+            <ol>
+            <li><a href="/documentation/1.1/tour/basics">Basics</a></li>
+            <li><a href="/documentation/1.1/tour/classes">Classes</a></li>
+            <li><a href="/documentation/1.1/tour/attributes-control-structures">Attributes and variables, control structures</a></li>
+            <li><a href="/documentation/1.1/tour/inheritance">Inheritance, refinement, and interfaces</a></li>
+            <li><a href="/documentation/1.1/tour/anonymous-member-classes">Anonymous and member classes</a></li>
+            <li><a href="/documentation/1.1/tour/sequences">Streams, sequences, and tuples</a></li>
+            <li><a href="/documentation/1.1/tour/typeinference">Type aliases and type inference</a></li>
+            <li><a href="/documentation/1.1/tour/types">Union, intersection, and enumerated types</a></li>
+            <li><a href="/documentation/1.1/tour/generics">Generics</a></li>
+            <li><a href="/documentation/1.1/tour/modules">Packages and modules</a></li>
+            <li><a href="/documentation/1.1/tour/functions">Functions</a></li>
+            <li><a href="/documentation/1.1/tour/named-arguments">Named arguments</a></li>
+            <li><a href="/documentation/1.1/tour/comprehensions">Comprehensions</a></li>
+            <li><a href="/documentation/1.1/tour/language-module">Language module</a></li>
+            <li><a href="/documentation/1.1/tour/initialization">Initialization</a></li>
+            <li><a href="/documentation/1.1/tour/annotations">Annotations and the metamodel</a></li>
+            <li><a href="/documentation/1.1/tour/interop">Interoperation with Java</a></li>
+            <li><a href="/documentation/1.1/tour/dynamic">Dynamic typing</a></li>
+            </ol>
+            
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.1/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <!-- ### [Tutorial videos](/documentation/1.1/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.1/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.1/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.1/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.1/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.1/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Tour of Ceylon (1.1)
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_11_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.1, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <h1 id="classes">Classes</h1>
+          
+          <p id="this_is_the_second_step...">This is the second step in our tour of the Ceylon language. In
+          the <a href="../basics">previous leg</a> you learned some of the basics of
+          the syntax of Ceylon. In this leg we're going to learn how to
+          define classes with methods and attributes.</p>
+          
+          <h2 id="identifier_naming">Identifier naming</h2>
+          
+          <p id="the_case_of_the_first...">The case of the first character of an identifier is significant.
+          Type (interface, class, and type parameter) names must start
+          with an initial capital letter. Function and value names start
+          with an initial lowercase letter or underscore. The Ceylon
+          compiler is very fussy about this. You'll get a compilation error
+          if you write:</p>
+          
+          <!-- try:
+              class hello() { } //compile error
+          -->
+          
+          
+          <pre data-language="ceylon"><code>class hello() { ... } //compile error
+</code></pre>
+          
+          <p id="or">or:</p>
+          
+          <!-- try:
+              String Name = "joe"; //compile error
+          -->
+          
+          
+          <pre data-language="ceylon"><code>String Name = .... //compile error
+</code></pre>
+          
+          <p id="there_is_a_way_to...">There is a way to work around this restriction, which is
+          mainly useful when calling legacy Java code. You can "force"
+          the compiler to understand that an identifier is a type name
+          by prefixing it with <code>\I</code>, or that it is a function or value
+          name by prefixing it with <code>\i</code>. For example, <code>\iRED</code> is
+          considered an initial lowercase identifier.</p>
+          
+          <p id="so_the_following_declarations_are...">So the following declarations are acceptable, but definitely
+          not recommended, except in the interop scenario:</p>
+          
+          <!-- try:
+              class \Ihello() { } //OK, but not recommended
+          -->
+          
+          
+          <pre data-language="ceylon"><code>class \Ihello() { ... } //OK, but not recommended
+</code></pre>
+          
+          <p id="and">and:</p>
+          
+          <!-- try:
+              String \iName = "joe"; //OK, but not recommended
+          -->
+          
+          
+          <pre data-language="ceylon"><code>String \iName = .... //OK, but not recommended
+</code></pre>
+          
+          <h2 id="creating_your_own_class">Creating your own class</h2>
+          
+          <p id="our_first_class_is_going...">Our first class is going to represent points in a polar coordinate
+          system. Our class has two parameters, two methods, and an attribute.</p>
+          
+          <!-- try-post:
+              print(Polar(0.37, 10.0).description);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>"A polar coordinate"
+class Polar(Float angle, Float radius) {
+
+    shared Polar rotate(Float rotation) 
+            =&gt; Polar(angle+rotation, radius);
+
+    shared Polar dilate(Float dilation) 
+            =&gt; Polar(angle, radius*dilation);
+
+    shared String description 
+            = "(``radius``,``angle``)";
+
+}
+</code></pre>
+          
+          <p id="theres_two_things_in_particular...">There's two things in particular to notice here:</p>
+          
+          <ol>
+          <li><p id="the_parameters_used_to_instantiate...">The parameters used to instantiate a class are specified as part of the
+          class declaration, right after the name of the class. There's no Java-style
+          constructors in Ceylon. This syntax is less verbose and more regular than
+          Java, C#, or C++.</p></li>
+          <li><p id="we_make_use_of_the...">We make use of the parameters of a class anywhere within the body of
+          the class. In Ceylon, we often don't need to define explicit members of the
+          class to hold the parameter values. Instead, we can access the parameters
+          <code>angle</code> and <code>radius</code> directly from the <code>rotate()</code> and <code>dilate()</code> methods,
+          and from the expression which specifies the value of <code>description</code>.</p></li>
+          </ol>
+          
+          
+          <p id="notice_also_that_ceylon_doesnt...">Notice also that Ceylon doesn't have a <code>new</code> keyword to indicate instantiation,
+          we just "invoke the class", writing <code>Polar(angle, radius)</code>.</p>
+          
+          <p id="the_shared_annotation_determines_the...">The <code>shared</code> annotation determines the accessibility of the annotated type,
+          attribute, or method. Before we go any further, let's see how we can hide the
+          internal implementation of a class from other code.</p>
+          
+          <h2 id="hiding_implementation_details">Hiding implementation details</h2>
+          
+          <p id="ceylon_doesnt_make_a_distinction...">Ceylon doesn't make a distinction between <code>public</code>, <code>protected</code> and "default"
+          visibility like Java does;
+          <a href="../../faq/language-design/#no_protected_modifier">here's why</a>.
+          Instead, the language distinguishes between:</p>
+          
+          <ul>
+          <li>program elements which are visible only inside the scope in which they are
+          defined, and</li>
+          <li>program elements which are visible wherever the thing they belong to (a type,
+          package, or module) is visible.</li>
+          </ul>
+          
+          
+          <p id="by_default_members_of_a...">By default, members of a class are hidden from code outside the body of the
+          class. By annotating a member with the <code>shared</code> annotation, we declare that
+          the member is visible to any code to which the class itself is visible.</p>
+          
+          <p id="and_of_course_a_class...">And, of course, a class itself may be hidden from other code. By default, a
+          toplevel class is hidden from code outside the package in which the class is
+          defined. Annotating a top level class with <code>shared</code> makes it visible to any
+          code to which the package containing the class is visible.</p>
+          
+          <p id="finally_packages_are_hidden_from...">Finally, packages are hidden from code outside the module to which the
+          package belongs by default. Only explicitly shared packages are visible to
+          other modules.</p>
+          
+          <p id="got_the_idea_were_playing...">Got the idea? We're playing Russian dolls here.</p>
+          
+          <h2 id="exposing_parameters_as_attributes">Exposing parameters as attributes</h2>
+          
+          <p id="if_we_want_to_expose...">If we want to expose the <code>angle</code> and <code>radius</code> of our <code>Polar</code> coordinate to
+          other code, we need to define attributes of the class. It's very common to
+          assign parameters of a class directly to a <code>shared</code> attribute of the class,
+          so Ceylon provides a streamlined syntax for this.</p>
+          
+          <!-- try-post:
+              print(Polar(0.37, 10.0).description);
+          -->
+          
+          
+          <!-- id:polar -->
+          
+          
+          <pre data-language="ceylon"><code>"A polar coordinate"
+class Polar(angle, radius) {
+
+    shared Float angle;
+    shared Float radius;
+
+    shared Polar rotate(Float rotation) 
+            =&gt; Polar(angle+rotation, radius);
+
+    shared Polar dilate(Float dilation) 
+            =&gt; Polar(angle, radius*dilation);
+
+    shared String description 
+            = "(``radius``,``angle``)";
+
+}
+</code></pre>
+          
+          <p id="code_that_uses_polar_can...">Code that uses <code>Polar</code> can access the attributes of the class using a very
+          convenient syntax.</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:Requires Math -->
+          
+          
+          <!-- cat-id:polar -->
+          
+          
+          <!-- cat:
+              class Cartesian(Float x, Float y) {} -->
+          
+          
+          <pre data-language="ceylon"><code>Cartesian cartesian(Polar polar)
+        =&gt; Cartesian(polar.radius*cos(polar.angle), 
+                     polar.radius*sin(polar.angle));
+</code></pre>
+          
+          <p id="theres_an_even_more_compact...">There's an even more compact way to write the code above, though it's often
+          less readable:</p>
+          
+          <!-- try-post:
+              print(Polar(0.37, 10.0).description);
+          -->
+          
+          
+          <!-- id:polar -->
+          
+          
+          <pre data-language="ceylon"><code>"A polar coordinate"
+class Polar(shared Float angle, shared Float radius) {
+
+    shared Polar rotate(Float rotation)
+            =&gt; Polar(angle+rotation, radius);
+
+    shared Polar dilate(Float dilation)
+            =&gt; Polar(angle, radius*dilation);
+
+    shared String description 
+            = "(``radius``,``angle``)";
+
+}
+</code></pre>
+          
+          <p id="this_illustrates_an_important_feature...">This illustrates an important feature of Ceylon: there is almost no
+          essential difference, aside from syntax, between a parameter of a class,
+          and a value declared in the body of the class.</p>
+          
+          <p id="instead_of_declaring_the_attributes...">Instead of declaring the attributes in the body of the class, we simply
+          annotated the parameters <code>shared</code>. We encourage you to avoid this shortcut
+          when you have more than one or two parameters.</p>
+          
+          <h2 id="initializing_attributes">Initializing attributes</h2>
+          
+          <p id="the_attributes_angle_and_radius...">The attributes <code>angle</code> and <code>radius</code> are <em>references</em>, the closest thing
+          Ceylon has to a Java field. Usually we specify the value of a reference
+          when we declare it.</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:Requires Math -->
+          
+          
+          <pre data-language="ceylon"><code>Float x = radius * sin(angle);
+String greeting = "Hello, ``name``!";
+Integer months = years * 12;
+</code></pre>
+          
+          <p id="on_the_other_hand_its...">On the other hand, it's sometimes useful to separate declaration from
+          assignment.</p>
+          
+          <!-- try-pre:
+              "A polar coordinate"
+              class Polar(Float angle, Float radius, String? label) { 
+          -->
+          
+          
+          <!-- try-post:
+              }
+              print(Polar(0.37, 10.0, "point").description);
+          -->
+          
+          
+          <!-- cat:
+              "A polar coordinate"
+              class Polar(Float angle, Float radius, String? label) { 
+                  // ...
+               -->
+          
+          
+          <pre data-language="ceylon"><code>shared String description;
+if (exists label) {
+    description = label;
+}
+else {
+    description = "(``radius``,``angle``)";
+}
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="but_if_theres_no_constructors...">But if there's no constructors in Ceylon, where precisely should we put this
+          code? We put it directly in the body of the class!</p>
+          
+          <!-- try-post:
+              print(Polar(0.37, 10.0, null).description);
+              print(Polar(0.0, 0.0, "origin").description);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>"A polar coordinate with an optional label"
+class Polar(angle, radius, String? label) {
+
+    shared Float angle;
+    shared Float radius;
+
+    shared String description;
+    if (exists label) {
+        description = label;
+    }
+    else {
+        description = "(``radius``,``angle``)";
+    }
+
+    // ...
+
+}
+</code></pre>
+          
+          <p id="the_ceylon_compiler_forces_you...">The Ceylon compiler forces you to specify a value of any reference before
+          making use of the reference in an expression.</p>
+          
+          <!-- check:none:Demoing error -->
+          
+          
+          <pre data-language="ceylon"><code>Integer count;
+void inc() {
+    count++;   //compile error
+}
+</code></pre>
+          
+          <p id="well_learn_more_about_this...">We'll learn more about this <a href="../initialization">later in the tour</a>.</p>
+          
+          <h2 id="abstracting_state_using_attributes">Abstracting state using attributes</h2>
+          
+          <p id="if_youre_used_to_writing...">If you're used to writing JavaBeans, you can think of a reference as a
+          combination of several things:</p>
+          
+          <ul>
+          <li>a field,</li>
+          <li>a getter, and, sometimes,</li>
+          <li>a setter.</li>
+          </ul>
+          
+          
+          <p id="thats_because_not_every_value...">That's because not every value is a reference like the one we've just seen;
+          others are more like a getter method, or, sometimes, like a getter and
+          setter method pair.</p>
+          
+          <p id="well_need_to_expose_the...">We'll need to expose the equivalent cartesian coordinates of a <code>Polar</code>.
+          Since the cartesian coordinates can be computed from the polar coordinates,
+          we don't need to define state-holding references. Instead, we can define
+          the attributes as <em>getters</em>.</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:Requires Math -->
+          
+          
+          <pre data-language="ceylon"><code>import ceylon.math.float { sin, cos }
+
+"A polar coordinate"
+class Polar(angle, radius) {
+
+    shared Float angle;
+    shared Float radius;
+
+    shared Float x =&gt; radius * cos(angle);
+    shared Float y =&gt; radius * sin(angle);
+
+    // ...
+
+}
+</code></pre>
+          
+          <p id="notice_that_the_syntax_of...">Notice that the syntax of a getter declaration looks a lot like a method
+          declaration with no parameter list.</p>
+          
+          <p id="so_in_what_way_are...">So in what way are attributes "abstracting state"? Well, code that uses
+          <code>Polar</code> never needs to know if an attribute is a reference or a getter.
+          Now that we know about getters, we could rewrite our <code>description</code>
+          attribute as a getter, without affecting any code that uses it.</p>
+          
+          <!-- try-post:
+              print(Polar(0.37, 10.0, null).description);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>"A polar coordinate, with an optional label"
+class Polar(angle, radius, String? label) {
+
+    shared Float angle;
+    shared Float radius;
+
+    shared String description {
+        if (exists label) {
+            return label;
+        }
+        else {
+            return "(``radius``,``angle``)";
+        }
+    }
+}
+</code></pre>
+          
+          <h2 id="living_without_static_members">Living without static members</h2>
+          
+          <p id="right_at_the_beginning_of...">Right at the beginning of the tour, we mentioned that Ceylon doesn't have
+          <code>static</code> members like in Java, C#, or C++. Instead of a <code>static</code> member,
+          we either:</p>
+          
+          <ul>
+          <li>use a toplevel function or value declaration, or</li>
+          <li>in the case where several "static" declarations need to share some private
+          stuff, members of a singleton <code>object</code> declaration, which we'll meet right
+          <a href="../anonymous-member-classes/#anonymous_classes">at the start of the next chapter</a>.</li>
+          </ul>
+          
+          
+          <p id="the_lack_of_static_members...">The lack of static members results in a minor gotcha for newcomers.</p>
+          
+          <h3 id="gotcha">Gotcha!</h3>
+          
+          <p id="the_syntax_polarradius_is_legal...">The syntax <code>Polar.radius</code> is legal in Ceylon, and we even call it a
+          <a href="../functions/#static_method_and_attribute_references">static reference</a>,
+          but it does not usually mean what you think it means!</p>
+          
+          <p id="sure_if_youre_taking_advantage...">Sure, if you're taking advantage of Ceylon's Java interop, you can call
+          a static member of a Java class using this syntax, just like you would in
+          Java:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>import java.lang { Runtime }
+
+Integer procs = Runtime.runtime.availableProcessors();
+</code></pre>
+          
+          <p id="or_alternatively_you_could_write...">Or, alternatively, you could write the following, directly <code>import</code>ing
+          the static member:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>import java.lang { Runtime { runtime } }
+
+Integer procs = runtime.availableProcessors(); 
+</code></pre>
+          
+          <p id="but_in_regular_ceylon_code...">But in regular Ceylon code, an expression like <code>Polar.radius</code> is <em>not</em> a
+          reference to a static member of the class <code>Polar</code>. We'll come back to the
+          question of what a "static reference" really is, when we discuss
+          <a href="../functions">higher-order functions</a>.</p>
+          
+          <h2 id="living_without_overloading">Living without overloading</h2>
+          
+          <p id="its_time_for_some_bad...">It's time for some bad news: Ceylon doesn't have method or constructor
+          overloading (the truth is that overloading is the source of various problems
+          in Java, especially when generics come into play). However we can emulate
+          most non-harmful uses of constructor or method overloading using:</p>
+          
+          <ul>
+          <li>defaulted parameters,</li>
+          <li>variadic parameters (varargs), and</li>
+          <li>union types or enumerated type constraints.</li>
+          </ul>
+          
+          
+          <p id="were_not_going_to_get...">We're not going to get into all the details of these workarounds right now,
+          but here's a quick example of each of the three techniques:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>//defaulted parameter
+void println(String line, String eol = "\n")
+        =&gt; process.write(line + eol);
+</code></pre>
+          
+          <br>
+          
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>//variadic parameter
+void printlns(String* lines) {
+    for (line in lines) {
+        println(line);
+    }
+}
+</code></pre>
+          
+          <br>
+          
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>//union type
+void printName(String|Named name) {
+    switch (name)
+    case (is String) {
+        println(name);
+    }
+    case (is Named) {
+        println(name.first + " " + name.last);
+    }
+}
+</code></pre>
+          
+          <p id="dont_worry_if_you_dont...">Don't worry if you don't completely understand the third example just yet,
+          we'll come back to it <a href="../types#union_types">later in the tour</a>.</p>
+          
+          <p id="lets_make_use_of_this...">Let's make use of this idea to "overload" the "constructor" of <code>Polar</code>.</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- id: polar -->
+          
+          
+          <pre data-language="ceylon"><code>"A polar coordinate with an optional label"
+class Polar(angle, radius, String? label=null) {
+
+    shared Float angle;
+    shared Float radius;
+
+    shared String description {
+        if (exists label) {
+            return label;
+        }
+        else {
+            return "(``radius``,``angle``)";
+        }
+    }
+
+    // ...
+
+}
+</code></pre>
+          
+          <p id="now_we_can_create_polar...">Now we can create <code>Polar</code> coordinates with or without labels:</p>
+          
+          <!-- try-pre:
+              "A polar coordinate with an optional label"
+              class Polar(angle, radius, String? label=null) {
+                  
+                  shared Float angle;
+                  shared Float radius;
+                  
+                  shared String description {
+                      if (exists label) {
+                          return label;
+                      }
+                      else {
+                          return "(``radius``,``angle``)";
+                      }
+                  }
+                  
+                  // ...
+                  
+              }
+          
+              Float r = 0.32;
+              Float theta = 10.0;
+          -->
+          
+          
+          <!-- try-post:
+              print(origin.description);
+              print(coord.description);
+          -->
+          
+          
+          <!-- cat-id: polar -->
+          
+          
+          <!-- cat: void m(Float r, Float theta) { -->
+          
+          
+          <pre data-language="ceylon"><code>Polar origin = Polar(0.0, 0.0, "origin");
+Polar coord = Polar(r, theta);
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="later_well_learn_about_named...">Later, we'll learn about <a href="../named-arguments">named arguments</a>, which we
+          often use to make instantiation expressions more readable, especially
+          when the class has more than two parameters:</p>
+          
+          <!-- try-pre:
+              "A polar coordinate with an optional label"
+              class Polar(angle, radius, String? label=null) {
+                  
+                  shared Float angle;
+                  shared Float radius;
+                  
+                  shared String description {
+                      if (exists label) {
+                          return label;
+                      }
+                      else {
+                          return "(``radius``,``angle``)";
+                      }
+                  }
+                  
+                  // ...
+                  
+              }
+          
+              Float r = 0.32;
+              Float theta = 10.0;
+          -->
+          
+          
+          <!-- try-post:
+              print(origin.description);
+              print(coord.description);
+          -->
+          
+          
+          <!-- cat-id: polar -->
+          
+          
+          <!-- cat: void m(Float r, Float theta) { -->
+          
+          
+          <pre data-language="ceylon"><code>Polar origin = Polar { angle = 0.0; radius = 0.0; label = "origin"; };
+Polar coord = Polar { radius = r; angle = theta; };
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <h3 id="gotcha-2">Gotcha!</h3>
+          
+          <p id="even_with_these_emulation_techniques...">Even with these "emulation" techniques, not <em>every</em> case of a legal overloaded
+          Java method can be represented directly in Ceylon. In such situations it's
+          necessary to exert a little more effort to come up with distinct names.</p>
+          
+          <h2 id="theres_more">There's more...</h2>
+          
+          <p id="in_the_next_chapter_well...">In the <a href="../attributes-control-structures">next chapter</a>, we'll continue our
+          investigation of attributes, and especially <em>variable</em> attributes. We'll also
+          meet Ceylon's <a href="../attributes-control-structures/#control_structures">control structures</a>.</p>
+          
+          <p id="well_wait_until_a_later...">(We'll wait until a later chapter to learn more about <a href="../functions">methods</a>.)</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Reference</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.2/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.2/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.2/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.2/examples">Examples</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.2/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.2/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.2/reference">Reference</a></h3>
+            
+            <ul>
+<li><a href="#structure_and_declarations">Structure and Declarations
+            </a></li>
+<li><a href="#annotations">Annotations
+            </a></li>
+<li><a href="#statements">Statements
+            </a></li>
+<li><a href="#expressions">Expressions
+            </a></li>
+<li><a href="#operators">Operators
+            </a></li>
+<li><a href="#literals">Literals
+            </a></li>
+<li><a href="#api_docs_for_ceylon_language_and_the_ceylon_sdk">API docs for <code>ceylon.language</code> and the Ceylon SDK
+            </a></li>
+<li><a href="#tools">Tools
+            </a></li>
+<li><a href="#interoperability">Interoperability
+            </a></li>
+<li><a href="#module_repositories">Module repositories
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.2/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.2/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.2/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_12_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.2, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.2/reference/index.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.2/reference/index.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="reference-2">Reference</h1>
+          
+          <p id="this_page_lists_concepts_and...">This page lists concepts and links to their descriptions. The complete
+          <a href="../spec">language specification</a> is also available.</p>
+          
+          <p id="some_of_these_pages_are..."><em>Some of these pages are incomplete. Want to help? <a href="/code/website">See how</a>.</em></p>
+          
+          <h2 id="structure_and_declarations">Structure and Declarations
+          </h2>
+          
+          
+          
+          
+          <ul class="linear">
+            <li><a href="structure/keyword/">Keywords</a></li>
+            <li><a href="structure/module/">Modules</a></li>
+            <li><a href="structure/package/">Packages</a></li>
+            <li><a href="structure/compilation-unit/">Compilation units</a></li>
+            <li><a href="structure/type/">Types</a></li>
+            <li><a href="structure/type-abbreviation/">Type abbreviations</a></li>
+            <li><a href="structure/type-declaration/">Type Declarations</a></li>
+            <li><a href="structure/type-parameters/">Type parameters</a></li>
+            <li><a href="structure/alias/">Type aliases</a></li>
+            <li><a href="structure/interface/">Interfaces</a></li>
+            <li><a href="structure/class/">Classes</a></li>
+            <li><a href="structure/parameter-list/">Parameters</a></li>
+            <li><a href="structure/value/">Values</a></li>
+            <li><a href="structure/function/">Functions</a></li>
+            <li>
+<a href="structure/object/"><code>object</code> declarations</a> 
+                <small>(c.f. <a href="expression/object/">object expressions</a>)</small>
+</li>
+            <li><a href="structure/annotation/">Annotations</a></li>
+            <li><a href="structure/dynamic/">Dynamic interfaces</a></li>
+          </ul>
+          
+          
+          
+          
+          <h2 id="annotations">Annotations
+          </h2>
+          
+          
+          
+          
+          <ul class="linear">
+            <li><a href="annotation/abstract/"><code>abstract</code></a></li>
+            <li><a href="annotation/actual/"><code>actual</code></a></li>
+            <li><a href="annotation/aliased/"><code>aliased</code></a></li>
+            <li><a href="annotation/annotation/"><code>annotation</code></a></li>
+            <li><a href="annotation/default/"><code>default</code></a></li>
+            <li><a href="annotation/deprecated/"><code>deprecated</code></a></li>
+            <li><a href="annotation/doc/"><code>doc</code></a></li>
+            <li><a href="annotation/by/"><code>by</code></a></li>
+            <li><a href="annotation/formal/"><code>formal</code></a></li>
+            <li><a href="annotation/final/"><code>final</code></a></li>
+            <li><a href="annotation/late/"><code>late</code></a></li>
+            <li><a href="annotation/license/"><code>license</code></a></li>
+            <li><a href="annotation/native/"><code>native</code></a></li>
+            <li><a href="annotation/optional/"><code>optional</code></a></li>
+            <li><a href="annotation/sealed/"><code>sealed</code></a></li>
+            <li><a href="annotation/see/"><code>see</code></a></li>
+            <li><a href="annotation/serializable/"><code>serializable</code></a></li>
+            <li><a href="annotation/shared/"><code>shared</code></a></li>
+            <li><a href="annotation/suppressWarnings/"><code>suppressWarnings</code></a></li>
+            <li><a href="annotation/throws/"><code>throws</code></a></li>
+            <li><a href="annotation/tagged/"><code>tagged</code></a></li>
+            <li><a href="annotation/variable/"><code>variable</code></a></li>
+          </ul>
+          
+          
+          
+          
+          <p id="markdown_reference_for_documentation_annotations"><a href="annotation/markdown/">Markdown reference</a> for documentation annotations</p>
+          
+          
+          
+          
+          <h2 id="statements">Statements
+          </h2>
+          
+          
+          
+          
+          <ul class="linear">
+            <li><a href="statement/assert/"><code>assert</code></a></li>
+            <li><a href="statement/break/"><code>break</code></a></li>
+            <li><a href="statement/continue/"><code>continue</code></a></li>
+            <li><a href="statement/conditions/">Condition lists</a></li>
+          
+            <li><a href="statement/expression/">Expression statements</a></li>
+            <li><a href="statement/for/"><code>for</code></a></li>
+            <li><a href="statement/if/"><code>if</code> statement</a></li>
+            <li><a href="statement/import/"><code>import</code></a></li>
+            <li><a href="statement/return/"><code>return</code></a></li>
+            <li><a href="statement/specification/">Specification statements</a></li>
+            <li><a href="statement/destructure/">Destructuring specification</a></li>
+            <li><a href="statement/switch/"><code>switch</code> statement</a></li>
+            <li><a href="statement/throw/"><code>throw</code></a></li>
+            <li><a href="statement/try/"><code>try</code></a></li>
+            <li><a href="statement/while/"><code>while</code></a></li>
+          </ul>
+          
+          
+          
+          
+          <p id="statement_blocks_and_dynamic_blocks"><a href="statement/block/">Statement blocks</a> and
+          <a href="statement/dynamic-block/"><code>dynamic</code> blocks</a>.</p>
+          
+          
+          
+          
+          <h2 id="expressions">Expressions
+          </h2>
+          
+          
+          <p><a href="expression/">Expressions</a></p>
+          
+          <ul class="linear">
+            <li><a href="expression/invocation/">Invocation</a></li>
+            <li><a href="expression/tuple/">Tuple enumeration</a></li>
+            <li><a href="expression/iterable/">Iterable enumeration</a></li>
+            <li><a href="expression/string-template/">String templates</a></li>
+            <li><a href="expression/this/"><code>this</code></a></li>
+            <li><a href="expression/outer/"><code>outer</code></a></li>
+            <li><a href="expression/super/"><code>super</code></a></li>
+            <li><a href="expression/package/"><code>package</code> qualifier</a></li>
+            <li><a href="expression/anonymous-function/">Anonymous functions</a></li>
+            <li><a href="expression/callable-reference/">Callable references</a></li>
+            <li><a href="expression/static-reference/">Static references</a></li>
+            <li><a href="expression/meta-reference/">Meta references</a></li>
+            
+            <li><a href="expression/if/"><code>if</code> expressions</a></li>
+            <li><a href="expression/switch/"><code>switch</code> expressions</a></li>
+            <li><a href="expression/let/"><code>let</code></a></li>
+            <li><a href="expression/object/"><code>object</code> expressions</a></li>
+          </ul>
+          
+          
+          <p id="also_see_operators_and_literals...">Also see <a href="#operators">operators</a> and <a href="#literals">literals</a> below</p>
+          
+          <h2 id="operators">Operators
+          </h2>
+          
+          
+          
+          
+          <ul class="linear">
+            <li><a href="operator/not/"><code>!</code>   (not)</a></li>
+            <li><a href="operator/not-equal/"><code>!=</code>  (not equal)</a></li>
+            <li><a href="operator/remainder/"><code>%</code>   (remainder)</a></li>
+            <li><a href="operator/remainder-assign/"><code>%=</code>  (remainder assign)</a></li>
+            <li><a href="operator/intersection/"><code>&amp;</code>   (Set intersection)</a></li>
+            <li><a href="operator/and/"><code>&amp;&amp;</code>  (and)</a></li>
+            <li><a href="operator/and-assign/"><code>&amp;&amp;=</code> (and assign)</a></li>
+            <li><a href="operator/intersect-assign/"><code>&amp;=</code>  (Set intersect assign)</a></li>
+            <li><a href="operator/invoke/"><code>()</code>  (invoke)</a></li>
+            <li><a href="operator/product/"><code>*</code>   (product)</a></li>
+            <li><a href="operator/scale/"><code>**</code>  (scale)</a></li>
+            <li><a href="operator/multiply-assign/"><code>*=</code>  (multiply assign)</a></li>
+            <li><a href="operator/sum/"><code>+</code>   (sum)</a></li>
+            <li><a href="operator/unary_plus/"><code>+</code>   (unary plus)</a></li>
+            <li><a href="operator/increment/"><code>++</code>  (increment)</a></li>
+            <li><a href="operator/add-assign/"><code>+=</code>  (add assign)</a></li>
+            <li><a href="operator/difference/"><code>-</code>   (difference)</a></li>
+            <li><a href="operator/unary_minus/"><code>-</code>   (unary minus)</a></li>
+            <li><a href="operator/decrement/"><code>--</code>  (decrement)</a></li>
+            <li><a href="operator/subtract-assign/"><code>-=</code>  (subtract assign)</a></li>
+            <li><a href="operator/entry/"><code>-&gt;</code>  (entry)</a></li>
+            <li><a href="operator/member/"><code>.</code>   (member)</a></li>
+            <li><a href="operator/spanned-range/"><code>..</code>  (spanned range)</a></li>
+            <li><a href="operator/measured-range/"><code>y:z</code> (measured range)</a></li>
+            <li><a href="operator/quotient/"><code>/</code>   (quotient)</a></li>
+            <li><a href="operator/divide-assign/"><code>/=</code>  (divide assign)</a></li>
+            <li><a href="operator/less-than/"><code>&lt;</code>   (less than)</a></li>
+            <li><a href="operator/less-than-or-equal/"><code>&lt;=</code>  (less than or equal)</a></li>
+            <li><a href="operator/compare/"><code>&lt;=&gt;</code> (compare)</a></li>
+            <li><a href="operator/assign/"><code>=</code>   (assign)</a></li>
+            <li><a href="operator/equal/"><code>==</code>  (equal)</a></li>
+            <li><a href="operator/identical/"><code>===</code> (identical)</a></li>
+            <li><a href="operator/greater-than/"><code>&gt;</code>   (greater than)</a></li>
+            <li><a href="operator/greater-than-or-equal/"><code>&gt;=</code>  (greater than or equal)</a></li>
+            <li><a href="operator/nullsafe-member/"><code>?.</code>   (null-safe attribute)</a></li>
+            <li><a href="operator/nullsafe-method/"><code>?.</code>   (null-safe method)</a></li>
+            <li><a href="operator/lookup/"><code>[]</code>  (lookup)</a></li>
+            <li><a href="operator/spread/"><code>*</code> (spread)</a></li>
+            <li><a href="operator/spread-attribute/"><code>*.</code> (spread attribute)</a></li>
+            <li><a href="operator/spread-invoke/"><code>*.</code> (spread method)</a></li>
+            <li><a href="operator/span/"><code>x[y..z]</code> (span)</a></li>
+            <li><a href="operator/upper-span/"><code>x[y...]</code> (upper span)</a></li>
+            <li><a href="operator/lower-span/"><code>x[...z]</code> (lower span)</a></li>
+            <li><a href="operator/measure/"><code>x[y:z]</code> (measure)</a></li>
+            <li><a href="operator/power/"><code>^</code>   (power)</a></li>
+            <li><a href="operator/union/"><code>|</code>   (Set union)</a></li>
+            <li><a href="operator/union-assign/"><code>|=</code>  (Set union assign)</a></li>
+            <li><a href="operator/or/"><code>||</code>  (or)</a></li>
+            <li><a href="operator/or-assign/"><code>||=</code> (or assign)</a></li>
+            <li><a href="operator/invoke/"><code>{}</code>  (invoke)</a></li>
+            <li><a href="operator/complement/"><code>~</code>   (Set complement)</a></li>
+            <li><a href="operator/complement-assign/"><code>~=</code>  (Set complement assign)</a></li>
+            <li><a href="operator/else/"><code>else</code></a></li>
+            <li><a href="operator/exists/"><code>exists</code></a></li>
+            <li><a href="operator/in/"><code>in</code></a></li>
+            <li><a href="operator/is/"><code>is</code></a></li>
+            <li><a href="operator/nonempty/"><code>nonempty</code></a></li>
+            <li><a href="operator/of/"><code>of</code></a></li>
+            <li><a href="operator/then/"><code>then</code></a></li>
+          </ul>
+          
+          
+          
+          
+          <p id="operator_polymorphism"><a href="operator/operator-polymorphism/">Operator polymorphism</a></p>
+          
+          
+          
+          
+          <h2 id="literals">Literals
+          </h2>
+          
+          
+          
+          
+          <ul class="linear">
+            <li><a href="literal/integer/"><code>Integer</code> literals</a></li>
+            <li><a href="literal/float/"><code>Float</code> literals</a></li>
+            <li><a href="literal/string/"><code>String</code> literals</a></li>
+            <li><a href="literal/character/"><code>Character</code> literals</a></li>
+          </ul>
+          
+          
+          
+          
+          <h2 id="api_docs_for_ceylon_language_and_the_ceylon_sdk">API docs for <code>ceylon.language</code> and the Ceylon SDK
+          </h2>
+          
+          
+          <p id="the_api_documentation_for">The API documentation for</p>
+          
+          <ul>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/api/index.html"><code>ceylon.language</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/buffer/1.3.3/module-doc/api/index.html"><code>ceylon.buffer</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/collection/1.3.3/module-doc/api/index.html"><code>ceylon.collection</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/dbc/1.3.3/module-doc/api/index.html"><code>ceylon.dbc</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/decimal/1.3.3/module-doc/api/index.html"><code>ceylon.decimal</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/file/1.3.3/module-doc/api/index.html"><code>ceylon.file</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/html/1.3.3/module-doc/api/index.html"><code>ceylon.html</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/interop/browser/1.3.3/module-doc/api/index.html"><code>ceylon.interop.browser</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/interop/java/1.3.3/module-doc/api/index.html"><code>ceylon.interop.java</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/io/1.3.3/module-doc/api/index.html"><code>ceylon.io</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/json/1.3.3/module-doc/api/index.html"><code>ceylon.json</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/locale/1.3.3/module-doc/api/index.html"><code>ceylon.locale</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/logging/1.3.3/module-doc/api/index.html"><code>ceylon.logging</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/math/1.3.3/module-doc/api/index.html"><code>ceylon.math</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/net/1.2.2/module-doc/api/index.html"><code>ceylon.net</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/numeric/1.3.3/module-doc/api/index.html"><code>ceylon.numeric</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/process/1.3.3/module-doc/api/index.html"><code>ceylon.process</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/promise/1.3.3/module-doc/api/index.html"><code>ceylon.promise</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/random/1.3.3/module-doc/api/index.html"><code>ceylon.random</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/regex/1.3.3/module-doc/api/index.html"><code>ceylon.regex</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/test/1.3.3/module-doc/api/index.html"><code>ceylon.test</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/time/1.3.3/module-doc/api/index.html"><code>ceylon.time</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/transaction/1.3.3/module-doc/api/index.html"><code>ceylon.transaction</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/unicode/1.3.3/module-doc/api/index.html"><code>ceylon.unicode</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/whole/1.3.3/module-doc/api/index.html"><code>ceylon.whole</code></a></li>
+          </ul>
+          
+          
+          <h2 id="tools">Tools
+          </h2>
+          
+          
+          <ul>
+          <li><a href="tool/">Command line tooling and build tools</a></li>
+          <li>The <code>ceylon</code> command, <a href="tool/ceylon/"><code>ceylon</code></a>
+</li>
+          <li>An index of <a href="/documentation/current/reference/tool/ceylon/subcommands/index.html"><code>ceylon</code></a> subcommands</li>
+          <li>Dealing with <a href="repository/tools/"><code>repositories</code></a> on the command line</li>
+          <li>The Ceylon <a href="tool/project">project structure</a>
+</li>
+          <li>
+<code>ceylon</code> <a href="tool/plugin/">command plugins</a>
+</li>
+          <li>The Ceylon <a href="tool/ant/"><code>ant</code></a> tasks</li>
+          <li>The <a href="tool/config/">configuration file format</a>
+</li>
+          <li><a href="tool/bootstrap/">Bootstrapping Ceylon</a></li>
+          </ul>
+          
+          
+          <h2 id="interoperability">Interoperability
+          </h2>
+          
+          
+          <ul>
+          <li><a href="interoperability/ceylon-on-jvm/">Calling Ceylon modules on the JVM</a></li>
+          <li><a href="interoperability/ceylon-from-java/">Calling Ceylon from Java</a></li>
+          <li><a href="interoperability/java-from-ceylon/">Calling Java from Ceylon</a></li>
+          <li><a href="interoperability/type-mapping/">Type mapping</a></li>
+          <li><a href="interoperability/osgi/">Running Ceylon modules in OSGI containers</a></li>
+          <li><a href="interoperability/js/">The JavaScript compiler</a></li>
+          <li><a href="interoperability/native/">How to use native annotations</a></li>
+          </ul>
+          
+          
+          <h2 id="module_repositories">Module repositories
+          </h2>
+          
+          
+          <ul>
+          <li><a href="repository/">Module repositories</a></li>
+          <li><a href="structure/module-properties/"><code>module.properties</code> files</a></li>
+          <li><a href="repository/maven/">Maven repositories</a></li>
+          <li><a href="repository/overrides/">Module overrides</a></li>
+          <li><a href="repository/modules.ceylon-lang.org"><code>modules.ceylon-lang.org</code> aka Ceylon Herd</a></li>
+          <li>The <a href="https://modules.ceylon-lang.org/categories/SDK">Ceylon SDK</a>
+</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

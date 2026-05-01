@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Getting the source</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="codepage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="selected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="licenses"><a href="/code/licenses">Licenses</a></h3>
+            
+            <h3 id="nightly_builds"><a href="https://ci-ceylon.rhcloud.com/">Nightly builds</a></h3>
+            
+            <h3 id="get_the_source"><a href="/code/source">Get the source</a></h3>
+            
+            <h3 id="contribute"><a href="/code/contribute">Contribute</a></h3>
+            
+            <h3 id="improve_the_website"><a href="/code/website">Improve the website</a></h3>
+            
+            <h3 id="report_a_bug"><a href="/code/issues">Report a bug</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Code
+          </div>
+        </div>
+        <div id="core-page">
+          <h1 id="getting_the_source">Getting the source</h1>
+          
+          <p id="we_publish_everything_on_github...">We publish everything on GitHub under the <a href="http://ceylon.github.com">Ceylon organization</a>.</p>
+          
+          <h2 id="ceylon_projects">Ceylon projects</h2>
+          
+          <p id="the_ceylon_project_is_actually...">The Ceylon project is actually made up of several smaller components:</p>
+          
+          <ul>
+          <li><a href="#parser_typechecker_and_specification">Parser, typechecker and specification</a></li>
+          <li><a href="#model">Model</a></li>
+          <li><a href="#java_compiler_and_other_command_line_tools">Java compiler and other command line tools</a></li>
+          <li><a href="#javascript_compiler">JavaScript compiler</a></li>
+          <li><a href="#ceylonlanguage_module">Ceylon language module</a></li>
+          <li><a href="#module_system">Module system</a></li>
+          <li><a href="#launcher">Launcher</a></li>
+          <li><a href="#common_code_library">Common code library</a></li>
+          <li><a href="#packaging_and_distribution">Packaging and distribution</a></li>
+          <li><a href="#ceylon_ide_for_eclipse">Ceylon IDE for Eclipse</a></li>
+          <li><a href="#ceylon_ide_for_intellij">Ceylon IDE for IntelliJ</a></li>
+          <li><a href="#ceylon_ide_for_netbeans">Ceylon IDE for NetBeans</a></li>
+          <li><a href="#ceylon_ide_common_code">Ceylon IDE common code</a></li>
+          <li><a href="#ceylon_web_ide">Ceylon Web IDE</a></li>
+          <li><a href="#ceylon_herd">Ceylon Herd</a></li>
+          <li><a href="#ceylon_sdk_platform_modules">Ceylon SDK platform modules</a></li>
+          </ul>
+          
+          
+          <p id="you_can_also_view_all...">You can also view <a href="http://ceylon.github.com">all our git projects</a> at quick glance.</p>
+          
+          <p id="information_on_how_to_set...">Information on how to set up your development environment, how to build the projects
+          and how to contribute to the project can be found <a href="/code/contribute">HERE</a>.</p>
+          
+          <h3 id="parser_typechecker_and_specification">Parser, typechecker and specification</h3>
+          
+          <table>
+           <tr>
+<th>Git repository</th>
+<td><a href="https://github.com/eclipse/ceylon/tree/master/typechecker">https://github.com/eclipse/ceylon/tree/master/typechecker</a></td>
+</tr>
+           <tr>
+<th>Issue reporting</th>
+<td><a href="https://github.com/eclipse/ceylon/issues?q=is%3Aopen+is%3Aissue+label%3Ac-typechecker">https://github.com/eclipse/ceylon/issues</a></td>
+</tr>
+          </table>
+          
+          
+          <p id="this_is_a_library_that...">This is a library that parses Ceylon source files, and runs type analysis on them,
+          producing a list of warnings and errors, and an AST for the analyzed source
+          code. This is the compiler frontend.</p>
+          
+          <p id="the_ceylon_language_specification_is...">The Ceylon language specification is also kept in this project.</p>
+          
+          <p id="theres_more_info_in_the...">There's more info in the <a href="https://github.com/eclipse/ceylon/blob/master/typechecker/README.md">README</a>.</p>
+          
+          <h3 id="model">Model</h3>
+          
+          <table>
+           <tr>
+<th>Git repository</th>
+<td><a href="https://github.com/eclipse/ceylon/tree/master/model">https://github.com/eclipse/ceylon/tree/master/model</a></td>
+</tr>
+           <tr>
+<th>Issue reporting</th>
+<td><a href="https://github.com/eclipse/ceylon/issues?q=is%3Aopen+is%3Aissue+label%3Ac-model">https://github.com/eclipse/ceylon/issues</a></td>
+</tr>
+          </table>
+          
+          
+          <p id="this_is_an_independently_reusable...">This is an independently reusable library that implements most of the type system.</p>
+          
+          <p id="theres_more_info_in_the_readme">There's more info in the <a href="https://github.com/eclipse/ceylon/blob/master/model/README.md">README</a>.</p>
+          
+          <h3 id="java_compiler_and_other_command_line_tools">Java compiler and other command line tools</h3>
+          
+          <table>
+           <tr>
+<th>Git repository</th>
+<td><a href="https://github.com/eclipse/ceylon/tree/master/compiler-java">https://github.com/eclipse/ceylon/tree/master/compiler-java</a></td>
+</tr>
+           <tr>
+<th>Issue reporting</th>
+<td><a href="https://github.com/eclipse/ceylon/issues?q=is%3Aopen+is%3Aissue+label%3Ac-compiler-java">https://github.com/eclipse/ceylon/issues</a></td>
+</tr>
+          </table>
+          
+          
+          <p id="this_is_where_youll_find...">This is where you'll find the <code>ceylon compile</code> compiler and the
+          <code>ceylon doc</code> API documentation compiler, some other command line tools,
+          as well as the Ceylon ant tasks.</p>
+          
+          <p id="you_can_find_out_how...">You can find out how to run these commands from the <a href="/documentation/current/spec/html_single/index.html#tools">documentation</a>.</p>
+          
+          <p id="feeling_adventurous_and_want_to...">Feeling adventurous and want to help us with the compiler backend? Read <a href="/code/contribute">how to work on that project</a>.</p>
+          
+          <p>There's more info in the <a href="https://github.com/eclipse/ceylon-compiler/blob/master/compiler-java/README.md">README</a>.</p>
+          
+          <h3 id="javascript_compiler">JavaScript compiler</h3>
+          
+          <table>
+           <tr>
+<th>Git repository</th>
+<td><a href="https://github.com/eclipse/ceylon/tree/master/compiler-js">https://github.com/eclipse/ceylon/tree/master/compiler-js</a></td>
+</tr>
+           <tr>
+<th>Issue reporting</th>
+<td><a href="https://github.com/eclipse/ceylon/issues?q=is%3Aopen+is%3Aissue+label%3Ac-compiler-js">https://github.com/eclipse/ceylon/issues</a></td>
+</tr>
+          </table>
+          
+          
+          <p id="this_project_contains_the_javascript...">This project contains the JavaScript compiler.</p>
+          
+          <p>There's more info in the <a href="https://github.com/eclipse/ceylon-js/blob/master/compiler-js/README.md">README</a>.</p>
+          
+          <h3 id="language_module">Language module</h3>
+          
+          <table>
+           <tr>
+<th>Git repository</th>
+<td><a href="https://github.com/eclipse/ceylon/tree/master/language">https://github.com/eclipse/ceylon/tree/master/language</a></td>
+</tr>
+           <tr>
+<th>Issue reporting</th>
+<td><a href="https://github.com/eclipse/ceylon/issues?q=is%3Aopen+is%3Aissue+label%3Ac-language">https://github.com/eclipse/ceylon/issues</a></td>
+</tr>
+          </table>
+          
+          
+          <p id="this_project_contains_the_module...">This project contains the module <code>ceylon.language</code>, the core classes
+          mentioned in the language specification.</p>
+          
+          <p id="see_the_api_documentation_for...">See the <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html">API documentation</a> for more information.</p>
+          
+          <p>There's more info in the <a href="https://github.com/eclipse/ceylon/blob/master/language/README.md">README</a>.</p>
+          
+          <h3 id="module_system">Module system</h3>
+          
+          <table>
+           <tr>
+<th>Git repository</th>
+<td><a href="https://github.com/eclipse/ceylon/tree/master/cmr">https://github.com/eclipse/ceylon/tree/master/cmr</a></td>
+</tr>
+           <tr>
+<th>Issue reporting</th>
+<td><a href="https://github.com/eclipse/ceylon/issues?q=is%3Aopen+is%3Aissue+label%3Ac-cmr">https://github.com/eclipse/ceylon/issues</a></td>
+</tr>
+          </table>
+          
+          
+          <p id="this_is_where_youll_find_the...">This is where you'll find the Ceylon module system, based on JBoss Modules.</p>
+          
+          <p>There's more info in the <a href="https://github.com/eclipse/ceylon/blob/master/cmr/README.md">README</a>.</p>
+          
+          <h3 id="launcher">Launcher</h3>
+          
+          <table>
+           <tr>
+<th>Git repository</th>
+<td><a href="https://github.com/eclipse/ceylon/tree/master/runtime">https://github.com/eclipse/ceylon/tree/master/runtime</a></td>
+</tr>
+           <tr>
+<th>Issue reporting</th>
+<td><a href="https://github.com/eclipse/ceylon/issues?q=is%3Aopen+is%3Aissue+label%3Ac-runtime">https://github.com/eclipse/ceylon/issues</a></td>
+</tr>
+          </table>
+          
+          
+          <p id="this_is_where_youll_find_the_ceylon...">This is where you'll find the Ceylon <code>ceylon</code> launcher command, which runs Ceylon modules.</p>
+          
+          <p>There's more info in the <a href="https://github.com/eclipse/ceylon/blob/master/runtime/README.md">README</a>.</p>
+          
+          <h3 id="common_code_library">Common code library</h3>
+          
+          <table>
+           <tr>
+<th>Git repository</th>
+<td><a href="https://github.com/eclipse/ceylon/tree/master/common">https://github.com/eclipse/ceylon/tree/master/common</a></td>
+</tr>
+           <tr>
+<th>Issue reporting</th>
+<td><a href="https://github.com/eclipse/ceylon/issues?q=is%3Aopen+is%3Aissue+label%3Ac-common">https://github.com/eclipse/ceylon/issues</a></td>
+</tr>
+          </table>
+          
+          
+          <p id="this_is_where_youll_find_code...">This is where you'll find code that is commonly used by the other projects. It handles configuration files, repositories, authentication, proxies and more things.</p>
+          
+          <p>There's more info in the <a href="https://github.com/eclipse/ceylon/blob/master/common/README.md">README</a>.</p>
+          
+          <h3 id="packaging_and_distribution">Packaging and distribution</h3>
+          
+          <table>
+           <tr>
+<th>Git repository</th>
+<td><a href="https://github.com/eclipse/ceylon/tree/master/dist">https://github.com/eclipse/ceylon/tree/master/dist</a></td>
+</tr>
+           <tr>
+<th>Issue reporting</th>
+<td><a href="https://github.com/eclipse/ceylon/issues?q=is%3Aopen+is%3Aissue+label%3Ac-dist">https://github.com/eclipse/ceylon/issues</a></td>
+</tr>
+          </table>
+          
+          
+          <p id="this_is_the_project_that...">This is the project that pulls together all the distributable files from the other projects and bundles them into a coherent whole
+          that can be distributed publicly. It also serves as the base directory from which to work when as a developer you don't have an
+          official Ceylon installation on your system (you might be working on several different versiosn afterall).</p>
+          
+          <p>There's more info in the <a href="https://github.com/eclipse/ceylon/blob/master/dist/README.md">README</a>.</p>
+          
+          <h3 id="ceylon_ide_for_eclipse">Ceylon IDE for Eclipse</h3>
+          
+          <table>
+           <tr>
+<th>Git repository</th>
+<td><a href="https://github.com/eclipse/ceylon-ide-eclipse">https://github.com/eclipse/ceylon-ide-eclipse</a></td>
+</tr>
+           <tr>
+<th>Issue reporting</th>
+<td><a href="https://github.com/eclipse/ceylon-ide-eclipse/issues">https://github.com/eclipse/ceylon-ide-eclipse/issues</a></td>
+</tr>
+          </table>
+          
+          
+          <p id="this_project_contains_the_ceylon...">This project contains the Ceylon IDE Eclipse plugin.</p>
+          
+          <p>There's more info in the <a href="https://github.com/eclipse/ceylon-ide-eclipse/blob/master/README.md">README</a>.</p>
+          
+          <h3 id="ceylon_ide_for_intellij">Ceylon IDE for IntelliJ</h3>
+          
+          <table>
+           <tr>
+<th>Git repository</th>
+<td><a href="https://github.com/eclipse/ceylon-ide-intellij">https://github.com/eclipse/ceylon-ide-intellij</a></td>
+</tr>
+           <tr>
+<th>Issue reporting</th>
+<td><a href="https://github.com/eclipse/ceylon-ide-intellij/issues">https://github.com/eclipse/ceylon-ide-intellij/issues</a></td>
+</tr>
+          </table>
+          
+          
+          <p id="this_project_contains_the_ceylon_ide...">This project contains the Ceylon IDE IntelliJ plugin.</p>
+          
+          <p>There's more info in the <a href="https://github.com/eclipse/ceylon-ide-intellij/blob/master/README.md">README</a>.</p>
+          
+          <h3 id="ceylon_ide_for_netbeans">Ceylon IDE for NetBeans</h3>
+          
+          <table>
+           <tr>
+<th>Git repository</th>
+<td><a href="https://github.com/eclipse/ceylon-ide-netbeans">https://github.com/eclipse/ceylon-ide-netbeans</a></td>
+</tr>
+           <tr>
+<th>Issue reporting</th>
+<td><a href="https://github.com/eclipse/ceylon-ide-netbeans/issues">https://github.com/eclipse/ceylon-ide-netbeans/issues</a></td>
+</tr>
+          </table>
+          
+          
+          <p id="this_project_contains_the_ceylon_ide_netbeans...">This project contains the Ceylon IDE NetBeans plugin. (This is currently a work in progress.)</p>
+          
+          <p>There's more info in the <a href="https://github.com/eclipse/ceylon-ide-netbeans/blob/master/README.md">README</a>.</p>
+          
+          <h3 id="ceylon_ide_common_code">Ceylon IDE common code</h3>
+          
+          <table>
+           <tr>
+<th>Git repository</th>
+<td><a href="https://github.com/eclipse/ceylon-ide-common">https://github.com/eclipse/ceylon-ide-eclipse</a></td>
+</tr>
+           <tr>
+<th>Issue reporting</th>
+<td><a href="https://github.com/eclipse/ceylon-ide-common/issues">https://github.com/eclipse/ceylon-ide-common/issues</a></td>
+</tr>
+          </table>
+          
+          
+          <p id="this_project_contains_the_common...">This project contains the common code shared by the various incarnations of Ceylon IDE.</p>
+          
+          <p>There's more info in the <a href="https://github.com/eclipse/ceylon-ide-common/blob/master/README.md">README</a>.</p>
+          
+          <h3 id="ceylon_web_ide">Ceylon Web IDE</h3>
+          
+          <table>
+           <tr>
+<th>Git repository</th>
+<td><a href="https://github.com/eclipse/ceylon-web-ide-backend">https://github.com/eclipse/ceylon-web-ide-backend</a></td>
+</tr>
+           <tr>
+<th>Issue reporting</th>
+<td><a href="https://github.com/eclipse/ceylon-web-ide-backend/issues">https://github.com/eclipse/ceylon-web-ide-backend/issues</a></td>
+</tr>
+          </table>
+          
+          
+          <p id="this_project_contains_the_ceylon_web...">This project contains the Ceylon Web IDE.</p>
+          
+          <p>There's more info in the <a href="https://github.com/eclipse/ceylon-web-ide-backend/blob/master/README.md">README</a>.</p>
+          
+          <h3 id="ceylon_herd">Ceylon Herd</h3>
+          
+          <table>
+           <tr>
+<th>Git repository</th>
+<td><a href="https://github.com/eclipse/ceylon-herd">https://github.com/eclipse/ceylon-herd</a></td>
+</tr>
+           <tr>
+<th>Issue reporting</th>
+<td><a href="https://github.com/eclipse/ceylon-herd/issues">https://github.com/eclipse/ceylon-herd/issues</a></td>
+</tr>
+          </table>
+          
+          
+          <p id="this_project_contains_the_ceylon_herd...">This project contains the Ceylon Herd application.</p>
+          
+          <p>There's more info in the <a href="https://github.com/eclipse/ceylon-herd/blob/master/README.md">README</a>.</p>
+          
+          <h3 id="ceylon_sdk_platform_modules">Ceylon SDK platform modules</h3>
+          
+          <table>
+           <tr>
+<th>Git repository</th>
+<td><a href="https://github.com/eclipse/ceylon-sdk">https://github.com/eclipse/ceylon-sdk</a></td>
+</tr>
+           <tr>
+<th>Issue reporting</th>
+<td><a href="https://github.com/eclipse/ceylon-sdk/issues">https://github.com/eclipse-sdk/issues</a></td>
+</tr>
+          </table>
+          
+          
+          <p id="this_project_contains_the_platform...">This project contains the platform modules belonging to the Ceylon SDK.</p>
+          
+          <p>There's more info in the <a href="https://github.com/eclipse/ceylon-sdk/blob/master/README.md">README</a>.</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

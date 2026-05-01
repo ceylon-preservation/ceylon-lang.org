@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<feed xml:lang="en-US" xmlns="http://www.w3.org/2005/Atom">
+  <id>http://localhost:4242/blog/emmanuel-bernard/</id>
+  <title>Blog of Emmanuel Bernard</title>
+  <updated>2012-04-04T00:00:00+00:00</updated>
+  <link href="http://localhost:4242/blog/authors/emmanuel-bernard/blog.atom" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4242/" rel="alternate" type="text/html" />
+  <entry>
+    <id>http://localhost:4242/blog/2012/04/04/podcast-interview-lescastcodeurs</id>
+    <title>Podcast Interview on Ceylon (in French)</title>
+    <updated>2012-04-04T00:00:00+00:00</updated>
+    <link href="http://localhost:4242/blog/2012/04/04/podcast-interview-lescastcodeurs" rel="alternate" type="text/html" />
+    <author>
+      <name>Emmanuel Bernard</name>
+    </author>
+    <summary>
+      Stéphane and I have been interviewed in Les Cast Codeurs Podcast. We
+      casually discuss Ceylon for a little more than an hour. We touched on the philosophy
+      of the language,  dived in some of the features and discussed the future and the
+      community.
+      
+      The only catch is that we talk in French. Now you have to learn two new languages :)
+      
+      You can listen to the Ceylon episode directly or see it in iTunes.
+      ...
+    </summary>
+    <content type="html">
+      &lt;p&gt;Stéphane and I have been interviewed in &lt;a href=&quot;http://lescastcodeurs.com/&quot;&gt;Les Cast Codeurs Podcast&lt;/a&gt;. We
+      casually discuss Ceylon for a little more than an hour. We touched on the philosophy
+      of the language,  dived in some of the features and discussed the future and the
+      community.&lt;/p&gt;
+      
+      &lt;p&gt;The only catch is that we talk in French. Now you have to learn two new languages :)&lt;/p&gt;
+      
+      &lt;p&gt;You can listen to the &lt;a href=&quot;http://lescastcodeurs.com/2012/03/les-cast-codeurs-podcast-episode-56-interview-ceylon-avec-stephane-epardaud-et-emmanuel-bernard/&quot;&gt;Ceylon episode directly&lt;/a&gt; or see it in &lt;a href=&quot;http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewPodcast?id=312239675&quot;&gt;iTunes&lt;/a&gt;.&lt;/p&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>http://localhost:4242/blog/2011/12/23/ide-screenshots</id>
+    <title>Last minute gifts - IDE screenshots and forums</title>
+    <updated>2011-12-23T00:00:00+00:00</updated>
+    <link href="http://localhost:4242/blog/2011/12/23/ide-screenshots" rel="alternate" type="text/html" />
+    <author>
+      <name>Emmanuel Bernard</name>
+    </author>
+    <summary>
+      Gavin has just created a very nice set of screenshots picturing what our IDE is capable of. Have a look
+      at it, a picture is worth a thousand words so imagine 13!
+      
+      
+      
+      More info on the IDE
+      
+      I also wanted to point out that with the release of Milestone 1, we have opened up
+      the user centered forum on Google groups. Come join the fun and feel
+      free to ask any questions, comments etc we want to know what you think and what we need to improve.
+      
+      Happy holidays everyone :)
+      ...
+    </summary>
+    <content type="html">
+      &lt;p&gt;Gavin has just created a very nice set of screenshots picturing what our IDE is capable of. Have a look
+      at it, &lt;a href=&quot;http://localhost:4242/documentation/1.0/ide/screenshots/?utm_source=blog&amp;amp;utm_medium=web&amp;amp;utm_content=screenshots&amp;amp;utm_campaign=ide_screenshots&quot;&gt;a picture is worth a thousand words&lt;/a&gt; so imagine 13!&lt;/p&gt;
+      
+      &lt;p&gt;&lt;img src=&quot;http://localhost:4242/images/screenshots/teaser.png&quot; alt=&quot;teaser&quot;&gt;&lt;/p&gt;
+      
+      &lt;p&gt;&lt;a href=&quot;http://localhost:4242/documentation/1.0/ide/?utm_source=blog&amp;amp;utm_medium=web&amp;amp;utm_content=ide&amp;amp;utm_campaign=ide_screenshots&quot;&gt;More info on the IDE&lt;/a&gt;&lt;/p&gt;
+      
+      &lt;p&gt;I also wanted to point out that with the &lt;a href=&quot;http://localhost:4242/blog/2011/12/20/ceylon-m1-newton/?utm_source=blog&amp;amp;utm_medium=web&amp;amp;utm_content=releaseblog&amp;amp;utm_campaign=ide_screenshots&quot;&gt;release of Milestone 1&lt;/a&gt;, we have opened up
+      the user centered &lt;a href=&quot;http://localhost:4242/community/forum?utm_source=blog&amp;amp;utm_medium=web&amp;amp;utm_content=userforum&amp;amp;utm_campaign=ide_screenshots&quot;&gt;forum&lt;/a&gt; on Google groups. Come join the fun and feel
+      free to ask any questions, comments etc we want to know what you think and what we need to improve.&lt;/p&gt;
+      
+      &lt;p&gt;Happy holidays everyone :)&lt;/p&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>http://localhost:4242/blog/2011/11/30/after-two-weeks</id>
+    <title>Ceylon after two weeks</title>
+    <updated>2011-11-30T00:00:00+00:00</updated>
+    <link href="http://localhost:4242/blog/2011/11/30/after-two-weeks" rel="alternate" type="text/html" />
+    <author>
+      <name>Emmanuel Bernard</name>
+    </author>
+    <summary>
+      This has been almost two weeks since Stephane and I have done our presentation at
+      Devoxx and revealed the Ceylon community. Let me give you some feedback.
+      
+      IDE
+      
+      Our IDE sneak preview
+      has been very popular. Not surprising since it let's you play with Ceylon right from your comfy Eclipse seat in five minutes.
+      
+      Many thanks to our early testers for finding a few bugs including the infamous
+      issue 107 which basically was shutting down
+      Eclipse if the language module was not installed (yep the System.exit(1) was mine :) ).
+      
+      All of this is now fixed and David has pushed a new IDE release with many improvements.
+      Make sure...
+    </summary>
+    <content type="html">
+      &lt;p&gt;This has been almost two weeks since Stephane and I have done our presentation at
+      Devoxx and revealed the Ceylon community. Let me give you some feedback.&lt;/p&gt;
+      
+      &lt;h2&gt;IDE&lt;/h2&gt;
+      
+      &lt;p&gt;Our &lt;a href=&quot;http://localhost:4242/documentation/1.0/ide/?utm_source=blog&amp;amp;utm_medium=web&amp;amp;utm_content=idesneakpreview&amp;amp;utm_campaign=2weeksfeedback&quot;&gt;IDE sneak preview&lt;/a&gt;
+      has been very popular. Not surprising since it let's you play with Ceylon right from your comfy Eclipse seat in five minutes.&lt;/p&gt;
+      
+      &lt;p&gt;Many thanks to our early testers for finding a few bugs including the infamous
+      &lt;a href=&quot;https://github.com/ceylon/ceylon-ide-eclipse/issues/107&quot;&gt;issue 107&lt;/a&gt; which basically was shutting down
+      Eclipse if the language module was not installed (yep the &lt;code&gt;System.exit(1)&lt;/code&gt; was mine :) ).&lt;/p&gt;
+      
+      &lt;p&gt;All of this is now fixed and David has pushed a new IDE release with many improvements.
+      Make sure to update the Eclipse plugin (&lt;code&gt;Help-&amp;gt;Check for updates&lt;/code&gt;).&lt;/p&gt;
+      
+      &lt;h2&gt;Community&lt;/h2&gt;
+      
+      &lt;p&gt;We are very happy with how the community is shaping up. We had a few interesting and engaging discussions
+      as well as contributions. Just one example: &lt;a href=&quot;https://github.com/ceylon/ceylon-spec/issues/56&quot;&gt;Visibility model&lt;/a&gt; ;
+      we have been discussing how to improveupon our visibility model (the &lt;code&gt;shared&lt;/code&gt; keyword).&lt;/p&gt;
+      
+      &lt;p&gt;That's exactly how we wanted it to be, so keep coming :) If you are interested, Gavin marks discussions as
+      &lt;a href=&quot;https://github.com/ceylon/ceylon-spec/issues?labels=request+for+feedback&amp;amp;sort=created&amp;amp;direction=desc&amp;amp;state=open&amp;amp;page=1&quot;&gt;&lt;code&gt;request for feedback&lt;/code&gt;&lt;/a&gt;
+      in our issue tracker.&lt;/p&gt;
+      
+      &lt;p&gt;Or simply join our &lt;a href=&quot;http://ceylon-lang.org/community/?utm_source=blog&amp;amp;utm_medium=web&amp;amp;utm_content=devmailinglist&amp;amp;utm_campaign=2weeksfeedback&quot;&gt;development mailing list&lt;/a&gt;.
+      We have recently discussed Java interop, killer features that should or should not be added and more.&lt;/p&gt;
+      
+      &lt;h2&gt;Website&lt;/h2&gt;
+      
+      &lt;p&gt;The website had a few glitches including an faulty atom feed. This is now fixed. We took the opportunity
+      to improve &lt;code&gt;ceylondoc&lt;/code&gt; (the equivalent of &lt;code&gt;javadoc&lt;/code&gt;). You can now search for a type, attribute, method name
+      etc &lt;a href=&quot;https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc&quot;&gt;right from the page&lt;/a&gt;. Thanks Stef for the jQuery wizardry.&lt;/p&gt;
+      
+      &lt;p&gt;That's all forks, if you are interested, please join the fun and come contribute by
+      &lt;a href=&quot;http://ceylon-lang.org/community/?utm_source=blog&amp;amp;utm_medium=web&amp;amp;utm_content=community&amp;amp;utm_campaign=2weeksfeedback&quot;&gt;talking&lt;/a&gt;
+      or by &lt;a href=&quot;http://ceylon-lang.org/code/?utm_source=blog&amp;amp;utm_medium=web&amp;amp;utm_content=code&amp;amp;utm_campaign=2weeksfeedback&quot;&gt;coding&lt;/a&gt;.&lt;/p&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>http://localhost:4242/blog/2011/11/07/building-site-spec-ceylondoc</id>
+    <title>Wire the site with spec and ceylondoc</title>
+    <updated>2011-11-07T00:00:00+00:00</updated>
+    <link href="http://localhost:4242/blog/2011/11/07/building-site-spec-ceylondoc" rel="alternate" type="text/html" />
+    <author>
+      <name>Emmanuel Bernard</name>
+    </author>
+    <summary>
+      The site now integrates the specification and the ceylondoc for ceylon.language.
+      
+      How to build the integrated site
+      
+      Run ./build-site.sh from the root of your ceylon-lang.org repository.
+      This will
+      
+      
+      clone or refresh the ceylon-spec, ceylon.language and ceylon-compiler
+      repos
+      build the documentation as of the latest in master
+      push the bits in the generated directory of awestruct
+      
+      
+      
+      Navigation from the site proper to the spec or the ceylon.language doc should work
+      when serving the awestruct website.
+      
+      How to reference the spec or the ceylondoc
+      
+      This information is out dated and has changed in later versions of the website, check out our how to edit a page section.
+      
+      If you want to point the spec...
+    </summary>
+    <content type="html">
+      &lt;p&gt;The site now integrates the specification and the ceylondoc for &lt;code&gt;ceylon.language&lt;/code&gt;.&lt;/p&gt;
+      
+      &lt;h2&gt;How to build the integrated site&lt;/h2&gt;
+      
+      &lt;p&gt;Run &lt;code&gt;./build-site.sh&lt;/code&gt; from the root of your &lt;code&gt;ceylon-lang.org&lt;/code&gt; repository.
+      This will&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;clone or refresh the ceylon-spec, ceylon.language and ceylon-compiler
+      repos&lt;/li&gt;
+      &lt;li&gt;build the documentation as of the latest in master&lt;/li&gt;
+      &lt;li&gt;push the bits in the generated directory of awestruct&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;p&gt;Navigation from the site proper to the spec or the ceylon.language doc should work
+      when serving the awestruct website.&lt;/p&gt;
+      
+      &lt;h2&gt;How to reference the spec or the ceylondoc&lt;/h2&gt;
+      
+      &lt;p&gt;&lt;em&gt;This information is out dated and has changed in later versions of the website, check out &lt;a href=&quot;http://localhost:4242/code/website/edit-page/#documentation_section&quot;&gt;our how to edit a page&lt;/a&gt; section.&lt;/em&gt;&lt;/p&gt;
+      
+      &lt;p&gt;If you want to point the spec to a user in the site, point to &lt;a href=&quot;http://localhost:4242/documentation/1.0/spec&quot;&gt;/documentation/1.0/spec&lt;/a&gt;.
+      This page show the spec in HTML, HTML in single page and PDF.&lt;/p&gt;
+      
+      &lt;p&gt;If you want to point to a specific paragraph in the spec, use the variable &lt;code&gt;site.urls.spec.current&lt;/code&gt; and
+      the anchor to the paragraph in the spec.&lt;/p&gt;
+      
+      &lt;p&gt;eg This is a &lt;strong&gt;[&lt;/strong&gt;pointer to the spec&lt;strong&gt;](#{site.urls.spec}#&lt;/strong&gt;&lt;em&gt;anchor-in-spec&lt;/em&gt;&lt;strong&gt;)&lt;/strong&gt;.&lt;/p&gt;
+      
+      &lt;p&gt;That means the specification anchors should be stable.&lt;/p&gt;
+      
+      &lt;p&gt;Likewise, to point to a ceylondoc entry, use the variable &lt;code&gt;site.urls.apidocs&lt;/code&gt;.&lt;/p&gt;
+      
+      &lt;p&gt;&lt;strong&gt;[&lt;/strong&gt;Doc for &lt;code&gt;Comparable&lt;/code&gt;&lt;strong&gt;](#{site.urls.apidoc_current}&lt;/strong&gt;&lt;em&gt;/ceylon/language/Comparable.html&lt;/em&gt;&lt;strong&gt;)&lt;/strong&gt;&lt;/p&gt;
+      
+      &lt;p&gt;By using these placeholders, we will be able to move the spec or ceylondoc to other places.
+      Note that &lt;a href=&quot;http://localhost:4242/documentation/1.0/api&quot;&gt;/documentation/1.0/api&lt;/a&gt; page is pretty useless as it is but
+      should be fixed in ceylondoc.&lt;/p&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>http://localhost:4242/blog/2011/08/29/news-section</id>
+    <title>Home page has a news section</title>
+    <updated>2011-08-29T00:00:00+00:00</updated>
+    <link href="http://localhost:4242/blog/2011/08/29/news-section" rel="alternate" type="text/html" />
+    <author>
+      <name>Emmanuel Bernard</name>
+    </author>
+    <summary>
+      The website home page now has an automatically filled news section.
+      
+      When you want to advertize a news, add a file yyyy-mm-some-text.md to _data/news with the following structure
+      
+      
+      
+      
+      ---
+      title: 'My exciting news'
+      date: 29 August, 2011
+      more_info_url: /my/url/with/more/details
+      effective_date: 20110829
+      ---
+      Some exciting news today.
+      
+      
+      A typical example would be 2011-08-news-section.md
+      
+      
+      
+      
+      ---
+      title: 'News section is up'
+      date: 29 August, 2011
+      more_info_url: /blog/2011-08-29-news-section/
+      effective_date: 20110829
+      ---
+      The website news section is now up.
+      
+      
+      Note
+      
+      I could have reused blog entries tagged #news but it turns out that the first 50 characters a
+      not often useful. So I've decided to go for the explicit _data/news structure.
+      ...
+    </summary>
+    <content type="html">
+      &lt;p&gt;The website home page now has an automatically filled news section.&lt;/p&gt;
+      
+      &lt;p&gt;When you want to advertize a news, add a file &lt;code&gt;yyyy-mm-some-text.md&lt;/code&gt; to &lt;code&gt;_data/news&lt;/code&gt; with the following structure&lt;/p&gt;
+      
+      &lt;!-- lang: none --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;---
+      title: 'My exciting news'
+      date: 29 August, 2011
+      more_info_url: /my/url/with/more/details
+      effective_date: 20110829
+      ---
+      Some exciting news today.
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;A typical example would be &lt;code&gt;2011-08-news-section.md&lt;/code&gt;&lt;/p&gt;
+      
+      &lt;!-- lang: none --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;---
+      title: 'News section is up'
+      date: 29 August, 2011
+      more_info_url: /blog/2011-08-29-news-section/
+      effective_date: 20110829
+      ---
+      The website news section is now up.
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;h3&gt;Note&lt;/h3&gt;
+      
+      &lt;p&gt;I could have reused blog entries tagged #news but it turns out that the first 50 characters a
+      not often useful. So I've decided to go for the explicit &lt;code&gt;_data/news&lt;/code&gt; structure.&lt;/p&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>http://localhost:4242/blog/2011/08/17/sanitized-urls</id>
+    <title>URLs for blogs are now sanitized</title>
+    <updated>2011-08-17T00:00:00+00:00</updated>
+    <link href="http://localhost:4242/blog/2011/08/17/sanitized-urls" rel="alternate" type="text/html" />
+    <author>
+      <name>Emmanuel Bernard</name>
+    </author>
+    <summary>
+      Author names and tags are now sanitized before creating the URL:
+      
+      
+      use lower cap
+      remove accents
+      replace spaces with dashes
+      
+      
+      
+      For example Stéphane Épardaud is now pointing to /blog/authors/stephane-epardaud. Same goes for tags like Cliché or Do-It-Yourself.
+      ...
+    </summary>
+    <content type="html">
+      &lt;p&gt;Author names and tags are now sanitized before creating the URL:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;use lower cap&lt;/li&gt;
+      &lt;li&gt;remove accents&lt;/li&gt;
+      &lt;li&gt;replace spaces with dashes&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;p&gt;For example &lt;code&gt;Stéphane Épardaud&lt;/code&gt; is now pointing to &lt;a href=&quot;http://localhost:4242/blog/authors/stephane-epardaud&quot;&gt;/blog/authors/stephane-epardaud&lt;/a&gt;. Same goes for tags like &lt;code&gt;Cliché&lt;/code&gt; or &lt;code&gt;Do-It-Yourself&lt;/code&gt;.&lt;/p&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>http://localhost:4242/blog/2011/08/06/team-member-list</id>
+    <title>How to add yourself as team member</title>
+    <updated>2011-08-06T00:00:00+00:00</updated>
+    <link href="http://localhost:4242/blog/2011/08/06/team-member-list" rel="alternate" type="text/html" />
+    <author>
+      <name>Emmanuel Bernard</name>
+    </author>
+    <summary>
+      Ceylon's website has a team member list.
+      
+      Adding your bio and photo is simple. create a FirstnameLastname.md file under _data/team.
+      
+      This file should contain your name, photo and level as metadata and your biography blurb in the content.
+      
+      
+      
+      
+      ---
+      name: John Doe
+      photo: /images/team/JohnDoe.jpg
+      level: 1000   
+      ---
+      John Doe does not work on Ceylon.
+      
+      He is however the representative of [...]
+      
+      John works for ACME Corp.
+      
+      
+      Photo
+      
+      Your photo must be square. A file of 200px by 200px would be best. Place your photo under /images/team.
+      
+      Level
+      
+      In order to give proper credit I've introduced the notion of level. Le lower you are, the most important you are (like in SPECTRE).
+      
+      
+      level...
+    </summary>
+    <content type="html">
+      &lt;p&gt;Ceylon's website has a &lt;a href=&quot;http://localhost:4242/community/team&quot;&gt;team member list&lt;/a&gt;.&lt;/p&gt;
+      
+      &lt;p&gt;Adding your bio and photo is simple. create a &lt;code&gt;FirstnameLastname.md&lt;/code&gt; file under &lt;code&gt;_data/team&lt;/code&gt;.&lt;/p&gt;
+      
+      &lt;p&gt;This file should contain your name, photo and level as metadata and your biography blurb in the content.&lt;/p&gt;
+      
+      &lt;!-- lang: none --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;---
+      name: John Doe
+      photo: /images/team/JohnDoe.jpg
+      level: 1000   
+      ---
+      John Doe does not work on Ceylon.
+      
+      He is however the representative of [...]
+      
+      John works for ACME Corp.
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;h1&gt;Photo&lt;/h1&gt;
+      
+      &lt;p&gt;Your photo must be square. A file of 200px by 200px would be best. Place your photo under &lt;code&gt;/images/team&lt;/code&gt;.&lt;/p&gt;
+      
+      &lt;h1&gt;Level&lt;/h1&gt;
+      
+      &lt;p&gt;In order to give proper credit I've introduced the notion of level. Le lower you are, the most important you are (like in SPECTRE).&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;level 1: that's founder and fearless leader&lt;/li&gt;
+      &lt;li&gt;level 10: that's active team member with heavy involvement ( and me of course ;) )&lt;/li&gt;
+      &lt;li&gt;level 100: casual contributors&lt;/li&gt;
+      &lt;li&gt;level 1000: retired contributors&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;h1&gt;Seeing the result&lt;/h1&gt;
+      
+      &lt;p&gt;Once you are satisfied, erase the generated site and run the generation &lt;code&gt;rm -fR _site ; awestruct -d&lt;/code&gt;. Check it out on the &lt;a href=&quot;http://localhost:4242/community/team&quot;&gt;team page&lt;/a&gt;.&lt;/p&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>http://localhost:4242/blog/2011/07/25/site-shaping</id>
+    <title>Site is shaping up rapidly &#58; feedback needed</title>
+    <updated>2011-07-25T00:00:00+00:00</updated>
+    <link href="http://localhost:4242/blog/2011/07/25/site-shaping" rel="alternate" type="text/html" />
+    <author>
+      <name>Emmanuel Bernard</name>
+    </author>
+    <summary>
+      The website is shaping up rapidly.
+      
+      I need your feedback on:
+      
+      
+      the infrastructure
+      the structure
+      
+      
+      
+      The website is available at &lt;git@github.com:ceylon/ceylon-lang.org.git>
+      To build the site, check out README.md
+      
+      The infrastructure
+      
+      As I said initially, the side is a static website built using Awestruct. I need you to have a look at it and play with it for real to see if you will be able to live with in in the coming months.
+      In particular, write pages, (both md and haml files), write blogs, write events. I think Markdown files (.md) will be sufficient for 90% of the pages but everything requiring  custom CSS id / class...
+    </summary>
+    <content type="html">
+      &lt;p&gt;The website is shaping up rapidly.&lt;/p&gt;
+      
+      &lt;p&gt;I need your feedback on:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;the infrastructure&lt;/li&gt;
+      &lt;li&gt;the structure&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;p&gt;The website is available at &amp;lt;git@github.com:ceylon/ceylon-lang.org.git&amp;gt;
+      To build the site, check out &lt;a href=&quot;http://localhost:4242/README&quot;&gt;README.md&lt;/a&gt;&lt;/p&gt;
+      
+      &lt;h2&gt;The infrastructure&lt;/h2&gt;
+      
+      &lt;p&gt;As I said initially, the side is a static website built using Awestruct. I need you to have a look at it and &lt;strong&gt;play with it for real&lt;/strong&gt; to see if you will be able to live with in in the coming months.
+      In particular, write pages, (both md and haml files), write blogs, write events. I think Markdown files (.md) will be sufficient for 90% of the pages but everything requiring  custom CSS id / class are better handled with .haml files.&lt;/p&gt;
+      
+      &lt;p&gt;I'm quite pleased with what is present even if that's not perfect by any means and if parsing errors can be quite hard to track. It's probable that at some point in the future, Awestruct won't be sufficient and that we will need better tools for specialized content (like blog, wiki etc). But I would never have been able to achieve what I did alone in such a short time without it.&lt;/p&gt;
+      
+      &lt;h2&gt;The structure&lt;/h2&gt;
+      
+      &lt;p&gt;The Play Framework site is very well done and I've shamelessly copied the structure. We of course have much less to show so many areas are different.&lt;/p&gt;
+      
+      &lt;h3&gt;Home&lt;/h3&gt;
+      
+      &lt;p&gt;The home page. That's the area I worked the less on, Somebody will have to step up and decide what we put in.&lt;/p&gt;
+      
+      &lt;h3&gt;Learn it&lt;/h3&gt;
+      
+      &lt;p&gt;That's everything doc related:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;the Ceylon tour (a shorter version of Gavin's introduction) - not finished btw&lt;/li&gt;
+      &lt;li&gt;FAQs: this will need to be filled with complier how to s when M1 hits the road. In the mean time, we need to populate it with something.&lt;/li&gt;
+      &lt;li&gt;Roadmap (I copied the wiki's page)&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;h3&gt;Download&lt;/h3&gt;
+      
+      &lt;p&gt;Not much to see here, I point to the roadmap&lt;/p&gt;
+      
+      &lt;h3&gt;Community&lt;/h3&gt;
+      
+      &lt;p&gt;Pointers to the forum, mailing list and the list of events (conferences etc)&lt;/p&gt;
+      
+      &lt;h3&gt;Code&lt;/h3&gt;
+      
+      &lt;p&gt;Not much to see but that will contain:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;pointers to the Git repos&lt;/li&gt;
+      &lt;li&gt;how to build&lt;/li&gt;
+      &lt;li&gt;a link to the bug tracking system&lt;/li&gt;
+      &lt;li&gt;some hand holding for contributors&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;h3&gt;Blog&lt;/h3&gt;
+      
+      &lt;p&gt;This is not a full featured blogging system yet but one can already write blogs in Markdown, tag them. A feed is generated from this. I put some examples.&lt;/p&gt;
+      
+      &lt;h2&gt;TODOs&lt;/h2&gt;
+      
+      &lt;p&gt;For me:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;integrate Disq.us comment system for the blog entries and possibly some other pages&lt;/li&gt;
+      &lt;li&gt;integrate a forum using an embedded Nabble forum. Btw, do we want a forum before we release some code?&lt;/li&gt;
+      &lt;li&gt;make the blog system generate per author pages (low priority)&lt;/li&gt;
+      &lt;li&gt;improve the top nav system (using some ruby code instead of copy paste)&lt;/li&gt;
+      &lt;li&gt;think about a way to generate the 2nd level nav system. Today that's manual per section.&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;p&gt;For you:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;try the system by writing docs and see what you can do&lt;/li&gt;
+      &lt;li&gt;write documentation or pages where you feel things are missing&lt;/li&gt;
+      &lt;li&gt;help port the Ceylon introduction to the Tour format (ie getting rid of the whys and detailed explanations to focus on showing the features)&lt;/li&gt;
+      &lt;/ul&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>http://localhost:4242/blog/2011/07/22/blog-system</id>
+    <title>We now have a blog system and decent structure</title>
+    <updated>2011-07-22T00:00:00+00:00</updated>
+    <link href="http://localhost:4242/blog/2011/07/22/blog-system" rel="alternate" type="text/html" />
+    <author>
+      <name>Emmanuel Bernard</name>
+    </author>
+    <summary>
+      We are at a stage where the website starts to look decent content wise.
+      
+      I have recently added the notion of upcoming talks
+      which is built based on the data in _data/events_.
+      
+      I have also added the blog system:
+      
+      In blog, create a file YYYY-MM-DD-some-title.md and add the following metadata
+      
+      
+      
+      
+      ---
+      title: We now have a blog system and decent structure
+      author: Emmanuel Bernard
+      layout: blog
+      tags: [site, blog]
+      ---
+      
+      
+      Then write down your blog post in Markdown.
+      
+      Note that unfortunately, the index page is not generated when a blog entry is added.
+      You need to rm -f _site and restart Awestruct.
+      ...
+    </summary>
+    <content type="html">
+      &lt;p&gt;We are at a stage where the website starts to look decent content wise.&lt;/p&gt;
+      
+      &lt;p&gt;I have recently added the notion of &lt;a href=&quot;http://localhost:4242/community/events&quot;&gt;upcoming talks&lt;/a&gt;
+      which is built based on the data in &lt;code&gt;_data/events_&lt;/code&gt;.&lt;/p&gt;
+      
+      &lt;p&gt;I have also added the blog system:&lt;/p&gt;
+      
+      &lt;p&gt;In &lt;code&gt;blog&lt;/code&gt;, create a file &lt;code&gt;YYYY-MM-DD-some-title.md&lt;/code&gt; and add the following metadata&lt;/p&gt;
+      
+      &lt;!-- lang: none --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;---
+      title: We now have a blog system and decent structure
+      author: Emmanuel Bernard
+      layout: blog
+      tags: [site, blog]
+      ---
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;Then write down your blog post in &lt;a href=&quot;http://localhost:4242/code/website/md-sample.md&quot;&gt;Markdown&lt;/a&gt;.&lt;/p&gt;
+      
+      &lt;p&gt;Note that unfortunately, the index page is not generated when a blog entry is added.
+      You need to &lt;code&gt;rm -f _site&lt;/code&gt; and restart Awestruct.&lt;/p&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>http://localhost:4242/blog/2011/07/19/Site-is-live</id>
+    <title>The website is live!</title>
+    <updated>2011-07-19T00:00:00+00:00</updated>
+    <link href="http://localhost:4242/blog/2011/07/19/Site-is-live" rel="alternate" type="text/html" />
+    <author>
+      <name>Emmanuel Bernard</name>
+    </author>
+    <summary>
+      The website is live!
+      ...
+    </summary>
+    <content type="html">
+      &lt;p&gt;The website is live!&lt;/p&gt;
+    </content>
+  </entry>
+</feed>

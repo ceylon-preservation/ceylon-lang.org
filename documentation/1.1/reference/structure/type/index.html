@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Types and type declarations</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.1/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.1/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.1/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.1/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.1/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.1/reference">Reference</a></h3>
+            
+            <ul>
+<li><a href="#usage">Usage
+            </a></li>
+<li><a href="#description">Description
+            </a></li>
+<ul>
+<li><a href="#types_and_type_constructors">Types and type constructors
+            </a></li>
+<li><a href="#union_and_intersection">Union and intersection
+            </a></li>
+<li><a href="#subtypes">Subtypes
+            </a></li>
+<li><a href="#subtypes_of_unions_and_intersections">Subtypes of unions and intersections
+            </a></li>
+<li><a href="#subtypes_and_type_constructors">Subtypes and type constructors
+            </a></li>
+<li><a href="#declaration_site_variance">Declaration-site variance
+            </a></li>
+<li><a href="#use_site_variance">Use-site variance
+            </a></li>
+</ul>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.1/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.1/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.1/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference (1.1)
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_11_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.1, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <h1 id="types_and_type_declarations">Types and type declarations</h1>
+          
+          <p id="this_page_is_about_types...">This page is about types and type expressions.
+          There is a separate page about <a href="../type-declaration">type declarations</a>
+          in general and further pages about <a href="../class">class declarations</a> and
+          <a href="../interface">interface declarations</a> in particular.</p>
+          
+          <h2 id="usage">Usage
+          </h2>
+          
+          
+          <p id="the_following_are_all_type...">The following are all <em>type expressions</em>:</p>
+          
+          <pre data-language="ceylon"><code>Human
+Human|Fish
+Human&amp;Female
+List&lt;Human|Fish&gt;
+Set&lt;Human&amp;Female&gt;
+HashSet&lt;in Human&amp;Female&gt;
+HashSet&lt;out Human|Fish&gt;
+</code></pre>
+          
+          <h2 id="description">Description
+          </h2>
+          
+          
+          
+          
+          <h3 id="types_and_type_constructors">Types and type constructors
+          </h3>
+          
+          
+          <p id="it_is_extremely_important_to...">It is extremely important to understand that a <a href="../type-declaration/">type <em>declaration</em></a>
+          such as</p>
+          
+          <pre data-language="ceylon"><code>class Generic&lt;Argument&gt;(){
+}
+</code></pre>
+          
+          <p id="does_not_introduce_a_new...">does <strong>not</strong> introduce a new <em>type</em>. Instead it introduces a <em>type constructor</em>,
+          called <code>Generic</code>, from which we can construct other types
+          such as</p>
+          
+          <pre data-language="ceylon"><code>Generic&lt;String&gt;
+Generic&lt;Integer&gt;
+Generic&lt;Generic&lt;Generic&lt;Boolean&gt;&gt;&gt;
+</code></pre>
+          
+          <p id="these_are_called_applied_types...">These are called <em>applied types</em> (or <em>produced types</em>), because we're applying
+          a list of <em>type arguments</em> to the type constructor to
+          create a type.</p>
+          
+          <p id="a_non_generic_class_or...">A non-generic <a href="../class/">class</a> or <a href="../interface/">interface</a>
+          declaration (one without type arguments) such as</p>
+          
+          <pre data-language="ceylon"><code>interface NonGeneric {
+}
+</code></pre>
+          
+          <p id="does_appear_to_introduce_a...">does appear to introduce a type, simply because it requires no type arguments
+          so the expression <code>NonGeneric</code> is a valid type expression, but conceptually it is still
+          a <em>type constructor</em>.</p>
+          
+          <p id="note_that_ceylon_doesnt_allow...">Note that Ceylon doesn't allow <em>raw types</em> which allow a
+          type constructor to be treated as a type.</p>
+          
+          <p id="this_might_seem_like_pedantry...">This might seem like pedantry, but understanding the difference between the
+          declaration of a type (i.e. a type constructor) and the types which are
+          produced from it will prove helpful.</p>
+          
+          <h3 id="union_and_intersection">Union and intersection
+          </h3>
+          
+          
+          <p id="apart_from_producing_types_by...">Apart from producing types by applying type arguments to type constructors,
+          Ceylon also allows us to produce types by forming intersections (using <code>&amp;</code>)
+          and unions (using <code>|</code>) of other types.</p>
+          
+          <pre data-language="ceylon"><code>Human&amp;Male
+Mammal|Reptile
+List&lt;Mammal|Fish&gt;
+Set&lt;Human&amp;Male&gt;
+Male|Set&lt;Human&amp;Male&gt;
+</code></pre>
+          
+          <h3 id="subtypes">Subtypes
+          </h3>
+          
+          
+          <p id="ceylon_supports_subtype_polymorphism_which...">Ceylon supports <em>subtype polymorphism</em> (which just means inheritance)
+          in addition to <em>parameteric polymorphism</em> (which means having type constructors).</p>
+          
+          <p id="subtype_polymorphism_means_that_as..."><em>Subtype polymorphism</em> means that as well as applying type arguments to
+          type declarations, and
+          producing unions and intersections of types, we can ask whether one type
+          is a <em>subtype</em> of another. Being a subtype means all instances of the subtype
+          must also be instances of the other type.</p>
+          
+          <p id="in_particular_ceylon_supports_declarative...">In particular Ceylon supports <em>declarative subtyping</em>. That means
+          the <a href="../type-declaration#declarative_subtyping">declaration of a type</a>
+          includes listing what are the supertypes of types produced
+          from the declaration.</p>
+          
+          <p id="its_worth_mentioning_two_important...">It's worth mentioning two important types at this point:</p>
+          
+          <ul>
+          <li>
+<a href="../type-declaration#anything"><code>Anything</code></a> is the supertype of all types; you can't do anything with an instanceof <code>Anything</code>
+          except narrow it to some more useful type,</li>
+          <li>
+<a href="../type-declaration#nothing"><code>Nothing</code></a> is a subtype of all types; there are no instances of <code>Nothing</code>.</li>
+          </ul>
+          
+          
+          <h3 id="subtypes_of_unions_and_intersections">Subtypes of unions and intersections
+          </h3>
+          
+          
+          <p id="assume_that">Assume that</p>
+          
+          <pre data-language="ceylon"><code>interface Human satisfies Mammal {
+}
+</code></pre>
+          
+          <p id="so_that_the_type_human...">So that the type <code>Human</code> is a subtype of the type <code>Mammal</code>.
+          Then <code>Human</code> is also a subtype of
+          <code>Human|Fish</code> because every human is also a human or a fish.
+          (<code>Fish</code> is also a subtype of <code>Human|Fish</code>).
+          Generalizing, we can say that any case of a union is trivially a
+          subtype of that union:</p>
+          
+          <pre data-language="ceylon"><code>X and Y are both subtypes of X|Y
+</code></pre>
+          
+          <p id="with_intersections_it_works_the...">With intersections it works the other way around. Every <code>Human&amp;Male</code> is both a
+          <code>Human</code> and a <code>Male</code>, so an intersection is trivially a subtype of all of
+          its constituent types:</p>
+          
+          <pre data-language="ceylon"><code>X&amp;Y is a subtype of both X and Y
+</code></pre>
+          
+          <p id="be_aware_that_the_ceylon...">Be aware that the ceylon typechecker is quite powerful in dealing with
+          unions and intersections:</p>
+          
+          <ul>
+          <li>it will simplify <code>Human|Mammal</code> to <code>Mammal</code> and <code>Human&amp;Mammal</code> to <code>Human</code>
+</li>
+          <li>it can often reason that an intersection type is <code>Nothing</code>
+          (which is does for things like <code>Integer&amp;String</code>, for example).</li>
+          </ul>
+          
+          
+          <p id="this_can_be_important_when...">This can be important when it comes to understanding compiler errors,
+          because the type you wrote might not be the type the typechecker is
+          using.</p>
+          
+          <h3 id="subtypes_and_type_constructors">Subtypes and type constructors
+          </h3>
+          
+          
+          <p id="combining_subtypes_and_type_constructors...">Combining subtypes and type constructors, we can ask
+          whether a <code>List&lt;Mammal&gt;</code> is a subtype of <code>List&lt;Mammal|Fish&gt;</code>.</p>
+          
+          <p id="its_not_meaningful_to_start...">It's not meaningful to
+          start thinking "well <code>List</code> is a subtype of <code>List</code>" because <code>List</code>
+          itself <em>isn't a type</em>, remember.</p>
+          
+          <p id="instead_we_need_to_think...">Instead we need to think about whether <em>every possible</em>
+          instance of <code>List&lt;Mammal&gt;</code> <em>must</em> also be an instance of
+          <code>List&lt;Mammal|Fish&gt;</code>. The answer depends on how we use the list.</p>
+          
+          <p id="if_we_only_get_elements...">If we only "get elements out of the list", then from a
+          <code>List&lt;Mammal&gt;</code> we might get a dog and a cat and a platypus and those
+          would be perfectly good things to find in a <code>List&lt;Mammal|Fish&gt;</code> too.
+          In other words in this "getting things out" case
+          <code>List&lt;Mammal&gt;</code> is a subtype of <code>List&lt;Mammal|Fish&gt;</code>.</p>
+          
+          <p id="now_if_we_only_add...">Now, if we only "add elements to the list", then into a list of
+          <code>List&lt;Mammal|Fish&gt;</code> we could add a dog and a cat and a shark, but
+          we couldn't put all those things into a <code>List&lt;Mammal&gt;</code>
+          (hint: a shark is not a mammal). So a
+          <code>List&lt;Mammal&gt;</code> is <em>not</em> a subtype of <code>List&lt;Mammal|Fish&gt;</code>.</p>
+          
+          <p id="it_turns_out_that_this...">It
+          turns out that this rule for "out" not to be limited to unions, so
+          more generally</p>
+          
+          <blockquote><p id="if_x_is_a_subtype...">if <code>X</code> is a subtype of <code>Y</code> then <code>Out&lt;X&gt;</code> is a subtype of <code>Out&lt;Y&gt;</code>.</p></blockquote>
+          
+          <p id="this_is_called_covariance_the...">This is called <em>covariance</em> (the type parameter of <code>Out</code> is <em>covariant</em>).</p>
+          
+          <p id="now_lets_think_about_intersections">Now let's think about intersections.</p>
+          
+          <p id="into_a_listhuman_we_could...">Into a <code>List&lt;Human&gt;</code> we could add Alice, Bob and Carol, but into a
+          <code>List&lt;Human&amp;Male&gt;</code> we could only add Bob. So a
+          <code>List&lt;Human&gt;</code> is a subtype of <code>List&lt;Human&amp;Male&gt;</code> (which is the other
+          way around from the type arguments, where <code>Human&amp;Male</code> is a subtype of
+          <code>Human</code>). In general in this "putting into" case we find that</p>
+          
+          <blockquote><p id="if_x_is_a_subtype_of...">if <code>X</code> is a subtype of <code>Y</code> then <code>In&lt;Y&gt;</code> is a subtype of <code>In&lt;X&gt;</code></p></blockquote>
+          
+          <p id="this_is_called_contravariance_the...">This is called <em>contravariance</em> (the type parameter of <code>In</code> is <em>contravariant</em>).</p>
+          
+          <p id="sometimes_you_have_an_reference...">Sometimes you have an reference where you need to get things out
+          <em>and</em> put them in. That's called <em>invariance</em>.
+          In general if <code>X</code> is a strict subtype of <code>Y</code>
+          neither <code>Both&lt;X&gt;</code> not <code>Both&lt;Y&gt;</code> is a subtype of the other.
+          This fact turns out to be rather inconvenient.</p>
+          
+          <p id="there_are_formal_rules_for...">There are formal rules for what constitutes "in" and "out", but
+          the simplest and most commonly needed one is:</p>
+          
+          <ul>
+          <li>If a type parameter appears just in attribute and method return types
+          it's "out" (covariant).</li>
+          <li>If a type parameter appears just in method and member class
+          parameter types, it's "in" (contravariant).</li>
+          <li>If a type parameter appears on both places it's invariant.</li>
+          </ul>
+          
+          
+          <p id="we_want_to_be_able...">We want to be able to make use of the subtype relationships for
+          <code>In</code> and <code>Out</code> types. To do this the typechecker needs to
+          enforce that we don't go passing a reference
+          to an "out thing" to something which wants to put things into the reference.
+          Likewise passing a "in thing" to something which wants to
+          get things out of the reference doesn't work either.</p>
+          
+          <h3 id="declaration_site_variance">Declaration-site variance
+          </h3>
+          
+          
+          <p id="one_way_to_do_this...">One way to do this is for the <a href="../type-declaration">declaration of a type</a>
+          to say
+          it whether it is an "in thing" or an "out thing":</p>
+          
+          <pre data-language="ceylon"><code>interface Out&lt;out Thing&gt;{}
+interface In&lt;in Thing&gt;{}
+</code></pre>
+          
+          <p id="the_members_of_those_interfaces...">The members of those interfaces then have to respect the
+          <code>in</code> or <code>out</code> nature of <code>Thing</code>: We can't have a member of <code>In</code>
+          which returns a <code>Thing</code> because that's a way of getting something
+          out of an <code>In</code>. And we can't have a method which takes a <code>Thing</code> in an
+          <code>Out</code> because that's a way to put something into an <code>Out</code>.</p>
+          
+          <p id="using_these_in_and_out...">Using these <code>in</code> and <code>out</code> to label the type parameter of a declaration
+          is called <em>declaration-site variance</em> and it is the preferred way of
+          handling variance in Ceylon.</p>
+          
+          <p id="theres_a_trick_we_can...">There's a trick we can often use to get around the inconvenience
+          of invariance. Suppose we want</p>
+          
+          <pre data-language="ceylon"><code>interface Both&lt;Thing&gt; {
+    shared formal Thing getThing;
+    shared formal Thing makeThing();
+    shared formal void consumeThing(Thing thing);
+}
+</code></pre>
+          
+          <p id="we_can_put_all_the...">We can put all the <code>Thing</code>-producing operations in an <code>out</code> declaration
+          and all the <code>Thing</code>-consuming operations in a different <code>in</code> declaration and
+          then combine them in a class:</p>
+          
+          <pre data-language="ceylon"><code>interface OutThings&lt;out Thing&gt;{
+    shared formal Thing getThing;
+    shared formal Thing makeThing();
+}
+interface InThings&lt;in Thing&gt;{
+    shared formal void consumeThing(Thing thing);
+}
+class BothThings&lt;Thing&gt;()
+        satisfies OutThings&lt;Thing&gt; &amp; InThings&lt;Thing&gt; {
+    // ...
+}
+</code></pre>
+          
+          <p id="this_trick_starts_to_break...">This trick starts to break down when there's a member which itself
+          has <code>Thing</code> as a result type and parameter type:</p>
+          
+          <pre data-language="ceylon"><code>Thing transformThing(Thing thing);
+</code></pre>
+          
+          <p id="we_can_declare">We can declare</p>
+          
+          <pre data-language="ceylon"><code>interface TransformThing&lt;out Output, in Input&gt; {
+    shared formal Output transformThing(Input thing);
+}
+</code></pre>
+          
+          <p id="and_then_satisfy_transformthingthing_thing...">And then satisfy <code>TransformThing&lt;Thing, Thing&gt;</code>, but this
+          starts to get cumbersome.</p>
+          
+          <h3 id="use_site_variance">Use-site variance
+          </h3>
+          
+          
+          <p id="ceylon_has_another_way_of...">Ceylon has another way of expressing variance: At the place where we apply a type
+          argument list to a type constructor. Reusing the invariant declaration <code>Both</code>
+          we can write:</p>
+          
+          <pre data-language="ceylon"><code>Both&lt;out Mammal&gt;
+</code></pre>
+          
+          <p id="every_occurence_of_thing_as...">Every occurence of <code>Thing</code> as a return type in <code>Both</code> then has the type <code>Mammal</code> in <code>Both&lt;out Mamma&gt;</code>, as we might hope.</p>
+          
+          <p id="however_every_occurence_of_thing...">However, every occurence of <code>Thing</code> as a parameter type in <code>Both</code> has the type <code>Nothing</code> in <code>Both&lt;out Mammal&gt;</code>.
+          We know there are no instances of <code>Nothing</code>, so we can never
+          supply a valid argument to such a parameter. Thus we cannot call those members of <code>Both&lt;out Mammal&gt;</code> which have a
+          <code>Thing</code>-typed parameter.</p>
+          
+          <p id="similar_things_happen_with">Similar things happen with</p>
+          
+          <pre data-language="ceylon"><code>Both&lt;in Mammal&gt;
+</code></pre>
+          
+          <p id="those_members_would_return_thing...">Those members would return <code>Thing</code>-typed results <code>Both</code> return <code>Anything</code> in <code>Both&lt;in Mammal&gt;</code>: We can obtain a
+          result, but can't do much with it.</p>
+          
+          <p id="strictly_use_site_variance_is...">Strictly, use-site variance is more powerful than declaration-side variance, but:</p>
+          
+          <ul>
+          <li>it's also less intuitive for most people</li>
+          <li>we can end up constructing some extremely complicated type expressions.</li>
+          </ul>
+          
+          
+          <p id="an_example_of_such_an...">An example of such an "extremely complicated type expression"
+          is the type of the <code>partition()</code> of <code>List&lt;out Y&gt;</code>. Technically
+          this is</p>
+          
+          <pre data-language="ceylon"><code>List&lt;in List&lt;in Y out Nothing&gt; out List&lt;in Nothing out Y&gt;&gt;
+</code></pre>
+          
+          <p id="but_ceylon_doesnt_actually_support...">But Ceylon doesn't actually support <code>in</code> and <code>out</code> type arguments
+          (each type argument must be just <code>in</code> or just <code>out</code>), because
+          thinking about this stuff is just too hard for most programmers.</p>
+          
+          <p id="so_in_general_we_avoid...">So, in general, we avoid using use-site variance in Ceylon.</p>
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li><a href="../type-declaration">type declarations</a></li>
+          <li><a href="../class"><code>class</code> declaration</a></li>
+          <li><a href="../interface"><code>interface</code> declaration</a></li>
+          <li><a href="../object"><code>object</code> declaration</a></li>
+          <li><a href="../type-abbreviation">type abbreviations</a></li>
+          <li><a href="../type-parameters">type parameters</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Why build your own type system?</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2015/06/21/constructors/">Constructors in Ceylon</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2015/10/27/why/">Why you might want to choose Ceylon</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="why_build_your_own_type_system">
+            Why build your own type system?
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              04 Jul 2015
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/ceylon-model/">
+                ceylon-model
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <p id="in_ceylon_12_weve_factored...">In Ceylon 1.2 we've factored out the type system of Ceylon
+            as an independent module, with minimal dependencies and a
+            clean API. The <code>ceylon-model</code>
+            <a href="https://github.com/ceylon/ceylon-model/">project</a>
+            incorporates:</p>
+            
+            <ul>
+            <li>an extensible object-oriented model of the type system in
+            Ceylon,</li>
+            <li>algorithms for reasoning about types at compile
+            time—or even at <em>runtime</em> in a system with reified
+            generics—and</li>
+            <li>a framework for <em>model loading</em>, that is, for loading a
+            model representing the types in a program or module from
+            binary artifacts, source artifacts, or anything
+            else—this is a necessary feature for incremental
+            compilation and modularity.</li>
+            </ul>
+            
+            
+            <p id="why_might_this_be_interesting...">Why might this be interesting to someone outside the Ceylon
+            team? Well, if you're thinking of creating a programming
+            language with nominal typing, you could consider reusing
+            <code>ceylon-model</code> in your own language, saving yourself the
+            problem of implementing all the hairy typing algorithms that
+            we've already spent years getting right. That way, you can
+            concentrate on the stuff that's really different about your
+            language, that is, the syntax, the compiler backend, the
+            runtime semantics, and the basic language types.</p>
+            
+            <p id="ceylon_model_implements_an_extremely..."><code>ceylon-model</code> implements an <em>extremely</em> complete type
+            system, including all the following features:</p>
+            
+            <ul>
+            <li>nominal typing with single-inheritance of classes and
+            multiple-inheritance of interfaces,</li>
+            <li>bounded parametric polymorphism (generics with constraints),</li>
+            <li>sum types,</li>
+            <li>union and intersection types, with sophisticated reasoning
+            about principal types and canonicalization,</li>
+            <li>reasoning about subtyping,</li>
+            <li>reasoning about coverage and disjoint types,</li>
+            <li>principal instantiation inheritance (more powerful than
+            the single-instantiation inheritance found in other
+            languages with subtyping and generics),</li>
+            <li>declaration-site and use-site variance,</li>
+            <li>type constructor polymorphism (higher-kinded types),</li>
+            <li>higher-rank / impredicative polymorphism,</li>
+            <li>type aliases including generic type aliases,</li>
+            <li>self types, and</li>
+            <li>some support for overloading.</li>
+            </ul>
+            
+            
+            <p id="it_doesnt_include_any_functionality...">It doesn't include any functionality for type inference,
+            flow-sensitive typing, or pattern matching, since in Ceylon
+            that stuff is implemented within the typechecker, and anyway
+            your language probably has different rules to ours.</p>
+            
+            <p id="it_seems_to_me_that...">It seems to me that unless your type system is based on
+            structural typing or dependent types, <code>ceylon-model</code> is an
+            awesome starting point. It might already have everything you
+            need, and, even if it doesn't, it provides a framework that
+            would let you incorporate other features into the type
+            system. For example, I imagine that primitively-defined
+            function, array, tuple, or record types would be easy to
+            incorporate.</p>
+            
+            <p id="were_already_reusing_this_model...">We're already reusing this model between the typechecker,
+            two compiler backends, two IDE projects, and the runtime, so
+            we know its API is reasonable.</p>
+            
+            <p id="the_only_stumbling_block_is...">The only stumbling block is that the project is implemented
+            in Java, so if you want to use it in a compiler written in a
+            different language, you'll probably want to translate it to
+            that language first. The code is pretty clean and
+            straightforward, so that's probably not a massive hurdle to
+            overcome.</p>
+            
+            <p id="the_license_for_ceylon_model...">The license for <code>ceylon-model</code> is Apache 2.0, so you can
+            basically do what you like with it. But if you decide to
+            use it in a project, please drop us a note, because it makes
+            us happy to see people reuse our work.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2015/07/04/model/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

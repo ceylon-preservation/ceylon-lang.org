@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Abstracting over functions</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2013/01/11/ceylon-test-plugin/">Ceylon Test Eclipse Plugin</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2013/01/21/static-type-system-mistakes/">Things static type systems shouldn't have</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="abstracting_over_functions">
+            Abstracting over functions
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              21 Jan 2013
+            </div>
+            <div class="tags">
+            </div>
+          </div>
+          <div class="body">
+            <p id="last_week_i_was_finally...">Last week, I was finally able to write the functions <code>compose()</code> and <code>curry()</code>
+            in Ceylon and compile them with the Ceylon compiler. These functions are
+            general purpose higher order functions that operate on other functions at a
+            very high level of abstraction. In most programming languages, it's very easy
+            to define a <code>compose()</code> function that works for functions with just one
+            parameter. For example, in Ceylon:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>X compose&lt;X,Y,Z&gt;(X(Y) f, Y(Z) g)(Z z) =&gt; f(g(z));
+</code></pre>
+            
+            <p id="in_this_function_signature_f...">In this function signature, <code>f()</code> and <code>g()</code> are functions with one parameter where
+            the return type of <code>g()</code> is the same as the parameter type of <code>f()</code>. The resulting
+            function is also a function with one parameter, and has the same return type
+            as <code>f()</code> and the same parameter type as <code>g()</code>.</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>String format(Float|Integer number) { .... }
+value printf = compose(print,format);
+printf(1.0); //prints 1.0
+</code></pre>
+            
+            <p id="now_things_get_trickier_when...">Now, things get trickier when <code>g()</code> has more than one parameter. Imagine the
+            following definition of <code>format()</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>String format(String pattern, Float|Integer number) { .... }
+</code></pre>
+            
+            <p id="this_function_has_the_type...">This function has the type <code>String(String,Float|Integer)</code>, which can't be a
+            <code>Y(Z)</code>, no matter what argument types we choose or infer for <code>Y</code> and <code>Z</code>. To
+            see this more clearly, and to see how we can come up with a more powerful
+            definition of <code>compose()</code>, we're going to have to understand how Ceylon really
+            represents function types. But first we're going to need to understand tuples.</p>
+            
+            <h2 id="tuples">Tuples</h2>
+            
+            <p id="ceylon_recently_grew_tuples_ive...">Ceylon recently grew tuples. I've heard all sorts of arguments for including
+            tuples in the language, but what finally convinced me was realizing that they
+            were a simpler way to represent function types.</p>
+            
+            <p id="so_a_major_goal_of...">So a major goal of adding tuples to the language was to add zero additional
+            complexity to the type system. So tuples are instances of an ordinary class,
+            <code>Tuple</code>, which you can see defined
+            <a href="https://raw.github.com/ceylon/ceylon.language/master/src/ceylon/language/Tuple.ceylon">here</a>.</p>
+            
+            <p id="a_tuple_is_a_linked...">A tuple is a linked list where each link in the list encodes the static type
+            of the element. Without syntax sugar, we can write:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>value point = Tuple(0.0, Tuple(0.0, Tuple("origin")));
+</code></pre>
+            
+            <p id="i_bet_youre_wondering_what...">I bet you're wondering what type <code>point</code> has. Well, if you really <em>have</em> to
+            know, it's:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Tuple&lt;Float|String,Float,Tuple&lt;Float|String,Float,Tuple&lt;String,String,Empty&gt;&gt;&gt; 
+</code></pre>
+            
+            <p id="phew_fortunately_we_never_see...">Phew! Fortunately we never see this type, because Ceylon lets us abbreviate it
+            to <code>[Float,Float,String]</code>, and the IDE always shows us the abbreviated form.
+            We can also use the square brackets to instantiate tuples, letting us write:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>[Float,Float,String] point = [0.0, 0.0, "origin"];
+</code></pre>
+            
+            <p id="yep_tuples_are_square_in...">(Yep, tuples are square in Ceylon. Don't worry, you'll quickly get used to
+            that.)</p>
+            
+            <p id="a_tuple_is_a_sequence...">A tuple is a sequence (<code>Tuple</code> is a subclass of <code>Sequence</code>), so the following
+            is well-typed:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>&lt;Float|String&gt;[] seq = point;
+Null|Float|String first = seq[0];
+</code></pre>
+            
+            <p id="now_what_makes_a_tuple...">Now, what makes a tuple special is that we can access its elements without
+            losing their static type information. We can write:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Float x = point.first;
+Float y = point.rest.first;
+String label = point.rest.rest.first;
+</code></pre>
+            
+            <p id="i_should_emphasize_that_were...">I should emphasize that we're not seeing any magic here. You could write your
+            own <code>MyTuple</code> class and reproduce the exact same behavior!</p>
+            
+            <p id="i_bet_youre_wondering_what_happens...">I bet you're wondering what happens if I type <code>point.rest.rest.rest.first</code>.
+            Well, take a closer look at the verbose type of <code>point</code> again. The chain of
+            "links" is terminated by <code>Empty</code>, Ceylon's empty sequence type. And the type
+            of <code>first</code> on <code>Empty</code> is <code>Null</code>. So we have:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Null zippo = point.rest.rest.rest.first;
+</code></pre>
+            
+            <p id="that_is_the_expression_is...">That is, the expression is provably <code>null</code>. Provable within the type system,
+            that is.</p>
+            
+            <p id="of_course_we_dont_want...">Of course, we don't want to make you write out suff like <code>point.rest.rest.first</code>
+            whenever you need to get something out of a tuple. A tuple is a sequence, so
+            you can access its elements using the index operator, for example:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Integer i = ... ;
+Null|Float|String ith = point[i];
+</code></pre>
+            
+            <p id="but_as_a_special_convenience...">But, as a special convenience, when the index is a literal integer, the compiler
+            will treat it as if it were a chain of calls to <code>rest</code> and <code>first</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Float x = point[0];
+Float y = point[1];
+String label = point[2];
+Null zippo = point[3];
+</code></pre>
+            
+            <p id="a_chain_of_tuple_instances...">A chain of <code>Tuple</code> instances doesn't need to be terminated by an <code>Empty</code>. It may,
+            alternatively, be terminated by a nonempty sequence, any instance of <code>Sequence</code>.
+            We can write the following:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>String[] labels = ["origin", "center"];
+[Float, Float, String*] point = [0.0, 0.0, *labels];
+</code></pre>
+            
+            <p id="the_type_float_float_string...">The type <code>[Float, Float, String*]</code> is an abbreviation for:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Tuple&lt;Float|String,Float,Tuple&lt;Float|String,Float,String[]&gt;&gt; 
+</code></pre>
+            
+            <p id="it_represents_a_sequence_of...">It represents a sequence of two <code>Float</code>s, followed by an unknown number of
+            <code>String</code>s. So the following is well-typed:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>[Float, Float, String*] point0 = [0.0, 0.0];
+[Float, Float, String*] point1 = [0.0, 0.0, "origin"];
+[Float, Float, String*] point2 = [0.0, 0.0, "origin", "center"];
+</code></pre>
+            
+            <p id="well_now_see_how_all...">We'll now see how all this is useful for abstracting over function parameter
+            types.</p>
+            
+            <h2 id="function_types">Function types</h2>
+            
+            <p id="an_instance_of_the_interface...">An instance of the interface <code>Callable</code> is a function.</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared interface Callable&lt;out Return, in Arguments&gt; 
+        given Arguments satisfies Anything[] {}
+</code></pre>
+            
+            <p id="going_back_to_our_function...">Going back to our function <code>format()</code> above, its type is:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Callable&lt;String,[String,Float|Integer]&gt;
+</code></pre>
+            
+            <p id="you_can_see_that_weve...">You can see that we've represented the parameter types of the function using a
+            tuple type. That is to say, Ceylon views a function as accepting a tuple of
+            arguments, and producing a single value. Indeed, Ceylon even lets use write
+            that explicitly:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>[String,Float] args = ["%5.2f", 1.0];
+print(format(*args));
+</code></pre>
+            
+            <p id="here_we_spread_the_elements...">Here we "spread" the elements of the tuple <code>args</code> across the parameters of the
+            function <code>format()</code>, just like you can do in some dynamically typed languages!</p>
+            
+            <p id="now_consider_a_function_with...">Now consider a function with a variadic argument:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code> String format(String pattern, Float|Integer* numbers) { .... }
+</code></pre>
+            
+            <p id="this_function_accepts_a_string...">This function accepts a <code>String</code>, followed by any number of <code>Float</code>s and
+            <code>Integer</code>s. We can represent its type as follows:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code> Callable&lt;String,[String,Float|Integer*]&gt;
+</code></pre>
+            
+            <p id="we_usually_abbreviate_function_types...">We usually abbreviate function types, writing <code>String(String,Float|Integer)</code>
+            or <code>String(String,Float|Integer*)</code> for the function types above.</p>
+            
+            <p id="ceylon_also_has_defaulted_parameters...">Ceylon also has defaulted parameters. The function type <code>String(String,String=)</code>
+            means <code>Callable&lt;String,[String]|[String,String]&gt;</code> and represents a function whose
+            second parameter has a default value.</p>
+            
+            <p id="notice_how_given_the_definitions...">Notice how, given the definitions we've just seen, assignability between function
+            types works out correctly:</p>
+            
+            <ul>
+            <li>a <code>String(Object)</code> is an instance of <code>Object(String)</code>,</li>
+            <li>a <code>String(String=)</code> is an instance of <code>String()</code> and of <code>String(String)</code>, and</li>
+            <li>a <code>String(String*)</code> is an instance of <code>String()</code>, of <code>String(String)</code>, and of
+            <code>String(String,String)</code>.</li>
+            </ul>
+            
+            
+            <h2 id="function_composition_and_currying">Function composition and currying</h2>
+            
+            <p id="finally_we_have_the_machinery...">Finally we have the machinery we need to define <code>compose()</code> and <code>curry()</code>.</p>
+            
+            <p id="the_signature_of_compose_is">The signature of <code>compose()</code> is:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared Callable&lt;X,Args&gt; compose&lt;X,Y,Args&gt;(X(Y) x, Callable&lt;Y,Args&gt; y) 
+        given Args satisfies Anything[]
+</code></pre>
+            
+            <p id="notice_how_the_type_parameter...">Notice how the type parameter <code>Args</code> abstracts over all possible parameter lists,
+            just as it does in the definition of <code>Callable</code>. To actually implement <code>compose()</code>,
+            I'm going to need to resort to two <code>native</code> functions that I can't yet implement
+            within the language. I can write down their signatures, however, so this isn't
+            a limitation of the type system itself:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared native Callable&lt;Return,Args&gt; flatten&lt;Return,Args&gt;
+            (Return tupleFunction(Args tuple))
+        given Args satisfies Anything[];
+
+shared native Return unflatten&lt;Return,Args&gt;
+            (Callable&lt;Return,Args&gt; flatFunction)(Args args)
+        given Args satisfies Anything[];
+</code></pre>
+            
+            <p id="if_youre_not_extremely_interested...">If you're not <em>extremely</em> interested, you can skip over these declarations, and
+            just look at an example of what they do:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>String([String,Float|Integer]) unflatFormat = unflatten(format);
+String(String,Float|Integer) flatFormat = flatten(unflatFormat);
+</code></pre>
+            
+            <p id="that_is_unflatten_takes_any...">That is, <code>unflatten()</code> takes any function with any parameter list, and returns a
+            function that accepts a single tuple of the same length as the original parameter
+            list. On the other hand, <code>flatten()</code> does the opposite. It takes a function that
+            accepts a single tuple, and returns a function with a parameter list of the same
+            length as the tuple.</p>
+            
+            <p id="ok_now_we_can_implement...">OK, now we can implement <code>compose()</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared Callable&lt;X,Args&gt; compose&lt;X,Y,Args&gt;(X(Y) f, Callable&lt;Y,Args&gt; g) 
+        given Args satisfies Anything[]
+               =&gt; flatten((Args args) =&gt; f(unflatten(g)(args)));
+</code></pre>
+            
+            <p id="perhaps_i_should_unpack_this...">Perhaps I should unpack this slightly for readability:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared Callable&lt;X,Args&gt; compose&lt;X,Y,Args&gt;(X(Y) f, Callable&lt;Y,Args&gt; g) 
+        given Args satisfies Anything[] {
+    X composed(Args args) {
+        Y y = unflatten(g)(args);
+        return f(y);
+    }
+    return flatten(composed);
+}
+</code></pre>
+            
+            <p id="the_definition_of_curry_is...">The definition of <code>curry()</code> is similarly dense:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared Callable&lt;Return,Rest&gt; curry&lt;Return,Argument,First,Rest&gt;
+            (Callable&lt;Return,Tuple&lt;Argument,First,Rest&gt;&gt; f)
+            (First first)
+        given First satisfies Argument 
+        given Rest satisfies Argument[] 
+                =&gt; flatten((Rest args) =&gt; unflatten(f)(Tuple(first, args)));
+</code></pre>
+            
+            <p id="this_function_accepts_a_function...">This function accepts a function with at least one parameter and returns a function
+            with two parameter lists, the first parameter list has the first parameter of the
+            original function, and the second parameter list has the rest of the parameters.</p>
+            
+            <p id="great_now_we_can_write">Great! Now we can write:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>value printf = compose(print,format);
+printf("%5.2f", 1.0); //prints 1.00
+value printFloat = curry(printf)("%5.2f");
+printFloat(2.5); //prints 2.50
+</code></pre>
+            
+            <h2 id="a_final_word">A final word</h2>
+            
+            <p id="this_post_has_been_long...">This post has been long and quite involved. I hope some of you made it this far.
+            This isn't typical Ceylon code we're looking at here. We're starting to move into
+            the field of metaprogramming, which is <em>just</em> becoming possible in Ceylon. What
+            I'm really trying to demonstrate here is how Ceylon layers sophisticated constructs
+            as pure syntax sugar over a relatively simple type system. I'm trying to show that
+            you can have things like tuple and function types without defining them primitively
+            as part of the type system, or resorting to inelegant hacks like <code>F1</code>, <code>F2</code>, <code>F3</code>,
+            <code>Tuple1</code>, <code>Tuple2</code>, <code>Tuple3</code>, etc. And indeed it works out <em>better</em> this way, I
+            believe.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2013/01/21/abstracting-over-functions/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

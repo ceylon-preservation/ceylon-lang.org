@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Ceylon on Android</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2016/04/20/ceylon-on-mobile/">Ceylon on mobile devices</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2016/06/29/ceylon-fat-jars/">Ceylon Fat Jars</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="ceylon_on_android">
+            Ceylon on Android
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/stephane-epardaud/">Stéphane Épardaud</a>
+            </div>
+            <div class="date">
+              02 Jun 2016
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/interop/">
+                interop
+              </a>
+              <a href="/blog/tags/mobile/">
+                mobile
+              </a>
+              <a href="/blog/tags/android/">
+                android
+              </a>
+              <a href="/blog/tags/modularity/">
+                modularity
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <p id="in_my_last_post_i...">In <a href="/blog/2016/04/20/ceylon-on-mobile/">my last post</a>, I explained how you can use Ceylon in Apache Cordova to write applications for
+            every mobile platform, including iOS and Android. This time, with many apologies for writing it
+            late (“next week” turned into next month), I will explain how to use the Ceylon IntelliJ plugin
+            to write native Android applications in Ceylon in Android Studio.</p>
+            
+            <h1 id="getting_started_with_ceylon_on_android_studio">Getting started with Ceylon on Android Studio</h1>
+            
+            <p id="to_start_writing_ceylon_applications...">To start writing Ceylon applications in Android Studio, follow these steps:</p>
+            
+            <ul>
+            <li><a href="https://developer.android.com/studio/index.html">Download Android Studio</a></li>
+            <li>Start it</li>
+            <li>Create a new application by clicking on <code>Start a new Android Studio Project</code>
+</li>
+            <li>You can use these values for <code>Application name</code>: <code>CeylonDemo</code>
+</li>
+            <li>And for <code>Company domain</code>: <code>android.example.com</code>
+</li>
+            <li>Next, select an <code>Empty activity</code>, with <code>Activity Name</code>: <code>MainActivity</code>
+</li>
+            <li>Click <code>Finish</code> and wait for the project to be created</li>
+            </ul>
+            
+            
+            <p id="at_this_point_you_have...">At this point you have an Android project open, but we still haven't had time to install the Ceylon
+            plugin, so let's do this right now:</p>
+            
+            <ul>
+            <li>Click on <code>File &gt; Settings &gt; Plugins &gt; Browse Repositories</code>
+</li>
+            <li>Then on <code>Manage Repositories &gt; +</code>
+</li>
+            <li>Add this repository: <code>https://downloads.ceylon-lang.org/ide/intellij/development/updatePlugins.xml</code>
+</li>
+            <li>Now click on <code>Install Ceylon IDE</code>
+</li>
+            </ul>
+            
+            
+            <p id="you_will_likely_need_to...">You will likely need to restart Android Studio, so do that.</p>
+            
+            <p id="next_were_going_to_convert...">Next we're going to convert our Android project to a Ceylon Android project:</p>
+            
+            <ul>
+            <li>In the <code>Android</code> view, Right-click on <code>app &gt; Configure Ceylon in this Module</code>
+</li>
+            <li>Click <code>OK</code> on the resulting configuration dialog</li>
+            </ul>
+            
+            
+            <p id="this_will_set_up_the...">This will set up the Ceylon plugin, and will add most of what you need in your Gradle build to build
+            Ceylon Android applications. You now have your Ceylon sources in <code>app/src/main/ceylon</code> and it includes
+            a module descriptor and an empty activity:</p>
+            
+            <div style="text-align:center;">
+            <img src="/images/screenshots/blog/2016-06-02-ceylon-on-android/ide.png" style="box-shadow: 0 0 10px #888;margin-left:5px;" width="700px" height="auto">
+            </div>
+            
+            
+            <p id="at_the_moment_this_requires...">At the moment, this requires a Ceylon <code>1.2.3</code> distribution to build, and since it's not released yet
+            you're going to have to either <a href="/code/contribute/#contributing_to_the_compiler_backend">build one yourself</a>
+            (just the <code>Getting the source</code> part), or
+            <a href="https://ci-ceylon.rhcloud.com/job/ceylon-distribution/">download a nightly build</a>.
+            Once you have it, edit
+            <code>app/build.gradle</code> near then end to add <code>ceylon &gt; ceylonLocation</code> and make it point to where you
+            installed your distribution (it needs to point to the Ceylon binary, not just the distribution
+            root):</p>
+            
+            <!-- try: -->
+            
+            
+            <!-- lang: groovy -->
+            
+            
+            <pre data-language="ceylon"><code>ceylon {
+    // ...
+    ceylonLocation ".../ceylon/dist/dist/bin/ceylon"
+}
+</code></pre>
+            
+            <p id="make_sure_you_click_on...">Make sure you click on <code>Sync now</code> to sync your Gradle build.</p>
+            
+            <p id="now_theres_a_bug_were...">Now, there's a bug we're in the process of fixing which fails to detect the exact version of the Android
+            SDK tooling and modules, and so depending on which version of the Android Tools you're using you may have
+            to sync the imports of <code>com.android.support:appcompat-v7:23.1.1</code> in <code>app/build.gradle</code> (in <code>dependencies</code>)
+            and in the Ceylon module descriptor in <code>module.ceylon</code>. Make sure the Ceylon import version is the same
+            as the Gradle import version, because the Gradle build is what makes it available to Ceylon, due to Android's
+            peculiarities.</p>
+            
+            <p id="in_order_to_finish_the...">In order to finish the conversion, make sure you delete the Java activity (since we're going to keep the
+            Ceylon one), in <code>Project Files</code>, delete <code>app/src/main/java</code>.</p>
+            
+            <p id="due_to_another_pending_plugin...">Due to another pending plugin fix, you may have to click on <code>Tools &gt; Ceylon &gt; Reset Ceylon Model</code> at this
+            point so that the Ceylon plugin gets synchronised with all these past changes (don't worry we're fixing
+            this at the moment).</p>
+            
+            <p id="the_good_news_is_were...">The good news is we're already able to click on <code>Run app</code> and try this in the emulator, but we're going to
+            make it a little more interesting.</p>
+            
+            <h1 id="customising_your_ceylon_android_activity">Customising your Ceylon Android activity</h1>
+            
+            <p id="were_going_to_be_displaying...">We're going to be displaying a list of Ceylon modules published on <a href="https://herd.ceylon-lang.org">Ceylon Herd</a>,
+            so we will make use of the Ceylon SDK, and in particular you will have to edit <code>module.ceylon</code> to add the following
+            imports:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>import ceylon.http.client "1.2.3";
+import ceylon.uri "1.2.3";
+import ceylon.json "1.2.3";
+import ceylon.collection "1.2.3";
+import ceylon.interop.java "1.2.3";
+</code></pre>
+            
+            <p id="next_were_going_to_turn...">Next, we're going to turn our <code>MainActivity</code> into a <code>ListActivity</code> and run an asynchronous task to connect to
+            the Herd REST endpoint, so edit <code>MainActivity.ceylon</code> with this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>import android.os { Bundle, AsyncTask }
+import android.app { ListActivity }
+import android.widget { ArrayAdapter, ListAdapter }
+import android.support.v7.app { AppCompatActivity }
+import ceylon.interop.java { createJavaStringArray }
+import java.lang { JString = String }
+import android { AndroidR = R }
+import ceylon.language.meta { modules }
+import ceylon.uri { parseUri = parse }
+import ceylon.http.client { httpGet = get }
+import ceylon.json { parseJson = parse, JsonObject = Object, JsonArray = Array }
+import ceylon.collection { MutableList, LinkedList }
+
+shared class MainActivity() extends ListActivity() {
+
+    class LoadModules() extends AsyncTask&lt;String, Nothing, List&lt;String&gt;&gt;() {
+        shared actual List&lt;String&gt; doInBackground(String?* uris){
+            assert(exists uri = uris.first);
+            value response = httpGet(parseUri(uri)).execute();
+            value modules = LinkedList&lt;String&gt;();
+            assert(is JsonObject json = parseJson(response.contents),
+                    is JsonArray results = json["results"]);
+            // Iterate modules
+            for(res in results) {
+                assert (is JsonObject res); // Get the list of versions
+                assert (is String name = res["module"],
+                        is JsonArray versions = res["versions"]);
+                modules.add(name);
+                print(name);
+            }
+            return modules;
+        }
+        shared actual void onPostExecute(List&lt;String&gt; result){
+            print("Got result: ``result``");
+
+            ListAdapter adapter = ArrayAdapter&lt;JString&gt;(outer, AndroidR.Layout.simple_list_item_1,
+                createJavaStringArray(result));
+            listAdapter = adapter;
+        }
+    }
+
+    shared actual void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.Layout.activity_main);
+
+        LoadModules().execute("https://modules.ceylon-lang.org/api/1/complete-modules?module=ceylon.");
+    }
+}
+</code></pre>
+            
+            <p id="now_edit_appsrcmainreslayoutactivity_mainxml_to...">Now edit <code>app/src/main/res/layout/activity_main.xml</code> to change the activity type to a list activity:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="html"><code>&lt;ListView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@android:id/list"/&gt;
+</code></pre>
+            
+            <p id="and_lastly_request_the_network...">And lastly request the <code>network</code> permission for your app, since we're hitting a web service, by adding
+            this to <code>app/src/main/res/AndroidManifest.xml</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="html"><code>&lt;uses-permission android:name="android.permission.INTERNET"/&gt;
+</code></pre>
+            
+            <p id="thats_all_you_need_now...">That's all you need, now just click on <code>Run &gt; Run app</code> and watch your Ceylon application display the
+            list of modules in the emulator:</p>
+            
+            <div style="text-align:center;">
+            <img src="/images/screenshots/blog/2016-06-02-ceylon-on-android/application.png" style="box-shadow: 0 0 10px #888;margin-left:5px;" height="auto">
+            </div>
+            
+            
+            <h1 id="some_technical_info">Some technical info</h1>
+            
+            <p id="the_ceylon_intellij_plugin_has...">The Ceylon IntelliJ plugin has not been released yet, but a preview is forthcoming really soon. You will
+            see it's already quite advanced when you try this out. Don't hesitate to
+            <a href="https://github.com/ceylon/ceylon-ide-intellij/issues/new">report any bugs</a>, or better yet, contribute
+            fixes :)</p>
+            
+            <p id="most_of_it_works_well...">Most of it works well enough for Android, except the caveats noted above, and the fact that Android Studio
+            does not yet recognize Ceylon classes, so they will be marked as errors in the <code>.xml</code> files that refer to
+            them, and when you run your application it will report an error:</p>
+            
+            <!-- try: -->
+            
+            
+            <!-- lang: text -->
+            
+            
+            <pre data-language="ceylon"><code>Could not identify launch activity: Default Activity not found. Error while Launching activity
+</code></pre>
+            
+            <p id="it_only_means_it_could...">It only means it could not start your application, you will have to click on it to start it in the emulator.
+            But the deployment worked. We're fixing this at the moment, so it will only improve.</p>
+            
+            <p id="if_you_want_to_revert...">If you want to revert to the Ceylon Eclipse IDE to edit your Ceylon Android application, you can, it will
+            work once you have your project set up with Android Studio. It's much easier to use it to set it up so all
+            the Gradle config is just right. Once that is done, you can use Eclipse if you want, and use
+            <code>$ ./gradlew assembleDebug</code> to build your APK.</p>
+            
+            <p id="this_work_depends_on_changes...">This work depends on changes we've made in Ceylon 1.2.3 (to be released soon) which adds support for jars
+            which provide alternate smaller JDKs (such as the Android jar), improvements in modularity so that the
+            created applications depend on much fewer runtime Ceylon jars than before, fixes in the runtime metamodel
+            to support Android runtimes, and several other tweaks. I will probably write an account of all that in
+            a future blog entry.</p>
+            
+            <p id="this_work_also_depends_on...">This work also depends on the <a href="https://github.com/renatoathaydes/ceylon-gradle-plugin">Ceylon Gradle plugin</a>
+            written by Renato Athaydes, and on a new <a href="https://github.com/ceylon/ceylon-gradle-android">Ceylon Gradle Android plugin</a>
+            which adds support for Ceylon in Android applications. This plugin is by no means finished, and in particular
+            does not yet support incremental compilation (even though the Ceylon IDE and compiler do). It also does not
+            yet support the latest Android <code>Instant Run</code> feature. Again, please
+            <a href="https://github.com/ceylon/ceylon-gradle-android/issues/new">report issues</a> or better, contribute pull-requests :)</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2016/06/02/ceylon-on-android/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

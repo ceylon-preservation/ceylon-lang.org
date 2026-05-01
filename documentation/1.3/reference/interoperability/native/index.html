@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: How to use native annotations</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.3/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.3/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.3/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.3/examples">Examples</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.3/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.3/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.3/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.3/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.3/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide_for_intellij"><a href="/documentation/1.3/ide/intellij">Ceylon IDE for IntelliJ</a></h3>
+            
+            <h3 id="ceylon_ide_for_eclipse"><a href="/documentation/1.3/ide/eclipse">Ceylon IDE for Eclipse</a></h3>
+            
+            <h3 id="vertx"><a href="http://vertx.io/docs/vertx-core/ceylon/">Vert.x</a></h3>
+          </div>
+          <div class="point-dark-bottom">
+             
+          </div>
+          <div class="point-light-top"></div>
+          <div class="toc">
+            <ul>
+<li><a href="#syntax_and_terminology">Syntax and terminology
+            </a></li>
+<li><a href="#using_native_declarations">Using native declarations
+            </a></li>
+<ul>
+<li><a href="#all_shared_native_declarations_must_declare_a_header">All <code>shared</code> <code>native</code> declarations must declare a header
+            </a></li>
+<li><a href="#a_native_header_and_its_implementations_must_have_the_exact_same_declaration">A native header and its implementations must have the exact same declaration
+            </a></li>
+<li><a href="#a_header_and_its_implementations_must_be_declared_in_the_same_file">A header and its implementations must be declared in the same file
+            </a></li>
+<li><a href="#you_cannot_access_native_code_that_has_no_header_from_non_native_code">You cannot access native code that has no header from non-native code
+            </a></li>
+<li><a href="#within_a_native_implementation_you_can_only_acces_native_code_from_the_same_backend">Within a native implementation you can only acces native code from the same backend
+            </a></li>
+</ul>
+<li><a href="#native_module_and_import">Native <code>module</code> and <code>import</code>
+            </a></li>
+<li><a href="#native_headers_and_members">Native headers and members
+            </a></li>
+<li><a href="#tips_tricks">Tips &amp; tricks
+            </a></li>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+          </div>
+          <div class="point-light-end"></div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+          </div>
+        </div>
+        <div id="core-page">
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.3/reference/interoperability/native.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.3/reference/interoperability/native.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="how_to_use_native_annotations">How to use native annotations</h1>
+          
+          <p id="native_annotations_are_used_to...">Native annotations are used to mark code that is specific to a certain backend.
+          This can either mean code written in the native language for that backend, for
+          example Java when running on the JVM or JavaScript when running on Node.js
+          or in a browser. But it can also be code that is written in Ceylon but that
+          uses certain features specific for that backend which make it unsuitable
+          for compilation on other backends.</p>
+          
+          <h2 id="syntax_and_terminology">Syntax and terminology
+          </h2>
+          
+          
+          <p id="the_native_annotation_comes_in...">The native annotation comes in two form: with and without an argument specifying
+          the backend or backends for which the annotated code is meant. A native annotation
+          without an argument, eg. <code>native</code>, is called a "header". A native annotation
+          <em>with</em> an argument, eg. `native("jvm"), is called an "implementation".</p>
+          
+          <p id="the_following_is_an_example...">The following is an example of some headers without associated Ceylon implementations
+          which means the compilers will look for native implementations.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>native shared String exampleAttribute;
+
+native shared Integer exampleMethod();
+
+native shared class Example() {
+    native shared String time();
+}
+</code></pre>
+          
+          <p id="and_this_is_an_example...">And this is an example of the same headers now with two implementations each, one
+          for the JVM backend marked with <code>native("jvm")</code> and one for the JavaScript backend
+          marked with <code>native("js")</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>native shared String exampleAttribute;
+native("jvm") shared String exampleAttribute =&gt; "JVM";
+native("js") shared String exampleAttribute =&gt; "JS";
+
+native shared Integer exampleMethod();
+native("jvm") shared Integer exampleMethod() =&gt; 42;
+native("js") shared Integer exampleMethod() =&gt; 7 * 6;
+
+native shared class Example() {
+    native shared String time();
+}
+
+native("jvm") shared class Example() {
+    native("jvm") shared String time() {
+        return Date().string;
+    }
+}   
+
+native("js") shared class Example() {
+    native("js") shared String time() {
+        dynamic {
+            return Date().toString();
+        }
+    }
+}   
+</code></pre>
+          
+          <p id="also_native_headers_can_optionally...">Also, native headers can optionally have an implementation or it can be left out.
+          This default implementation will be used automatically for each backend for which
+          no implementation (either using <code>native("...")</code> or native code) can be found.
+          The code itself by necessity has to be cross-platform. Some examples:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>native shared String attribute;
+native shared String attributeWith = "hello";
+
+native shared Integer method();
+native shared Integer methodWith() =&gt; 5;
+</code></pre>
+          
+          <p id="for_declarations_like_classes_and...">For declarations like classes and objects similar rules apply but instead of being
+          able to leave out the class/object bodies you do so for their member attributes
+          and methods, like this:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>native shared class Klass() {
+    native shared String attribute;
+    native shared String attributeWith = "hello";
+    native shared Integer method();
+    native shared Integer methodWith() =&gt; 5;
+}
+
+native("js") shared class Klass() {
+    native("js") shared String attribute = "foo";
+    native("js") shared Integer method() =&gt; 42;
+    native("js") shared Integer methodWith() =&gt; 6;
+}
+</code></pre>
+          
+          <p id="the_example_implementation_above_shows...">The example implementation above shows that we had to add code for the "attribute"
+          and the "method()" because the header didn't provide a default implementation, it
+          also shows that we didn't mention "attributeWith" which means the default version
+          from the header will be used and finally it also shows us overriding the default
+          implementation for "methodWith()" with a new implementation.</p>
+          
+          <p id="any_method_attribute_class_and...">Any <strong>method</strong>, <strong>attribute</strong>, <strong>class</strong> and <strong>object</strong> declaration can be marked <code>native</code>,
+          be they toplevel or members or even nested. But right now <strong>interface</strong> declarations are
+          not yet supported, but they will be in the near future. Any other declarations cannot
+          be marked native (basically because it would make no sense).</p>
+          
+          <h2 id="using_native_declarations">Using native declarations
+          </h2>
+          
+          
+          <p id="first_a_couple_of_rules...">First a couple of rules you have to adhere to when using <code>native</code>:</p>
+          
+          <ul>
+          <li>All <code>shared</code> <code>native</code> declarations must declare a header</li>
+          <li>A native header and its implementations must have the exact same declaration</li>
+          <li>A header and its implementations mus be declared in the same file</li>
+          <li>You cannot access native code that has no header from non-native code</li>
+          <li>Within a native implementation you can only acces native code from the same backend</li>
+          </ul>
+          
+          
+          <p id="going_into_more_detail_for...">Going into more detail for each of them:</p>
+          
+          <h3 id="all_shared_native_declarations_must_declare_a_header">All <code>shared</code> <code>native</code> declarations must declare a header
+          </h3>
+          
+          
+          <p id="this_means_you_cant_just...">This means you can't just have a single shared native declaration like this:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>native("jvm") shared String time() {
+    return Date().string;
+}
+</code></pre>
+          
+          <p id="this_is_actually_a_rule...">This is actually a rule that we'll be trying to relax in the future, but for
+          the moment having a shared native declaration means you need to add a header
+          and need to provide implementations for the other backends.</p>
+          
+          <h3 id="a_native_header_and_its_implementations_must_have_the_exact_same_declaration">A native header and its implementations must have the exact same declaration
+          </h3>
+          
+          
+          <p id="this_rules_means_that_all...">This rules means that all parameter types, parameter names, return types, type argument types
+          and type argument names and bounds must all be exactly the same. Basic language annotations
+          like <code>shared</code>, <code>actual</code>, <code>formal</code> etc must also be duplicated (a notable exception is the
+          <code>doc</code> annotation). So the following would not be correct:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>native Integer parse(String number);
+
+native("jvm") Float parse(Integer number) {
+    // Method has wrong return type
+    // and wrong paramter type
+}
+
+native("js") shared Integer parse(String num, Boolean strict) {
+    // Method is marked "shared"
+    // Has wrong parameter name
+    // And wrong number of parameters
+}
+</code></pre>
+          
+          <h3 id="a_header_and_its_implementations_must_be_declared_in_the_same_file">A header and its implementations must be declared in the same file
+          </h3>
+          
+          
+          <p id="this_is_a_restriction_we...">This is a restriction we hope to lift at some point in the future but for now it's required
+          that a header and all its associated implementations be declarared in the same file.
+          If you have a declaration that is becoming too big for your taste to fit all possible
+          implementations in a single file you might think about refactoring the code a bit to
+          delegate the actual work to some private declarations. For example in one file you put:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>native shared void reallyBigMethod();
+
+native("jvm") shared void reallyBigMethod() {
+    reallyBigMethodForJvm();
+}
+
+native("js") shared void reallyBigMethod() {
+    reallyBigMethodForJs();
+}
+</code></pre>
+          
+          <p id="and_in_two_other_files...">And in two other files you could define:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>native("jvm") void reallyBigMethodForJvm() {
+    ...
+}
+</code></pre>
+          
+          <p id="and">And:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>native("js") void reallyBigMethodForJs() {
+    ...
+}
+</code></pre>
+          
+          <h3 id="you_cannot_access_native_code_that_has_no_header_from_non_native_code">You cannot access native code that has no header from non-native code
+          </h3>
+          
+          
+          <p id="non_native_code_is_cross...">Non-native code is cross-platform and should be able to run anywhere, accessing code
+          specifically meant for a single backend (it has no header and therefore no other
+          implementations) is therefore prohibited:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>native("js") String time() {
+    return Date().string;
+}
+
+shared void run() {
+    print(time()); // Error
+}
+</code></pre>
+          
+          <h3 id="within_a_native_implementation_you_can_only_acces_native_code_from_the_same_backend">Within a native implementation you can only acces native code from the same backend
+          </h3>
+          
+          
+          <p id="code_meant_for_different_backends...">Code meant for different backends cannot be mixed, which means that if you have an
+          implementation for the JVM backend it can only reference declarations that are
+          non-native (you can think of non-native code as having an implementation for
+          all possible backends) or other native JVM declarations. So the first two references
+          in the <code>run()</code> method below are okay while the 3rd one displays an error:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>void nonNative() {
+}
+
+native("js") void jsOnly() {
+}
+
+native("jvm") void forJvm() {
+}
+
+shared("js") shared void run() {
+    nonNative(); // Ok
+    jsOnly(); // Ok too
+    forJvm(); // Error
+}
+</code></pre>
+          
+          <p id="this_same_rule_also_applies...">This same rule also applies when dealing with native modules and imports as explained
+          in the next section.</p>
+          
+          <h2 id="native_module_and_import">Native <code>module</code> and <code>import</code>
+          </h2>
+          
+          
+          <p id="up_to_now_we_have...">Up to now we have only seen <code>native</code> annotations on declarations, but there are two
+          other places where we can use the annotation:</p>
+          
+          <p id="a_module_can_also_be...">A <strong>module</strong> can also be marked <code>native</code> when <em>all</em> declarations in it are to be
+          considered native for the given backend. A <code>module</code> can not be a native header so it
+          always needs an argument:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>native("jvm")
+module my.jvmmodule "1.0" {
+    import java.base "7";
+}
+</code></pre>
+          
+          <p id="in_this_example_the_entire...">In this example the entire module is meant for the <code>jvm</code> backend so there's no need
+          to mark things <code>native</code> anywhere else in the code, everything is already considered
+          to be exclusively for that single backend.</p>
+          
+          <p id="but_you_might_want_to...">But you might want to write a cross-platform module and <em>still</em> be able to use
+          platform-specific imports. So that's why it's possible to mark imports as well:</p>
+          
+          <p id="an_import_inside_a_module...">An <strong>import</strong> inside a module descriptor can be marked <code>native</code> to indicate that it's
+          only meant for code marked native for the same backend. An <code>import</code> can not be a native
+          header so it always needs an argument:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>module my.networking "1.0" {
+    native("jvm") import java.nio "7";
+    native("js") import network "0.1.3";
+    import ceylon.collection "1.2.0";
+}
+</code></pre>
+          
+          <p id="in_the_above_example_the...">In the above example the <code>my.networking</code> module is cross-platform because it isn't
+          marked <code>native</code> but it does provide the <code>java.nio</code> import for any code in the module
+          that is marked native for the <code>jvm</code> and the <code>network</code> import for any native code
+          marked <code>js</code>. And the unmarked cross-platform <code>ceylon.collection</code> is available to
+          both of them.</p>
+          
+          <p id="nb_you_can_not_put...">NB: you can not put a <code>native</code> annotation on the <code>import</code> statements in source files,
+          the compiler will figure out for itself which are meant for which backend.</p>
+          
+          <h2 id="native_headers_and_members">Native headers and members
+          </h2>
+          
+          
+          <p id="the_situation_with_declarations_that...">The situation with declarations that can contain members, like classes for example,
+          can become somewhat complicated so let's look at some examples:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>native shared class Example() {
+    // Plain non-native members
+    shared String notNativeAttribute = "foobar";
+    shared Integer notNativeAnswer() {
+        return 42;
+    }
+
+    // Native members without implmentation
+    native shared String nativeAttribute;
+    native shared Integer nativeMethod();
+
+    // Native members with default implmentation
+    native shared String nativeAttributeWith = "foobar";
+    native shared Integer nativeMethodWith() =&gt; 42;
+}
+</code></pre>
+          
+          <p id="first_are_those_members_that...">First are those members that are not marked native. They will not be treated in any special
+          way, they will just become members of the final declaration. But they can not contain any
+          native code nor can they be defined in any of the native implementations.</p>
+          
+          <p id="then_come_the_native_members...">Then come the native members <em>without</em> implementation. They <em>must</em> be defined in the native
+          implementation of their container and are required to have an implementation.</p>
+          
+          <p id="and_finally_we_have_the...">And finally we have the native members <em>with</em> a default implementation. They <em>can</em> be redefined
+          in the native implementation of their container, but this is not required.</p>
+          
+          <p id="an_example_of_a_native...">An example of a native implementation of the above class could be:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>native("jvm") shared class Example() {
+    // Implementation required
+    native("jvm") shared String nativeAttribute =&gt; "eg";
+    native("jvm") shared Integer nativeMethod() =&gt; 6 * 7;
+
+    // Allowed to be redefined
+    native("jvm") shared Integer nativeMethodWith() =&gt; 13; 
+}   
+</code></pre>
+          
+          <h2 id="tips_tricks">Tips &amp; tricks
+          </h2>
+          
+          
+          <p id="one_very_useful_trick_you...">One very useful trick you can use when dealing with a project with mutiple native modules,
+          some of which are written for the JVM backend and some of which are for the JS backend, is
+          that you can let the compilers figure out for themselves which modules they should compile
+          and which they should skip. When you use:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>$ ceylon compile '*'
+$ ceylon compile-js '*'
+</code></pre>
+          
+          <p id="the_compilers_will_only_compile...">the compilers will <em>only</em> compile those modules that are either not marked native or
+          that are marked native for that particular backend. That way you don't have to explicitly
+          specify each of the modules to compile on the command line.</p>
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li>
+<a href="../annotation/native"><code>native</code></a> annotation reference</li>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html#native"><code>native</code></a> annotation documentation</li>
+          <li>Reference for <a href="../../structure/annotation/">annotations in general</a>
+</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

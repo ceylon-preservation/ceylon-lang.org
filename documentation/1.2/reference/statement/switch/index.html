@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: switch statement</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.2/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.2/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.2/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.2/examples">Examples</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.2/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.2/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.2/reference">Reference</a></h3>
+            
+            <ul>
+<li><a href="#usage">Usage
+            </a></li>
+<li><a href="#description">Description
+            </a></li>
+<ul>
+<li><a href="#execution">Execution
+            </a></li>
+<li><a href="#exhaustivity_and_else">Exhaustivity and <code>else</code>
+            </a></li>
+<li><a href="#_case_with_an_enumerated_type_value_reference"><code>case</code> with an enumerated type (value reference)
+            </a></li>
+<li><a href="#_case_is_assignability_condition"><code>case(is...)</code> (assignability condition)
+            </a></li>
+<li><a href="#_case_with_literals"><code>case(...)</code> with literals
+            </a></li>
+<li><a href="#flow_typing">Flow typing
+            </a></li>
+<li><a href="#variable_declaration">Variable declaration
+            </a></li>
+</ul>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.2/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.2/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.2/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_12_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.2, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.2/reference/statement/switch.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.2/reference/statement/switch.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="switch_statement">
+<code>switch</code> statement</h1>
+          
+          <p id="the_switch_statement_executes_code...">The <code>switch</code> statement executes code conditionally according to an enumerated
+          list of disjoint cases.</p>
+          
+          <h2 id="usage">Usage
+          </h2>
+          
+          
+          <p id="the_general_form_of_the...">The general form of the <code>switch</code> statement is</p>
+          
+          <!-- check:none -->
+          
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>switch ( /* switch expression */ )
+case ( /* case */) {
+    /* case block */
+}
+case ( /* case */) {
+    /* case block */
+}
+else {
+    /* else block */
+}
+/* code after switch statement */
+</code></pre>
+          
+          <p id="there_can_be_one_or...">There can be one or more <em>disjoint</em> <code>case</code> clauses. The <code>else</code> clause is required
+          if (and only if) the cases are not <a href="#exhaustivity_and_else"><em>exhaustive</em></a>.</p>
+          
+          <h2 id="description">Description
+          </h2>
+          
+          
+          <p id="unlike_most_other_programming_languages...">Unlike most other programming languages, a <code>switch</code> statement in Ceylon must be
+          <em>exhaustive</em>, covering all possible values of the <code>switch</code> expression, and its
+          cases must be <em>disjoint</em>, having no value in common.</p>
+          
+          <h3 id="execution">Execution
+          </h3>
+          
+          
+          <p id="the_switch_expression_is_evaluated...">The <code>switch</code> expression is evaluated and then each of the <code>case</code>s is considered.
+          The matching <code>case</code> has its block executed, and then execution continues with the
+          code after the <code>switch</code> statement. If none of the given <code>case</code>s match and an <code>else</code>
+          clause is given, then the <code>else</code> block is executed, and then execution continues
+          with the code after the <code>switch</code> statement.</p>
+          
+          <p id="note_the_compiler_need_not..."><strong>Note:</strong> The compiler need not evaluate the cases in the order they are written.</p>
+          
+          <h3 id="exhaustivity_and_else">Exhaustivity and <code>else</code>
+          </h3>
+          
+          
+          <p id="if_the_cases_cover_every...">If the <code>case</code>s cover every possible case of the <code>switch</code> expression then the
+          <code>switch</code> is said to be <em>exhaustive</em>, and the <code>else</code> clause is prohibited.
+          Otherwise the <code>else</code> clause is required.</p>
+          
+          <h3 id="_case_with_an_enumerated_type_value_reference">
+<code>case</code> with an enumerated type (value reference)
+          </h3>
+          
+          
+          <p id="if_the_switch_expression_is...">If the <code>switch</code> expression is of an
+          <a href="../../structure/type-declaration#enumerated_types">enumerated type</a> <code>U</code> then a <code>case</code> may
+          be of the form <code>case (x)</code> where <code>x</code> is one of the cases of <code>U</code>. A list of cases,
+          <code>case(x | y | z)</code>, is also permitted.</p>
+          
+          <p id="since_boolean_and_null_are...">Since <code>Boolean</code> and <code>Null</code> are both enumerated types, we can use their enumerated
+          values in a <code>switch</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>void switchOnEnumValues(Boolean? b) {
+    switch(b)
+    case (true) {
+        print("yes");
+    }
+    case (false) {
+        print("no");
+    }
+    case (null) {
+        print("Who cares");
+    }
+}
+</code></pre>
+          
+          <h3 id="_case_is_assignability_condition">
+<code>case(is...)</code> (assignability condition)
+          </h3>
+          
+          
+          <p id="if_the_switch_expression_type...">If the <code>switch</code> expression type <code>U</code> is a union of disjoint types, or an
+          <a href="../../structure/type-declaration#enumerated_types">enumerated type</a>, then a <code>case</code>
+          may be of the form <code>case (is V)</code> where <code>V</code> is a case of the type <code>U</code>.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>void switchOnEnumTypes(Foo|Bar|Baz var) {
+    switch(var)
+    case (is Foo) {
+        print("FOO");
+    }
+    case (is Bar) {
+        print("BAR");
+    }
+    case (is Baz) {
+        print("BAZ");
+    }
+}
+</code></pre>
+          
+          <h3 id="_case_with_literals">
+<code>case(...)</code> with literals
+          </h3>
+          
+          
+          <p id="if_the_switch_expression_is_of...">If the <code>switch</code> expression is of type <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Integer.type.html"><code>Integer</code></a>,
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Character.type.html"><code>Character</code></a>, or
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/String.type.html"><code>String</code></a> then the
+          <code>case</code>s may be literal values.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>void switchOnLiteralValues(Integer i) {
+    switch (i)
+    case (0) {
+        print("zero"); 
+    }
+    case (1) {
+        print("one");
+    }
+    case (2) {
+        print("two");
+    }
+    else { 
+        print("lots"); 
+    }
+}
+</code></pre>
+          
+          <p id="since_its_impossible_to_enumerate...">Since it's impossible to enumerate every value of any of these types, the <code>else</code>
+          clause is required.</p>
+          
+          <h3 id="flow_typing">Flow typing
+          </h3>
+          
+          
+          <p id="note_that_case_is_...">Note that <code>case (is ...)</code> narrows the type of the switch value within the
+          scope of the <code>case</code>. Furthermore this flow typing can also affect the <code>else</code>
+          clause of the control structure:</p>
+          
+          <pre data-language="ceylon"><code>void go(Car|Bicycle|Motobike vehicle) {
+    switch(vehicle)
+    case (is Car) {
+        // vehicle has type Car
+        vehicle.drive();
+    } 
+    else {
+        // vehicle has type Bicycle|Motobike
+        vehicle.ride();
+    }
+}
+</code></pre>
+          
+          <h3 id="variable_declaration">Variable declaration
+          </h3>
+          
+          
+          <p id="as_an_alternative_to_the...">As an alternative to the <code>switch</code> expression, an inline variable declaration (containing an initializing expression) is allowed. This declares a new variable which is then usable inside the <code>case</code> and <code>else</code> blocks (with the correct type in each of them).</p>
+          
+          <pre data-language="ceylon"><code>switch(line = process.readLine())
+// line has type String?
+case(is Null) {
+    // line has type Null
+    print("End of file!");
+}
+else {
+    // line has type String
+    print(line);
+}
+</code></pre>
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li>The <a href="../if"><code>if</code> statement</a> is an alternative control structure for
+          conditional execution</li>
+          <li>The <a href="../../expression/switch/"><code>switch</code> expression</a>
+</li>
+          <li><a href="/documentation/current/spec/html_single/index.html#switchcaseelse"><code>switch</code> in the language specification</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

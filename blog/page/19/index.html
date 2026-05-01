@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Team blog</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="feed"><a href="/blog/blog.atom">Feed</a></h3>
+          </div>
+          <div class="point-dark-bottom">
+             
+          </div>
+          <div class="point-light-top">
+             
+          </div>
+          <div class="sidebar-block">
+            <h3 id="recent_posts">Recent posts</h3>
+            <div id="blog-archive">
+              <h4 id="ceylon_to_move_to_the_eclipse_foundation_by_stéphane_épardaud__gavin_king_21_august_2017">
+                <a href="/blog/2017/08/21/eclipse-ceylon/">Ceylon to move to the Eclipse Foundation</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Stéphane Épardaud &amp; Gavin King
+                <br>
+                21 August 2017
+              </h4>
+              <h4 id="ceylon_133_is_now_available_by_gavin_king_21_august_2017">
+                <a href="/blog/2017/08/21/ceylon-1-3-3/">Ceylon 1.3.3 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                21 August 2017
+              </h4>
+              <h4 id="ceylon_132_is_now_available_by_gavin_king_03_march_2017">
+                <a href="/blog/2017/03/03/ceylon-1-3-2/">Ceylon 1.3.2 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                03 March 2017
+              </h4>
+              <h4 id="ceylon_131_is_now_available_by_gavin_king_22_november_2016">
+                <a href="/blog/2016/11/22/ceylon-1-3-1/">Ceylon 1.3.1 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                22 November 2016
+              </h4>
+              <h4 id="ceylon_130_is_now_available_by_gavin_king_19_september_2016">
+                <a href="/blog/2016/09/19/ceylon-1-3-0/">Ceylon 1.3.0 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                19 September 2016
+              </h4>
+            </div>
+            <h3 id="tags">Tags</h3>
+            <div class="tag-cloud">
+              <div class="tag-cloud">
+                <ul>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/100/">
+                        1.0.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/110/">
+                        1.1.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/12/">
+                        1.2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/120/">
+                        1.2.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/121/">
+                        1.2.1
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/122/">
+                        1.2.2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/130/">
+                        1.3.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/131/">
+                        1.3.1
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/132/">
+                        1.3.2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/133/">
+                        1.3.3
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m1/">
+                        M1
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m2/">
+                        M2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m3/">
+                        M3
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m4/">
+                        M4
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m5/">
+                        M5
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m6/">
+                        M6
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/android/">
+                        android
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/ceylon-js/">
+                        ceylon-js
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/ceylon-model/">
+                        ceylon-model
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/code/">
+                        code
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/compiler/">
+                        compiler
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/conference/">
+                        conference
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/constructors/">
+                        constructors
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/design/">
+                        design
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/design-interop-herd/">
+                        design interop herd
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/error-handling/">
+                        error handling
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/exceptions/">
+                        exceptions
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/feedback/">
+                        feedback
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/forum/">
+                        forum
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/generics/">
+                        generics
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/gsoc/">
+                        gsoc
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/guice/">
+                        guice
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/herd/">
+                        herd
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/httpd/">
+                        httpd
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/ide/">
+                        ide
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/interop/">
+                        interop
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/interview/">
+                        interview
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/ios/">
+                        ios
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/java/">
+                        java
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/language-design/">
+                        language design
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/mobile/">
+                        mobile
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/modularity/">
+                        modularity
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-2">
+                      <a href="/blog/tags/news/">
+                        news
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/osgi/">
+                        osgi
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/podcast/">
+                        podcast
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-7">
+                      <a href="/blog/tags/progress/">
+                        progress
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-4">
+                      <a href="/blog/tags/release/">
+                        release
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/roadmap/">
+                        roadmap
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/runtime/">
+                        runtime
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/sdk/">
+                        sdk
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-2">
+                      <a href="/blog/tags/site/">
+                        site
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/test/">
+                        test
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/tools/">
+                        tools
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/typesafety/">
+                        typesafety
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/typescript/">
+                        typescript
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/weld/">
+                        weld
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <h3 id="authors">Authors</h3>
+            <div class="tag-cloud">
+              <div class="tag-cloud">
+                <ul>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/bastien-jansen/">
+                        Bastien Jansen
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/david-festal/">
+                        David Festal
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/emmanuel-bernard/">
+                        Emmanuel Bernard
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-6">
+                      <a href="/blog/authors/gavin-king/">
+                        Gavin King
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/lucas-werkmeister/">
+                        Lucas Werkmeister
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-3">
+                      <a href="/blog/authors/stephane-epardaud/">
+                        Stéphane Épardaud
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/stephane-epardaud--gavin-king/">
+                        Stéphane Épardaud &amp; Gavin King
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/tako-schotanus/">
+                        Tako Schotanus
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/tom-bentley/">
+                        Tom Bentley
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/tomas-hradec/">
+                        Tomáš Hradec
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="point-light-end">
+             
+          </div>
+          <a href="/+" style="cursor:pointer;margin-left:auto;margin-right:auto;display:block;text-align:center;padding-top:10px;padding-bottom:0px">
+            <span style="display:inline-block;font-weight:bold;vertical-align:top;margin-right:5px;margin-top:8px;">Follow Ceylon:</span>
+          </a>
+          <p style="cursor:pointer;margin-left:auto;margin-right:auto;margin-top:2px;display:block;text-align:center;padding-top:0px" id="">
+            <a href="/+">
+              <i alt="Google Plus" class="fa fa-google-plus-square fa-2x" height="32" width="32"></i>
+            </a>
+            <a href="http://twitter.com/ceylonlang">
+              <i alt="Twitter" class="fa fa-twitter-square fa-2x" height="32" width="32"></i>
+            </a>
+            <a href="https://www.facebook.com/ceylonlang">
+              <i alt="Facebook" class="fa fa-facebook-square fa-2x" height="32" width="32"></i>
+            </a>
+          </p>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="core-page">
+          <h1 id="team_blog">
+            Team blog
+          </h1>
+          <div class="post">
+            <h1 class="title" id="mini_status_update">
+              <a href="/blog/2012/02/19/mini-status-update/">Mini-status update</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/gavin-king/">Gavin King</a>
+              </div>
+              <div class="date">
+                19 February 2012
+              </div>
+              <div class="tags">
+              </div>
+            </div>
+            <div class="body">
+              <p id="its_now_been_exactly_two...">It's now been exactly two months since the M1 release of the
+              Ceylon command line distribution, and more than a month since
+              the first release of Ceylon IDE. And we've just finished our
+              second face-to-face team meeting, in Barcelona. You might be
+              wondering what's really been keeping us busy, so I figured
+              it's time for a little status update.</p>
+              
+              <h2 id="ceylon_for_the_jvm_and_ceylon_ide">Ceylon for the JVM and Ceylon IDE</h2>
+              
+              <p id="of_course_most_of_our...">Of course, most of our effort has been focussed on the M2
+              release of the command line tools and IDE. The top-priority
+              issue for M2 was Java interop, but this turned out to be a
+              somewhat more challenging task than we had anticipated, so
+              there has been some shuffling of the roadmap to accommodate
+              that. Therefore, M2 will feature five major new features:</p>
+              
+              <ul>
+              <li>Java interoperability</li>
+              <li>enumerated (algebraic) types</li>
+              <li>enhancements to the language module</li>
+              <li>optimization of numeric operations</li>
+              <li>support for remote module reposities</li>
+              </ul>
+              
+              
+              <p id="the_ide_gets">The IDE gets:</p>
+              
+              <ul>
+              <li>the ability to compile against binary archives, including
+              Java <code>.jar</code>s</li>
+              <li>Create Subtype and Move to New Unit wizards</li>
+              <li>several new quickfixes</li>
+              </ul>
+              
+              
+              <p id="of_course_theres_many_other...">Of course, there's many other minor bugfixes and enhancements
+              I'm glossing over here.</p>
+              
+              <p id="were_planning_to_release_ceylon...">We're planning to release Ceylon M2 in March.</p>
+              
+              <h2 id="ceylon_for_javascript_and_the_ceylon_web_runner">Ceylon for JavaScript and the Ceylon Web Runner</h2>
+              
+              <p id="meanwhile_the_javascipt_compiler_for...">Meanwhile, the <a href="http://github.com/ceylon/ceylon-js">JavaScipt compiler for Ceylon</a> has
+              taken off and is progressing much faster than anticipated.
+              You can play with it online using the "teaser" pre-release
+              of <a href="http://github.com/ceylon/ceylon-web-ide-backend">Ceylon Web Runner</a> here:</p>
+              
+              <p id="httptry_ceylonrhcloudcom"><a href="http://try-ceylon.rhcloud.com/">http://try-ceylon.rhcloud.com/</a></p>
+              
+              <p id="note_that_the_web_runner...">(Note that the Web Runner isn't finished yet, this is just
+              what the guys whipped over the last two weeks in between
+              working on other stuff and eating paella.)</p>
+              
+              <p id="since_weve_taken_the_decision...">Since we've taken the decision to dedicate serious time and
+              effort to this part of the project, I think we're going to
+              need to stop calling Ceylon "a JVM-based programming language",
+              and emphasize that it is a programming language suitable for
+              many different virtual machines. Ceylon's minimal language
+              module - which is being carefully designed to not be dependent
+              on anything JVM-specific - makes the language especially
+              adaptable to alternative platforms.</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2012/02/19/mini-status-update/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="post">
+            <h1 class="title" id="how_we_test_ceylon">
+              <a href="/blog/2012/02/02/how-we-test-ceylon/">How we test Ceylon</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/stephane-epardaud/">Stéphane Épardaud</a>
+              </div>
+              <div class="date">
+                02 February 2012
+              </div>
+              <div class="tags">
+              </div>
+            </div>
+            <div class="body">
+              <p id="writing_a_new_language_is...">Writing a new language is a lot about the ideas that go into the language, and then a lot about implementation.</p>
+              
+              <p id="in_the_case_of_ceylon...">In the case of Ceylon, a lot of effort went into thinking, discussions, negotiations, explanations, and eventually
+              trying and documentation, in the form of a specification. Then there's work to be done on the AntLR grammar, the Abstract
+              Syntax Tree (AST) that the parser/lexer give us, and then the typechecking phase until finally we get to the backend
+              (backends, in our case: Java bytecode and JavaScript).</p>
+              
+              <p id="but_were_not_stopping_at...">But we're not stopping at the language, we're also developing a whole SDK, with an API, tools (<code>ceylond</code>, <code>ceylonc</code>,
+              <code>ceylon</code>), a module system, and an IDE.</p>
+              
+              <p id="naturally_while_were_in_the...">Naturally, while we're in the process of implementing all this stuff, we spend a fair amount of time discovering new
+              problems, new solutions, and refactoring a lot of code to make it fitter. The number of interdependent pieces in all
+              this — and the expectation of high-quality — is such that we have to have a proper test suite for these things and,
+              rest assured: we do. If you've ever wondered how new languages are tested, read on to see how we test the Ceylon
+              implementation.</p>
+              
+              <h2 id="type_checker_and_parser_tests">Type-checker and parser tests</h2>
+              
+              <p id="the_first_tests_in_the...">The first tests in the tool chain concern the very early phase of compiling Ceylon: checking that good code compiles,
+              bad code does not compile, and that the type system reasons about types the way we expect it to. We currently have
+              1251 such checks, quite smartly done using compiler annotations such as <code>@error</code> to mark an AST node where we expect
+              an error, and <code>@type["Foo"]</code> to make sure the AST node is of type <code>Foo</code>.</p>
+              
+              <p id="here_is_a_brief_example...">Here is a brief example where we make sure we can't return a value from a <code>void</code> method:</p>
+              
+              <pre data-language="ceylon"><code>void cannotReturnValue() {
+    if ("Hello"=="Goodbye") {
+        @error return var;
+    }
+}
+</code></pre>
+              
+              <p id="and_another_example_where_we...">And another example where we make sure that the type inference is correct:</p>
+              
+              <pre data-language="ceylon"><code>@type["Sequence&lt;String&gt;|Sequence&lt;Integer&gt;"] value ut = f({ "aaa" },{ 1 });
+</code></pre>
+              
+              <p id="the_tests_will_walk_the...">The tests will walk the AST and when they see one of these annotations, they check that an error is
+              reported on the node, or that the node type is as we expected.</p>
+              
+              <h2 id="java_bytecode_generation_tests">Java bytecode generation tests</h2>
+              
+              <p id="in_the_java_bytecode_compiler...">In the Java bytecode compiler backend, we generate Java bytecode, but as <a href="/blog/2011/12/08/let-it-work/">previously described</a>
+              we are plugged in the <code>javac</code> compiler, and we feed it (pseudo-) Java AST. This turns out to be again very useful since
+              it's much easier to compare Java source code than byte code (for humans). So we have tests that try to compile a small Ceylon
+              file, typically one per feature, and then we compare the Java code generated with the Java code we expect. For example, to make
+              sure we can create a class in Ceylon, we write this test:</p>
+              
+              <pre data-language="ceylon"><code>class Klass() {}
+</code></pre>
+              
+              <p id="and_we_see_if_it...">And we see if it generates the following Java code:</p>
+              
+              <pre data-language="java"><code>package com.redhat.ceylon.compiler.java.test.structure.klass;
+
+class Klass {
+    Klass() {
+    }
+}
+</code></pre>
+              
+              <p id="we_currently_have_around_250...">We currently have around 250 tests like these. This might seem a small number, but it's the number of files we're comparing,
+              so for example when we test numeric operation optimisation, we have one test with 350 lines of Ceylon numeric operator tests
+              to be tested. We have 100% coverage of the each feature promised on the roadmap.</p>
+              
+              <p id="of_course_occasionally_we_have...">Of course, occasionally we have bugs for things that are corner cases, so for each bug reported we have one such test as well.</p>
+              
+              <h2 id="model_loader_tests">Model loader tests</h2>
+              
+              <p id="the_compiler_is_not_only...">The compiler is not only generating bytecode, though. It's also loading bytecode. By the truck-load. Since it's an incremental
+              compiler, it needs to be able to load compiled Ceylon bytecode and map it into a model that the type-checker can work with. The
+              piece that loads bytecode (using three different reflection libaries: Javac, Java Reflection and Eclipse JDT) is called the
+              <em>model loader</em>.</p>
+              
+              <p id="those_get_their_own_tests...">Those get their own tests. We write two files. The first includes code we will compile:</p>
+              
+              <pre data-language="ceylon"><code>shared class Klass() {
+}
+</code></pre>
+              
+              <p id="and_the_second_will_reference...">And the second will reference declarations from the first file:</p>
+              
+              <pre data-language="ceylon"><code>Klass klass = Klass();
+</code></pre>
+              
+              <p id="but_because_we_compile_the...">But because we compile the second one on its own, it will load the model for the first file from the compiled bytecode
+              (incremental compilation). The test
+              will then compare the model representation for <code>Klass</code> that we got during the first compilation (when we were compiling <code>Klass</code>)
+              with the model representation we loaded for <code>Klass</code> during the second compilation. The first model will come directly from the
+              typechecker after parsing the AST, while the second will come from the model loader. By walking both recursively and checking
+              that they are completely equivalent, we ensure that we produce the right model when loading it from bytecode.</p>
+              
+              <p id="we_have_currently_11_such...">We have currently 11 such tests, but once again, do not be fooled by the low number of tests here, there's only a certain number of
+              things we can test here: class, interface, method, attribute declarations and their signatures. We're not testing things like
+              statements or expressions, only signatures of declarations. And for each declaration we have recursive tests that check every
+              property of the model object (of which there are many).</p>
+              
+              <p id="incidentally_we_dont_just_load...">Incidentally, we don't just load Ceylon bytecode, we also load Java bytecode, for interoperability with Java classes, and since
+              the <code>ceylon.language</code> module is currently hand-written in Java, none of the Ceylon code could be compiled if the model loader wasn't
+              able to load a model from its bytecode. So it gets a lot of testing everywhere.</p>
+              
+              <h2 id="interoperability_tests">Interoperability tests</h2>
+              
+              <p id="as_i_mentioned_previously_ceylon...">As I mentioned previously, Ceylon is fully interoperable with Java, so we have tests that make sure that we can import Java modules,
+              packages, types, call their methods, read their fields, implement Java interfaces, etc…</p>
+              
+              <p id="we_currently_have_10_tests...">We currently have 10 tests for this, each including all the variations on a theme (static methods, fields, constructors…).</p>
+              
+              <h2 id="recovery_tests">Recovery tests</h2>
+              
+              <p id="we_have_a_few_tests...">We have a few tests to make sure the compiler backend doesn't crash on unparseable input, or on Ceylon code that is improperly typed.</p>
+              
+              <h2 id="module_system">Module system</h2>
+              
+              <p id="we_have_34_tests_that...">We have 34 tests that make sure that the compiler produces <code>.car</code> files, source archives and MD5 checksums in the right place, that it
+              can save and find them back locally, or via HTTP, that we can load <code>.jar</code> modules, and that we they contain what is expected. We also
+              test that we can resolve dependency graphs, cache HTTP files and check the MD5 checksums.</p>
+              
+              <h2 id="runtime_behaviour_tests">Runtime behaviour tests</h2>
+              
+              <blockquote><p id="however_beautiful_the_strategy_you...">However beautiful the strategy, you should occasionally look at the results — Sir Winston Churchill</p></blockquote>
+              
+              <p id="we_have_about_20_tests...">We have about 20 tests that make sure that we can invoke the Ceylon compiler, on any number of files, including incrementally. We test
+              that we can run Ceylon programs. We also test that the runtime behaviour of statements is correct (it's not enough to check that the
+              <code>for</code> loop is compiled to a certain Java bytecode, we want to make sure it runs as we think it should).</p>
+              
+              <h2 id="tool_tests">Tool tests</h2>
+              
+              <p id="we_have_a_few_tests_that...">We have a few tests that check that <code>ceylond</code> (our documentation generator) is able to produce documentation, and that it produces it
+              correctly, while using the model loader (using Java Reflection, unlike the compiler which uses Javac Reflection).</p>
+              
+              <p id="we_have_a_few_manual...">We have a few manual tests (we need to automate that) to check that our ant tasks run as expected.</p>
+              
+              <h2 id="ceylonlanguage_tests">
+<code>ceylon.language</code> tests</h2>
+              
+              <p id="last_but_not_least_we...">Last but not least, we have 633 runtime tests written in Ceylon that check that the <code>ceylon.language</code> API behaves as expected, which
+              is the ultimate test, since it effectively requires all the pieces previously described to work in order to do anything.</p>
+              
+              <p id="we_even_have_one_test...">We even have one test which attemps to compile the Ceylon reference implementation of <code>ceylon.language</code>, which the typechecker handles,
+              but the backend doesn't yet. Once that one passes, we'll be ready for Ceylon 1.0.</p>
+              
+              <h1 id="about_speed">About speed</h1>
+              
+              <p id="ive_recently_had_a_discussion...">I've recently had a discussion about the speed of test execution with the Ceylon team, and was shocked to discover that while I was
+              complaining that the Java backend compiler was taking 40 seconds to run, some of my colleagues had to wait more than 2 minutes for the
+              same tests!</p>
+              
+              <p id="were_now_looking_at_running...">We're now looking at running some of those tests in parallel to speed things up on multi-core systems, but unfortunately it doesn't
+              look like we'll be able to run them in parallel using Eclipse. We should be able to do it using Ant, though.</p>
+              
+              <h1 id="on_breaking_tests">On breaking tests</h1>
+              
+              <p id="we_break_tests_all_the...">We break tests all the time. Most of the time when we fix a bug or add a feature we break a given number of tests. Sometimes we fix
+              a bigger bug and break most of the tests. This is great: we can find the cause of the breakage straight away thanks to all these
+              tests. Sometimes though, it takes a <a href="https://plus.google.com/u/0/103036382695763273919/posts/J2pzscRCYxJ">little bit of work</a>
+              to fix the tests we broke :)</p>
+              
+              <h1 id="conclusion">Conclusion</h1>
+              
+              <p id="weve_an_awful_lot_of...">We've an awful lot of tests, and we test (almost) everything. Those that are missing will get automated as soon as possible so we can
+              forget about them, because that's what tests are for: when we fix a bug or add a feature, we know it works, and we know we didn't break
+              anything. This is both priceless and fundamental for a new language.</p>
+              
+              <h2 id="note">Note</h2>
+              
+              <p id="since_this_post_was_originally...">Since this post was originally written:</p>
+              
+              <ul>
+              <li>
+<code>ceylonc</code> has become <code>ceylon compile</code>.</li>
+              <li>
+<code>ceylond</code> has become <code>ceylon doc</code>.</li>
+              </ul>
+            </div>
+            <div class="tail">
+               <a href="/blog/2012/02/02/how-we-test-ceylon/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="post">
+            <h1 class="title" id="generics_and_enumerated_types">
+              <a href="/blog/2012/01/26/generic-enumerated-types/">Generics and enumerated types</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/gavin-king/">Gavin King</a>
+              </div>
+              <div class="date">
+                26 January 2012
+              </div>
+              <div class="tags">
+              </div>
+            </div>
+            <div class="body">
+              <p id="in_the_previous_post_i...">In the <a href="/blog/2012/01/25/enumerated-types/">previous post</a> I discussed Ceylon's support for enumerated types. Looking back over the post, I notice that I forgot to mention anything about generics! Let's remedy that glaring omission!</p>
+              
+              <h2 id="parameterized_enumerated_types">Parameterized enumerated types</h2>
+              
+              <p id="an_enumerated_type_may_be...">An enumerated type may be parameterized:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>interface Container&lt;Item&gt;
+    of None&lt;Item&gt; | One&lt;Item&gt; | Many&lt;Item&gt; { ... }
+</code></pre>
+              
+              <p id="ceylon_currently_requires_that_each...">Ceylon currently requires that each case of the enumerated type completely "covers" all possible arguments to the type parameter of the enumerated type itself. So we could not write:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>//bad!
+interface One&lt;Item&gt; 
+    satisfies Container&lt;Item&gt;
+    given Item satisfies Object { ... }
+</code></pre>
+              
+              <p id="by_adding_a_new_constraint...">By adding a new constraint on <code>Item</code> that is not present in <code>Container</code>, we've created a situation where for some values of <code>Item</code>, <code>Container&lt;Item&gt;</code> is well-defined, but <code>One&lt;Item&gt;</code> is an illegal type. This is currently considered an error.</p>
+              
+              <p id="one_thing_we_are_allowed...">One thing we <em>are</em> allowed to write, however, is the following:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>interface Container&lt;out Item&gt;
+    of None | One&lt;Item&gt; | Many&lt;Item&gt; { ... }
+
+interface None 
+    satisfies Container&lt;Bottom&gt; { ... }
+</code></pre>
+              
+              <p id="since_containerbottom_is_a_subtype...">Since <code>Container&lt;Bottom&gt;</code> is a subtype of <code>Container&lt;Item&gt;</code> for any value of <code>Item</code>, this is considered well-typed.</p>
+              
+              <h2 id="removing_this_restriction">Removing this restriction</h2>
+              
+              <p id="as_youve_probably_guessed_this...">As you've probably guessed, this restriction is an inconvenient one. There are some <em>very</em> useful enumerated types where the list of cases of the enumeration depend upon the value of the type argument. It's so useful that there is a term for this construct in the literature: a <em>generalized algebraic type</em>, or GADT.</p>
+              
+              <p id="in_the_language_design_faq...">In the language design FAQ, I already wrote up a mini-explanation of <a href="/documentation/1.0/faq/language-design/#generalized_algebraic_types">GADT support</a> with an example, so I won't repeat myself here. A future version of Ceylon will likely support GADTs.</p>
+              
+              <h2 id="type_parameters_with_enumerated_constraints">Type parameters with enumerated constraints</h2>
+              
+              <p id="in_the_previous_post_i_started...">In the previous post, I started with an example where a union type is used to emulate overloading. Alert readers might have noticed that the only reason this worked was that the "overloaded" type only appeared once in the method signature. We had something like this:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>void add(Integer|Float x) { ... }
+</code></pre>
+              
+              <p id="what_if_the_overloaded_type...">What if the overloaded type appears more than once? Well, to handle this sort of thing, we would need to introduce a type parameter:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Num increment&lt;Num&gt;(Num x) 
+        given Num of Integer|Float {
+    ...
+}
+</code></pre>
+              
+              <p id="the_syntax_given_num_of...">The syntax <code>given Num of Integer|Float</code> defines a type parameter with an enumerated  type constraint. The unknown type must be one of a list of types.</p>
+              
+              <p id="this_looks_like_a_very...">This looks like a very nice feature, but the truth is that Ceylon is still missing one extra thing in order for it to be truly useful. The problem is that the following code is not well-typed:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Num increment&lt;Num&gt;(Num x) 
+        given Num of Integer|Float {
+    switch (x)
+    case (is Integer) { return x+1; } //error: Integer not assignable to Num
+    case (is Float) { return x+1.0; } //error: Float not assignable to Num
+}
+</code></pre>
+              
+              <p id="the_if_is__and...">The <code>if (is ...)</code> and <code>case (is ...)</code> constructs let us narrow the type of a single value. What we need here is the ability to narrow a type parameter itself, "pinning" the value of the type parameter within the body of the method, letting us write:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Num increment&lt;Num&gt;(Num x) 
+        given Num of Integer|Float {
+    switch (Num)
+    case (Integer) { return x+1; }
+    case (Float) { return x+1.0; }
+}
+</code></pre>
+              
+              <p id="unfortunately_this_functionality_depends_upon...">Unfortunately, this functionality depends upon having fully reified type parameters, so it will have to wait until M5, later this year.</p>
+              
+              <p id="i_think_this_is_ultimately...">I think this is ultimately quite a powerful feature. It looks like overloading when we look at simple examples like this parameterized method, but it's actually a bit more than that. Notice that a whole <em>type</em> could have a parameter with an enumerated type constraint! With upper bound type constraints, generics let us abstract a parameterized declaration over all types which share a common supertype. Enumerated type constraints help us abstract over types which <em>don't</em> have a common ancestor, and which weren't designed to be treated polymorphically.</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2012/01/26/generic-enumerated-types/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="post">
+            <h1 class="title" id="enumerated_types_in_ceylon">
+              <a href="/blog/2012/01/25/enumerated-types/">Enumerated types in Ceylon</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/gavin-king/">Gavin King</a>
+              </div>
+              <div class="date">
+                25 January 2012
+              </div>
+              <div class="tags">
+              </div>
+            </div>
+            <div class="body">
+              <p id="were_just_wrapping_up_the...">We're just wrapping up the implementation of Ceylon's enumerated types (<em>algebraic types</em>, if you prefer that term). This feature is turning out significantly nicer than what was originally defined in the spec.</p>
+              
+              <h2 id="unions_and_switch">Unions and <code>switch</code>
+</h2>
+              
+              <p id="the_simplest_kind_of_enumerated...">The simplest kind of enumerated type is simply a union of classes. For example, the type <code>Integer|Float</code> is a very simple enumerated type. Since <code>Float</code> and <code>Integer</code> are distinct classes and neither inherits from the other, the compiler reasons that the types are <em>disjoint</em>, meaning they have no common instances. Therefore, it lets us write the following:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>void add(Integer|Float x) {
+    switch (x)
+    case (is Integer x) { integers.add(x); }
+    case (is Float x) { floats.add(x); }
+}
+</code></pre>
+              
+              <p id="notice_that_inside_the_block...">Notice that inside the block that follows a <code>case</code>, the type of the <code>switch</code>ed variable is narrowed to the <code>case</code> type. We know that <code>x</code> is an <code>Integer</code> in the first <code>case</code>, and a <code>Float</code> in the second, so the compiler lets us make use of this additional information.</p>
+              
+              <p id="there_are_two_basic_things...">There are two basic things to appreciate about Ceylon's <code>switch</code> construct:</p>
+              
+              <ol>
+              <li>The <code>case</code>s must be disjoint. The behavior never depends upon the order in which the <code>case</code>s appear.</li>
+              <li>If the <code>case</code>s don't completely cover all possible values of the <code>switch</code> expression type, we need to include an <code>else</code> clause.</li>
+              </ol>
+              
+              
+              <p id="a_switch_statement_which_covers...">A <code>switch</code> statement which covers all possible values of the switched type is said to have an <em>exhaustive</em> list of <code>case</code>s.</p>
+              
+              <p id="the_purpose_of_the_required...">The purpose of the required <code>else</code> clause is to syntactically distinguish <code>switch</code> statements which don't need to be fixed and recompiled when a new type is added.</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>void add(Integer|Float|String x) {
+    switch (x)
+    case (is Integer x) { integers.add(x); }
+    case (is Float x) { floats.add(x); }
+    else {}
+}
+</code></pre>
+              
+              <h2 id="enumerated_classes">Enumerated classes</h2>
+              
+              <p id="we_can_extend_this_idea...">We can extend this idea for an interface or abstract class. Ceylon lets us declare that an abstract class or interface is <em>equivalent</em> to a union using the <code>of</code> clause. For example, the root class of the type hierarchy, <code>Void</code>, is declared like this:</p>
+              
+              <pre data-language="ceylon"><code>shared abstract class Void() of Nothing | Object {}
+</code></pre>
+              
+              <p id="this_says_that_the_class...">This says that the class <code>Void</code> has exactly the same instances as the union type <code>Nothing|Object</code>. So when we encounter a value of type <code>Void</code>, we know it must either be an instance of <code>Object</code>, or an instance of <code>Nothing</code>. We can write:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>void printVoid(Void v) {
+    switch (v)
+    case (is Nothing) { print("nothing"); }
+    case (is Object) { print(v); }
+}
+</code></pre>
+              
+              <p id="the_compiler_wont_let_us...">The compiler won't let us define a third subclass of <code>Void</code> that doesn't extend either <code>Nothing</code> or <code>Object</code>. We call the types mentioned in the <code>of</code> clause the <em>cases</em> of an enumerated type.</p>
+              
+              <p id="since_an_object_declaration_is...">Since an <code>object</code> declaration is also a type, we can even include the names of objects in the <code>of</code> clause. For example, this is how the language module expressed the fact that the only instance of <code>Nothing</code> is the null value:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>shared abstract class Nothing() of null {}
+shared object null extends Nothing() {}
+</code></pre>
+              
+              <p id="more_commonly_there_will_be...">More commonly, there will be multiple values, allowing us to recapture the semantics of a Java <code>enum</code>, without introducing a special language construct. For example, Ceylon's <code>Boolean</code> is an enumerated type with two values:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>shared abstract class Boolean() of true | false {}
+
+shared object true extends Boolean() {
+    shared actual String string { return "true"; }
+}
+
+shared object false extends Boolean() {
+    shared actual String string { return "false"; }
+}
+</code></pre>
+              
+              <p id="therefore_we_can_switch_on...">Therefore, we can <code>switch</code> on a <code>Boolean</code> value:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>void printBoolean(Boolean bool) {
+    switch (bool)
+    case (true) { print("true"); }
+    case (false) { print("false"); }
+}
+</code></pre>
+              
+              <p id="note_that_the_classic_example...">Note that the classic example of a Java enumerated type works out significantly more verbose in Ceylon:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>shared abstract class Suit() 
+        of hearts|diamonds|clubs|spades {}
+shared object hearts extends Suit() {} 
+shared object diamonds extends Suit() {} 
+shared object clubs extends Suit() {} 
+shared object spades extends Suit() {} 
+</code></pre>
+              
+              <p id="i_think_thats_ok_the...">I think that's OK. The tradeoff is that enumerated types in Ceylon are simply much more powerful and flexible.</p>
+              
+              <h2 id="enumerated_interfaces">Enumerated interfaces</h2>
+              
+              <p id="enumerated_interfaces_are_a_little...">Enumerated interfaces are a little more special. Consider:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>interface Association 
+    of OneToOne | OneToMany | ManyToOne | ManyToMany { ... }
+</code></pre>
+              
+              <p id="interfaces_support_multiple_inheritance_so...">Interfaces support multiple inheritance, so in general interface types are not disjoint. But when an interface declares an enumerated list of subinterfaces, the compiler enforces that those interfaces be disjoint by rejecting any attempt to define a concrete class or object that is a subtype of more than one of them. This code is not well-typed:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>class BrokenAssociation() 
+    satisfies OneToOne &amp; OneToMany {} //error: inherits multiple cases of enumerated type
+</code></pre>
+              
+              <p id="note_that_the_types_named...">Note that the types named in the <code>of</code> clause don't need to be <em>direct</em> subtypes of the enumerated type. The following code <em>is</em> well-typed:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>interface ToOne satisfies Association {}
+class OneToOne() satisfies ToOne {}
+class ManyToOne() satisfies ToOne {}
+</code></pre>
+              
+              <p id="the_interface_toone_is_a...">The interface <code>ToOne</code> is a subtype of the enumerated type <code>Association</code> but not of any of its cases. That's acceptable, because <code>ToOne</code> is an abstract type that can't be directly instantiated. Of course, every one of its concrete subtypes must be a subtype of one of the enumerated cases of <code>Association</code>.</p>
+              
+              <h2 id="handling_multiple_cases_at_once">Handling multiple cases at once</h2>
+              
+              <p id="a_case_of_a_switch...">A <code>case</code> of a <code>switch</code> can handle more than one type at once. For example, <code>ToOne</code> could be a <code>case</code> type:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Association assoc = ... ;
+switch (assoc)
+case (is ToOne) { ... }
+else { ... }
+</code></pre>
+              
+              <p id="even_better_we_can_form...">Even better, we can form unions of the cases of the enumerated type:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Association assoc = ... ;
+switch (assoc)
+case (is OneToOne|ManyToOne) { ... }
+case (is OneToMany|ManyToMany) { ... }
+</code></pre>
+              
+              <p id="for_object_cases_the_syntax...">For <code>object</code> cases, the syntax is slightly different:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>switch (suit)
+case (hearts, diamonds) { return red; }
+case (clubs, spades) { return black; }
+</code></pre>
+              
+              <h2 id="how_the_compiler_reasons_about_enumerated_types">How the compiler reasons about enumerated types</h2>
+              
+              <p id="now_lets_see_something_cool...">Now let's see something cool. When the compiler encounters an enumerated type in a <code>switch</code> statement, it:</p>
+              
+              <ol>
+              <li>first expands the type to a union of its cases. And it does this recursively to any of the cases which are themselves enumerated types, and then</li>
+              <li>to determine if a <code>switch</code> statement has an exhaustive list of <code>case</code> branches, takes the union of each of the <code>case</code> types and determines if it is a supertype of the union type produced in step 1.</li>
+              </ol>
+              
+              
+              <p id="thus_the_following_switch_is...">Thus, the following <code>switch</code> is well-typed:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>void printVoid(Void v) {
+    switch (v)
+    case (nothing) { print("nothing"); }
+    case (is Object) { print(v); }
+}
+</code></pre>
+              
+              <p id="likewise_remembering_that_boolean_means...">Likewise, remembering that <code>Boolean?</code> means <code>Nothing|Boolean</code>, we can write:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>void printBoolean(Boolean? bool) {
+    switch (bool)
+    case (true) { print("true"); }
+    case (false) { print("false"); }
+    case (nothing) { print("nothing"); }
+}
+</code></pre>
+              
+              <p id="but_what_about_disjointness_of...">But what about disjointness of the <code>case</code> types? How is that determined? Well, first of all, the compiler is able to reason that the intersection of two types is empty if they inherit from different cases of an enumerated type. So whenever the compiler encounters a type like <code>Nothing&amp;Boolean</code>, it automatically simplifies the type to <code>Bottom</code>.</p>
+              
+              <p id="so_the_disjointness_restriction_on...">So the disjointness restriction on <code>case</code>s of a <code>switch</code> boils down to checking that for each pair of <code>case</code>s, the intersection of the <code>case</code> types is <code>Bottom</code>.</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2012/01/25/enumerated-types/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="post">
+            <h1 class="title" id="a_sort_of_manifesto">
+              <a href="/blog/2012/01/18/type-system-manifesto/">A sort of manifesto</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/gavin-king/">Gavin King</a>
+              </div>
+              <div class="date">
+                18 January 2012
+              </div>
+              <div class="tags">
+                <a href="/blog/tags/language-design/">
+                  language design
+                </a>
+              </div>
+            </div>
+            <div class="body">
+              <p id="the_latest_generation_of_statically...">The latest generation of statically typed languages combine
+              subtyping, type parameterization, and varying levels of support
+              for type inference. But their type systems have - reflecting
+              their development over time - grown so complex and riddled with
+              corner cases and unintuitive behavior that few programmers are
+              able to understand the reasoning of the compiler all the time.
+              Error messages are confusing, referring to concepts that only
+              language theorists care about, or to types which can't be written
+              down in the language itself. The type systems are so complex that
+              they even include corner cases which are mathematically
+              undecidable, resulting in the possibility of compile-time stack
+              overflows or non-termination.</p>
+              
+              <p id="for_example_java_features_sophisticated...">For example, Java features sophisticated support for covariance
+              and contravariance via wildcard type arguments. But most Java
+              developers avoid making use of this extremely powerful feature
+              of the type system, viewing it as a source of confusing error
+              messages and syntactic ugliness.</p>
+              
+              <p id="other_languages_introduce_even_further...">Other languages introduce even further complexity to this mix,
+              for example, implicit type conversions, which result in
+              unintuitive behavior, especially when combined with generic
+              types and covariance, or nonlocal type inference, which can
+              result in frustratingly slow compilation times.</p>
+              
+              <p id="but_the_desire_to_combine...">But the desire to combine the best of the ML family of languages
+              with the best of the C family of languages is not, in itself, a
+              misplaced goal. A type system featuring subtyping, type
+              parameterization, simplified covariance and contravariance,
+              limited type inference, and algebraic types could be a powerful
+              tool in the hands of developers, if it:</p>
+              
+              <ul>
+              <li>could be defined in terms that reflect how programmers
+              intuitively reason about types,</li>
+              <li>was packaged up in a syntax that is easy to read and understand,
+              and</li>
+              <li>constrained so as to eliminate performance problems,
+              undecidability, and confusing corner cases.</li>
+              </ul>
+              
+              
+              <p id="a_language_like_this_would...">A language like this would necessarily be simpler than some
+              other recent statically typed languages, but ultimately more
+              powerful, if its features were more accessible to developers.</p>
+              
+              <p id="ceylon_is_a_language_with...">Ceylon is a language with several goals, including readability,
+              modularity, and excellent tool support. In terms of its type
+              system, a core goal is to provide powerful mechanisms of
+              abstraction without scaring away the people who will ultimately
+              benefit from this power with confusing error messages and
+              unintuitive collisions between intersecting language features.</p>
+              
+              <p id="in_pursuit_of_that_goal...">In pursuit of that goal, we've had to start by taking some
+              things away. When you start using Ceylon, you'll find there are
+              some things you can do in Java that you can't do in Ceylon. Our
+              hope is that, as you get further into the language, you'll find
+              yourself naturally writing better code, making use of more
+              general-purpose abstractions and stronger type safety, without
+              even really needing to try. It will just feel like the most
+              natural way to do it.</p>
+              
+              <p id="at_least_thats_the_theory">At least, that's the theory. ;-)</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2012/01/18/type-system-manifesto/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="pagination-links">
+<a href="/blog/page/18/" class="previous-link">Previous</a> <a href="/blog/" class="page-link">1</a> <a href="/blog/page/2/" class="page-link">2</a> <span class="skip">...</span><a href="/blog/page/18/" class="page-link">18</a> <span class="current-page">19</span> <a href="/blog/page/20/" class="page-link">20</a> <span class="skip">...</span><a href="/blog/page/24/" class="page-link">24</a> <a href="/blog/page/25/" class="page-link">25</a> <a href="/blog/page/20/" class="next-link">Next</a> </div>
+        </div>
+        <script type="text/javascript">
+          //<![CDATA[
+            /* place div.expandable to 
+             * - minHeight by default 
+             * - full size on click
+             * - back to minHeight on second click
+             * with a jQuery animation
+             */
+            var minHeight=150;
+            $(document).ready( function() {
+              $("div.expandable").height(minHeight);     
+              $("div.expandable").click(function(e) 
+                {
+                  if( !$(e.target).is("a")) {
+                    $this = $(this); 
+                    var currentHeight = $this.height();
+                    if(currentHeight==minHeight) {
+                      $this.css('height', 'auto');
+                    }
+                    else{
+                      $this.css('height', minHeight + 'px');
+                    };
+                    var height = $this.height();
+                    $this.css('height', currentHeight + 'px');
+                    $this.animate({'height':height}, 500);
+                }
+              })
+            });
+          //]]>
+        </script>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

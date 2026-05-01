@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Reification, finally</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2013/02/21/httpd/">Ceylon HTTP server</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2013/02/26/ceylon-in-the-browser/">Ceylon in the browser</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="reification_finally">
+            Reification, finally
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              21 Feb 2013
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/progress/">
+                progress
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <p id="thanks_to_a_bunch_of...">Thanks to a bunch of hard work by Stef, Ceylon finally has fully
+            reified types, that is, reified generic type arguments. You can
+            now write stuff like this very contrived example:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>"Check if the given value is an instance 
+ of the given type."
+Boolean check&lt;T&gt;(Anything o) =&gt; o is T;
+
+"A string is a list of characters."
+assert (check&lt;List&lt;Character&gt;&gt;("hello"));
+
+"A string is a list of objects."
+assert (check&lt;List&lt;Object&gt;&gt;("hello"));
+
+"A string isn't a list of integers nor a 
+ list of floats."
+assert (!check&lt;List&lt;Integer&gt;|List&lt;Float&gt;&gt;("hello"));
+</code></pre>
+            
+            <p id="this_long_promised_feature_promised...">This long-promised feature, promised
+            <a href="http://in.relation.to/Bloggers/Ceylon">almost two years ago</a>,
+            will be available in the upcoming M5 release of the language.
+            The truth is that it's going to take a fair bit more work to
+            do all the optimizations we plan in order to wring acceptable
+            performance out of this stuff, but we've got a couple of clever
+            ideas in this area, that I'm going to keep under wraps for now. ;-)</p>
+            
+            <p id="so_why_is_reified_generics...">So why is reified generics important? Well, I took a brief stab
+            at answering that question <a href="http://relation.to/Bloggers/ThreeArgumentsForReifiedGenerics">way back when</a>,
+            but since then we've spotted a couple of other compelling reasons.
+            So lets take a quick look at one practical problem that is
+            <em>extremely</em> difficult to solve without reified generics.</p>
+            
+            <p id="ceylons_language_module_has_an...">Ceylon's language module has an interface called <code>Category</code></p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared interface Category {
+    shared formal Boolean contains(Object element);
+    ...
+}
+</code></pre>
+            
+            <p id="a_category_is_an_object...">A <code>Category</code> is an object that can "contain" other objects. Given
+            an object, we can ask if it belongs to the category by calling
+            <code>contains()</code>, or using the <code>in</code> operator.</p>
+            
+            <p id="of_course_collections_are_categorys">Of course, collections are <code>Category</code>s:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared interface Collection&lt;out Element&gt;
+    satisfies {Element*} &amp;
+              Category &amp; 
+              ...
+</code></pre>
+            
+            <p id="now_notice_that_the_signature...">Now, notice that the signature of <code>contains()</code> for a
+            <code>Collection&lt;String&gt;</code> is <code>contains(Object element)</code>, <em>not</em>
+            <code>contains(Element element)</code>. The reason for that is that we
+            want collections to be <em>covariant</em> in their element type.
+            I should be able to write the following:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Collection&lt;String&gt; strings = [ "hello", "world" ];
+Collection&lt;Object&gt; objects = strings;
+print(1 in objects);
+</code></pre>
+            
+            <p id="notice_that_on_the_last...">Notice that on the last line, an <code>Integer</code> gets passed to the
+            <code>contains()</code> method of a <code>Collection&lt;String&gt;</code>.</p>
+            
+            <p id="so_the_without_making_use...">So the, without making use of reified generics, the default
+            implementation of <code>contains()</code> defined by <code>Collection</code> would
+            be as follows:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared actual default Boolean contains(Object element) {
+    for (elem in this) {
+        if (exists elem, elem==element) {
+            return true;
+        }
+    }
+    else {
+        return false;
+    }
+}
+</code></pre>
+            
+            <p id="thats_already_kinda_lame_if...">That's already kinda lame. If I have a <code>Collection&lt;String&gt;</code>,
+            and <code>contains()</code> gets passed an <code>Integer</code>, we should be able
+            to immediately return <code>false</code> like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared actual default Boolean contains(Object element) {
+    if (is Element element) {
+        for (elem in this) {
+            if (exists elem, elem==element) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+</code></pre>
+            
+            <p id="but_well_whatever_thats_merely...">But, well, whatever, that's merely a minor performance
+            optimization, I suppose. But now consider the case of a
+            <code>Range</code>. A <code>Range</code> is a kind of <code>Collection</code> whose elements
+            are determined by two endpoints, which could potentially have
+            <em>thousands</em> or <em>millions</em> or even more values in between! The
+            above default implementation of <code>contains()</code>, inherited from
+            <code>Collection</code>, would be so hideously expensive as to be actually
+            <em>wrong</em>. So <code>Range</code> should refine the implementation of
+            <code>contains()</code> as follows:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared actual Boolean contains(Object element) {
+    if (is Element element) {
+        return includes(element);
+    }
+    else {
+        return false;
+    }
+}
+
+shared Boolean includes(Element element) =&gt;
+        decreasing then element&lt;=first &amp;&amp; element&gt;=last
+                else element&gt;=first &amp;&amp; element&lt;=last;
+</code></pre>
+            
+            <p id="the_is_element_element_test...">The <code>is Element element</code> test requires reified generics.
+            Without it, I can't be sure that the given value is a
+            <code>Comparable&lt;Element&gt;</code>, so I can't compare the given value to
+            the endpoints of the <code>Range</code>.</p>
+            
+            <p id="what_ive_shown_here_for...">What I've shown here, for those interested in type systems, is
+            that in a type system with declaration-site covariance, there
+            are <em>perfectly legitimate</em> reasons to want to be able to test
+            the runtime type of a value. Sure, ML and Haskell don't need
+            to do this kind of thing, but those languages don't feature
+            subtyping, and therefore don't have covariance. Object oriented
+            languages are <em>very different</em>, so please take that into account
+            before arguing that reified generics are unnecessary.</p>
+            
+            <p id="update_for_more_information_about...">UPDATE:
+            For more information about the implementation, see Stef's
+            email here:</p>
+            
+            <p id="httpsgroupsgooglecomforumhlenfromgroupstopicceylon_devmirroqhcf7o"><a href="https://groups.google.com/forum/?hl=en&amp;fromgroups=#!topic/ceylon-dev/mIrroqhcf7o">https://groups.google.com/forum/?hl=en&amp;fromgroups=#!topic/ceylon-dev/mIrroqhcf7o</a></p>
+            
+            <p id="update_2_it_was_very...">UPDATE 2:
+            It was very remiss of me to not mention that we've had support
+            for reified generics in the JavaScript backend for a while now.
+            Thanks, Enrique!</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2013/02/21/reification-finally/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

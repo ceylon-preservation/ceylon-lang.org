@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Ceylon CLI plugin</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.1/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.1/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.1/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.1/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.1/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.1/reference">Reference</a></h3>
+            
+            <ul>
+<li><a href="#what_is_a_ceylon_cli_plugin">What is a Ceylon CLI plugin?
+            </a></li>
+<li><a href="#installing_new_cli_plugins">Installing new CLI plugins
+            </a></li>
+<li><a href="#writing_ceylon_cli_plugins">Writing Ceylon CLI plugins
+            </a></li>
+<li><a href="#environment_variables_given_to_your_script">Environment variables given to your script
+            </a></li>
+<li><a href="#packaging_scripts_to_make_them_available_for_users">Packaging scripts to make them available for users
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.1/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.1/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.1/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference (1.1)
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_11_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.1, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <h1 id="ceylon_cli_plugin">Ceylon CLI plugin</h1>
+          
+          <p id="the_ceylon_tools_use_a...">The ceylon tools use a <code>git</code>-like plugin scheme for declaring new subcommands.</p>
+          
+          <h2 id="what_is_a_ceylon_cli_plugin">What is a Ceylon CLI plugin?
+          </h2>
+          
+          
+          <p id="if_you_have_any_executable...">If you have any executable in your path (<code>$PATH</code> on Unices, <code>%PATH%</code> on Windows) whose
+          name starts with <code>ceylon-</code> and is executable, then the <code>ceylon</code> command will detect it
+          and make it available as a subcommand.</p>
+          
+          <p id="for_example_the_ceylon_format...">For example, the <code>ceylon-format</code> executable will be picked up by the <code>ceylon</code> CLI tool
+          as a <code>format</code> subcommand, which means you can invoke it with <code>ceylon format</code>:</p>
+          
+          <pre data-language="shell"><code>$ ceylon --help format
+NAME
+
+        'ceylon format' - format Ceylon source code
+
+
+SYNOPSIS
+
+        ceylon format [OPTION]... ( FILE [--and FILE]... [--to FILE] )...
+...
+</code></pre>
+          
+          <h2 id="installing_new_cli_plugins">Installing new CLI plugins
+          </h2>
+          
+          
+          <p id="you_can_install_the_cli...">You can install the CLI plugin scripts packaged for the module <code>ceylon.formatter</code> with:</p>
+          
+          <pre data-language="shell"><code>$ ceylon plugin install ceylon.formatter/1.1.0
+</code></pre>
+          
+          <p id="this_will_install_the_ceylon...">This will install the <code>ceylon-format</code> plugin script to <code>~/.ceylon/bin/ceylon.formatter/ceylon-format</code>
+          where the ceylon CLI will look for plugins, as well as from your <code>PATH</code> environment variable.</p>
+          
+          <p id="naturally_you_can_also_manually...">Naturally, you can also manually install plugins in your <code>PATH</code>.</p>
+          
+          <p id="you_can_list_every_plugin...">You can list every plugin installed with:</p>
+          
+          <pre data-language="shell"><code>$ ceylon plugin list
+ceylon-build (ceylon.build.engine)
+ceylon-format (ceylon.formatter)
+</code></pre>
+          
+          <p id="and_finally_you_can_uninstall...">And finally, you can uninstall plugins with:</p>
+          
+          <pre data-language="shell"><code>$ ceylon plugin uninstall ceylon.formatter
+</code></pre>
+          
+          <h2 id="writing_ceylon_cli_plugins">Writing Ceylon CLI plugins
+          </h2>
+          
+          
+          <p id="suppose_we_want_to_write...">Suppose we want to write a <code>compile-doc</code> plugin which runs the JVM and JS compilers, then the
+          API documentation. We will call the file <code>ceylon-compile-doc</code> for Unices, with the following
+          contents:</p>
+          
+          <pre data-language="shell"><code>#!/bin/sh
+
+USAGE='[any option valid for compile, compile-js and doc]'
+DESCRIPTION='Runs both compilers and the doc tool'
+LONG_USAGE='This will run the `compile`, `compile-js` and `doc` subcommands.
+
+OPTIONS
+
+Any option that is accepted by all of the `compile`, `compile-js` and `doc`
+subcommands.'
+
+. $CEYLON_HOME/bin/ceylon-sh-setup
+
+$CEYLON compile $@
+$CEYLON compile-js $@
+$CEYLON doc $@
+</code></pre>
+          
+          <p id="as_you_can_see_you...">As you can see, you need to specify a number of shell variables:</p>
+          
+          <ul>
+          <li>
+<code>USAGE</code> will be used to document the command-line arguments your plugin accepts,</li>
+          <li>
+<code>DESCRIPTION</code> will be used to describe your plugin in <code>ceylon --help</code>, and</li>
+          <li>
+<code>LONG_USAGE</code> will be used to document your plugin in <code>ceylon compile-doc --help</code>.</li>
+          </ul>
+          
+          
+          <p id="these_variables_will_then_be...">These variables will then be used in the <code>ceylon-sh-setup</code> script which you should invoke,
+          which will handle exiting from your script when there are <code>--help</code> parameters on the command-line
+          to pass them back to the command-line system.</p>
+          
+          <p id="once_you’ve_defined_those_documentation...">Once you’ve defined those documentation variables and invoked the <code>ceylon-sh-setup</code> script, you can
+          what you want in the script.</p>
+          
+          <p id="on_windows_your_script_will...">On Windows, your script will be named <code>ceylon-format.bat</code> and look like:</p>
+          
+          <pre data-language="shell"><code>@echo off
+set "USAGE=[any option valid for compile, compile-js and doc]"
+set "DESCRIPTION=Runs both compilers and the doc tool"
+set "LONG_USAGE=This will run the `compile`, `compile-js` and `doc` subcommands."
+set "LONG_USAGE=%LONG_USAGE%"
+set "LONG_USAGE=%LONG_USAGE%OPTIONS"
+set "LONG_USAGE=%LONG_USAGE%"
+set "LONG_USAGE=%LONG_USAGE%Any option that is accepted by all of the `compile`, `compile-js` and `doc`"
+set "LONG_USAGE=%LONG_USAGE%subcommands."
+
+call %CEYLON_HOME%\bin\ceylon-sh-setup.bat %*
+
+if "%errorlevel%" == "1" (
+    exit /b 0
+)
+%CEYLON% compile %*
+%CEYLON% compile-js %*
+%CEYLON% doc %*
+</code></pre>
+          
+          <h2 id="environment_variables_given_to_your_script">Environment variables given to your script
+          </h2>
+          
+          
+          <p id="there_are_a_number_of...">There are a number of predefined environment variables that the <code>ceylon</code> CLI will pass to your
+          script:</p>
+          
+          <ul>
+          <li>
+<code>CEYLON_HOME</code> will point to the Ceylon distribution root folder,</li>
+          <li>
+<code>JAVA_HOME</code> will point to the current JDK/JRE root folder,</li>
+          <li>
+<code>CEYLON_VERSION_MAJOR</code> contains the current Ceylon version major part (<code>Maj</code> in <code>Maj.Min.Rel</code>),</li>
+          <li>
+<code>CEYLON_VERSION_MINOR</code> contains the current Ceylon version minor part (<code>Min</code> in <code>Maj.Min.Rel</code>),</li>
+          <li>
+<code>CEYLON_VERSION_RELEASE</code> contains the current Ceylon version release part (<code>Rel</code> in <code>Maj.Min.Rel</code>),</li>
+          <li>
+<code>CEYLON_VERSION</code> contains the current Ceylon version major part (<code>Maj.Min.Rel (Name)</code>),</li>
+          <li>
+<code>CEYLON_VERSION_NAME</code> contains the current ceylon version code name,</li>
+          <li>
+<code>SCRIPT</code> is the absolute path to your plugin script, and</li>
+          <li>
+<code>SCRIPT_DIR</code> is the absolute path to the directory containing your plugin script.</li>
+          </ul>
+          
+          
+          <h2 id="packaging_scripts_to_make_them_available_for_users">Packaging scripts to make them available for users
+          </h2>
+          
+          
+          <p id="cli_plugin_scripts_for_the...">CLI plugin scripts for the module <code>your.module</code> should be put in the <code>script/your/module</code> folder
+          by convention, although you can override this with the <code>--script</code> option.</p>
+          
+          <p id="you_can_generate_a_script...">You can generate a script package for the module <code>your.module</code> with:</p>
+          
+          <pre data-language="shell"><code>$ ceylon plugin pack your.module
+</code></pre>
+          
+          <p id="naturally_you_can_publish_your...">Naturally, you can publish your plugins as part of your module to Herd, so that they are available to
+          users.</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

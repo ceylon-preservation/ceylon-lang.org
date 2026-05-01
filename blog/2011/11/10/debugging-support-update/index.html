@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Update on the debugging support in the IDE</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2011/11/07/building-site-spec-ceylondoc/">Wire the site with spec and ceylondoc</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2011/11/17/welcome/">Welcome to ceylon-lang.org!</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="update_on_the_debugging_support_in_the_ide">
+            Update on the debugging support in the IDE
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/david-festal/">David Festal</a>
+            </div>
+            <div class="date">
+              10 Nov 2011
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/ide/">
+                ide
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <p id="basic_support_for_debugging_ceylon...">Basic support for debugging ceylon programs is now available in the IDE plugin on GitHub.</p>
+            
+            <h2 id="description_of_available_support">Description of available support</h2>
+            
+            <h3 id="how_to_install">How to install</h3>
+            
+            <h4 id="from_the_sources">From the sources</h4>
+            
+            <p id="for_those_who_already_have...">For those who already have the ceylon-ide-eclipse plugin project in the Eclipse workspace,
+            just pull the last GitHub version and run with a "Eclipse Application" launch configuration.</p>
+            
+            <h4 id="from_the_update_site">From the update site</h4>
+            
+            <ul>
+            <li>From within Eclipse, install or update the Ceylon plugin through the Ceylon Update Site : <code>http://ceylon-lang.org/eclipse/updatesite/</code>
+</li>
+            <li>Restart Eclipse</li>
+            <li>You should be able to use basic debugging support</li>
+            </ul>
+            
+            
+            <h3 id="how_to_use_it">How to use it</h3>
+            
+            <h4 id="start_debugging_a_ceylon_program">Start debugging a ceylon program</h4>
+            
+            <p id="in_order_to_debug_a...">In order to debug a ceylon program, just do the following :
+            - When editing a ceylon source file, you can add a breakpoint by double-clicking in the editor ruler.
+            - In the Package Explorer, select the ceylon source file.
+            - In the contextual menu, start the following command : <code>Debug as -&gt; Ceylon Application</code>
+            - If more than one top-level definition is available in the source file, a dialog allows you to choose the one you want to debug.
+            - The program is then started and paused at the first breakpoint.
+            - You can then use the <code>Step into</code>, <code>Step over</code> and <code>Step out</code> or <code>Resume</code> buttons, just as with JDT debugging.</p>
+            
+            <h4 id="step_filtering">Step Filtering</h4>
+            
+            <p id="in_order_to_avoid_going...">In order to avoid going into unwanted stackframes when stepping into the code, you should activate debug step filtering in the Eclipse general preferences :
+            <code>Java -&gt; Debug -&gt; Step Filtering</code></p>
+            
+            <p id="select_all_the_proposed_filters...">Select all the proposed filters, as well as the simple getters and setters.</p>
+            
+            <h4 id="variables_view">Variables View</h4>
+            
+            <p id="the_variables_is_available_in...">The <code>Variables</code> is available in the <code>Debug</code> perspective, and shows the variables in the current stack frame context.
+            variables are shown in their Java flavour (that means how they had been translated to Java). However thanks to the Ceylon-Java mapping,
+            the variable representation of objects is very near to what is declared in the ceylon file.</p>
+            
+            <p id="for_the_moment_the_change...">For the moment, the <code>Change value</code> contextual command only works for simple types such as String or numeric values.</p>
+            
+            <h4 id="breakpoints_view">Breakpoints View</h4>
+            
+            <p id="the_breakpoints_view_is_also...">The <code>Breakpoints</code> view is also available and, for each breakpoint, allows enabling/disable it, but also setting a hit count.
+            However do to the type of breakpoint used internally, it is not possible to add a breakpoint condition for the moment.</p>
+            
+            <h3 id="known_problems_and_limitations">Known problems and limitations</h3>
+            
+            <h4 id="line_problems">Line problems</h4>
+            
+            <p id="it_might_happen_that_when...">It might happen that when paused on a specific stack frame, the instruction pointer is not positioned on the right corresponding line in the ceylon source file.
+            This is due to wrong line information in the class files generated by the ceylon compiler.
+            Such errors should be reported with the corresponding source code and erroneous lines, so that the corresponding problem in the compiler code would be corrected and additional tests implemented.</p>
+            
+            <h4 id="limitations">Limitations</h4>
+            
+            <ul>
+            <li>In the <code>Variables</code> view, the <code>Open Declared Type</code> and <code>Open Declared Type Hierarchy</code> contextual commands don't work, since for now the variables are seen as pure Java variables. Thus the source file of the Ceylon objects cannot be found.
+            This will be solved once the plugin is able to support a true Ceylon-specific debug model (see next section).</li>
+            <li>Also in the <code>Variables</code> view, the <code>Watch</code> contextual command doesn't work : the <code>Watches</code> is opened but the expressions are not successfully parsed and evaluated. This will also require some overloading of the standard JDT Debug support.</li>
+            </ul>
+            
+            
+            <h2 id="next_steps">Next steps</h2>
+            
+            <ul>
+            <li>Extend/override JDT debug model in order to :
+            
+            <ul>
+            <li>add ceylon-specific step filters (e.g. for attribute generated getters, etc ...),</li>
+            <li>define ceytlon-specific lin-breakpoints that allow advanced usages such as conditions,</li>
+            <li>manage variables and values and type references with the ceylon semantics,</li>
+            <li>etc ...</li>
+            </ul>
+            </li>
+            <li>Provide a more powerful breakpoint support (conditions, watchpoints, etc ...)</li>
+            <li>Override the expression management to support ceylon code parsing/evaluation</li>
+            <li>Allow ceylon code snippets in breakpoint cnditions for example</li>
+            <li>etc ...</li>
+            </ul>
+            
+            
+            <p id="some_many_of_those_next...">Some (many) of those next steps, which mainly consist in extending/overriding existing implementations in JDT debug plugin,
+             imply building a Ceylon-specific logical core resource model, by extending the JDT core model.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2011/11/10/debugging-support-update/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

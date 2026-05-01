@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Enumerated types in Ceylon</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2012/01/18/type-system-manifesto/">A sort of manifesto</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2012/01/26/generic-enumerated-types/">Generics and enumerated types</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="enumerated_types_in_ceylon">
+            Enumerated types in Ceylon
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              25 Jan 2012
+            </div>
+            <div class="tags">
+            </div>
+          </div>
+          <div class="body">
+            <p id="were_just_wrapping_up_the...">We're just wrapping up the implementation of Ceylon's enumerated types (<em>algebraic types</em>, if you prefer that term). This feature is turning out significantly nicer than what was originally defined in the spec.</p>
+            
+            <h2 id="unions_and_switch">Unions and <code>switch</code>
+</h2>
+            
+            <p id="the_simplest_kind_of_enumerated...">The simplest kind of enumerated type is simply a union of classes. For example, the type <code>Integer|Float</code> is a very simple enumerated type. Since <code>Float</code> and <code>Integer</code> are distinct classes and neither inherits from the other, the compiler reasons that the types are <em>disjoint</em>, meaning they have no common instances. Therefore, it lets us write the following:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>void add(Integer|Float x) {
+    switch (x)
+    case (is Integer x) { integers.add(x); }
+    case (is Float x) { floats.add(x); }
+}
+</code></pre>
+            
+            <p id="notice_that_inside_the_block...">Notice that inside the block that follows a <code>case</code>, the type of the <code>switch</code>ed variable is narrowed to the <code>case</code> type. We know that <code>x</code> is an <code>Integer</code> in the first <code>case</code>, and a <code>Float</code> in the second, so the compiler lets us make use of this additional information.</p>
+            
+            <p id="there_are_two_basic_things...">There are two basic things to appreciate about Ceylon's <code>switch</code> construct:</p>
+            
+            <ol>
+            <li>The <code>case</code>s must be disjoint. The behavior never depends upon the order in which the <code>case</code>s appear.</li>
+            <li>If the <code>case</code>s don't completely cover all possible values of the <code>switch</code> expression type, we need to include an <code>else</code> clause.</li>
+            </ol>
+            
+            
+            <p id="a_switch_statement_which_covers...">A <code>switch</code> statement which covers all possible values of the switched type is said to have an <em>exhaustive</em> list of <code>case</code>s.</p>
+            
+            <p id="the_purpose_of_the_required...">The purpose of the required <code>else</code> clause is to syntactically distinguish <code>switch</code> statements which don't need to be fixed and recompiled when a new type is added.</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>void add(Integer|Float|String x) {
+    switch (x)
+    case (is Integer x) { integers.add(x); }
+    case (is Float x) { floats.add(x); }
+    else {}
+}
+</code></pre>
+            
+            <h2 id="enumerated_classes">Enumerated classes</h2>
+            
+            <p id="we_can_extend_this_idea...">We can extend this idea for an interface or abstract class. Ceylon lets us declare that an abstract class or interface is <em>equivalent</em> to a union using the <code>of</code> clause. For example, the root class of the type hierarchy, <code>Void</code>, is declared like this:</p>
+            
+            <pre data-language="ceylon"><code>shared abstract class Void() of Nothing | Object {}
+</code></pre>
+            
+            <p id="this_says_that_the_class...">This says that the class <code>Void</code> has exactly the same instances as the union type <code>Nothing|Object</code>. So when we encounter a value of type <code>Void</code>, we know it must either be an instance of <code>Object</code>, or an instance of <code>Nothing</code>. We can write:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>void printVoid(Void v) {
+    switch (v)
+    case (is Nothing) { print("nothing"); }
+    case (is Object) { print(v); }
+}
+</code></pre>
+            
+            <p id="the_compiler_wont_let_us...">The compiler won't let us define a third subclass of <code>Void</code> that doesn't extend either <code>Nothing</code> or <code>Object</code>. We call the types mentioned in the <code>of</code> clause the <em>cases</em> of an enumerated type.</p>
+            
+            <p id="since_an_object_declaration_is...">Since an <code>object</code> declaration is also a type, we can even include the names of objects in the <code>of</code> clause. For example, this is how the language module expressed the fact that the only instance of <code>Nothing</code> is the null value:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared abstract class Nothing() of null {}
+shared object null extends Nothing() {}
+</code></pre>
+            
+            <p id="more_commonly_there_will_be...">More commonly, there will be multiple values, allowing us to recapture the semantics of a Java <code>enum</code>, without introducing a special language construct. For example, Ceylon's <code>Boolean</code> is an enumerated type with two values:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared abstract class Boolean() of true | false {}
+
+shared object true extends Boolean() {
+    shared actual String string { return "true"; }
+}
+
+shared object false extends Boolean() {
+    shared actual String string { return "false"; }
+}
+</code></pre>
+            
+            <p id="therefore_we_can_switch_on...">Therefore, we can <code>switch</code> on a <code>Boolean</code> value:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>void printBoolean(Boolean bool) {
+    switch (bool)
+    case (true) { print("true"); }
+    case (false) { print("false"); }
+}
+</code></pre>
+            
+            <p id="note_that_the_classic_example...">Note that the classic example of a Java enumerated type works out significantly more verbose in Ceylon:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared abstract class Suit() 
+        of hearts|diamonds|clubs|spades {}
+shared object hearts extends Suit() {} 
+shared object diamonds extends Suit() {} 
+shared object clubs extends Suit() {} 
+shared object spades extends Suit() {} 
+</code></pre>
+            
+            <p id="i_think_thats_ok_the...">I think that's OK. The tradeoff is that enumerated types in Ceylon are simply much more powerful and flexible.</p>
+            
+            <h2 id="enumerated_interfaces">Enumerated interfaces</h2>
+            
+            <p id="enumerated_interfaces_are_a_little...">Enumerated interfaces are a little more special. Consider:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>interface Association 
+    of OneToOne | OneToMany | ManyToOne | ManyToMany { ... }
+</code></pre>
+            
+            <p id="interfaces_support_multiple_inheritance_so...">Interfaces support multiple inheritance, so in general interface types are not disjoint. But when an interface declares an enumerated list of subinterfaces, the compiler enforces that those interfaces be disjoint by rejecting any attempt to define a concrete class or object that is a subtype of more than one of them. This code is not well-typed:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>class BrokenAssociation() 
+    satisfies OneToOne &amp; OneToMany {} //error: inherits multiple cases of enumerated type
+</code></pre>
+            
+            <p id="note_that_the_types_named...">Note that the types named in the <code>of</code> clause don't need to be <em>direct</em> subtypes of the enumerated type. The following code <em>is</em> well-typed:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>interface ToOne satisfies Association {}
+class OneToOne() satisfies ToOne {}
+class ManyToOne() satisfies ToOne {}
+</code></pre>
+            
+            <p id="the_interface_toone_is_a...">The interface <code>ToOne</code> is a subtype of the enumerated type <code>Association</code> but not of any of its cases. That's acceptable, because <code>ToOne</code> is an abstract type that can't be directly instantiated. Of course, every one of its concrete subtypes must be a subtype of one of the enumerated cases of <code>Association</code>.</p>
+            
+            <h2 id="handling_multiple_cases_at_once">Handling multiple cases at once</h2>
+            
+            <p id="a_case_of_a_switch...">A <code>case</code> of a <code>switch</code> can handle more than one type at once. For example, <code>ToOne</code> could be a <code>case</code> type:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Association assoc = ... ;
+switch (assoc)
+case (is ToOne) { ... }
+else { ... }
+</code></pre>
+            
+            <p id="even_better_we_can_form...">Even better, we can form unions of the cases of the enumerated type:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Association assoc = ... ;
+switch (assoc)
+case (is OneToOne|ManyToOne) { ... }
+case (is OneToMany|ManyToMany) { ... }
+</code></pre>
+            
+            <p id="for_object_cases_the_syntax...">For <code>object</code> cases, the syntax is slightly different:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>switch (suit)
+case (hearts, diamonds) { return red; }
+case (clubs, spades) { return black; }
+</code></pre>
+            
+            <h2 id="how_the_compiler_reasons_about_enumerated_types">How the compiler reasons about enumerated types</h2>
+            
+            <p id="now_lets_see_something_cool...">Now let's see something cool. When the compiler encounters an enumerated type in a <code>switch</code> statement, it:</p>
+            
+            <ol>
+            <li>first expands the type to a union of its cases. And it does this recursively to any of the cases which are themselves enumerated types, and then</li>
+            <li>to determine if a <code>switch</code> statement has an exhaustive list of <code>case</code> branches, takes the union of each of the <code>case</code> types and determines if it is a supertype of the union type produced in step 1.</li>
+            </ol>
+            
+            
+            <p id="thus_the_following_switch_is...">Thus, the following <code>switch</code> is well-typed:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>void printVoid(Void v) {
+    switch (v)
+    case (nothing) { print("nothing"); }
+    case (is Object) { print(v); }
+}
+</code></pre>
+            
+            <p id="likewise_remembering_that_boolean_means...">Likewise, remembering that <code>Boolean?</code> means <code>Nothing|Boolean</code>, we can write:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>void printBoolean(Boolean? bool) {
+    switch (bool)
+    case (true) { print("true"); }
+    case (false) { print("false"); }
+    case (nothing) { print("nothing"); }
+}
+</code></pre>
+            
+            <p id="but_what_about_disjointness_of...">But what about disjointness of the <code>case</code> types? How is that determined? Well, first of all, the compiler is able to reason that the intersection of two types is empty if they inherit from different cases of an enumerated type. So whenever the compiler encounters a type like <code>Nothing&amp;Boolean</code>, it automatically simplifies the type to <code>Bottom</code>.</p>
+            
+            <p id="so_the_disjointness_restriction_on...">So the disjointness restriction on <code>case</code>s of a <code>switch</code> boils down to checking that for each pair of <code>case</code>s, the intersection of the <code>case</code> types is <code>Bottom</code>.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2012/01/25/enumerated-types/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

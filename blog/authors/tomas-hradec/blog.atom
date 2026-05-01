@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<feed xml:lang="en-US" xmlns="http://www.w3.org/2005/Atom">
+  <id>http://localhost:4242/blog/tomas-hradec/</id>
+  <title>Blog of Tom&#225;&#353; Hradec</title>
+  <updated>2016-02-22T00:00:00+00:00</updated>
+  <link href="http://localhost:4242/blog/authors/tomas-hradec/blog.atom" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4242/" rel="alternate" type="text/html" />
+  <entry>
+    <id>http://localhost:4242/blog/2016/02/22/ceylon-test-new-and-noteworthy</id>
+    <title>ceylon.test new and noteworthy</title>
+    <updated>2016-02-22T00:00:00+00:00</updated>
+    <link href="http://localhost:4242/blog/2016/02/22/ceylon-test-new-and-noteworthy" rel="alternate" type="text/html" />
+    <author>
+      <name>Tom&#225;&#353; Hradec</name>
+    </author>
+    <summary>
+      Module ceylon.test
+      (simple framework for writing repeatable tests) is an integral part of
+      Ceylon SDK since its first version and in the latest release 1.2.1
+      brings several handy new features, namely:
+      
+      
+      Parameterized tests
+      Conditional execution
+      Grouped assertions
+      Tagging and filtering
+      Extension points
+      Reporting
+      
+      
+      
+      Let's look at them in more details.
+      
+      
+      
+      
+      Parameterized tests
+      
+      Parameterized tests allow developers to run the same test over and over
+      again using different values, where each invocation of a test function is
+      reported individually. A classical example for usage of parameterized tests
+      is with a function computing Fibonacci numbers.
+      
+      
+      
+      
+      shared {[Integer, Integer]*} fibonnaciNumbers =&gt; 
+          {[1, 1], [2, 1], [3, 2], [4, 3], [5, 5], [6, 8] ...};
+      
+      test
+      parameters(`value fibonnaciNumbers`)
+      shared...
+    </summary>
+    <content type="html">
+      &lt;p&gt;Module &lt;a href=&quot;https://herd.ceylon-lang.org/modules/ceylon.test&quot;&gt;ceylon.test&lt;/a&gt;
+      (simple framework for writing repeatable tests) is an integral part of
+      Ceylon SDK since its first version and in the latest release 1.2.1
+      brings several handy new features, namely:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#parameterized_tests&quot;&gt;Parameterized tests&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#conditional_execution&quot;&gt;Conditional execution&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#grouped_assertions&quot;&gt;Grouped assertions&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#tagging_and_filtering&quot;&gt;Tagging and filtering&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#extension_points&quot;&gt;Extension points&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#reporting&quot;&gt;Reporting&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;p&gt;Let's look at them in more details.&lt;/p&gt;
+      
+      &lt;br&gt;
+      
+      
+      &lt;h2&gt;Parameterized tests&lt;/h2&gt;
+      
+      &lt;p&gt;Parameterized tests allow developers to run the same test over and over
+      again using different values, where each invocation of a test function is
+      reported individually. A classical example for usage of parameterized tests
+      is with a function computing Fibonacci numbers.&lt;/p&gt;
+      
+      &lt;!-- try: --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;shared {[Integer, Integer]*} fibonnaciNumbers =&amp;gt; 
+          {[1, 1], [2, 1], [3, 2], [4, 3], [5, 5], [6, 8] ...};
+      
+      test
+      parameters(`value fibonnaciNumbers`)
+      shared void shouldCalculateFibonacciNumber(Integer input, Integer result) {
+          assert(fibonacciNumber(input) == result);
+      }
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;In this example, we use annotation &lt;a href=&quot;https://modules.ceylon-lang.org/repo/1/ceylon/test/1.2.1/module-doc/api/index.html#parameters&quot;&gt;&lt;code&gt;parameters&lt;/code&gt;&lt;/a&gt; to specify the source of argument
+      values, which will be used during test execution. You can use any top level value
+      or unary function with a compatible type as the source of argument values. The argument
+      provider can be specified for the whole function, as in this example, or individually
+      for each parameter, then the test framework will execute the test for each combination
+      of provided values. For example, a function with one parameter whose argument provider
+      yields two values and a second parameter whose argument provider yields three values,
+      will be executed six times.&lt;/p&gt;
+      
+      &lt;p&gt;This functionality is based on a general mechanism, which can be easily extended,
+      e.g. serving values from data file or randomized testing. For more information see
+      documentation to &lt;a href=&quot;https://modules.ceylon-lang.org/repo/1/ceylon/test/1.2.1/module-doc/api/engine/spi/ArgumentListProvider.type&quot;&gt;&lt;code&gt;ArgumentProvider&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://modules.ceylon-lang.org/repo/1/ceylon/test/1.2.1/module-doc/api/engine/spi/ArgumentListProvider.type&quot;&gt;&lt;code&gt;ArgumentListProvider&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+      
+      &lt;br&gt;
+      
+      
+      &lt;h2&gt;Conditional execution&lt;/h2&gt;
+      
+      &lt;p&gt;In some scenarios, the condition if the test can be reliable executed is known only in
+      runtime. For this purpose it is useful to be able explicitly declare those &lt;em&gt;assumption&lt;/em&gt;,
+      as for example in following test. When the assumption is not met, verified with
+      &lt;a href=&quot;https://modules.ceylon-lang.org/repo/1/ceylon/test/1.2.1/module-doc/api/index.html#assumeTrue&quot;&gt;&lt;code&gt;assumeTrue()&lt;/code&gt;&lt;/a&gt; function, then the test execution is interupted and the test is
+      marked as &lt;em&gt;aborted&lt;/em&gt;.&lt;/p&gt;
+      
+      &lt;!-- try: --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;test
+      shared void shouldUseNetwork() {
+          assumeTrue(isOnline);
+          ...
+      }
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;Alternatively, it is possible to specify test condition declaratively, via custom
+      annotation which satisfy SPI interface &lt;a href=&quot;https://modules.ceylon-lang.org/repo/1/ceylon/test/1.2.1/module-doc/api/engine/spi/TestCondition.type.html&quot;&gt;&lt;code&gt;TestCondition&lt;/code&gt;&lt;/a&gt;. In fact the &lt;a href=&quot;https://modules.ceylon-lang.org/repo/1/ceylon/test/1.2.1/module-doc/api/index.html#ignore&quot;&gt;&lt;code&gt;ignore&lt;/code&gt;&lt;/a&gt;
+      annotation is just simple implementation of this concept.&lt;/p&gt;
+      
+      &lt;br&gt;
+      
+      
+      &lt;h2&gt;Grouped assertions&lt;/h2&gt;
+      
+      &lt;p&gt;Sometimes you don't want to interrupt your test after first failed assertions,
+      because you are interested to know all possible failures. In that case you can
+      use &lt;a href=&quot;https://modules.ceylon-lang.org/repo/1/ceylon/test/1.2.1/module-doc/api/index.html#assertAll&quot;&gt;&lt;code&gt;assertAll()&lt;/code&gt;&lt;/a&gt; function, which will verify all given assertions and any
+      failures will report together.&lt;/p&gt;
+      
+      &lt;!-- try: --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;assertAll([
+          () =&amp;gt; assertEquals(agent.id, &quot;007&quot;),
+          () =&amp;gt; assertEquals(agent.firstName, &quot;James&quot;),
+          () =&amp;gt; assertEquals(agent.lastName, &quot;Bond&quot;)]);
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;br&gt;
+      
+      
+      &lt;h2&gt;Tagging and filtering&lt;/h2&gt;
+      
+      &lt;p&gt;Test functions/methods and their containers (classes, packages) can be tagged,
+      via annotation &lt;a href=&quot;https://modules.ceylon-lang.org/repo/1/ceylon/test/1.2.1/module-doc/api/index.html#tag&quot;&gt;&lt;code&gt;tag&lt;/code&gt;&lt;/a&gt;. For example, a test which is failing randomly for
+      unknown reasons can be marked as &lt;em&gt;unstable&lt;/em&gt;.&lt;/p&gt;
+      
+      &lt;!-- try: --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;test
+      tag(&quot;unstable&quot;)
+      shared void shouldSucceedWithLittleLuck() { ... }
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;Those tags can later be used for filtering tests. Either in inclusive style
+      (only tests &lt;em&gt;with&lt;/em&gt; specified tag will be executed).&lt;/p&gt;
+      
+      &lt;!-- lang: bash --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;$ceylon test --tag=unstable com.acme.mymodule
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;Or visa versa for exclusion (only tests &lt;em&gt;without&lt;/em&gt; specified tag will be executed).&lt;/p&gt;
+      
+      &lt;!-- lang: bash --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;$ceylon test --tag=!unstable com.acme.mymodule
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;br&gt;
+      
+      
+      &lt;h2&gt;Extension points&lt;/h2&gt;
+      
+      &lt;p&gt;Extension points are general mechanisms which allow to extend or modify default
+      framework behavior and better integration with 3rd party libraries (e.g. custom
+      reporters, integration with DI frameworks). The easiest way to register extensions
+      is with annotation &lt;a href=&quot;https://modules.ceylon-lang.org/repo/1/ceylon/test/1.2.1/module-doc/api/index.html#testExtension&quot;&gt;&lt;code&gt;testExtension&lt;/code&gt;&lt;/a&gt;, which can be placed on test itself, or on any
+      of its container. Currently the following extension points are available, and new
+      ones can be added if needed:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;listening events during test run
+      &lt;a href=&quot;https://modules.ceylon-lang.org/repo/1/ceylon/test/1.2.1/module-doc/api/TestListener.type.html&quot;&gt;TestListener&lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li&gt;creating test class instance
+      &lt;a href=&quot;https://modules.ceylon-lang.org/repo/1/ceylon/test/1.2.1/module-doc/api/engine/spi/TestInstanceProvider.type.html&quot;&gt;TestInstanceProvider&lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li&gt;post processing of test class instance
+      &lt;a href=&quot;https://modules.ceylon-lang.org/repo/1/ceylon/test/1.2.1/module-doc/api/engine/spi/TestInstancePostProcessor.type.html&quot;&gt;TestInstancePostProcessor&lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li&gt;describing parameterized test
+      &lt;a href=&quot;https://modules.ceylon-lang.org/repo/1/ceylon/test/1.2.1/module-doc/api/engine/spi/TestVariantProvider.type.html&quot;&gt;TestVariantProvider&lt;/a&gt;
+      &lt;/li&gt;
+      &lt;li&gt;resolving all possible argument lists combination for parameterized test
+      &lt;a href=&quot;https://modules.ceylon-lang.org/repo/1/ceylon/test/1.2.1/module-doc/api/engine/spi/ArgumentListResolver.type.html&quot;&gt;ArgumentListResolver&lt;/a&gt;
+      &lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;br&gt;
+      
+      
+      &lt;h2&gt;Reporting&lt;/h2&gt;
+      
+      &lt;p&gt;These two last features have already been available for some time, but they could easily
+      have slipped your attention. The first is nice html report with results of test execution,
+      to enable it, run the test tool with &lt;code&gt;--report&lt;/code&gt; option, it will be generated
+      under &lt;code&gt;report/test(-js)&lt;/code&gt; subdirectory.&lt;/p&gt;
+      
+      &lt;p&gt;&lt;img src=&quot;http://localhost:4242/images/screenshots/ceylon-test-html-report.png&quot; style=&quot;max-width:600px;&quot;&gt;&lt;/p&gt;
+      
+      &lt;p&gt;The second is support for Test Anything Protocol (&lt;a href=&quot;https://en.wikipedia.org/wiki/Test_Anything_Protocol&quot;&gt;TAP&lt;/a&gt;), which allow integration
+      with CI servers. To enable run the test tool with &lt;code&gt;--tap&lt;/code&gt; option.&lt;/p&gt;
+      
+      &lt;br&gt;
+      
+      
+      &lt;p&gt;&lt;em&gt;And if you don't have enough, just look on excellent library, built on top
+      of &lt;code&gt;ceylon.test&lt;/code&gt; which enables BDD style of test development and much more,
+      called &lt;a href=&quot;https://github.com/renatoathaydes/specks&quot;&gt;specks&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>http://localhost:4242/blog/2013/12/16/ceylon-test-news</id>
+    <title>When ceylon.test met meta-model</title>
+    <updated>2013-12-16T00:00:00+00:00</updated>
+    <link href="http://localhost:4242/blog/2013/12/16/ceylon-test-news" rel="alternate" type="text/html" />
+    <author>
+      <name>Tom&#225;&#353; Hradec</name>
+    </author>
+    <summary>
+      Ceylon has had support for unit testing since milestone four,
+      but its functionality was pretty limited due lack of annotations and meta-model at that time.
+      
+      Fortunately this is not true anymore!
+      With version 1.0 of Ceylon we also released a completely rewritten ceylon.test module.
+      So let’s see what’s new and how we can use it now.
+      
+      Tests annotations
+      
+      Tests are now declaratively marked with the test annotation
+      and can be written as top-level functions or methods inside top-level class,
+      in case you want to group multiple tests together.
+      
+      Inside tests, assertions can be evaluated by using the language’s assert statement
+      or with the various assert... functions, for example assertEquals, assertThatException...
+    </summary>
+    <content type="html">
+      &lt;p&gt;Ceylon has had support for unit testing since milestone four,
+      but its functionality was pretty limited due lack of annotations and meta-model at that time.&lt;/p&gt;
+      
+      &lt;p&gt;Fortunately this is not true anymore!
+      With version 1.0 of Ceylon we also released a completely rewritten &lt;code&gt;ceylon.test&lt;/code&gt; module.
+      So let’s see what’s new and how we can use it now.&lt;/p&gt;
+      
+      &lt;h2&gt;Tests annotations&lt;/h2&gt;
+      
+      &lt;p&gt;Tests are now declaratively marked with the &lt;code&gt;test&lt;/code&gt; annotation
+      and can be written as top-level functions or methods inside top-level class,
+      in case you want to group multiple tests together.&lt;/p&gt;
+      
+      &lt;p&gt;Inside tests, assertions can be evaluated by using the language’s &lt;code&gt;assert&lt;/code&gt; statement
+      or with the various &lt;em&gt;assert...&lt;/em&gt; functions, for example &lt;code&gt;assertEquals&lt;/code&gt;, &lt;code&gt;assertThatException&lt;/code&gt; etc.&lt;/p&gt;
+      
+      &lt;!-- try: --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;class YodaTest() {
+      
+          test
+          void shouldBeJedi() {
+              assert(yoda is Jedi, 
+                     yoda.midichloriansCount &amp;gt; 1k);
+          }
+      
+          ...
+      }
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;Common initialization logic, which is shared by several tests,
+      can be placed into functions or methods and marked with the &lt;code&gt;beforeTest&lt;/code&gt; or &lt;code&gt;afterTest&lt;/code&gt; annotations.
+      The test framework will invoke them automatically before or after each test in its scope.
+      So top-level initialization functions will be invoked for each test in the same package,
+      while initialization methods will be invoked for each test in the same class.&lt;/p&gt;
+      
+      &lt;!-- try: --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;class DeathStarTest() {
+      
+          beforeTest
+          void init() =&amp;gt; station.chargeLasers();
+      
+          afterTest
+          void dispose() =&amp;gt; station.shutdownSystems();
+      
+          ...
+      }
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;Sometimes you want to temporarily disable a test or a group of tests.
+      This can be done via the &lt;code&gt;ignore&lt;/code&gt; annotation.
+      This way the test will not be executed, but will be covered in the summary tests result.
+      Ignore annotation can be used on test functions/methods, or on classes which contains tests,
+      or even on packages or modules.&lt;/p&gt;
+      
+      &lt;!-- try: --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;test
+      ignore(&quot;still not implemented&quot;)
+      void shouldBeFasterThanLight() {
+      }
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;All these features are of course supported in our Ceylon IDE.
+      Where you can create a &lt;em&gt;Ceylon Test Launch Configuration&lt;/em&gt;
+      or easily select what you want to run in the &lt;em&gt;Ceylon Explorer&lt;/em&gt; and in context menu select &lt;em&gt;Run-As → Ceylon Test&lt;/em&gt;.&lt;/p&gt;
+      
+      &lt;p&gt;&lt;img src=&quot;http://localhost:4242/images/screenshots/ceylon-test-plugin/test-result-view.png&quot; alt=&quot;test-result-view&quot;&gt;&lt;/p&gt;
+      
+      &lt;h2&gt;Test command&lt;/h2&gt;
+      
+      &lt;p&gt;Our command line toolset has been enhanced by the new &lt;code&gt;ceylon test&lt;/code&gt; command,
+      which allows you to easily execute tests in specific modules.&lt;/p&gt;
+      
+      &lt;p&gt;The following command will execute every test in the &lt;code&gt;com.acme.foo/1.0.0&lt;/code&gt; module
+      and will print a report about them to console.&lt;/p&gt;
+      
+      &lt;!-- try: --&gt;
+      
+      
+      &lt;!-- lang:bash --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;$ ceylon test com.acme.foo/1.0.0
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;You can execute specific tests with the &lt;code&gt;--test&lt;/code&gt; option,
+      which takes a list of full-qualified declarations literals as values.
+      The following examples show how to execute only the tests in a specified package, class or function.&lt;/p&gt;
+      
+      &lt;!-- try: --&gt;
+      
+      
+      &lt;!-- lang:bash --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;$ ceylon test --test='package com.acme.foo.bar' com.acme.foo/1.0.0
+      $ ceylon test --test='class com.acme.foo.bar::Baz' com.acme.foo/1.0.0
+      $ ceylon test --test='function com.acme.foo.bar::baz' com.acme.foo/1.0.0
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;More details about this command can be found
+      &lt;a href=&quot;http://localhost:4242/documentation/current/reference/tool/ceylon/subcommands/ceylon-test.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+      
+      &lt;h2&gt;Next version&lt;/h2&gt;
+      
+      &lt;p&gt;In the next version, we will introduce other improvements.&lt;/p&gt;
+      
+      &lt;p&gt;There will be a test suite annotation, which allows you to combine several tests or test suites to run them together:&lt;/p&gt;
+      
+      &lt;!-- try: --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;testSuite({`class YodaTest`,
+                 `class DarthVaderTest`,
+                 `function starOfDeathTestSuite`})
+      shared void starwarsTestSuite() {}
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;You will be able to declare custom test listeners, which will be notified during test execution:&lt;/p&gt;
+      
+      &lt;!-- try: --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;testListeners({`class DependencyInjectionTestListener`,
+                     `class TransactionalTestListener`})
+      package com.acme;
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;And finally you will be able to specify custom implementation of the test executor, which is responsible for running tests:&lt;/p&gt;
+      
+      &lt;!-- try: --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;testExecutor(`class ArquillianTestExecutor`)
+      package com.acme;
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;&lt;em&gt;Please note, that these APIs are not final yet, and can change.
+      If you want to share your thoughts about it, don't hesitate and &lt;a href=&quot;http://localhost:4242/community&quot;&gt;contact us&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>http://localhost:4242/blog/2013/01/11/ceylon-test-plugin</id>
+    <title>Ceylon Test Eclipse Plugin</title>
+    <updated>2013-01-11T00:00:00+00:00</updated>
+    <link href="http://localhost:4242/blog/2013/01/11/ceylon-test-plugin" rel="alternate" type="text/html" />
+    <author>
+      <name>Tom&#225;&#353; Hradec</name>
+    </author>
+    <summary>
+      Today we would like to introduce a new eclipse plugin that allows you to run ceylon unit tests,
+      and easily monitor their execution and their output.
+      
+      It offers similar comfort and integration with IDE as JUnit and even more. Finally, it is part of
+      the Ceylon IDE, so no additional installation is needed.
+      
+      Getting started with your first ceylon unit test
+      
+      The new test framework is in the Ceylon SDK module ceylon.test, though this is still an early version
+      and contains only basic functionality, because we need annotations and meta-model support to make it really
+      flamboyant.
+      
+      So let’s start by importing the ceylon.test module in our module descriptor...
+    </summary>
+    <content type="html">
+      &lt;p&gt;Today we would like to introduce a new eclipse plugin that allows you to run ceylon unit tests,
+      and easily monitor their execution and their output.&lt;/p&gt;
+      
+      &lt;p&gt;It offers similar comfort and integration with IDE as JUnit and even more. Finally, it is part of
+      the Ceylon IDE, so no additional installation is needed.&lt;/p&gt;
+      
+      &lt;h2&gt;Getting started with your first ceylon unit test&lt;/h2&gt;
+      
+      &lt;p&gt;The new test framework is in the Ceylon SDK module &lt;code&gt;ceylon.test&lt;/code&gt;, though this is still an early version
+      and contains only basic functionality, because we need annotations and meta-model support to make it really
+      flamboyant.&lt;/p&gt;
+      
+      &lt;p&gt;So let’s start by importing the &lt;code&gt;ceylon.test&lt;/code&gt; module in our module descriptor and writing our first test.&lt;/p&gt;
+      
+      &lt;!-- try: --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;module com.acme.foo '1.0.0' {
+          import ceylon.test '0.4';
+      }
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;!-- try: --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;import ceylon.test { ... }
+      
+      void shouldAlwaysSuccess() {
+          assertEquals(1, 1);
+      }
+      
+      void shouldAlwaysFail() {
+          fail(&quot;crash !!!&quot;);
+      }
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;These tests can be run like any ordinary ceylon application with the following code:&lt;/p&gt;
+      
+      &lt;!-- try: --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;void run() {
+          TestRunner testRunner = TestRunner();
+          testRunner.addTestListener(PrintingTestListener());
+          testRunner.addTest(&quot;com.acme.foo::shouldAlwaysSuccess&quot;, shouldAlwaysSuccess);
+          testRunner.addTest(&quot;com.acme.foo::shouldAlwaysFail&quot;, shouldAlwaysFail);
+          testRunner.run();
+      }
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;Which outputs:&lt;/p&gt;
+      
+      &lt;!-- lang: none --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;======================== TESTS STARTED =======================
+      com.acme.foo::shouldAlwaysSuccess
+      com.acme.foo::shouldAlwaysFail
+      ======================== TESTS RESULT ========================
+      run:     2
+      success: 1
+      failure: 1
+      error:   0
+      ======================== TESTS FAILED ========================
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;Now let’s see the IDE integrations!&lt;/p&gt;
+      
+      &lt;h2&gt;Launch configuration&lt;/h2&gt;
+      
+      &lt;p&gt;Once you have created your tests, you can create a &lt;em&gt;Ceylon Test Launch Configuration&lt;/em&gt;.
+      In this dialog you can specify the tests to run, their arguments, run-time environment, etc…&lt;/p&gt;
+      
+      &lt;p&gt;&lt;img src=&quot;http://localhost:4242/images/screenshots/ceylon-test-plugin/launch-config.png&quot; alt=&quot;launch-config&quot;&gt;&lt;/p&gt;
+      
+      &lt;p&gt;In the launch configuration you can directly add test methods or whole containers, like classes, packages, modules, or entire projects.&lt;/p&gt;
+      
+      &lt;p&gt;&lt;img src=&quot;http://localhost:4242/images/screenshots/ceylon-test-plugin/select-test.png&quot; alt=&quot;select-test&quot;&gt;&lt;/p&gt;
+      
+      &lt;p&gt;As you would expect, a quick way to run ceylon tests is to right click in the &lt;em&gt;Ceylon Explorer&lt;/em&gt; or in open editor and select &lt;em&gt;Run-As → Ceylon Test&lt;/em&gt;.&lt;/p&gt;
+      
+      &lt;h2&gt;Viewing test results&lt;/h2&gt;
+      
+      &lt;p&gt;The &lt;em&gt;Ceylon Test View&lt;/em&gt; shows you the tests run progress and their status.
+      The toolbar has familiar functions:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;show next/previous failure,&lt;/li&gt;
+      &lt;li&gt;collapse/expand all nodes,&lt;/li&gt;
+      &lt;li&gt;filter to only show failing tests,&lt;/li&gt;
+      &lt;li&gt;scroll lock,&lt;/li&gt;
+      &lt;li&gt;buttons for relaunching or terminating,&lt;/li&gt;
+      &lt;li&gt;test runs history, and&lt;/li&gt;
+      &lt;li&gt;menu for view customisation (show elapsed time or show tests grouped by packages).&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;p&gt;&lt;img src=&quot;http://localhost:4242/images/screenshots/ceylon-test-plugin/test-result-view.png&quot; alt=&quot;test-result-view&quot;&gt;&lt;/p&gt;
+      
+      &lt;h2&gt;Comparing test results&lt;/h2&gt;
+      
+      &lt;p&gt;In &lt;em&gt;Test Runs History&lt;/em&gt; you can review test runs history and switch between runs.&lt;/p&gt;
+      
+      &lt;p&gt;But the real killer feature here happens if you open &lt;em&gt;Compare Test Runs&lt;/em&gt; dialog,
+      where you can see which tests have regressed, which tests have been fixed and
+      which tests have been added or removed between two test runs, making it extra
+      easy to get an idea of what your recent work did to the test suite.&lt;/p&gt;
+      
+      &lt;p&gt;&lt;img src=&quot;http://localhost:4242/images/screenshots/ceylon-test-plugin/test-runs-history.png&quot; alt=&quot;test-runs-history&quot;&gt;&lt;/p&gt;
+      
+      &lt;p&gt;&lt;img src=&quot;http://localhost:4242/images/screenshots/ceylon-test-plugin/compare-test-runs.png&quot; alt=&quot;compare-test-runs&quot;&gt;&lt;/p&gt;
+      
+      &lt;h2&gt;Try it now&lt;/h2&gt;
+      
+      &lt;p&gt;You can try it right away by downloading one of our
+      &lt;a href=&quot;http://localhost:4242/documentation/1.0/ide#installing_the_latest_development_unstable_ide&quot;&gt;Ceylon IDE development build&lt;/a&gt;.&lt;/p&gt;
+    </content>
+  </entry>
+</feed>

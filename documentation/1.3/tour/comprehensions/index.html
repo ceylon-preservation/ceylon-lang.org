@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Comprehensions</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.3/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.3/tour">Tour of Ceylon</a></h3>
+            
+            <ol>
+            <li><a href="/documentation/1.3/tour/basics">Basics</a></li>
+            <li><a href="/documentation/1.3/tour/classes">Classes</a></li>
+            <li><a href="/documentation/1.3/tour/attributes-control-structures">Attributes and variables, control structures</a></li>
+            <li><a href="/documentation/1.3/tour/inheritance">Inheritance, refinement, and interfaces</a></li>
+            <li><a href="/documentation/1.3/tour/anonymous-member-classes">Anonymous and member classes</a></li>
+            <li><a href="/documentation/1.3/tour/sequences">Streams, sequences, and tuples</a></li>
+            <li><a href="/documentation/1.3/tour/typeinference">Type aliases and type inference</a></li>
+            <li><a href="/documentation/1.3/tour/types">Union, intersection, and enumerated types</a></li>
+            <li><a href="/documentation/1.3/tour/generics">Generics</a></li>
+            <li><a href="/documentation/1.3/tour/modules">Packages and modules</a></li>
+            <li><a href="/documentation/1.3/tour/functions">Functions</a></li>
+            <li><a href="/documentation/1.3/tour/named-arguments">Named arguments</a></li>
+            <li><a href="/documentation/1.3/tour/comprehensions">Comprehensions</a></li>
+            <li><a href="/documentation/1.3/tour/language-module">Language module</a></li>
+            <li><a href="/documentation/1.3/tour/initialization">Initialization and constructors</a></li>
+            <li><a href="/documentation/1.3/tour/annotations">Annotations and the metamodel</a></li>
+            <li><a href="/documentation/1.3/tour/interop">Interoperation with Java</a></li>
+            <li><a href="/documentation/1.3/tour/dynamic">Dynamic typing and interoperation with JavaScript</a></li>
+            </ol>
+            
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.3/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.3/examples">Examples</a></h3>
+            
+            <!-- ### [Tutorial videos](/documentation/1.3/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.3/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.3/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.3/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.3/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide_for_intellij"><a href="/documentation/1.3/ide/intellij">Ceylon IDE for IntelliJ</a></h3>
+            
+            <h3 id="ceylon_ide_for_eclipse"><a href="/documentation/1.3/ide/eclipse">Ceylon IDE for Eclipse</a></h3>
+            
+            <h3 id="vertx"><a href="http://vertx.io/docs/vertx-core/ceylon/">Vert.x</a></h3>
+          </div>
+          <div class="point-dark-bottom">
+             
+          </div>
+          <div class="point-light-top"></div>
+          <div class="toc">
+            <ul>
+<li><a href="#comprehensions">Comprehensions
+            </a></li>
+<ul>
+<li><a href="#comprehensions_in_stream_and_sequence_instantiation_expressions">Comprehensions in stream and sequence instantiation expressions
+            </a></li>
+<li><a href="#gotcha">Gotcha!
+            </a></li>
+<li><a href="#comprehensions_as_variadic_arguments">Comprehensions as variadic arguments
+            </a></li>
+<li><a href="#comprehensions_in_named_argument_lists">Comprehensions in named argument lists
+            </a></li>
+</ul>
+<li><a href="#comprehension_clauses">Comprehension clauses
+            </a></li>
+<ul>
+<li><a href="#transformation">Transformation
+            </a></li>
+<li><a href="#filtering">Filtering
+            </a></li>
+<li><a href="#products_and_joins">Products and joins
+            </a></li>
+<li><a href="#comprehensions_beginning_in_if">Comprehensions beginning in <code>if</code>
+            </a></li>
+</ul>
+<li><a href="#there_s_more">There's more...
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+          </div>
+          <div class="point-light-end"></div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Tour of Ceylon
+          </div>
+        </div>
+        <div id="core-page">
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.3/tour/comprehensions.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.3/tour/comprehensions.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="comprehensions-2">Comprehensions</h1>
+          
+          <p id="this_is_the_thirteenth_stop...">This is the thirteenth stop in our Tour of Ceylon. In the
+          <a href="../named-arguments">previous section</a> we looked at invoking functions
+          using named arguments. We're now ready to learn about <em>comprehensions</em>.</p>
+          
+          <h2 id="comprehensions">Comprehensions
+          </h2>
+          
+          
+          <p id="a_comprehension_is_a_convenient...">A comprehension is a convenient way to transform, filter, or combine
+          a stream or streams of values before passing the result to a function.
+          Comprehensions act upon, and produce, instances of <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Iterable.type.html"><code>Iterable</code></a>. A
+          comprehension may appear:</p>
+          
+          <ul>
+          <li>inside braces, producing an stream,</li>
+          <li>inside brackets, producing a sequence,</li>
+          <li>inside a positional argument list, as an argument to a
+          <a href="../basics/#variadic_parameters">variadic parameter</a>, or</li>
+          <li>inside a named argument list, as an <a href="../named-arguments/#iterable_arguments">iterable argument</a>.</li>
+          </ul>
+          
+          
+          <h3 id="comprehensions_in_stream_and_sequence_instantiation_expressions">Comprehensions in stream and sequence instantiation expressions
+          </h3>
+          
+          
+          <p id="the_brace_syntax_for_instantiating...">The brace syntax for <a href="../sequences#streams_iterables">instantiating a stream</a> accepts a
+          comprehension, so we can use a comprehension to transform any
+          iterable:</p>
+          
+          <!-- try-pre:
+              class Person(shared String name) {}
+              value people = { Person("Gavin"), Person("Stephane"), Person("Tom"), Person("Tako") };
+          
+          -->
+          
+          
+          <!-- try-post:
+          
+              print(names);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>{String*} names = { for (p in people) p.name };
+</code></pre>
+          
+          <p id="executing_the_above_line_of...">Executing the above line of code doesn't actually <em>do</em> very much.
+          In particular it doesn't actually iterate the collection <code>people</code>,
+          or evaluate the <code>name</code> attribute. That's because elements of the
+          resulting <code>Iterable</code> are evaluated <em>lazily</em>.</p>
+          
+          <p id="the_bracket_syntax_for_instantiating...">The bracket syntax for <a href="../sequences#sequence_syntax_sugar">instantiating a sequence</a> also accepts a
+          comprehension, so we can use a comprehension to build a sequence:</p>
+          
+          <!-- try-pre:
+              class Person(shared String name) {}
+              value people = { Person("Gavin"), Person("Stephane"), Person("Tom"), Person("Tako") };
+          
+          -->
+          
+          
+          <!-- try-post:
+          
+              print(names);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>String[] names = [ for (p in people) p.name ];
+</code></pre>
+          
+          <p id="since_sequences_are_by_nature...">Since sequences are by nature immutable, executing the previous
+          statement <em>does</em> iterate the <code>people</code> and evaluate their <code>name</code>s.
+          But it's best to think of that as the effect of the bracket syntax,
+          not of the comprehension itself.</p>
+          
+          <p id="now_comprehensions_arent_only_useful...">Now, comprehensions aren't only useful for building iterables and
+          sequences! They're a significantly more general purpose construct.
+          The idea is that you can write a comprehension anywhere the language
+          syntax accepts multiple values. That is to say, anywhere you could
+          write a list of comma-separated expressions, or spread an iterable
+          using <code>*</code>.</p>
+          
+          <p id="aside_actually_we_sometimes_prefer...">(Aside: actually, we sometimes prefer think of the iterable
+          instantiation syntax and sequence instantiation syntax as just a
+          syntactic shorthand for an <a href="../named-arguments/#iterable_arguments">ordinary named argument instantiation
+          expression</a>. That's not
+          <em>precisely</em> how the language specification defines these constructs,
+          but it's a useful mental model to keep handy. So the idea is that
+          anything we can write inside braces or brackets should also be
+          syntactically legal inside a named argument list.)</p>
+          
+          <h3 id="gotcha">Gotcha!
+          </h3>
+          
+          
+          <p id="its_important_to_have_the...">It's important to have the right mental model of where a comprehension
+          starts and finishes and what precisely it means. The comprehension is
+          the bit which starts with <code>for</code>, and ends in an expression. The braces
+          or brackets are <em>not</em> included.</p>
+          
+          <p id="a_comprehension_produces_multiple_values...">A comprehension produces multiple values, not a single value.
+          <em>Therefore a comprehension is not considered an expression and we
+          can't directly assign a comprehension to a value reference!</em> If we
+          just need to store the iterable stream somewhere, without evaluating
+          any of its elements, we can use an iterable instantiation expression,
+          exactly like the one we've just seen.</p>
+          
+          <h3 id="comprehensions_as_variadic_arguments">Comprehensions as variadic arguments
+          </h3>
+          
+          
+          <p id="one_place_where_the_language...">One place where the language "accepts multiple values" is in the
+          positional argument list for a function with a variadic parameter.</p>
+          
+          <!-- try-pre:
+              class Person(shared String name) {}
+              value people = { Person("Gavin"), Person("Stephane"), Person("Tom"), Person("Tako") };
+          
+          -->
+          
+          
+          <pre data-language="ceylon"><code>void printNames(String* names) =&gt; printAll(names, " and ");
+
+printNames(for (p in people) p.name);
+</code></pre>
+          
+          <p id="arguments_to_variadic_parameters_are...">Arguments to variadic parameters are packaged into a sequence, so
+          the comprehension is iterated <em>eagerly</em>, before the result is passed
+          to the receiving function. Therefore, we don't usually use variadic
+          parameters for processing streams in Ceylon. That's OK, because we
+          have an alternative option that is designed precisely with stream
+          processing in mind.</p>
+          
+          <h3 id="comprehensions_in_named_argument_lists">Comprehensions in named argument lists
+          </h3>
+          
+          
+          <p id="now_lets_see_what_makes...">Now let's see what makes comprehensions really useful.</p>
+          
+          <p id="suppose_we_had_a_class...">Suppose we had a class <code>HashMap</code>, with the following signature:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>class HashMap&lt;Key,Item&gt;({Key-&gt;Item*} entries) { ... }
+</code></pre>
+          
+          <p id="according_to_the_previous_chapter...">According to the <a href="../named-arguments/#iterable_arguments">previous chapter</a>, we can pass
+          multiple values to this parameter using a named argument list:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>value numbersByName = HashMap { "one"-&gt;1, "two"-&gt;2, "three"-&gt;3 };
+</code></pre>
+          
+          <p id="if_multiple_values_are_acceptable...">If multiple values are acceptable, so is a comprehension:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>value numNames = ["one", "two", "three"];
+value numbersByName = HashMap { for (i-&gt;w in numNames.indexed) w-&gt;i };
+</code></pre>
+          
+          <p id="going_back_to_our_previous...">Going back to our previous example, we could construct a
+          <code>HashMap&lt;String,Person&gt;</code> like this:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>value peopleByName = HashMap { for (p in people) p.name-&gt;p };
+</code></pre>
+          
+          <p id="as_youve_already_guessed_the...">As you've already guessed, the <code>for</code> clause of a comprehension works
+          a bit like the <code>for</code> loop we met earlier. It takes each element of
+          the <code>Iterable</code> stream in turn. But it does it <em>lazily</em>, when the
+          receiving function actually iterates its argument!</p>
+          
+          <p id="this_means_that_if_the...">This means that if the receiving function never actually needs to
+          iterate the entire stream, the comprehension will never be fully
+          evaluated. This is extremely useful for functions like <code>every()</code> and
+          <code>any()</code>:</p>
+          
+          <!-- try:
+              class Person(shared String name, shared Integer age) {}
+              value people = { Person("Wim", 43), Person("Zus", 20), Person("Jet", 37) };
+          
+              print( every { for (p in people) p.age>=18 } );
+          -->
+          
+          
+          <pre data-language="ceylon"><code>if (every { for (p in people) p.age&gt;=18 }) { ... }
+</code></pre>
+          
+          <p id="the_function_every_in_ceylonlanguage...">The function <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html#every"><code>every()</code></a> in <code>ceylon.language</code> accepts a stream of
+          <code>Boolean</code> values, and stops iterating the stream as soon as it
+          encounters <code>false</code>.</p>
+          
+          <p id="now_lets_see_what_the...">Now let's see what the various bits of a comprehension do.</p>
+          
+          <h2 id="comprehension_clauses">Comprehension clauses
+          </h2>
+          
+          
+          <p id="a_comprehension_is_a_series...">A comprehension is a series of:</p>
+          
+          <ul>
+          <li>
+<code>for</code> clauses, and</li>
+          <li>
+<code>if</code> clauses,</li>
+          <li>followed by an expression.</li>
+          </ul>
+          
+          
+          <p id="youre_allowed_to_freely_mix...">You're allowed to freely mix <code>if</code> and <code>for</code> clauses. But there must
+          be exactly one expression, and it must come last.</p>
+          
+          <h3 id="transformation">Transformation
+          </h3>
+          
+          
+          <p id="the_first_thing_we_can...">The first thing we can do with a comprehension is transform the
+          elements of the stream using an expression to produce a new value
+          for each element. This expression appears at the end of a
+          comprehension. It's the thing that the resulting <code>Iterable</code> actually
+          iterates!</p>
+          
+          <p id="for_example_this_comprehension">For example, this comprehension</p>
+          
+          <!-- try:
+              class Person(name) { shared String name; }
+              value people = { Person("Gavin"), Person("Stephane"), Person("Tom"), Person("Tako") };
+          
+              printAll { for (p in people) p.name->p };
+          -->
+          
+          
+          <pre data-language="ceylon"><code>for (p in people) p.name-&gt;p
+</code></pre>
+          
+          <p id="results_in_an_iterablestringperson_for...">results in an <code>Iterable&lt;String-&gt;Person&gt;</code>. For each element of <code>people</code>,
+          a new <code>Entry&lt;String,Person&gt;</code> is constructed by the <code>-&gt;</code> operator.</p>
+          
+          <h3 id="filtering">Filtering
+          </h3>
+          
+          
+          <p id="the_if_clause_of_a...">The <code>if</code> clause of a comprehension allows us to skip certain elements
+          of the stream. This comprehension produces a stream of numbers which
+          are divisible by <code>3</code>.</p>
+          
+          <!-- try:
+              printAll { for (i in 0..100) if (i%3==0) i };
+          -->
+          
+          
+          <pre data-language="ceylon"><code>for (i in 0..100) if (i%3==0) i
+</code></pre>
+          
+          <p id="its_especially_useful_to_filter...">It's especially useful to filter using <code>if (exists ...)</code>.</p>
+          
+          <!-- try:
+              class Person(name) {
+                  shared String name;
+                  shared variable Person? spouse = null;
+                  shared actual String string = name;
+              }
+              value wim = Person("Wim");
+              value zus = Person("Zus");
+              value jet = Person("Jet");
+              wim.spouse = jet;
+              jet.spouse = wim;
+              value people = { wim, zus, jet };
+          
+              printAll { for (p in people) if (exists s = p.spouse) p->s };
+          -->
+          
+          
+          <pre data-language="ceylon"><code>for (p in people) if (exists s = p.spouse) p-&gt;s
+</code></pre>
+          
+          <p id="you_can_even_use_multiple...">You can even use <a href="../attributes-control-structures#condition_lists">multiple <code>if</code> conditions</a>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>for (p in people) 
+    if (exists s = p.spouse, 
+        nonempty inlaws = s.parents) 
+                p-&gt;inlaws
+</code></pre>
+          
+          <h3 id="products_and_joins">Products and joins
+          </h3>
+          
+          
+          <p id="a_comprehension_may_have_more...">A comprehension may have more than one <code>for</code> clause. This allows us
+          to combine two streams to obtain a stream of the values in their
+          cartesian product:</p>
+          
+          <!-- try:
+              class Node(Integer x, Integer y) { 
+                  shared actual String string = "(``x``,``y``)"; 
+              }
+          
+              printAll { for (i in 0..5) for (j in 0..5) Node(i,j) };
+          -->
+          
+          
+          <pre data-language="ceylon"><code>for (i in 0..100) for (j in 0..10) Node(i,j)
+</code></pre>
+          
+          <p id="even_more_usefully_it_lets...">Even more usefully, it lets us obtain a stream of associated values,
+          a lot like a <code>join</code> in SQL.</p>
+          
+          <!-- try:
+              class Employee(name) { shared String name; }
+              class Organisation(name, employees) { shared String name; shared Employee* employees; }
+              value orgs = { Organisation("RedHat", Employee("Joe"), Employee("Jack")),
+                             Organisation("Fedora", Employee("Lisa")) };
+          
+              printAll { for (o in orgs) for (e in o.employees) o.name->e.name };
+          -->
+          
+          
+          <pre data-language="ceylon"><code>for (o in orgs) for (e in o.employees) e.name
+</code></pre>
+          
+          <h3 id="comprehensions_beginning_in_if">Comprehensions beginning in <code>if</code>
+          </h3>
+          
+          
+          <p id="a_comprehension_may_begin_with...">A comprehension may begin with an <code>if</code> clause. For example, this
+          comprehension:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>[ if (x&gt;=0.0) x^0.5 ]
+</code></pre>
+          
+          <p id="produces_the_singleton_20_if...">Produces the singleton <code>[2.0]</code> if <code>x==4.0</code>, and the empty tuple
+          <code>[]</code> if <code>x&lt;0.0</code>. It's similar to the following <code>if</code> expression:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>if (x&gt;=0.0) then [x^0.5] else []
+</code></pre>
+          
+          <p id="likewise_the_comprehension">Likewise, the comprehension:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>{ if (exists list) for (x in list) x.string }
+</code></pre>
+          
+          <p id="produces_an_empty_stream_if...">Produces an empty stream if <code>list</code> is <code>null</code>. It's similar to
+          this <code>if</code> expression:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>if (exists list) then { for (x in list) x.string } else {}
+</code></pre>
+          
+          <p id="however_theres_one_important_difference...">However, there's one important difference: conditions inside
+          brace-delimited comprehensions are evaluated <em>lazily</em>.</p>
+          
+          <h2 id="there_s_more">There's more...
+          </h2>
+          
+          
+          <p id="next_were_going_to_discuss...">Next we're going to discuss some of the basic types from the
+          <a href="../language-module">language module</a>, in particular numeric types, and
+          introduce the idea of operator polymorphism.</p>
+          
+          <p id="you_can_read_more_about...">You can read more about working with iterable objects in Ceylon in
+          <a href="/blog/2012/07/12/tricks-with-iterable">this blog post</a>.</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

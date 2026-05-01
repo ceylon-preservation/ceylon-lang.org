@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Assertions in Ceylon</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2012/10/29/ceylon-m4-analytical-engine/">Ceylon M4 and Ceylon IDE M4 released!</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2012/10/31/ceylon-webinar/">Ceylon webinar Monday 5th of November</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="assertions_in_ceylon">
+            Assertions in Ceylon
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              30 Oct 2012
+            </div>
+            <div class="tags">
+            </div>
+          </div>
+          <div class="body">
+            <p id="a_distinguishing_characteristic_of_ceylon...">A distinguishing characteristic of Ceylon is that exceptions aren't used
+            to represent programming errors. Well, that statement is a little vague
+            or even over-broad, so let me make it more concrete with several
+            examples of exceptions that I think always indicate a programming error
+            in Java:</p>
+            
+            <ul>
+            <li><code>NullPointerException</code></li>
+            <li><code>ClassCastException</code></li>
+            <li><code>IndexOutOfBoundsException</code></li>
+            </ul>
+            
+            
+            <p id="the_big_problem_with_these...">The big problem with these exceptions is that they undermine the static
+            type system.</p>
+            
+            <p id="sure_all_exceptions_work_around...">Sure, all exceptions work around the type system—that's basically
+            what we have exceptions <em>for</em>. And when you're talking about exceptions
+            that represent transient conditions that can legitimately occur in a
+            production system, and you're using the exception to transmit information
+            from one part of the system (that can fail) to a completely different
+            part of the system (that knows what to do in the case of failure) without
+            forcing awareness of the failure onto every bit of intermediate code that
+            occurs between these two bits of the system, then I think that's very
+            reasonable.</p>
+            
+            <p id="but_thats_not_the_role...">But that's not the role of the exceptions above. These exceptions:</p>
+            
+            <ul>
+            <li>should <em>never</em> occur at runtime in a production system</li>
+            <li>represent problems that must be fixed by the programmer editing code</li>
+            <li>tend to hide the "corner" condition they represent from someone reading
+            the code</li>
+            <li>are much too low-level to carry any useful information about the
+            real problem</li>
+            </ul>
+            
+            
+            <p id="instead_ceylon_tries_to_encode...">Instead, Ceylon tries to encode these "corner" conditions into the type
+            system. The compiler won't let you write:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>print(process.arguments[1].uppercased);
+</code></pre>
+            
+            <p id="this_code_isnt_well_typed...">This code isn't well-typed because <code>process.arguments[1]</code> is of type
+            <code>String?</code>, reflecting the fact that there might not be a second element
+            in the list <code>process.arguments</code>.</p>
+            
+            <p id="instead_youre_forced_to_at...">Instead you're forced to at least take into account the possibility that
+            there are less than two arguments:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>if (exists arg = process.arguments[1]) {
+    print(arg.uppercased);
+}
+else {
+    throw Exception("missing second argument");
+}
+</code></pre>
+            
+            <p id="i_know_some_of_you...">I know some of you reading this are itching to condemn Ceylon for making
+            you write three lines of code instead of one. But, as I find myself
+            repeating over and over, we spend <em>much</em> more time reading other people's
+            code than we spend writing our own code, and the second code example
+            makes it much clearer to the reader that there is another case that
+            needs to be taken into account. Furthermore the exception carries much
+            more information about what went wrong than an <code>IndexOutOfBoundsException</code>
+            would.</p>
+            
+            <p id="but_what_if_ask_my...">But <em>what if</em>, ask my doubters, I already <em>know</em> that there is more than
+            one argument? What if my code looks like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>if (process.arguments.size&gt;=3) {
+    if (exists arg = process.arguments[1]) {
+        print(arg.uppercased);
+    }
+    else {
+        throw Exception("missing second argument");
+    }
+}
+</code></pre>
+            
+            <p id="in_this_case_its_clear...">In this case, it's clear that the exception can <em>never</em> occur. I'm
+            forced to write code that simply <em>never</em> executes at runtime, under any
+            scenario!</p>
+            
+            <p id="well_thats_a_great_point...">Well, that's a great point, and it's exactly why we've introduced the
+            <code>assert</code> statement in M4. An assertion failure, unlike an exception,
+            always represents a programming error—in production code, an
+            assertion should never fail.</p>
+            
+            <p id="now_sure_assertion_failures_are...">Now, sure, assertion failures <em>are</em> represented by a kind of exception,
+            but unlike <code>NullPointerException</code> or <code>IndexOutOfBoundsException</code>, this
+            exception is <em>much</em> more likely to carry useful information about the
+            cause of the failure. And the assertion helps document the assumptions
+            made by the code, for the benefit of people coming along and reading it
+            later.</p>
+            
+            <p id="we_can_rewrite_the_example...">We can rewrite the example above like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>if (process.arguments.size&gt;=3) {
+    assert(exists arg = process.arguments[1]);
+    print(arg.uppercased);
+}
+</code></pre>
+            
+            <p id="or_even_like_this">Or even like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>value arg = process.arguments[1];
+if (process.arguments.size&gt;=3) {
+    assert(exists arg);
+    print(arg.uppercased);
+}
+</code></pre>
+            
+            <p id="you_can_assert_an_exists...">You can <code>assert</code> an <code>exists</code>, <code>nonempty</code>, <code>is</code>, or boolean condition,
+            all the same options you have with <code>if</code> or <code>while</code>.</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Object person = ... ;
+assert (is Person person);
+print(person.name);
+</code></pre>
+            
+            <p id="note_that_this_is_a...">Note that this is a <em>lot</em> like a traditional Java-style typecast, but
+            the syntax reflects a much more disciplined approach to the problem.</p>
+            
+            <p id="youre_encouraged_to_add_some...">You're encouraged to add some extra information to document the
+            assertion:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>value arg = process.arguments[1];
+if (process.arguments.size&gt;=3) {
+    doc "second argument must be provided"
+    assert(exists arg);
+    print(arg.uppercased);
+}
+</code></pre>
+            
+            <p id="the_documentation_appears_in_the...">The documentation appears in the assertion failure message.</p>
+            
+            <p id="this_documentation_becomes_especially_useful...">This documentation becomes especially useful if start using Extract
+            Function to refactor this code:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>void printSecondArg(String? arg) {
+    doc "second argument must be provided"
+    assert(exists arg);
+    print(arg);
+}
+
+value arg = process.arguments[1];
+if (process.arguments.size&gt;=3) {
+    printSecondArg(arg);
+}
+</code></pre>
+            
+            <p id="in_future_the_ceylon_documentation...">In future, the Ceylon documentation tool will automatically include
+            assertions like this about method parameter values in a list of method
+            preconditions.</p>
+            
+            <p id="a_single_assert_statement_may...">A single <code>assert</code> statement may assert multiple conditions, for
+            example:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>value first = process.arguments[0];
+value second = process.arguments[1];
+if (process.arguments.size&gt;=3) {
+    assert(exists first, exists second);
+    print(first + ", " + second);
+}
+</code></pre>
+            
+            <p id="for_the_record_by_popular...">For the record, by popular demand, Ceylon M4 even lets us include multiple
+            conditions in an <code>if</code> or <code>while</code> statement:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>if (exists first = process.arguments[0],
+    exists second = process.arguments[1]) {
+    print(first + ", " + second);
+}
+</code></pre>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2012/10/30/assertions/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

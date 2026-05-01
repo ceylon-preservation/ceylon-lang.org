@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: New features coming soon</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2014/10/28/cli-plugins/">Ceylon command-line plugins</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2014/12/01/version-ranges/">Useless lying version ranges</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="new_features_coming_soon">
+            New features coming soon
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              03 Nov 2014
+            </div>
+            <div class="tags">
+            </div>
+          </div>
+          <div class="body">
+            <p id="weve_been_spending_time_discussing...">We've been spending time discussing the priorities for development
+            of Ceylon 1.1.5 and 1.2, including soliciting
+            <a href="/blog/2014/10/19/plan/">community feedback</a>. The plan is still
+            suprisingly fluid right now, but there are a number of things that
+            we've already started working on, or have decided to start working
+            on, and so in the interest of transparency, I thought I would share
+            them.</p>
+            
+            <p id="warning_were_not_committing_to..."><em>Warning:</em> we're not committing to a timeframe or release version for
+            most of these features. It's merely a summary of what we're working
+            on now, or plan to start work on soon.</p>
+            
+            <h2 id="serialization">Serialization</h2>
+            
+            <p id="as_already_announced_ceylonlanguage_115...">As already announced, <code>ceylon.language</code> 1.1.5 will feature an API for
+            <a href="https://github.com/ceylon/ceylon-spec/issues/704">Serialization</a>.
+            Note that this API does not itself specify a serialization format.
+            Rather, it's a general-purpose and platform-neutral facility for
+            marshalling objects to and from a serialized stream. Serialization
+            libraries founded on this API may serialize to text-based formats
+            like JSON or XML, to binary formats, or even to a database via ORM.</p>
+            
+            <p id="work_on_this_api_is...">Work on this API is already well-advanced. Tom has already done the
+            Java implementation, and Enrique has got it working in JavaScript.</p>
+            
+            <h2 id="type_argument_inference_for_function_references">Type argument inference for function references</h2>
+            
+            <p id="in_ceylon_11_we_made...">In Ceylon 1.1, we made it possible to leave off the type of a
+            parameter of an anonymous function that occurs in an argument list,
+            letting the type be inferred by the compiler, for example:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>{Float*} measurements = ... ;
+Float product = measurements.fold(1.0)((x,y)=&gt;x*y);
+</code></pre>
+            
+            <p id="in_ceylon_115_ive_extended...">In Ceylon 1.1.5, I've extended this approach to cover references
+            to generic functions. So now, instead of this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>{Float*} measurements = ... ;
+Float product = measurements.fold(1.0)(times&lt;Float&gt;);
+</code></pre>
+            
+            <p id="you_can_write_this">You can write this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>{Float*} measurements = ... ;
+Float product = measurements.fold(1.0)(times);
+</code></pre>
+            
+            <p id="this_even_works_for_static...">This even works for static value references, so instead of this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>{[Float+]*} sequences = ... ;
+{Float*} heads = sequences.map(Iterable&lt;Float&gt;.first);
+</code></pre>
+            
+            <p id="you_can_write_simply_this">You can write simply this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>{[Float+]*} sequences = ... ;
+{Float*} heads = sequences.map(Iterable.first);
+</code></pre>
+            
+            <p id="this_is_already_implemented_and...">This is already implemented, and you can try it out in git. It will
+            be released in Ceylon 1.1.5.</p>
+            
+            <h2 id="named_constructors">Named constructors</h2>
+            
+            <p id="in_ceylon_11_there_is...">In Ceylon 1.1, there is only one "constructor" of a class, the body
+            of the class itself. For the vast majority of classes this is far
+            more elegant and convenient. But in a minority of cases, there is
+            a true need to have multiple initialization paths, and so we've
+            designed a <code>new</code> syntax to support that. It took us a while to come
+            up with something elegant and regular that didn't break the block
+            structure of the language or the rules about definite initialization,
+            but I'm very happy with the final outcome.</p>
+            
+            <p id="since_ceylon_doesnt_have_overloading...">Since Ceylon doesn't have overloading (except for Java interop),
+            constructors have distinct names.</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>class Point {
+    shared Float x;
+    shared Float y;
+
+    //the "default" constructor
+    shared new Point(Float x, Float y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    //an additional constructor
+    shared new Diagonal(Float d) {
+        x = (d^2/2)^0.5 * d.sign;
+        y = x;
+    }
+}
+</code></pre>
+            
+            <p id="every_constructor_must_initialize_all...">Every constructor must initialize all members which are left
+            uninitialized by the body of the class, and must delegate to a
+            constructor of the superclass (in this case, they delegate to
+            <code>Basic()</code> by default). Now we can create a <code>Point</code> in two
+            different ways:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Point p1 = Point(2.0, 3.0);  //call the default constructor
+Point p2 = Point.Diagonal(1.0);
+</code></pre>
+            
+            <p id="the_typechecker_already_supports_constructors...">The typechecker already supports constructors, and Tom has made
+            good progress on implementing this feature for the Java backend.
+            I'm not sure if this will make it into 1.1.5, but if it does
+            then we might actually need to rename 1.1.5 to 1.2, given that
+            this is a pretty significant enhancement to the language itself.</p>
+            
+            <h2 id="extensions_to_the_expression_syntax">Extensions to the expression syntax</h2>
+            
+            <p id="were_making_several_extensions_to...">We're making several extensions to the expression syntax. These
+            features are already supported in the typechecker, but not yet
+            by the backends. Note that these features are especially useful
+            when combined with certain other features of the language, like
+            comprehensions, anonymous functions, named argument lists, and
+            fat arrow function definitions.</p>
+            
+            <h3 id="inline_object_expressions">Inline <code>object</code> expressions</h3>
+            
+            <p id="an_inline_anonymous_object_expression...">An <a href="https://github.com/ceylon/ceylon-spec/issues/333">inline anonymous <code>object</code> expression</a>
+            is very similar to an anonymous class in Java, and is useful in
+            essentially the same cases. For example:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>printAll(object satisfies {Integer+} {
+    iterator() =&gt;
+        object satisfies Iterator&lt;Integer&gt; {
+            variable value current = 0;
+            next() =&gt; current++;
+        };
+});
+</code></pre>
+            
+            <h3 id="let_expressions">
+<code>let</code> expressions</h3>
+            
+            <p id="a_let_expression_allows_the...">A <a href="https://github.com/ceylon/ceylon-spec/issues/747"><code>let</code> expression</a>
+            allows the definition of new <code>value</code>s within an expression. For
+            example:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Float d = ... ;
+value ptl = let (x = (d^2/2)^0.5 * d.sign) Point(x,x);
+</code></pre>
+            
+            <h3 id="inline_if_and_switch_expressions">Inline <code>if</code> and <code>switch</code> expressions</h3>
+            
+            <p id="ceylons_then_and_else_operators...">Ceylon's <code>then</code> and <code>else</code> operators are nice, but they don't
+            do anything special in terms of flow-sensitive typing, so we
+            quite often run into cases where we're forced to use a whole
+            <code>if</code> or <code>switch</code> statement in a block. To alleviate that minor
+            source of discomfort, we're now going to let you use
+            <a href="https://github.com/ceylon/ceylon-spec/issues/503"><code>if</code></a> and
+            <a href="https://github.com/ceylon/ceylon-spec/issues/556"><code>switch</code></a>
+            within expressions. For example:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>String string(Object it)
+        =&gt; if (is Person it) 
+           then it.name 
+           else it.string;
+</code></pre>
+            
+            <p id="or">Or:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>String name(Person|Org it)
+        =&gt; switch (it) 
+           case (is Org) it.tradingName 
+           case (is Person) it.firstName + " " + it.lastName;
+</code></pre>
+            
+            <h2 id="cayla_web_framework">Cayla web framework</h2>
+            
+            <p id="frameworks_for_developing_web_applications...">Frameworks for developing web applications are a top request from
+            the community. After some discussion, we've decided to focus first
+            on the <em>server side</em>, and come back later to the problem of
+            client-side web frameworks. Note that there's no problem at all
+            with using a native JS client-side web framework to call a Ceylon
+            module compiled to JavaScript.</p>
+            
+            <p id="julien_is_going_to_work...">Julien is going to work on getting
+            <a href="https://github.com/vietj/ceylon-cayla">Cayla</a>, a web framework
+            for use on Vert.x, ready for release.</p>
+            
+            <p id="to_showcase_cayla_ceylon_and...">To showcase Cayla, Ceylon, and Vert.x, Julien is going to do a
+            partial port of Ceylon Herd from Java/Play to Ceylon/Cayla. That
+            should make for a great demo.</p>
+            
+            <h2 id="sdk_modules_ceylonhtml_and_ceylonpromise">SDK modules <code>ceylon.html</code> and <code>ceylon.promise</code>
+</h2>
+            
+            <p id="cayla_will_offer_a_choice...">Cayla will offer a choice of templating technologies, but one of
+            the options we obviously want to offer is templates written in
+            Ceylon. In order to avoid the cost of rebuilding the template
+            from scratch on each request, <code>ceylon.html</code> needs to be enhanced
+            to support a mix of static nodes and nodes which are created or
+            rendered dynamically.</p>
+            
+            <p id="work_on_cayla_will_also...">Work on Cayla will also likely necessitate improvements to
+            <code>ceylon.promise</code>, and, in particular, we need to make this
+            module cross-platform (right now it is only available on the
+            JVM).</p>
+            
+            <h2 id="java_ee_integration">Java EE integration</h2>
+            
+            <p id="toby_crawley_has_started_work...">Toby Crawley has started work on integration with Java EE. The
+            first order of business here is to make it easy to write a
+            servlet in Ceylon and package it into a <code>war</code> archive. After
+            that, we'll need to make sure Ceylon works well with CDI, JPA,
+            JAX-RS, etc.</p>
+            
+            <h2 id="improved_debugging_in_ceylon_ide">Improved debugging in Ceylon IDE</h2>
+            
+            <p id="david_is_going_to_work...">David is going to work on making Eclipse's debugger work better
+            with Ceylon. This is now the only really major feature missing
+            from Ceylon IDE, so when he's done with that, he's going to move
+            onto the #1 requested feature from the Ceylon community, which
+            is...</p>
+            
+            <h2 id="intellij_based_ide_for_ceylon">IntelliJ-based IDE for Ceylon</h2>
+            
+            <p id="the_intellij_plugin_for_ceylon...">The IntelliJ plugin for Ceylon is still rudimentary, and not yet
+            ready for release. But now that the Eclipse-based IDE is feature
+            complete, we're going to refocus our tooling development efforts
+            on IntelliJ.</p>
+            
+            <p id="note_that_this_doesnt_really...">Note that this doesn't really represent a change of direction
+            for us; I'm an Eclipse user, I prefer Eclipse, and I see no good
+            reason to change to IntelliJ. That's especially true since
+            whenever I discover a nice feature of IntelliJ, I just go ahead
+            and reimplement it in Ceylon IDE ;-) However, we recognize that
+            there are plenty of folks on the other side of the fence, who,
+            preferring IntelliJ, and likewise seeing no reason to change,
+            deserve a great plugin for Ceylon. So I hereby promise that we
+            will have absolutely awesome tooling for <em>both</em> these IDEs.</p>
+            
+            <h2 id="source_maps">Source maps</h2>
+            
+            <p id="to_make_it_easy_to...">To make it easy to debug Ceylon code running on a JavaScript
+            virtual machine, Enrique is going to add support for source maps
+            to <code>ceylon compile-js</code>.</p>
+            
+            <h2 id="consume_typescript_interface_definitions">Consume Typescript interface definitions</h2>
+            
+            <p id="microsofts_typescript_project_which_recently...">Microsoft's Typescript project (which recently took inspiration
+            from Ceylon by adopting our approach to union types and flow
+            sensitive typing) has put a whole lot of work into defining
+            statically typed definitions of important APIs in the JavaScript
+            world. Now that Ceylon 1.1 has <a href="/blog/2014/10/13/dynamic-interfaces">dynamic interfaces</a>
+            it's at least in principle possible to have a well-defined
+            transformation from a Typescript API definition to a Ceylon type.
+            This could take the form of a mechanical source translator, or
+            even a "model loader" for the Ceylon compiler. Stef is going to
+            investigate this.</p>
+            
+            <h2 id="more">More</h2>
+            
+            <p id="the_above_is_an_incomplete...">The above is an incomplete list. If the thing you're waiting for
+            (Android!!) isn't on that list, that doesn't mean we don't want
+            to work on it, it just means I don't yet have a concrete plan for
+            actually starting work on it right now. Feel very welcome to bug
+            us about it in comments or on the mailing list or IRC :-)</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2014/11/03/plan/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

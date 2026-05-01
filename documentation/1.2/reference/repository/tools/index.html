@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Dealing with repositories on the command line</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.2/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.2/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.2/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.2/examples">Examples</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.2/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.2/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.2/reference">Reference</a></h3>
+            
+            <ul>
+<ul>
+<li><a href="#default_repository_lookup">Default repository lookup
+            </a></li>
+<li><a href="#specifying_repositories">Specifying repositories
+            </a></li>
+<li><a href="#repository_aliases">Repository aliases
+            </a></li>
+</ul>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.2/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.2/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.2/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_12_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.2, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.2/reference/repository/tools.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.2/reference/repository/tools.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="dealing_with_repositories_on_the_command_line">Dealing with repositories on the command line</h1>
+          
+          <p id="quite_a_number_of_the...">Quite a number of the <code>ceylon</code> sub commands deal with <a href="..">Module Repositories</a>
+          and all of them support at least a basic set of options to change the default behavior
+          for dealing with them.</p>
+          
+          <p id="but_lets_first_start_by...">But let's first start by detailing what exactly <em>is</em> the default behavior.</p>
+          
+          <h3 id="default_repository_lookup">Default repository lookup
+          </h3>
+          
+          
+          <p id="almost_all_tools_that_deal...">Almost all tools that deal with repositories will either have to look up specific modules
+          or they need to search for modules using certain search criteria.
+          Ror example you typed <code>ceylon run my.module/1.2.3</code> so the system will go look for a
+          module named "my.module" with version "1.2.3" and see if there's a artifact containing
+          compiled code for the Java Virtual Machine.</p>
+          
+          <p id="now_by_default_ceylon_goes...">Now by default Ceylon goes looking in a fixed list of repositories in the exact order as shown below,
+          choosing the first module that matches:</p>
+          
+          <ul>
+          <li>
+<strong>SYSTEM</strong> - The <strong>distribution repository</strong> which is located wherever Ceylon
+          is installed at <code>$CEYLON_HOME/repo</code>. It contains the modules required by Ceylon itself
+          and all its tools.</li>
+          <li>
+<strong>CACHE</strong> - The <strong>cache repository</strong> which by default is located in <code>$HOME/.ceylon/cache</code>
+          and contains all the modules that were at some point downloaded from remote servers.</li>
+          <li>
+<strong>LOCAL</strong> - The <strong>local repository</strong> refers to the repository that can be found
+          in the current directory where the tool is executed. By default this will be in a
+          directory named <code>modules</code>.</li>
+          <li>
+<strong>USER</strong> - The <strong>user repository</strong> normally located in <code>$HOME/.ceylon/repo</code>
+          holds the modules that are available to the user anywhere on their system regardless of
+          the current folder they are in when executing a Ceylon tool.</li>
+          <li>
+<strong>REMOTE</strong> - The <strong>Herd</strong>, the official <a href="https://herd.ceylon-lang.org">remote Ceylon repository</a>
+          that contains all the official Ceylon SDK modules and all other freely
+          available 3rd party modules. By default this is <a href="https://herd.ceylon-lang.org">https://herd.ceylon-lang.org</a>.</li>
+          <li>
+<strong>MAVEN</strong> - The <strong>Maven repository</strong> where Maven artifacts are looked up.</li>
+          </ul>
+          
+          
+          <p id="if_the_module_you_need...">If the module you need is in any of these repositories you won't have to do a thing
+          to run it, copy it, query it or whatever else you want. All the tools that deal with
+          repositories will be able to find it by default.</p>
+          
+          <p id="but_what_if_your_module...">But what if your module is stored somewhere else?</p>
+          
+          <h3 id="specifying_repositories">Specifying repositories
+          </h3>
+          
+          
+          <p id="to_specify_that_you_want...">To specify that you want to add another repository that isn't in the above list
+          you use the <code>--rep</code> command line argument, for example:</p>
+          
+          <pre><code>--rep /path/to/my/repository
+</code></pre>
+          
+          <p id="of_course_you_can_refer...">Of course you can refer to remote servers as well:</p>
+          
+          <pre><code>--rep https://herd.mycompany.example.com
+</code></pre>
+          
+          <p id="and_its_perfectly_acceptable_to...">And it's perfectly acceptable to specify as many <code>--rep</code> arguments as you need.</p>
+          
+          <p id="nb_you_have_to_be...">NB: You have to be aware of the fact that specifying <em>any</em> <code>--rep</code> argument on the command
+          line overrides <em>all</em> of the predefined local repositories. In the case of the list above
+          this means that the <code>modules</code> repository will be overridden in favor of the one(s) provided
+          by the <code>--rep</code> argument(s).</p>
+          
+          <p id="another_important_argument_for_specifying...">Another important argument for specifying a repository is used by those tools that need to
+          create or copy modules. These use the argument <code>--out</code> to specify a <em>destination</em> repository,
+          like this:</p>
+          
+          <pre><code>--out /my/output/repo
+</code></pre>
+          
+          <p id="and_finally_there_are_two...">And finally there are two other, more specialized, arguments for specifying repositories:</p>
+          
+          <ul>
+          <li>
+<code>--cacherep</code> can be used to change the location where downloaded modules will be stored and looked up</li>
+          <li>
+<code>--sysrep</code> can be used to change the location where the system modules needded for Ceylon itself
+          are looked up. You should never need to use this.</li>
+          </ul>
+          
+          
+          <p id="but_what_if_you_want...">But what if you want to specify your repositories to the exclusion of everything else?
+          What if you don't want to make sure <em>none</em> of the predefined repositories are searched?
+          For that you can use the argument <code>--no-default-repositories</code>, meaning that with this:</p>
+          
+          <pre><code>--no-default-repositories --rep /the/one/and/only
+</code></pre>
+          
+          <p id="the_tools_will_only_look...">the tools will <em>only</em> look in the path(s) you specified with the <code>--rep</code> argument(s).</p>
+          
+          <p id="nb_this_is_not_entirely...">NB: This is not entirely true. The tools will still use the <code>SYSTEM</code> and <code>CACHE</code> repositories.
+          We can't do anything about <code>SYSTEM</code>, Ceylon needs it to function correctly, but if you really want
+          to get rid of even the <code>CACHE</code> you can specify <code>--offline</code> along with <code>--no-default-repositories</code>.</p>
+          
+          <h3 id="repository_aliases">Repository aliases
+          </h3>
+          
+          
+          <p id="in_the_list_above_where...">In the list above where all the repositories were introduced each of them was given a name.
+          This name is the repository's "alias" as defined by Ceylon's configuration. We'll get back
+          to that but it's important to explain what those aliases are for: you can use an alias
+          everywhere you can use a path or url to a repository by using a plus sign (<code>+</code>) followed
+          by the alias. So an argument like this:</p>
+          
+          <pre><code>--out +USER
+</code></pre>
+          
+          <p id="would_mean_that_we_want...">would mean that we want any modules to be written to the "USER" repository (which by default points
+          to <code>$HOME/.ceylon/repo</code> as mentioned earlier).</p>
+          
+          <p id="so_far_weve_only_seen...">So far we've only seen and talked about the predefined aliases like <code>USER</code>, <code>LOCAL</code> and <code>SYSTEM</code>,
+          but it's entirely possible to create your own aliases in the Ceylon configuration file. You can
+          read in detail how to do that <a href="../../tool/config/#_repositories_section">here</a></p>
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li><a href="..">Module repositories</a></li>
+          <li><a href="../../tool/config/#_repositories_section">Repository configuration</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

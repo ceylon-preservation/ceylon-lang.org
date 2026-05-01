@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: The signature of reduce() in Ceylon</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2013/12/16/ceylon-test-news/">When ceylon.test met meta-model</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2014/02/05/first-ceylon-tour-in-paris/">First Ceylon Tour in Paris</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="the_signature_of_reduce_in_ceylon">
+            The signature of reduce() in Ceylon
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              23 Dec 2013
+            </div>
+            <div class="tags">
+            </div>
+          </div>
+          <div class="body">
+            <p id="the_iterable_interface_defines_a...">The <code>Iterable</code> interface defines a method named <code>fold()</code> with
+            this signature:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Result fold&lt;Result&gt;(Result initial)
+        (Result accumulating(Result partial, Element element))
+</code></pre>
+            
+            <p id="where_element_is_the_element...">Where <code>Element</code> is the element type of the <code>Iterable</code>. This
+            method accepts an initial value, and an accumulator function
+            which is applied to each element of the iterable object in
+            turn. For example:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Integer sum = (1..10).fold(0)(plus);
+</code></pre>
+            
+            <p id="sometimes_we_dont_need_the...">Sometimes, we don't need the initial value, since can simply
+            start accumulating from the first element. Following the
+            convention used by Scala and F#, let's call this function
+            <code>reduce()</code>. Then we would like to be able to write:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Integer sum = (1..10).reduce(plus);
+</code></pre>
+            
+            <p id="but_what_should_the_signature...">But what should the signature of this method be? A first stab
+            might give us:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Element reduce(Element accumulating(Element partial, Element elem))
+</code></pre>
+            
+            <p id="but_this_signature_is_a...">But this signature is a bit more restrictive than it should
+            be. It's perfectly reasonable for the result type of <code>reduce()</code>
+            to be a supertype of the element type. Scala handles this using
+            a lower bound type constraint. Transliterating this to Ceylon,
+            using an imaginary syntax for lower bounds, it would look like:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Result reduce&lt;Result&gt;(Result accumulating(Result partial, Element elem))
+        given Result abstracts Element
+</code></pre>
+            
+            <p id="here_the_lower_bound_constraint...">Here the lower bound constraint ensures that the first element
+            is assignable to the first parameter of the accumulator
+            function.</p>
+            
+            <p id="but_ceylon_doesnt_have_lower...">But Ceylon doesn't have lower bound type constraints. Why?
+            Well, because it seems that we can in practice almost always
+            use union types to achieve the same effect. So let's try that:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Result|Element reduce&lt;Result&gt;(
+        Result accumulating(Result|Element partial, Element element))
+</code></pre>
+            
+            <p id="now_lets_try_to_implement...">Now let's try to implement this signature. One possibility
+            would be:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Result|Element reduce&lt;Result&gt;(
+        Result accumulating(Result|Element partial, Element element)) {
+    assert (!empty, is Element initial = first);
+    variable Result|Element partial = initial;
+    for (elem in rest) {
+        partial = accumulating(partial, elem);
+    }
+    return partial;
+}
+</code></pre>
+            
+            <p id="the_assertion_handles_the_case...">The assertion handles the case of an empty <code>Iterable</code>, resulting
+            in an <code>AssertionException</code> if the iterable object has no first
+            element.</p>
+            
+            <p id="alternatively_we_might_prefer_to...">Alternatively, we might prefer to return <code>null</code> in the case of
+            an empty <code>Iterable</code>, which suggests the following implementation:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Result|Element|Null reduce&lt;Result&gt;(
+        Result accumulating(Result|Element partial, Element element)) {
+    if (!empty, is Element initial = first) {
+        variable Result|Element partial = initial;
+        for (elem in rest) {
+            partial = accumulating(partial, elem);
+        }
+        return partial;
+    }
+    else {
+        return null;
+    }
+}
+</code></pre>
+            
+            <p id="going_back_to_scala_we...">Going back to Scala, we notice that Scala has two versions of
+            <code>reduce()</code>, which are exactly analogous to the two possibilities
+            we've just seen. The first version throws an exception in the
+            empty case, and the second version, <code>reduceOption()</code>, returns an
+            instance of the wrapper class <code>Option</code>.</p>
+            
+            <p id="but_in_ceylon_we_can...">But in Ceylon, we can do better. In Ceylon, <code>Iterable</code> has a
+            slightly mysterious-looking second type parameter, named <code>Absent</code>,
+            with an upper bound <code>given Absent satisfies Null</code>. An
+            <code>Iterable&lt;T,Null&gt;</code>, which we usually write <code>{T*}</code>, is a
+            <em>possibly-empty</em> iterable. An <code>Iterable&lt;T,Nothing&gt;</code>, which we
+            usually write <code>{T+}</code>, is an iterable we know to be nonempty.</p>
+            
+            <p id="thus_we_arrive_at_the...">Thus we arrive at the following definition of <code>reduce()</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code> Result|Element|Absent reduce&lt;Result&gt;(
+        Result accumulating(Result|Element partial, Element element)) {
+    value initial = first;
+    if (!empty, is Element initial) {
+        variable Result|Element partial = initial;
+        for (elem in rest) {
+            partial = accumulating(partial, elem);
+        }
+        return partial;
+    }
+    else {
+        return initial;
+    }
+}
+</code></pre>
+            
+            <p id="now_for_a_spanned_range...">Now, for a "spanned" range expression like <code>1..n</code>, which is
+            nonempty, we get a non-null return type:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Integer sum = (1..n).reduce(plus);
+</code></pre>
+            
+            <p id="on_the_other_hand_for...">On the other hand, for a "segmented" range expression like
+            <code>1:n</code>, which is possibly-empty, we get an optional return
+            type:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Integer? sum = (1:n).reduce(plus);
+</code></pre>
+            
+            <p id="best_of_all_it_never...">Best of all, it never throws an exception. This is, I humbly
+            submit, Pretty Damn Nice.</p>
+            
+            <p id="notice_just_how_much_work...">Notice just how much work union types are doing for us here.
+            Compared to Scala's <code>reduce()</code>/<code>reduceOption()</code>, they let us
+            eliminate:</p>
+            
+            <ul>
+            <li>a lower bound type constraint,</li>
+            <li>a second, effectively overloaded, version of the method,
+            and</li>
+            <li>the wrapper <code>Option</code> class.</li>
+            </ul>
+            
+            
+            <p id="ive_added_this_definition_of...">I've added this definition of <code>reduce()</code> to <code>Iterable</code>, and
+            it will be available in the next release of Ceylon.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2013/12/23/reduce/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

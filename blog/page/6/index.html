@@ -1,0 +1,3169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Team blog</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="feed"><a href="/blog/blog.atom">Feed</a></h3>
+          </div>
+          <div class="point-dark-bottom">
+             
+          </div>
+          <div class="point-light-top">
+             
+          </div>
+          <div class="sidebar-block">
+            <h3 id="recent_posts">Recent posts</h3>
+            <div id="blog-archive">
+              <h4 id="ceylon_to_move_to_the_eclipse_foundation_by_stéphane_épardaud__gavin_king_21_august_2017">
+                <a href="/blog/2017/08/21/eclipse-ceylon/">Ceylon to move to the Eclipse Foundation</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Stéphane Épardaud &amp; Gavin King
+                <br>
+                21 August 2017
+              </h4>
+              <h4 id="ceylon_133_is_now_available_by_gavin_king_21_august_2017">
+                <a href="/blog/2017/08/21/ceylon-1-3-3/">Ceylon 1.3.3 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                21 August 2017
+              </h4>
+              <h4 id="ceylon_132_is_now_available_by_gavin_king_03_march_2017">
+                <a href="/blog/2017/03/03/ceylon-1-3-2/">Ceylon 1.3.2 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                03 March 2017
+              </h4>
+              <h4 id="ceylon_131_is_now_available_by_gavin_king_22_november_2016">
+                <a href="/blog/2016/11/22/ceylon-1-3-1/">Ceylon 1.3.1 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                22 November 2016
+              </h4>
+              <h4 id="ceylon_130_is_now_available_by_gavin_king_19_september_2016">
+                <a href="/blog/2016/09/19/ceylon-1-3-0/">Ceylon 1.3.0 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                19 September 2016
+              </h4>
+            </div>
+            <h3 id="tags">Tags</h3>
+            <div class="tag-cloud">
+              <div class="tag-cloud">
+                <ul>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/100/">
+                        1.0.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/110/">
+                        1.1.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/12/">
+                        1.2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/120/">
+                        1.2.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/121/">
+                        1.2.1
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/122/">
+                        1.2.2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/130/">
+                        1.3.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/131/">
+                        1.3.1
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/132/">
+                        1.3.2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/133/">
+                        1.3.3
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m1/">
+                        M1
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m2/">
+                        M2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m3/">
+                        M3
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m4/">
+                        M4
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m5/">
+                        M5
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m6/">
+                        M6
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/android/">
+                        android
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/ceylon-js/">
+                        ceylon-js
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/ceylon-model/">
+                        ceylon-model
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/code/">
+                        code
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/compiler/">
+                        compiler
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/conference/">
+                        conference
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/constructors/">
+                        constructors
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/design/">
+                        design
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/design-interop-herd/">
+                        design interop herd
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/error-handling/">
+                        error handling
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/exceptions/">
+                        exceptions
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/feedback/">
+                        feedback
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/forum/">
+                        forum
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/generics/">
+                        generics
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/gsoc/">
+                        gsoc
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/guice/">
+                        guice
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/herd/">
+                        herd
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/httpd/">
+                        httpd
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/ide/">
+                        ide
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/interop/">
+                        interop
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/interview/">
+                        interview
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/ios/">
+                        ios
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/java/">
+                        java
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/language-design/">
+                        language design
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/mobile/">
+                        mobile
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/modularity/">
+                        modularity
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-2">
+                      <a href="/blog/tags/news/">
+                        news
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/osgi/">
+                        osgi
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/podcast/">
+                        podcast
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-7">
+                      <a href="/blog/tags/progress/">
+                        progress
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-4">
+                      <a href="/blog/tags/release/">
+                        release
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/roadmap/">
+                        roadmap
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/runtime/">
+                        runtime
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/sdk/">
+                        sdk
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-2">
+                      <a href="/blog/tags/site/">
+                        site
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/test/">
+                        test
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/tools/">
+                        tools
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/typesafety/">
+                        typesafety
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/typescript/">
+                        typescript
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/weld/">
+                        weld
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <h3 id="authors">Authors</h3>
+            <div class="tag-cloud">
+              <div class="tag-cloud">
+                <ul>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/bastien-jansen/">
+                        Bastien Jansen
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/david-festal/">
+                        David Festal
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/emmanuel-bernard/">
+                        Emmanuel Bernard
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-6">
+                      <a href="/blog/authors/gavin-king/">
+                        Gavin King
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/lucas-werkmeister/">
+                        Lucas Werkmeister
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-3">
+                      <a href="/blog/authors/stephane-epardaud/">
+                        Stéphane Épardaud
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/stephane-epardaud--gavin-king/">
+                        Stéphane Épardaud &amp; Gavin King
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/tako-schotanus/">
+                        Tako Schotanus
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/tom-bentley/">
+                        Tom Bentley
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/tomas-hradec/">
+                        Tomáš Hradec
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="point-light-end">
+             
+          </div>
+          <a href="/+" style="cursor:pointer;margin-left:auto;margin-right:auto;display:block;text-align:center;padding-top:10px;padding-bottom:0px">
+            <span style="display:inline-block;font-weight:bold;vertical-align:top;margin-right:5px;margin-top:8px;">Follow Ceylon:</span>
+          </a>
+          <p style="cursor:pointer;margin-left:auto;margin-right:auto;margin-top:2px;display:block;text-align:center;padding-top:0px" id="">
+            <a href="/+">
+              <i alt="Google Plus" class="fa fa-google-plus-square fa-2x" height="32" width="32"></i>
+            </a>
+            <a href="http://twitter.com/ceylonlang">
+              <i alt="Twitter" class="fa fa-twitter-square fa-2x" height="32" width="32"></i>
+            </a>
+            <a href="https://www.facebook.com/ceylonlang">
+              <i alt="Facebook" class="fa fa-facebook-square fa-2x" height="32" width="32"></i>
+            </a>
+          </p>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="core-page">
+          <h1 id="team_blog">
+            Team blog
+          </h1>
+          <div class="post">
+            <h1 class="title" id="why_you_might_want_to_choose_ceylon">
+              <a href="/blog/2015/10/27/why/">Why you might want to choose Ceylon</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/gavin-king/">Gavin King</a>
+              </div>
+              <div class="date">
+                27 October 2015
+              </div>
+              <div class="tags">
+              </div>
+            </div>
+            <div class="body">
+              <p id="in_a_couple_of_days..."><del>In a couple of days Ceylon 1.2 will be released.</del> Ceylon 1.2 is
+              <a href="/blog/2015/10/29/ceylon-1-2-0/">out now</a>, after a year of development. That’s exciting for us,
+              but we think it would be interesting to summarize our thoughts about why <em>you</em> should be excited
+              about Ceylon, and why you might consider it over other programming languages designed to run on the
+              Java and JavaScript virtual machines.</p>
+              
+              <p id="ceylon_is_a_rather_ambitious...">Ceylon is a rather <em>ambitious</em> programming language, so sometimes when people ask us to summarize
+              its advantages, it can be a bit difficult to know where to start!</p>
+              
+              <h2 id="a_truly_cross_platform_language">A truly cross-platform language</h2>
+              
+              <p id="ceylon_is_a_language_that...">Ceylon is a language that is equally at home on the JVM and on any JavaScript VM. Furthermore,
+              implementation of a compiler backend for the Dart VM is already quite advanced, and work has begun
+              on a native backend based on LLVM. The architecture of the compiler and tooling make addition of a
+              new runtime environment, if not easy, at least <em>straightforward</em>.</p>
+              
+              <p id="also_important_ceylon_is_rigorously...">Also important: Ceylon is rigorously defined by a complete <em>language specification</em>. The very act
+              of writing a specification forces the language designer to really think through the semantics and
+              corner cases, and acts as an essential reference as to what the behavior of the compiler
+              <em>should be</em>.</p>
+              
+              <p id="unlike_other_languages_designed_first...">Unlike other languages designed first for the JVM and then, belatedly, ported to JavaScript, Ceylon
+              doesn’t feature JVM-specific numeric types with semantics that aren’t relevant to—or can’t be
+              honored on—other VMs. And its language module isn’t polluted with dependencies to types like
+              <code>java.lang.Exception</code> that don’t exist in other runtime environments. Instead, Ceylon’s language
+              module completely abstracts the underlying runtime, and offers a set of elegant APIs that vastly
+              improve on those available natively.</p>
+              
+              <p id="but_this_abstraction_doesn’t_come...">But this abstraction doesn’t come at the cost of lowest-common-denominator performance
+              characteristics. On the contrary, you can expect Java-like performance when Ceylon executes on the
+              JVM, Dart-like performance when Ceylon executes on the Dart VM, and JavaScript-like performance when
+              Ceylon executes on a JavaScript VM like Node.js.</p>
+              
+              <p id="nor_does_this_abstraction_limit...">Nor does this abstraction limit the potential for interoperation with native code. Ceylon features
+              excellent interoperation with Java and Maven, and it’s very easy to use most Java libraries in
+              Ceylon. Similarly, Ceylon’s battery of <code>dynamic</code> constructs make interoperation with native
+              JavaScript straightforward. With the new <code>native</code> functions and classes in Ceylon 1.2, it’s even
+              possible to write a cross-platform module that interoperates with native Java <em>and</em> JavaScript code!</p>
+              
+              <p id="finally_ceylons_module_system_is...">Finally, Ceylon's module system is already compatible with OSGi, with Maven, with Vert.x, with <code>npm</code>,
+              and with <code>requirejs</code>. When Jigsaw finally arrives, we'll support it too.</p>
+              
+              <p id="this_all_amounts_to_an...">This all amounts to an impressive engineering achievement, especially when taking into account the
+              sophistication of the language itself.</p>
+              
+              <h2 id="truly_disciplined_static_typing">Truly disciplined static typing</h2>
+              
+              <p id="chances_are_you_have_some...">Chances are you have some experience writing code in a language with static typing. In combination
+              with the right tooling, static typing makes code more robust, more understandable, and much more
+              maintainable. But most languages go out of their way to include features and APIs which  undermine
+              their own static type system. A handful of languages such as ML and Haskell eschew this, offering
+              a principled, disciplined approach to static typing. And programmers working with these languages
+              report a curious thing: that their programs have a strange tendency to work first or second time
+              they run them. Sure, it takes a little longer to produce a program that the compiler accepts, but
+              once the compiler is satisfied, so many common bugs have already been eliminated, that the program
+              is often already correct or at least <em>almost</em> correct.</p>
+              
+              <p id="ceylon_follows_this_same_philosophy...">Ceylon follows this same philosophy and, even though it’s a very different sort of language to ML,
+              our experience is that our programs have the very same tendency to just work, almost immediately.
+              You surely won’t believe this until you experience it yourself.</p>
+              
+              <p id="ceylon’s_type_system_itself_is...">Ceylon’s type system itself is state-of-the-art, including generic types with both use-site and
+              declaration-site covariance and contravariance, mixin (multiple) inheritance, principal instantiation
+              inheritance, sum types, disjointness analysis, experimental support for higer-order and higher-rank
+              generics, and, best of all, union and intersection types.</p>
+              
+              <h4 id="union_and_intersection_types">Union and intersection types</h4>
+              
+              <p id="ceylon_was_the_first_modern...">Ceylon was the first modern language to introduce a full implementation of union and intersection
+              types, and the first language to realize that union and intersection types make flow-typing and type
+              inference, especially generic type inference, very much simpler, more predictable, and more elegant.
+              As of today, it’s still the language with the most sophisticated support for unions and intersections.</p>
+              
+              <p id="what’s_most_difficult_to_explain...">What’s most difficult to explain to folks who’ve never written any significant amount of code in
+              Ceylon is just how powerful union and intersection types really are. Far from being an exotic
+              construct that you encounter occasionally in tricky library code, they form an essential part of the
+              everyday experience of writing code in Ceylon, and there is almost no significant Ceylon program
+              which doesn’t use union types <em>somewhere</em>. It’s no exaggeration to say they will totally change the
+              way you think about types.</p>
+              
+              <h4 id="flow_sensitive_typing">Flow-sensitive typing</h4>
+              
+              <p id="ceylon_was_also_the_first...">Ceylon was also the first modern language to embrace the notion of flow-sensitive typing, where the
+              conditional logic in the body of a function affects the types inferred by the compiler. This approach
+              eliminates a significant amount of verbosity and a significant number of runtime type casting errors.
+              In combination with Ceylon’s powerful coverage and disjointness analysis, it also helps detect
+              certain other kinds of logic errors.</p>
+              
+              <h4 id="the_cleanest_solution_to_the_problem_of_null">The cleanest solution to the problem of null</h4>
+              
+              <p id="the_null_value_has_perplexed...">The <code>null</code> value has perplexed language designers for decades. For a long time the “best” solution
+              to the problem was an ML- or Haskell-style <code>Maybe</code> type, which offered type safety and eliminated
+              the hated “null pointer” error. That solution works quite well for languages without subtyping, but
+              it’s not the best approach for a language with subtyping and union types. Ceylon’s approach to <code>null</code>
+              is just as type safe, but, with flow-sensitive typing, is more user-friendly, and it doesn’t require
+              the overhead of separate <code>Option</code>-style wrapper objects. Unlike some other languages, <code>Null</code> isn’t a
+              special case in Ceylon’s type system. Rather, it’s just one further example of the power of union
+              types.</p>
+              
+              <h4 id="an_elegant_and_powerful_representation_of_tuple_and_function_types">An elegant and powerful representation of tuple and function types</h4>
+              
+              <p id="like_most_other_modern_languages...">Like most other modern languages, Ceylon features tuples and function references. Unlike other
+              languages Ceylon doesn’t represent these things as special cases in the type system, nor as an
+              explosion of interface types, one for each tuple/function -arity. Instead, there is just one class
+              <code>Tuple</code>, and one interface <code>Callable</code> which expresses function types in terms of tuple types. This
+              approach allows the language to abstract over tuple or function -arity, and write higher-order
+              functions that simply can’t be expressed in many other modern languages.</p>
+              
+              <h4 id="reified_generics">Reified generics</h4>
+              
+              <p id="along_with_gosu_ceylon_is...">Along with Gosu, Ceylon is one of only two languages to offer reified generics on the JVM. And it’s
+              the only language to offer reified generics on JavaScript virtual machines. You’ll sometimes run
+              into attempts to “backsplain” the lack of reified generics in Java or other JVM languages: claims
+              that reified generics perform badly, aren’t useful, or don’t work correctly with variance or with
+              higher-order generics. Ceylon is an existence proof that none of these assertions is true.</p>
+              
+              <p id="the_system_of_reified_generics...">The system of reified generics backs Ceylon's unique typesafe metamodel, which enables powerful
+              runtime metaprogramming (reflection). It also makes debugging easier: you can see the runtime
+              type arguments of every generic type or generic function in the Ceylon debugger!</p>
+              
+              <h2 id="a_clean_efficient_highly_readable_syntax">A clean, efficient, highly readable syntax</h2>
+              
+              <p id="a_program_written_in_idiomatic...">A program written in idiomatic Ceylon is usually much more <em>compact</em> than the same program written
+              in Java. But it’s also usually more readable. Ceylon’s syntax appears, at first glance, to be rather
+              boring and conservative: it uses familiar (and <em>cleaner</em>) prefix type annotations instead of postfix
+              types; it uses plain English keywords instead of cryptic strings of symbols; its naming convention
+              eschews the use of abbreviations. When you look at a program written in Ceylon, you’ll probably
+              understand more or less what it’s doing, even if you have only a passing familiarity with the
+              language.</p>
+              
+              <p id="but_that_first_impression_misses...">But that first impression misses a surprising amount of syntactic flexibility. Type inference, named
+              arguments, comprehensions, tuples and sequences, “fat arrow” function definitions, anonymous
+              functions, <code>let</code>, <code>switch</code>, <code>if</code>, <code>case</code>, and <code>object</code> expressions, flow-sensitive typing, and a
+              very powerful facility for stream processing all work together to lend a level of expressiveness
+              rarely seen outside of dynamic languages.</p>
+              
+              <p id="operator_overloading_is_a_feature...">Operator overloading is a feature that, while useful, is widely abused in languages that offer it in
+              unadulterated form. Instead of untrammelled operator overloading, Ceylon supports operator
+              <em>polymorphism</em>, a more disciplined approach, where its operators have fixed, well-defined semantics,
+              but are defined in terms of interfaces that user-written types may satisfy. Thus, you can have the
+              <code>+</code> operator apply to your own class, but it always means some kind of addition-like operation.</p>
+              
+              <p id="we_often_don’t_need_to...">We often don’t need to write down the types of things explicitly (type inference takes care of that),
+              but when we do, Ceylon features a uniquely sophisticated expression syntax for types, along with
+              type aliases, eliminating the verbosity of generic type declarations in other languages.</p>
+              
+              <h2 id="awesome_modularity_and_tooling">Awesome modularity and tooling</h2>
+              
+              <p id="ceylon’s_suite_of_command_line...">Ceylon’s suite of command line tools, including an incremental compiler, program runner, test runner,
+              documentation compiler, code formatter, and WAR archive packager, are all accessible via the <code>ceylon</code>
+              command, which features a plugin architecture, and excellent usability.</p>
+              
+              <p id="but_ceylon_really_comes_into...">But Ceylon really comes into its own when authoring code using its powerful Eclipse-based IDE.
+              Ceylon’s IDE has a feature set that easily surpasses other modern languages, and competes with much
+              more mature languages like Java and C#. For those who prefer IntelliJ, an IntelliJ-based IDE is
+              already in the works, with a first release planned in the next few months.</p>
+              
+              <p id="if_you’ve_ever_spent_time...">If you’ve ever spent time waiting for <code>mvn</code> to finish, you’ll immediately appreciate Ceylon’s
+              powerful module architecture, which comes fully integrated into the command line tools and IDE.
+              Modularity is a problem that is utterly <em>central</em> to the discipline of software engineering, and
+              Ceylon, at least arguably, does it better than any other language out there. You don’t usually need
+              to interact directly with the module repository architecture, since the command line compiler, IDE,
+              and runtime all know how to fetch dependencies transparently.</p>
+              
+              <p id="finally_ceylon_herd_is_an...">Finally, <a href="https://herd.ceylon-lang.org">Ceylon Herd</a> is an fantastic tool that makes it ridiculously easy to share your work
+              with other Ceylon developers.</p>
+              
+              <h2 id="seamless_web_development">Seamless web development</h2>
+              
+              <p id="ceylon_is_evolving_into_a...">Ceylon is evolving into a compelling platform for web development, allowing you to reuse code
+              written for a Java server on the JavaScript client and vice-versa, while still interoperating
+              cleanly with native code on both sides. With our new serialization facility, you'll be able to
+              transparently move objects between client and server. The Ceylon SDK comes with a HTTP server
+              module based on Undertow, and a transactions module based on JBoss Transactions, but if you're
+              looking for something "heavier", Ceylon modules can already be deployed on RedHat's <a href="https://developers.openshift.com/en/ceylon-overview.html">OpenShift</a>
+              cloud platform, on WildFly, or on <a href="http://vertx.io/vertx2/core_manual_ceylon.html">Vert.x 2</a> (with Vert.x 3 support coming soon). Alternatively
+              you could use Ceylon in Node.js!</p>
+              
+              <p id="developing_web_applications_in_ceylon...">Developing web applications in Ceylon is actually <em>enjoyable</em>. With Ceylon, you'll spend much less
+              time redeploying and/or refreshing things, or wrestling with inadequate tooling, and more time
+              focused on writing elegant code.</p>
+              
+              <h2 id="a_helpful_and_open_minded_community">A helpful and open-minded community</h2>
+              
+              <p id="the_ceylon_community_is_friendly...">The Ceylon community is friendly and helpful, and you can usually get your questions answered
+              quickly at just about any time of day. And we're <em>extremely</em> open to feedback, and don't mind
+              explaining the reasoning behind decisions we've made. Of course we have the traditional mailing
+              lists like any other open source project, but actually we're much more active on Gitter and on the
+              GitHub issue tracking system. So come join us on <a href="https://gitter.im/ceylon/user">our Gitter channel</a>, and ask us anything!</p>
+              
+              <p id="if_youre_motivated_to_contribute...">If you're motivated to contribute, there's plenty of places to get involved. Some fairly significant
+              parts of the Ceylon ecosystem were originally written by community contributors. Currently, the
+              development of two new compiler backends is being driven by the community. Note that a whole lot of
+              development, including the IntelliJ IDE, and the new compiler backends, is now being done in Ceylon,
+              so you can learn Ceylon by contributing to the Ceylon project itself!</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2015/10/27/why/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="post">
+            <h1 class="title" id="why_build_your_own_type_system">
+              <a href="/blog/2015/07/04/model/">Why build your own type system?</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/gavin-king/">Gavin King</a>
+              </div>
+              <div class="date">
+                04 July 2015
+              </div>
+              <div class="tags">
+                <a href="/blog/tags/ceylon-model/">
+                  ceylon-model
+                </a>
+              </div>
+            </div>
+            <div class="body">
+              <p id="in_ceylon_12_weve_factored...">In Ceylon 1.2 we've factored out the type system of Ceylon
+              as an independent module, with minimal dependencies and a
+              clean API. The <code>ceylon-model</code>
+              <a href="https://github.com/ceylon/ceylon-model/">project</a>
+              incorporates:</p>
+              
+              <ul>
+              <li>an extensible object-oriented model of the type system in
+              Ceylon,</li>
+              <li>algorithms for reasoning about types at compile
+              time—or even at <em>runtime</em> in a system with reified
+              generics—and</li>
+              <li>a framework for <em>model loading</em>, that is, for loading a
+              model representing the types in a program or module from
+              binary artifacts, source artifacts, or anything
+              else—this is a necessary feature for incremental
+              compilation and modularity.</li>
+              </ul>
+              
+              
+              <p id="why_might_this_be_interesting...">Why might this be interesting to someone outside the Ceylon
+              team? Well, if you're thinking of creating a programming
+              language with nominal typing, you could consider reusing
+              <code>ceylon-model</code> in your own language, saving yourself the
+              problem of implementing all the hairy typing algorithms that
+              we've already spent years getting right. That way, you can
+              concentrate on the stuff that's really different about your
+              language, that is, the syntax, the compiler backend, the
+              runtime semantics, and the basic language types.</p>
+              
+              <p id="ceylon_model_implements_an_extremely..."><code>ceylon-model</code> implements an <em>extremely</em> complete type
+              system, including all the following features:</p>
+              
+              <ul>
+              <li>nominal typing with single-inheritance of classes and
+              multiple-inheritance of interfaces,</li>
+              <li>bounded parametric polymorphism (generics with constraints),</li>
+              <li>sum types,</li>
+              <li>union and intersection types, with sophisticated reasoning
+              about principal types and canonicalization,</li>
+              <li>reasoning about subtyping,</li>
+              <li>reasoning about coverage and disjoint types,</li>
+              <li>principal instantiation inheritance (more powerful than
+              the single-instantiation inheritance found in other
+              languages with subtyping and generics),</li>
+              <li>declaration-site and use-site variance,</li>
+              <li>type constructor polymorphism (higher-kinded types),</li>
+              <li>higher-rank / impredicative polymorphism,</li>
+              <li>type aliases including generic type aliases,</li>
+              <li>self types, and</li>
+              <li>some support for overloading.</li>
+              </ul>
+              
+              
+              <p id="it_doesnt_include_any_functionality...">It doesn't include any functionality for type inference,
+              flow-sensitive typing, or pattern matching, since in Ceylon
+              that stuff is implemented within the typechecker, and anyway
+              your language probably has different rules to ours.</p>
+              
+              <p id="it_seems_to_me_that...">It seems to me that unless your type system is based on
+              structural typing or dependent types, <code>ceylon-model</code> is an
+              awesome starting point. It might already have everything you
+              need, and, even if it doesn't, it provides a framework that
+              would let you incorporate other features into the type
+              system. For example, I imagine that primitively-defined
+              function, array, tuple, or record types would be easy to
+              incorporate.</p>
+              
+              <p id="were_already_reusing_this_model...">We're already reusing this model between the typechecker,
+              two compiler backends, two IDE projects, and the runtime, so
+              we know its API is reasonable.</p>
+              
+              <p id="the_only_stumbling_block_is...">The only stumbling block is that the project is implemented
+              in Java, so if you want to use it in a compiler written in a
+              different language, you'll probably want to translate it to
+              that language first. The code is pretty clean and
+              straightforward, so that's probably not a massive hurdle to
+              overcome.</p>
+              
+              <p id="the_license_for_ceylon_model...">The license for <code>ceylon-model</code> is Apache 2.0, so you can
+              basically do what you like with it. But if you decide to
+              use it in a project, please drop us a note, because it makes
+              us happy to see people reuse our work.</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2015/07/04/model/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="post">
+            <h1 class="title" id="constructors_in_ceylon">
+              <a href="/blog/2015/06/21/constructors/">Constructors in Ceylon</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/gavin-king/">Gavin King</a>
+              </div>
+              <div class="date">
+                21 June 2015
+              </div>
+              <div class="tags">
+                <a href="/blog/tags/constructors/">
+                  constructors
+                </a>
+                <a href="/blog/tags/12/">
+                  1.2
+                </a>
+              </div>
+            </div>
+            <div class="body">
+              <p id="since_the_earliest_versions_of...">Since the earliest versions of Ceylon, we've supported a
+              streamlined syntax for class initialization where the
+              parameters of a class are listed right after the class name,
+              and initialization logic goes directly in the body of the
+              class.</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>class Color(shared Integer rgba) {
+
+    assert (0 &lt;= rgba &lt;= #FFFFFFFF);
+
+    function encodedValue(Integer slot)
+            =&gt; rgba.rightLogicalShift(8*slot).and(#FF);
+
+    shared Integer alpha =&gt; encodedValue(3);
+
+    shared Integer red =&gt; encodedValue(2);
+    shared Integer green =&gt; encodedValue(1);
+    shared Integer blue =&gt; encodedValue(0);
+
+    function hex(Integer int) =&gt; formatInteger(int, 16);
+
+    string =&gt; "Color { \ 
+               alpha=``hex(alpha)``, \ 
+               red=``hex(red)``, \ 
+               green=``hex(green)``, \ 
+               blue=``hex(blue)`` }";
+
+}
+</code></pre>
+              
+              <p id="we_can_instantiate_a_class...">We can instantiate a class like this:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Color red = Color(#FFFF0000);
+</code></pre>
+              
+              <p id="the_ability_to_refer_to...">The ability to refer to parameters of the class directly
+              from the members of the class really helps cut down on
+              verbosity, and most of the time this is a really comfortable
+              way to write code.</p>
+              
+              <p id="however_as_weve_seen_over...">However, as we've seen over the past few years of writing
+              Ceylon code, there are moments when we would really
+              appreciate the ability to write a class with multiple
+              initialization paths, something like constructors in Java,
+              C#, or C++. To be clear, in the overwhelmingly common
+              case—something more than 90% of classes, I would
+              estimate—constructors are unnecessary and uncomfortable.
+              But we still need a good solution for the remaining trickier
+              cases.</p>
+              
+              <p id="a_couple_of_especially_compelling...">A couple of especially compelling cases we ran into were:</p>
+              
+              <ul>
+              <li>the class <code>Array</code> in <code>ceylon.language</code>, which can be
+              allocated with a list of elements, or with a size and a
+              single element value, and</li>
+              <li>cloning copy constructors, used, for example, to implement
+              <code>HashMap.clone()</code> and <code>HashSet.clone()</code>.</li>
+              </ul>
+              
+              
+              <p id="unfortunately_ive_always_found_the...">Unfortunately, I've always found the design of constructors
+              that Java and C# inherited from C++ to be a bit strange and
+              inexpressive. So before I tell you what we've done about
+              constructors in Ceylon 1.2, let me start by explaining what
+              I think is wrong with constructors in Java.</p>
+              
+              <h2 id="whats_wrong_with_constructors_in_java">What's wrong with constructors in Java?</h2>
+              
+              <p id="as_alluded_above_the_biggest...">As alluded above, the biggest problem with the constructor
+              syntax in languages that borrow from C++ is that in the
+              common case of a class with just one constructor, the
+              parameters of that constructor aren't available in the body
+              of the class, leading to awful code like the following:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="java"><code>class Point {
+    public float x;
+    public float y;
+    public Point(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
+    public String toString() {
+        return "(" + x + ", " + y + ")";
+    }
+}
+</code></pre>
+              
+              <p id="this_hurts_fortunately_weve_already...">This hurts. Fortunately, we've already made that pain go
+              away in Ceylon.</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>class Point(shared Float x, shared Float y) {
+    string =&gt; "(``x``, ``y``)";
+}
+</code></pre>
+              
+              <p id="so_lets_look_at_some...">So let's look at some additional issues with constructors in
+              Java.</p>
+              
+              <p id="to_begin_with_the_syntax...">To begin with, the syntax is irregular. In C-like languages,
+              the grammar for a declaration is:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Modifier* (Keyword|Type) Identifier OtherStuff
+</code></pre>
+              
+              <p id="constructors_strangely_dont_conform_to...">Constructors, strangely, don't conform to this general
+              schema, having been bolted on later.</p>
+              
+              <p id="second_the_constructors_of_a...">Second, the constructors of a class are all forced to have
+              the same name. This seems like a quite bizarre restriction:</p>
+              
+              <ul>
+              <li>If they all have the same name, why not declare them with
+              a keyword instead of an identifier? DRY, anyone?</li>
+              <li>It's a restriction that robs me of expressiveness. Instead
+              of <code>new ColorWithRGBAndAlpha(r,g,b,a)</code>, giving me a clue
+              as to the semantics of the arguments, I write just
+              <code>new Color(r,g,b,a)</code>, and the reader is left guessing.</li>
+              <li>Constructors thus run into Java's totally broken support
+              for overloading. I can't have a constructor that takes
+              a <code>List&lt;Float&gt;</code> and another which takes a <code>List&lt;Integer&gt;</code>,
+              since these two parameter types have the same erasure.</li>
+              <li>Constructor references (<code>Class::new</code> in Java) can be
+              ambiguous, depending on the context.</li>
+              </ul>
+              
+              
+              <p id="third_constructors_arent_forced_to...">Third, constructors aren't forced to initialize the instance
+              variables of the class. All Java types have a "default"
+              (zero or null) value, and if you forget to initialize an
+              instance variable in Java, you'll get a <code>NullPointerException</code>,
+              or, worse, an incorrect zero value at runtime. These problems
+              most certainly belong to the class of problems that I expect
+              a static type system to be able to detect, and, indeed, in
+              other contexts Java <em>does</em> detect uninitialized variables.</p>
+              
+              <p id="further_note_that_this_would...">Further note that this would be an even bigger problem in
+              Ceylon, because most types don't have <code>null</code> as an instance,
+              so there is no obvious "default" value.</p>
+              
+              <p id="as_usual_my_purpose_here...">As usual, my purpose here isn't to bash Java, but to justify
+              why we've done things differently in Ceylon.</p>
+              
+              <h2 id="named_constructors_and_default_constructors">Named constructors and  default constructors</h2>
+              
+              <p id="by_contrast_the_newly_introduced...">By contrast, the newly introduced syntax for constructors in
+              Ceylon is regular, expressive, and doesn't rely on
+              overloading (which Ceylon doesn't support, except when
+              interoperating with native Java code). Here's the basic
+              syntax for a constructor:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>new withFooAndBar(Foo foo, Bar bar)
+        extends anotherConstructor(foo) {
+    //do stuff
+}
+</code></pre>
+              
+              <p id="when_the_class_to_which...">When the class to which the constructor belongs directly
+              extends <code>Basic</code>, the <code>extends</code> clause is optional.</p>
+              
+              <p id="and_heres_an_example_of...">And here's an example of how it's used:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>class Color {
+
+    shared Integer rgba;
+
+    //default constructor
+    shared new (Integer rgba) {
+        assert (0 &lt;= rgba &lt;= #FFFFFFFF);
+        this.rgba = rgba;
+    }
+
+    //named constructor
+    shared new withRGB(
+        Integer red, Integer green, Integer blue, 
+        Integer alpha = #FF) {
+        assert (0 &lt;= red &lt;= #FF, 
+                0 &lt;= green &lt;= #FF, 
+                0 &lt;= blue &lt;= #FF);
+        rgba = 
+                alpha.leftLogicalShift(24) +
+                red.leftLogicalShift(16) +
+                green.leftLogicalShift(8) +
+                blue;
+    }
+
+    //another named constructor
+    shared new withRGBIntensities(
+        Float red, Float green, Float blue, 
+        Float alpha = 1.0) {
+        assert (0.0 &lt;= red &lt;= 1.0, 
+                0.0 &lt;= green &lt;= 1.0, 
+                0.0 &lt;= blue &lt;= 1.0);
+        function int(Float intensity) 
+                =&gt; (intensity*#FF).integer;
+        rgba = 
+                int(alpha).leftLogicalShift(24) +
+                int(red).leftLogicalShift(16) +
+                int(green).leftLogicalShift(8) +
+                int(blue);
+    }
+
+    function encodedValue(Integer slot)
+            =&gt; rgba.rightLogicalShift(8*slot).and(#FF);
+
+    shared Integer alpha =&gt; encodedValue(3);
+
+    shared Integer red =&gt; encodedValue(2);
+    shared Integer green =&gt; encodedValue(1);
+    shared Integer blue =&gt; encodedValue(0);
+
+    function hex(Integer int) =&gt; formatInteger(int, 16);
+
+    string =&gt; "Color { \ 
+               alpha=``hex(alpha)``, \ 
+               red=``hex(red)``, \ 
+               green=``hex(green)``, \ 
+               blue=``hex(blue)`` }";
+
+}
+</code></pre>
+              
+              <p id="constructor_declarations_are_indicated_with...">Constructor declarations are indicated with the keyword <code>new</code>,
+              and have a name which begins with a lowercase letter. We call
+              a constructor like this:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Color red = Color.withRGBIntensities(1.0, 0.0, 0.0);
+</code></pre>
+              
+              <p id="or_using_named_arguments_like...">Or, using named arguments, like this:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Color red = 
+    Color.withRGBIntensities { 
+        red = 1.0; 
+        green = 0.0;
+        blue = 0.0;
+    };
+</code></pre>
+              
+              <p id="a_function_reference_to_a...">A function reference to a constructor has a natural syntax:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Color(Float,Float,Float) createColor
+        = Color.withRGBIntensities;
+</code></pre>
+              
+              <p id="a_class_may_have_a...">A class may have a constructor, called the <em>default constructor</em>,
+              with no name. Instantiation via the default constructor works
+              just like instantiation of a class without constructors:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Color red = Color(#FFFF0000);
+</code></pre>
+              
+              <p id="a_class_isnt_required_to...">A class isn't required to have a default constructor, but
+              most classes will have one.</p>
+              
+              <p id="why_do_we_need_the...">Why do we need the concept of a default constructor? Well,
+              because a class with constructors <em>may not have a parameter
+              list</em>. Wait, let's stop and reemphasize that caveat, because
+              it's an important one:</p>
+              
+              <blockquote><p id="you_cant_add_constructors_to...">You can't add constructors to a class with a parameter
+              list! Instead, you must first rewrite the class to use
+              a "default constructor" for its "normal" initialization
+              logic.</p></blockquote>
+              
+              <p id="however_a_class_with_constructors...">However, a class with constructors may still have
+              initialization logic directly in the body of the class. For
+              example, the following is perfectly legal:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>class Color {
+
+    shared Integer rgba;
+
+    shared new (Integer rgba) {
+        this.rgba = rgba;
+    }
+
+    shared new withRGB(
+        Integer red, Integer green, Integer blue, 
+        Integer alpha = #FF) {
+        assert (0 &lt;= red &lt;= #FF, 
+                0 &lt;= green &lt;= #FF, 
+                0 &lt;= blue &lt;= #FF);
+        rgba = 
+                alpha.leftLogicalShift(24) +
+                red.leftLogicalShift(16) +
+                green.leftLogicalShift(8) +
+                blue;
+    }
+
+    shared new withRGBIntensities(
+        Float red, Float green, Float blue, 
+        Float alpha = 1.0) {
+        assert (0.0 &lt;= red &lt;= 1.0, 
+                0.0 &lt;= green &lt;= 1.0, 
+                0.0 &lt;= blue &lt;= 1.0);
+        function int(Float intensity) 
+                =&gt; (intensity*#FF).integer;
+        rgba = 
+                int(alpha).leftLogicalShift(24) +
+                int(red).leftLogicalShift(16) +
+                int(green).leftLogicalShift(8) +
+                int(blue);
+    }
+
+    //executed for every constructor
+    assert (0 &lt;= rgba &lt;= #FFFFFFFF);
+
+    //other members
+    ...
+}
+</code></pre>
+              
+              <p id="the_last_assert_statement_is...">The last <code>assert</code> statement is executed every time the class
+              is instantiated.</p>
+              
+              <h2 id="value_constructors">Value constructors</h2>
+              
+              <p id="the_constructors_weve_just_seen...">The constructors we've just seen are termed <em>callable
+              constructors</em> in the language specification, because they
+              declare parameters. We also have <em>value constructors</em>, which
+              don't declare parameters, and which are executed once, the
+              first time the constructor is evaluated in the context to
+              which the class belongs. For a toplevel class, a value
+              constructor is a singleton.</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>class Color {
+
+    shared Integer rgba;
+
+    //default constructor
+    shared new (Integer rgba) {
+        this.rgba = rgba;
+    }
+
+    //value constructors
+
+    shared new white {
+        rgba = #FFFFFFFF;
+    }
+
+    shared new red {
+        rgba = #FFFF0000;
+    }
+
+    shared new green {
+        rgba = #FF00FF00;
+    }
+
+    shared new blue {
+        rgba = #FF0000FF;
+    }
+
+    //etc
+    ...
+
+}
+</code></pre>
+              
+              <p id="we_can_use_a_value...">We can use a value constructor like this:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Color red = Color.red;
+</code></pre>
+              
+              <p id="sometimes_the_constructors_of_a...">Sometimes the constructors of a class share certain
+              initialization logic. If that logic doesn't depend upon the
+              parameters of the class, we can put it directly in the body
+              of the class, as we've already seen. But if it <em>does</em> depend
+              upon the parameters, we often need to take a different tack.</p>
+              
+              <h2 id="constructor_delegation">Constructor delegation</h2>
+              
+              <p id="to_facilitate_reuse_of_initialization...">To facilitate reuse of initialization logic within a class,
+              it's useful to allow a constructor to delegate to a different
+              constructor of the same class. For this, we use the <code>extends</code>
+              clause:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Integer int(Float intensity) 
+        =&gt; (intensity*#FF).integer;
+
+class Color {
+
+    shared Integer rgba;
+
+    shared new (Integer rgba) {
+        this.rgba = rgba;
+    }
+
+    //value constructors delegate to the default constructor
+
+    shared new white 
+            extends Color(#FFFFFFFF) {}
+
+    shared new red 
+            extends Color(#FFFF0000) {}
+
+    shared new green 
+            extends Color(#FF00FF00) {}
+
+    shared new blue 
+            extends Color(#FF0000FF) {}
+
+    shared new withRGB(
+        Integer red, Integer green, Integer blue, 
+        Integer alpha = #FF) {
+        assert (0 &lt;= red &lt;= #FF, 
+                0 &lt;= green &lt;= #FF, 
+                0 &lt;= blue &lt;= #FF);
+        rgba = 
+                alpha.leftLogicalShift(24) +
+                red.leftLogicalShift(16) +
+                green.leftLogicalShift(8) +
+                blue;
+    }
+
+    shared new withRGBIntensities(
+        Float red, Float green, Float blue, 
+        Float alpha = 1.0) 
+            //delegate to other named constructor
+            extends withRGB(int(red), 
+                            int(green), 
+                            int(blue),
+                            int(alpha)) {}
+
+    assert (0 &lt;= rgba &lt;= #FFFFFFFF);
+
+    //other members
+    ...
+}
+</code></pre>
+              
+              <p id="a_constructor_may_only_delegate...">A constructor may only delegate to a constructor defined
+              earlier in the body of the class.</p>
+              
+              <p id="note_that_weve_written_extends...">Note that we've written <code>extends Color(#FFFFFFFF)</code> to
+              delegate to the default constructor of <code>Color</code>.</p>
+              
+              <h2 id="definite_initialization_and_partial_constructors">Definite initialization and partial constructors</h2>
+              
+              <p id="an_ordinary_constructor_like_colorwithrgb...">An ordinary constructor like <code>Color.withRGB()</code> or
+              <code>Color.withRGBIntensities()</code> has a responsibility to
+              initialize every value reference belonging to the class that
+              is either:</p>
+              
+              <ul>
+              <li>
+<code>shared</code>, or</li>
+              <li>used ("captured") by another member of the class.</li>
+              </ul>
+              
+              
+              <p id="the_ceylon_compiler_enforces_this...">The Ceylon compiler enforces this responsibility at compile
+              time and will reject the code unless it can prove that every
+              value reference has been fully initialized, either:</p>
+              
+              <ul>
+              <li>by every ordinary constructor, or</li>
+              <li>in the body of the class itself.</li>
+              </ul>
+              
+              
+              <p id="this_rule_would_make_it...">This rule would make it difficult to factor out common logic
+              contained in constructors if it weren't for the notion of a
+              <em>partial constructor</em>. For a partial constructor, the
+              requirement that all references are fully initialized is
+              relaxed. But a partial constructor may not be used to
+              directly instantiate the class. It may only be called from
+              the <code>extends</code> clause of another constructor of the same
+              class. A partial constructor is indicated by the <code>abstract</code>
+              annotation:</p>
+              
+              <p id="heres_a_contrived_example">Here's a contrived example:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>class ColoredPoint {
+    shared Point point;
+    shared Color color;
+
+    //partial constructor
+    abstract new withColor(Color color) {
+        this.color = color;
+    }
+
+    shared new forCartesianCoords(Color color, 
+        Float x, Float y) 
+            //delegate to partial constructor
+            extends withColor(color) {
+        point = Point.cartesian(x, y);
+    }
+
+    shared new forPolarCoords(Color color, 
+        Float r, Float theta) 
+            //delegate to partial constructor
+            extends withColor(color) {
+        point = Point.polar(r, theta);
+    }
+
+    ...
+
+}
+</code></pre>
+              
+              <p id="so_far_weve_only_seen...">So far, we've only seen how to delegate to another
+              constructor of the same class. But when a class extends a
+              superclass, every constructor must ultimately
+              delegate—perhaps indirectly—to a constructor of
+              the superclass.</p>
+              
+              <h2 id="constructors_and_inheritance">Constructors and inheritance</h2>
+              
+              <p id="a_class_may_extend_a...">A class may extend a class with constructors, for example:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>class ColoredPoint2(color, Float x, Float y) 
+        extends Point.cartesian(x, y) {
+    shared Color color;
+    ...
+}
+</code></pre>
+              
+              <p id="a_more_interesting_case_is...">A more interesting case is when the extending class itself
+              has constructors:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>class ColoredPoint extends Point {
+    shared Color color;
+
+    shared new forCartesianCoords(Color color, 
+        Float x, Float y)
+            //delegate to Point.cartesian()
+            extends cartesian(x, y) {
+        this.color = color;
+    }
+
+    shared new forPolarCoords(Color color, 
+        Float r, Float theta)
+            //delegate to Point.polar()
+            extends polar(r, theta) {
+        this.color = color;
+    }
+
+    ...
+}
+</code></pre>
+              
+              <p id="in_this_example_the_constructors...">In this example, the constructors delegate directly to
+              constructors of the superclass.</p>
+              
+              <h3 id="ordering_of_initialization_logic">Ordering of initialization logic</h3>
+              
+              <p id="with_constructor_delegation_together_with...">With constructor delegation, together with initialization
+              logic defined directly in the body of the class, you must
+              be imagining that initialization can get pretty convoluted.</p>
+              
+              <p id="well_no_the_general_principle...">Well, no. The general principle of initialization in Ceylon
+              remains unchanged: initialization always flows from top to
+              bottom, allowing the typechecker to verify that every <code>value</code>
+              is initialized before it is used.</p>
+              
+              <p id="consider_this_class">Consider this class:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>class Class {
+    print(1);
+    abstract new partial() {
+        print(2);
+    }
+    print(3);
+    shared new () extends partial() {
+        print(4);
+    }
+    print(5);
+    shared new create() extends partial() {
+        print(6);
+    }
+    print(7);
+}
+</code></pre>
+              
+              <p id="calling_class_results_in_the...">Calling <code>Class()</code> results in the following output:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>1
+2
+3
+4
+5
+7
+</code></pre>
+              
+              <p id="calling_classcreate_results_in_this...">Calling <code>Class.create()</code> results in this output:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>1
+2
+3
+5
+6
+7
+</code></pre>
+              
+              <p id="all_quite_orderly_and_predictable">All quite orderly and predictable!</p>
+              
+              <p id="in_the_comments_david_hagen...">In the <a href="http://ceylon-lang.org/blog/2015/06/21/constructors/#comment-2091964265">comments</a>,
+              David Hagen suggests a way of understanding how constructor
+              delegation and ordering works.</p>
+              
+              <h2 id="using_value_constructors_to_emulate_enums">Using value constructors to emulate enums</h2>
+              
+              <p id="you_might_already_have_noticed...">You might already have noticed that if a class <em>only</em> has
+              value constructors, it's very similar to a Java <code>enum</code>.</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>shared class Day {
+    shared actual String string;
+    abstract new named(String name) {
+        string = name;
+    } 
+    shared new sunday extends named("SUNDAY") {}
+    shared new monday extends named("MONDAY") {}
+    shared new tuesday extends named("TUESDAY") {}
+    shared new wednesday extends named("WEDNESDAY") {}
+    shared new thursday extends named("THURSDAY") {}
+    shared new friday extends named("FRIDAY") {}
+    shared new saturday extends named("SATURDAY") {}
+}
+</code></pre>
+              
+              <p id="we_therefore_let_you_use...">We therefore let you use value constructors in a <code>switch</code>
+              statement. The ability to <code>switch</code> over value constructors
+              can be viewed as an extension of the pre-existing facility
+              for <code>switch</code>ing over literal values of types like <code>Integer</code>,
+              <code>Character</code>, and <code>String</code>.</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Day day = ... ;
+String message;
+switch (day)
+case (Day.friday) { 
+    message = "thank god"; 
+}
+case (Day.sunday | Day.saturday) { 
+    message = "we could be having this conversation with beer"; 
+}
+else {
+    message = "need more coffee";
+}
+print(message);
+</code></pre>
+              
+              <p id="but_when_we_noticed_the...">But when we noticed the similarity to Java <code>enum</code>s, we
+              decided to take the idea a little further than what Java
+              offers here. Java enumerations are <em>open</em>, in the sense that
+              a <code>switch</code> statement which covers all enumerated values of
+              an <code>enum</code> must still include a <code>default</code> case to be
+              considered exhaustive by definite assignment and definite
+              return checking.</p>
+              
+              <p id="but_in_ceylon_we_also...">But in Ceylon we also have the notion of <em>closed</em>
+              enumerated types, where the "default" case—the <code>else</code>
+              clause of Ceylon's <code>switch</code> statement—may be omitted,
+              but the whole <code>switch</code> will still be considered exhaustive.</p>
+              
+              <p id="note_api_designers_should_be...">Note: API designers should be careful to only "close" an
+              enumeration that won't grow new value constructors in future
+              revisions of the API. <code>Day</code> and <code>Boolean</code> are good examples
+              of closed enumerations. <code>ErrorType</code> is an examples of an
+              open enumeration.</p>
+              
+              <p id="if_we_add_an_of...">If we add an <code>of</code> clause to <code>Day</code>, it will be considered a
+              closed enumeration.</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>shared class Day 
+        of sunday | monday | tuesday | wednesday | 
+           thursday | friday | saturday {
+    shared actual String string;
+    abstract new named(String name) {
+        string = name;
+    } 
+    shared new sunday extends named("SUNDAY") {}
+    shared new monday extends named("MONDAY") {}
+    shared new tuesday extends named("TUESDAY") {}
+    shared new wednesday extends named("WEDNESDAY") {}
+    shared new thursday extends named("THURSDAY") {}
+    shared new friday extends named("FRIDAY") {}
+    shared new saturday extends named("SATURDAY") {}
+}
+</code></pre>
+              
+              <p id="now_ceylon_will_consider_a...">Now Ceylon will consider a <code>switch</code> statement that covers
+              all the value constructors as an exhaustive <code>switch</code>, and we
+              can write the following code without needing an <code>else</code>
+              clause:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Day day = ... ;
+String message;
+switch (day)
+case (Day.monday | Day.tuesday | 
+      Day.wednesday | Day.thursday) { 
+    message = "need more coffee"; 
+}
+case (Day.friday) { 
+    message = "thank god"; 
+}
+case (Day.sunday | Day.saturday) { 
+    message = "we could be having this conversation with beer"; 
+}
+print(message);
+</code></pre>
+              
+              <p id="this_is_an_alternative_to...">This is an alternative to the <a href="http://ceylon-lang.org/documentation/1.1/tour/types/#enumerated_instances">existing pattern for emulating
+              Java-style <code>enum</code>s</a>.</p>
+              
+              <h2 id="a_final_word">A final word</h2>
+              
+              <p id="the_design_ive_presented_here...">The design I've presented here is the final result of a
+              thought process that spanned five years. I personally found
+              this to be a surprisingly difficult problem to address in a
+              principled way. For a time, I hoped to not even need to have
+              constructors in the language at all. But ultimately I'm very
+              happy with the end result. It seems to me not only
+              principled and consistent with the rest of the language, but
+              also very expressive and powerful.</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2015/06/21/constructors/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="post">
+            <h1 class="title" id="a_little_more_about_type_functions">
+              <a href="/blog/2015/06/12/more-type-functions/">A little more about type functions</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/gavin-king/">Gavin King</a>
+              </div>
+              <div class="date">
+                12 June 2015
+              </div>
+              <div class="tags">
+              </div>
+            </div>
+            <div class="body">
+              <p id="my_previous_post_about_type...">My previous post about
+              <a href="/blog/2015/06/03/generic-function-refs">type functions</a>
+              generated some interesting discussion, here, and
+              <a href="http://www.reddit.com/r/programming/comments/38hsrb/programming_with_type_functions_in_ceylon/">on reddit</a>.</p>
+              
+              <p id="therefore_i_think_its_worth...">Therefore, I think it's worth tying up several loose ends
+              from the earlier post. So here's a collection of further
+              observations about type functions.</p>
+              
+              <p id="warning_this_post_addresses_some..."><em>Warning: this post addresses some very technical details of
+              how we've incorporated type functions into Ceylon's type
+              system. Don't even bother continuing any further until
+              you've read the <a href="/blog/2015/06/03/generic-function-refs">earlier post</a>.</em></p>
+              
+              <h3 id="the_why_of_this">The "why" of this</h3>
+              
+              <p id="the_most_well_known_application...">The most well-known application of higher-order generics is
+              for representing high-level abstractions of container types:
+              functors, monads, and friends. That's not what motivated me
+              to experiment with higher-order generics in Ceylon, and as a
+              practical matter I still have little interest in these
+              abstractions, though they're fun to play with.</p>
+              
+              <p id="no_what_bothered_me_was...">No, what bothered me was not that Ceylon's type system
+              wasn't powerful enough to represent <code>Functor</code> or <code>Monad</code>,
+              but rather that Ceylon's type system <em>wasn't powerful enough
+              to represent Ceylon</em>. I'll show you what I mean by that in
+              just a second. But first I want to argue that type functions
+              can be seen as a regularization of the language.</p>
+              
+              <p id="from_a_purely_syntactic_point...">From a <em>purely syntactic</em> point of view, it's always seemed
+              a little strange that every sort of type declaration in
+              Ceylon can have a list of type parameters, <em>except for a
+              type parameter itself</em>. Furthermore, it's noticeable that I
+              can take a reference, or meta reference to any program
+              element <em>unless it has a list of type parameters</em>. Now, such
+              restrictions might seem reasonable if a parameterized type
+              parameter or a reference to a generic declaration were not
+              meaningful notions at a fundamental level. But they clearly
+              <em>are</em> meaningful, and even at least <em>somewhat</em> useful.</p>
+              
+              <p id="exactly_how_useful_is_a...">Exactly <em>how</em> useful is a different question—the
+              jury's still out, at least in my mind. And so perhaps we'll
+              ultimately conclude that this stuff isn't worth its weight.
+              The weight being, substantially, the time it takes for
+              programmers new to Ceylon to understand this stuff.</p>
+              
+              <p id="in_the_original_post_i...">In the original post, I showed how type functions were
+              necessary to represent the type of a reference to a generic
+              function. One place where this problem arises is with one of
+              Ceylon's more unique features: its <em>typesafe metamodel</em>.</p>
+              
+              <h3 id="a_use_case_for_generic_function_reference_types">A use case for generic function reference types</h3>
+              
+              <p id="usually_i_can_obtain_a...">Usually, I can obtain a metamodel object that represents a
+              class or function and captures its type signature. For
+              example, the expression <code>`String`</code> evaluates to a
+              metamodel object that captures the type and initializer
+              parameters of the class <code>String</code>:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Class&lt;String,[{Character*}]&gt; stringClass = `String`;
+</code></pre>
+              
+              <p id="for_a_generic_declaration_i...">For a generic declaration, I can do a similar thing, as long
+              as I'm prepared to nail down the type arguments. For example,
+              I can write <code>`Singleton&lt;String&gt;`</code> to get a metamodel
+              object representing the class <code>Singleton</code> after applying the
+              type argument <code>String</code>:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Class&lt;Singleton&lt;String&gt;,[String]&gt; stringSingletonClass
+        = `Singleton&lt;String&gt;`
+</code></pre>
+              
+              <p id="but_in_ceylon_as_it...">But in Ceylon as it exists today, I can't obtain a typed
+              metamodel object that represents just <code>`Singleton`</code>,
+              because to represent the type of that metamodel object I
+              would necessarily need a type function.</p>
+              
+              <p id="now_with_the_new_experimental...">Now, with the new experimental support for type functions,
+              the type of the expression <code>`Singleton`</code> could be
+              <code>&lt;T&gt; =&gt; Class&lt;Singleton&lt;T&gt;,[T]&gt;()</code>, allowing code like this:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>value singletonGenericClass = `Singleton`;
+...
+Class&lt;Singleton&lt;String&gt;,[String]&gt; stringSingletonClass 
+        = singletonGenericClass&lt;String&gt;();
+</code></pre>
+              
+              <p id="thats_just_one_example_of...">That's just one example of how allowing references to
+              generic functions makes Ceylon feel more "complete".</p>
+              
+              <h3 id="two_use_cases_for_anonymous_type_functions">Two use cases for anonymous type functions</h3>
+              
+              <p id="i_get_the_impression_that...">I get the impression that the "scariest" bit of what I've
+              presented in the previous post is the notation for anonymous
+              type functions. That is, the following syntax:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>&lt;X&gt; =&gt; X
+&lt;X&gt; =&gt; [X,X,X]
+&lt;X,Y&gt; =&gt; X|Y
+&lt;T&gt; given T satisfies Object =&gt; Category&lt;T&gt;(T*)
+</code></pre>
+              
+              <p id="but_im_convinced_that_this...">But I'm convinced that this notation is not really that
+              hard to understand. The reason I assert this is because if
+              I give each of these type functions a name, then most of
+              you guys have no problem understanding them:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>alias Identity&lt;X&gt; =&gt; X;
+alias Triple&lt;X&gt; =&gt; [X,X,X];
+alias Union&lt;X,Y&gt; =&gt; X|Y;
+alias CategoryCreator&lt;T&gt; given T satisfies Object =&gt; Category&lt;T&gt;(T*);
+</code></pre>
+              
+              <p id="but—one_might_reasonably_enquire—why_do..."><em>But</em>—one might reasonably enquire—<em>why do we
+              even need them, if the named versions are easier to read</em>?</p>
+              
+              <p id="well_we_need_them">Well, we need them:</p>
+              
+              <ol>
+              <li>in order to be able to denote the type of a reference to
+              a generic function—remember, we don't have
+              undenotable types in Ceylon—and</li>
+              <li>to make it easy to <em>partially apply</em> a named type
+              function like <code>Map</code>.</li>
+              </ol>
+              
+              
+              <p id="for_example_we_want_to...">For example, we want to be able to write stuff like
+              <code>&lt;T&gt; =&gt; Map&lt;String,T&gt;</code> when working with higher-order
+              generics, thus turning a type function of two type
+              parameters into a type function of one type parameter.</p>
+              
+              <h3 id="are_type_functions_type_types">Are type functions "type types"?</h3>
+              
+              <p id="one_thing_i_should_have...">One thing I should have made very clear, and forgot, is that
+              type functions don't represent an additional meta level. In
+              Ceylon's type system, type functions are types, in the very
+              same sense that function are values in Ceylon and other
+              modern languages.</p>
+              
+              <p id="there_simply_is_no_additional...">There simply is no additional meta-type system for types in
+              Ceylon. The closest thing we have to a "type type" is a
+              generic type constraint, but that's an extremely
+              impoverished sort of type type, since Ceylon provides no
+              facilities at all to abstract over type constraints—I
+              can't even assign an alias to a type constraint and reuse it
+              by name.</p>
+              
+              <p id="ceylon_reasons_about_type_constraints...">Ceylon reasons about type constraints and assignability of
+              types to type variables using hardcoded rules written
+              primitively into the language spec and type checker, not by
+              abstraction over the types of types.</p>
+              
+              <h3 id="type_functions_and_subtyping">Type functions and subtyping</h3>
+              
+              <p id="but_if_a_type_function...">But if a type function is a type, what are its subtyping
+              relationships with other types and other type functions?</p>
+              
+              <p id="well_first_recall_that_some...">Well, first, recall that some type functions have instances:
+              generic function references. We didn't want to introduce
+              values into the language that aren't <code>Object</code>s, so we've
+              declared that every type function is a subtype of <code>Object</code>.
+              This preserves the useful property that our type system has
+              a single root type <code>Anything</code>.</p>
+              
+              <p id="next_recall_that_an_ordinary...">Next, recall that an ordinary function type is <em>covariant</em>
+              in its return type, and <em>contravariant</em> in its parameter
+              types. For example, the function type:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>String(Object, Object)
+</code></pre>
+              
+              <p id="is_a_subtype_of">is a subtype of:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Object(String, String)
+</code></pre>
+              
+              <p id="since_if_a_function_accepts...">Since if a function accepts two <code>Object</code>s and returns a
+              <code>String</code>, then it's clearly also a function that accepts two
+              <code>String</code>s and returns an <code>Object</code>.</p>
+              
+              <p id="given_two_function_types_with...">Given two function types with one parameter:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>F(P)
+G(Q)
+</code></pre>
+              
+              <p id="then_fp_is_a_subtype...">Then <code>F(P)</code> is a subtype of <code>G(Q)</code> iff <code>P</code> is a supertype of
+              <code>Q</code> and <code>F</code> is a subtype of <code>G</code>.</p>
+              
+              <p id="similar_rules_apply_to_type...">Similar rules apply to type functions. Consider two type
+              functions of one type parameter:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>alias A&lt;X&gt; given X satisfies U =&gt; F&lt;X&gt;
+alias B&lt;Y&gt; given Y satisfies V =&gt; G&lt;Y&gt;
+</code></pre>
+              
+              <p id="then_a_is_a_subtype...">Then <code>A</code> is a subtype of <code>B</code> iff:</p>
+              
+              <ul>
+              <li>the upper bound <code>U</code> on <code>X</code> is a supertype of the upper
+              bound <code>V</code> on <code>Y</code>, and</li>
+              <li>for any type <code>T</code>, <code>F&lt;T&gt;</code> is a subtype of <code>G&lt;T&gt;</code>.</li>
+              </ul>
+              
+              
+              <p id="that_is_to_say_if...">That is to say, if <code>A&lt;X&gt;</code> accepts every type argument <code>T</code>
+              that <code>B&lt;Y&gt;</code> accepts, and for each such <code>T</code>, the applied type
+              <code>A&lt;T&gt;</code> is a subtype of the applied type <code>B&lt;T&gt;</code>, then we can
+              soundly replace <code>B</code> with <code>A</code> in well-typed code.</p>
+              
+              <p id="of_course_these_rules_generalize...">(Of course, these rules generalize to type functions with
+              multiple type parameters.)</p>
+              
+              <h3 id="generic_function_types_and_subtyping">Generic function types and subtyping</h3>
+              
+              <p id="now_lets_narrow_our_attention...">Now let's narrow our attention to consider only type
+              functions that represent the types of generic functions.
+              To make it easier, we'll consider generic functions of the
+              following form, with just one type parameter and just one
+              value parameter:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>F&lt;X&gt; f&lt;X&gt;(P&lt;X&gt; p) given X satisfies U =&gt; ... ;
+</code></pre>
+              
+              <p id="here_fx_is_the_return...">Here, <code>F&lt;X&gt;</code> is the return type, a type expression involving
+              the type parameter <code>X</code>, and <code>P&lt;X&gt;</code> is the parameter type,
+              which also involves <code>X</code>.</p>
+              
+              <p id="the_type_of_this_generic...">The type of this generic function—as we
+              <a href="/blog/2015/06/03/generic-function-refs/#the_type_of_a_generic_function_is_a_type_function">saw</a>
+              in the previous post— is the type function:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>&lt;X&gt; given X satisfies U =&gt; F&lt;X&gt;(P&lt;X&gt;)
+</code></pre>
+              
+              <p id="so_lets_consider_two_type...">So let's consider two type functions of the general form
+              we're considering:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>alias A&lt;X&gt; given X satisfies U =&gt; F&lt;X&gt;(P&lt;X&gt;)
+alias B&lt;Y&gt; given Y satisfies V =&gt; G&lt;Y&gt;(Q&lt;Y&gt;)
+</code></pre>
+              
+              <p id="then_we_see_quickly_that...">Then we see quickly that <code>A</code> is a subtype of <code>B</code> iff:</p>
+              
+              <ul>
+              <li>the upper bound <code>U</code> on <code>X</code> is a supertype of the upper
+              bound <code>V</code> on <code>Y</code>, and</li>
+              <li>for any type <code>T</code>, the return type <code>F&lt;T&gt;</code> of <code>A</code> is a
+              subtype of the return type <code>G&lt;T&gt;</code> of <code>B</code>, and the
+              parameter type <code>P&lt;T&gt;</code> of <code>A</code> is a supertype of the
+              parameter type <code>Q&lt;T&gt;</code> of <code>B</code>.</li>
+              </ul>
+              
+              
+              <p id="for_example_this_generic_function...">For example, this generic function type:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>&lt;X&gt; =&gt; X&amp;Object(X|Object)
+</code></pre>
+              
+              <p id="is_a_subtype_of_this...">is a subtype of this generic function type:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>&lt;X&gt; given X satisfies Object =&gt; X(X)
+</code></pre>
+              
+              <p id="take_a_minute_to_convince...">Take a minute to convince yourself that this is correct
+              intuitively.</p>
+              
+              <p id="again_these_rules_generalize_naturally...">(Again, these rules generalize naturally to functions with
+              multiple type parameters and/or multiple value parameters.)</p>
+              
+              <h3 id="type_functions_and_type_inference">Type functions and type inference</h3>
+              
+              <p id="when_we_call_a_first...">When we call a first-order generic function in Ceylon, we
+              don't usually need to explicitly specify type arguments.
+              Instead, we can usually infer them from the value arguments
+              of the invocation expression. For example, if we have this
+              generic function:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>List&lt;Out&gt; map&lt;In,Out&gt;(Out(In) fun, List&lt;In&gt; list) =&gt; ... ;
+</code></pre>
+              
+              <p id="then_we_can_always_safely...">Then we can always safely infer <code>In</code> and <code>Out</code>, because
+              there's a unique most-precise choice of type arguments:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>value list = map(Integer.string, ArrayList { 10, 20, 30 });
+</code></pre>
+              
+              <p id="in_this_example_we_can...">In this example, we can safely infer that <code>In</code> is <code>Integer</code>,
+              and <code>Out</code> is <code>String</code>, without any loss of precision.</p>
+              
+              <p id="unfortunately_once_higher_order_generics...">Unfortunately, once higher-order generics come into play,
+              inference of type functions is a much more ambiguous problem.
+              Consider this second-order generic function, which abstracts
+              the <code>map()</code> function away from the container type, by
+              introducing the type function variable <code>Box</code> to represent
+              the unknown container type:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Box&lt;Out&gt; fmap&lt;Box,In,Out&gt;(Out(In) fun, Box&lt;In&gt; box) 
+        given Box&lt;Element&gt; { ... }
+</code></pre>
+              
+              <p id="and_now_consider_the_following...">And now consider the following invocation of this function:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>fmap(Integer.string, ArrayList { 10, 20, 30 })
+</code></pre>
+              
+              <p id="what_type_should_we_infer...">What type should we infer for <code>Element</code>, and what type
+              function for <code>Box</code>?</p>
+              
+              <ul>
+              <li>
+<code>Integer</code> and <code>List</code>?</li>
+              <li>
+<code>Integer</code> and <code>Iterable</code>?</li>
+              <li>
+<code>Integer</code> and <code>ArrayList</code>?</li>
+              <li>
+<code>Integer</code> and <code>MutableList</code>?</li>
+              <li>
+<code>Integer</code> and <code>ListMutator</code>?</li>
+              <li>
+<code>Integer</code> and <code>Collection</code>?</li>
+              <li>
+<code>Object</code> and <code>Category</code>?</li>
+              </ul>
+              
+              
+              <p id="in_general_there_might_be...">In general, there might be several different reasonable
+              choices, and no really good criteria for choosing between
+              them. So in this case, we require that the type arguments be
+              specified explicitly:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>fmap&lt;List,Integer,String&gt;(Integer.string, ArrayList { 10, 20, 30 })
+</code></pre>
+              
+              <p id="however_there_is_a_pattern...">However, there is a pattern we can use to make type function
+              inference possible. In this case, we could define the
+              following interface:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>interface Functor&lt;Box,Element&gt; given Box&lt;Value&gt; { ... }
+</code></pre>
+              
+              <p id="now_lets_imagine_that_our...">Now let's imagine that our <code>ArrayList</code> class inherits
+              <code>Functor</code>, so that any <code>ArrayList&lt;Element&gt;</code> is a
+              <code>Functor&lt;List,Element&gt;</code>.</p>
+              
+              <p id="and_lets_redefine_fmap_like...">And let's redefine <code>fmap()</code> like this:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>  Box&lt;Out&gt; fmap&lt;Box,In,Out&gt;(Out(In) fun, Functor&lt;Box,In&gt; box) 
+        given Box&lt;Element&gt; { ... }
+</code></pre>
+              
+              <p id="then_finally_for_the_same...">Then, finally, for the same instantiation expression we had
+              before:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>fmap(Integer.string, ArrayList { 10, 20, 30 })
+</code></pre>
+              
+              <p id="we_can_now_unambiguously_infer...">we can now unambiguously infer that <code>Box</code> is <code>List</code> and
+              <code>In</code> is <code>Integer</code>, since those types are encoded as type
+              arguments to <code>Functor</code> in the principal supertype
+              instantiation of <code>Functor</code> for the expression
+              <code>ArrayList { 10, 20, 30 }</code>.</p>
+              
+              <h3 id="instances_of_type_functions">Instances of type functions</h3>
+              
+              <p id="in_the_original_post_we...">In the original post, we noted that a type function that
+              returns a function type is the type of a generic function.
+              For example, the type function:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>&lt;X&gt; given X satisfies Object =&gt; X(X)
+</code></pre>
+              
+              <p id="is_the_type_of_this...">Is the type of this generic function:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>X f&lt;X&gt;(X x) given X satisfies Object =&gt; x;
+</code></pre>
+              
+              <p id="but_then_its_natural_to...">But then it's natural to enquire: if some type functions are
+              the types of generic functions, what are the <em>other</em> type
+              functions the types of?</p>
+              
+              <p id="well_if_you_reflect_for...">Well, if you reflect for a second on the relationship
+              between types and values, I think you'll see that they must
+              be the types of <em>generic value declarations</em>. That is, this
+              type function:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>&lt;X&gt; =&gt; List&lt;X&gt;
+</code></pre>
+              
+              <p id="would_be_the_type_of...">would be the type of this value, written in pseudo-Ceylon:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>List&lt;X&gt; list&lt;X&gt; =&gt; ... ;
+</code></pre>
+              
+              <p id="that_is_when_presented_with...">That is, when presented with a type <code>X</code>, <code>list&lt;X&gt;</code> evaluates
+              to a <code>List&lt;X&gt;</code>.</p>
+              
+              <p id="of_course_there_are_no...">Of course there are no actual generic values in Ceylon, the
+              closest thing we have is a nullary generic function:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>List&lt;X&gt; list&lt;X&gt;() =&gt; ... ;
+</code></pre>
+              
+              <p id="whose_type_is_actually">whose type is actually:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>&lt;X&gt; =&gt; List&lt;X&gt;()
+</code></pre>
+              
+              <p id="theres_no_plan_to_ever...">There's no plan to ever introduce generic values into Ceylon,
+              so types like <code>&lt;X&gt; =&gt; List&lt;X&gt;</code> have no instances. They're
+              useful only as type arguments to higher-order generic types.</p>
+              
+              <h3 id="type_functions_and_principal_typing">Type functions and principal typing</h3>
+              
+              <p id="finally_lets_address_a_rather...">Finally, let's address a rather technical point.</p>
+              
+              <p id="a_very_important_property_of...">A very important property of Ceylon's type system is the
+              ability to form a <em>principal instantiation</em> of any union or
+              intersection of different instantiations of a generic type.</p>
+              
+              <p id="for_example_for_the_covariant...">For, example, for the covariant type <code>List&lt;T&gt;</code>:</p>
+              
+              <ul>
+              <li>
+<code>List&lt;X&gt; | List&lt;Y&gt;</code> has the principal instantiation
+              <code>List&lt;X|Y&gt;</code>
+</li>
+              <li>
+<code>List&lt;X&gt; &amp; List&lt;Y&gt;</code> has the principal instantiation
+              <code>List&lt;X&amp;Y&gt;</code>
+</li>
+              </ul>
+              
+              
+              <p id="for_the_contravariant_type_comparablet">For the contravariant type <code>Comparable&lt;T&gt;</code>:</p>
+              
+              <ul>
+              <li>
+<code>Comparable&lt;X&gt; | Comparable&lt;Y&gt;</code> has the principal
+              instantiation <code>Comparable&lt;X&amp;Y&gt;</code>
+</li>
+              <li>
+<code>Comparable&lt;X&gt; &amp; Comparable&lt;Y&gt;</code> has the principal
+              instantiation <code>Comparable&lt;X|Y&gt;</code>
+</li>
+              </ul>
+              
+              
+              <p id="naturally_its_important_that_we...">Naturally, it's important that we can do the same tricks for
+              intersections and unions of instantiations of higher-order
+              types. As at happens, this works out extremely naturally,
+              using the following identities:</p>
+              
+              <ul>
+              <li>
+<code>&lt;&lt;X&gt; =&gt; F&lt;X&gt;&gt; | &lt;&lt;Y&gt; =&gt; G&lt;Y&gt;&gt;</code> is a subtype of
+              <code>&lt;T&gt; =&gt; F&lt;T&gt; | G&lt;T&gt;</code>, and</li>
+              <li>
+<code>&lt;&lt;X&gt; =&gt; F&lt;X&gt;&gt; &amp; &lt;&lt;Y&gt; =&gt; G&lt;Y&gt;&gt;</code> is a subtype of
+              <code>&lt;T&gt; =&gt; F&lt;T&gt; &amp; G&lt;T&gt;</code>.</li>
+              </ul>
+              
+              
+              <p id="thus_if_we_have_the...">Thus, if we have the following covariant second-order type:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>interface Functor&lt;out Element, out Container&gt;
+        given Container&lt;E&gt; { ... }
+</code></pre>
+              
+              <p id="then_we_obtain_the_following...">Then we obtain the following principal instantiations:</p>
+              
+              <ul>
+              <li>
+<code>Functor&lt;E,A&gt; | Functor&lt;F,B&gt;</code> has the principal
+              instantiation <code>Functor&lt;E|F,&lt;T&gt; =&gt; A&lt;T&gt;|B&lt;T&gt;&gt;</code>, and</li>
+              <li>
+<code>Functor&lt;E,A&gt; &amp; Functor&lt;F,B&gt;</code> has the principal
+              instantiation <code>Functor&lt;E&amp;F, &lt;T&gt; =&gt; A&lt;T&gt;&amp;B&lt;T&gt;&gt;</code>.</li>
+              </ul>
+              
+              
+              <p id="you_dont_need_to_know...">You don't need to know these identities when you're writing
+              code in Ceylon, but it's nice to know that type functions
+              don't undermine the basic algebraic properties which are the
+              reason Ceylon's type system is so nice to work with.
+              Everything fits together here, without weird holes and
+              corner cases.</p>
+              
+              <h3 id="a_word_about_rank">A word about "rank"</h3>
+              
+              <p id="in_the_previous_post_i...">In the previous post I described our support for references
+              to generic functions as "arbitrary rank" polymorphism, which
+              prompted a short discussion about how to measure the rank of
+              a generic type. I now think that the term "rank" probably
+              isn't very meaningful in connection to Ceylon, since there's
+              nothing special about our function types: they're just
+              instantiations of the perfectly ordinary generic type
+              <code>Callable</code>. As suggested by Kamatsu
+              <a href="http://www.reddit.com/r/programming/comments/38hsrb/programming_with_type_functions_in_ceylon/crva8md">on reddit</a>,
+              it seems to me that a better word to use is probably
+              "impredicative".</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2015/06/12/more-type-functions/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="post">
+            <h1 class="title" id="programming_with_type_functions_in_ceylon">
+              <a href="/blog/2015/06/03/generic-function-refs/">Programming with type functions in Ceylon</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/gavin-king/">Gavin King</a>
+              </div>
+              <div class="date">
+                03 June 2015
+              </div>
+              <div class="tags">
+              </div>
+            </div>
+            <div class="body">
+              <p id="ive_recently_been_working_on...">I've recently been working on some experimental new features
+              of Ceylon's already extremely powerful type system. What I'm
+              going to explain in this post is known, technically, as:</p>
+              
+              <ul>
+              <li>
+<strong>higher order generic types</strong> (or <em>type constructor
+              polymorphism</em>, or <em>higher kinds</em>), and</li>
+              <li>
+<strong>higher rank generic types</strong> (or <em>rank-N polymorphism</em>).</li>
+              </ul>
+              
+              
+              <p id="please_dont_worry_about_this...">Please don't worry about this jargon salad. (And please don't
+              try to google any of those terms, because the explanations
+              you'll find will only make these pretty straightforward
+              notions seem confusing.) Stick with me, and I'll do my best
+              to explain the concepts in intuitive terms, without needing
+              any of the above terminology.</p>
+              
+              <p id="but_first_lets_start_with...">But first, let's start with pair of examples that illustrate
+              a motivating problem.</p>
+              
+              <p id="this_function_simply_returns_its...">This function simply returns its argument:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Object pipeObject(Object something) =&gt; something;
+</code></pre>
+              
+              <p id="this_function_adds_floats">This function adds <code>Float</code>s:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Float addFloats(Float x, Float y) =&gt; x+y;
+</code></pre>
+              
+              <p id="modern_programming_language_let_us...">Modern programming language let us treat either of these
+              functions as a value and pass it around the system. For
+              example, I can write:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Object(Object) pipeObjectFun = pipeObject;
+</code></pre>
+              
+              <p id="or">Or:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Float(Float,Float) addFloatsFun = addFloats;
+</code></pre>
+              
+              <p id="where_objectobject_and_floatfloatfloat_represent...">Where <code>Object(Object)</code> and <code>Float(Float,Float)</code> represent
+              the <em>types</em> of the functions, and <code>pipeObject</code> and
+              <code>addFloats</code> are a <em>references</em> to the functions. So far so
+              good.</p>
+              
+              <p id="but_sometimes_its_useful_to...">But sometimes it's useful to have a function that abstracts
+              away from the concrete data type using generics. We
+              introduce a type variable, to represent the "unknown" type
+              of thing we're dealing with:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Any pipe&lt;Any&gt;(Any anything) =&gt; anything;
+</code></pre>
+              
+              <p id="and">And:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Number add&lt;Number&gt;(Number x, Number y)
+            given Number satisfies Summable&lt;Number&gt;
+        =&gt; x+y;
+</code></pre>
+              
+              <p id="sometimes_as_in_add_the...">Sometimes, as in <code>add()</code>, the unknown type is constrained
+              in some way. We express this using a type constraint:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>given Number satisfies Summable&lt;Number&gt;
+</code></pre>
+              
+              <p id="this_is_ceylons_way_of...">This is Ceylon's way of denoting that <code>Number</code> may only be a
+              type which is a subtype of the upper bound <code>Summable&lt;Number&gt;</code>,
+              i.e. that it is a type to which we can apply the addition
+              operator <code>+</code>.</p>
+              
+              <p id="now_what_if_i_want...">Now, what if I want to pass around a reference to this
+              function. Well, one thing I can typically do is nail down
+              the unknown type to a concrete value:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Object(Object) pipeObjectFun = pipe&lt;Object&gt;;
+</code></pre>
+              
+              <p>Or:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Float(Float,Float) addFloatsFun = add&lt;Float&gt;;
+</code></pre>
+              
+              <p id="but_thats_a_bit_disappointing—weve...">But that's a bit disappointing—we've lost the fact
+              that <code>add()</code> was generic. Now, in object-oriented languages
+              it's possible to define the generic function as a member of
+              a class, and pass an instance of the class around the system.
+              This is called the <em>strategy pattern</em>. But it's inconvenient
+              to have to write a whole class just to encapsulate a function
+              reference.</p>
+              
+              <p id="it_would_be_nicer_to...">It would be nicer to be able to write:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>TypeOfPipe pipeFun = pipe;
+</code></pre>
+              
+              <p>And:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>TypeOfAdd addFun = add; 
+</code></pre>
+              
+              <p id="where_typeofpipe_and_typeofadd_are...">Where <code>TypeOfPipe</code> and <code>TypeOfAdd</code> are the types of the
+              generic functions. The problem is that there's no way to
+              represent these types within the type system of most
+              languages. Let's see how we can do that in Ceylon 1.2.</p>
+              
+              <h3 id="introducing_type_functions">Introducing type functions</h3>
+              
+              <p id="i_promised_to_avoid_jargon...">I promised to avoid jargon, and avoid jargon I will. The
+              only bit of terminology we'll need is the idea of a <em>type
+              function</em>. A type function, as its name implies, is a
+              function that accepts zero or more types, and produces a
+              type. Type functions might seem exotic and abstract at
+              first, but there's one thing that will help you understand
+              them:</p>
+              
+              <blockquote><p id="you_already_know_almost_everything...">You already know almost everything you need to know about
+              type functions, because almost everything you know about
+              ordinary (value) functions is also true of type functions.</p></blockquote>
+              
+              <p id="if_you_stay_grounded_in...">If you stay grounded in the analogy to ordinary functions,
+              you'll have no problems with the rest of this post, I
+              <em>promise</em>.</p>
+              
+              <p id="so_we_all_know_what...">So, we all know what an ordinary function looks like:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>function addFloats(Float x, Float y) =&gt; x+y;
+</code></pre>
+              
+              <p id="lets_break_that_down_we...">Let's break that down, we have:</p>
+              
+              <ul>
+              <li>the function name, and list of parameters, to the left
+              of a fat arrow, and</li>
+              <li>an expression on the right of the fat arrow.</li>
+              </ul>
+              
+              
+              <p id="a_type_function_doesnt_look...">A type function doesn't look very different. It has a name
+              and (type) parameters on the left of a fat arrow, and a
+              (type) expression on the right. It looks like this:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>alias Pair&lt;Value&gt; =&gt; [Value,Value];
+</code></pre>
+              
+              <p id="aha_this_is_something_weve...">Aha! This is something we've already seen! So a type
+              function is nothing more than a generic type alias! This
+              particular type function accepts a type, and produces a
+              tuple type, a pair, whose elements are of the given type.</p>
+              
+              <p id="actually_not_every_type_function...">Actually not every type function is a type alias. A generic
+              class or interface is a type function. For example:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>interface List&lt;Element&gt; { ... }
+</code></pre>
+              
+              <p id="this_interface_declaration_accepts_a...">This interface declaration accepts a type <code>Element</code>, and
+              produces a type <code>List&lt;Element&gt;</code>, so it's a type function.</p>
+              
+              <p id="i_can_call_a_function...">I can call a function by providing values as arguments:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>pipe("hello")
+add(1.0, 2.0)
+</code></pre>
+              
+              <p id="these_expressions_produce_the_values...">These expressions produce the values <code>"hello"</code> and <code>3.0</code>.</p>
+              
+              <p id="i_can_apply_a_type...">I can <em>apply</em> a type function by providing types as
+              arguments:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Pair&lt;Float&gt;
+</code></pre>
+              
+              <p id="this_type_expression_produces_the...">This <em>type</em> expression produces the <em>type</em> <code>[Float,Float]</code>,
+              by applying the type function <code>Pair</code> to the type argument
+              <code>Float</code>.</p>
+              
+              <p id="similarly_i_can_apply_the...">Similarly, I can apply the type function <code>List</code>:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>List&lt;String&gt;
+</code></pre>
+              
+              <p id="this_type_expression_just_literally...">This type expression just literally produces the type
+              <code>List&lt;String&gt;</code>, by applying the type function <code>List</code> to
+              the type argument <code>String</code>.</p>
+              
+              <p id="on_the_other_hand_i...">On the other hand, I can take a reference to a value
+              function by just writing its name, without any arguments,
+              for example, <code>pipe</code>, or <code>add</code>. I can do the same with type
+              functions, writing <code>Pair</code> or <code>List</code>.</p>
+              
+              <p id="back_in_the_quotidian_world...">Back in the quotidian world of ordinary values, I can write
+              down an <em>anonymous function</em>:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>(Float x, Float y) =&gt; x+y
+</code></pre>
+              
+              <p id="in_the_platonic_world_of...">In the platonic world of types, I can do that too:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>&lt;Value&gt; =&gt; [Value,Value]
+</code></pre>
+              
+              <p id="finally_an_ordinary_value_function...">Finally, an ordinary value function can constrain its
+              arguments using a type annotation like <code>Float x</code>. A type
+              function can do the same thing, albeit with a more
+              cumbersome syntax:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>interface List&lt;Element&gt; 
+        given Element satisfies Object 
+{
+    //define the type list
+    ...
+}
+</code></pre>
+              
+              <p id="even_an_anonymous_type_function...">Even an anonymous type function may have constraints:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>&lt;Value&gt; given Value satisfies Object 
+        =&gt; [Value,Value]
+</code></pre>
+              
+              <p id="jargon_watch_most_people_including..."><strong>Jargon watch:</strong> most people, including me, use the term
+              <em>type constructor</em> instead of "type function".</p>
+              
+              <h3 id="type_functions_are_types">Type functions are types</h3>
+              
+              <p id="now_were_going_to_make...">Now we're going to make a key conceptual leap. Recall that
+              in modern languages, functions are treated as values. I can</p>
+              
+              <ol>
+              <li>take a function, and assign it to a variable, and then</li>
+              <li>call that variable within the body of the function.</li>
+              </ol>
+              
+              
+              <p id="for_example">For example:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>void secondOrder(Float(Float,Float) fun) {
+    print(fun(1.0, 2.0));
+}
+
+//apply to a function reference
+secondOrder(addFloats);
+
+//apply to an anonymous function
+secondOrder((Float x, Float y) =&gt; x+y);
+</code></pre>
+              
+              <p id="we_call_functions_which_accept...">We call functions which accept functions <em>higher order
+              functions</em>.</p>
+              
+              <p id="similarly_were_going_to_declare...">Similarly, we're going to declare that <em>type functions are
+              types</em>. That is, I can:</p>
+              
+              <ol>
+              <li>take a type function and assign it to a type variable,
+              and then</li>
+              <li>apply that type variable in the body of the declaration
+              it parameterizes.</li>
+              </ol>
+              
+              
+              <p>For example:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>interface SecondOrder&lt;Box&gt; given Box&lt;Value&gt; {
+    shared formal Box&lt;Float&gt; createBox(Float float);
+}
+
+//apply to a generic type alias
+SecondOrder&lt;Pair&gt; something;
+
+//apply to a generic interface
+SecondOrder&lt;List&gt; somethingElse;
+
+//apply to an anonymous type function
+SecondOrder&lt;&lt;Value&gt; =&gt; [Value,Value]&gt; somethingScaryLookin;
+</code></pre>
+              
+              <p id="the_type_constraint_given_boxvalue...">The type constraint <code>given Box&lt;Value&gt;</code> indicates that the
+              type variable <code>Box</code> accepts type functions with one type
+              argument.</p>
+              
+              <p id="now_theres_one_thing_to...">Now, there's one thing to take note of here. At this point,
+              the notion that type functions are types is a purely formal
+              statement. An axiom that defines what kinds of types I can
+              write down and expect the typechecker of my programming
+              language to be able to reason about. I have
+              not—yet—said that there are any actual <em>values</em>
+              of these types!</p>
+              
+              <p id="jargon_watch_the_ability_to..."><strong>Jargon watch:</strong> the ability to treat a type function as a
+              type is called <em>higher order generics</em>.</p>
+              
+              <h3 id="the_type_of_a_generic_function_is_a_type_function">The type of a generic function is a type function</h3>
+              
+              <p id="lets_come_back_to_our...">Let's come back to our motivating examples:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Any pipe&lt;Any&gt;(Any anything) =&gt; anything;
+
+Number add&lt;Number&gt;(Number x, Number y)
+            given Number satisfies Summable&lt;Number&gt;
+        =&gt; x+y;
+</code></pre>
+              
+              <p id="if_you_squint_youll_see...">If you squint, you'll see that these are actually functions
+              with <em>two</em> parameter lists. The first parameter lists are:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>&lt;Any&gt;
+</code></pre>
+              
+              <p>And:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>&lt;Number&gt; given Number satisfies Summable&lt;Number&gt;
+</code></pre>
+              
+              <p id="which_both_accept_a_type...">Which both accept a type. The second parameter lists are:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>(Any anything)
+</code></pre>
+              
+              <p>And:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>(Number x, Number y)
+</code></pre>
+              
+              <p id="therefore_we_can_view_each...">Therefore, we can view each generic function as a function
+              that accepts a type and produces an ordinary value function.
+              The resulting functions are of type <code>Any(Any)</code> and
+              <code>Value(Value,Value)</code> respectively.</p>
+              
+              <p id="thus_we_could_write_down...">Thus, we could write down the type of our first generic
+              function <code>pipe()</code> like this:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>&lt;Any&gt; =&gt; Any(Any)
+</code></pre>
+              
+              <p id="and_the_type_of_add...">And the type of <code>add()</code> is:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>&lt;Number&gt; given Number satisfies Summable&lt;Number&gt;
+        =&gt; Number(Number,Number)
+</code></pre>
+              
+              <p id="phew_that_looks_a_bit...">Phew. That looks a bit scary. But mainly because of the type
+              constraint. Because generic function types like this are
+              pretty verbose, we can assign them aliases:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>alias AdditionLikeOperation
+        =&gt; &lt;Number&gt; given Number satisfies Summable&lt;Number&gt;
+                =&gt; Number(Number,Number);
+</code></pre>
+              
+              <p id="or_equivalently_but_more_simply">Or, equivalently, but more simply:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>alias AdditionLikeOperation&lt;Number&gt; 
+        given Number satisfies Summable&lt;Number&gt;
+                =&gt; Number(Number,Number);
+</code></pre>
+              
+              <p id="that_was_the_hard_part—were...">That was the hard part—we're almost done.</p>
+              
+              <h3 id="references_to_generic_functions">References to generic functions</h3>
+              
+              <p id="now_we_can_use_these...">Now we can use these types as the types of references to
+              generic functions:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>&lt;Any&gt; =&gt; Any(Any) pipeFun = pipe;
+
+AdditionLikeOperation addFun = add;
+</code></pre>
+              
+              <p id="and_we_can_apply_these...">And we can apply these function references by providing type
+              arguments:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>String(String) pipeString = pipeFun&lt;String&gt;;
+Object(Object) pipeObject = pipeFun&lt;Object&gt;;
+
+Float(Float,Float) addFloats = addFun&lt;Float&gt;;
+Integer(Integer,Integer) addInts = addFun&lt;Integer&gt;;
+</code></pre>
+              
+              <p id="or_alternatively_we_can_just...">Or, alternatively, we can just immediately apply the generic
+              function references to <em>value</em> arguments, and let Ceylon
+              infer the type arguments, just as it usually does when you
+              call a function directly:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>String hi = pipeFun("hello");
+Integer zero = pipeFun(0);
+
+Float three = addFun(1.0, 2.0);
+String helloWorld = addFun("Hello", "World");
+</code></pre>
+              
+              <p id="and_now_weve_solved_the...">And now we've solved the problem posed at the beginning!</p>
+              
+              <p id="now_for_the_kicker_the...">Now for the kicker: the types <code>&lt;Any&gt; =&gt; Any(Any)</code> and
+              <code>AdditionLikeOperation</code> are both type functions. Indeed, the
+              type of <em>any</em> generic function is a type function of this
+              general form:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>&lt;TypeParameters&gt; =&gt; ReturnType(ParameterTypes)
+</code></pre>
+              
+              <p id="similarly_every_type_function_of...">Similarly, every type function of this general form is the
+              type of some generic function.</p>
+              
+              <p id="so_weve_now_shown_that...">So we've now shown that some type functions are not only
+              types, they're the types of values—the values are
+              references to generic functions like <code>pipe</code> and
+              <code>add</code>.</p>
+              
+              <p id="jargon_watch_the_ability_to_treat..."><strong>Jargon watch:</strong> the ability to treat a generic function as
+              a value is called <em>higher rank generics</em>.</p>
+              
+              <h3 id="abstraction_over_generic_functions">Abstraction over generic functions</h3>
+              
+              <p id="finally_we_can_use_all...">Finally, we can use all this for something useful. Let's
+              consider a scanner library that is abstracted away from
+              all of:</p>
+              
+              <ul>
+              <li>the character type,</li>
+              <li>the token type,</li>
+              <li>the kind of container that tokens occur in.</li>
+              </ul>
+              
+              
+              <p id="then_we_might_have_a...">Then we might have a <code>scan()</code> function with this sort
+              of signature:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>"Tokenize a stream of characters, producing
+ a stream of tokens."
+Stream&lt;Token&gt; scan&lt;Char,Token,Stream&gt;
+        (grammar, characterStream, newToken, newStream)
+            //Note: Stream is a reference to a type function!
+            given Stream&lt;Element&gt; satisfies {Element*} {
+
+    //parameters:
+
+    "The token grammar."
+    Grammar grammar;
+
+    "The character stream to tokenize."
+    Stream&lt;Char&gt; characterStream;
+
+    "Constructor for tokens, accepting a
+     substream of characters."
+    Token newToken(Stream&lt;Char&gt; chars);
+
+    "Generic function to construct a stream
+     of characters or tokens."
+     //Note: newStream is a reference to a generic function!
+     Stream&lt;Elem&gt; newStream&lt;Elem&gt;({Elem*} elements);
+
+    //implementation:
+
+    Stream&lt;Token&gt; tokenStream;
+
+    //do all the hard work
+    ...
+
+    return tokenStream;
+}
+</code></pre>
+              
+              <p id="here">Here:</p>
+              
+              <ul>
+              <li>
+<code>Char</code> is the unknown character type,</li>
+              <li>
+<code>Token</code> is the unknown token type,</li>
+              <li>
+<code>Stream</code> is a type function representing an unknown
+              container type that can contain either characters or
+              tokens,</li>
+              <li>
+<code>newToken</code> is a function that accepts a substream of
+              characters and creates a <code>Token</code>,</li>
+              <li>
+<code>characterStream</code> is a stream of characters, and, most
+              significantly,</li>
+              <li>
+<code>newStream</code> is a generic function that constructs streams
+              of any element type, used internally to create streams of
+              characters as well as tokens.</li>
+              </ul>
+              
+              
+              <p id="we_could_use_this_function...">We could use this function like this:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>//Let's use String as the token type, Character as the
+//character type, and Iterable as the stream type.
+
+//input a stream of characters
+{Character*} input = ... ;
+
+//and some token grammar
+Grammar grammar = ... ;
+
+//get back a stream of Strings
+{String*} tokens =
+        scan&lt;Character, String, Iterable&gt;
+            (grammar, input, String,
+                    //Note: a generic anonymous function! 
+                    &lt;Elem&gt;({Elem*} elems) =&gt; elems);
+</code></pre>
+              
+              <p id="or_like_this">Or like this:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>//use LinkedList as the stream type
+import ceylon.collection { LinkedList }
+
+//we don't need Unicode support, so let's use
+//Ceylon's 8-bit Byte as our character type
+alias Char =&gt; Byte;
+
+//define our own token type
+class BasicToken(LinkedList&lt;Char&gt; charList) {
+    string =&gt; String { for (b in charList) 
+                       b.unsigned.character };
+}
+
+//input a linked list of characters
+LinkedList&lt;Char&gt; input = ... ;
+
+//and some token grammar
+Grammar grammar = ... ;
+
+//get back a linked list of BasicTokens
+LinkedList&lt;BasicToken&gt; tokens =
+        scan&lt;Char, BasicToken, LinkedList&gt;
+            (grammar, input, BasicToken,
+                    //Note: a generic function ref! 
+                    LinkedList);
+</code></pre>
+              
+              <p id="as_you_can_see_our...">As you can see, our parsing algorithm is now almost
+              completely abstracted away from the concrete types we want
+              to use!</p>
+              
+              <h3 id="compiling_this_code">Compiling this code</h3>
+              
+              <p id="in_ceylon_12_programming_with...">In Ceylon 1.2, programming with type functions is an
+              experimental feature that only works in conjunction with
+              the JavaScript backend. So you can run code that uses type
+              functions on a JavaScript virtual machine, but not on the
+              JVM. This is something we're inviting you to play with to
+              see if the whole community agrees it is useful. But right
+              now it's not covered in the language specification, and it's
+              not supported by the Java backend.</p>
+              
+              <p id="the_typechecker_itself_supports_extremely...">The typechecker itself supports <em>extremely</em> sophisticated
+              reasoning about higher order and higher rank types. Type
+              functions are fully integrated with Ceylon's powerful
+              system of subtype polymorphism, including with union
+              and intersection types, and with type inference and type
+              argument inference. There's even limited support for type
+              function inference! And there's no arbitrary upper limits
+              here; not only rank-2 but arbitrary rank types are supported.</p>
+              
+              <p id="if_theres_enough_interest_ill...">If there's enough interest, I'll cover that material in a
+              future post.</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2015/06/03/generic-function-refs/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="pagination-links">
+<a href="/blog/page/5/" class="previous-link">Previous</a> <a href="/blog/" class="page-link">1</a> <a href="/blog/page/2/" class="page-link">2</a> <span class="skip">...</span><a href="/blog/page/5/" class="page-link">5</a> <span class="current-page">6</span> <a href="/blog/page/7/" class="page-link">7</a> <span class="skip">...</span><a href="/blog/page/24/" class="page-link">24</a> <a href="/blog/page/25/" class="page-link">25</a> <a href="/blog/page/7/" class="next-link">Next</a> </div>
+        </div>
+        <script type="text/javascript">
+          //<![CDATA[
+            /* place div.expandable to 
+             * - minHeight by default 
+             * - full size on click
+             * - back to minHeight on second click
+             * with a jQuery animation
+             */
+            var minHeight=150;
+            $(document).ready( function() {
+              $("div.expandable").height(minHeight);     
+              $("div.expandable").click(function(e) 
+                {
+                  if( !$(e.target).is("a")) {
+                    $this = $(this); 
+                    var currentHeight = $this.height();
+                    if(currentHeight==minHeight) {
+                      $this.css('height', 'auto');
+                    }
+                    else{
+                      $this.css('height', minHeight + 'px');
+                    };
+                    var height = $this.height();
+                    $this.css('height', currentHeight + 'px');
+                    $this.animate({'height':height}, 500);
+                }
+              })
+            });
+          //]]>
+        </script>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Annotations and the metamodel</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.2/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.2/tour">Tour of Ceylon</a></h3>
+            
+            <ol>
+            <li><a href="/documentation/1.2/tour/basics">Basics</a></li>
+            <li><a href="/documentation/1.2/tour/classes">Classes</a></li>
+            <li><a href="/documentation/1.2/tour/attributes-control-structures">Attributes and variables, control structures</a></li>
+            <li><a href="/documentation/1.2/tour/inheritance">Inheritance, refinement, and interfaces</a></li>
+            <li><a href="/documentation/1.2/tour/anonymous-member-classes">Anonymous and member classes</a></li>
+            <li><a href="/documentation/1.2/tour/sequences">Streams, sequences, and tuples</a></li>
+            <li><a href="/documentation/1.2/tour/typeinference">Type aliases and type inference</a></li>
+            <li><a href="/documentation/1.2/tour/types">Union, intersection, and enumerated types</a></li>
+            <li><a href="/documentation/1.2/tour/generics">Generics</a></li>
+            <li><a href="/documentation/1.2/tour/modules">Packages and modules</a></li>
+            <li><a href="/documentation/1.2/tour/functions">Functions</a></li>
+            <li><a href="/documentation/1.2/tour/named-arguments">Named arguments</a></li>
+            <li><a href="/documentation/1.2/tour/comprehensions">Comprehensions</a></li>
+            <li><a href="/documentation/1.2/tour/language-module">Language module</a></li>
+            <li><a href="/documentation/1.2/tour/initialization">Initialization and constructors</a></li>
+            <li><a href="/documentation/1.2/tour/annotations">Annotations and the metamodel</a></li>
+            <li><a href="/documentation/1.2/tour/interop">Interoperation with Java</a></li>
+            <li><a href="/documentation/1.2/tour/dynamic">Dynamic typing</a></li>
+            </ol>
+            
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.2/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.2/examples">Examples</a></h3>
+            
+            <!-- ### [Tutorial videos](/documentation/1.2/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.2/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.2/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.2/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.2/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.2/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Tour of Ceylon
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_12_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.2, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.2/tour/annotations.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.2/tour/annotations.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="annotations_and_the_metamodel">Annotations and the metamodel</h1>
+          
+          <p id="wow_part_sixteen_of_the...">Wow, part sixteen of the Tour of Ceylon and the end is in sight! The
+          <a href="../initialization">last part</a> covered initialization. This part is all
+          about <em>annotations</em> and metaprogramming.</p>
+          
+          <h2 id="annotations">Annotations</h2>
+          
+          <p id="if_youve_made_it_this...">If you've made it this far into this series of articles, you've already
+          seen lots of annotations. Annotations are <em>so</em> important in Ceylon that
+          it's extremely difficult to write any code without using them. But we
+          have not yet really explored what an annotation actually <em>is</em>.</p>
+          
+          <p id="lets_finally_rectify_that_the...">Let's finally rectify that. The answer is simple: an annotation is a
+          toplevel function that returns a subtype of
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/ConstrainedAnnotation.type.html"><code>ConstrainedAnnotation</code></a>.
+          We call the function an <em>annotation constructor</em>.</p>
+          
+          <h2 id="annotation_constructors">Annotation constructors</h2>
+          
+          <p id="heres_the_definition_of_a...">Here's the definition of a some of our old friends, first <code>shared</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>"Annotation to mark a type or member as shared. A `shared` 
+ member is visible outside the block of code in which it is 
+ declared."
+shared annotation SharedAnnotation shared() 
+        =&gt; SharedAnnotation();
+</code></pre>
+          
+          <p id="then_doc">Then <code>doc</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>"Annotation to specify API documentation of a program
+ element." 
+shared annotation DocAnnotation doc(String description)
+        =&gt; DocAnnotation(description);
+</code></pre>
+          
+          <p id="and_by">And <code>by</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>"Annotation to specify API authors."
+shared annotation AuthorsAnnotation by(String* authors) 
+        =&gt; AuthorsAnnotation(*authors);
+</code></pre>
+          
+          <p id="of_course_we_can_define...">Of course, we can define our own annotations. (That's the whole point!)</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:Annotations M5 -->
+          
+          
+          <pre data-language="ceylon"><code>shared annotation ScopeAnnotation scope(Scope s) =&gt; ScopeAnnotation(s);
+</code></pre>
+          
+          <p id="or">Or:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared annotation TodoAnnotation todo(String text) =&gt; TodoAnnotation(text);
+</code></pre>
+          
+          <p id="since_annotation_constructors_are_functions...">Since annotation constructors are functions, annotation names always begin
+          with a lowercase letter.</p>
+          
+          <h2 id="annotation_arguments">Annotation arguments</h2>
+          
+          <p id="when_we_specify_an_annotation...">When we specify an annotation with a non-empty parameter list on a program
+          element, we need to specify arguments for the parameters of the annotation.
+          Just like with a normal method invocation, we have the choice between a
+          positional argument list or a named argument list. We could write:</p>
+          
+          <!-- try-post:
+              void test() { }
+          -->
+          
+          
+          <pre data-language="ceylon"><code>doc ("The Hello World program")
+</code></pre>
+          
+          <!-- cat: void m() {} -->
+          
+          
+          <p>Or:</p>
+          
+          <!-- try-post:
+              void test() { }
+          -->
+          
+          
+          <pre data-language="ceylon"><code>doc { description = "The Hello World program"; }
+</code></pre>
+          
+          <!-- cat: void m() {} -->
+          
+          
+          <p id="likewise_we_could_write">Likewise, we could write:</p>
+          
+          <!-- try-post:
+              void test() { }
+          -->
+          
+          
+          <pre data-language="ceylon"><code>by ("Gavin", "Stephane", "Emmanuel", "Tom", "Tako")
+</code></pre>
+          
+          <!-- cat: void m() {} -->
+          
+          
+          <p>Or:</p>
+          
+          <!-- try-post:
+              void test() { }
+          -->
+          
+          
+          <pre data-language="ceylon"><code>by { authors = ["Gavin", "Stephane", "Emmanuel", "Tom", "Tako"]; }
+</code></pre>
+          
+          <!-- cat: void m() {} -->
+          
+          
+          <p id="if_an_annotation_has_no...">If an annotation has no arguments, we can just write the annotation name
+          and leave it at that. We do this all the time with annotations like <code>shared</code>,
+          <code>formal</code>, <code>default</code>, <code>actual</code>, <code>abstract</code>, <code>deprecated</code>, and <code>variable</code>.</p>
+          
+          <h2 id="annotation_types">Annotation types</h2>
+          
+          <p id="the_return_type_of_an...">The return type of an annotation constructor is called the <em>annotation type</em>.
+          The <code>shared</code> annotation produces a <code>SharedAnnotation</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>"The annotation class for [[shared]]."
+shared final annotation class SharedAnnotation()
+        satisfies OptionalAnnotation&lt;SharedAnnotation, 
+            FunctionOrValueDeclaration|ClassOrInterfaceDeclaration|
+                    Package|Import&gt; {}
+</code></pre>
+          
+          <p id="the_doc_annotation_produces_a...">The <code>doc</code> annotation produces a <code>DocAnnotation</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>"The annotation class for the [[doc]] annotation."
+shared final annotation class DocAnnotation(shared String description)
+        satisfies OptionalAnnotation&lt;DocAnnotation, Annotated&gt; {}
+</code></pre>
+          
+          <p id="the_by_annotation_produces_authorsannotation">The <code>by</code> annotation produces <code>AuthorsAnnotation</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>"The annotation class for [[by]]."
+shared final annotation class AuthorsAnnotation(shared String* authors)
+        satisfies OptionalAnnotation&lt;AuthorsAnnotation, Annotated&gt; {}
+</code></pre>
+          
+          <p id="naturally_we_can_define_our...">Naturally, we can define our own annotation types:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared final annotation class TodoAnnotation(String text)
+        satisfies SequencedAnnotation&lt;TodoAnnotation&gt; {
+    string =&gt; text;
+}
+</code></pre>
+          
+          <p>Or:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared final annotation class ScopeAnnotation(shared Scope scope)
+        satisfies OptionalAnnotation&lt;ScopeAnnotation, ClassDeclaration&gt; {
+    string =&gt; (scope==request then "request")
+         else (scope==session then "session")
+         else (scope==application then "application")
+         else nothing;
+}
+</code></pre>
+          
+          <p id="multiple_annotation_constructors_may_produce...">Multiple annotation constructors may produce the same annotation type. An
+          annotation type must be a subtype of <code>ConstrainedAnnotation</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:Annotations M6 -->
+          
+          
+          <pre data-language="ceylon"><code>"An annotation constrained to appear only on certain 
+ program elements, and only with certain values..."
+shared interface ConstrainedAnnotation&lt;out Value=Annotation, 
+                                       out Values=Anything, 
+                                       in ProgramElement=Nothing&gt; 
+        of Value
+        satisfies Annotation&lt;Value&gt;
+        given Value satisfies Annotation&lt;Value&gt;
+        given ProgramElement satisfies Annotated {
+
+    "Can this annotation occur on the given program 
+     element?"
+    shared Boolean occurs(Annotated programElement)
+            =&gt; programElement is ProgramElement;
+
+}
+</code></pre>
+          
+          <p id="the_type_arguments_of_this...">The type arguments of this interface express constraints upon how annotations
+          which return the annotation type occur. The first type parameter, <code>Value</code>, is
+          simply the annotation type itself.</p>
+          
+          <h2 id="annotation_constraints">Annotation constraints</h2>
+          
+          <p id="the_second_type_parameter_values...">The second type parameter, <code>Values</code>, governs how many different annotations
+          of given program element may return the annotation type. Ceylon provides two
+          subtypes of <code>ConstrainedAnnotation</code> that will be useful for the most common
+          cases:</p>
+          
+          <ul>
+          <li>If an annotation type is a subtype of
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/OptionalAnnotation.type.html"><code>OptionalAnnotation</code></a>,
+          at most one annotation of a given program element may be of this annotation
+          type, or, otherwise</li>
+          <li>if an annotation type is a subtype of
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/SequencedAnnotation.type.html"><code>SequencedAnnotation</code></a>,
+          more than one annotation of a given program element may be of this annotation
+          type.</li>
+          </ul>
+          
+          
+          <p id="where_optionalannotation_is_defined_in...">Where <code>OptionalAnnotation</code> is defined in the language module:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:Annotations M5 -->
+          
+          
+          <pre data-language="ceylon"><code>"An annotation that may occur at most once at a given 
+ program element..."
+shared interface OptionalAnnotation&lt;out Value, 
+                in ProgramElement=Annotated&gt;
+        of Value
+        satisfies ConstrainedAnnotation&lt;Value,Value?,ProgramElement&gt;
+        given Value satisfies Annotation&lt;Value&gt;
+        given ProgramElement satisfies Annotated {}
+</code></pre>
+          
+          <p id="along_with_sequencedannotation">Along with <code>SequencedAnnotation</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:Annotations M5 -->
+          
+          
+          <pre data-language="ceylon"><code>"An annotation that may occur multiple times at a given 
+ program element..."
+shared interface SequencedAnnotation&lt;out Value, 
+                in ProgramElement=Annotated&gt;
+        of Value
+        satisfies ConstrainedAnnotation&lt;Value,Value[],ProgramElement&gt;
+        given Value satisfies Annotation&lt;Value&gt;
+        given ProgramElement satisfies Annotated {}
+</code></pre>
+          
+          <p id="finally_the_third_type_parameter...">Finally, the third type parameter, <code>ProgramElement</code>, of <code>ConstrainedAnnotation</code>
+          constrains the kinds of program elements at which the annotation can occur.
+          The argument to <code>ProgramElement</code> must be a metamodel type. So the argument
+          <code>InterfaceDeclaration|AliasDeclaration</code> would constrain the annotation to occur
+          only at interface and <code>alias</code> declarations. The argument <code>ValueDeclaration</code> would
+          constrain the annotation to occur only at value or attribute declarations.</p>
+          
+          <h2 id="restrictions_on_annotation_parameters_and_annotation_arguments">Restrictions on annotation parameters and annotation arguments</h2>
+          
+          <p id="the_specification_defines_a_number...">The specification defines a number of restrictions on annotation parameter
+          types:</p>
+          
+          <blockquote>
+<p id="each_parameter_of_an_annotation...">Each parameter of an annotation constructor [or initializer parameter of an
+          annotation type] must have one of the following types:</p>
+          
+          <ul>
+          <li>
+<code>Integer</code>, <code>Float</code>, <code>Character</code>, or <code>String</code>,</li>
+          <li>an enumerated type whose cases are all anonymous classes, such as <code>Boolean</code>,</li>
+          <li>a subtype of <code>Declaration</code> in <code>ceylon.language.meta.declaration</code>,</li>
+          <li>an annotation type,</li>
+          <li>
+<code>{T*}</code> or <code>[T*]</code> where <code>T</code> is a legal annotation constructor parameter type,
+          or</li>
+          <li>any tuple type whose element types are legal annotation constructor parameter
+          types.</li>
+          </ul>
+          </blockquote>
+          
+          <p id="furthermore">Furthermore:</p>
+          
+          <ul>
+          <li>an annotation type can't contain initialization logic or reference declarations
+          (it must have an empty initializer section), and</li>
+          <li>an annotation constructor can't contain multiple statements (it must simply
+          instantiate and return an annotation type).</li>
+          </ul>
+          
+          
+          <p id="finally_an_annotation_argument_may...">Finally, an annotation argument may contain only:</p>
+          
+          <ul>
+          <li>literal strings, characters, integers, and floats,</li>
+          <li>references to toplevel anonymous classes (for example, <code>true</code>),</li>
+          <li>program element reference expressions (for example, <code>`interface List`</code>,
+          or <code>`function sum`</code>), and</li>
+          <li>iterable and tuple enumerations (<code>{ ... }</code> and <code>[ ... ]</code>) containing legal
+          annotation arguments.</li>
+          </ul>
+          
+          
+          <p id="some_of_these_restrictions_will...">Some of these restrictions will likely be relaxed in future versions of the
+          language.</p>
+          
+          <h2 id="reading_annotation_values_at_runtime">Reading annotation values at runtime</h2>
+          
+          <p id="annotation_values_may_be_obtained...">Annotation values may be obtained by calling the toplevel method
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/meta/index.html#annotations"><code>annotations()</code></a>
+          defined in the language module.</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:Annotations M5 -->
+          
+          
+          <pre data-language="ceylon"><code>shared native Values annotations&lt;Value,Values,ProgramElement&gt;(
+              Class&lt;ConstrainedAnnotation&lt;Value,Values,ProgramElement&gt;&gt; 
+              annotationType,
+              ProgramElement programElement)
+           given Value satisfies 
+                   ConstrainedAnnotation&lt;Value,Values,ProgramElement&gt;
+           given ProgramElement satisfies Annotated;
+</code></pre>
+          
+          <p id="so_to_obtain_the_value...">So to obtain the value of the <code>doc</code> annotation of the <code>Person</code> class, we
+          write:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:Annotations M5 -->
+          
+          
+          <pre data-language="ceylon"><code>String? description = annotations(`DocAnnotation`, 
+            `class Person`)?.description;
+</code></pre>
+          
+          <p id="note_that_the_expression_docannotation...">Note that the expression <code>`DocAnnotation`</code> returns the metamodel object
+          for the type <code>DocAnnotation</code>, an instance of <code>Class&lt;DocAnnotation,[String]&gt;</code>.
+          The expression <code>`class Person`</code> returns the reference object for the
+          program element <code>Person</code>, a <code>ClassDeclaration</code>.</p>
+          
+          <p id="to_determine_if_the_method...">To determine if the method <code>stop()</code> of a class named <code>Thread</code> is deprecated,
+          we can write:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:Annotations M5 -->
+          
+          
+          <pre data-language="ceylon"><code>Boolean deprecated = annotations(`DeprecationAnnotation`, 
+            `function Thread.stop`) exists;
+</code></pre>
+          
+          <p id="note_that_the_expression_function...">Note that the expression <code>`function Thread.stop`</code> returns the reference
+          object for the method <code>stop()</code> of <code>Thread</code>, an instance of <code>FunctionDeclaration</code>.</p>
+          
+          <p id="here_are_two_more_examples...">Here are two more examples, to make sure you get the idea:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:Annotations M5 -->
+          
+          
+          <pre data-language="ceylon"><code>Scope scope = annotations(`ScopeAnnotation`, `class Person`)?.scope else request;
+</code></pre>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>String[] todos = annotations(`TodoAnnotation`, `function method`)*.text;
+</code></pre>
+          
+          <p id="everythings_set_up_so_that...">Everything's set up so that <code>annotations()</code> returns <code>ScopeAnnotation?</code> for the
+          optional annotation type <code>ScopeAnnotation</code>, and <code>TodoAnnotation[]</code> for the
+          sequenced annotation type <code>TodoAnnotation</code>.</p>
+          
+          <!--
+          Of course, it's much more common to work with annotations in generic code, 
+          so you're more likely to be writing code like this:
+          
+              Entry<Attribute<Nothing,Object?>,String>[] attributeColumnNames(Class<Object> clazz) {
+                  return { for (att in clazz.members(Attribute<Nothing,Object?>))
+                              att->columnName(att) };
+              }
+          
+              String columnName(Attribute<Nothing,Object?> member) {
+                  return annotations(Column, member)?.name else member.name;
+              }
+          As you can see, Ceylon annotations are framework-developer-heaven.
+          -->
+          
+          
+          <h2 id="defining_annotations">Defining annotations</h2>
+          
+          <p id="weve_seen_plenty_of_examples...">We've seen plenty of examples of annotations built into Ceylon. Application
+          developers don't often define their own annotations, but framework developers
+          do this all the time. Let's see how we could define an annotation for
+          declarative transaction management in Ceylon.</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:Annotations M5 -->
+          
+          
+          <pre data-language="ceylon"><code>shared annotation TransactionalAnnotation transactional
+        (Boolean requiresNew = false)
+    =&gt; TransactionalAnnotation(requiresNew);
+</code></pre>
+          
+          <p id="this_method_simply_produces_an...">This method simply produces an instance of the class <code>TransactionalAnnotation</code>
+          that will be attached to the metamodel of an annotated method or attribute.
+          The meta-annotation specifies that the annotation may be applied to methods
+          and attributes, and may occur at most once on any member.</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:Annotations M5 -->
+          
+          
+          <pre data-language="ceylon"><code>shared final annotation class TransactionalAnnotation(requiresNew)
+        satisfies OptionalAnnotation&lt;TransactionalAnnotation,
+                        FunctionDeclaration|ValueDeclaration&gt; {
+    shared Boolean requiresNew;
+}
+</code></pre>
+          
+          <p id="now_we_can_apply_our...">Now we can apply our annotation to a method of any class.</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:Annotations M5 -->
+          
+          
+          <pre data-language="ceylon"><code>shared class OrderManager() {
+    shared transactional void createOrder(Order order) { ... }
+    ...
+}
+</code></pre>
+          
+          <p id="we_could_specify_an_explicit...">We could specify an explicit argument to the parameter of transactional using
+          a positional argument list:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:Annotations M5 -->
+          
+          
+          <pre data-language="ceylon"><code>shared transactional (true)
+void createOrder(Order order) { ... }
+</code></pre>
+          
+          <p id="alternatively_we_could_use_a...">Alternatively, we could use a named argument list:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:Annotations M5 -->
+          
+          
+          <pre data-language="ceylon"><code>shared transactional { requiresNew = true; }
+void createOrder(Order order) { ... }
+</code></pre>
+          
+          <!--We won't need to use reflection in our example, since Ceylon's module 
+          architecture includes special built-in support for using annotations to add
+          interceptors to methods and attributes.-->
+          
+          
+          <h2 id="the_metamodel">The metamodel</h2>
+          
+          <p id="the_ceylon_metamodel_is_an...">The Ceylon metamodel is an API that allows a program to interact with its
+          own program elements and the types they define at runtime. This capability
+          is commonly called <em>reflection</em> or <em>introspection</em> in other languages.
+          Reflection makes possible <em>runtime metaprogramming</em>.</p>
+          
+          <p id="note_ceylon_does_not_support..."><em>Note: Ceylon does not support any form of compile-time metaprogramming.</em></p>
+          
+          <p id="in_fact_the_ceylon_metamodel...">In fact, the Ceylon metamodel is divided into two separate APIs:</p>
+          
+          <ul>
+          <li>
+<code>ceylon.language.meta.declaration</code> defines a <em>detyped</em> model of
+          declarations, packages, and modules, while</li>
+          <li>
+<code>ceylon.language.meta.model</code> defines a statically typed model of types
+          and typed declarations.</li>
+          </ul>
+          
+          
+          <p id="the_language_provides_a_built...">The language provides a built-in syntax for obtaining the metamodel for
+          a program element. All metamodel expressions are enclosed in backticks.</p>
+          
+          <p id="a_program_element_reference_expression...">A program element reference expression specifies the fully-qualified name
+          of the program element, and a keyword indicating the kind of program
+          element it is. We've already seen a few examples of this syntax in <code>see</code>
+          and <code>throws</code> annotations:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>`class Singleton`
+`interface List`
+`function Iterable.map`
+`function sum`
+`alias Number`
+`value Iterable.size`
+`given Element`
+`module ceylon.language`
+`package ceylon.language.meta`
+</code></pre>
+          
+          <p id="reference_expressions_produce_an_instance...">Reference expressions produce an instance of a subtype of <code>Declaration</code>,
+          for example, a reference to a <code>class</code> is of type <code>ClassDeclaration</code>, and
+          a reference to a <code>function</code> is of type <code>FunctionDeclaration</code>. They're
+          especially useful for defining cross-references between program elements
+          in annotations.</p>
+          
+          <p id="a_typed_metamodel_expression_specifies...">A typed metamodel expression specifies a type or fully-typed function or
+          value. No keyword is necessary. By "fully-typed", I mean that type
+          arguments must be provided to all type parameters of a generic type or
+          function. For example:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>`Singleton&lt;String&gt;`
+`List&lt;Float|Integer&gt;`
+`{Object+}`
+`{Anything*}.map&lt;String&gt;`
+`sum&lt;Float&gt;`
+`{String*}.size`
+`[Float,Float,String]`
+`Float|Integer`
+`Element`
+</code></pre>
+          
+          <p id="a_typed_metamodel_expression_evaluates...">A typed metamodel expression evaluates to a metamodel object whose static
+          type captures the type of the referenced program element. For example:</p>
+          
+          <ul>
+          <li>
+<code>Singleton&lt;String&gt;</code> is of type <code>Class&lt;Singleton&lt;String&gt;,[String]&gt;</code>,</li>
+          <li>
+<code>{Anything*}.map&lt;String&gt;</code> is of type
+          <code>Method&lt;{Anything*},{String*},[String(Anything)]&gt;</code>, and</li>
+          <li>
+<code>Float|Integer</code> is of type <code>UnionType&lt;Float|Integer&gt;</code>.</li>
+          </ul>
+          
+          
+          <p id="thus_we_can_interact_with...">Thus, we can interact with our program at the meta level without losing
+          the benefits of static typing. For example, I can write a generic function
+          like the following:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>T createTriple&lt;T,E&gt;(Class&lt;T,[E,E,E]&gt; c, Function&lt;E,[Integer]&gt; e)
+        =&gt; c(e(0),e(1),e(2)); 
+</code></pre>
+          
+          <p id="and_use_it_like_this">And use it like this:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Integer isqr(Integer i) =&gt; i*i;
+class Triple&lt;T&gt;(T t0, T t1, T t2) {}
+
+Triple&lt;Integer&gt; triple = createTriple(`Triple&lt;Integer&gt;`, `isqr`)
+</code></pre>
+          
+          <p id="ok_sure_thats_a_very...">OK, sure, that's a very contrived example, and doesn't demonstrate
+          anything that we couldn't do more efficiently with function references.
+          Runtime metaprogramming is primarily intended to ease the development of
+          frameworks and libraries for Ceylon, and therefore further discussion of
+          the topic is outside of the scope of this tour.</p>
+          
+          <h2 id="theres_more_">There's more ...</h2>
+          
+          <p id="you_can_learn_more_about...">You can learn more about the metamodel from its
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/meta/index.html">API documentation</a>.</p>
+          
+          <p id="the_last_two_chapters_of...">The last two chapters of this tour deal with interoperation with other
+          languages, first with <a href="../interop">Java</a>, and then with dynamically
+          typed <a href="../dynamic">JavaScript</a>.</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Initialization and constructors</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.2/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.2/tour">Tour of Ceylon</a></h3>
+            
+            <ol>
+            <li><a href="/documentation/1.2/tour/basics">Basics</a></li>
+            <li><a href="/documentation/1.2/tour/classes">Classes</a></li>
+            <li><a href="/documentation/1.2/tour/attributes-control-structures">Attributes and variables, control structures</a></li>
+            <li><a href="/documentation/1.2/tour/inheritance">Inheritance, refinement, and interfaces</a></li>
+            <li><a href="/documentation/1.2/tour/anonymous-member-classes">Anonymous and member classes</a></li>
+            <li><a href="/documentation/1.2/tour/sequences">Streams, sequences, and tuples</a></li>
+            <li><a href="/documentation/1.2/tour/typeinference">Type aliases and type inference</a></li>
+            <li><a href="/documentation/1.2/tour/types">Union, intersection, and enumerated types</a></li>
+            <li><a href="/documentation/1.2/tour/generics">Generics</a></li>
+            <li><a href="/documentation/1.2/tour/modules">Packages and modules</a></li>
+            <li><a href="/documentation/1.2/tour/functions">Functions</a></li>
+            <li><a href="/documentation/1.2/tour/named-arguments">Named arguments</a></li>
+            <li><a href="/documentation/1.2/tour/comprehensions">Comprehensions</a></li>
+            <li><a href="/documentation/1.2/tour/language-module">Language module</a></li>
+            <li><a href="/documentation/1.2/tour/initialization">Initialization and constructors</a></li>
+            <li><a href="/documentation/1.2/tour/annotations">Annotations and the metamodel</a></li>
+            <li><a href="/documentation/1.2/tour/interop">Interoperation with Java</a></li>
+            <li><a href="/documentation/1.2/tour/dynamic">Dynamic typing</a></li>
+            </ol>
+            
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.2/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.2/examples">Examples</a></h3>
+            
+            <!-- ### [Tutorial videos](/documentation/1.2/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.2/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.2/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.2/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.2/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.2/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Tour of Ceylon
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_12_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.2, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.2/tour/initialization.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.2/tour/initialization.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="initialization_and_constructors">Initialization and constructors</h1>
+          
+          <p id="this_is_the_fifteenth_part...">This is the fifteenth part of the Tour of Ceylon. In the
+          <a href="../language-module">last part</a> we learned about the language module,
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/index.html"><code>ceylon.language</code></a>. Now we're going to
+          go into the details of <em>initialization</em>, and the restrictions that Ceylon
+          places upon your code to ensure that you never experience anything like
+          Java's infamous <code>NullPointerException</code>.</p>
+          
+          <p id="but_first_we_need_to...">But first, we need to learn a little more about references to the current
+          object.</p>
+          
+          <h2 id="self_references_and_outer_instance_references">Self references and outer instance references</h2>
+          
+          <p id="ceylon_features_the_keywords_this...">Ceylon features the keywords <code>this</code> and <code>super</code>, which refer to the current
+          instance of a class—the receiving instance of an operation (method
+          invocation, member class instantiation, or attribute evaluation/assignment),
+          within the body of the definition of the operation. The semantics are exactly
+          the same as what you're used to in Java, with one exception: a reference to
+          a member of <code>super</code> might refer to a member inherited from an interface,
+          instead of from a superclass.</p>
+          
+          <p id="consider_this_class">Consider this class:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>class Impl() extends Class() satisfies Interface { ... }
+</code></pre>
+          
+          <p id="inside_the_body_of_this...">Inside the body of this class, the expression <code>super</code> is treated as having
+          the type <code>Class &amp; Interface</code>. But what if <code>Class</code> and <code>Interface</code> both
+          descend from a common ancestor with a method named <code>ambiguous()</code>, and <code>Impl</code>
+          inherits two different implementations of <code>ambiguous()</code>, one from <code>Class</code>,
+          and one from <code>Interface</code>? Then the expression <code>super.ambiguous()</code> would be,
+          well, super-ambiguous.</p>
+          
+          <p id="in_this_case_the_widening...">In this case, the widening operator <code>of</code> may be used to disambiguate the
+          member reference:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>(super of Interface).ambiguous() //ambiguity resolved!
+</code></pre>
+          
+          <p id="in_addition_to_this_and...">In addition to <code>this</code> and <code>super</code>, Ceylon features the keyword <code>outer</code>, which
+          refers to the parent instance of the current instance of a nested class.</p>
+          
+          <!-- try:post
+              print(Parent("outer").Child("inner").qualifiedName);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>class Parent(name) {
+    shared String name;
+    shared class Child(name) {
+        shared String name;
+        shared String qualifiedName = 
+                outer.name + "/" + name;
+        shared Parent parent =&gt; outer;
+    }
+}
+</code></pre>
+          
+          <p id="there_are_some_restrictions_on...">There are some restrictions on the use of <code>this</code>, <code>super</code>, and <code>outer</code>, which
+          we'll explore below.</p>
+          
+          <p id="finally_the_keyword_package_may...">Finally, the keyword <code>package</code> may be used to refer to the toplevel declarations
+          in the current package.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>String name = "Trompon";
+
+class Elephant(name = package.name) {
+    String name;
+}
+</code></pre>
+          
+          <h2 id="multiple_inheritance_and_linearization">Multiple inheritance and "linearization"</h2>
+          
+          <p id="ceylon_features_a_restricted_kind...">Ceylon features a restricted kind of multiple inheritance often called
+          <em>mixin inheritance</em>. Some languages with multiple inheritance or even mixin
+          inheritance feature so-called "depth-first" member resolution or
+          linearization where all supertypes of a class are arranged into a linear
+          order. We believe that this model is unacceptably arbitrary and fragile.</p>
+          
+          <p id="ceylon_doesnt_perform_any_kind...">Ceylon doesn't perform any kind of linearization of supertypes. The order in
+          which types appear in the <code>satisfies</code> clause is never significant. The only
+          way one supertype can take "precedence" over another supertype is if the
+          first supertype is a subtype of the second supertype. The only way a member
+          of one supertype can take precedence over a member of another supertype is if
+          the first member refines the second member.</p>
+          
+          <p id="in_our_view_theres_no...">In our view, there's no non-fragile basis for deciding that one type
+          specializes another type unless the first type is explicitly defined to be a
+          subtype of the second. There's no non-fragile basis for deciding that one
+          operation is more specific than another operation unless the first operation
+          is explicitly declared to refine the second.</p>
+          
+          <p id="for_a_similar_reason_interfaces...">For a similar reason, interfaces shouldn't be able to define initialization
+          logic. There's no non-fragile way to define the ordering in which supertype
+          initializers are executed in a multiple-inheritance model. This is the basic
+          reason why <a href="../inheritance#interfaces_and_mixin_inheritance">interfaces are stateless</a>
+          in Ceylon.</p>
+          
+          <!--
+          (Note that these arguments are even stronger in the case of 
+          [adapter introduction](../introduction), where linearization or statefulness 
+          would be even more fragile.)
+          -->
+          
+          
+          <p id="so_ceylon_is_more_restrictive...">So Ceylon is more restrictive than some other languages in this respect. But
+          we think that this restriction makes a subtype less vulnerable to breakage due
+          to changes in its supertypes.</p>
+          
+          <h2 id="definite_assignment_and_definite_initialization">Definite assignment and definite initialization</h2>
+          
+          <p id="a_really_nice_feature_of...">A really nice feature of Java is that the compiler checks that a local
+          variable has definitely been assigned a value before allowing use of the
+          local variable in an expression. So, for example, the following code compiles
+          without error:</p>
+          
+          <!-- try-pre:
+              value person = "Someone";
+              value me = "Me";
+          
+          -->
+          
+          
+          <!-- cat: void m(String person, String me) { -->
+          
+          
+          <pre data-language="ceylon"><code>String greeting;
+if (person == me) {
+    greeting = "You're beautiful!";
+}
+else {
+    greeting = "You're ugly!";
+}
+print(greeting);
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="but_the_following_code_results...">But the following code results in an error at compile time:</p>
+          
+          <!-- try-pre:
+              value person = "Someone";
+              value me = "Me";
+          
+          -->
+          
+          
+          <!-- check:none:demos error -->
+          
+          
+          <pre data-language="ceylon"><code>String greeting;
+if (person == me) {
+    greeting = "You're beautiful!";
+}
+print(greeting);   //error: greeting not definitely initialized
+</code></pre>
+          
+          <p id="many_most_languages_dont_perform...">Many (most?) languages don't perform this kind of static analysis, which
+          means that use of an uninitialized variable results in an error at runtime
+          instead of compile time.</p>
+          
+          <p id="unfortunately_java_doesnt_do_this...">Unfortunately, Java doesn't do this same kind of static analysis for instance
+          variables, not even for <code>final</code> instance variables. Instead, an instance
+          variable which is not assigned a value in the constructor is initialized to a
+          default value (zero or <code>null</code>). Surprisingly, it's even possible to see this
+          default value for a <code>final</code> instance variable that is eventually assigned a
+          value by the constructor. Consider the following code:</p>
+          
+          <pre data-language="java"><code>//Java code that prints "null"
+class Broken {
+    final String greeting;
+
+    Broken() {
+        print();
+        greeting = "Hello";
+    }
+
+    void print() {
+        System.out.println(greeting);
+    }
+
+}
+new Broken();
+</code></pre>
+          
+          <p id="this_behavior_is_bad_enough...">This behavior is bad enough in and of itself. But it would be even less
+          acceptable in Ceylon, where most types don't have an acceptable "default"
+          value. For example, consider the type <code>Person</code>. What would be an acceptable
+          default value of this type? The value <code>null</code> certainly won't do, since it's
+          not even an instance of <code>Person</code>. (It's an instance of <code>Null</code>,
+          <a href="../basics#dealing_with_objects_that_arent_there">remember!</a>) Sure,
+          evaluation of an uninitialized instance variable could be defined
+          to result in an immediate exception, that would just be our old friend
+          <code>NullPointerException</code> creeping back in by the back door.</p>
+          
+          <p id="indeed_very_few_object_oriented...">Indeed, very few object-oriented languages perform the necessary static
+          analysis to ensure definite initialization of instance variables, and this
+          is perhaps one of the main reasons why object-oriented languages have never
+          featured typesafe handling of <code>null</code> values.</p>
+          
+          <h2 id="class_bodies">Class bodies</h2>
+          
+          <p id="in_order_to_make_it...">In order to make it possible for the compiler to guarantee definite
+          initialization of attributes, Ceylon imposes some restrictions on the body
+          of a class.</p>
+          
+          <p id="actually_to_be_completely_fair...">Actually, to be completely fair, they're not strictly speaking <em>restrictions</em>
+          at all, at least not from a ceylonic point of view, since you're actually
+          allowed <em>extra</em> flexibility in the body of a class that you're not allowed in
+          the body of a function or getter declaration! But, at least compared to Java,
+          there's some things you're not allowed to do.</p>
+          
+          <p id="first_we_need_to_know...">First, we need to know that the compiler automatically divides the body of
+          the class into two sections:</p>
+          
+          <ul>
+          <li>First comes the <em>initializer</em> section, which contains a mix of declarations,
+          statements and control structures. The initializer is executed every time the
+          class is instantiated.</li>
+          <li>Then comes the <em>declaration</em> section, which consists purely of declarations,
+          similar to the body of an interface.</li>
+          </ul>
+          
+          
+          <p id="now_were_going_to_introduce...">Now we're going to introduce some rules that apply to code that appears in
+          each section. The purpose of these rules is to guarantee that an instance
+          variable has had a value specified or assigned before its value is used in
+          an expression.</p>
+          
+          <p id="but_you_dont_need_to...">But you don't need to actually explicitly think about these rules when you
+          write code. Only very rarely will you need to think about the "initializer
+          section" and "declaration section" in explicit terms. The compiler will let
+          you know when you break the rules, and force you to fix your code.</p>
+          
+          <h2 id="initializer_section">Initializer section</h2>
+          
+          <p id="the_initializer_section_is_responsible...">The initializer section is responsible for initializing the state of the
+          new instance of the class, before a reference to the new instance is available
+          to clients. The declaration section contains members of the class which are
+          only called after the instance has been fully initialized.</p>
+          
+          <p id="consider_the_following_example">Consider the following example:</p>
+          
+          <!-- try-pre: 
+              Boolean morning = false;
+              Boolean afternoon = false;
+              Boolean evening = true;
+          
+          -->
+          
+          
+          <!-- try-post:
+          
+              Hello("Joe").say();
+          -->
+          
+          
+          <!-- check:parse:#93 -->
+          
+          
+          <!-- cat: 
+              Boolean morning = false;
+              Boolean afternoon = false;
+              Boolean evening = true;
+          -->
+          
+          
+          <pre data-language="ceylon"><code>class Hello(String? name) {
+
+    //initializer section:
+
+    String greetingForTime {
+        if (morning) {
+            return "Good morning";
+        }
+        else if (afternoon) {
+            return "Good afternoon";
+        }
+        else if (evening) {
+            return "Good evening";
+        }
+        else {
+            return "Hi";
+        }
+    }
+
+    String greeting;
+    if (exists name) {
+        greeting = greetingForTime + ", " + name;
+    }
+    else {
+        greeting = greetingForTime;
+    }
+
+    //declaration section:
+
+    shared void say() {
+        printMessage(greeting);
+    }
+
+    shared default void printMessage(String message) {
+        print(message);
+    }
+
+}
+</code></pre>
+          
+          <p id="to_prevent_a_reference_to...">To prevent a reference to a new instance of the class "leaking" before the
+          new instance has been completely initialized, the language spec defines the
+          following terminology:</p>
+          
+          <blockquote>
+<p id="within_a_class_initializer_a...">Within a class initializer, a <em>self reference</em> to the instance being
+          initialized is either:</p>
+          
+          <ul>
+          <li>any occurrence of the expression <code>this</code> or <code>super</code>, unless it also occurs
+          in the body of a nested class or interface declaration, or</li>
+          <li>any occurrence of the expression <code>outer</code> in the body of a class or interface
+          declaration immediately contained by the class.</li>
+          </ul>
+          </blockquote>
+          
+          <p id="now_according_to_the_language...">Now, according to the language spec:</p>
+          
+          <blockquote>
+<p id="a_statement_or_declaration_contained...">A statement or declaration contained in the initializer of a class may
+          not evaluate an attribute, invoke a method, or instantiate a member class upon
+          the instance being initialized, including upon a self reference to the instance
+          being initialized if the attribute, method, or member class:</p>
+          
+          <ul>
+          <li>occurs later in the body of the class,</li>
+          <li>is annotated <code>formal</code> or <code>default</code>, or</li>
+          <li>is inherited from an interface or superclass, and is not refined by a
+          declaration occurring earlier in the body of the class.</li>
+          </ul>
+          
+          
+          <p id="furthermore_a_statement_or_declaration...">Furthermore, a statement or declaration contained in the initializer of a
+          class may not:</p>
+          
+          <ul>
+          <li>pass a self reference to the instance being initialized as an argument of
+          an instantiation, function invocation, or <code>extends</code> clause expression or as
+          the value of a value assignment or specification,</li>
+          <li>use a self reference to the instance being initialized as an operand of
+          any operator except the member selection operator, or the <code>of</code> operator,</li>
+          <li>return a self reference to the instance being initialized, or</li>
+          <li>narrow the type of a self reference to the instance being initialized
+          using an assignability [<code>is</code>] condition.</li>
+          </ul>
+          </blockquote>
+          
+          <p id="the_spec_mentions_a_couple...">(The spec mentions a couple of other restrictions that we'll gloss over here.)</p>
+          
+          <h2 id="declaration_section">Declaration section</h2>
+          
+          <p id="the_declaration_section_contains_the...">The declaration section contains the definition of members that don't
+          hold state, and that are never called until the instance to which they
+          belong has been completely initialized.</p>
+          
+          <p id="according_to_the_language_spec">According to the language spec:</p>
+          
+          <blockquote>
+<p id="the_following_constructs_may_not...">The following constructs may not [occur] in the declaration section
+          [unless nested inside a member body]:</p>
+          
+          <ul>
+          <li>a statement or control structure,</li>
+          <li>a reference declaration,</li>
+          <li>a constructor declaration,</li>
+          <li>a forward-declared function or value declaration not annotated <code>late</code>,</li>
+          <li>an <code>object</code> declaration with a non-empty initializer section, or</li>
+          <li>an <code>object</code> declaration that directly extends a class other than
+          <code>Object</code> or <code>Basic</code>.</li>
+          </ul>
+          </blockquote>
+          
+          <p id="note_that_the_rules_governing...">Note that the rules governing the declaration section of a class body are
+          essentially the same rules governing the body of an interface. That makes
+          sense, because interfaces don't have initialization logic—what interfaces
+          and declaration sections have in common is <em>statelessness</em>.</p>
+          
+          <h2 id="circular_references">Circular references</h2>
+          
+          <p id="unfortunately_these_rules_make_it...">Unfortunately, these rules make it a little tricky to set up circular
+          references between two objects. This is a problem Ceylon has in common
+          with functional languages, which also emphasize immutability. The
+          following code produces an error:</p>
+          
+          <!-- check:none:#94 -->
+          
+          
+          <pre data-language="ceylon"><code>class Child(parent) {
+    shared Parent parent;
+}
+
+class Parent() {
+    shared Child child = 
+            Child(this); //compile error: leaks self reference
+}
+</code></pre>
+          
+          <p id="as_a_slightly_adhoc_workaround...">As a slightly adhoc workaround for this problem, we can annotate the
+          reference <code>parent</code>, suppressing the usual definite initialization
+          checks, using the <code>late</code> annotation:</p>
+          
+          <!-- check:none:#94 -->
+          
+          
+          <pre data-language="ceylon"><code>class Child() {
+    shared late Parent parent;
+}
+
+class Parent() {
+    shared Child child = Child();
+    child.parent = this; //ok, since parent is late
+}
+</code></pre>
+          
+          <p id="when_a_reference_is_annotated...">When a reference is annotated <code>late</code>, the checks which normally happen
+          at compile time are delayed until runtime.</p>
+          
+          <h2 id="definite_initialization_of_functions">Definite initialization of functions</h2>
+          
+          <p id="ceylon_lets_us_separate_the...">Ceylon lets us separate the declaration of a function from the actual
+          specification statement that specifies the function implementation.</p>
+          
+          <p id="this_applies_when_a_function...">This applies when a function implementation is specified by assigning
+          a reference:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Float(Float) arithmetic(Operation op, Float x) {
+    Float fun(Float y);
+    switch (op)
+    case (plus) { fun = x.plus; }
+    case (minus) { fun = x.minus; }
+    case (times) { fun = x.times; }
+    case (divide) { fun = x.divided; }
+    return fun;
+}
+</code></pre>
+          
+          <p id="or_when_a_function_implementation...">Or when a function implementation is specified using a fat arrow:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Float(Float) arithmetic(Operation op, Float x) {
+    Float fun(Float y);
+    switch (op)
+    case (plus) { fun(Float y) =&gt; x+y; }
+    case (minus) { fun(Float y) =&gt; x-y; }
+    case (times) { fun(Float y) =&gt; x*y; }
+    case (divide) { fun(Float y) =&gt; x/y; }
+    return fun;
+}
+</code></pre>
+          
+          <p id="the_rules_for_definite_initialization...">The rules for definite initialization of values apply equally to functions
+          defined this way.</p>
+          
+          <h2 id="definite_return">Definite return</h2>
+          
+          <p id="while_were_on_the_topic...">While we're on the topic, it's worth noting that the Ceylon compiler, just
+          like the Java compiler, also performs definite return checking, to ensure
+          that a function or getter always has an explicitly specified return value.
+          So, this code compiles without error:</p>
+          
+          <!-- try-pre:
+              value person = "Someone";
+              value me = "Me";
+          
+          -->
+          
+          
+          <!-- try-post:
+          
+              print(greeting);
+          -->
+          
+          
+          <!-- cat: void m(String person, String me) { -->
+          
+          
+          <pre data-language="ceylon"><code>String greeting {
+    if (person==me) {
+        return "You're beautiful!";
+    }
+    else {
+        return "You're ugly!";
+    }
+}
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="but_the_following_code_results_in...">But the following code results in an error at compile time:</p>
+          
+          <!-- try-pre:
+              value person = "Someone";
+              value me = "Me";
+          
+          -->
+          
+          
+          <!-- try-post:
+          
+              print(greeting);
+          -->
+          
+          
+          <!-- check:none:Demoing error -->
+          
+          
+          <pre data-language="ceylon"><code>String greeting {   //error: greeting does not definitely return
+    if (person==me) {
+        return "You're beautiful!";
+    }
+    //or otherwise? what now?
+}
+</code></pre>
+          
+          <h2 id="lazy_initialization">Lazy initialization</h2>
+          
+          <p id="we_can_abuse_the_variable...">We can abuse the <code>variable</code> annotation to arrive at the following idiom for
+          lazy initialization of an attribute:</p>
+          
+          <!-- try-pre:
+              Float calculatePi() => 3.14159;
+              
+          -->
+          
+          
+          <!-- try-post:
+          
+              print(HaveYourPi().pi);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>class HaveYourPi() {
+    variable Float? _pi = null;
+    shared Float pi
+        =&gt; _pi else (_pi=calculatePi());
+}
+</code></pre>
+          
+          <p id="a_future_version_of_the...">A future version of the language will likely offer a better way to do this.</p>
+          
+          <h2 id="constructors">Constructors</h2>
+          
+          <p id="classes_with_initializer_parameters_are...">Classes with <a href="../classes/#creating_your_own_class">initializer parameters</a>
+          are very convenient almost all of the time, but very occasionally we run
+          into the need for a class with two or more completely separate initialization
+          paths. For this relatively rare case, Ceylon allows you to write a class with
+          separate <em>constructors</em>.</p>
+          
+          <h3 id="gotcha">Gotcha!</h3>
+          
+          <p id="a_class_with_initializer_parameters...">A class with initializer parameters can't have constructors, so if we need
+          to add a constructor to a class, the first thing we need to do is rewrite it
+          without initializer parameters.</p>
+          
+          <h2 id="default_constructors">Default constructors</h2>
+          
+          <p id="lets_take_our_trusty_polar...">Let's take our <a href="../classes/#creating_your_own_class">trusty <code>Polar</code> class</a>,
+          and rewrite it to use a <em>default constructor</em>:</p>
+          
+          <!-- try-post:
+              print(Polar(0.37, 10.0).description);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>"A polar coordinate"
+class Polar {
+
+    shared Float angle;
+    shared Float radius;
+
+    shared new (Float angle, Float radius) {
+        this.angle = angle;
+        this.radius = radius;
+    }
+
+    shared Polar rotate(Float rotation) 
+            =&gt; Polar(angle+rotation, radius);
+
+    shared Polar dilate(Float dilation) 
+            =&gt; Polar(angle, radius*dilation);
+
+    shared String description 
+            = "(``radius``,``angle``)";
+
+}
+</code></pre>
+          
+          <p id="this_looks_a_great_deal...">This looks a great deal like a constructor declaration in Java or C#,
+          except that we write the keyword <code>new</code> instead of the name of the
+          class.</p>
+          
+          <p id="the_good_news_is_that...">The good news is that this refactoring didn't break any clients, who
+          can still instantiate <code>Polar</code> like this:</p>
+          
+          <!-- try-pre:
+              "A polar coordinate"
+              class Polar {
+                  
+                  shared Float angle;
+                  shared Float radius;
+                  
+                  shared new (Float angle, Float radius) {
+                      this.angle = angle;
+                      this.radius = radius;
+                  }
+                  
+                  shared Polar rotate(Float rotation) 
+                          => Polar(angle+rotation, radius);
+                  
+                  shared Polar dilate(Float dilation) 
+                          => Polar(angle, radius*dilation);
+                  
+                  string => "(``radius``,``angle``)";
+                  
+              }
+          -->
+          
+          
+          <pre data-language="ceylon"><code>print(Polar(0.37, 10.0));
+</code></pre>
+          
+          <p id="unlike_java_and_c_we...">Unlike Java and C#, we can't overload a default constructor. Instead,
+          we must give a distinct name to each additional constructor of the
+          class.</p>
+          
+          <p id="constructors_are_considered_to_belong...">Constructors are considered to belong to the initialized section of
+          the class, so in this case the initializer section extends until the
+          end of the default constructor declaration.</p>
+          
+          <p id="of_course_all_the_usual...">Of course, all the usual language guarantees about definite
+          initialization are still in force, and the compiler will make sure
+          that every constructor of a class leaves all members of the class
+          fully initialized.</p>
+          
+          <h2 id="named_constructors">Named constructors</h2>
+          
+          <p id="a_named_constructor_declaration_looks...">A named constructor declaration looks just like a default constructor,
+          except that it declares an initial-lowercase name:</p>
+          
+          <!-- try-post:
+              value pt = Polar(0.37, 10.0);
+              print(Polar.copy(pt));
+          -->
+          
+          
+          <pre data-language="ceylon"><code>"A polar coordinate"
+class Polar {
+
+    shared Float angle;
+    shared Float radius;
+
+    shared new (Float angle, Float radius) {
+        this.angle = angle;
+        this.radius = radius;
+    }
+
+    shared new copy(Polar polar) {
+        this.angle = polar.angle;
+        this.radius = polar.radius;
+    }
+
+    shared Polar rotate(Float rotation) 
+            =&gt; Polar(angle+rotation, radius);
+
+    shared Polar dilate(Float dilation) 
+            =&gt; Polar(angle, radius*dilation);
+
+    string =&gt; "(``radius``,``angle``)";
+
+}
+</code></pre>
+          
+          <p id="a_reference_to_a_named...">A reference to a named constructor must be qualified by the
+          class name, except within the body of the class itself:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>value pt = Polar(0.37, 10.0);
+print(Polar.copy(pt));
+</code></pre>
+          
+          <h2 id="constructor_delegation">Constructor delegation</h2>
+          
+          <p id="a_constructor_may_delegate_to">A constructor may delegate to:</p>
+          
+          <ul>
+          <li>another constructor of the class to which it belongs,
+          whose declaration occurs earlier in the body of the class,
+          or</li>
+          <li>directly to a constructor of its superclass or to the
+          initializer of its superclass, if any.</li>
+          </ul>
+          
+          
+          <p id="constructor_delegation_is_specified_using..."> Constructor delegation is specified using <code>extends</code>:</p>
+          
+          <!-- try-post:
+              print(Polar.onHorizontalAxis(1.0));
+          -->
+          
+          
+          <pre data-language="ceylon"><code>"A polar coordinate"
+class Polar {
+
+    shared Float angle;
+    shared Float radius;
+
+    shared new (Float angle, Float radius) {
+        this.angle = angle;
+        this.radius = radius;
+    }
+
+    shared new copy(Polar polar)
+        extends Polar(polar.angle, polar.radius) {}
+
+    shared new onHorizontalAxis(Float distance)
+        extends Polar(0.0, distance) {}
+
+    shared Polar rotate(Float rotation) 
+            =&gt; Polar(angle+rotation, radius);
+
+    shared Polar dilate(Float dilation) 
+            =&gt; Polar(angle, radius*dilation);
+
+    string =&gt; "(``radius``,``angle``)";
+
+}
+</code></pre>
+          
+          <p id="if_the_class_directly_extends...">If the class directly extends <code>Basic</code>, and the constructor
+          does not explicitly delegate to another constructor, it is
+          understood to implicitly delegate to initializer of <code>Basic</code>.</p>
+          
+          <p id="constructors_of_a_class_which...">Constructors of a class which does not directly extend <code>Basic</code>
+          <em>must</em> explicitly delegate.</p>
+          
+          <p id="since_constructors_are_restricted_to...">Since constructors are restricted to delegate <em>backwards</em>, the
+          general flow of member initialization in Ceylon is preserved:
+          initialization flows forward from the beginning of the body of
+          the class, and each member must be initialized before it is
+          used. The gory details are covered
+          <a href="../../../../blog/2015/06/21/constructors/#ordering_of_initialization_logic">here</a>.</p>
+          
+          <h2 id="constructors_and_extension">Constructors and extension</h2>
+          
+          <p id="when_a_class_with_a...">When a class with a constructor extends a class with an
+          initializer or default constructor, it specifies just the name
+          of the extended class in the <code>extends</code> clause, and a regular
+          instantiation in the <code>extends</code> clause of the constructor:</p>
+          
+          <pre data-language="ceylon"><code>class Person(String name) {}
+
+class Employee 
+        extends Person { //just the class name
+    shared new withName(String name) 
+            extends Person(name) {} //instantiation
+}
+</code></pre>
+          
+          <p id="when_a_class_with_an...">When a class with an initializer extends a class with a named
+          constructor, it may specify the constructor invocation in its
+          <code>extends</code> clause:</p>
+          
+          <pre data-language="ceylon"><code>class Person {
+    String name;
+    shared new withName(String name) {
+        this.name = name;
+    }
+}
+
+class Employee(String name) 
+        extends Person.withName(name) {} //constructor invocation
+</code></pre>
+          
+          <p id="when_a_class_with_a_constructor...">When a class with a constructor extends a class with a named
+          constructor, it specifies just the name of the extended class
+          in the <code>extends</code> clause, and a regular constructor invocation
+          in the <code>extends</code> clause of the constructor:</p>
+          
+          <pre data-language="ceylon"><code>class Person {
+    String name;
+    shared new withName(String name) {
+        this.name = name;
+    }
+}
+
+class Employee 
+        extends Person { //just the class name
+    shared new withName(String name) 
+            extends Person.withName(name) {} //constructor invocation
+}
+</code></pre>
+          
+          <p id="it_is_legal_to_delegate...">It is legal to delegate to <code>super</code> instead of writing <code>Person</code>
+          explicitly:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>class Employee 
+        extends Person { //just the class name
+    shared new withName(String name) 
+            extends super.withName(name) {} //super constructor invocation
+}
+</code></pre>
+          
+          <p id="it_is_perfectly_legal_for...">It is perfectly legal for each constructor of a class to
+          delegate to a <em>different</em> constructor of the superclass:</p>
+          
+          <pre data-language="ceylon"><code>class Person {
+    String name;
+    shared new withName(String name) {
+        this.name = name;
+    }
+    shared new withFirstAndLast(String first, String last) {
+        this.name = first + ' ' + last;
+    }
+}
+
+class Employee 
+        extends Person {
+    shared new withName(String name) 
+            extends super.withName(name) {}
+    shared new withFirstAndLast(String first, String last) 
+            extends super.withFirstAndLast(first, last) {}
+}
+</code></pre>
+          
+          <h2 id="value_constructors">Value constructors</h2>
+          
+          <p id="a_value_constructor_is_a...">A <em>value constructor</em> is a constructor that:</p>
+          
+          <ul>
+          <li>takes no parameters, and</li>
+          <li>is executed exactly once for the context to which the class
+          belongs.</li>
+          </ul>
+          
+          
+          <p id="value_constructors_of_toplevel_classes...">Value constructors of toplevel classes are singletons.</p>
+          
+          <!-- try-post:
+              print(Polar.origin);
+              print(Polar.onHorizontalAxis(1.0));
+          -->
+          
+          
+          <pre data-language="ceylon"><code>"A polar coordinate"
+class Polar {
+
+    shared Float angle;
+    shared Float radius;
+
+    shared new (Float angle, Float radius) {
+        this.angle = angle;
+        this.radius = radius;
+    }
+
+    shared new copy(Polar polar)
+        extends Polar(polar.angle, polar.radius) {}
+
+    shared new onHorizontalAxis(Float distance)
+        extends Polar(0.0, distance) {}
+
+    shared new origin extends onHorizontalAxis(0.0) {}
+
+    shared Polar rotate(Float rotation) 
+            =&gt; Polar(angle+rotation, radius);
+
+    shared Polar dilate(Float dilation) 
+            =&gt; Polar(angle, radius*dilation);
+
+    string =&gt; "(``radius``,``angle``)";
+
+}
+</code></pre>
+          
+          <p id="a_reference_to_a_value...">A reference to a value constructor must be qualified by the
+          class name, except within the body of the class itself:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>print(Polar.origin);
+</code></pre>
+          
+          <h2 id="value_constructor_enumerations">Value constructor enumerations</h2>
+          
+          <p id="finally_weve_arrived_at_an...">Finally we've arrived at an alternative, more satisfying, way
+          to emulate a Java <code>enum</code>. We've already seen how to do it
+          using <a href="../types/#enumerated_instances">anonymous classes</a>, but
+          we can also use value constructors:</p>
+          
+          <!-- try-post:
+              void printSuit(Suit suit) {
+                  switch (suit)
+                  case (Suit.hearts) { print("Heartzes"); }
+                  case (Suit.diamonds) { print("Diamondzes"); }
+                  case (Suit.clubs) { print("Clidubs"); }
+                  case (Suit.spades) { print("Spidades"); }
+              }
+          -->
+          
+          
+          <pre data-language="ceylon"><code>class Suit of hearts | diamonds | clubs | spades {
+    String name;
+    shared new hearts { name = "hearts"; }
+    shared new diamonds { name = "diamonds"; }
+    shared new clubs { name = "clubs"; }
+    shared new spades { name = "spades"; }
+}
+</code></pre>
+          
+          <p id="we_can_use_this_enumerated...">We can use this enumerated type in a <code>switch</code>:</p>
+          
+          <!-- try-pre:
+              class Suit of hearts | diamonds | clubs | spades {
+                  String name;
+                  shared new hearts { name = "hearts"; }
+                  shared new diamonds { name = "diamonds"; }
+                  shared new clubs { name = "clubs"; }
+                  shared new spades { name = "spades"; }
+              }
+          -->
+          
+          
+          <pre data-language="ceylon"><code>void printSuit(Suit suit) {
+    switch (suit)
+    case (Suit.hearts) { print("Heartzes"); }
+    case (Suit.diamonds) { print("Diamondzes"); }
+    case (Suit.clubs) { print("Clidubs"); }
+    case (Suit.spades) { print("Spidades"); }
+}
+</code></pre>
+          
+          <p id="youre_probably_wondering_why_ceylon...">You're probably wondering why Ceylon would provide two
+          different ways to do essentially the same thing. Well, the
+          thing is that according to the language specification, an
+          <code>object</code> <em>actually is a value constructor!</em></p>
+          
+          <p id="when_we_write">When we write:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>object thing {}
+</code></pre>
+          
+          <p id="thats_really_just_a_syntactic...">That's really just a syntactic abbreviation for:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>class \Ithing {
+    shared new thing {}
+}
+\Ithing thing =&gt; \Ithing.thing;
+</code></pre>
+          
+          <h2 id="theres_more">There's more...</h2>
+          
+          <p id="you_can_read_more_about...">You can read more about constructors <a href="/blog/2015/06/21/constructors/">here</a>.</p>
+          
+          <p id="now_were_going_to_discuss...">Now, we're going to discuss <a href="../annotations">annotations</a>, and take a little
+          peek at using the metamodel to build framework code.</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

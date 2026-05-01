@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: One Big Repository</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2015/11/12/openshift/">Running Ceylon on OpenShift</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2015/12/01/weld-guice/">Dependency injection in Ceylon with Weld and Guice</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="one_big_repository">
+            One Big Repository
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/tako-schotanus/">Tako Schotanus</a>
+            </div>
+            <div class="date">
+              20 Nov 2015
+            </div>
+            <div class="tags">
+            </div>
+          </div>
+          <div class="body">
+            <p id="over_the_last_year_and...">Over the last year and a half it has happened quite frequently that users on our <a href="http://groups.google.com/group/ceylon-users">mailing lists</a> or <a href="https://gitter.im/ceylon/user">Gitter channels</a> asked: "What is this OBR you people keep talking about?". It was something that would most often be mentioned when we were frustrated with the current project setup making things more difficult than necessary.</p>
+            
+            <h2 id="how_it_all_started">How it all started</h2>
+            
+            <p id="to_understand_what_the_obr...">To understand what the OBR really is you first need to know how our project was organized all these years. Ceylon started out with nothing but the parser and the code that checks and models our unique typesystem, we call it the "typechecker". When we started working on the compilers new modules got added, first for the Java Virtual Machine, later for JavaScript. Then we added a module that handles downloading and caching of external modules retrieved from the <a href="https://modules.ceylon-lang.org/">Herd</a>. This went on to the point that we wound up with 9 separate but very interdependent projects.</p>
+            
+            <h2 id="the_problem">The problem</h2>
+            
+            <p id="now_of_course_modularization_is...">Now of course modularization is a good software engineering practise so there was no problem there. The problem was with the way we had created multiple <a href="https://github.com/ceylon">Git repositories</a> for each of the projects. We started noticing that for certain types of cross-module issues we often had to make changes to multiple repositories at a time. And when you do that, let's say you change 6 repositories for a single bug report or for a single new feature, you lose cohesion. The changes are all separate and you lose sight of the fact that they belong together. So if you need to go back in time looking for a specific problem and when it was introduced and by which code commit it suddenly becomes very hard to synchronize all the repositories in such a way that you get a working system. The famous <code>git bisect</code> becomes impossible to use.</p>
+            
+            <p id="it_also_caused_minor_problems...">It also caused minor problems when managing issues on GitHub because users, not knowing, would often open issues on the wrong project which meant manually copying the issue from one project to another (and sometimes even <em>we</em> didn't know where to put an issue and it would get moved several times).</p>
+            
+            <h2 id="looking_for_a_solution">Looking for a solution</h2>
+            
+            <p id="so_at_a_certain_moment...">So at a certain moment it became obvious that our project setup was working against us, that its structure made certain operations way too hard. A single repository on the other hand wouldn't have those problems. A single big repository, the only one for the entire distribution. So we started calling it the "One Big Repository", quickly shortened to "OBR".</p>
+            
+            <p id="but_there_were_doubts_that...">But there were doubts that a single repository would become too big and unwieldy. And <em>how</em> would we go from 9 repositories to just 1? Are there tools to do that? And what about our GitHub issues?</p>
+            
+            <p id="instead_we_first_looked_at...">Instead we first looked at tools like <code>git submodule</code> and <code>git subtree</code> which would allow us to keep our current projects but still treat them as a one. But after researching it for a while we came to the conclusion that although it might work it <em>does</em> make things more complex for the developer. And given the fact that most of us aren't Git experts and sometimes have trouble enough with it as it is we decided that the added complexity would not work in our favor. Besides the problem with the GitHub issues being separate would still remain.</p>
+            
+            <h2 id="the_execution">The execution</h2>
+            
+            <p id="one_big_repository_it_would...">One Big Repository it would be then, merging all 9 Ceylon distribution repositories into a single one. But how? No ready-made tools seemed to exist, just fragments of <a href="http://stackoverflow.com/questions/1425892/how-do-you-merge-two-git-repositories">scripts</a> and <a href="http://stackoverflow.com/questions/13040958/merge-two-git-repositories-without-breaking-file-history">examples</a> of <a href="http://stackoverflow.com/questions/1683531/how-to-import-existing-git-repository-into-another">complex</a> <a href="http://www.harecoded.com/merging-two-three-or-more-git-repositories-keeping-the-log-history-2366393">Git commands</a>. And for the GitHub issues we could only rely on their <a href="https://developer.github.com/v3/">remote API</a>.</p>
+            
+            <p id="i_will_spare_you_all...">I will spare you all the nitty gritty details on the many dozens of practise merges we did to get to a point where we were happy enough with the result but finally, last monday on November 16th, we made public the new OBR, the <a href="https://github.com/ceylon/ceylon">One Big Repository</a>!</p>
+            
+            <h2 id="how_to_use_it">How to use it</h2>
+            
+            <p id="setting_up_a_ceylon_environment...">Setting up a Ceylon environment for development used to be a big hassle. So much in fact that we created some pretty complex build scripts to do that all for you. So fortunately as a contributor you'd never notice, you'd just type <code>ant setup</code> and everything would be done for you.</p>
+            
+            <p id="but_now_things_have_become...">But now things have become still easier, for you as a potential contributor the only that is needed is:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="shell"><code>$ git clone https://github.com/ceylon/ceylon
+$ cd ceylon
+$ ant clean dist
+</code></pre>
+            
+            <p id="for_a_more_thorough_explanation...">For a more thorough explanation on how to set up a development environment and how to go from there to submitting your first contribution please visit <a href="/code/contribute/">Contributing to the compiler backend</a></p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2015/11/20/obr/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

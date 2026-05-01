@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Operator Polymorphism</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.3/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.3/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.3/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.3/examples">Examples</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.3/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.3/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.3/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.3/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.3/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide_for_intellij"><a href="/documentation/1.3/ide/intellij">Ceylon IDE for IntelliJ</a></h3>
+            
+            <h3 id="ceylon_ide_for_eclipse"><a href="/documentation/1.3/ide/eclipse">Ceylon IDE for Eclipse</a></h3>
+            
+            <h3 id="vertx"><a href="http://vertx.io/docs/vertx-core/ceylon/">Vert.x</a></h3>
+          </div>
+          <div class="point-dark-bottom">
+             
+          </div>
+          <div class="point-light-top"></div>
+          <div class="toc">
+            <ul>
+<li><a href="#description">Description
+            </a></li>
+<ul>
+<li><a href="#primitive_and_polymorphic_operators">Primitive and polymorphic operators
+            </a></li>
+<li><a href="#simple_example">Simple Example
+            </a></li>
+<li><a href="#identities">Identities
+            </a></li>
+<li><a href="#advice">Advice
+            </a></li>
+</ul>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+          </div>
+          <div class="point-light-end"></div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+          </div>
+        </div>
+        <div id="core-page">
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.3/reference/operator/operator-polymorphism.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.3/reference/operator/operator-polymorphism.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="operator_polymorphism">Operator Polymorphism</h1>
+          
+          <h2 id="description">Description
+          </h2>
+          
+          
+          
+          
+          <h3 id="primitive_and_polymorphic_operators">Primitive and polymorphic operators
+          </h3>
+          
+          
+          <p id="almost_all_of_the_operators...">Almost all of the operators in Ceylon can be expressed in terms of
+          methods defined on classes and/or interfaces in the language module.
+          Those operators which do not have such a definition are called
+          <em>primitive</em> operators. The primitive operators are:</p>
+          
+          <ul>
+          <li>
+<code>.</code> (member),</li>
+          <li>
+<code>=</code> (assignment),</li>
+          <li>
+<code>===</code> (identity),</li>
+          <li>
+<code>is</code>,</li>
+          <li>
+<code>of</code>,</li>
+          <li>
+<code>()</code> (positional invocation),</li>
+          <li>
+<code>{}</code> (named argument invocation)</li>
+          </ul>
+          
+          
+          <p id="many_non_primitive_operators_are...">Many non-primitive operators are <em>polymorphic</em>, which means that it
+          is possible to specify the behaviour of operators in a type-specific
+          way by satisfying the interface(s) used in the operator's definition.</p>
+          
+          <p id="however_not_every_non_primitive...">However, not every non-primitive operator is polymorphic. Some are
+          defined only in terms of the primitive operators, for example.</p>
+          
+          <h3 id="simple_example">Simple Example
+          </h3>
+          
+          
+          <p id="a_simple_example_might_be...">A simple example might be writing a complex number class which implements
+          <code>Exponentiable</code>. This would allow us to write expressions using the
+          operators <code>+</code> (unary plus), <code>-</code> (unary minus), <code>+</code> (sum), <code>-</code> (difference),
+          <code>*</code> (product), <code>/</code> (quotient), and <code>^</code> (power). For example:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>class Complex(shared Float re, shared Float im) 
+        satisfies Exponentiable&lt;Complex,Integer&gt; {
+
+    positiveValue =&gt; this;
+
+    negativeValue =&gt; Complex(-re,-im);
+
+    plus(Complex other) =&gt; Complex(re+other.re, im+other.im);
+
+    minus(Complex other) =&gt; Complex(re-other.re, im-other.im);
+
+    times(Complex other) =&gt;
+            Complex(re*other.re-im*other.im, 
+                    re*other.im+im*other.re);
+
+    shared actual Complex divided(Complex other) {
+        Float d = other.re^2 + other.im^2;
+        return Complex((re*other.re+im*other.im)/d, 
+                       (im*other.re-re*other.im)/d);
+    }
+
+    shared actual Complex power(Integer other) {
+        "exponent must be non-negative"
+        assert(other&gt;=0);
+        //lame impl
+        variable Complex result = Complex(1.0, 0.0);
+        for (i in 0:other) {
+            result*=this;
+        }
+        return result;
+    }
+
+    string =&gt; im&lt;0.0 then "``re``-``-im``i" 
+                     else "``re``+``im``i";
+
+    hash =&gt; re.hash + im.hash;
+
+    shared actual Boolean equals(Object that) {
+        if (is Complex that) {
+            return re==that.re &amp;&amp; im==that.im;
+        }
+        else {
+            return false;
+        }
+    }
+
+}
+
+void compare(Complex z) {
+    value a = Complex(1.0, 2.0); // 1 + 2i
+    value b = Complex(4.0, 2.0); // 4 + 2i
+    value c = Complex(0.0, 1.0); // i
+    value d = a * b + c;
+    if (d == z) {
+        print("``d`` == ``z``");
+    } 
+    else {
+        print("``d`` != ``z``");
+    }
+}
+
+compare(Complex(2.0, 5.0));
+compare(Complex(0.0, 11.0));
+</code></pre>
+          
+          <h3 id="identities">Identities
+          </h3>
+          
+          
+          <p id="there_are_certain_identities_which...">There are certain <em>identities</em> which are true of numbers (and of the built-in
+          numeric types), which may not hold with arbitrary types. For example, given any
+          <code>x</code> and <code>y</code> of a type <code>T</code> which implements <code>Invertible</code>, the
+          following identity <em>should</em> be satisfied:</p>
+          
+          <pre>
+    <i>x</i> - <i>y</i> ≡ <i>x</i> + (-<i>y</i>)</pre>
+          
+          
+          <p id="unfortunately_ceylon_cant_validate_that...">Unfortunately, Ceylon can't validate that the above identity holds for <code>T</code>'s
+          implementation of <code>Invertible</code>.</p>
+          
+          <h3 id="advice">Advice
+          </h3>
+          
+          
+          <p id="the_single_most_important_thing...">The single most important thing to remember is that
+          <strong>if an identity does not apply for <code>T</code> then you cannot use that identity to
+          rewrite expressions involving <code>T</code></strong>.</p>
+          
+          <p id="philosophically_the_operator_symbols_are...">Philosophically, the operator symbols are just notation and Ceylon simply
+          defines how those operators work in terms of the various interfaces. It's up
+          to the author of a class to decide what those symbols ought to mean for that
+          class, <em>bearing in mind those symbols have a conventional meaning</em>.</p>
+          
+          <p id="pragmatically_that_same_author_would...">Pragmatically, that same author would be ill-advised to try giving radically
+          different meanings to those operators: doing so will only confuse people.</p>
+          
+          <p id="our_advice_is_that_if...">Our advice is that if a type has a notion of arithmetic (or whatever)
+          which closely conforms to numerical arithmetic, then by all means implement
+          <code>Numeric</code> (or whatever). If you do, then document clearly any identities which
+          do not hold.</p>
+          
+          <p id="if_on_the_other_hand...">If on the other hand, the type <em>doesn't</em> have some notion of arithmetic, then
+          <em>don't</em> confuse people by making operators do funky things: plain old method
+          calls will be clearest.</p>
+          
+          <p id="the_user_of_a_class...">The user of a class which implements the various operator interfaces is
+          advised to be cautious about assuming the truth of identities which are not
+          documented as being satisfied.</p>
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li>
+<a href="../../../tour/language-module/#operator_polymorphism">Operator polymorphism</a>
+          in the Tour of Ceylon</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

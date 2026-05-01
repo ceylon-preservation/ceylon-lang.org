@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Prototypes vs lexical scope in the Ceylon JavaScript compiler</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2011/12/31/compiling-ceylon-2-js/">Compiling Ceylon to JavaScript</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2012/01/05/reification-project/">Cross-platform reified types for Ceylon</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="prototypes_vs_lexical_scope_in_the_ceylon_javascript_compiler">
+            Prototypes vs lexical scope in the Ceylon JavaScript compiler
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              02 Jan 2012
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/ceylon-js/">
+                ceylon-js
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <p id="in_the_previous_post_i...">In the <a href="/blog/2011/12/31/compiling-ceylon-2-js">previous post</a> I introduced the <a href="https://github.com/ceylon/ceylon-js">Ceylon JavaScript
+            compiler project</a>. One of the things I mentioned
+            was that there was an extremely natural mapping from Ceylon
+            to JavaScript making use of JavaScript's lexical scope to
+            create nicely encapsulated JavaScript objects. For example,
+            given the following Ceylon code:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared class Counter(Integer initialCount=0) {
+    variable value currentCount:=initialCount;
+    shared Integer count {
+        return currentCount;
+    }
+    shared void inc() {
+        currentCount:=currentCount+1; 
+    }
+}
+</code></pre>
+            
+            <p id="we_produce_the_following_javascript">We produce the following JavaScript:</p>
+            
+            <pre data-language="javascript"><code>var $$$cl15=require('ceylon/language/0.1/ceylon.language');
+
+//class Counter at members.ceylon (1:0-9:0)
+this.Counter=function Counter(initialCount){
+    var $$counter=new CeylonObject;
+
+    //value currentCount at members.ceylon (2:4-2:45)
+    var $currentCount=initialCount;
+    function getCurrentCount(){
+        return $currentCount;
+    }
+    function setCurrentCount(currentCount){
+        $currentCount=currentCount;
+    }
+
+    //value count at members.ceylon (3:4-5:4)
+    function getCount(){
+        return getCurrentCount();
+    }
+    $$counter.getCount=getCount;
+
+    //function inc at members.ceylon (6:4-8:4)
+    function inc(){
+        setCurrentCount(getCurrentCount().plus($$$cl15.Integer(1)));
+    }
+    $$counter.inc=inc;
+
+    return $$counter;
+}
+</code></pre>
+            
+            <p id="notice_that_this_code_is...">Notice that this code is really quite readable and really
+            not very different to the original Ceylon.</p>
+            
+            <p id="lets_load_this_module_up...">Let's load this module up in the node REPL, and play with the
+            <code>Counter</code>.</p>
+            
+            <pre data-language="javascript"><code>&gt; Counter = require('./node_modules/default/members').Counter
+[Function: Counter]
+&gt; Integer = require('./runtime/ceylon/language/0.1/ceylon.language').Integer
+[Function: Integer]
+&gt; c = Counter(Integer(0))
+{ getCount: [Function: getCount], inc: [Function: inc] }
+</code></pre>
+            
+            <p id="the_counter_instance_presents_a...">The <code>Counter</code> instance presents a nice clean API with
+            <code>getCount()</code> and <code>inc()</code> functions:</p>
+            
+            <pre data-language="javascript"><code>&gt; c.getCount().value
+0
+&gt; c.inc()
+&gt; c.inc()
+&gt; c.getCount().value
+2
+</code></pre>
+            
+            <p id="notice_that_the_actual_value...">Notice that the actual value of <code>$$counter</code> is completely
+            hidden from the client JavaScript code. Another nice thing
+            about this mapping is that it is completely free of
+            JavaScript's well-known broken <code>this</code>. I can freely use the
+            methods of <code>c</code> by reference:</p>
+            
+            <pre data-language="javascript"><code>&gt; inc = c.inc
+[Function: inc]
+&gt; count = c.getCount
+[Function: getCount]
+&gt; inc()
+&gt; count().value
+3
+</code></pre>
+            
+            <p id="now_an_issue_that_was...">Now, an issue that was bugging me about this mapping - and
+            bugging Ivo even more - is the performance cost of this
+            mapping compared to statically binding the methods of a class
+            to its prototype. Ivo did some tests and found that it's up
+            to like 100 times slower to instantiate an object that
+            defines its methods in lexical scope instead of using its
+            prototype on V8. Well, that's not really acceptable in
+            production, so I've added a switch that generates code that
+            makes use of prototypes. With this switch enabled, then for
+            the same Ceylon code, the compiler generates the following:</p>
+            
+            <pre data-language="javascript"><code>var $$$cl15=require('ceylon/language/0.1/ceylon.language');
+
+//ClassDefinition Counter at members.ceylon (1:0-12:0)
+function $Counter(){}
+
+//AttributeDeclaration currentCount at members.ceylon (2:4-2:45)
+$Counter.prototype.getCurrentCount=function getCurrentCount(){
+    return this.currentCount;
+}
+$Counter.prototype.setCurrentCount=function setCurrentCount(currentCount){
+    this.currentCount=currentCount;
+}
+
+//AttributeGetterDefinition count at members.ceylon (3:4-5:4)
+$Counter.prototype.getCount=function getCount(){
+    return this.getCurrentCount();
+}
+
+//MethodDefinition inc at members.ceylon (6:4-8:4)
+$Counter.prototype.inc=function inc(){
+    this.setCurrentCount(this.getCurrentCount().plus($$$cl15.Integer(1)));
+}
+
+this.Counter=function Counter(initialCount){
+    var $$counter=new $Counter;
+    $$counter.initialCount=initialCount;        
+    return $$counter;
+}
+</code></pre>
+            
+            <p id="clearly_this_code_is_a...">Clearly this code is a bit harder to understand than what we
+            started with. It's also a lot uglier in the REPL:</p>
+            
+            <pre data-language="javascript"><code>&gt; c = Counter(Integer(0))
+{ initialCount: { value: 0, ... } }
+</code></pre>
+            
+            <p id="notice_that_the_internal_state...">Notice that the internal state of the object is now exposed to
+            clients. And all its operations - held on the prototype - are
+            also accessible, even the non-<code>shared</code> operations. Finally,
+            JavaScript's <code>this</code> bug is back:</p>
+            
+            <pre data-language="javascript"><code>&gt; inc = c.inc
+[Function: inc]
+&gt; inc()
+TypeError: Object #&lt;error&gt; has no method 'getCurrentCount'
+    at inc (/Users/gavin/ceylon-js/build/test/node_modules/default/members.js:21:31)
+    ...
+</code></pre>
+            
+            <p id="we_have_to_use_the...">We have to use the following ugly workaround:</p>
+            
+            <pre data-language="javascript"><code>&gt; inc = function(){c.inc.apply(c,arguments)}
+&gt; inc()
+&gt; c.getCount().value
+1
+</code></pre>
+            
+            <p id="of_course_the_compiler_automatically...">(Of course, the compiler automatically inserts these wrapper
+            functions when you write a function reference at the Ceylon
+            level.)</p>
+            
+            <p id="personally_i_dont_really_see...">Personally, I don't really see why the JavaScript interpreter
+            in V8 could not in principle internally optimize our original
+            code to something more like our "optimized" code. I think it
+            would make JavaScript a much more pleasant language to deal
+            with if there wasn't such a big difference in performance
+            there.</p>
+            
+            <p id="anyway_if_youre_producing_your...">Anyway, if you're producing your JavaScript by writing Ceylon,
+            this is now just a simple compiler switch :-)</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2012/01/02/prototypes-ceylon-js/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Object construction and validation</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2016/03/11/ceylon-1-2-2/">Ceylon 1.2.2 is now available</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2016/04/20/ceylon-on-mobile/">Ceylon on mobile devices</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="object_construction_and_validation">
+            Object construction and validation
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              05 Apr 2016
+            </div>
+            <div class="tags">
+            </div>
+          </div>
+          <div class="body">
+            <p id="when_porting_java_code_to...">When porting Java code to Ceylon, I sometimes run into
+            Java classes where the constructor mixes <em>validation</em> with
+            <em>initialization</em>. Let's illustrate what I mean with a simple
+            but very contrived example.</p>
+            
+            <h2 id="some_bad_code">Some bad code</h2>
+            
+            <p id="consider_this_java_class_try...">Consider this Java class. (Try not to write code like this
+            at home, kiddies!)</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="java"><code>public class Period {
+
+    private final Date startDate;
+    private final Date endDate;
+
+    //returns null if the given String
+    //does not represent a valid Date
+    private Date parseDate(String date) {
+       ...
+    }
+
+    public Period(String start, String end) {
+        startDate = parseDate(start);
+        endDate = parseDate(end);
+    }
+
+    public boolean isValid() {
+        return startDate!=null &amp;&amp; endDate!=null;
+    }
+
+    public Date getStartDate() {
+        if (startDate==null) 
+            throw new IllegalStateException();
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        if (endDate==null)
+            throw new IllegalStateException();
+        return endDate;
+    }
+} 
+</code></pre>
+            
+            <p id="hey_i_warned_you_it...">Hey, I warned you it was going to be contrived. But it's
+            really not uncommon to find stuff like this in real Java
+            code.</p>
+            
+            <p id="the_problem_here_is_that...">The problem here is that even if validation of the input
+            parameters (in the elided <code>parseDate()</code> method) fails, we
+            still receive an instance of <code>Period</code>. But the <code>Period</code> we
+            get isn't actually in a "valid" state. What do I mean by
+            that, precisely?</p>
+            
+            <p id="well_i_would_say_that...">Well, I would say that an object is in an invalid state if
+            it can't respond meaningfully to its public operations. In
+            this case, <code>getStartDate()</code> and <code>getEndDate()</code> can throw an
+            <code>IllegalStateException</code>, which is a condition I would
+            consider not "meaningful".</p>
+            
+            <p id="another_way_to_look_at...">Another way to look at this is that what we have here is a
+            failure of type safety in the design of <code>Period</code>. Unchecked
+            exceptions represent a "hole" in the type system. So a more
+            typesafe design for <code>Period</code> would be one which never uses
+            unchecked exceptions—that doesn't throw
+            <code>IllegalStateException</code>, in this case.</p>
+            
+            <p id="actually_in_practice_in_real...">(Actually, in practice, in real code, I'm more likely to
+            encounter a <code>getStartDate()</code> which <em>doesn't</em> check for
+            <code>null</code>, and actually results in a <code>NullPointerException</code>
+            further down the line, which is even worse.)</p>
+            
+            <p id="we_can_easily_translate_the...">We can easily translate the above <code>Period</code> class to Ceylon:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared class Period(String start, String end) {
+
+    //returns null if the given String
+    //does not represent a valid Date
+    Date? parseDate(String date) =&gt; ... ;
+
+    value maybeStartDate = parseDate(start);
+    value maybeEndDate = parseDate(end);
+
+    shared Boolean valid
+        =&gt; maybeStartDate exists 
+        &amp;&amp; maybeEndDate exists;
+
+    shared Date startDate {
+        assert (exists maybeStartDate);
+        return maybeStartDate;
+    }
+
+    shared Date endDate {
+        assert (exists maybeEndDate);
+        return maybeEndDate;
+    }
+} 
+</code></pre>
+            
+            <p id="and_of_course_this_code...">And, of course, this code suffers from the same problem as
+            the original Java code. The two <code>assert</code>ions are screaming
+            at us that there is a problem with the typesafety of the
+            code.</p>
+            
+            <h2 id="making_the_java_code_better">Making the Java code better</h2>
+            
+            <p id="how_could_we_improve_this...">How could we improve this code in Java. Well, here's a case
+            where Java's much-maligned checked exceptions would be a
+            really reasonable solution! We could slightly change <code>Period</code>
+            to throw a checked exception from its constructor:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="java"><code>public class Period {
+
+    private final Date startDate;
+    private final Date endDate;
+
+    //throws if the given String
+    //does not represent a valid Date
+    private Date parseDate(String date)
+            throws DateFormatException {
+       ...
+    }
+
+    public Period(String start, String end) 
+            throws DateFormatException {
+        startDate = parseDate(start);
+        endDate = parseDate(end);
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+} 
+</code></pre>
+            
+            <p id="now_with_this_solution_we...">Now, with this solution, we can never get a <code>Period</code> in an
+            invalid state, and the code which instantiates <code>Period</code> is
+            obligated by the compiler to handle the case of invalid
+            input by <code>catch</code>ing the <code>DateFormatException</code> somewhere.</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="java"><code>try {
+    Period p = new Period(start, end);
+    ...
+}
+catch (DateFormatException dfe) {
+    ...
+}
+</code></pre>
+            
+            <p id="this_is_a_good_and...">This is a good and excellent and righteous use of checked
+            exceptions, and it's unfortunate that I only rarely find
+            Java code which uses checked exceptions like this.</p>
+            
+            <h3 id="making_the_ceylon_code_better">Making the Ceylon code better</h3>
+            
+            <p id="what_about_ceylon_ceylon_doesnt...">What about Ceylon? Ceylon doesn't have checked exceptions,
+            so we'll have to look for a different solution. Typically,
+            in cases where Java would call for use of a function that
+            throws a checked exception, Ceylon would call for the use
+            of a function that returns a union type. Since the
+            initializer of a class can't return any type other than the
+            class itself, we'll need to extract some of the mixed
+            initialization/validation logic into a factory function.</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>//returns DateFormatError if the given 
+//String does not represent a valid Date
+Date|DateFormatError parseDate(String date) =&gt; ... ;
+
+shared Period|DateFormatError parsePeriod
+        (String start, String end) {
+    value startDate = parseDate(start);
+    if (is DateFormatError startDate) {
+        return startDate;
+    }
+    value endDate = parseDate(end);
+    if (is DateFormatError endDate)  {
+        return endDate;
+    }
+    return Period(startDate, endDate);
+}
+
+shared class Period(startDate, endDate) {
+    shared Date startDate;
+    shared Date endDate;
+} 
+</code></pre>
+            
+            <!--
+                shared Period|DateFormatError parsePeriod
+                        (String start, String end)
+                    => let (startDate = parseDate(start),
+                            endDate = parseDate(end))
+                            if (is DateFormatError startDate) 
+                                then startDate
+                       else if (is DateFormatError endDate) 
+                                then endDate
+                       else Period(startDate, endDate);
+            -->
+            
+            
+            <p id="the_caller_is_forced_by...">The caller is forced by the type system to deal with
+            <code>DateFormatError</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>value p = parsePeriod(start, end);
+if (is DateFormatError p) {
+    ...
+}
+else {
+    ...
+}
+</code></pre>
+            
+            <p id="or_if_we_didnt_care...">Or, if we didn't care about the actual problem with the
+            given date format (probable, given that the initial code we
+            were working from lost that information), we could just use
+            <code>Null</code> instead of <code>DateFormatError</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>//returns null if the given String 
+//does not represent a valid Date
+Date? parseDate(String date) =&gt; ... ;
+
+shared Period? parsePeriod(String start, String end)
+    =&gt; if (exists startDate = parseDate(start), 
+           exists endDate = parseDate(end))
+       then Period(startDate, endDate)
+       else null;
+
+shared class Period(startDate, endDate) {
+    shared Date startDate;
+    shared Date endDate;
+} 
+</code></pre>
+            
+            <p id="at_least_arguably_the_approach...">At least arguably, the approach of using a factory function
+            is superior, since in general it obtains better separation
+            between validation logic and object initialization. This is
+            especially useful in Ceylon, where the compiler enforces
+            some quite heavy-handed restrictions on object
+            initialization logic in order to guarantee that all fields
+            of the object are assigned exactly once.</p>
+            
+            <h2 id="summary">Summary</h2>
+            
+            <p id="in_conclusion">In conclusion:</p>
+            
+            <ul>
+            <li>Try to separate validation from initialization, wherever
+            reasonable.</li>
+            <li>Validation logic doesn't usually belong in constructors
+            (especially not in Ceylon).</li>
+            <li>Don't create objects in "invalid" states.</li>
+            <li>An "invalid" state can sometimes be detected by looking
+            for failures of typesafety.</li>
+            <li>In Java, a constructor or factory function that throws a
+            checked exception is a reasonable alternative.</li>
+            <li>In Ceylon, a factory function that returns a union type is
+            a reasonable alternative.</li>
+            </ul>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2016/04/05/object-validation/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

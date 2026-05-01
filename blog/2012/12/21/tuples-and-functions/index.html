@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Tuples and function types</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2012/10/31/new-screenshots/">Some new screenshots</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2013/01/11/ceylon-test-plugin/">Ceylon Test Eclipse Plugin</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="tuples_and_function_types">
+            Tuples and function types
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/stephane-epardaud/">Stéphane Épardaud</a>
+            </div>
+            <div class="date">
+              21 Dec 2012
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/design/">
+                design
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <h1 id="tuples">Tuples</h1>
+            
+            <p id="ceylon_is_getting_tuples_in...">Ceylon is getting <em>tuples</em> in the next version. For those who don´t know what a tuple is,
+            it´s a bit like a <code>struct</code> in C: a finite sequence of heterogeneous typed elements values,
+            with no methods (unlike a class) and no names (unlike C structures). But let´s start with
+            an example.</p>
+            
+            <p id="in_ceylon_1_20_hello...">In Ceylon, <code>[1, 2.0, "Hello"]</code> is a tuple value of size 3 with type <code>[Integer, Float, String]</code>.
+            Now let´s see a more useful example:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>// convert a sequence of strings into a sequence of tuples with size, string
+// and number of uppercase letters
+Iterable&lt;[Integer,String,Integer]&gt; results = 
+    {"Merry Christmas", "Happy Cheesy Holidays"}
+        .map((String s) [s.size, s, s.count((Character c) c.uppercase)]);
+for([Integer,String,Integer] result in results){
+    Integer size = result[0];
+    String s = result[1];
+    Integer uppercaseLetters = result[2];
+    print("Size: " size ", for: '" s "', uppercase letters: " uppercaseLetters "");
+}
+</code></pre>
+            
+            <p id="which_outputs">Which outputs:</p>
+            
+            <pre><code>Size: 15, for: 'Merry Christmas', uppercase letters: 2
+Size: 21, for: 'Happy Cheesy Holidays', uppercase letters: 3
+</code></pre>
+            
+            <p id="as_you_can_see_you...">As you can see, you can access each tuple element using the <code>Correspondence.item</code> syntax sugar <code>result[i]</code>,
+            and that's because our <code>Tuple</code> type <em>satisfies</em> <code>Sequence</code>, underneath.</p>
+            
+            <p id="you_may_ask_but_then...">You may ask, but then what is the sequence type of a <code>[Integer, String, Integer]</code> tuple, then? Easy: it´s
+            <code>Sequencial&lt;Integer|String&gt;</code>.</p>
+            
+            <p id="then_how_do_we_possibly...">Then how do we possibly know that <code>result[2]</code> is an <code>Integer</code> and not an <code>Integer|String</code>? Well, that´s
+            again syntactic sugar.</p>
+            
+            <p id="you_see_our_tuple_type...">You see, our Tuple type is defined like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared class Tuple&lt;out Element, out First, out Rest&gt;(first, rest)
+        extends Object()
+        satisfies Sequence&lt;Element&gt;
+        given First satisfies Element
+        given Rest satisfies Element[] {
+
+    shared actual First first;
+    shared actual Rest rest;
+
+    // ...
+}
+</code></pre>
+            
+            <p id="so_a_tuple_is_just...">So a tuple is just a sort of elaborate <code>cons</code>-list and <code>result[2]</code> is syntactic sugar for <code>result.rest.rest.first</code>,
+            which has type <code>Integer</code>.</p>
+            
+            <p id="similarly_the_integer_string_integer...">Similarly, the <code>[Integer, String, Integer]</code> type literal is syntactic sugar for:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Tuple&lt;Integer|String, Integer, Tuple&lt;Integer|String, String, Tuple&lt;Integer, Integer, Empty&gt;&gt;&gt;
+</code></pre>
+            
+            <p id="and_last_the_0_foo...">And last, the <code>[0, "foo", 2]</code> value literal is syntactic sugar for:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Tuple(0, Tuple("foo", Tuple(2, empty)))
+</code></pre>
+            
+            <p id="as_you_can_see_our...">As you can see, our type inference rules are smart enough to infer the <code>Integer|String</code> sequential types by itself.</p>
+            
+            <h1 id="function_types">Function types</h1>
+            
+            <p id="so_tuples_are_nice_for...">So tuples are nice, for example to return multiple values from a method, but that´s not all you can do with them.</p>
+            
+            <p id="here´s_how_our_callable_type...">Here´s how our <code>Callable</code> type (the type of Ceylon functions and methods) is defined:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared interface Callable&lt;out Return, in Arguments&gt; 
+    given Arguments satisfies Void[] {}
+</code></pre>
+            
+            <p id="as_you_can_see_its...">As you can see, its <code>Arguments</code> type parameter accepts a sequence of anything (<code>Void</code> is the top of the object
+            hierarchy in Ceylon, above <code>Object</code> and the type of <code>null</code>), which means we can use tuple types to describe
+            the parameter lists:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>void threeParameters(Integer a, String b, Float c){
+}
+
+Callable&lt;Void, [Integer, String, Float]&gt; threeParametersReference = threeParameters;
+</code></pre>
+            
+            <p id="so_callablevoid_integer_string_float...">So, <code>Callable&lt;Void, [Integer, String, Float]&gt;</code> describes the type of a function which returns <code>Void</code> and takes
+            three parameters of types <code>Integer</code>, <code>String</code> and <code>Float</code>.</p>
+            
+            <p id="but_you_may_ask_what...">But you may ask what the type of a function with defaulted parameters is? Defaulted parameters are optional
+            parameters, that get a default value if you don´t specify them:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>void oneOrTwo(Integer a, Integer b = 2){
+    print("a = " a ", b = " b ".");
+}
+oneOrTwo(1);
+oneOrTwo(1, 1);
+</code></pre>
+            
+            <p id="that_would_print">That would print:</p>
+            
+            <pre><code>a = 1, b = 2.
+a = 1, b = 1.
+</code></pre>
+            
+            <p id="so_let´s_see_what_the...">So let´s see what the type of <code>oneOrTwo</code> is:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Callable&lt;Void, [Integer, Integer=]&gt; oneOrTwoReference = oneOrTwo;
+// magic: we can still invoke it with one or two arguments!
+oneOrTwoReference(1);
+oneOrTwoReference(1, 1);
+</code></pre>
+            
+            <p id="so_its_type_is_callablevoid...">So its type is <code>Callable&lt;Void, [Integer, Integer=]&gt;</code>, which means that it takes one or two parameters. We´re not
+            sure yet about the <code>=</code> sign in <code>Integer=</code> to denote that it is optional, so that may change. This is syntactic
+            sugar for <code>Callable&lt;Void, [Integer] | [Integer, Integer]&gt;</code>, meaning: a function that takes one or two parameters.</p>
+            
+            <p id="similarly_variadic_functions_also_have...">Similarly, variadic functions also have a denotable type:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>void zeroOrPlenty(Integer... args){
+    for(i in args){
+        print(i);
+    }
+}
+Callable&lt;Void, [Integer...]&gt; zeroOrPlentyReference = zeroOrPlenty;
+// magic: we can still invoke it with zero or more arguments!
+zeroOrPlentyReference();
+zeroOrPlentyReference(1);
+zeroOrPlentyReference(5, 6);
+</code></pre>
+            
+            <p id="here_integer_means_that_it...">Here, <code>[Integer...]</code> means that it accepts a sequence of zero or more <code>Integer</code> elements.</p>
+            
+            <p id="now_if_you´re_not_impressed...">Now if you´re not impressed yet, here´s the thing that´s really cool: thanks to our subtyping rules (nothing
+            special here, just our normal subtyping rules related to union types), we´re able
+            to figure out that a function that takes one or two parameters is a supertype of both functions that take one parameter
+            and functions that take two parameters:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Callable&lt;Void, [Integer, Integer=]&gt; oneOrTwoReference = oneOrTwo;
+
+// we can all it with one parameter
+Callable&lt;Void, [Integer]&gt; one = oneOrTwoReference;
+// or two
+Callable&lt;Void, [Integer, Integer]&gt; two = oneOrTwoReference;
+</code></pre>
+            
+            <p id="and_similarly_for_variadic_functions...">And similarly for variadic functions, they are supertypes of functions that take any number of parameters:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Callable&lt;Void, [Integer...]&gt; zeroOrPlentyReference = zeroOrPlenty;
+
+// we can call it with no parameters
+Callable&lt;Void, []&gt; zero = zeroOrPlentyReference;
+// or one
+Callable&lt;Void, [Integer]&gt; oneAgain = zeroOrPlentyReference;
+// or two
+Callable&lt;Void, [Integer, Integer]&gt; twoAgain = zeroOrPlentyReference;
+// and even one OR two parameters!
+Callable&lt;Void, [Integer, Integer=]&gt; oneOrTwoAgain = zeroOrPlentyReference;
+</code></pre>
+            
+            <p id="although_this_is_something_that...">Although this is something that dynamic languages have been able to do for decades, this is pretty impressive in a
+            statically typed language, and allows flexibility in how you use, declare and pass functions around that follows the
+            rules of logic (and checked!) and don´t make you fight the type system.</p>
+            
+            <h1 id="by_the_way">By the way</h1>
+            
+            <p id="i´ve_shown_here_that_we...">I´ve shown here that we support method references in Ceylon, but the same is true with constructors, because after all
+            a constructor is nothing more than a function that takes parameters and returns a new instance:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>class Foo(Integer x){
+    shared actual String string = "Foo " x "";
+}
+print(Foo(2));
+
+Callable&lt;Foo, [Integer]&gt; makeFoo = Foo;
+print(makeFoo(3));
+</code></pre>
+            
+            <p id="will_print">Will print:</p>
+            
+            <pre><code>Foo 2
+Foo 3
+</code></pre>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2012/12/21/tuples-and-functions/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

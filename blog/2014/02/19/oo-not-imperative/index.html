@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Object-oriented != imperative</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2014/02/05/first-ceylon-tour-in-paris/">First Ceylon Tour in Paris</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2014/05/10/about-plus/">About the plus symbol</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="object_oriented__imperative">
+            Object-oriented != imperative
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              19 Feb 2014
+            </div>
+            <div class="tags">
+            </div>
+          </div>
+          <div class="body">
+            <p id="dear_fp_community_one_of...">Dear FP community: one of the things I really like about you folks
+            is the <em>rigor</em> you've brought to the field of programming language
+            design. Compared to the kind of magical and folklore-based thinking
+            we've grown accustomed to in the field of computing, your approach
+            to problems is a massive breath of fresh air. But there's one area
+            where you guys seem to have fallen into some rather fuzzy and
+            unfounded rhetoric. What I'm taking about is your continued
+            conflation of <em>object orientation</em> with <em>imperative programming</em>.</p>
+            
+            <p id="when_we_program_with_classes...">When we program with classes and objects, we have the choice between
+            expressing ourselves using:</p>
+            
+            <ul>
+            <li>mutable objects, or</li>
+            <li>immutable objects.</li>
+            </ul>
+            
+            
+            <p id="this_is_no_different_to...">This is <em>no different</em> to programming using functions, where we have
+            the choice between:</p>
+            
+            <ul>
+            <li>impure functions, or</li>
+            <li>pure functions.</li>
+            </ul>
+            
+            
+            <p id="the_use_of_mutable_objects...">The use of mutable objects and impure functions is called <em>imperative
+            programming</em> and is the norm in business and scientific computing.
+            Another way to describe it is "programming with side-effects". Savvy
+            programmers from both the OO and FP traditions have long understood
+            that side-effects make it more difficult to reason about complex code,
+            and that a design based upon immutable objects and/or pure functions
+            is often superior.</p>
+            
+            <p id="indeed_ive_been_hearing_the...">Indeed, I've been hearing the advice to prefer immutable objects, and
+            avoid side-effects, for as long as I've been programming using
+            object-oriented languages.</p>
+            
+            <p id="oh_but_wait_you_might...">Oh, but wait, you might respond: isn't my point totally specious, when
+            so many of the objects that people actually write in practice are
+            actually mutable? Well, no, I don't think so. The truth is, that almost
+            as many of the <em>functions</em> that people actually write in practice are
+            impure. Programming with functions, and without objects, does not in
+            itself innoculate us against side-effects. Indeed, the disciplined use
+            of immutability that we see in some parts of the FP community is simply
+            not the norm in business or scientific computing, even in languages
+            which don't support object orientation. Trust me, the old Fortran code
+            I used to mess about with when I was doing scientific computing work
+            back in university was certainly no more free of side-effects than
+            typical object-oriented code I've worked with since.</p>
+            
+            <p id="perhaps_a_source_of_the...">Perhaps a source of the confusion here is that we say that objects
+            "hold state and behavior". When some people who aren't so familiar with
+            OO read this, they imagine that by "state", we mean <em>mutable state</em>.
+            But that's not quite right. What this statement is saying is that an
+            object holds references to other objects, along with functions that
+            make use of those references. Thus, we can distinguish one instance
+            of a class from another instance, by the different references (state)
+            it holds. We don't mean, <em>necessarily</em> that those references are
+            <em>mutable</em>, and, indeed, they're very often immutable, especially in
+            well-designed code.</p>
+            
+            <p id="so_replies_my_imaginary_fp...">"So", replies my imaginary FP interlocutor, "how then would such an
+            immutable object be any different to a closure?" Well, at some level
+            <em>it's not any different</em>, and that's the point! There's nothing
+            <em>unfunctional</em> about objects! You can think of a class as a function
+            that returns the closure of its own exported nested declarations.
+            (Indeed, this is precisely how we think of a class in Ceylon.)</p>
+            
+            <p id="among_the_modern_languages_what...">Among the modern languages, what really distinguishes a language as
+            object-oriented is whether it supports <em>subtype polymorphism</em> (or
+            <em>structural polymorphism</em>, which I consider just a special kind of
+            subtyping). Thus, some languages that people consider "functional"
+            (ML, Haskell) aren't object-oriented. Others (OCaml, F#) are.</p>
+            
+            <p id="a_request_fp_folks_please...">A request: FP folks, please, please improve your use of terminology,
+            because I've seen your misuse of the term "object-oriented" creating
+            a lot of confusion in discussions about programming languages.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2014/02/19/oo-not-imperative/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

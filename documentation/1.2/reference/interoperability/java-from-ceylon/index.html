@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Using Java from Ceylon</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.2/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.2/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.2/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.2/examples">Examples</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.2/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.2/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.2/reference">Reference</a></h3>
+            
+            <ul>
+<li><a href="#description">Description
+            </a></li>
+<ul>
+<li><a href="#dealing_with_ceylon_constraints">Dealing with Ceylon constraints
+            </a></li>
+<ul>
+<li><a href="#accessing_java_types_with_an_initial_lowercase_letter">Accessing Java types with an initial lowercase letter
+            </a></li>
+<li><a href="#accessing_java_methods_or_fields_with_an_initial_uppercase_letter">Accessing Java methods or fields with an initial uppercase letter
+            </a></li>
+<li><a href="#accessing_java_declarations_whose_name_is_a_ceylon_keyword">Accessing Java declarations whose name is a Ceylon keyword
+            </a></li>
+</ul>
+<li><a href="#dealing_with_overloading">Dealing with overloading
+            </a></li>
+<ul>
+<li><a href="#calling_overloaded_constructors_or_methods">Calling overloaded constructors or methods
+            </a></li>
+<li><a href="#overriding_overloaded_methods">Overriding overloaded methods
+            </a></li>
+</ul>
+<li><a href="#dealing_with_static_fields_and_methods">Dealing with static fields and methods
+            </a></li>
+<ul>
+<li><a href="#accessing_static_methods_or_fields">Accessing static methods or fields
+            </a></li>
+<li><a href="#importing_static_methods_or_fields">Importing static methods or fields
+            </a></li>
+</ul>
+<li><a href="#accessing_instance_fields">Accessing instance fields
+            </a></li>
+<li><a href="#accessing_javabean_properties">Accessing JavaBean properties
+            </a></li>
+<li><a href="#accessing_instance_methods">Accessing instance methods
+            </a></li>
+<li><a href="#catching_java_exceptions">Catching Java exceptions
+            </a></li>
+<li><a href="#java_primitive_types">Java primitive types
+            </a></li>
+<li><a href="#java_array_types">Java array types
+            </a></li>
+<ul><li><a href="#creating_your_own_java_array_in_ceylon">Creating your own Java array in Ceylon
+            </a></li></ul>
+<li><a href="#java_enum_types">Java <code>enum</code> types
+            </a></li>
+</ul>
+<li><a href="#other_areas_of_interoperation">Other areas of interoperation
+            </a></li>
+<li><a href="#calling_java_code_with_unsafe_nulls">Calling Java code with unsafe nulls
+            </a></li>
+<li><a href="#implementing_java_code_with_unsafe_nulls">Implementing Java code with unsafe nulls
+            </a></li>
+<li><a href="#using_java_annotations_on_ceylon_declarations">Using Java annotations on Ceylon declarations
+            </a></li>
+<li><a href="#java_io_serializable">java.io.Serializable
+            </a></li>
+<li><a href="#_default_constructors">'Default' constructors
+            </a></li>
+<li><a href="#importing_jdk_modules">Importing JDK modules
+            </a></li>
+<li><a href="#obtaining_java_jar_dependencies">Obtaining Java <code>jar</code> dependencies
+            </a></li>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.2/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.2/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.2/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_12_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.2, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.2/reference/interoperability/java-from-ceylon.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.2/reference/interoperability/java-from-ceylon.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="using_java_from_ceylon">Using Java from Ceylon</h1>
+          
+          <h2 id="description">Description
+          </h2>
+          
+          
+          <p id="this_page_covers_how_you...">This page covers how you can use Java classes from Ceylon.</p>
+          
+          <h3 id="dealing_with_ceylon_constraints">Dealing with Ceylon constraints
+          </h3>
+          
+          
+          
+          
+          <h4 id="accessing_java_types_with_an_initial_lowercase_letter">Accessing Java types with an initial lowercase letter
+          </h4>
+          
+          
+          <p id="if_you_want_to_use...">If you want to use a Java type with an initial lowercase letter, you have to
+          prefix its name with <code>\I</code> to let the Ceylon parser know that we're talking about
+          a type name.</p>
+          
+          <p id="note_that_this_does_not...">Note that this does not apply to Java primitives, which are in general handled by
+          the <a href="../type-mapping">type mapping</a> or by using the corresponding JVM boxed versions.</p>
+          
+          <h4 id="accessing_java_methods_or_fields_with_an_initial_uppercase_letter">Accessing Java methods or fields with an initial uppercase letter
+          </h4>
+          
+          
+          <p id="if_you_want_to_use_a...">If you want to use a Java method or field with an initial uppercase letter, you have to
+          prefix its name with <code>\i</code> to let the Ceylon parser know that we're talking about
+          an attribute/method name.</p>
+          
+          <h4 id="accessing_java_declarations_whose_name_is_a_ceylon_keyword">Accessing Java declarations whose name is a Ceylon keyword
+          </h4>
+          
+          
+          <p id="if_you_need_to_access...">If you need to access a Java method or field whose
+          name is a Ceylon keyword (e.g. a method called <code>value()</code>), you have to prefix its name with <code>\i</code>
+          to let the Ceylon parser know that we're talking about an attribute/method name.</p>
+          
+          <p id="if_you_need_to_access_a...">If you need to access a Java class or interface whose
+          name is a Ceylon keyword (e.g. a class called <code>value</code>), you have to prefix its name with <code>\I</code>
+          to let the Ceylon parser know that we're talking about a type name.</p>
+          
+          <h3 id="dealing_with_overloading">Dealing with overloading
+          </h3>
+          
+          
+          
+          
+          <h4 id="calling_overloaded_constructors_or_methods">Calling overloaded constructors or methods
+          </h4>
+          
+          
+          <p id="no_special_syntax_is_required...">No special syntax is required to call an overloaded constructor or method.</p>
+          
+          <p id="occasionally_as_in_java_a...">Occasionally, as in Java, a typecast is required to distinguish the overloaded
+          version. Ceylon doesn't have unsafe typecasts, but it does have the <a href="../../operator/of"><code>of</code></a> operator:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>import java.lang { JException=Exception }
+
+...
+
+throw JException(null of String?);
+</code></pre>
+          
+          <h4 id="overriding_overloaded_methods">Overriding overloaded methods
+          </h4>
+          
+          
+          <p id="although_it_is_not_possible...">Although it <a href="../../../faq/language-design/#overloading">is not possible in Ceylon to declare overloaded methods</a>,
+          it is possible to refine overloaded methods defined in a Java type.</p>
+          
+          <h3 id="dealing_with_static_fields_and_methods">Dealing with static fields and methods
+          </h3>
+          
+          
+          <p id="its_easy_to_access_static...">It's easy to access <code>static</code> members of a Java class.</p>
+          
+          <h4 id="accessing_static_methods_or_fields">Accessing static methods or fields
+          </h4>
+          
+          
+          <p id="you_can_access_static_methods...">You can access static methods or fields just like you would in Java:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>import java.io { File }
+
+void m(){
+    print(File.separator);
+    File.createTempFile("foo", "bar");
+}
+</code></pre>
+          
+          <p id="note_that_since_many_java...">Note that since many Java static fields actually have an initial uppercase letter you will
+          have to prefix their name with <code>\i</code>.</p>
+          
+          <h4 id="importing_static_methods_or_fields">Importing static methods or fields
+          </h4>
+          
+          
+          <p id="alternatively_you_can_import_a...">Alternatively, you can import a <code>static</code> method or field from its containing type:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>import java.io { File { separator, createTempFile } }
+
+void m(){
+    print(separator);
+    createTempFile("foo", "bar");
+}
+</code></pre>
+          
+          <p id="you_can_even_use_aliases">You can even use aliases:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>import java.io { JFile = File { sep = separator, roots = listRoots } }
+import java.lang { ObjectArray }
+
+void m(){
+    print(sep);
+    ObjectArray&lt;JFile&gt; roots2 = roots();
+}
+</code></pre>
+          
+          <p id="this_is_a_good_way...">This is a good way to eliminate the <code>\i</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>import java.lang { Integer { maxInt=\iMAX_VALUE } }
+
+void m() {
+    print(maxInt);
+}
+</code></pre>
+          
+          <h3 id="accessing_instance_fields">Accessing instance fields
+          </h3>
+          
+          
+          <p id="you_can_access_java_instance...">You can access Java instance fields as if they were normal Ceylon attributes,
+          except if they are not <code>public</code> or if they are hidden by a JavaBean property of
+          the same name.</p>
+          
+          <h3 id="accessing_javabean_properties">Accessing JavaBean properties
+          </h3>
+          
+          
+          <p id="ceylon_maps_instance_attributes_to...">Ceylon maps instance attributes to JavaBean properties, so naturally, every
+          JavaBean property defined in Java is mapped to a Ceylon instance attribute.</p>
+          
+          <h3 id="accessing_instance_methods">Accessing instance methods
+          </h3>
+          
+          
+          <ol>
+          <li>Java Bean accessors (<code>get*()</code> and <code>set*()</code> methods) will be treated as Ceylon
+          attributes, and therefore can only be accessed as such.</li>
+          <li>If there is a Java Bean setter that has no corresponding getter (such as in
+          the older parts of the JDK such as <code>Vector.size()</code> and <code>Vector.setSize()</code>)
+          then both methods are available as normal Ceylon instance methods.</li>
+          <li>The <code>Object.toString()</code> and <code>Object.hashCode()</code> methods are mapped to the
+          respective Ceylon instance attributes <code>string</code> and <code>hash</code>, and as such are
+          not visible as instance methods.</li>
+          <li>Other methods declared by <code>java.lang.Object</code> are not visible in Ceylon.</li>
+          </ol>
+          
+          
+          <p id="other_instance_methods_can_be...">Other instance methods can be accessed as normal Ceylon instance methods.</p>
+          
+          <h3 id="catching_java_exceptions">Catching Java exceptions
+          </h3>
+          
+          
+          <p id="a_ceylon_side_catch_exception...">A Ceylon-side <code>catch (Exception e) { ... }</code> will catch <code>java.lang.Exception</code>
+          (and, of course its subclasses).</p>
+          
+          <p id="a_ceylon_side_catch_throwable...">A Ceylon-side <code>catch (Throwable e) { ... }</code> will catch <code>java.lang.Throwable</code>.
+          There is no way to catch only <code>java.lang.Error</code>.</p>
+          
+          <p id="since_ceylon_121_you_can...">Since Ceylon 1.2.1 you can use a <code>java.lang::AutoCloseable</code> as a resource in
+          a Ceylon <a href="../../statement/try"><code>try</code></a> statement.</p>
+          
+          <h3 id="java_primitive_types">Java primitive types
+          </h3>
+          
+          
+          <p id="every_java_primitive_type_including...">Every Java primitive type (including arrays) is mapped to a Ceylon type as
+          described in the <a href="../type-mapping">type mapping list</a>. This means you can
+          get Java primitives into Ceylon and send them back. If you satisfy or extend
+          a Java type, Ceylon will use the proper Java primitive types to satisfy the
+          constraints imposed by the Java type.</p>
+          
+          <p id="in_some_very_specific_cases...">In some very specific cases, such as with overloading, you might have to write
+          some code in a special way though. For instance, since <code>short</code> and <code>int</code> are
+          both mapped to the Ceylon type <code>celon.language.Integer</code> which in turn is mapped
+          to <code>long</code>, if you want to call a method overriden for a specific version of these
+          three types, you have to make it explicit:</p>
+          
+          <pre data-language="java"><code>public class JavaType {
+    public void foo(short s){}
+    public void foo(long s){}
+    public void takesAShort(short s){}
+}
+</code></pre>
+          
+          <p id="and">And:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>import java.lang { JavaShort = Short }
+
+void m(){
+    JavaType t = JavaType();
+    // this will be stored as a long on the JVM
+    Integer i = 2;
+    // this will produce a short and thus call foo(short)
+    t.foo(JavaShort(i).shortValue());
+    // this will call foo(long)
+    t.foo(i);
+    // naturally this works too
+    t.takesAShort(i); 
+}
+</code></pre>
+          
+          <p id="at_the_moment_you_cannot...">At the moment you cannot declare a method or attribute in Ceylon such that its
+          type represents a certain Java primitive (though if you override a method or
+          attribute, its primitive type will be respected). In the future we may implement
+          this with a compiler annotation to specify the underlying primitive type to use.</p>
+          
+          <h3 id="java_array_types">Java array types
+          </h3>
+          
+          
+          <p id="java_arrays_are_supported_and...">Java arrays are supported and mapped to <em>virtual</em> objects in the <code>java.lang</code> package:</p>
+          
+          <table>
+            <tbody>
+              <tr>
+                <th>Java type</th>
+                <th>Ceylon type</th>
+              </tr>
+              <tr>
+                <td><code>boolean[]</code></td>
+                <td><code>java.lang.BooleanArray</code></td>
+              </tr>
+              <tr>
+                <td><code>byte[]</code></td>
+                <td><code>java.lang.ByteArray</code></td>
+              </tr>
+              <tr>
+                <td><code>short[]</code></td>
+                <td><code>java.lang.ShortArray</code></td>
+              </tr>
+              <tr>
+                <td><code>int[]</code></td>
+                <td><code>java.lang.IntArray</code></td>
+              </tr>
+              <tr>
+                <td><code>long[]</code></td>
+                <td><code>java.lang.LongArray</code></td>
+              </tr>
+              <tr>
+                <td><code>float[]</code></td>
+                <td><code>java.lang.FloatArray</code></td>
+              </tr>
+              <tr>
+                <td><code>double[]</code></td>
+                <td><code>java.lang.DoubleArray</code></td>
+              </tr>
+              <tr>
+                <td><code>char[]</code></td>
+                <td><code>java.lang.CharArray</code></td>
+              </tr>
+              <tr>
+                <td><code>T[]</code></td>
+                <td><code>java.lang.ObjectArray&lt;T&gt;</code></td>
+              </tr>
+            </tbody>
+          </table>
+          
+          
+          <p id="these_virtual_types_must_be...">These virtual types must be imported from the <code>java.base/7</code> or <code>java.base/8</code>
+          module, as the rest of the core of the JDK, and
+          their definition is as follows, for example for <code>BooleanArray</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>import java.lang { JBoolean = Boolean }
+
+shared class BooleanArray(Integer size, Boolean element = false){
+
+    "Gets the item at the specified index"
+    shared Boolean get(Integer index);
+
+    "Sets the item at the specified index"
+    shared void set(Integer index, Boolean element);
+
+    "The array size"
+    shared Integer size;
+
+    "Get a Ceylon Array that is a view backed by this array"
+    shared Array&lt;JBoolean&gt; array;
+
+    "Get a Ceylon Array that is a view backed by this array"
+    shared Array&lt;Boolean&gt; booleanArray;
+
+    "Get a Ceylon Iterable that is a view backed by this array"
+    shared Iterable&lt;Boolean&gt; iterable;
+
+    "Copies this array to another array"
+    shared void copyTo(BooleanArray destination, 
+                       Integer sourcePosition = 0, 
+                       Integer destinationPosition = 0, 
+                       Integer length = size - sourcePosition);
+
+    "True if this array is equal to the given array"
+    shared Boolean equals(Object other);
+
+    "A string representation of this array"
+    shared String string;
+
+    "A hash code for this array"
+    shared Integer hash;
+
+    "A shallow copy of this array"
+    shared BooleanArray clone();
+}
+</code></pre>
+          
+          <p id="as_you_can_see_we...">As you can see, we mapped every Java array operation to methods and attributes, and added a way to get a
+          Ceylon <code>Array</code> object from a Java array, which allows you to access Java arrays as if they were Ceylon
+          arrays. Be careful that the Java array is only wrapped so all changes to it will be visible in the
+          Ceylon <code>Array</code>.</p>
+          
+          <p id="note_that_the_intarray_type...">Note that the <code>IntArray</code> type has an extra method to convert an array of Unicode Code Points to a Ceylon
+          <code>Array</code> of <code>Character</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>    "Get a Ceylon Array that is a view backed by this array"
+    shared Array&lt;Character&gt; codePointArray;
+</code></pre>
+          
+          <p id="also_note_that_the_objectarray...">Also note that the <code>ObjectArray</code> type is covariant in its element type <code>T</code>, as is the case in Java, and
+          that therefore, to fit Ceylon semantics regarding declaration-site variance, its <code>set</code> method accepts
+          <code>Object</code> and not just <code>T</code>. However, if you try to store elements whose type is not compatible with <code>T</code>,
+          you will get a <code>java.lang.ArrayStoreException</code>.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared class ObjectArray&lt;out T&gt;(Integer size, T? element = null){
+    "Sets the item at the specified index"
+    shared void set(Integer index, Object element);
+    // ...
+}
+</code></pre>
+          
+          <p id="see_how_to_use_java...">See how to use Java arrays:</p>
+          
+          <pre data-language="java"><code>public class JavaType {
+    public String[] giveMeAnArray(){ return new String[]{"Foo"}; }
+    public void takeThisArray(String[] arr){}
+}
+</code></pre>
+          
+          <p>And:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>JavaType t = JavaType();
+ObjectArray&lt;String&gt; array = t.giveMeAnArray();
+String first = array.get(0);
+array.set(0, "Updated");
+t.takeThisArray(array);
+</code></pre>
+          
+          <p id="ceylon_122_brought_a_number...">Ceylon 1.2.2 brought a number of improvements to interoperating with
+          Java arrays:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>// lookup operator support for arrays
+value firstViaLookup = array[0];
+// arrays in a for statement
+for (string in array) {
+    print(string);
+}
+// arrays in a for comprehension
+value shouty = {for (string in array) uppercased};
+</code></pre>
+          
+          <h4 id="creating_your_own_java_array_in_ceylon">Creating your own Java array in Ceylon
+          </h4>
+          
+          
+          <p id="you_can_create_java_arrays...">You can create Java arrays in Ceylon:</p>
+          
+          <pre data-language="java"><code>public class JavaType {
+    public void takeThisArray(String[] arr){}
+    public void takeThisArray(int[] arr){}
+}
+</code></pre>
+          
+          <p>And:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>JavaType t = JavaType();
+ObjectArray&lt;JString&gt; a = ObjectArray&lt;JString&gt;(2);
+a.set(0, "foo");
+a.set(1, "bar"); 
+t.takeThisArray(a);
+IntArray i = IntArray(2); 
+a.set(0, 0);
+a.set(1, 1); 
+t.takeThisArray(i);
+</code></pre>
+          
+          <h3 id="java_enum_types">Java <code>enum</code> types
+          </h3>
+          
+          
+          <p id="it_is_currently_impossible_to...">It is currently impossible to create a Java enum from Ceylon, but you can use them as if
+          they were toplevel objects:</p>
+          
+          <pre data-language="java"><code>public enum JavaEnum {
+
+    ONE, TWO;
+
+    public long field;
+    public void method(){}
+    public long getProperty(){ return 1; }
+    public void setProperty(long p){}
+}
+</code></pre>
+          
+          <p>And:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>import com.foo { JavaEnum { one = \iONE, two = \iTWO } }
+
+void enums(){
+    JavaEnum e = one;
+    e.field = e.field;
+    e.property = e.property;
+    e.method();
+}
+</code></pre>
+          
+          <p id="or">Or:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>import com.foo { JavaEnum }
+
+void enums(){
+    JavaEnum e = JavaEnum.\iONE;
+    e.field = e.field;
+    e.property = e.property;
+    e.method();
+}
+</code></pre>
+          
+          <h2 id="other_areas_of_interoperation">Other areas of interoperation
+          </h2>
+          
+          
+          <p id="since_ceylon_122_there_has...">Since Ceylon 1.2.2 there has been some improved support for interop with
+          certain language constructs:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>import java.lang{ JIterable=Iterable }
+import java.util{ JMap=Map, JList=List }
+JIterable&lt;Person&gt; people = ...;
+JList&lt;Person&gt; peopleList = ...;
+JMap&lt;Person,Task&gt; tasks = ...;
+
+// Use java.lang.Iterable in for statements
+for (person in people) {
+    print(person.name);
+}
+
+// Use java.lang.Iterable in for comprehensions
+value adults = {for (person in people) if (person.age &gt; 18) person};
+
+// Using the lookup operator with java.util.List
+value firstPerson = peopleList[0];
+
+// Using the lookup operator with java.util.Map
+value firstTask = tasks[firstPerson];
+
+// Using in operator with java.util.Collection
+assert (firstPerson in peopleList);
+</code></pre>
+          
+          <h2 id="calling_java_code_with_unsafe_nulls">Calling Java code with unsafe nulls
+          </h2>
+          
+          
+          <p id="ceylon_always_knows_whether_a...">Ceylon always knows whether a value can or not be <code>null</code>, but this is not the case in Java,
+          so when calling Java code, we don't really know if a value, or a method's return value
+          can be <code>null</code> or not. There's simply no way to know this, unless you know the API, and so
+          the decision is yours. When calling Java code, we will make your life easier and treat
+          the return values as non-optional, so you can store them in non-optional variables,
+          but you can also treat them as optional (like in <code>exists</code> tests) and things will work out.</p>
+          
+          <p id="if_you_decide_to_store...">If you decide to store a value obtained from calling Java code into a non-optional variable,
+          we will insert a <code>null</code> check at the threshold, so that you get an exception at the most useful
+          place. That check is of course not generated if you store a Java value in an optional variable,
+          because <code>null</code> is allowed then.</p>
+          
+          <p id="we_treat_java_method_parameters...">We treat Java method parameters and writeable fields and JavaBean properties as accepting
+          optional values if they are not Java primitives, thus allowing you to set them to <code>null</code>
+          or to a value.</p>
+          
+          <h2 id="implementing_java_code_with_unsafe_nulls">Implementing Java code with unsafe nulls
+          </h2>
+          
+          
+          <p id="when_implementing_a_java_interface...">When implementing a Java interface or class in Ceylon, you can decide to make the method
+          parameters and return values optional or not. The same is true when implementing JavaBean
+          properties (as Ceylon attributes).</p>
+          
+          <h2 id="using_java_annotations_on_ceylon_declarations">Using Java annotations on Ceylon declarations
+          </h2>
+          
+          
+          <p id="ceylon_annotations_differ_from_java...">Ceylon annotations differ from Java annotations in an important respect:
+          Ceylon requires an <em>annotation constructor</em> to be invoked at the
+          declaration being annotated.
+          Java doesn't have the concept of an annotation constructor, so for
+          each Java annotation type we pretend there's a corresponding annotation
+          constructor (whose name is the same as the annotation type name,
+          but with a lower cased initial letter), which can be <code>import</code>ed:</p>
+          
+          <pre data-language="ceylon"><code>import javax.annotation{generated, 
+    postConstruct, 
+    preDestroy, 
+    resource,
+    Resource {
+        AuthenticationType{
+            application=\iAPPLICATION
+        }
+    }
+}
+</code></pre>
+          
+          <p id="these_annotation_constructors_can_then...">These annotation constructors can then be used in the same way as normal
+          Ceylon annotation constructors</p>
+          
+          <pre data-language="ceylon"><code>class Foo() {
+    postConstruct
+    shared void afterConstrution() {}
+}
+</code></pre>
+          
+          <p id="invocations_of_these_synthetic_annotation...">Invocations of these synthetic annotation constructors support Java enumeration
+          elements and class literals (using <code>Declaration</code> reference expressions):</p>
+          
+          <pre data-language="ceylon"><code>class Bar() {
+    resource{
+        name="tom";
+        authenticationType=application;
+        type=`AnnotationInterop`;
+    }
+    annotationTakingClass(`class Bar`)
+    shared variable String tom = "";
+}
+</code></pre>
+          
+          <p id="in_some_cases_the_target...">In some cases the target of the annotation is ambiguous, for example you might
+          need to annotate a <em>field</em> with <code>@Inject</code>, but in Ceylon there is no
+          field in the source code to apply the annotation to.
+          In these cases there are several synthetic annotation
+          constructors available, named according to the possible <code>@Target</code> of the
+          annotation type in question. For example</p>
+          
+          <pre data-language="ceylon"><code>class Injected() {
+    inject__FIELD
+    shared variable String whatever;
+}
+</code></pre>
+          
+          <p id="the_compiler_will_warn_you...">The compiler will warn you if you apply an annotation constructor to an
+          element in an ambiguous way, and force you to use the more specific
+          named variant.</p>
+          
+          <h2 id="java_io_serializable">java.io.Serializable
+          </h2>
+          
+          
+          <p id="it_is_a_common_requirement...">It is a common requirement of Java frameworks that user classes
+          be serializable (in the Java sense).</p>
+          
+          <p id="ceylon_classes_directly_extending_basic...">Ceylon classes directly extending <code>Basic</code> or <code>Object</code> automatically
+          implement <code>java.io.Serializable</code> whether or not
+          they are declared with a <code>satisfies Serializable</code> clause. Of course, subclasses
+          of such classes will inherit <code>java.io.Serializable</code>. Thus most classes
+          in Ceylon are serializable.</p>
+          
+          <p id="objects_and_instances_created_from..."><code>object</code>s and instances created from value constructors are supported
+          and result in the appropiate instance being resolved during deserialization.
+          This means that you still have a single instance of classes which are
+          supposed to be singletons.</p>
+          
+          <p id="currently_there_is_no_mechanism...">Currently there is no mechanism for marking a field as <code>transient</code> or
+          for specifying a <code>serialVersionUID</code>. It is possible to implement the
+          "magic" methods of
+          <a href="https://docs.oracle.com/javase/7/docs/api/java/io/Serializable.html"><code>java.io.Serializable</code></a>
+          <code>writeObject()</code>, <code>readObject()</code>, <code>readObjectNoData()</code>,
+          <code>writeReplace()</code> and <code>readResolve()</code>.</p>
+          
+          <p id="a_number_of_runtime_classes...">A number of runtime classes are not serializable, including callables,
+          the iterables supporting comprehensions and metamodel
+          implementation classes. This means that you should thoroughly test
+          the actually serializability of the instances your application creates
+          if you're relying on
+          serializablility in your application.</p>
+          
+          <h2 id="_default_constructors">'Default' constructors
+          </h2>
+          
+          
+          <p id="frameworks_frequently_require_that_user...">Frameworks frequently require that user classes have a no-arguments
+          constructor. The need for this usually stems from the fact that such
+          classes will be instantiated via reflection APIs.</p>
+          
+          <p id="the_usual_idiom_in_ceylon...">The usual idiom in Ceylon is for the constructor to fully initialize
+          the instance. Thus the idomatic class:</p>
+          
+          <pre data-language="ceylon"><code>class Person(firstName, lastName, dateOfBirth) {
+    shared variable String firstName;
+    shared variable String lastName;
+    shared variable Date dateOfBirth;
+}
+</code></pre>
+          
+          <p id="would_have_to_be_written...">would have to be written non-idiomatically as</p>
+          
+          <pre data-language="ceylon"><code>class Person {
+    shared variable String firstName;
+    shared variable String lastName;
+    shared variable Date dateOfBirth;
+    "Constructor for the framework"
+    shared new () {
+        this.firstName = "";
+        this.lastName = "";
+        this.dateOfBirth = epoch;
+    }
+    shared new instance(String firstName, String lastName, Date dateOfBirth) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+    }
+}
+</code></pre>
+          
+          <p id="you_could_omit_the_instance...">You could omit the <code>instance()</code> constructor, but at the cost Ceylon clients of
+          <code>Person</code> having to instantiate and then call the setters separately.</p>
+          
+          <p id="so_the_ceylon_compiler_generates...">So the ceylon compiler generates a
+          <code>protected</code> no-arguments constructor behind the scenes, specifically for use
+          by frameworks, while Ceylon clients get the benefits of an API that is
+          pleasant to use.</p>
+          
+          <p id="there_are_some_cases_where...">There are some cases where a constructor is not generated (or is not no-arguments):</p>
+          
+          <ul>
+          <li>Generic classes have constructors, but they take reified type arguments,
+          and so won't be useful to frameworks. (They will be useful to non-generic
+          subclasses though).</li>
+          <li>
+<code>object</code> ("anonymous") classes, since these have a singleton semantic
+          which would be subverted by providing an accessible constructor.</li>
+          <li>Simiarly, classes which have only value constructors.</li>
+          </ul>
+          
+          
+          <h2 id="importing_jdk_modules">Importing JDK modules
+          </h2>
+          
+          
+          <p id="the_java_jdk_is_not...">The Java JDK is not imported by default anymore since Milestone 4, which means you need to import
+          the JDK modules if you want to import JDK packages.</p>
+          
+          <p id="the_jdk_has_been_mapped...">The JDK has been mapped to Ceylon modules following the current JDK module list for
+          <a href="http://openjdk.java.net/projects/jigsaw/">Jigsaw</a>, which is the module system planned
+          for Java 9. Note that the Jigsaw module list is far from being final, so it is subject to
+          change.</p>
+          
+          <p id="the_current_list_of_jdk...">The current list of JDK modules is as follows:</p>
+          
+          <ul>
+          <li>
+<code>java.base</code>: the JDK base packages such as <code>java.lang</code>, <code>java.util</code>, <code>java.io</code>, <code>java.net</code>, <code>java.text</code>,
+          NIO and security</li>
+          <li>
+<code>java.logging</code>: contains <code>java.util.logging</code> aka. JUL</li>
+          <li>
+<code>java.desktop</code>: contains <code>java.applet</code>, <code>java.awt.**</code>, <code>javax.imageio.**</code>, <code>javax.print.**</code>, <code>javax.sound</code>, <code>javax.swing.**</code>, <code>javax.accessibility</code>
+</li>
+          <li>
+<code>java.jdbc</code>: contains <code>java.sql</code>, <code>javax.sql</code>
+</li>
+          <li>
+<code>java.jdbc.rowset</code>: contains <code>javax.sql.rowset.**</code>
+</li>
+          <li>
+<code>javax.script</code>: contains <code>javax.script</code>
+</li>
+          <li>
+<code>javax.xml</code>: contains <code>javax.xml.**</code>, <code>org.w3c.dom</code>, <code>org.w3c.dom.{bootstrap,events,ls}</code>
+           (<code>css</code>, <code>html</code>, <code>ranges</code>, <code>stylesheets</code>, <code>traversal</code> and <code>views</code> are in the <code>oracle.jdk.jaxp</code> module), <code>org.xml.sax.**</code>
+</li>
+          <li>
+<code>javax.xmldsig</code>: contains <code>javax.xml.crypto.**</code>
+</li>
+          <li>
+<code>java.management</code>: contains <code>javax.management</code>
+</li>
+          <li>
+<code>java.instrument</code>: contains <code>java.lang.instrument</code>
+</li>
+          <li>
+<code>java.rmi</code>: contains <code>java.rmi</code>
+</li>
+          <li>
+<code>java.prefs</code>: contains <code>java.util.prefs</code>
+</li>
+          <li>
+<code>java.tls</code>: contains <code>javax.net.**</code>, <code>javax.security.cert</code>
+</li>
+          <li>
+<code>java.auth</code>: contains <code>javax.security.sasl</code>
+</li>
+          <li>
+<code>java.auth.kerberos</code>: contains <code>javax.security.auth.kerberos</code>, <code>org.ietf.jgss</code>
+</li>
+          <li>
+<code>java.security.acl</code>: contains <code>java.security.acl</code>
+</li>
+          <li>
+<code>javax.naming</code>: contains <code>javax.naming.**</code>
+</li>
+          <li>
+<code>javax.transaction</code>: contains <code>javax.transaction.**</code>
+</li>
+          <li>
+<code>javax.jaxws</code>: contains <code>javax.xml.bind.**</code>, <code>javax.xml.soap</code>, <code>javax.xml.ws.**</code>, <code>javax.activation</code>
+</li>
+          <li>
+<code>javax.annotation</code>: contains <code>javax.annotation</code>
+</li>
+          <li>
+<code>java.corba</code>: contains <code>javax.activity</code>, <code>javax.rmi.**</code>, <code>org.omg.**</code>
+</li>
+          <li>
+<code>java.compiler</code>: contains <code>javax.tools</code>, <code>javax.lang.model.**</code>, <code>javax.annotation.processing</code>
+</li>
+          </ul>
+          
+          
+          <p id="there_are_additional_vendor_specific...">There are additional vendor-specific JDK modules, whose module/package-list mappings are
+          <a href="https://github.com/eclipse/ceylon/blob/master/model/src/com/redhat/ceylon/model/cmr/package-list.oracle.jdk7">defined in the source</a>.</p>
+          
+          <h2 id="obtaining_java_jar_dependencies">Obtaining Java <code>jar</code> dependencies
+          </h2>
+          
+          
+          <p id="you_can_either_install_java...">You can either install Java <code>jar</code> dependencies in your Ceylon <a href="../../repository">repositories</a> manually
+          in order for Ceylon to find them, or you can resolve them from legacy
+          <a href="../../repository/maven">Maven repositories</a>.</p>
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li><a href="../ceylon-from-java">Calling Ceylon from Java</a></li>
+          <li>The <a href="../type-mapping">type mapping rules</a>
+</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

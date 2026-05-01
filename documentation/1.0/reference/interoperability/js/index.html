@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: The JavaScript compiler</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.0/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.0/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.0/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="tutorial_videos"><a href="/documentation/1.0/videos">Tutorial Videos</a></h3>
+            
+            <h3 id="language_specification"><a href="/documentation/1.0/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.0/reference">Reference</a></h3>
+            
+            <ul>
+<li><a href="#lexical_scope_style">Lexical scope style
+            </a></li>
+<li><a href="#prototype_style">Prototype style
+            </a></li>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.0/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.0/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.0/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+            <span style="color:#8d5e0b">(1.0)</span>
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_10_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.0, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <h1 id="the_javascript_compiler">The JavaScript compiler</h1>
+          
+          <p id="ceylon_code_can_be_compiled...">Ceylon code can be compiled to JavaScript. There are two styles that can be used:</p>
+          
+          <ul>
+          <li>Lexical scope, which is the default, and</li>
+          <li>Prototype style, also known as <em>optimized</em>.</li>
+          </ul>
+          
+          
+          <h2 id="lexical_scope_style">Lexical scope style
+          </h2>
+          
+          
+          <p id="in_lexical_scope_style_a...">In lexical scope style, a type´s methods and attributes are assigned to each
+          new instance as it is created. This offers good encapsulation but incurs in
+          some performance costs.</p>
+          
+          <h2 id="prototype_style">Prototype style
+          </h2>
+          
+          
+          <p id="in_prototype_style_all_methods...">In prototype style, all methods and attributes are assigned to the type´s prototype,
+          so that new instances automatically have all those methods and attributes. This has
+          much better performance but all methods and attributes are visible in native JavaScript.</p>
+          
+          <h1 id="declaration_names">Declaration names</h1>
+          
+          <p id="a_ceylon_module_is_compiled...">A Ceylon module is compiled as a CommonJS module, but since this format has no notion
+          of packages, all the packages in the Ceylon module will be contained in the same
+          CommonJS file. To avoid naming collisions, there are some rules used when generating
+          names for top-level declarations:</p>
+          
+          <ul>
+          <li>If the declaration is in the module´s root package, then its name is basically the same.</li>
+          <li>If the declaration is in a subpackage, its name will have the subpackage name appended to it.</li>
+          </ul>
+          
+          
+          <p id="for_example_for_a_module...">For example, for a module <code>my.module</code> the declaration <code>my.module.MyClass</code> will simply
+          be called <code>MyClass</code> but <code>my.module.sub1.sub2.MyClass</code> will be called <code>MyClass$sub1$sub2</code>.</p>
+          
+          <h1 id="compile_order">Compile order</h1>
+          
+          <p id="when_compiling_to_javascript_the...">When compiling to JavaScript, the order in which the files are processed by the compiler
+          can be important, especially when mixing native code with code generated by the compiler.
+          You can mix native code simply by adding a <code>.js</code> file to the list of sources to be compiled, for example:</p>
+          
+          <p id="ceylon_compile_js_unit1ceylon_unit2ceylon..."><code>ceylon compile-js unit1.ceylon unit2.ceylon some_native_stuff.js unit3.ceylon</code></p>
+          
+          <p id="the_compiler_will_generate_a...">The compiler will generate a CommonJS module containing the results of processing
+          <code>unit1.ceylon</code>, then <code>unit2.ceylon</code>, then copying the contents of <code>some_native_stuff.js</code>
+          and finally processing <code>unit3.ceylon</code>.</p>
+          
+          <h1 id="runnable_methods">Runnable methods</h1>
+          
+          <p id="when_compiling_for_the_jvm...">When compiling for the JVM, any top-level method can be used as an entry point to
+          run a program. The default is <code>run</code> but you can specify any other top-level method.</p>
+          
+          <p id="when_compiling_to_javascript_only...">When compiling to JavaScript, only <code>shared</code> top-level methods can be used as entry
+          points to run a program with the <code>run-js</code> command. This is because a command is executed
+          that loads the specified module and runs the specified method from it, and since only
+          <code>shared</code> top-level declarations are directly added to the <code>exports</code> object of the
+          CommonJS module, only a <code>shared</code> top-level method can be run.</p>
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li><a href="native-anno">Extending types annotated as <code>native</code></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

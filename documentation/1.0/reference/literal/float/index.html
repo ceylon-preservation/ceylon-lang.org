@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Float literals</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.0/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.0/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.0/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="tutorial_videos"><a href="/documentation/1.0/videos">Tutorial Videos</a></h3>
+            
+            <h3 id="language_specification"><a href="/documentation/1.0/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.0/reference">Reference</a></h3>
+            
+            <ul>
+<li><a href="#usage">Usage
+            </a></li>
+<li><a href="#description">Description
+            </a></li>
+<ul>
+<li><a href="#decimal_point">Decimal point
+            </a></li>
+<li><a href="#decimal_magnitude_suffices">Decimal magnitude suffices
+            </a></li>
+<li><a href="#grouping_digits">Grouping digits
+            </a></li>
+<li><a href="#exponential_notation">Exponential notation
+            </a></li>
+<li><a href="#as_a_primary">As a primary
+            </a></li>
+</ul>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.0/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.0/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.0/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+            <span style="color:#8d5e0b">(1.0)</span>
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_10_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.0, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <h1 id="float_literals">
+<code>Float</code> literals</h1>
+          
+          <p id="a_literal_notation_for_a...">A literal notation for a <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/Float.type.html"><code>Float</code></a>
+          value.</p>
+          
+          <h2 id="usage">Usage
+          </h2>
+          
+          
+          <p id="a_float_literal_can_be...">A <code>Float</code> literal can be written in a variety of ways:</p>
+          
+          <!-- cat: void m() { -->
+          
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>variable Float one = 1.0;
+one = 1.0000;
+
+variable Float oneMillion = 1000000.0;
+oneMillion = 1_000_000.0;
+oneMillion = 1.0M;
+oneMillion = 1.0e6;
+oneMillion = 1.0E+6;
+
+variable Float half = 0.5;
+half = 5.0E-1;
+half = 5.0e-1;
+half = 500m;
+half = 500.0m;
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          
+          
+          <h2 id="description">Description
+          </h2>
+          
+          
+          
+          
+          <h3 id="decimal_point">Decimal point
+          </h3>
+          
+          
+          <p id="float_literals_almost_always_contain..."><code>Float</code> literals almost always contain a decimal point, <code>.</code>, which:</p>
+          
+          <ul>
+          <li>separates the fractional part from the whole number part, and</li>
+          <li>syntactically distinguishes a <code>Float</code> literal from an <code>Integer</code>
+          literal.</li>
+          </ul>
+          
+          
+          <p id="the_exception_to_this_rule...">The exception to this rule is any <code>Float</code> literal with a one of the
+          "fractional" magnitude suffices (<code>m</code>, <code>u</code>, <code>n</code>, <code>p</code>, <code>f</code>).</p>
+          
+          <h3 id="decimal_magnitude_suffices">Decimal magnitude suffices
+          </h3>
+          
+          
+          <p id="a_float_literal_may_be...">A <code>Float</code> literal may be written with a magnitude, a whole magnitude:</p>
+          
+          <ul>
+          <li>
+<code>k</code> (kilo), 10<sup>3</sup>
+</li>
+          <li>
+<code>M</code> (mega), 10<sup>6</sup>
+</li>
+          <li>
+<code>G</code> (giga), 10<sup>9</sup>
+</li>
+          <li>
+<code>T</code> (tera), 10<sup>12</sup>
+</li>
+          <li>
+<code>P</code> (peta), 10<sup>15</sup>
+</li>
+          </ul>
+          
+          
+          <p id="or_a_fractional_magnitude">Or a fractional magnitude:</p>
+          
+          <ul>
+          <li>
+<code>m</code> (milli), 10<sup>-3</sup>
+</li>
+          <li>
+<code>u</code> (micro), 10<sup>-6</sup> (strictly this should be mu (μ), but that
+          would be too hard to type on most keyboards)</li>
+          <li>
+<code>n</code> (nano), 10<sup>-9</sup>
+</li>
+          <li>
+<code>p</code> (pico), 10<sup>-12</sup>
+</li>
+          <li>
+<code>f</code> (femto), 10<sup>-15</sup>
+</li>
+          </ul>
+          
+          
+          <p id="for_example">For example:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Float million = 1.0M;
+Float millionth = 1u;
+</code></pre>
+          
+          <h3 id="grouping_digits">Grouping digits
+          </h3>
+          
+          
+          <p id="an_underscore___may...">An underscore, <code>_</code>, may be used to separate groups of three digits in the
+          integer or fractional part of the literal.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Float million = 1_000_000.0;
+Float millionth = 0.000_000_1;
+</code></pre>
+          
+          <h3 id="exponential_notation">Exponential notation
+          </h3>
+          
+          
+          <p id="exponential_notation_is_supported_using...">Exponential notation is supported using <code>e</code> or <code>E</code> to separate the mantissa
+          (before the <code>E</code>) from the scale (after the <code>E</code>).</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Float million = 2.0e6;
+Float millionth = 2.0e-6;
+</code></pre>
+          
+          <h3 id="as_a_primary">As a primary
+          </h3>
+          
+          
+          <p id="invoking_members_of_the_class...">Invoking members of the class <code>Float</code> directly on a literal is permitted:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Float minusOneHalf = 0.5.negativeValue;
+</code></pre>
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li>
+<a href="../../../tour/language-module/#numeric_literals">Numeric literals</a>
+          in the Tour of Ceylon</li>
+          <li><a href="/documentation/current/spec/html_single/index.html#numericliterals">Numeric literals in the language specification</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

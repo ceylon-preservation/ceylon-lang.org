@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Architecture of Ceylon</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="codepage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="selected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="licenses"><a href="/code/licenses">Licenses</a></h3>
+            
+            <h3 id="nightly_builds"><a href="https://ci-ceylon.rhcloud.com/">Nightly builds</a></h3>
+            
+            <h3 id="get_the_source"><a href="/code/source">Get the source</a></h3>
+            
+            <h3 id="contribute"><a href="/code/contribute">Contribute</a></h3>
+            
+            <h3 id="improve_the_website"><a href="/code/website">Improve the website</a></h3>
+            
+            <h3 id="report_a_bug"><a href="/code/issues">Report a bug</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Code
+          </div>
+        </div>
+        <div id="core-page">
+          <h1 id="architecture_of_ceylon">Architecture of Ceylon</h1>
+          
+          <p id="the_ceylon_project_comprises_the...">The Ceylon project comprises the following major subsystems:</p>
+          
+          <ul>
+          <li>typechecker,</li>
+          <li>compiler,</li>
+          <li>launcher and module runtime,</li>
+          <li>documentation compiler,</li>
+          <li>IDE, and</li>
+          <li>language module.</li>
+          </ul>
+          
+          
+          <p id="this_architecture_makes_it_possible...">This architecture makes it possible to support alternate runtime
+          platforms, for example, a JavaScript-based runtime, or any other
+          kind of virtual machine.</p>
+          
+          <p id="contrary_to_common_belief_compilers...">Contrary to common belief, compilers aren't magical, nor even as
+          difficult as you probably imagine. You don't need a PhD to
+          understand the Ceylon compiler.</p>
+          
+          <h2 id="typechecker">Typechecker</h2>
+          
+          <p id="what_we_call_the_typechecker...">What we call the <em>typechecker</em>, which is found in the <code>typechecker</code>
+          directory of the repository, is actually responsible for much more than just
+          typechecking. It includes:</p>
+          
+          <ul>
+          <li>an ANTLR-based lexer/parser,</li>
+          <li>a typesafe syntax tree for the Ceylon language,</li>
+          <li>a model of the types encountered in the code, and</li>
+          <li>a type analysis engine.</li>
+          </ul>
+          
+          
+          <p id="the_lexer_and_parser_are...">The <em>lexer and parser</em> are generated from the ANTLR grammar
+          defined in the file <code>Ceylon.g</code>. The parser builds a syntax
+          tree representing the input source code.</p>
+          
+          <p id="the_syntax_tree_is_currently...">The <em>syntax tree</em> is currently generated from a specification
+          defined in the file <code>Ceylon.nodes</code> (but this might change in
+          future). The syntax tree has a Java class that represents each
+          syntactic construct in the language. An instance of the tree
+          represents the code in a certain compilation unit.</p>
+          
+          <p id="the_model_is_an_abstract...">The <em>model</em> is an abstract representation of the types that
+          are available to the compiler, not just in the compilation
+          unit being compiled. Indeed, the compiler is even able to
+          build a model for classes it encounters in precompiled
+          module archives. However, note that the model contains much
+          less information than the tree. For example, it does not
+          contain any information about the procedural code contained
+          in a class, method, or attribute.</p>
+          
+          <p id="the_type_analysis_engine_consists...">The <em>type analysis engine</em> consists of several visitor classes
+          that implement the rules defined in the language specification.
+          They walk the syntax tree validating all the various rules that
+          correct Ceylon code must satisfy, and attaching errors to tree
+          nodes that fail to satisfy the rules. In addition, the type
+          analysis visitors build up a model of the types they encounter
+          in the tree, and create links from the tree to associated model
+          objects. Thus, typing information is available to the compiler
+          when it comes to transform the syntax tree to Java.</p>
+          
+          <p id="the_typechecker_has_no_dependencies...">The typechecker has no dependencies to anything JVM-specific,
+          so it can be reused with other backends.</p>
+          
+          <h3 id="type_analysis">Type analysis</h3>
+          
+          <p id="type_analysis_takes_place_in...">Type analysis takes place in three phases. The type system
+          was designed to never require more than three passes over
+          the syntax tree.</p>
+          
+          <ol>
+          <li>
+<code>DeclarationVisitor</code> creates model objects for each named
+          declaration and keeping track of the scope in which it
+          occurs.</li>
+          <li>
+<code>TypeVisitor</code> analyses <code>import</code> statements and explicit
+          type declarations, and assigns types to the model objects
+          for explicitly typed declarations.</li>
+          <li>
+<code>ExpressionVisitor</code> analyses the types of expressions,
+          resolves member references, reports typing errors, and
+          infers types of declarations without explicit type
+          declarations.</li>
+          </ol>
+          
+          
+          <h2 id="compiler">Compiler</h2>
+          
+          <p id="thus_the_thing_we_call...">Thus, the thing we call the <em>compiler</em>, which is found in the
+          <code>compiler-java</code> directory of the repository, is actually just half of the
+          compiler. This "compiler" actually calls the typechecker when
+          it needs the syntax tree for a compilation unit.</p>
+          
+          <p id="the_compiler_has_two_main...">The compiler has two main responsibilities:</p>
+          
+          <ul>
+          <li>to build a model from pre-compiled binary classes that are
+          found in module archives, and</li>
+          <li>transform the Ceylon syntax tree that is produced by the
+          typechecker to a Java syntax tree that is understood by
+          <code>javac</code>.</li>
+          </ul>
+          
+          
+          <p id="finally_the_compiler_hands_the...">Finally, the compiler hands the Java syntax tree off to <code>javac</code>
+          to produce bytecode. We're essentially using <code>javac</code> as the
+          world's most sophisticated bytecode library.</p>
+          
+          <p id="since_javac_already_supports_incremental...">Since <code>javac</code> already supports incremental compilation, so does
+          the Ceylon compiler.</p>
+          
+          <h2 id="launcher_and_module_runtime">Launcher and module runtime</h2>
+          
+          <p id="the_ceylon_module_runtime_in...">The Ceylon module runtime (in the <code>runtime</code> directory of the repository)
+          is based on <a href="http://relation.to/Bloggers/ModularizedJavaWithJBossModules">JBoss Modules</a>.
+          The Ceylon launcher simply starts <code>java</code> and invokes the module
+          runtime. JBoss Modules bootstraps via a local repository, which
+          must contain the following dependencies:</p>
+          
+          <ul>
+          <li>the Ceylon language module,</li>
+          <li>the Ceylon module resolver <code>jar</code>,</li>
+          <li>the Ceylon runtime <code>jar</code>, and</li>
+          <li>the JBoss Modules <code>jar</code>.</li>
+          </ul>
+          
+          
+          <p id="finally_jboss_modules_is_responsible...">Finally, JBoss Modules is responsible for loading module archives
+          as required according to the metadata contained in the module
+          descriptors.</p>
+          
+          <!--
+          This is the part that the user needs locally (unless you use 
+          remote bootstrap module loader). To ease things, we created a 
+          zipped version of bootstrap repository, and placed it under 
+          `&lt;CEYLON_REPOSITORY&gt;/ceylon-runtime-bootstrap/ceylon-runtime-bootstrap.zip`
+          In order to use this zipped module repository we need to use 
+          custom module loader - `DistributionModuleLoader`, which 
+          explodes (if not already present) this zipped repository at 
+          initialization and places the exploded repository under 
+          `&lt;CEYLON_REPOSITORY&gt;/ceylon-runtime-bootstrap/ceylon-runtime-bootstrap-exploded directory`.
+          You can force an update with `-Dforce.bootstrap.update=true` 
+          system property flag.
+          
+          Afterwards Ceylon Runtime uses Ceylon Module Resolver (CMR) 
+          to get its modules. By default we use `<CEYLON_REPOSITORY>`
+          as local CMR repository, but different repositories can be 
+          mounted.
+           
+          In order to run your Ceylon module, you need to first place 
+          it into `<CEYLON_REPOSITORY>`. Then you can use 
+          `ceylon.sh` script to run the module. `ceylon.sh` expects 
+          module name and version as its first parameter, for example,
+          `./ceylon.sh hello/1.0.0 \[full module name\]/\[version\]`, 
+          where default version is `0.0.0` if missing.
+          -->
+          
+          
+          <h2 id="documentation_compiler">Documentation compiler</h2>
+          
+          <p id="the_documentation_compiler_in_the...">The documentation compiler (in the <code>compiler-java</code> directory of the
+          repository, like the compiler) takes as its input the model produced
+          by the typechecker. It's job is to produce HTML documentation.
+          There is currently no support for alternate output formats.</p>
+          
+          <h2 id="ide">IDE</h2>
+          
+          <p id="the_ceylon_ide_is_a...">The Ceylon IDE is a plugin for eclipse, and may be found in the
+          <code>ceylon-ide-eclipse</code> repository. It is based on
+          <a href="http://eclipse.org/imp/">IMP</a>, which provides us with a lot of
+          the infrastructure that is common to programming language
+          editors on Eclipse.</p>
+          
+          <p id="the_eclipse_plugin_is_also...">The Eclipse plugin is also built on top of the typechecker. It
+          works directly with the syntax tree and model, which means that
+          anything the typechecker knows about the source code, the IDE
+          also knows. This includes types, members of types, errors, etc.
+          And, of course, the IDE does not need to contain its own parser.</p>
+          
+          <p id="the_ide_maintains_a_central...">The IDE maintains a central model which it updates as part of
+          the incremental compilation process. It also has a "forked"
+          version of this model for each open Ceylon source editor. Each
+          time a change is made in a source editor, a new "fork" of the
+          model is produced. When the editor is saved, the central model
+          is updated.</p>
+          
+          <p id="searching_for_declarations_is_extremely...">Searching for declarations is <em>extremely</em> fast in the Ceylon IDE
+          since it works against the central model, not against the text
+          of the source files.</p>
+          
+          <p id="the_ide_does_not_directly...">The IDE does not directly use the compiler to perform its own
+          work, but it does invoke the compiler as the last step of
+          incremental compilation.</p>
+          
+          <h2 id="language_module">Language module</h2>
+          
+          <p id="the_language_module_is_found...">The language module is found in the <code>language</code> directory of the repository.
+          The language module is special, because it contains types that
+          are used by the compiler to compile other code. Therefore, the
+          language module itself can't be compiled - there is a
+          chicken/egg problem where you would need to compile the language
+          module first, before you could compile the language module.</p>
+          
+          <p id="furthermore_in_order_to_achieve...">Furthermore, in order to achieve acceptable performance, the
+          language module needs to take advantage of hand-written Java
+          code.</p>
+          
+          <p id="therefore_considering_the_javascript_backend...">Therefore, considering the Javascript backend, there are three
+          implementations of the language module:</p>
+          
+          <ul>
+          <li>an incomplete implementation in Ceylon,</li>
+          <li>a complete implementation in Javascript, and</li>
+          <li>a complete implementation in Java.</li>
+          </ul>
+          
+          
+          <p id="keeping_the_three_versions_in...">Keeping the three versions in sync is a rather painful process!</p>
+          
+          <p id="the_language_module_for_the...">The language module for the JVM also contains several annotations which are
+          used by the Ceylon compiler at compile time to reverse engineer
+          the model from precompiled Ceylon code in a module archive.</p>
+          
+          <h2 id="javascript_backend">Javascript backend</h2>
+          
+          <p id="there_is_another_half_compiler...">There is another "half-compiler" (in the <code>compiler-js</code> directory of the repository)
+          that uses the typechecker's syntax
+          tree to generate Javascript code. This, along with a full implementation
+          of the language module done in Javascript, can be used to transform
+          Ceylon source code into Javascript code, which can be run in node.js
+          or inside a browser. The compiler itself is written in Java, and node.js
+          is used for testing. There are two kinds of tests: one is to check the
+          correctness of the generated js code, and the other is to check that the
+          language module implementation in js works as expected (and it actually
+          runs all the tests from the ceylon.language project).</p>
+          
+          <p id="this_project_is_what_makes...">This project is what makes the <a href="http://try.ceylon-lang.org/">Ceylon Web Runner</a> possible.</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

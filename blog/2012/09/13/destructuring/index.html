@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Destructuring considered harmful</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2012/08/16/ceylon-ide-m3_2/">Ceylon IDE M3.2 released</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2012/10/17/devoxx-2012/">At devoxx 2012? Come write Ceylon code for real, challenge yourself!</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="destructuring_considered_harmful">
+            Destructuring considered harmful
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              13 Sep 2012
+            </div>
+            <div class="tags">
+            </div>
+          </div>
+          <div class="body">
+            <p id="a_language_is_said_to...">A language is said to feature <em>destructuring</em> if it provides a syntax
+            for quickly declaring multiple local variables and assigning their
+            values from the attributes of some complex object. For example, in
+            Ceylon, we let you write:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>for (k-&gt;v in map) { ... }
+</code></pre>
+            
+            <p id="this_is_a_simple_kind...">This is a simple kind of destructuring where the <code>key</code> and <code>item</code>
+            attributes of the map <code>Entry</code> are assigned to the locals <code>k</code> and
+            <code>v</code>.</p>
+            
+            <p id="lets_see_a_couple_more...">Let's see a couple more examples of destructuring, written in a
+            hypothetical Ceylon-like language, before we get to the main point
+            of this post.</p>
+            
+            <p id="a_number_of_languages_support...">A number of languages support a kind of parallel assignment syntax
+            for destructuring tuples. In our hypothetical language, it might
+            look like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>String name, Value val = namedValues[i];
+</code></pre>
+            
+            <p id="some_languages_support_a_kind...">Some languages support a kind of destructuring that is so powerful
+            that it's referred to as <em>pattern matching</em>. In our language we might
+            support pattern matching in <code>switch</code> statements, using a syntax
+            something like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Person|Org identity = getIdentityFromSomewhere();
+switch (identity)
+case (Person(name, age, ...)) {
+    print("Person");
+    print("Name: " + name);
+    print("Age: " + age);
+}
+case (Org(legalName, ...)) {
+    print("Organization");
+    print("Name: " + legalName);
+}
+</code></pre>
+            
+            <p id="now_ive_always_had_a...">Now, I've always had a bit of a soft spot for destructuring—it's
+            a minor convenience, but there are certainly cases (like iterating
+            the entries of a map) where I think it improves the code. A future
+            version of Ceylon <em>might</em> feature a lot more support for destructuring,
+            but there are several reasons why I'm not especially enthusiastic
+            about the idea. I'm going to describe just one of them.</p>
+            
+            <p id="lets_start_with_the_pattern...">Let's start with the "pattern matching" example above. And let's
+            stipulate that I—perhaps more than most developers—rely
+            almost completely on my IDE to write my code for me. I use Extract
+            Value, Extract Function, Assign To Local, Rename, ⌘1, etc, in Ceylon
+            IDE like it's a nervous tic. So of course the first thing I want to do
+            when I see code like the above is to run
+            Extract Function on the two branches, resulting in:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Person|Org identity = getIdentityFromSomewhere();
+switch (identity)
+case (Person(name, age, ...)) {
+    printPerson(name, age);
+}
+case (Org(legalName, ...)) {
+    printOrg(legalName);
+}
+
+...
+
+void printPerson(String name, Integer age) {
+    print("Person");
+    print("Name: " + name);
+    print("Age: " + age);
+}
+
+void printOrg(String legalName) {
+    print("Organization");
+    print("Name: " + legalName);
+}
+</code></pre>
+            
+            <p id="ooops_immediately_we_have_a...">Ooops. Immediately we have a problem. The schema of <code>Person</code> and
+            <code>Org</code> is smeared out over the signatures of <code>printPerson()</code> and
+            <code>printOrg()</code>. This makes the code much more vulnerable to changes
+            to the schema of <code>Person</code> or <code>Org</code>, makes the code more vulnerable
+            to changes to the internal implementation of these methods (if we
+            want to also print the <code>Person</code>'s address, we need to add a
+            parameter), and it even makes the code less typesafe. The problem
+            gets worse and worse as I recursively run Extract Value and
+            Extract Function on the implementation of <code>printPerson()</code> and
+            <code>printOrg()</code>.</p>
+            
+            <p id="now_consider_what_we_would...">Now consider what we would get <em>without</em> the use of destructuring,
+            as we would do in Ceylon <em>today</em>. We would have started with:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Person|Org identity = getIdentityFromSomewhere();
+switch (identity)
+case (is Person) {
+    print("Person");
+    print("Name: " + identity.name);
+    print("Age: " + identity.age);
+}
+case (is Org) {
+    print("Organization");
+    print("Name: " + identity.legalName);
+}
+</code></pre>
+            
+            <p id="whether_this_is_better_or...">Whether this is better or worse than the code using of pattern
+            matching is somewhat in the eye of the beholder, but clearly it's
+            not <em>much</em> worse and is arguably even a little cleaner. Now
+            let's run Extract Function on it. We get:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Person|Org identity = getIdentityFromSomewhere();
+switch (identity)
+case (is Person) {
+    printPerson(identity);
+}
+case (is Org) {
+    printOrg(identity);
+}
+
+...
+
+void printPerson(Person identity) {
+    print("Person");
+    print("Name: " + identity.name);
+    print("Age: " + identity.age);
+}
+
+void printOrg(Organization identity) {
+    print("Organization");
+    print("Name: " + identity.legalName);
+}
+</code></pre>
+            
+            <p id="i_think_its_very_clear...">I think it's very clear that this a much better end result. And
+            I hope it's also clear that this is in no way a contrived example.
+            The arguments I'm making here scale to most uses of pattern
+            matching. The problem here is that introducing local variables
+            too "early" screws things up for refactoring tools.</p>
+            
+            <p id="essentially_the_same_argument_applies...">Essentially the same argument applies to tuples: a tuple seems
+            like a convenient thing to use when you "just" have a quick helper
+            function that returns two values. But after a few iterations of
+            Extract Function/Extract Value, you wind up with five functions
+            with the tuple type <code>(String, Value)</code> smeared out all over the
+            place, resulting in code that is significantly more brittle
+            than it would have been with a <code>NamedValue</code> class.</p>
+            
+            <p id="ive_repeatedly_heard_the_complain...">I've repeatedly heard the complain that "oh but sometimes it's
+            just not worth writing a whole class to represent the return
+            value of one function". I think this overlooks the effect of
+            code growing and evolving and being refactored. And it also
+            presupposes that writing a class is a pain, as it is in Java.
+            But in Ceylon writing a class is easy—indeed, it looks just
+            like a function! Instead of this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>(String, Value) getNamedValue(String name) {
+    return (name, findValueForName(name));
+}
+</code></pre>
+            
+            <p id="we_can_just_write_this">we can just write this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>class NamedValue(name) {
+    shared String name;
+    shared Value val = findValueForName(name);
+}
+</code></pre>
+            
+            <p id="no_constructor_no_getterssetters_and...">No constructor, no getters/setters, and if this is a member of
+            another class, you can just annotate it <code>shared default</code>, and it's
+            even <em>polymorphic</em>, meaning that there is not even a need to write
+            a factory method. And this solution comes with the huge advantage
+            that the schema of a <code>NamedValue</code> is localized in just one place,
+            and won't start to "smear out" as your codebase grows and evolves.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2012/09/13/destructuring/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

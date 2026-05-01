@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: When ceylon.test met meta-model</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2013/12/13/three-legged-elephants/">On three-legged elephants</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2013/12/23/reduce/">The signature of reduce() in Ceylon</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="when_ceylontest_met_meta_model">
+            When ceylon.test met meta-model
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/tomas-hradec/">Tomáš Hradec</a>
+            </div>
+            <div class="date">
+              16 Dec 2013
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/test/">
+                test
+              </a>
+              <a href="/blog/tags/tools/">
+                tools
+              </a>
+              <a href="/blog/tags/progress/">
+                progress
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <p id="ceylon_has_had_support_for...">Ceylon has had support for unit testing since milestone four,
+            but its functionality was pretty limited due lack of annotations and meta-model at that time.</p>
+            
+            <p id="fortunately_this_is_not_true...">Fortunately this is not true anymore!
+            With version 1.0 of Ceylon we also released a completely rewritten <code>ceylon.test</code> module.
+            So let’s see what’s new and how we can use it now.</p>
+            
+            <h2 id="tests_annotations">Tests annotations</h2>
+            
+            <p id="tests_are_now_declaratively_marked...">Tests are now declaratively marked with the <code>test</code> annotation
+            and can be written as top-level functions or methods inside top-level class,
+            in case you want to group multiple tests together.</p>
+            
+            <p id="inside_tests_assertions_can_be...">Inside tests, assertions can be evaluated by using the language’s <code>assert</code> statement
+            or with the various <em>assert...</em> functions, for example <code>assertEquals</code>, <code>assertThatException</code> etc.</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>class YodaTest() {
+
+    test
+    void shouldBeJedi() {
+        assert(yoda is Jedi, 
+               yoda.midichloriansCount &gt; 1k);
+    }
+
+    ...
+}
+</code></pre>
+            
+            <p id="common_initialization_logic_which_is...">Common initialization logic, which is shared by several tests,
+            can be placed into functions or methods and marked with the <code>beforeTest</code> or <code>afterTest</code> annotations.
+            The test framework will invoke them automatically before or after each test in its scope.
+            So top-level initialization functions will be invoked for each test in the same package,
+            while initialization methods will be invoked for each test in the same class.</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>class DeathStarTest() {
+
+    beforeTest
+    void init() =&gt; station.chargeLasers();
+
+    afterTest
+    void dispose() =&gt; station.shutdownSystems();
+
+    ...
+}
+</code></pre>
+            
+            <p id="sometimes_you_want_to_temporarily...">Sometimes you want to temporarily disable a test or a group of tests.
+            This can be done via the <code>ignore</code> annotation.
+            This way the test will not be executed, but will be covered in the summary tests result.
+            Ignore annotation can be used on test functions/methods, or on classes which contains tests,
+            or even on packages or modules.</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>test
+ignore("still not implemented")
+void shouldBeFasterThanLight() {
+}
+</code></pre>
+            
+            <p id="all_these_features_are_of...">All these features are of course supported in our Ceylon IDE.
+            Where you can create a <em>Ceylon Test Launch Configuration</em>
+            or easily select what you want to run in the <em>Ceylon Explorer</em> and in context menu select <em>Run-As → Ceylon Test</em>.</p>
+            
+            <p id=""><img src="/images/screenshots/ceylon-test-plugin/test-result-view.png" alt="test-result-view"></p>
+            
+            <h2 id="test_command">Test command</h2>
+            
+            <p id="our_command_line_toolset_has...">Our command line toolset has been enhanced by the new <code>ceylon test</code> command,
+            which allows you to easily execute tests in specific modules.</p>
+            
+            <p id="the_following_command_will_execute...">The following command will execute every test in the <code>com.acme.foo/1.0.0</code> module
+            and will print a report about them to console.</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="shell"><code>$ ceylon test com.acme.foo/1.0.0
+</code></pre>
+            
+            <p id="you_can_execute_specific_tests...">You can execute specific tests with the <code>--test</code> option,
+            which takes a list of full-qualified declarations literals as values.
+            The following examples show how to execute only the tests in a specified package, class or function.</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="shell"><code>$ ceylon test --test='package com.acme.foo.bar' com.acme.foo/1.0.0
+$ ceylon test --test='class com.acme.foo.bar::Baz' com.acme.foo/1.0.0
+$ ceylon test --test='function com.acme.foo.bar::baz' com.acme.foo/1.0.0
+</code></pre>
+            
+            <p id="more_details_about_this_command...">More details about this command can be found
+            <a href="/documentation/current/reference/tool/ceylon/subcommands/ceylon-test.html">here</a>.</p>
+            
+            <h2 id="next_version">Next version</h2>
+            
+            <p id="in_the_next_version_we...">In the next version, we will introduce other improvements.</p>
+            
+            <p id="there_will_be_a_test...">There will be a test suite annotation, which allows you to combine several tests or test suites to run them together:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>testSuite({`class YodaTest`,
+           `class DarthVaderTest`,
+           `function starOfDeathTestSuite`})
+shared void starwarsTestSuite() {}
+</code></pre>
+            
+            <p id="you_will_be_able_to...">You will be able to declare custom test listeners, which will be notified during test execution:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>testListeners({`class DependencyInjectionTestListener`,
+               `class TransactionalTestListener`})
+package com.acme;
+</code></pre>
+            
+            <p id="and_finally_you_will_be...">And finally you will be able to specify custom implementation of the test executor, which is responsible for running tests:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>testExecutor(`class ArquillianTestExecutor`)
+package com.acme;
+</code></pre>
+            
+            <p id="please_note_that_these_apis..."><em>Please note, that these APIs are not final yet, and can change.
+            If you want to share your thoughts about it, don't hesitate and <a href="/community">contact us</a>.</em></p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2013/12/16/ceylon-test-news/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

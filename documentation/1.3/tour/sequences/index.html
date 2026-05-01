@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Streams, sequences, and tuples</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.3/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.3/tour">Tour of Ceylon</a></h3>
+            
+            <ol>
+            <li><a href="/documentation/1.3/tour/basics">Basics</a></li>
+            <li><a href="/documentation/1.3/tour/classes">Classes</a></li>
+            <li><a href="/documentation/1.3/tour/attributes-control-structures">Attributes and variables, control structures</a></li>
+            <li><a href="/documentation/1.3/tour/inheritance">Inheritance, refinement, and interfaces</a></li>
+            <li><a href="/documentation/1.3/tour/anonymous-member-classes">Anonymous and member classes</a></li>
+            <li><a href="/documentation/1.3/tour/sequences">Streams, sequences, and tuples</a></li>
+            <li><a href="/documentation/1.3/tour/typeinference">Type aliases and type inference</a></li>
+            <li><a href="/documentation/1.3/tour/types">Union, intersection, and enumerated types</a></li>
+            <li><a href="/documentation/1.3/tour/generics">Generics</a></li>
+            <li><a href="/documentation/1.3/tour/modules">Packages and modules</a></li>
+            <li><a href="/documentation/1.3/tour/functions">Functions</a></li>
+            <li><a href="/documentation/1.3/tour/named-arguments">Named arguments</a></li>
+            <li><a href="/documentation/1.3/tour/comprehensions">Comprehensions</a></li>
+            <li><a href="/documentation/1.3/tour/language-module">Language module</a></li>
+            <li><a href="/documentation/1.3/tour/initialization">Initialization and constructors</a></li>
+            <li><a href="/documentation/1.3/tour/annotations">Annotations and the metamodel</a></li>
+            <li><a href="/documentation/1.3/tour/interop">Interoperation with Java</a></li>
+            <li><a href="/documentation/1.3/tour/dynamic">Dynamic typing and interoperation with JavaScript</a></li>
+            </ol>
+            
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.3/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.3/examples">Examples</a></h3>
+            
+            <!-- ### [Tutorial videos](/documentation/1.3/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.3/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.3/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.3/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.3/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide_for_intellij"><a href="/documentation/1.3/ide/intellij">Ceylon IDE for IntelliJ</a></h3>
+            
+            <h3 id="ceylon_ide_for_eclipse"><a href="/documentation/1.3/ide/eclipse">Ceylon IDE for Eclipse</a></h3>
+            
+            <h3 id="vertx"><a href="http://vertx.io/docs/vertx-core/ceylon/">Vert.x</a></h3>
+          </div>
+          <div class="point-dark-bottom">
+             
+          </div>
+          <div class="point-light-top"></div>
+          <div class="toc">
+            <ul>
+<li><a href="#streams_iterables">Streams (Iterables)
+            </a></li>
+<ul>
+<li><a href="#iterating_a_stream">Iterating a stream
+            </a></li>
+<li><a href="#gotcha">Gotcha!
+            </a></li>
+</ul>
+<li><a href="#gotcha_again">Gotcha again!
+            </a></li>
+<li><a href="#sequences">Sequences
+            </a></li>
+<ul>
+<li><a href="#sequence_syntax_sugar">Sequence syntax sugar
+            </a></li>
+<li><a href="#ranges">Ranges
+            </a></li>
+<li><a href="#sequence_and_its_supertypes">Sequence and its supertypes
+            </a></li>
+<li><a href="#empty_sequences_and_the_bottom_type">Empty sequences and the bottom type
+            </a></li>
+<li><a href="#sequence_gotchas_for_java_developers">Sequence gotchas for Java developers
+            </a></li>
+</ul>
+<li><a href="#tuples">Tuples
+            </a></li>
+<li><a href="#destructuring">Destructuring
+            </a></li>
+<li><a href="#there_s_more">There's more...
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+          </div>
+          <div class="point-light-end"></div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Tour of Ceylon
+          </div>
+        </div>
+        <div id="core-page">
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.3/tour/sequences.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.3/tour/sequences.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="streams_sequences_and_tuples">Streams, sequences, and tuples</h1>
+          
+          <p id="this_is_the_sixth_leg...">This is the sixth leg of the Tour of Ceylon. In the
+          <a href="../anonymous-member-classes">previous leg</a> we covered anonymous classes and
+          member classes. Now we're going to look at <em>streams</em>, <em>sequences</em>, and
+          <em>tuples</em>. These are examples of generic <em>container objects</em>. Don't worry,
+          we'll come back to talk more about generics <a href="../generics">later</a>.</p>
+          
+          <h2 id="streams_iterables">Streams (Iterables)
+          </h2>
+          
+          
+          <p id="an_iterable_object_or_stream...">An iterable object, or <em>stream</em>, is an object that produces a stream of
+          values. Streams satisfy the interface
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Iterable.type.html"><code>Iterable</code></a>.</p>
+          
+          <p id="ceylon_provides_some_syntax_sugar...">Ceylon provides some syntax sugar for working with streams:</p>
+          
+          <ul>
+          <li>the type <code>Iterable&lt;X,Null&gt;</code> represents a stream that might not produce any
+          values when it is iterated, and may be abbreviated <code>{X*}</code>, and</li>
+          <li>the type <code>Iterable&lt;X,Nothing&gt;</code> represents a stream that always produces at
+          least one value when it is iterated, and is usually abbreviated <code>{X+}</code>.</li>
+          </ul>
+          
+          
+          <p id="we_may_construct_an_instance...">We may construct an instance of <code>Iterable</code> using braces:</p>
+          
+          <!-- try-post:
+              print(moreWords);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>{String+} words = { "hello", "world" };
+{String+} moreWords = { "hola", "mundo", *words };
+</code></pre>
+          
+          <p id="the_prefix__is_called...">The prefix <code>*</code> is called the <em>spread operator</em>. It "spreads" the values of a
+          stream. So <code>moreWords</code> produces the values <code>"hola", "mundo", "hello", "world"</code>
+          when iterated.</p>
+          
+          <p id="as_well_see_later_the...">As we'll see <a href="../comprehensions">later</a>, the braces may even contain a
+          <em>comprehension</em>, making them much more powerful than what you see here.</p>
+          
+          <p id="iterable_is_a_subtype_of..."><code>Iterable</code> is a subtype of the interface
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Category.type.html"><code>Category</code></a>,
+          so we can use the <code>in</code> operator to test if a value is produced by the
+          <code>Iterable</code>.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>if (exists char = text[i],
+    char in {',', '.', '!', '?', ';', ':'}) {
+    //...
+}
+</code></pre>
+          
+          <br>
+          
+          
+          
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>"index must be between 1 and 100"
+assert (index in 1..100);
+</code></pre>
+          
+          <p id="the_in_operator_is_just...">The <code>in</code> operator is just syntactic sugar for the method
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Category.type.html#contains"><code>contains()</code></a> of
+          <code>Category</code>.</p>
+          
+          <h3 id="iterating_a_stream">Iterating a stream
+          </h3>
+          
+          
+          <p id="to_iterate_an_instance_of...">To iterate an instance of <code>Iterable</code>, we can use a
+          <a href="../attributes-control-structures/#for"><code>for</code> loop</a>:</p>
+          
+          <!-- try-pre:
+              {String+} words = { "hello", "world" };
+              {String+} moreWords = { "hola", "mundo", *words };
+          -->
+          
+          
+          <pre data-language="ceylon"><code>for (word in moreWords) {
+    print(word);
+}
+</code></pre>
+          
+          <p id="note_that_in_this_context...">(Note that in this context, the <code>in</code> keyword isn't the operator we just met
+          above, it's just part of the syntax of the <code>for</code> loop.)</p>
+          
+          <p id="if_for_any_reason_we...">If, for any reason, we need an index for each element produced by a stream,
+          we can use the following idiom to iterate a streams of
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Entry.type.html"><code>Entry</code>s</a>:</p>
+          
+          <!-- try-pre:
+              {String+} words = { "hello", "world" };
+              {String+} moreWords = { "hola", "mundo", *words };
+          -->
+          
+          
+          <pre data-language="ceylon"><code>for (i -&gt; word in moreWords.indexed) {
+    print("``i``: ``word``");
+}
+</code></pre>
+          
+          <p id="this_idiom_makes_use_of...">This idiom makes use of <em>destructuring</em>, which we'll learn about at the
+          <a href="#destructuring">end of this leg of the tour</a>.</p>
+          
+          <p id="the_indexed_attribute_returns_a...">The <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Iterable.type.html#indexed"><code>indexed</code></a>
+          attribute returns a stream of entries containing the indexed elements of
+          the original stream.</p>
+          
+          <p id="note_the_arrow__is...">(Note: the arrow <code>-&gt;</code> is syntax sugar for the class <code>Entry</code>. So we can
+          write the type of the entry stream as <code>{&lt;Integer-&gt;String&gt;*}</code>.)</p>
+          
+          <p id="its_often_useful_to_be...">It's often useful to be able to iterate two sequences at once. The
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html#zipEntries"><code>zipEntries()</code></a> function
+          comes in handy here:</p>
+          
+          <!-- try-pre:
+              String[] names = ["mies", "wim", "jet"];
+              String[] places = ["hoogezand", "sappemeer", "kalkwijk"];
+          -->
+          
+          
+          <!-- cat: void m(String[] names, String[] places) { -->
+          
+          
+          <pre data-language="ceylon"><code>for (name -&gt; place in zipEntries(names,places)) {
+    print(name + " @ " + place);
+}
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="now_theres_one_very_important...">Now there's one very important thing to know when you start mixing
+          streams with mutable objects, variables, or impure functions. This is
+          a common source of error for folks new to Ceylon.</p>
+          
+          <h3 id="gotcha">Gotcha!
+          </h3>
+          
+          
+          <p id="streams_created_using_the_...">Streams created using the <code>{ ... }</code> syntax are always <em>lazy</em>. That is:</p>
+          
+          <ul>
+          <li>their elements are not evaluated until the stream is iterated, and</li>
+          <li>each element is reevaluated each time the stream is iterated.</li>
+          </ul>
+          
+          
+          <p id="consider_this_code">Consider this code:</p>
+          
+          <pre data-language="ceylon"><code>variable value counter = 0;
+value stream = { for (i in 0:5) counter++ }; //curly braces means LAZY!
+print(stream); //evaluate elements
+print(stream); //reevaluate elements
+</code></pre>
+          
+          <p id="the_code_prints">The code prints:</p>
+          
+          <pre><code>{ 0, 1, 2, 3, 4 }
+{ 5, 6, 7, 8, 9 }
+</code></pre>
+          
+          <p id="if_this_behavior_is_not...">If this behavior is <em>not</em> what you're looking for, you'll need a different
+          sort of stream! One option is to use a <em>sequence</em> instead.</p>
+          
+          <pre data-language="ceylon"><code>variable value counter = 0;
+value stream = [ for (i in 0:5) counter++ ]; //square brackets means EAGER!
+print(stream); //elements already evaluated
+print(stream); //elements already evaluated
+</code></pre>
+          
+          <p id="this_code_prints">This code prints:</p>
+          
+          <pre><code>[0, 1, 2, 3, 4]
+[0, 1, 2, 3, 4]
+</code></pre>
+          
+          <p id="an_even_more_confusing_example...">An even more confusing example arises when one attempts to form a stream by
+          incrementally "cons"-ing elements at the head of the stream. A first, naive
+          attempt might look like this:</p>
+          
+          <!-- try-post:
+              print(stream);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>variable value stream = { 0 };
+stream = { 1, *stream };
+stream = { 2, *stream };
+</code></pre>
+          
+          <p id="this_code_results_in_an...">This code results in an infinite stream of <code>2</code>s, instead of the stream <code>{2,1,0}</code>.
+          That's because the spread references to <code>stream</code> is evaluated lazily!</p>
+          
+          <p id="the_recommended_solution_is_to...">The recommended solution is to use the <code>follow()</code> method, which forces the
+          references to <code>stream</code> to be evaluated eagerly:</p>
+          
+          <!-- try-post:
+              print(stream);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>variable value stream = { 0 };
+stream = stream.follow(1);
+stream = stream.follow(2);
+</code></pre>
+          
+          <p id="alternatively_one_could_use_a...">Alternatively, one could use a sequence:</p>
+          
+          <!-- try-post:
+              print(sequence);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>variable [Integer+] sequence = [0];
+sequence = [1, *sequence];
+sequence = [2, *sequence];
+</code></pre>
+          
+          <p id="laziness_is_not_the_only...">Laziness is not the <em>only</em> stream-related gotcha.</p>
+          
+          <h2 id="gotcha_again">Gotcha again!
+          </h2>
+          
+          
+          <p id="iterable_is_an_extremely_abstract..."><code>Iterable</code> is an extremely abstract type, and many different container types
+          satisfy it. These various container types each have their own notions of what
+          "equality" means. For example, in a <code>List</code>, the order of elements is important,
+          whereas in a <code>Set</code>, it isn't. Furthermore, there are infinite  streams for
+          which equality is not computable.</p>
+          
+          <p id="therefore_value_equality—the__operator—is...">Therefore, <a href="../language-module/#equality_and_identity">value equality</a>—the <code>==</code> operator—is not considered
+          a well-defined operation for streams, unless the streams have some known
+          additional structure in common. The following assertion produces a warning at
+          compilation time:</p>
+          
+          <pre data-language="ceylon"><code>assert ({1, 2} == {1, 2}); //warning: equality not well-defined
+</code></pre>
+          
+          <p id="we_should_rewrite_this_code...">We should rewrite this code to use some other data structure for which value
+          equality <em>is</em> well-defined. For example, if we didn't care about order, we
+          could compare <code>Set</code>s:</p>
+          
+          <pre data-language="ceylon"><code>assert (set {1, 2} == set {2, 1});
+</code></pre>
+          
+          <p id="or_if_we_did_want...">Or, if we did want to take order into account, we could use sequences:</p>
+          
+          <pre data-language="ceylon"><code>assert ([1, 2] == [1, 2]);
+</code></pre>
+          
+          <p id="so_now_naturally_its_time...">So now, naturally, it's time to learn about sequences.</p>
+          
+          <h2 id="sequences">Sequences
+          </h2>
+          
+          
+          <p id="some_kind_of_array_or...">Some kind of array or list construct is a universal feature of all programming
+          languages. The Ceylon language module defines support for <em>sequence types</em> via
+          the interfaces <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Sequential.type.html"><code>Sequential</code></a>,
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Sequence.type.html"><code>Sequence</code></a>,
+          and <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Empty.type.html"><code>Empty</code></a>.</p>
+          
+          <p id="again_there_is_some_syntax...">Again, there is some syntax sugar associated with sequences:</p>
+          
+          <ul>
+          <li>the type <code>Sequential&lt;X&gt;</code> represents a sequence that may be empty, and may be
+          abbreviated <code>[X*]</code> or <code>X[]</code>,</li>
+          <li>the type <code>Sequence&lt;X&gt;</code> represents a nonempty sequence, and may be abbreviated
+          <code>[X+]</code>, and</li>
+          <li>the type <code>Empty</code> represents an empty sequence and is abbreviated <code>[]</code>.</li>
+          </ul>
+          
+          
+          <p id="some_operations_of_the_type...">Some operations of the type <code>Sequence</code> aren't defined by <code>Sequential</code>, so you
+          can't call them if all you have is <code>X[]</code>. Therefore, we need the
+           <code>if (nonempty ... )</code> construct to gain access to these operations.</p>
+          
+          <!-- try-post:
+              printBounds(["aap", "noot", "mies"]);
+              printBounds([]);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>void printBounds(String[] strings) {
+    if (nonempty strings) {
+        //strings is of type [String+] here
+        print(strings.first + ".." + strings.last);
+    }
+    else {
+        print("Empty");
+    }
+}
+</code></pre>
+          
+          <p id="notice_how_this_is_just...">Notice how this is just a continuation of the
+          <a href="../basics#dealing_with_objects_that_arent_there">pattern established</a> for
+          <code>null</code> value handling. In fact, both these constructs are just syntactic
+          abbreviations for type narrowing:</p>
+          
+          <ul>
+          <li>
+<code>if (nonempty strings)</code> is an abbreviation for <code>if (is [String+] strings)</code>,
+          just like</li>
+          <li>
+<code>if (exists name)</code> is an abbreviation for <code>if (is Object name)</code>.</li>
+          </ul>
+          
+          
+          <h3 id="sequence_syntax_sugar">Sequence syntax sugar
+          </h3>
+          
+          
+          <p id="theres_lots_more_syntactic_sugar...">There's lots more syntactic sugar for sequences. We can use a bunch of
+          familiar Java-like syntax:</p>
+          
+          <!-- try-post:
+              print(multiplicative);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>String[] operators = [ "+", "-", "*", "/" ];
+String? plus = operators[0];
+String[] multiplicative = operators[2..3];
+</code></pre>
+          
+          <p id="oh_and_the_expression_...">Oh, and the expression <code>[]</code> evaluates to an instance of <code>Empty</code>.</p>
+          
+          <!-- try-post:
+              print(none);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>[] none = [];
+</code></pre>
+          
+          <p id="however_unlike_java_all_these...">However, unlike Java, all these syntactic constructs are pure abbreviations.
+          The code above is exactly equivalent to the following de-sugared code:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:pedagogial -->
+          
+          
+          <pre data-language="ceylon"><code>Sequential&lt;String&gt; operators = ... ;
+Null|String plus = operators.get(0);
+Sequential&lt;String&gt; multiplicative = operators.span(2,3);
+</code></pre>
+          
+          <p id="well_come_back_to_what...">(We'll come back to what the list of values in brackets means in a minute!)</p>
+          
+          <p id="the_sequential_interface_extends_iterable...">The <code>Sequential</code> interface extends
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Iterable.type.html"><code>Iterable</code></a>,
+          so we can iterate a <code>Sequential</code> using a <code>for</code> loop:</p>
+          
+          <!-- try-pre:
+              String[] operators = ["+", "-", "*", "/"];
+          -->
+          
+          
+          <!-- cat: void m(String[] operators) { -->
+          
+          
+          <pre data-language="ceylon"><code>for (op in operators) {
+    print(op);
+}
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          
+          
+          <h3 id="ranges">Ranges
+          </h3>
+          
+          
+          <p id="a_range_is_a_kind...">A <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Range.type.html"><code>Range</code></a>
+          is a kind of <code>Sequence</code>. The <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html#span"><code>span</code></a>
+          function creates a <code>Range</code>. The following:</p>
+          
+          <!-- try:
+              Character[] uppercaseLetters = 'A'..'Z';
+              Integer[] countDown =  10..0 ;
+              print(uppercaseLetters);
+              print(countDown);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>Character[] uppercaseLetters = 'A'..'Z';
+Integer[] countDown = 10..0;
+</code></pre>
+          
+          <p id="is_just_sugar_for">Is just sugar for:</p>
+          
+          <!-- try:
+              Sequential<Character> uppercaseLetters = span('A','Z');
+              Sequential<Integer> countDown = span(10,0);
+              print(uppercaseLetters);
+              print(countDown);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>Sequential&lt;Character&gt; uppercaseLetters = span('A','Z');
+Sequential&lt;Integer&gt; countDown = span(10,0);
+</code></pre>
+          
+          <p id="in_fact_this_is_just...">In fact, this is just a sneak preview of the fact that almost all operators
+          in Ceylon are just sugar for method calls upon a type. We'll come back to this
+          later, when we talk about <a href="../language-module#operator_polymorphism">operator polymorphism</a>.</p>
+          
+          <p id="ceylon_doesnt_need_c_style...">Ceylon doesn't need C-style <code>for</code> loops. Instead, combine <code>for</code> with the
+          range operator:</p>
+          
+          <!-- cat: void m() { -->
+          
+          
+          <pre data-language="ceylon"><code>variable Integer fac=1;
+for (n in 1..100) {
+    fac*=n;
+    print("Factorial ``n``! = ``fac``");
+}
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          
+          
+          <h3 id="sequence_and_its_supertypes">Sequence and its supertypes
+          </h3>
+          
+          
+          <p id="its_probably_a_good_time...">It's probably a good time to see some more advanced Ceylon code. What better
+          place to find some than in the language module itself?</p>
+          
+          <p id="you_can_find_the_api...">You can find the API documentation and source code of
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Sequence.type.html"><code>Sequence</code></a>
+          online, or you can go to <code>Navigate &gt; Open Ceylon Declaration...</code> to view the
+          declaration of <code>Sequential</code> directly inside Ceylon IDE for Eclipse.</p>
+          
+          <p id="the_most_important_operations_of...">The most important operations of <code>Sequential</code> are inherited from
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Correspondence.type.html"><code>Correspondence</code></a>,
+          and <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Iterable.type.html"><code>Iterable</code></a>.</p>
+          
+          <ul>
+          <li>
+<code>Correspondence</code> provides the capability to access elements of the sequence
+          by index, and</li>
+          <li>
+<code>Iterable</code> provides the ability to iterate the elements of the sequence.</li>
+          </ul>
+          
+          
+          <p id="now_open_the_class_range...">Now open the class <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Range.type.html"><code>Range</code></a>
+          in the IDE, to see a concrete implementation of the <code>Sequence</code> interface.</p>
+          
+          <h3 id="empty_sequences_and_the_bottom_type">Empty sequences and the bottom type
+          </h3>
+          
+          
+          <p id="finally_check_out_the_definition...">Finally, check out the definition of
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Empty.type.html"><code>Empty</code></a>.
+          Notice that <code>Empty</code> is declared to be a subtype of <code>List&lt;Nothing&gt;</code>. This special
+          type <code>Nothing</code>, often called the <em>bottom type</em>, represents:</p>
+          
+          <ul>
+          <li>the empty set, or equivalently</li>
+          <li>the intersection of all types.</li>
+          </ul>
+          
+          
+          <p id="since_the_empty_set_is...">Since the empty set is a subset of all other sets, <code>Nothing</code> is assignable to
+          all other types. Why is this useful here? Well, <code>Correspondence&lt;Integer,Element&gt;</code>
+          and <code>Iterable&lt;Element&gt;</code> are both covariant in the type parameter <code>Element</code>. So
+          <code>Empty</code> is assignable to <code>Correspondence&lt;Integer,T&gt;</code> and <code>Iterable&lt;T&gt;</code> for any
+          type <code>T</code>. That's why <code>Empty</code> doesn't need a type parameter.</p>
+          
+          <p id="since_there_are_no_actual...">Since there are no actual instances of <code>Nothing</code>, if you ever see an attribute
+          or method of type <code>Nothing</code>, you know for certain that it can't possibly ever
+          return a value. There is only one possible way that such an operation can
+          terminate: by throwing an exception.</p>
+          
+          <p id="another_cool_thing_to_notice...">Another cool thing to notice here is the return type of the
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Empty.type.html#first"><code>first</code></a> and
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Empty.type.html#item"><code>item()</code></a> operations
+          of <code>Empty</code>. You might have been expecting to see <code>Nothing?</code> here, since they
+          override supertype members of type <code>T?</code>. But as we saw in the
+          <a href="../basics">first part</a> of the Tour, <code>Nothing?</code> is just an abbreviation for
+          <code>Null|Nothing</code>. And <code>Nothing</code> is the empty set, so the union <code>Nothing|T</code> of
+          <code>Nothing</code> with any other type <code>T</code> is just <code>T</code> itself.</p>
+          
+          <p id="the_ceylon_compiler_is_able...">The Ceylon compiler is able to do all this reasoning automatically. So when
+          it sees an <code>Iterable&lt;Nothing&gt;</code>, it knows that the operation <code>first</code> is of type
+          <code>Null</code>, i.e. that its value is <code>null</code>.</p>
+          
+          <p id="cool_huh">Cool, huh?</p>
+          
+          <h3 id="sequence_gotchas_for_java_developers">Sequence gotchas for Java developers
+          </h3>
+          
+          
+          <p id="superficially_a_sequence_type_looks...">Superficially, a sequence type looks a lot like a Java array, but really it's
+          very, very different! First, of course, a sequence type <code>Sequential&lt;String&gt;</code> is
+          an immutable interface, it's not a mutable concrete type like an array. We
+          can't set the value of an element:</p>
+          
+          <!-- try:
+              String[] operators = ["+", "-", "*", "/"];
+              operators[0] = "^"; //compile error
+          -->
+          
+          
+          <!-- check:none:Demoing error -->
+          
+          
+          <pre data-language="ceylon"><code>String[] operators = .... ;
+operators[0] = "^"; //compile error
+</code></pre>
+          
+          <p id="furthermore_the_index_operation_operatorsi...">Furthermore, the index operation <code>operators[i]</code> returns an optional type
+          <code>String?</code>, which results in quite different code idioms. To begin with, we
+          don't iterate sequences by index like in C or Java. The following code does
+          not compile:</p>
+          
+          <!-- try-pre:
+              String[] operators = ["+", "-", "*", "/"];
+          -->
+          
+          
+          <!-- check:none:Demoing error -->
+          
+          
+          <pre data-language="ceylon"><code>for (i in 0..operators.size-1) {
+    String op = operators[i]; //compile error
+    // ...
+}
+</code></pre>
+          
+          <p id="here_operatorsi_is_a_string...">Here, <code>operators[i]</code> is a <code>String?</code>, which is not directly assignable to
+          <code>String</code>.</p>
+          
+          <p id="instead_if_we_need_access...">Instead, if we need access to the index, we use the the idiom we saw above:</p>
+          
+          <!-- try:
+              String[] operators = [ "+", "-", "*", "/" ];
+              for (i -> op in operators.indexed) {
+                  // ...
+              }
+          -->
+          
+          
+          <!-- cat: void m(String operators) { -->
+          
+          
+          <pre data-language="ceylon"><code>for (i -&gt; op in operators.indexed) {
+    // ...
+}
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="likewise_we_dont_usually_do...">Likewise, we don't usually do an upfront check of an index against the
+          sequence length:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:demoing error -->
+          
+          
+          <pre data-language="ceylon"><code>if (i&gt;operators.size-1) {
+    throw IndexOutOfBoundException();
+}
+else {
+    return operators[i]; //compile error
+}
+</code></pre>
+          
+          <p id="instead_we_do_the_check...">Instead, we do the check <em>after</em> accessing the sequence element:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- cat: 
+              class IndexOutOfBoundException() extends Exception(null, null) {} 
+              String m(String[] operators, Integer i) { -->
+          
+          
+          <pre data-language="ceylon"><code>if (exists op = operators[i]) {
+    return op;
+}
+else {
+    throw IndexOutOfBoundException();
+}
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="indeed_this_is_a_common...">Indeed, this is a common use for <code>assert</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- cat: 
+              class IndexOutOfBoundException() extends Exception(null, null) {} 
+              String m(String[] operators, Integer i) { -->
+          
+          
+          <pre data-language="ceylon"><code>assert (exists op = operators[i]);
+return op;
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="we_especially_dont_ever_need...">We especially don't ever need to write the following:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:demoing error -->
+          
+          
+          <pre data-language="ceylon"><code>if (i&gt;operators.size-1) {
+    return "";
+}
+else {
+    return operators[i]; //compile error
+}
+</code></pre>
+          
+          <p id="this_is_much_cleaner">This is much cleaner:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- cat: String m(String[] operators, Integer i) { -->
+          
+          
+          <pre data-language="ceylon"><code>return operators[i] else "";
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="all_this_may_take_a...">All this may take a little getting used to. But what's nice is that all the
+          exact same idioms also apply to other kinds of <code>Correspondence</code>, including
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Map.type.html"><code>Map</code>s</a> .</p>
+          
+          <h2 id="tuples">Tuples
+          </h2>
+          
+          
+          <p id="a_tuple_is_a_linked...">A <em>tuple</em> is a linked list which captures the static type of each individual
+          element in the list. For example:</p>
+          
+          <!-- try-post:
+              print(point);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>[Float,Float,String] point = [0.0, 0.0, "origin"];
+</code></pre>
+          
+          <p id="this_tuple_contains_two_floats...">This tuple contains two <code>Float</code>s followed by a <code>String</code>. That information
+          is captured in its static type, <code>[Float,Float,String]</code>.</p>
+          
+          <p id="each_link_of_the_list...">Each link of the list is an instance of the class
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Tuple.type.html"><code>Tuple</code></a>.
+          If you really <em>must know</em>, the code above is syntax sugar for the following:</p>
+          
+          <!-- try-post:
+              print(point);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>Tuple&lt;Float|String,Float,Tuple&lt;Float|String,Float,Tuple&lt;String,String&gt;&gt;&gt;
+        point = Tuple(0.0, Tuple(0.0, Tuple("origin", [])));
+</code></pre>
+          
+          <p id="therefore_we_always_use_syntax...">Therefore, we <em>always</em> use syntax sugar when working with tuples.</p>
+          
+          <p id="tuple_extends_sequence_so_we..."><code>Tuple</code> extends <code>Sequence</code>, so we can do all the usual kinds of sequency
+          things to a tuple, iterate it, and so on. As with sequences, we can access
+          a tuple element by index. But in the case of a tuple, Ceylon is able to
+          determine the type of the element when the index is a literal integer:</p>
+          
+          <!-- try-pre:
+              value point = [0.0, 0.0, "origin"];
+          -->
+          
+          
+          <pre data-language="ceylon"><code>Float x = point[0];
+Float y = point[1];
+String label = point[2];
+Null zippo = point[3];
+</code></pre>
+          
+          <p id="a_unterminated_tuple_is_a...">A <em>unterminated</em> tuple is a tuple where the last link in the list is
+          a sequence, not an <code>Empty</code>. For example:</p>
+          
+          <!-- try:
+              String[] labels = ["center", "origin"];
+              [Float,Float,String*] point = [0.0, 0.0, *labels];
+          -->
+          
+          
+          <pre data-language="ceylon"><code>String[] labels = ... ;
+[Float,Float,String*] point = [0.0, 0.0, *labels];
+</code></pre>
+          
+          <p id="this_tuple_contains_two_floats_followed...">This tuple contains two <code>Float</code>s followed by an unknown number of <code>String</code>s.</p>
+          
+          <p id="now_we_can_see_that...">Now we can see that a sequence type like <code>[String*]</code> or <code>[String+]</code> can
+          be viewed as a degenerate tuple type!</p>
+          
+          <h2 id="destructuring">Destructuring
+          </h2>
+          
+          
+          <p id="individually_accessing_the_elements_of...">Individually accessing the elements of a tuple by numeric index can be
+          a little verbose, so Ceylon supports a sophisticated sort of parallel
+          assignment called <em>destructuring</em>. We can rewrite the code above like
+          this:</p>
+          
+          <!-- try-pre:
+              value point = [0.0, 0.0, "origin"];
+          -->
+          
+          
+          <pre data-language="ceylon"><code>value [x, y, label] = point;
+</code></pre>
+          
+          <p id="this_introduces_three_new_values...">This introduces three new values, <code>x</code> and <code>y</code> of inferred type <code>Float</code>,
+          and <code>label</code> of inferred type <code>String</code>.</p>
+          
+          <p id="the_syntax_x_y_label...">The syntax <code>[x, y, label]</code> is called a <em>tuple pattern</em>. Tuple patterns
+          are used to destructure nonempty sequences. A tuple pattern is a list
+          of value names, the last of which may be a <em>tail</em> value, indicated using
+          the spread operator:</p>
+          
+          <!-- try-post:
+              print(label);
+              print(point);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>value labeled = ["one two three", 1.0, 2.0, 3.0];
+value [label, *point] = labeled; //point is a tail with type Float[3]
+</code></pre>
+          
+          <p id="a_tuple_pattern_may_include...">A tuple pattern may include explicit element types:</p>
+          
+          <!-- try-pre:
+              value point = [0.0, 0.0, "origin"];
+          -->
+          
+          
+          <pre data-language="ceylon"><code>value [Float x, Float y, String label] = point;
+</code></pre>
+          
+          <p id="we_can_use_destructuring_in...">We can use destructuring in <code>for</code>
+          <a href="../attributes-control-structures/#for_loops">loops</a>:</p>
+          
+          <!-- try-pre:
+              value points = {[0.0, 0.0, "origin"], [1.0, 2.5, "whatever"]};
+          -->
+          
+          
+          <pre data-language="ceylon"><code>for ([x, y, label] in points) {
+    print("``label``: (``x``, ``y``)");
+}
+</code></pre>
+          
+          <p id="and_in_exists_and_nonempty...">And in <code>exists</code> and <code>nonempty</code>
+          <a href="../attributes-control-structures/#condition_lists">conditions</a>
+          in <code>if</code> or <code>while</code> :</p>
+          
+          <pre data-language="ceylon"><code>if (nonempty [name, *rest] = process.arguments) {
+    print("Hello ``name``!");
+}
+</code></pre>
+          
+          <p id="and_in_cases_of_a...">And in <code>case</code>s of a <code>switch</code>
+          <a href="../attributes-control-structures/#switch_conditionals">statement</a> or
+          <a href="../attributes-control-structures/#if_and_switch_expressions">expression</a>:</p>
+          
+          <!-- try: 
+              Float[2]|Float[3] coord = [1.0,2.0,3.0];
+              switch (coord)
+              case ([Float x, Float y]) {
+                  print((x^2+y^2)^0.5);
+              }
+              case ([Float x, Float y, Float z]) {
+                  print((x^2+y^2+z^2)^0.5);
+              }
+          -->
+          
+          
+          <pre data-language="ceylon"><code>Float[2]|Float[3] coord = ... ;
+switch (coord)
+case ([Float x, Float y]) { 
+    print((x^2+y^2)^0.5);
+}
+case ([Float x, Float y, Float z]) {
+    print((x^2+y^2+z^2)^0.5);
+}
+</code></pre>
+          
+          <p id="and_even_in_a_let...">And even in a <code>let</code>
+          <a href="../attributes-control-structures/#tip_let_expressions">expression</a>:</p>
+          
+          <pre data-language="ceylon"><code>print(let ([x, y] = [1.0, 2.0]) "(``x``, ``y``)");
+</code></pre>
+          
+          <p id="we_can_also_destructure_entrys...">We can also destructure <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Entry.type.html"><code>Entry</code>s</a>.
+          We've <a href="#iterating_a_stream">already seen</a> this used in a <code>for</code> loop:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>for (i -&gt; op in operators.indexed) {
+    // ...
+}
+</code></pre>
+          
+          <p id="the_syntax_i__op...">The syntax <code>i -&gt; op</code> is called an <em>entry pattern</em>. An entry pattern
+          may include explicit key and item types:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>for (Integer i -&gt; String op in operators.indexed) {
+    // ...
+}
+</code></pre>
+          
+          <p id="more_complex_destructuring_patterns_may...">More complex destructuring patterns may be formed by nesting tuple
+          and entry patterns, for example:</p>
+          
+          <!-- try-pre:
+              value translations = { ["hello", "hola"], ["goodbye", "adios"] };
+          -->
+          
+          
+          <pre data-language="ceylon"><code>for (i -&gt; [en, es] in translations.indexed) {
+    print("``i``: ``en`` ``es``");
+}
+</code></pre>
+          
+          <p id="finally_destructuring_may_be_used...">Finally, destructuring may be used in the parameter list of an
+          <a href="../functions/#anonymous_functions">anonymous function</a>. But we'll
+          discuss that
+          <a href="../functions/#destructuring_anonymous_function_parameters">later in the tour</a>.</p>
+          
+          <h2 id="there_s_more">There's more...
+          </h2>
+          
+          
+          <p id="if_youre_interested_you_can...">If you're interested, you can find a more in-depth discussion of tuples
+          <a href="/blog/2013/01/21/abstracting-over-functions/">here</a>.</p>
+          
+          <p id="you_can_read_more_about...">You can read more about destructuring <a href="/blog/2014/12/29/destructuring">here</a>.</p>
+          
+          <p id="next_up_well_explore_some...">Next up we'll explore some more details of the type system, starting with
+          <a href="../typeinference">type aliases and type inference</a>.</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

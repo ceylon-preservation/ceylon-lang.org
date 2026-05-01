@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Generics and enumerated types</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2012/01/25/enumerated-types/">Enumerated types in Ceylon</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2012/02/02/how-we-test-ceylon/">How we test Ceylon</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="generics_and_enumerated_types">
+            Generics and enumerated types
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              26 Jan 2012
+            </div>
+            <div class="tags">
+            </div>
+          </div>
+          <div class="body">
+            <p id="in_the_previous_post_i...">In the <a href="/blog/2012/01/25/enumerated-types/">previous post</a> I discussed Ceylon's support for enumerated types. Looking back over the post, I notice that I forgot to mention anything about generics! Let's remedy that glaring omission!</p>
+            
+            <h2 id="parameterized_enumerated_types">Parameterized enumerated types</h2>
+            
+            <p id="an_enumerated_type_may_be...">An enumerated type may be parameterized:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>interface Container&lt;Item&gt;
+    of None&lt;Item&gt; | One&lt;Item&gt; | Many&lt;Item&gt; { ... }
+</code></pre>
+            
+            <p id="ceylon_currently_requires_that_each...">Ceylon currently requires that each case of the enumerated type completely "covers" all possible arguments to the type parameter of the enumerated type itself. So we could not write:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>//bad!
+interface One&lt;Item&gt; 
+    satisfies Container&lt;Item&gt;
+    given Item satisfies Object { ... }
+</code></pre>
+            
+            <p id="by_adding_a_new_constraint...">By adding a new constraint on <code>Item</code> that is not present in <code>Container</code>, we've created a situation where for some values of <code>Item</code>, <code>Container&lt;Item&gt;</code> is well-defined, but <code>One&lt;Item&gt;</code> is an illegal type. This is currently considered an error.</p>
+            
+            <p id="one_thing_we_are_allowed...">One thing we <em>are</em> allowed to write, however, is the following:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>interface Container&lt;out Item&gt;
+    of None | One&lt;Item&gt; | Many&lt;Item&gt; { ... }
+
+interface None 
+    satisfies Container&lt;Bottom&gt; { ... }
+</code></pre>
+            
+            <p id="since_containerbottom_is_a_subtype...">Since <code>Container&lt;Bottom&gt;</code> is a subtype of <code>Container&lt;Item&gt;</code> for any value of <code>Item</code>, this is considered well-typed.</p>
+            
+            <h2 id="removing_this_restriction">Removing this restriction</h2>
+            
+            <p id="as_youve_probably_guessed_this...">As you've probably guessed, this restriction is an inconvenient one. There are some <em>very</em> useful enumerated types where the list of cases of the enumeration depend upon the value of the type argument. It's so useful that there is a term for this construct in the literature: a <em>generalized algebraic type</em>, or GADT.</p>
+            
+            <p id="in_the_language_design_faq...">In the language design FAQ, I already wrote up a mini-explanation of <a href="/documentation/1.0/faq/language-design/#generalized_algebraic_types">GADT support</a> with an example, so I won't repeat myself here. A future version of Ceylon will likely support GADTs.</p>
+            
+            <h2 id="type_parameters_with_enumerated_constraints">Type parameters with enumerated constraints</h2>
+            
+            <p id="in_the_previous_post_i_started...">In the previous post, I started with an example where a union type is used to emulate overloading. Alert readers might have noticed that the only reason this worked was that the "overloaded" type only appeared once in the method signature. We had something like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>void add(Integer|Float x) { ... }
+</code></pre>
+            
+            <p id="what_if_the_overloaded_type...">What if the overloaded type appears more than once? Well, to handle this sort of thing, we would need to introduce a type parameter:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Num increment&lt;Num&gt;(Num x) 
+        given Num of Integer|Float {
+    ...
+}
+</code></pre>
+            
+            <p id="the_syntax_given_num_of...">The syntax <code>given Num of Integer|Float</code> defines a type parameter with an enumerated  type constraint. The unknown type must be one of a list of types.</p>
+            
+            <p id="this_looks_like_a_very...">This looks like a very nice feature, but the truth is that Ceylon is still missing one extra thing in order for it to be truly useful. The problem is that the following code is not well-typed:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Num increment&lt;Num&gt;(Num x) 
+        given Num of Integer|Float {
+    switch (x)
+    case (is Integer) { return x+1; } //error: Integer not assignable to Num
+    case (is Float) { return x+1.0; } //error: Float not assignable to Num
+}
+</code></pre>
+            
+            <p id="the_if_is__and...">The <code>if (is ...)</code> and <code>case (is ...)</code> constructs let us narrow the type of a single value. What we need here is the ability to narrow a type parameter itself, "pinning" the value of the type parameter within the body of the method, letting us write:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Num increment&lt;Num&gt;(Num x) 
+        given Num of Integer|Float {
+    switch (Num)
+    case (Integer) { return x+1; }
+    case (Float) { return x+1.0; }
+}
+</code></pre>
+            
+            <p id="unfortunately_this_functionality_depends_upon...">Unfortunately, this functionality depends upon having fully reified type parameters, so it will have to wait until M5, later this year.</p>
+            
+            <p id="i_think_this_is_ultimately...">I think this is ultimately quite a powerful feature. It looks like overloading when we look at simple examples like this parameterized method, but it's actually a bit more than that. Notice that a whole <em>type</em> could have a parameter with an enumerated type constraint! With upper bound type constraints, generics let us abstract a parameterized declaration over all types which share a common supertype. Enumerated type constraints help us abstract over types which <em>don't</em> have a common ancestor, and which weren't designed to be treated polymorphically.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2012/01/26/generic-enumerated-types/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

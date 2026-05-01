@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Attributes and variables, control structures</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.0/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.0/tour">Tour of Ceylon</a></h3>
+            
+            <ol>
+            <li><a href="/documentation/1.0/tour/basics">Basics</a></li>
+            <li><a href="/documentation/1.0/tour/classes">Classes</a></li>
+            <li><a href="/documentation/1.0/tour/attributes-control-structures">Attributes and variables, control structures</a></li>
+            <li><a href="/documentation/1.0/tour/inheritance">Inheritance, refinement, and interfaces</a></li>
+            <li><a href="/documentation/1.0/tour/anonymous-member-classes">Anonymous and member classes</a></li>
+            <li><a href="/documentation/1.0/tour/sequences">Iterables, sequences, and tuples</a></li>
+            <li><a href="/documentation/1.0/tour/typeinference">Type aliases and type inference</a></li>
+            <li><a href="/documentation/1.0/tour/types">Union, intersection, and enumerated types</a></li>
+            <li><a href="/documentation/1.0/tour/generics">Generics</a></li>
+            <li><a href="/documentation/1.0/tour/modules">Packages and modules</a></li>
+            <li><a href="/documentation/1.0/tour/functions">Functions</a></li>
+            <li><a href="/documentation/1.0/tour/named-arguments">Named arguments</a></li>
+            <li><a href="/documentation/1.0/tour/comprehensions">Comprehensions</a></li>
+            <li><a href="/documentation/1.0/tour/language-module">Language module</a></li>
+            <li><a href="/documentation/1.0/tour/initialization">Initialization</a></li>
+            <li><a href="/documentation/1.0/tour/annotations">Annotations and the metamodel</a></li>
+            <li><a href="/documentation/1.0/tour/interop">Interoperation with Java</a></li>
+            <li><a href="/documentation/1.0/tour/dynamic">Dynamic typing</a></li>
+            </ol>
+            
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.0/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="tutorial_videos"><a href="/documentation/1.0/videos">Tutorial videos</a></h3>
+            
+            <h3 id="language_specification"><a href="/documentation/1.0/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.0/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.0/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.0/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.0/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Tour of Ceylon
+            <span style="color:#8d5e0b">(1.0)</span>
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_10_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.0, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <h1 id="attributes_and_variables_control_structures">Attributes and variables, control structures</h1>
+          
+          <p id="this_is_the_third_part...">This is the third part of the Tour of Ceylon. In the <a href="../classes">previous leg</a>
+          we learned about classes and <a href="../classes/#abstracting_state_using_attributes">met the concept of an attribute</a>.
+          What really makes a class special is that is can hold state—references
+          to other objects. So it's time to learn more about <a href="#attributes_and_locals">attributes</a>
+          and <a href="#variables">variables</a>.</p>
+          
+          <p id="then_were_going_to_skim...">Then we're going to skim over some material about
+          <a href="#control_structures">control structures</a>
+            (<a href="#ok_so_here_are_the..."><code>if</code></a>,
+            <a href="#the_switchcase_statement_eliminates_cs..."><code>switch</code></a>,
+            <a href="#the_for_loop_has_an..."><code>for</code></a>,
+            <a href="#the_while_loop_is_traditional"><code>while</code></a> and
+            <a href="#the_trycatchfinally_statement_works_like..."><code>try</code></a>).</p>
+          
+          <h2 id="attributes_and_local_values">Attributes and local values</h2>
+          
+          <p id="in_java_a_field_of...">In Java, a field of a class is quite easily distinguished from a local
+          variable or parameter of a constructor. This distinction is much less
+          meaningful in Ceylon, and often irrelevant. An <em>attribute</em> is really
+          just a value declared in the parameter list or body of the class that
+          happens to be captured by some <code>shared</code> declaration.</p>
+          
+          <p id="here_count_is_a_block...">Here, <code>count</code> is a block-local variable of the initializer of <code>Counter</code>:</p>
+          
+          <!-- try-post:
+              value c = Counter();
+              print(c.count); // Compiler error! No access
+          -->
+          
+          
+          <pre data-language="ceylon"><code>class Counter() {
+    variable Integer count=0;
+}
+</code></pre>
+          
+          <p id="but_in_the_following_two...">But in the following two examples, <code>count</code> is an attribute:</p>
+          
+          <!-- try-post:
+              value c = Counter();
+              print(c.count);
+              c.count++;
+              print(c.count);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>class Counter() {
+    shared variable Integer count=0;
+}
+</code></pre>
+          
+          <!-- break up the two examples so we don't see a duped decl-->
+          
+          
+          
+          
+          <!-- try-post:
+              value c = Counter();
+              print(c.inc());
+          -->
+          
+          
+          <pre data-language="ceylon"><code>class Counter() {
+    variable Integer count=0;
+    shared Integer inc() =&gt; ++count;
+}
+</code></pre>
+          
+          <p id="this_might_seem_a_bit...">This might seem a bit strange at first, but it's really just how the principle
+          of closure works. The same behavior applies to block-local values declared in
+          the body of a function. Functions can't declare <code>shared</code> members, of course,
+          but they can return an <code>object</code> that captures a local variable:</p>
+          
+          <!-- try-post:
+              value c = createCounter();
+              print(c.inc());
+          -->
+          
+          
+          <pre data-language="ceylon"><code>interface Counter {
+    shared formal Integer inc();
+}
+
+Counter createCounter() {
+    variable Integer count=0;
+    object counter satisfies Counter {
+        shared actual Integer inc() =&gt; ++count;
+    }
+    return counter;
+}
+</code></pre>
+          
+          <p id="or_as_well_see_later...">Or, as we'll see <a href="../functions">later</a>, a function can return a nested function
+          that captures the local variable:</p>
+          
+          <!-- try-post:
+              print(counter()());
+          -->
+          
+          
+          <pre data-language="ceylon"><code>Integer() counter() {
+    variable Integer count=0;
+    Integer inc() =&gt; ++count;
+    return inc;
+}
+</code></pre>
+          
+          <p id="dont_worry_too_much_about...">(Don't worry too much about the syntax here—for now all we're interested
+          in is that <code>counter()</code> returns a reference to a function <code>inc()</code> that captures
+          the variable <code>count</code>.)</p>
+          
+          <p id="so_even_though_well_continue...">So even though we'll continue to use the terms "local value" and "attribute"
+          throughout this tutorial, keep in mind that there's no really strong distinction
+          between the terms. Any named value might be captured by some other declaration
+          in the same containing scope. A local value is just an attribute that happens
+          to not be captured by anything.</p>
+          
+          <h2 id="variables">Variables</h2>
+          
+          <p id="ceylon_encourages_you_to_use...">Ceylon encourages you to use <em>immutable</em> attributes as much as possible. An
+          immutable attribute has its value specified when the object is initialized,
+          and is never reassigned.</p>
+          
+          <pre data-language="ceylon"><code>class Reference&lt;Value&gt;(val) {
+    shared Value val;
+}
+
+value ref = Reference("foo");
+print(ref.val);
+ref.val = "bar";    //compile error: value is not variable
+</code></pre>
+          
+          <p id="if_we_want_to_be...">If we want to be able to assign a value to a
+          <a href="../classes/#initializing_attributes">reference</a>, we need to annotate it
+          <code>variable</code>:</p>
+          
+          <pre data-language="ceylon"><code>class Reference&lt;Value&gt;(val) {
+    shared variable Value val;
+}
+
+value ref = Reference("foo");
+print(ref.val);
+ref.val = "bar";    //ok
+print(ref.val);
+</code></pre>
+          
+          <h2 id="setters">Setters</h2>
+          
+          <p id="weve_already_met_the_concept...">We've already met the concept of a <a href="../classes/#abstracting_state_using_attributes">getter</a>.</p>
+          
+          <p id="if_we_want_to_make...">If we want to make an attribute with a getter mutable, we need to define a
+          matching setter. Usually this is only useful if you have some other internal
+          attribute you're trying to set the value of indirectly.</p>
+          
+          <p id="suppose_our_class_has_the...">Suppose our class has the following attributes, intended for internal
+          consumption only, so un-<code>shared</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- id:attrs -->
+          
+          
+          <pre data-language="ceylon"><code>variable String? firstName=null;
+variable String? lastName=null;
+</code></pre>
+          
+          <p id="remember_ceylon_never_automatically_initializes...">(Remember, Ceylon never automatically initializes attributes to null.)</p>
+          
+          <p id="then_we_can_abstract_the...">Then we can abstract the attributes using a third attribute defined
+          as a getter/setter pair:</p>
+          
+          <!-- try-pre:
+          class Test() {
+              variable String? firstName=null;
+              variable String? lastName=null;
+          
+          -->
+          
+          
+          <!-- try-post:
+          }
+          value t = Test();
+          t.fullName="Pietje     Pluk";
+          print(t.fullName);
+          -->
+          
+          
+          <!-- cat-id:attrs -->
+          
+          
+          <pre data-language="ceylon"><code>shared String fullName =&gt;
+        " ".join(coalesce { firstName, lastName });
+
+assign fullName {
+    value tokens = fullName.split().iterator();
+    if (is String first = tokens.next()) {
+        firstName=first;
+    }
+    if (is String last = tokens.next()) {
+        lastName=last;
+    }
+}
+</code></pre>
+          
+          <p id="a_setter_is_identified_by...">A setter is identified by the keyword <code>assign</code> in place of a type declaration.
+          (The type of the matching getter determines the type of the attribute.)
+          Within the body of the setter, the attribute name evaluates to the value
+          being set.</p>
+          
+          <p id="yes_this_is_a_lot...">Yes, this is a lot like a Java get/set method pair, though the syntax is
+          significantly streamlined. But since Ceylon attributes are polymorphic, and
+          since you can redefine a reference as a getter or getter/setter pair without
+          affecting clients that call the attribute, you don't need to write getters
+          and setters unless you're doing something special with the value you're
+          getting or setting.</p>
+          
+          <p id="dont_ever_write_code_like...">Don't ever write code like this in Ceylon:</p>
+          
+          <!-- try-pre:
+          class Test() {
+          -->
+          
+          
+          <!-- try-post:
+          }
+          -->
+          
+          
+          <pre data-language="ceylon"><code>variable String _name = "";
+shared String name =&gt; _name;  //pointless getter
+assign name =&gt; _name=name;    //pointless setter
+</code></pre>
+          
+          <p id="its_not_necessary_and_theres...">It's not necessary, and there's never any benefit to it.</p>
+          
+          <h2 id="control_structures">Control structures</h2>
+          
+          <p id="ceylon_has_six_built_in...">Ceylon has six built-in control structures. There's nothing much new here
+          for Java or C# developers, so a few quick examples without much additional
+          commentary should suffice.</p>
+          
+          <p id="first_one_gotcha_for_folks...">First, one "gotcha" for folks coming from other C-like languages: Ceylon
+          doesn't allow you to omit the braces in a control structure. The following
+          doesn't even parse:</p>
+          
+          <!-- try:
+              Integer x = 200;
+              if (x>100) print("big");  //error
+          -->
+          
+          
+          <!-- check:none:Demoing error -->
+          
+          
+          <pre data-language="ceylon"><code>if (x&gt;100) print("big");  //error
+</code></pre>
+          
+          <p id="you_are_required_to_write">You are required to write:</p>
+          
+          <!-- try-pre:
+              Integer x = 200;
+          -->
+          
+          
+          <!-- cat: void m(Integer x) { -->
+          
+          
+          <pre data-language="ceylon"><code>if (x&gt;100) { print("big"); }
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="the_reason_braces_arent_optional...">(The reason braces aren't optional in Ceylon is that an expression
+          can begin with an opening brace, for example, <code>{"hello", "world"}</code>,
+          so optional braces in control structures make the whole grammar
+          ambiguous to the parser.)</p>
+          
+          <p id="ok_so_here_we_go...">OK, so here we go with the examples.</p>
+          
+          <p id=""><a name="conditionals"><!-- old id --></a></p>
+          
+          <h3 id="if"><code>if</code></h3>
+          
+          <p id="the_ifelse_statement_is_totally...">The <code>if/else</code> statement is totally traditional:</p>
+          
+          <!-- try-pre:
+              Integer x = 2000;
+          -->
+          
+          
+          <!-- cat: void m(Integer x) { -->
+          
+          
+          <pre data-language="ceylon"><code>if (x&gt;1000) {
+    print("really big");
+}
+else if (x&gt;100) {
+    print("big");
+}
+else {
+    print("small");
+}
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="later_we_will_learn_how...">Later we will learn how <code>if</code> can <a href="../types#narrowing_the_type_of_an_object_reference">narrow the type</a>
+          of references in its block. We've already seen an example of that,
+          back when we talked about <a href="../basics/#dealing_with_objects_that_arent_there">optional types</a>.</p>
+          
+          <p id="we_often_use_the_operators...">We often use <a href="../basics/#you_can_chain_an_else...">the operators <code>then</code> and <code>else</code></a>
+          instead of <code>if</code>.</p>
+          
+          <h3 id="switch"><code>switch</code></h3>
+          
+          <p id="the_switchcase_statement_eliminates_cs...">The <code>switch/case</code> statement eliminates C's much-criticized "fall through"
+          behavior and irregular syntax:</p>
+          
+          <!-- try-pre:
+              Integer x = 100;
+          -->
+          
+          
+          <!-- cat: void m(Integer x) { -->
+          
+          
+          <pre data-language="ceylon"><code>switch (x&lt;=&gt;100)
+case (smaller) { print("smaller"); }
+case (equal) { print("one hundred"); }
+case (larger) { print("larger"); }
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="the_type_of_the_switched...">The type of the <code>switch</code>ed expression may be an enumerated type, <code>String</code>,
+          <code>Character</code>, or <code>Integer</code>.</p>
+          
+          <p id="well_have_much_more_to...">We'll have much more to say about <code>switch</code> when we discuss
+          <a href="../types/#enumerated_types">enumerated types</a>.</p>
+          
+          <h3 id="assert"><code>assert</code></h3>
+          
+          <p id="ceylon_also_has_an_assert...">Ceylon also has an <code>assert</code> statement:</p>
+          
+          <!-- try-pre:
+              value length = "hello world".size;
+          -->
+          
+          
+          <pre data-language="ceylon"><code>assert (length &lt; 10);
+</code></pre>
+          
+          <p id="such_assertions_are_good_for...">Such assertions are good for making statements which you <em>know</em> have to be true,
+          but are not apparent to other readers of the code (including the type checker!).
+          Common uses of <code>assert</code> include things like preconditions, postconditions and
+          class invariants.</p>
+          
+          <p id="if_the_condition_is_false...">If the condition is <code>false</code> at runtime an exception is thrown. The exception
+          message helpfully includes details of the condition which was violated, which
+          is extra important when the <code>assert</code> has more than one condition.</p>
+          
+          <!-- try-pre:
+              value arg = process.arguments.first;
+          -->
+          
+          
+          <pre data-language="ceylon"><code>assert (exists arg, !arg.empty);
+</code></pre>
+          
+          <p id="to_customize_the_assertion_message...">To customize the assertion message, add a <code>doc</code> annotation:</p>
+          
+          <!-- try-pre:
+              value length = "hello world".size;
+          -->
+          
+          
+          <pre data-language="ceylon"><code>"length must be less than 10"
+assert (length &lt; 10);
+</code></pre>
+          
+          <p id="where_applicable_the_typechecker_uses...">Where applicable, the typechecker uses <code>assert</code>ed type information when checking
+          statements which follow the assertion, for example:</p>
+          
+          <pre data-language="ceylon"><code>Integer? x = parseInteger("1");
+assert (exists x);
+// after the assert, x has type Integer instead of Integer?
+value y = x+10;
+</code></pre>
+          
+          <p id="this_is_really_just_the...">This is really just the same behavior we saw
+          <a href="../basics#dealing_with_objects_that_arent_there">earlier</a>, only this time
+          it's happening in the middle of a block rather than at the start of an <code>if</code> block.
+          (Don't worry, there's
+          <a href="../types#narrowing_the_type_of_an_object_reference">more on this later</a>.)</p>
+          
+          <p id="note_that_unlike_javas_assert...">Note that, unlike Java's <code>assert</code>, which can be disabled at runtime, Ceylon's
+          assertions are always enabled.</p>
+          
+          <p><a name="loops"><!-- old id --></a></p>
+          
+          <h3 id="for"><code>for</code></h3>
+          
+          <p id="the_for_loop_has_an...">The <code>for</code> loop has an optional <code>else</code> block, which is executed when the
+          loop completes normally, rather than via a <code>return</code> or <code>break</code> statement.</p>
+          
+          <!-- try:
+              class Person(name, age) {
+                  shared String name;
+                  shared Integer age;
+              }
+              Boolean hasMinors(Person* people) {
+                  variable Boolean minors;
+                  for (p in people) {
+                      if (p.age<18) {
+                          minors=true;
+                          break;
+                      }
+                  }
+                  else {
+                      minors=false;
+                  }
+                  return minors;
+              }
+              print(hasMinors(Person("john", 34), Person("jake", 47)));
+          -->
+          
+          
+          <!-- cat: class Person() {shared Integer age = 0;} -->
+          
+          
+          <!-- cat: void m(Person[] people) { -->
+          
+          
+          <pre data-language="ceylon"><code>variable Boolean minors;
+for (p in people) {
+    if (p.age&lt;18) {
+        minors=true;
+        break;
+    }
+}
+else {
+    minors=false;
+}
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="there_is_no_c_style...">There is no C-style <code>for</code>. Instead, you can use the lengthwise range
+          operator <code>:</code> to produce a sequence of <code>Integer</code>s given a starting point
+          and a length:</p>
+          
+          <!-- try:
+              for (i in 5:10) { print(i); }
+          -->
+          
+          
+          <pre data-language="ceylon"><code>for (i in min:len) { ... }
+</code></pre>
+          
+          <p id="alternatively_you_can_use_the...">Alternatively, you can use the ordinary range operator <code>..</code> to produce
+          a sequence of <code>Integer</code>s given two endpoints:</p>
+          
+          <!-- try:
+              for (i in 5..10) { print(i); }
+          -->
+          
+          
+          <pre data-language="ceylon"><code>for (i in min..max) { ... }
+</code></pre>
+          
+          <p id="there_are_a_couple_of...">There are a couple of other tricks with <code>for</code> that we'll come back to
+          <a href="../sequences/#iterating_using_for">later</a>.</p>
+          
+          <p id="we_often_use_comprehensions_or...">We often use <a href="../comprehensions">comprehensions</a> or even
+          <a href="../functions/#anonymous_functions">higher order functions</a> instead of
+          <code>for</code>.</p>
+          
+          <h3 id="while"><code>while</code></h3>
+          
+          <p id="the_while_loop_is_traditional">The <code>while</code> loop is traditional.</p>
+          
+          <!-- try-pre:
+              value names = { "aap", "noot", "mies" };
+          -->
+          
+          
+          <!-- cat: void m(String[] names) { -->
+          
+          
+          <pre data-language="ceylon"><code>value it = names.iterator();
+while (is String next = it.next()) {
+    print(next);
+}
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="there_is_no_dowhile_statement">There is no <code>do/while</code> statement.</p>
+          
+          <p><a name="exception_handling"><!-- old id --></a></p>
+          
+          <h3 id="try"><code>try</code></h3>
+          
+          <p id="the_trycatchfinally_statement_works_just...">The <code>try/catch/finally</code> statement works just like Java's:</p>
+          
+          <!-- implicit-id:tx: 
+              shared interface Message { 
+                  shared formal void send(); 
+              } 
+              shared interface Transaction { 
+                  shared formal void setRollbackOnly(); 
+              }
+              shared class ConnectionException() extends Exception(null, null) {
+              }
+              shared class MessageException() extends Exception(null, null) {
+              }
+          -->
+          
+          
+          
+          
+          <!-- try: -->
+          
+          
+          <!-- cat-id:tx -->
+          
+          
+          <!-- cat: void m(Message message, Transaction tx) { -->
+          
+          
+          <pre data-language="ceylon"><code>try {
+    message.send();
+}
+catch (ConnectionException|MessageException e) {
+    tx.setRollbackOnly();
+}
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="to_handle_all_ceylon_exceptions...">To handle all Ceylon exceptions, together with all JavaScript exceptions,
+          or all Java exceptions that are subclasses of <code>java.lang.Exception</code>, we
+          can <code>catch</code> the type
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/Exception.type.html"><code>Exception</code></a>
+          defined in <code>ceylon.language</code>. If we don't explicitly specify a type,
+          <code>Exception</code> is inferred:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- cat-id:tx -->
+          
+          
+          <!-- cat: void m(Message message, Transaction tx) { -->
+          
+          
+          <pre data-language="ceylon"><code>try {
+    message.send();
+}
+catch (e) {  //equivalent to "catch (Exception e)"
+    tx.setRollbackOnly();
+}
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="there_is_no_way_to...">There is no way to handle exceptions of type of <code>java.lang.Error</code>.</p>
+          
+          <p id="the_try_statement_may_optionally...">The <code>try</code> statement may optionally specify a "resource" expression, just
+          like in Java.</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- cat-id:tx -->
+          
+          
+          <!-- check:parse:Requires try-with-resources -->
+          
+          
+          <pre data-language="ceylon"><code>try (Transaction()) {
+    try (s = Session()) {
+        s.persist(person);
+    }
+}
+</code></pre>
+          
+          <p id="there_are_no_java_style...">There are no Java-style checked exceptions in Ceylon.</p>
+          
+          <h2 id="condition_lists">Condition lists</h2>
+          
+          <p id="constructs_like_if_while_and...">Constructs like <code>if</code>, <code>while</code>, and <code>assert</code> accept a  <em>condition list</em>.
+          A condition list is simply an ordered list of multiple boolean, <code>exists</code>,
+          <code>nonempty</code>, and <code>is</code> conditions. The condition list is satisfied if
+          (and only if) <em>every one</em> of the conditions is satisfied.</p>
+          
+          <p id="with_plain_boolean_conditions_you...">With plain <code>Boolean</code> conditions you could achieve the same thing with the
+          <code>&amp;&amp;</code> operator of course. But a condition list lets you use the "structured
+          typecasting" of <code>exists</code>, <code>is</code>, and friends in conditions appearing later
+          in the same list.</p>
+          
+          <p id="lets_see_an_example_using...">Let's see an example using <code>assert</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>value url = parserUri("http://ceylon-lang.org/download");
+assert(exists authority=url.authority,
+       exists host=authority.hostname);
+// do something with host
+</code></pre>
+          
+          <p id="here_you_can_see_two...">Here you can see two <code>exists</code> conditions in the <code>assert</code> statement, separated
+          with a comma. The first one declares <code>authority</code> (which is inferred to be a
+          <code>String</code>, rather than a <code>String?</code> because of the <code>exists</code>). The second condition
+          then uses this in it's own <code>exists</code> condition.</p>
+          
+          <p id="the_important_thing_to_note...">The important thing to note is that the compiler lets us use <code>authority</code> in the
+          second condition and knows that it's a <code>String</code> not a <code>String?</code>. You can't do
+          that by <code>&amp;&amp;</code>-ing multiple conditions together. You could do it by nesting several
+          <code>if</code>s, but that tends to lead to much less readable code, and doesn't work well
+          in <code>while</code> statements or comprehensions.</p>
+          
+          <h2 id="theres_more">There's more...</h2>
+          
+          <p id="now_that_we_know_enough...">Now that we know enough about classes and their members, we're ready to
+          explore <a href="../inheritance">inheritance and refinement (overriding)</a>.</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

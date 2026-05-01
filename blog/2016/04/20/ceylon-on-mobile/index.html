@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Ceylon on mobile devices</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2016/04/05/object-validation/">Object construction and validation</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2016/06/02/ceylon-on-android/">Ceylon on Android</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="ceylon_on_mobile_devices">
+            Ceylon on mobile devices
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/stephane-epardaud/">Stéphane Épardaud</a>
+            </div>
+            <div class="date">
+              20 Apr 2016
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/interop/">
+                interop
+              </a>
+              <a href="/blog/tags/mobile/">
+                mobile
+              </a>
+              <a href="/blog/tags/android/">
+                android
+              </a>
+              <a href="/blog/tags/ios/">
+                ios
+              </a>
+              <a href="/blog/tags/modularity/">
+                modularity
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <p id="ceylon_already_runs_on_the...">Ceylon already runs on the JVM, whether bare-bones, via JBoss Modules, Vert.x, Java EE Servlet
+            containers such as WildFly, or OSGi containers, as well as on JavaScript VMs such as Node.js
+            and the browser. But today we're going to explain how to run Ceylon on mobile devices, not just
+            in the browser (though it does play a part in it), but as applications, via Apache Cordova.</p>
+            
+            <p id="apache_cordova_allows_you_to..."><a href="https://cordova.apache.org">Apache Cordova</a> allows you to write applications for every mobile
+            platform, including Android and iOS, using nothing but HTML, CSS and JavaScript. Since Ceylon
+            compiles to JavaScript this is perfect as it allows us to run our Ceylon applications on iOS,
+            via the JavaScript compiler backend.</p>
+            
+            <p id="note_that_this_article_is...">Note that this article is using Ceylon 1.2.3 which is not yet released, because the JavaScript
+            runtime in Cordova on Android had one peculiarity we had to work around in the language module
+            JavaScript implementation. Luckily you can get nightly builds of
+            <a href="https://ci-ceylon.rhcloud.com/job/ceylon-distribution/">Ceylon 1.2.3</a> and the
+            <a href="https://ci-ceylon.rhcloud.com/job/ceylon-sdk/lastSuccessfulBuild/artifact/">Ceylon 1.2.3 SDK</a>.</p>
+            
+            <h1 id="writing_your_ceylon_cordova_application">Writing your Ceylon Cordova application</h1>
+            
+            <h2 id="installing_apache_cordova">Installing Apache Cordova</h2>
+            
+            <p id="first_install_apache_cordova_and...">First, <a href="https://cordova.apache.org/#getstarted">install Apache Cordova</a> and add two platforms.
+            I haven't been able to test the iOS platform since it requires an OSX platform to build and
+            an iOS device to test, and I lack both, so I will explain how to package for Android and the
+            browser, and let you guys try it out for iOS, but I have enough faith in Apache Cordova that
+            it will Just Work™.</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="shell"><code># Install npm, the Node.js package manager
+$ sudo apt-get install npm
+# Then install Apache Cordova
+$ npm install cordova
+</code></pre>
+            
+            <p id="small_note_for_me_this...">Small note: for me this installed things in <code>./node_modules/cordova</code> and the Apache Cordova
+            command in <code>./node_modules/cordova/bin/cordova</code>, so adapt your path as you must.</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="shell"><code># Create your application
+$ cordova create ceylon-cordova-demo
+$ cd ceylon-cordova-demo
+# Now add the browser and Android platforms
+$ cordova platform add browser
+$ cordova platform add android
+</code></pre>
+            
+            <p id="at_this_point_you_have...">At this point you have your application ready to be checked in your browser:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="shell"><code>$ cordova platform run browser
+</code></pre>
+            
+            <p id="or_in_an_android_emulator...">Or in an Android emulator, provided you have downloaded the Android SDK already:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="shell"><code>$ ANDROID_HOME=.../Android/Sdk cordova platform build android
+$ ANDROID_HOME=.../Android/Sdk cordova platform run android
+</code></pre>
+            
+            <h2 id="getting_a_little_side_tracked_about_styling">Getting a little side-tracked about styling</h2>
+            
+            <p id="writing_an_application_using_just...">Writing an application using just HTML and CSS means you have to make some effort for
+            it to look good, and instead I decided to delegate to use <a href="https://www.polymer-project.org">Polymer</a>
+            so that my application would have the look and feel of
+            <a href="https://www.google.com/design/spec/material-design/introduction.html">Android Material Design</a> applications
+            to feel even more like a native application on Android. No doubt a similar look and feel exists for iOS.</p>
+            
+            <p id="so_lets_download_polymer_in...">So let's download <a href="https://www.polymer-project.org/1.0/docs/start/getting-the-code.html">Polymer</a> in our
+            application's HTML sources:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="shell"><code>$ npm install bower
+$ cd www
+$ bower init
+# At this point just hit enter/Yes/No until it's set up 
+$ bower install --save Polymer/polymer
+$ bower install --save Polymerelements/paper-item
+</code></pre>
+            
+            <p id="and_now_edit_wwwindexhtml_to...">And now edit <code>www/index.html</code> to use Polymer:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="html"><code>&lt;script src="bower_components/webcomponentsjs/webcomponents.js"&gt;&lt;/script&gt;
+&lt;link rel="import" href="bower_components/paper-item/paper-item.html"&gt;
+&lt;link rel="import" href="bower_components/paper-item/paper-item-body.html"&gt;
+</code></pre>
+            
+            <p id="you_should_also_remove_the...">You should also remove the default CSS:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="html"><code>&lt;link rel="stylesheet" type="text/css" href="css/index.css"&gt;
+</code></pre>
+            
+            <h2 id="getting_requirejs_and_jquery">Getting require.js and jQuery</h2>
+            
+            <p id="ceylon_compiles_to_javascript_modules...">Ceylon compiles to JavaScript modules by way of <a href="http://requirejs.org">require.js</a>, so we're going to
+            have to download it too:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="shell"><code>$ cd www/js
+$ wget http://requirejs.org/docs/release/2.2.0/minified/require.js
+</code></pre>
+            
+            <p id="our_ceylon_demo_will_use...">Our Ceylon demo will use <code>jQuery</code> to add elements to the HTML page, so we also need it:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="shell"><code>$ cd www
+$ bower install --save jquery
+</code></pre>
+            
+            <p id="now_edit_wwwindexhtml_to_use...">Now edit <code>www/index.html</code> to use both:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="html"><code>&lt;script type="text/javascript" src="js/require.js"&gt;&lt;/script&gt;
+&lt;script src="bower_components/jquery/dist/jquery.js"&gt;&lt;/script&gt;
+</code></pre>
+            
+            <h2 id="writing_the_ceylon_application">Writing the Ceylon application</h2>
+            
+            <p id="were_going_to_write_a...">We're going to write a trivial application that queries Ceylon Herd for the list of modules, to display them
+            in a list.</p>
+            
+            <p id="lets_start_by_creating_a...">Let's start by creating a Ceylon module in <code>source/cordova/demo/module.ceylon</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>module cordova.demo "1.0.0" {
+    import ceylon.json "1.2.3";
+}
+</code></pre>
+            
+            <p id="and_our_applications_main_method...">And our application's main method in <code>source/cordova/demo/run.ceylon</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>import ceylon.json { parseJson = parse, JsonObject = Object, JsonArray = Array }
+
+shared void run() {
+    dynamic {
+        // The HTML element where we'll add our items
+        dynamic target = jQuery("#target");
+        // The function called when we get data from the server
+        void success(dynamic data){
+            // Parse the JSON
+            assert(is JsonObject json = parseJson(data),
+                   is JsonArray results = json["results"]);
+            // Iterate modules
+            for(res in results){
+              assert(is JsonObject res);
+              // Get the list of versions
+              assert(is String name = res["module"],
+                     is JsonArray versions = res["versions"]);
+              // Join them
+              value versionText = ", ".join(versions.narrow&lt;String&gt;());
+              // Now add the HTML items
+              dynamic item = jQuery("&lt;paper-item/&gt;");
+              dynamic body = jQuery("&lt;paper-item-body two-line/&gt;").appendTo(item);
+              jQuery("&lt;div/&gt;").text(name).appendTo(body);
+              jQuery("&lt;div secondary/&gt;").text(versionText).appendTo(body);
+              target.append(item);
+            }
+        }
+        // Query Herd for the list of modules
+        jQuery.get("https://modules.ceylon-lang.org/api/1/complete-modules?module=ceylon.", null, success, "text");
+    }
+}
+</code></pre>
+            
+            <p id="now_obviously_using_jquery_to...">Now, obviously using <code>jQuery</code> to add HTML is far from ideal, so I can't wait for someone to
+            extend <a href="https://herd.ceylon-lang.org/modules/ceylon.html">ceylon.html</a> to allow Polymer web
+            components!</p>
+            
+            <p id="we_can_now_compile_our...">We can now compile our application for JavaScript:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="shell"><code>$ ceylon compile-js
+</code></pre>
+            
+            <p id="and_copy_our_compiled_module...">And copy our compiled module and all its dependencies to where the Apache Cordova application
+            will find them in <code>www/modules</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="shell"><code>$ ceylon copy --with-dependencies --js --out www/modules cordova.demo/1.0.0
+</code></pre>
+            
+            <h2 id="invoking_the_ceylon_module_from_the_cordova_application">Invoking the Ceylon module from the Cordova application</h2>
+            
+            <p id="because_were_going_to_use...">Because we're going to use <code>require.js</code> inline and connect to Ceylon Herd, we have to adjust the Apache
+            Cordova permissions in <code>www/index.html</code>, so find that line and edit it as such:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="html"><code>&lt;meta http-equiv="Content-Security-Policy" 
+      content="default-src 'self' 'unsafe-inline' 
+               https://fonts.googleapis.com
+               https://fonts.gstatic.com;
+               connect-src *"&gt;
+</code></pre>
+            
+            <p id="were_left_with_just_invoking...">We're left with just invoking our Ceylon function in <code>www/index.html</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="html"><code>&lt;script type="text/javascript"&gt;
+  // tell require.js where our Ceylon modules are 
+  require.config({
+    baseUrl:'modules',
+  });
+  // when the document is ready
+  jQuery(function(){
+    // load our Ceylon module
+    require(['cordova/demo/1.0.0/cordova.demo-1.0.0'], function(client) {
+      // and call our run method
+      client.run();
+    });
+});
+&lt;/script&gt;
+</code></pre>
+            
+            <p id="and_setting_up_the_target...">And setting up the target HTML elements where we're going to add every loaded module (in
+            the same file):</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="html"><code>&lt;body id="app" unresolved&gt;
+  &lt;app-shell class="fit"&gt;
+    &lt;div id="target" role="listbox"&gt;&lt;/div&gt;
+  &lt;/app-shell&gt;
+&lt;/body&gt;
+</code></pre>
+            
+            <h2 id="trying_it">Trying it</h2>
+            
+            <p id="and_thats_it_try_it...">And that's it, try it out in your browser:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="shell"><code>$ cordova platform run browser
+</code></pre>
+            
+            <p id="or_in_an_android_emulator">Or in an Android emulator:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="shell"><code>$ ANDROID_HOME=.../Android/Sdk cordova platform build android
+$ ANDROID_HOME=.../Android/Sdk cordova platform run android
+</code></pre>
+            
+            <p id="if_you_have_osx_and...">If you have OSX and iOS dev tools, please try this with the iOS Cordova platform and let
+            me know how it works :)</p>
+            
+            <p id="in_the_future_we_would...">In the future, we would benefit from having a type-safe API in front of the Cordova JavaScript
+            API that lets you access native mobile APIs such as the camera, GPS, contacts, but even without
+            it you can already use them using <code>dynamic</code> blocks.</p>
+            
+            <p id="and_now_for_the_teaser…...">And now for the teaser… this is only one method to run Ceylon on Android, because obviously it
+            may be more desirable to use the JVM compiler backend and integrate with the Android Tools to
+            run Ceylon on Android using only type-safe APIs. Don't worry, it's coming, and next week I will
+            show you how :)</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2016/04/20/ceylon-on-mobile/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Ceylon 1.1.0 is now available</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2014/08/10/progress-report/">Ceylon 1.1 progress report</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2014/10/10/ceylon-osgi-jee/">Write in Ceylon, deploy as OSGI, use in Java EE</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="ceylon_110_is_now_available">
+            Ceylon 1.1.0 is now available
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              09 Oct 2014
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/release/">
+                release
+              </a>
+              <a href="/blog/tags/news/">
+                news
+              </a>
+              <a href="/blog/tags/progress/">
+                progress
+              </a>
+              <a href="/blog/tags/110/">
+                1.1.0
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <p id="ten_whole_months_in_the...">Ten whole months in the making, this is the biggest release
+            of Ceylon so far! <a href="/download/">Ceylon 1.1.0</a> incorporates oodles of
+            enhancements and bugfixes, with well over <a href="/documentation/1.0/roadmap/">1400 issues</a>
+            closed.</p>
+            
+            <p id="ceylon_is_a_modern_modular...">Ceylon is a modern, modular, statically typed programming
+            language for the Java and JavaScript virtual machines. The
+            language features a flexible and very readable syntax, a
+            unique and uncommonly elegant static type system, a powerful
+            module architecture, and excellent tooling, including an
+            awesome Eclipse-based IDE.</p>
+            
+            <p id="ceylon_enables_the_development_of...">Ceylon enables the development of cross-platform modules
+            that execute portably in both virtual machine environments.
+            Alternatively, a Ceylon module may target one or the other
+            platform, in which case it may interoperate with native code
+            written for that platform.</p>
+            
+            <p id="for_the_end_user_the...">For the end user, the most significant improvements in
+            Ceylon 1.1 are:</p>
+            
+            <ul>
+            <li>
+<strong>performance enhancements</strong>, especially to compilation
+            times in the IDE,</li>
+            <li>even smoother <strong>interoperation with Java overloading and
+            Java generics</strong>,</li>
+            <li>out of the box support for deployment of <strong>Ceylon modules
+            on OSGi containers</strong>,</li>
+            <li>enhancements to the Ceylon SDK, including the <strong>new
+            platform modules</strong> <code>ceylon.promise</code>, <code>ceylon.locale</code>, and
+            <code>ceylon.logging</code>, along with many improvements to
+            <code>ceylon.language</code>, <code>ceylon.collection</code>, and <code>ceylon.test</code>,</li>
+            <li>many new features and improvements in <strong>Ceylon IDE</strong>,
+            including</li>
+            <li>
+<code>ceylon.formatter</code>, a high-quality <strong>code formatter</strong>
+            written in Ceylon,</li>
+            <li>support for command line tool plugins, including the new
+            <code>ceylon format</code> and <code>ceylon build</code> plugins, and</li>
+            <li>
+<a href="https://github.com/vert-x/mod-lang-ceylon">integration with vert.x</a>.</li>
+            </ul>
+            
+            
+            <p id="a_longer_list_of_changes...">A longer list of changes may be found
+            <a href="/blog/2014/08/10/progress-report/">here</a>.</p>
+            
+            <h2 id="in_the_box">In the box</h2>
+            
+            <p id="this_release_includes"><a href="/download">This release</a> includes:</p>
+            
+            <ul>
+            <li>a complete <a href="/documentation/1.1/spec">language specification</a> that defines the
+            syntax and semantics of Ceylon in language accessible to
+            the professional developer,</li>
+            <li>a <a href="/documentation/1.1/reference/tool/ceylon/subcommands/index.html">command line toolset</a> including compilers for
+            Java and JavaScript, a documentation compiler, and support
+            for executing modular programs on the JVM and Node.js,</li>
+            <li>a powerful module architecture for code organization,
+            dependency management, and module isolation at runtime,</li>
+            <li>the <a href="https://herd.ceylon-lang.org/modules/ceylon.language">language module</a>, our minimal,
+            cross-platform foundation of the <a href="https://modules.ceylon-lang.org/categories/SDK">Ceylon SDK</a>, and</li>
+            <li>a <a href="/documentation/1.1/ide/features/">full-featured</a> Eclipse-based integrated
+            development environment.</li>
+            </ul>
+            
+            
+            <h2 id="language">Language</h2>
+            
+            <p id="ceylon_is_a_highly_understandable...">Ceylon is a highly understandable object-oriented language
+            with static typing. The language features:</p>
+            
+            <ul>
+            <li>an emphasis upon <strong>readability</strong> and a strong bias toward
+            <strong>omission or elimination of potentially-harmful or
+            potentially-ambiguous constructs</strong> and toward highly
+            <strong>disciplined use of static types</strong>,</li>
+            <li>an extremely powerful and uncommonly elegant type system
+            combining subtype and parametric polymorphism with:
+            
+            <ul>
+            <li>first-class <strong>union and intersection types</strong>,</li>
+            <li>both <strong>declaration-site and use-site variance</strong>, and</li>
+            <li>the use of principal types for <strong>local type inference</strong>
+            and <strong>flow-sensitive typing</strong>,</li>
+            </ul>
+            </li>
+            <li>a unique treatment of <strong>function and tuple types</strong>,
+            enabling powerful abstractions, along with the most
+            <strong>elegant approach to <code>null</code></strong> of any modern language,</li>
+            <li>first-class constructs for defining <strong>modules and
+            dependencies between modules</strong>,</li>
+            <li>a very flexible syntax including <strong>comprehensions</strong> and
+            support for expressing <strong>tree-like structures</strong>, and</li>
+            <li>
+<strong>fully-reified generic types</strong>, on both the JVM and
+            JavaScript virtual machines, and a unique <strong>typesafe
+            metamodel</strong>.</li>
+            </ul>
+            
+            
+            <p id="more_information_about_these_language...">More information about these language features may be
+            found in the <a href="/features">feature list</a> and
+            <a href="/documentation/1.1/introduction/">quick introduction</a>.</p>
+            
+            <p id="this_release_introduces_the_following...">This release introduces the following new language features:</p>
+            
+            <ul>
+            <li>support for <strong>use-site variance</strong>, enabling complete
+            interop with Java generics,</li>
+            <li>
+<strong><code>dynamic</code> interfaces</strong>, providing a typesafe way to
+            interoperate with dynamically typed native JavaScript code,</li>
+            <li>
+<strong>type inference for parameters of anonymous functions</strong>
+            that occur in an argument list, and</li>
+            <li>a <strong><code>Byte</code> class</strong> that is optimized by the compiler.</li>
+            </ul>
+            
+            
+            <h2 id="language_module">Language module</h2>
+            
+            <p id="the_language_module_was_a...">The language module was a major focus of attention in this
+            release, with substantial performance improvements, API
+            optimizations, and new features, including the addition of
+            a raft of powerful operations for working with streams.</p>
+            
+            <p id="the_language_module_now_includes...">The language module now includes an API for deploying Ceylon
+            modules programmatically from Java.</p>
+            
+            <p id="the_language_module_is_now...">The language module is now considered stable, and no further
+            breaking changes to its API are contemplated.</p>
+            
+            <h2 id="command_line_tools">Command line tools</h2>
+            
+            <p id="the_ceylon_command_now_supports...">The <code>ceylon</code> command now supports a plugin architecture. For
+            example, type:</p>
+            
+            <pre data-language="shell"><code>ceylon plugin install ceylon.formatter/1.1.0
+</code></pre>
+            
+            <p id="to_install_the_ceylon_format...">To install the <code>ceylon format</code> subcommand.</p>
+            
+            <h2 id="ide">IDE</h2>
+            
+            <p id="this_release_of_the_ide...">This release of the IDE features dramatic improvements to
+            build performance, and introduces many new features,
+            including:</p>
+            
+            <ul>
+            <li>a <strong>code formatter</strong>,</li>
+            <li>seven <strong>new refactorings</strong> and many improvements to existing
+            refactorings,</li>
+            <li>many <strong>new quick fixes/assists</strong>,</li>
+            <li>IntelliJ-style <strong>"chain completion"</strong> and completion of toplevel
+            functions applying to a value,</li>
+            <li>a rewritten <strong>Explorer view</strong>, with better presentation of modules
+            and modular dependencies,</li>
+            <li>synchronization of all keyboard accelerators with JDT
+            equivalents,</li>
+            <li>Quick Find References, Recently Edited Files, Format Block,
+            Visualize Modular Dependencies, Open in Type Hierarchy View,
+            Go to Refined Declaration, and much more.</li>
+            </ul>
+            
+            
+            <h2 id="sdk">SDK</h2>
+            
+            <p id="the_platform_modules_recompiled_for...">The <a href="https://modules.ceylon-lang.org/categories/SDK">platform modules</a>, recompiled for 1.1.0, are
+            available in the shared community repository, <a href="https://herd.ceylon-lang.org">Ceylon Herd</a>.</p>
+            
+            <p id="this_release_introduces_the_following_new...">This release introduces the following new platform modules:</p>
+            
+            <ul>
+            <li>
+<code>ceylon.promise</code>, cross-platform support for <strong>promises</strong>,</li>
+            <li>
+<code>ceylon.locale</code>, a cross-platform library for
+             <strong>internationalization</strong>, and</li>
+            <li>
+<code>ceylon.logging</code>, a simple <strong>logging API</strong>.</li>
+            </ul>
+            
+            
+            <p id="in_addition_there_were_many...">In addition, there were many improvements to
+            <code>ceylon.collection</code>, which is now considered stable, and to
+            <code>ceylon.test</code>.</p>
+            
+            <p id="the_ceylon_sdk_is_available...">The Ceylon SDK is available from <a href="https://herd.ceylon-lang.org">Ceylon Herd</a>, the community
+            module repository.</p>
+            
+            <h2 id="vertx_integration">Vert.x integration</h2>
+            
+            <p id="mod_lang_ceylon_implements_ceylon..."><code>mod-lang-ceylon</code> implements Ceylon 1.1 support for
+            Vert.x 2.1.x, and may be downloaded
+            <a href="https://github.com/vert-x/mod-lang-ceylon/releases/">here</a>.</p>
+            
+            <h2 id="community">Community</h2>
+            
+            <p id="the_ceylon_community_site_httpceylon...">The Ceylon community site, <a href="http://ceylon-lang.org">http://ceylon-lang.org</a>, includes
+            <a href="/documentation/1.1">documentation</a>, and information about <a href="/community">getting involved</a>.</p>
+            
+            <h2 id="source_code">Source code</h2>
+            
+            <p id="the_source_code_for_ceylon...">The source code for Ceylon, its specification, and its website
+            is freely available from <a href="https://github.com/ceylon">GitHub</a>.</p>
+            
+            <h2 id="issues">Issues</h2>
+            
+            <p id="bugs_and_suggestions_may_be...">Bugs and suggestions may be reported in GitHub's
+            <a href="/code/issues">issue tracker</a>.</p>
+            
+            <h2 id="acknowledgement">Acknowledgement</h2>
+            
+            <p id="were_deeply_indebted_to_the...">We're deeply indebted to the community volunteers who contributed a
+            substantial part of the current Ceylon codebase, working in their own
+            spare time. The following people have contributed to this release:</p>
+            
+            <p id="gavin_king_stéphane_épardaud_tako...">Gavin King, Stéphane Épardaud, Tako Schotanus, Emmanuel Bernard,
+            Tom Bentley, Aleš Justin, David Festal, Max Rydahl Andersen,
+            Mladen Turk, James Cobb, Tomáš Hradec, Ross Tate, Ivo Kasiuk,
+            Enrique Zamudio, Roland Tepp, Diego Coronel, Daniel Rochetti,
+            Loic Rouchon, Matej Lazar, Lucas Werkmeister, Akber Choudhry,
+            Corbin Uselton, Julien Viet, Stephane Gallès, Paco Soberón,
+            Renato Athaydes, Michael Musgrove, Flavio Oliveri, Michael Brackx,
+            Brent Douglas, Lukas Eder, Markus Rydh, Julien Ponge, Pete Muir,
+            Henning Burdack, Nicolas Leroux, Brett Cannon, Geoffrey De Smet,
+            Guillaume Lours, Gunnar Morling, Jeff Parsons, Jesse Sightler,
+            Oleg Kulikov, Raimund Klein, Sergej Koščejev, Chris Marshall,
+            Simon Thum, Maia Kozheva, Shelby, Aslak Knutsen, Fabien Meurisse,
+            Sjur Bakka, Xavier Coulon, Ari Kast, Dan Allen, Deniz Türkoglu,
+            F. Meurisse, Jean-Charles Roger, Johannes Lehmann, Alexander Altman,
+            allentc, Nikolay Tsankov, Chris Horne, gabriel-mirea, Georg Ragaller,
+            Griffin DeJohn, Harald Wellmann, klinger, Luke, Oliver Gondža,
+            Stephen Crawley.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2014/10/09/ceylon-1/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<feed xml:lang="en-US" xmlns="http://www.w3.org/2005/Atom">
+  <id>http://localhost:4242/blog/bastien-jansen/</id>
+  <title>Blog of Bastien Jansen</title>
+  <updated>2016-02-15T00:00:00+00:00</updated>
+  <link href="http://localhost:4242/blog/authors/bastien-jansen/blog.atom" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4242/" rel="alternate" type="text/html" />
+  <entry>
+    <id>http://localhost:4242/blog/2016/02/15/ceylon-browser-again</id>
+    <title>Ceylon in the browser (again)</title>
+    <updated>2016-02-15T00:00:00+00:00</updated>
+    <link href="http://localhost:4242/blog/2016/02/15/ceylon-browser-again" rel="alternate" type="text/html" />
+    <author>
+      <name>Bastien Jansen</name>
+    </author>
+    <summary>
+      As you might (or might not) know, Ceylon is more than a JVM language. It has been possible to compile Ceylon code
+      to JavaScript for a long time, but other platforms
+      such as Dart or LLVM
+      are around the corner.
+      
+      Having a JS backend means that you can actually write Ceylon code that can be
+      run in a web browser, giving the opportunity to share code
+      between the server and the client. The web IDE is a very good example of this. Up until now,
+      using Ceylon in a browser wasn't really straightforward though. The good news is, Ceylon 1.2.1 brought two major
+      features that overcome this problem:
+      
+      
+      a...
+    </summary>
+    <content type="html">
+      &lt;p&gt;As you might (or might not) know, Ceylon is more than a JVM language. It has been possible to compile Ceylon code
+      to JavaScript &lt;a href=&quot;http://localhost:4242/blog/2011/12/31/compiling-ceylon-2-js/&quot;&gt;for a long time&lt;/a&gt;, but other platforms
+      such as &lt;a href=&quot;https://github.com/jvasileff/ceylon-dart&quot;&gt;Dart&lt;/a&gt; or &lt;a href=&quot;https://github.com/sadmac7000/org.americanteeth.ceylon_llvm&quot;&gt;LLVM&lt;/a&gt;
+      are around the corner.&lt;/p&gt;
+      
+      &lt;p&gt;Having a JS backend means that you can actually write Ceylon code that can be
+      &lt;a href=&quot;http://localhost:4242/blog/2013/02/26/ceylon-in-the-browser/&quot;&gt;run in a web browser&lt;/a&gt;, giving the opportunity to share code
+      between the server and the client. The &lt;a href=&quot;https://try.ceylon-lang.org&quot;&gt;web IDE&lt;/a&gt; is a very good example of this. Up until now,
+      using Ceylon in a browser wasn't really straightforward though. The good news is, Ceylon 1.2.1 brought two major
+      features that overcome this problem:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;a &lt;a href=&quot;https://modules.ceylon-lang.org/repo/1/ceylon/net/1.2.1/module-doc/api/http/server/endpoints/RepositoryEndpoint.type.html&quot;&gt;RepositoryEndpoint&lt;/a&gt; in &lt;code&gt;ceylon.net&lt;/code&gt; on the server side&lt;/li&gt;
+      &lt;li&gt;a new JS module &lt;a href=&quot;https://herd.ceylon-lang.org/modules/ceylon.interop.browser&quot;&gt;ceylon.interop.browser&lt;/a&gt; on the client side&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;p&gt;Let's see how these fit together.&lt;/p&gt;
+      
+      &lt;h2&gt;Creating a new project&lt;/h2&gt;
+      
+      &lt;p&gt;First things first, we need an empty project that will hold two modules:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;
+      &lt;p&gt;&lt;code&gt;com.acme.client&lt;/code&gt; is a &lt;code&gt;native(&quot;js&quot;)&lt;/code&gt; module that imports &lt;code&gt;ceylon.interop.browser&lt;/code&gt;:&lt;/p&gt;
+      
+      &lt;p&gt;  native(&quot;js&quot;)
+        module com.acme.client &quot;1.0.0&quot; {
+            import ceylon.interop.browser &quot;1.2.1-1&quot;;
+        }&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+      &lt;p&gt;&lt;code&gt;com.acme.server&lt;/code&gt; is a &lt;code&gt;native(&quot;jvm&quot;)&lt;/code&gt; module that imports &lt;code&gt;ceylon.net&lt;/code&gt;:&lt;/p&gt;
+      
+      &lt;p&gt;  native(&quot;jvm&quot;)
+        module com.acme.server &quot;1.0.0&quot; {
+            import ceylon.net &quot;1.2.1&quot;;
+        }&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;h2&gt;Serving Ceylon modules&lt;/h2&gt;
+      
+      &lt;p&gt;In order to run &lt;code&gt;com.acme.client&lt;/code&gt; in a browser, we have to import it from an HTML file. The recommended way is to use
+      &lt;a href=&quot;http://requirejs.org/&quot;&gt;RequireJS&lt;/a&gt;:&lt;/p&gt;
+      
+      &lt;!-- lang: html --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;&amp;lt;!doctype html&amp;gt;
+      &amp;lt;html lang=&quot;en&quot;&amp;gt;
+      &amp;lt;head&amp;gt;
+          &amp;lt;meta charset=&quot;utf-8&quot;&amp;gt;
+          &amp;lt;title&amp;gt;Hello from Ceylon!&amp;lt;/title&amp;gt;
+      &amp;lt;/head&amp;gt;
+      &amp;lt;body&amp;gt;
+          &amp;lt;div id=&quot;container&quot;&amp;gt;
+          &amp;lt;/div&amp;gt;
+          &amp;lt;script src=&quot;//requirejs.org/docs/release/2.1.22/minified/require.js&quot;&amp;gt;&amp;lt;/script&amp;gt;
+          &amp;lt;script type=&quot;text/javascript&quot;&amp;gt;
+          require.config({
+              baseUrl : 'modules'
+          });
+          require(
+                  [ 'com/acme/client/1.0.0/com.acme.client-1.0.0' ],
+                  function(app) {
+                      app.run();
+                  }
+          );
+          &amp;lt;/script&amp;gt;
+      &amp;lt;/body&amp;gt;
+      &amp;lt;/html&amp;gt;
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;Here, we tell RequireJS to use the prefix &lt;code&gt;modules&lt;/code&gt; when downloading artifacts from the server, which means
+      we need something on a server that will listen on &lt;code&gt;/modules&lt;/code&gt;, parse module names and serve the correct artifact.&lt;/p&gt;
+      
+      &lt;h3&gt;Option 1: using a Ceylon server&lt;/h3&gt;
+      
+      &lt;p&gt;Ceylon SDK 1.2.1 introduced a new endpoint named &lt;code&gt;RepositoryEndpoint&lt;/code&gt;, that uses a &lt;code&gt;RepositoryManager&lt;/code&gt; to look
+      up module artifacts in one or more Ceylon repositories, like the compiler or Ceylon IDE do:&lt;/p&gt;
+      
+      &lt;pre&gt;&lt;code&gt;import ceylon.net.http.server.endpoints {
+          RepositoryEndpoint
+      }
+      import ceylon.net.http.server {
+          newServer
+      }
+      
+      &quot;Run the module `com.acme.server`.&quot;
+      shared void run() {
+          value modulesEp = RepositoryEndpoint(&quot;/modules&quot;);
+          value server = newServer { modulesEp };
+      
+          server.start();
+      }
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;By default, this endpoint will look for artifacts in your local Ceylon repository, but also in the compiler's output
+      directory. This greatly simplifies our development workflow, because each time we modify files in &lt;code&gt;com.acme.client&lt;/code&gt;,
+      Ceylon IDE will rebuild the JS artifacts, which can then be immediately refreshed in the browser.&lt;/p&gt;
+      
+      &lt;p&gt;Finally, to serve static files (HTML, CSS, images etc), we need a second endpoint that uses &lt;code&gt;serveStaticFile&lt;/code&gt;
+      to look up files in the &lt;code&gt;www&lt;/code&gt; folder, and serve &lt;code&gt;index.html&lt;/code&gt; by default:&lt;/p&gt;
+      
+      &lt;pre&gt;&lt;code&gt;function mapper(Request req) 
+              =&amp;gt; req.path == &quot;/&quot; then &quot;/index.html&quot; else req.path;
+      
+      value staticEp = AsynchronousEndpoint(
+          startsWith(&quot;/&quot;), 
+          serveStaticFile(&quot;www&quot;, mapper),
+          {get}
+      );
+      
+      value server = newServer { modulesEp, staticEp };
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;If we start the server and open &lt;code&gt;http://localhost:8080/&lt;/code&gt;, we can see in the web inspector that the modules
+      are correctly loaded:&lt;/p&gt;
+      
+      &lt;p&gt;&lt;img src=&quot;http://localhost:4242/images/screenshots/ceylon-browser/network.png&quot; height=&quot;273&quot;&gt;&lt;/p&gt;
+      
+      &lt;h3&gt;Option 2: using static HTTP servers&lt;/h3&gt;
+      
+      &lt;p&gt;Option 1 is interesting if you already have a backend written in Ceylon. Otherwise, it might be a little
+      too heavy because you're basically starting a Ceylon server just to serve static files. Luckily, there's
+      a way to create a standard Ceylon repository containing a module and all its dependencies:
+      &lt;a href=&quot;http://ceylon-lang.org/documentation/current/reference/tool/ceylon/subcommands/ceylon-copy.html&quot;&gt;&lt;code&gt;ceylon copy&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+      
+      &lt;!-- lang: bash --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;ceylon copy --with-dependencies com.acme.client
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;This command will copy the module &lt;code&gt;com.acme.client&lt;/code&gt; and all its dependencies to a given folder (by default
+      &lt;code&gt;./modules&lt;/code&gt;), preserving a repository layout like the one RequireJs expects. This means we can start httpd
+      or nginx and bind them directly on the project folder. Modules will be loaded from &lt;code&gt;./modules&lt;/code&gt;, we just have
+      to configure the server to look for other files in the &lt;code&gt;www&lt;/code&gt; directory.&lt;/p&gt;
+      
+      &lt;p&gt;Attention though, each time we modify dependencies of &lt;code&gt;com.acme.client&lt;/code&gt;, we will have to run &lt;code&gt;ceylon copy&lt;/code&gt; again
+      to update the local repository.&lt;/p&gt;
+      
+      &lt;p&gt;Option 2 is clearly the way to go for client apps that don't require a backend. Like option 1, it doesn't force
+      you to publish artifacts in &lt;code&gt;~/.ceylon/repo&lt;/code&gt;.&lt;/p&gt;
+      
+      &lt;p&gt;Of course, if you are running a local Ceylon JS application, and your browser allows you to include files directly from
+      the filesystem, you can also avoid the HTTP server and load everything for the filesystem.&lt;/p&gt;
+      
+      &lt;h2&gt;Using browser APIs&lt;/h2&gt;
+      
+      &lt;p&gt;Now that we have bootstrapped a Ceylon application running in a browser, it's time to do actual things
+      that leverage browser APIs. To do this, we'll use the brand new &lt;code&gt;ceylon.interop.browser&lt;/code&gt; which was
+      introduced in the Ceylon SDK 1.2.1 a few days ago. Basically, it's a set of
+      &lt;a href=&quot;http://localhost:4242/blog/2014/10/13/dynamic-interfaces/&quot;&gt;&lt;code&gt;dynamic&lt;/code&gt; interfaces&lt;/a&gt; that
+      allow wrapping native JS objects returned by the browser in nice typed Ceylon instances. For example, this
+      interface represents the browser's &lt;code&gt;Document&lt;/code&gt;:&lt;/p&gt;
+      
+      &lt;pre&gt;&lt;code&gt;shared dynamic Document satisfies Node &amp;amp; GlobalEventHandlers {
+          shared formal String \iURL;
+          shared formal String documentURI;
+          ...
+          shared formal HTMLCollection getElementsByTagName(String localName);
+          shared formal HTMLCollection getElementsByClassName(String classNames);
+          ...
+      }
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;An instance of &lt;code&gt;Document&lt;/code&gt; can be retrieved via the toplevel object &lt;code&gt;document&lt;/code&gt;, just like in JavaScript:&lt;/p&gt;
+      
+      &lt;pre&gt;&lt;code&gt;shared Document document =&amp;gt; window.document;
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;Note that &lt;code&gt;window&lt;/code&gt; is also a toplevel instance of the dynamic interface &lt;code&gt;Window&lt;/code&gt;.&lt;/p&gt;
+      
+      &lt;p&gt;&lt;code&gt;ceylon.interop.browser&lt;/code&gt; contains lots of interfaces related to:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.w3.org/TR/dom/#nodes&quot;&gt;DOM nodes&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.w3.org/TR/dom/#events&quot;&gt;DOM events&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.w3.org/TR/dom/#traversal&quot;&gt;DOM traversal&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.w3.org/TR/XMLHttpRequest/&quot;&gt;XMLHttpRequest&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;p&gt;Making an AJAX call, retrieving the result and adding it to a &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt; is now super easy in Ceylon:&lt;/p&gt;
+      
+      &lt;pre&gt;&lt;code&gt;import ceylon.interop.browser.dom {
+          document,
+          Event
+      }
+      import ceylon.interop.browser {
+          newXMLHttpRequest
+      }
+      
+      shared void run() {
+          value req = newXMLHttpRequest();
+      
+          req.onload = void (Event evt) {
+              if (exists container = document.getElementById(&quot;container&quot;)) {
+                  value title = document.createElement(&quot;h1&quot;);
+                  title.textContent = &quot;Hello from Ceylon&quot;;
+                  container.appendChild(title);
+      
+                  value content = document.createElement(&quot;p&quot;);
+                  content.innerHTML = req.responseText;
+                  container.appendChild(content);
+              }
+          };
+      
+          req.open(&quot;GET&quot;, &quot;/msg.txt&quot;);
+          req.send();
+      }
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;h2&gt;Going further&lt;/h2&gt;
+      
+      &lt;p&gt;Dynamic interfaces are really nice when it comes to using JavaScript objects in Ceylon. They are somewhat
+      similar to TypeScript's &lt;a href=&quot;https://github.com/DefinitelyTyped/DefinitelyTyped&quot;&gt;type definitions&lt;/a&gt;, which means
+      in theory, it is possible to use any JavaScript framework directly from Ceylon, provided that someone writes dynamic
+      interfaces for its API.&lt;/p&gt;
+      
+      &lt;p&gt;The Ceylon team is currently looking for ways to &lt;a href=&quot;https://github.com/ceylon/ceylon/issues/3041&quot;&gt;load TypeScript definitions and make them available to Ceylon modules&lt;/a&gt;,
+      which would greatly simplify the process of adding support for a new framework/API.&lt;/p&gt;
+      
+      &lt;p&gt;The &lt;a href=&quot;https://github.com/bjansen/ceylon-browser-demo&quot;&gt;complete source code&lt;/a&gt; for this article is available on GitHub.&lt;/p&gt;
+      
+      &lt;p&gt;A &lt;a href=&quot;http://try.ceylon-lang.org/?gist=c7e291bc337b5b260de4&quot;&gt;live example&lt;/a&gt; is available on the Web IDE.&lt;/p&gt;
+    </content>
+  </entry>
+</feed>

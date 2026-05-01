@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: The language module</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.2/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.2/tour">Tour of Ceylon</a></h3>
+            
+            <ol>
+            <li><a href="/documentation/1.2/tour/basics">Basics</a></li>
+            <li><a href="/documentation/1.2/tour/classes">Classes</a></li>
+            <li><a href="/documentation/1.2/tour/attributes-control-structures">Attributes and variables, control structures</a></li>
+            <li><a href="/documentation/1.2/tour/inheritance">Inheritance, refinement, and interfaces</a></li>
+            <li><a href="/documentation/1.2/tour/anonymous-member-classes">Anonymous and member classes</a></li>
+            <li><a href="/documentation/1.2/tour/sequences">Streams, sequences, and tuples</a></li>
+            <li><a href="/documentation/1.2/tour/typeinference">Type aliases and type inference</a></li>
+            <li><a href="/documentation/1.2/tour/types">Union, intersection, and enumerated types</a></li>
+            <li><a href="/documentation/1.2/tour/generics">Generics</a></li>
+            <li><a href="/documentation/1.2/tour/modules">Packages and modules</a></li>
+            <li><a href="/documentation/1.2/tour/functions">Functions</a></li>
+            <li><a href="/documentation/1.2/tour/named-arguments">Named arguments</a></li>
+            <li><a href="/documentation/1.2/tour/comprehensions">Comprehensions</a></li>
+            <li><a href="/documentation/1.2/tour/language-module">Language module</a></li>
+            <li><a href="/documentation/1.2/tour/initialization">Initialization and constructors</a></li>
+            <li><a href="/documentation/1.2/tour/annotations">Annotations and the metamodel</a></li>
+            <li><a href="/documentation/1.2/tour/interop">Interoperation with Java</a></li>
+            <li><a href="/documentation/1.2/tour/dynamic">Dynamic typing</a></li>
+            </ol>
+            
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.2/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.2/examples">Examples</a></h3>
+            
+            <!-- ### [Tutorial videos](/documentation/1.2/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.2/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.2/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.2/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.2/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.2/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Tour of Ceylon
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_12_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.2, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.2/tour/language-module.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.2/tour/language-module.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="the_language_module">The language module</h1>
+          
+          <p id="this_is_the_fourteenth_part...">This is the fourteenth part of the Tour of Ceylon. The <a href="../comprehensions">previous part</a>
+          introduced comprehensions. We're now going to learn about Ceylon's
+          <em>language module</em> and some of the basic types it defines.</p>
+          
+          <p id="the_language_module_is_special...">The language module is special, because it is referred to by the language
+          specification, and some language-level constructs are defined in terms of
+          the types it declares. Therefore, you can think of it as forming part of
+          the language definition. In practice, the language module is implemented
+          in a mix of Ceylon and native (Java and JavaScript) code. Of course, we've
+          already met quite a few of the inhabitants of the language module,
+          especially in <a href="../sequences">this chapter</a>.</p>
+          
+          <h2 id="an_overview_of_the_language_module">An overview of the language module</h2>
+          
+          <p id="the_module_ceylonlanguage_contains_classes...">The module <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/index.html"><code>ceylon.language</code></a>
+          contains classes and interfaces that are referred to in the language
+          specification, other declarations <em>they</em> refer to, and a number of
+          related useful functions and types. Let's meet the main characters.</p>
+          
+          <p id="just_like_java_ceylon_has...">Just like Java, Ceylon has a class named
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Object.type.html"><code>Object</code></a>.</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:decl from ceylon.language -->
+          
+          
+          <pre data-language="ceylon"><code>"The abstract supertype of all types representing 
+ definite values..."
+see (`class Basic`, `class Null`)
+shared abstract class Object() 
+        extends Anything() {
+
+    "Determine if two values are equal..."
+    shared formal Boolean equals(Object that);
+
+    "The hash value of the value..."
+    shared formal Integer hash;
+
+    "A developer-friendly string representing the 
+     instance..."
+    shared default String string
+            =&gt; className(this) + "@" + hash.string;
+
+}
+</code></pre>
+          
+          <p id="ceylons_object_isnt_the_root...">Ceylon's, <code>Object</code> <em>isn't</em> the root of the type system. An expression
+          of type <code>Object</code> has a definite, well-defined, non-<code>null</code> value. As
+          we've seen, Ceylon type system also has the class
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Null.type.html"><code>Null</code></a>,
+          which is the type of <code>null</code>.</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:decl from ceylon.language -->
+          
+          
+          <pre data-language="ceylon"><code>"The type of the [[null]] value. Any union type of form 
+ `Null|T` is considered an _optional_ type, whose values
+ include `null`. Any type of this form may be written as
+ `T?` for convenience..."
+see (`value null`)
+shared abstract class Null() 
+        of null
+        extends Anything() {}
+</code></pre>
+          
+          <p id="the_object_null_is_the...">The object <code>null</code> is the only instance of this class.</p>
+          
+          <p id="therefore_object_and_null_share...">Therefore, <code>Object</code> and <code>Null</code> share a superclass, named
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Anything.type.html"><code>Anything</code></a>.</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:decl from ceylon.language -->
+          
+          
+          <pre data-language="ceylon"><code>"The abstract supertype of all types. A value of type 
+ `Anything` may be a definite value of type [[Object]], or 
+ it may be the [[null]] value. A method declared `void` is 
+ considered to have the return type `Anything`..."
+shared abstract class Anything() 
+        of Object | Null {}
+</code></pre>
+          
+          <p id="all_ceylon_types_are_assignable...">All Ceylon types are assignable to <code>Anything</code>. Expressions of type <code>Anything</code>
+          aren't useful for very much, since <code>Anything</code> has no members or operations.
+          The one useful thing you can do with <code>Anything</code> is represent the signature of
+          a method when you don't care about the return type, since a method declared
+          <code>void</code> is considered to have return type <code>Anything</code>, as we saw in the
+          <a href="../functions">part about functions</a>.</p>
+          
+          <p id="all_types_that_represent_well...">All types that represent well-defined values extend <code>Object</code>, including:</p>
+          
+          <ul>
+          <li>user-written classes,</li>
+          <li>all interfaces, including,</li>
+          <li>function types, and even</li>
+          <li>the types that are considered primitive in Java, such as
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Boolean.type.html"><code>Boolean</code></a>,
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Integer.type.html"><code>Integer</code></a>,
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Float.type.html"><code>Float</code></a>,
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Byte.type.html"><code>Byte</code></a>, and<br>
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Character.type.html"><code>Character</code></a>.</li>
+          </ul>
+          
+          
+          <p id="since_an_expression_of_type...">Since an expression of type <code>Object</code> always evaluates to a definite,
+          well-defined value, it's possible to obtain the runtime type of an
+          <code>Object</code>, or narrow an expression of type <code>Object</code> to a more specific
+          type.</p>
+          
+          <h2 id="equality_and_identity">Equality and identity</h2>
+          
+          <p id="on_the_other_hand_since...">On the other hand, since <code>Object</code> is a supertype of types like <code>Float</code>
+          which are passed by value at the level of the virtual machine, you
+          can't use the <code>===</code> operator to test the identity of two values of type
+          <code>Object</code>. The following is not allowed:</p>
+          
+          <pre data-language="ceylon"><code>Integer x = 1;
+assert (x===1); //compile error: Integer is not Identifiable 
+</code></pre>
+          
+          <p id="instead__is_defined_to...">Instead, <code>===</code> is defined to act on instances of the interface
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Identifiable.type.html"><code>Identifiable</code></a>.
+          <code>Integer</code>, <code>Float</code>, <code>Character</code>, and <code>String</code> <em>don't</em> satisfy this
+          interface, but most classes do.</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:decl from ceylon.language -->
+          
+          
+          <pre data-language="ceylon"><code>"The abstract supertype of all types with a well-defined
+ notion of identity. Values of type `Identifiable` may 
+ be compared using the `===` operator to determine if 
+ they are references to the same object instance..."
+shared interface Identifiable {
+
+    "Identity equality comparing the identity of the two 
+     values..."
+    shared default actual Boolean equals(Object that) {
+        if (is Identifiable that) {
+            return this===that;
+        }
+        else {
+            return false;
+        }
+    }
+
+    "The system-defined identity hash value of the 
+     instance..."
+    see (`function identityHash`)
+    shared default actual Integer hash =&gt; identityHash(this);
+
+}
+</code></pre>
+          
+          <p id="identifiable_implements_the_hash_attribute..."><code>Identifiable</code> implements the <code>hash</code> attribute and <code>equals()</code> method of
+          <code>Object</code>, which are very similar to the <code>equals()</code> and <code>hashCode()</code> methods
+          defined by <code>java.lang.Object</code>.</p>
+          
+          <p id="just_like_in_java_you...">Just like in Java, you can refine this default implementation in your own
+          classes. This is the normal way to get a customized behavior for the <code>==</code>
+          operator, the only constraint being, that for subtypes of <code>Identifiable</code>,
+          <code>x===y</code> should imply <code>x==y</code>— equality should be consistent with identity.</p>
+          
+          <p id="by_default_a_user_written...">By default, a user-written class extends the class
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Basic.type.html"><code>Basic</code></a>,
+          which extends <code>Object</code> and satisfies <code>Identifiable</code>. It's possible for a
+          user-written class to directly extend <code>Object</code>, but most of the classes
+          you write will be subclasses of <code>Basic</code>. All classes with <code>variable</code>
+          attributes must extend <code>Basic</code>.</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:decl from ceylon.language -->
+          
+          
+          <pre data-language="ceylon"><code>"The default superclass when no superclass is explicitly
+ specified using `extends`..."
+shared abstract class Basic() 
+        extends Object() satisfies Identifiable {}
+</code></pre>
+          
+          <h2 id="operator_polymorphism">Operator polymorphism</h2>
+          
+          <p id="ceylon_discourages_the_creation_of...">Ceylon discourages the creation of intriguing executable ASCII art.
+          Therefore, true operator overloading is <em>not</em> supported by the language.
+          Instead, almost every operator (every one except the primitive <code>.</code>, <code>()</code>,
+          <code>is</code>, <code>=</code>, <code>===</code>, and <code>of</code> operators) is considered a shortcut way of
+          writing some more complex expression involving other operators and ordinary
+          function calls.</p>
+          
+          <p id="for_example_the__operator...">For example, the <code>&lt;</code> operator is defined in terms of the interface
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Comparable.type.html"><code>Comparable</code></a>,
+          which has a method named <code>compare()</code>. The operator expression</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none -->
+          
+          
+          <pre data-language="ceylon"><code>x&lt;y
+</code></pre>
+          
+          <p id="means_by_definition">means, by definition,</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none -->
+          
+          
+          <pre data-language="ceylon"><code>x.compare(y) === smaller
+</code></pre>
+          
+          <p id="the_equality_operator__is...">The equality operator <code>==</code> is defined in terms of the class <code>Object</code>,
+          which has a method named <code>equals()</code>. So</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none -->
+          
+          
+          <pre data-language="ceylon"><code>x==y
+</code></pre>
+          
+          <p>means, by definition,</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none -->
+          
+          
+          <pre data-language="ceylon"><code>x.equals(y)
+</code></pre>
+          
+          <p id="therefore_its_easy_to_customize...">Therefore, it's easy to customize operators like <code>&lt;</code> and <code>==</code> with specific
+          behavior for our own classes, just by implementing or refining methods like
+          <code>compare()</code> and <code>equals()</code>. Thus, we say that operators are <em>polymorphic</em>
+          in Ceylon.</p>
+          
+          <p id="apart_from_comparable_and_object...">Apart from <code>Comparable</code> and <code>Object</code>, which provide the underlying
+          definition of comparison and equality operators, the following interfaces
+          are also important in the definition of Ceylon's polymorphic operators:</p>
+          
+          <ul>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Summable.type.html"><code>Summable</code></a>
+          supports the infix <code>+</code> operator,</li>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Invertible.type.html"><code>Invertible</code></a>
+          supports the prefix and infix <code>-</code> operators,</li>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Ordinal.type.html"><code>Ordinal</code></a>
+          supports the unary <code>++</code> and <code>--</code> operators,</li>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Numeric.type.html"><code>Numeric</code></a>
+          supports the infix <code>*</code> and <code>/</code> operators,</li>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Exponentiable.type.html"><code>Exponentiable</code></a>
+          supports the power operator <code>^</code>,</li>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Comparable.type.html"><code>Comparable</code></a>
+          supports the comparison operators <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, and <code>&lt;=&gt;</code>,</li>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Enumerable.type.html"><code>Enumerable</code></a>
+          supports the range operators <code>..</code> and <code>:</code>,</li>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Correspondence.type.html"><code>Correspondence</code></a>
+          supports the index operator,</li>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Ranged.type.html"><code>Ranged</code></a>
+          supports the subrange operators,</li>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Boolean.type.html"><code>Boolean</code></a>
+          is the basis of the logical operators <code>&amp;&amp;</code>, <code>||</code>, <code>!</code>, and</li>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Set.type.html"><code>Set</code></a>
+          is the basis of the set operators <code>|</code>, <code>&amp;</code>, and, <code>~</code>.</li>
+          </ul>
+          
+          
+          <h2 id="comparison_operators">Comparison operators</h2>
+          
+          <p id="in_addition_to_the_traditional...">In addition to the traditional <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, and <code>&gt;=</code> operators, which
+          evaluate to <code>Boolean</code>, there is a <code>&lt;=&gt;</code> operator, which produces an instance
+          of the enumerated type
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Comparison.type.html"><code>Comparison</code></a>.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>switch(x&lt;=&gt;0)
+case (smaller) {
+    return sqrt(-x);
+}
+case (equal) {
+    return 0;
+}
+case (larger) {
+    return sqrt(x);
+}
+</code></pre>
+          
+          <p id="two__or__operators...">Two <code>&lt;</code> or <code>&lt;=</code> operators may be combined to determine if a value falls withing
+          a range:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>assert(0&lt;quantity&lt;=100);
+</code></pre>
+          
+          <h2 id="set_operators">Set operators</h2>
+          
+          <p id="the_operators__and_...">The operators <code>|</code> and <code>&amp;</code> represent set union and intersection when they appear in a
+          value expression. But, as we've already seen, when they appear in a type expression
+          they represent <em>type</em> union and intersection! Indeed, there is a relationship between
+          the two kinds of union/intersection:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Set&lt;Integer&gt; integers = ... ;
+Set&lt;Float&gt; floats = ... ;
+Set&lt;Float|Integer&gt; numbers = integers | floats;
+</code></pre>
+          
+          <br>
+          
+          
+          
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Set&lt;Foo&gt; foos = ... ;
+Set&lt;Bar&gt; bars = ... ;
+Set&lt;Foo&amp;Bar&gt; foobars = foos &amp; bars;
+</code></pre>
+          
+          <p id="the_binary__operator_represents...">The binary <code>~</code> operator represents complement (set subtraction).</p>
+          
+          <h2 id="indexed_operations">Indexed operations</h2>
+          
+          <p id="we_can_access_an_element...">We can access an element of a <code>Correspondence</code> by using the index operator. Both
+          <code>List</code>s and <code>Map</code>s are instances of <code>Correspondence</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>"string must start with a \""
+assert (exists ch = text[0], ch=='"');
+</code></pre>
+          
+          <p id="all_lists_are_also_instances...">All <code>List</code>s are also instances of <code>Ranged</code>. We can produce a subrange of a <code>Ranged</code>
+          by providing two endpoints:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>if (text[i..i]=="/") {
+    [String,String] split = [text[...i-1], text[i+1...]];
+    //...
+}
+</code></pre>
+          
+          <p id="we_can_also_produce_a...">We can also produce a subrange of a <code>Ranged</code> by providing a starting point and a
+          length.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>String selectedText = text[selection.offset:selection.length];
+</code></pre>
+          
+          <p id="please_take_careful_note_the...">Please take careful note the difference between <code>..</code> and <code>:</code>, they have quite distinct
+          purposes:</p>
+          
+          <pre data-language="ceylon"><code>print("hello"[2..2]); //prints "l"
+print("hello"[2:2]);  //prints "ll"
+
+print("hello"[2..0]); //prints "leh"
+print("hello"[2:0]);  //prints ""
+</code></pre>
+          
+          <h2 id="characters_and_character_strings">Characters and character strings</h2>
+          
+          <p id="weve_already_met_the_class...">We've already met the class <code>String</code>, way back in
+          <a href="../basics/#string_literals">the first leg of the tour</a>. Ceylon strings are composed of
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Character.type.html"><code>Character</code></a>s—indeed,
+          a <code>String</code> is a <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/List.type.html"><code>List</code></a>
+          of <code>Character</code>s.</p>
+          
+          <p id="a_character_literal_is_written...">A character literal is written between single quotes.</p>
+          
+          <pre data-language="ceylon"><code>Character[] latinLetters = concatenate('a'..'z', 'A'..'Z');
+Character newline = '\n';
+Character pi = '\{#0001D452}';
+</code></pre>
+          
+          <p id="an_instance_of_character_represents...">An instance of <code>Character</code> represents a 32-bit Unicode character, not a
+          Java-style UTF-16 <code>char</code>. However, under the covers, Ceylon strings are
+          implemented using a Java <code>char[]</code> array (in fact, they are implemented
+          using a Java string). So some operations on Ceylon strings are much
+          slower than you might expect, since they must take four-byte characters
+          into account. This includes <code>size</code> and <code>item()</code>. We think it's much better
+          that these operations be slow, like in Ceylon, than that they sometimes
+          give the wrong answer, like in Java. And
+          <a href="../sequences/#sequence_gotchas_for_java_developers">remember</a>, it's
+          never correct to iterate a list using <code>size</code> and <code>item()</code> in Ceylon!</p>
+          
+          <p id="to_avoid_the_cost_of...">To avoid the cost of calling <code>size()</code>, try to use the more efficient
+          <code>empty</code>, <code>longerThan()</code> and <code>shorterThan()</code> when the string might be
+          very long.</p>
+          
+          <h2 id="numeric_types">Numeric types</h2>
+          
+          <p id="as_weve_mentioned_several_times...">As we've mentioned several times before, Ceylon doesn't have anything like
+          Java's primitive types. The types that represent numeric values are just
+          ordinary classes. Ceylon has fewer built-in numeric types than other C-like
+          languages:</p>
+          
+          <ul>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Integer.type.html"><code>Integer</code></a>
+          represents signed integers, and</li>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Float.type.html"><code>Float</code></a>
+          represents floating point approximations to the real numbers.</li>
+          </ul>
+          
+          
+          <p id="however_the_compiler_magically_eliminates...">However, the compiler magically eliminates these classes, wherever possible,
+          in order to take advantage of the high performance of the platform's native
+          primitive types.</p>
+          
+          <p id="therefore_the_precision_of_these...">Therefore, the precision of these types depends on whether you're running
+          your code on the JVM or on a JavaScript virtual machine.</p>
+          
+          <ul>
+          <li>When compiling for Java both types have 64-bit precision by default.
+          Eventually, you'll be able to specify that a value has 32-bit precision
+          by annotating it <code>small</code>. But note that this annotation is really just a
+          hint that the compiler is free to ignore (as it currently does).</li>
+          <li>When compiling for JavaScript, <code>Float</code>s have 64-bit precision and
+          <code>Integer</code>s have 53-bit precision.</li>
+          </ul>
+          
+          
+          <p id="overflow_on_the_jvm_or...">Overflow (on the JVM), or loss of precision (in JavaScript) occurs silently.</p>
+          
+          <h2 id="numeric_literals">Numeric literals</h2>
+          
+          <p id="in_their_simplest_form_the...">In their simplest form the literals for <code>Integer</code>s, and
+          literals for <code>Float</code>s look as you might expect from other languages:</p>
+          
+          <pre data-language="ceylon"><code>Integer one = 1;
+Float oneHundredth = 0.01;
+Float oneMillion = 1.0E+6;
+</code></pre>
+          
+          <p id="however_they_can_be_a...">However they can be a bit more sophisticated. The digits of a numeric literal
+          may be grouped using underscores. If the digits are grouped, then groups must
+          contain exactly three digits.</p>
+          
+          <pre data-language="ceylon"><code>Integer twoMillionAndOne = 2_000_001;
+Float pi = 3.141_592_654;
+</code></pre>
+          
+          <p id="a_very_large_or_small...">A very large or small numeric literal may be qualified by one of the standard
+          SI unit prefixes: <code>m</code>, <code>u</code>, <code>n</code>, <code>p</code>, <code>f</code>, <code>k</code>, <code>M</code>, <code>G</code>, <code>T</code>, <code>P</code>.</p>
+          
+          <pre data-language="ceylon"><code>Float red = 390.0n;                  // n (nano) means E-9
+Float galaxyDiameter = 900.0P;       // P (peta) means E+15
+Float hydrogenRadius = 25.0p;        // p (pico) means E-12
+Float usGovDebt = 14.33T;            // T (tera) means E+12
+Float brainCellSize = 4.0u;          // u (micro) means E-6
+Integer deathsUnderCommunism = 94M;  // M (mega) means E+6
+</code></pre>
+          
+          <p id="a_hexadecimal_integer_is_written...">A hexadecimal integer is written using a prefix <code>#</code>. Digits may be grouped
+          into groups of two or four digits.</p>
+          
+          <pre data-language="ceylon"><code>Integer white = #FF_FF_FF;
+</code></pre>
+          
+          <p id="a_binary_integer_is_written...">A binary integer is written with a prefix <code>$</code>. Digits may be grouped into
+          groups of four digits.</p>
+          
+          <pre data-language="ceylon"><code>Integer sixtyNine = $0100_0101;
+</code></pre>
+          
+          <h2 id="arbitrary_precision_numeric_types">Arbitrary precision numeric types</h2>
+          
+          <p id="the_platform_module_ceylonmath_defines...">The platform module <code>ceylon.math</code> defines the types</p>
+          
+          <ul>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/math/1.3.3/module-doc/whole/Whole.type.html"><code>Whole</code></a> and</li>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/math/1.3.3/module-doc/decimal/Decimal.type.html"><code>Decimal</code></a>,</li>
+          </ul>
+          
+          
+          <p id="which_represent_arbitrary_precision_integers...">which represent arbitrary precision integers and arbitrary precision
+          decimals. Both classes are subtypes of <code>Numeric</code>, so you can use all the
+          usual numeric operators with them:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Decimal num = ... ;
+Decimal denom = ... ;
+Decimal ratio = num / denom;
+</code></pre>
+          
+          <p id="note_that_ceylonmath_is_currently...">Note that <code>ceylon.math</code> is currently JVM-only.</p>
+          
+          <h2 id="abstracting_over_numeric_types">Abstracting over numeric types</h2>
+          
+          <p id="since_all_numeric_types_are...">Since all numeric types are subtypes of <code>Numeric</code>, it's possible to write
+          generic code that treats numeric values polymorphically.</p>
+          
+          <pre data-language="ceylon"><code>Value ratio&lt;Value&gt;(Value num, Value denom) 
+        given Value satisfies Numeric&lt;Value&gt;
+        =&gt; num/denom;
+</code></pre>
+          
+          <p id="you_can_pass_floats_integers...">You can pass <code>Float</code>s, <code>Integer</code>s, <code>Whole</code>s, <code>Decimal</code>s or any other numeric
+          type to <code>ratio()</code>.</p>
+          
+          <h3 id="gotcha">Gotcha!</h3>
+          
+          <p id="since_polymorphic_numeric_functions_cant...">Since polymorphic numeric functions can't be optimized to use VM-level
+          primitive types, when executed on the JVM, the generic function above is
+          likely to be <em>much</em> slower than a function which accepts two <code>Float</code>s or two
+          <code>Integer</code>s. (On a JavaScript VM, you can expect a much smaller performance
+          penalty.)</p>
+          
+          <h2 id="numeric_widening">Numeric widening</h2>
+          
+          <p id="as_mentioned_earlier_ceylon_doesnt...">As mentioned earlier, Ceylon doesn't have implicit type conversions, not even
+          built-in conversions for numeric types. Assignment does not automatically
+          widen (or narrow) numeric values. Instead, we usually need to call one of the
+          operations (well, attributes, actually) defined by the interface
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Number.type.html"><code>Number</code></a>.</p>
+          
+          <pre data-language="ceylon"><code>Float zero = 0.float; // explicitly widen from Integer
+</code></pre>
+          
+          <p id="you_can_use_all_the...">You can use all the operators you're used to from other C-style languages
+          with the numeric types. You can also use the <code>^</code> operator to raise a
+          number to a power:</p>
+          
+          <!-- try-pre:
+              Float length = 2.0;
+              Float width = 1.5;
+          -->
+          
+          
+          <!-- cat: void m(Float length, Float width) { -->
+          
+          
+          <pre data-language="ceylon"><code>Float diagonal = (length^2.0+width^2.0)^0.5;
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="of_course_if_you_want...">Of course, if you want to use the increment <code>++</code> operator, decrement <code>--</code>
+          operator, or one of the compound assignment operators such as <code>+=</code>, you'll
+          have to declare the value <code>variable</code>.</p>
+          
+          <p id="since_its_quite_noisy_to...">Since it's quite noisy to explicitly perform numeric widening in numeric
+          expressions, the numeric operators <em>do</em> automatically widen their operands,
+          so we could write the expression above like this:</p>
+          
+          <!-- try-pre:
+              Float length = 2.0;
+              Float width = 1.5;
+          -->
+          
+          
+          <!-- cat: void m(Float length, Float width) { -->
+          
+          
+          <pre data-language="ceylon"><code>Float diagonal = (length^2+width^2)^(1.0/2);
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="since_ceylonlanguage_only_has_two...">Since <code>ceylon.language</code> only has two numeric types the only automatic
+          widening conversion is from <code>Integer</code> to <code>Float</code>. This is the one and
+          only thing approaching an implicit type conversion in the whole language.</p>
+          
+          <h2 id="bytes">Bytes</h2>
+          
+          <p id="the_class_byte_is_very...">The class <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Byte.type.html"><code>Byte</code></a> is very different
+          from <code>byte</code>s in Java, C#, or C. A <code>Byte</code> is considered to represent a
+          <a href="http://en.wikipedia.org/wiki/Modular_arithmetic">congruence class</a> of
+          integers modulo 256. That is to say, a <code>Byte</code> doesn't represent just one
+          integer value, but a whole infinite set of them!</p>
+          
+          <p id="therefore">Therefore:</p>
+          
+          <ul>
+          <li>the arithmetic operations on <code>Byte</code> are explicitly understood to be the
+          operations of modular arithmetic, not of ordinary integer arithmetic,</li>
+          <li>there is no order for <code>Byte</code>s (they aren't <code>Comparable</code>), and</li>
+          <li>it doesn't even make sense to ask if a <code>Byte</code> is signed or unsigned!</li>
+          </ul>
+          
+          
+          <p id="however_byte_has_two_very...">However, <code>Byte</code> has two very useful attributes:</p>
+          
+          <ul>
+          <li>
+<code>unsigned</code>, which returns a positive <code>Integer</code> in the range <code>0..255</code>,
+          and</li>
+          <li>
+<code>signed</code>, which returns an <code>Integer</code> in the range <code>-128..127</code>.</li>
+          </ul>
+          
+          
+          <p id="youll_need_to_use_either...">You'll need to use either <code>signed</code> or <code>unsigned</code> if you want to treat a
+          <code>Byte</code> value as an integer with integer arithmetic and integer ordering.</p>
+          
+          <p id="byte_is_optimized_by_the..."><code>Byte</code> is optimized by the compiler to a Java <code>byte</code> on the JVM, where
+          possible.</p>
+          
+          <h2 id="collections">Collections</h2>
+          
+          <p id="the_language_module_includes_several...">The language module includes several interfaces that represent container
+          types:</p>
+          
+          <ul>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Collection.type.html"><code>Collection</code></a>,</li>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/List.type.html"><code>List</code></a>,</li>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Map.type.html"><code>Map</code></a>, and</li>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Set.type.html"><code>Set</code></a>.</li>
+          </ul>
+          
+          
+          <p id="you_might_be_disappointed_to...">You might be disappointed to discover that there are no general-purpose
+          implementations of these interfaces in the language module itself. In fact,
+          they're only declared here so that <code>String</code>, <code>Sequential</code>,
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Array.type.html"><code>Array</code></a>, and
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Tuple.type.html"><code>Tuple</code></a>
+          can be subtypes of <code>List</code>.</p>
+          
+          <p id="you_might_be_even_more...">You might be even more disappointed when you look at these interfaces and
+          discover that they're missing half the useful operations you're used to
+          seeing on a collection: they have no operations at all for building or
+          mutating the collection. Actually, there's a couple of good reasons for this:</p>
+          
+          <ul>
+          <li>It's usually best for an API to return an obviously read-only collection
+          to clients, instead of leaving the client scratching his head wondering
+          whether mutating this collection results in mutation of the internal data
+          structures held by the API, and whether this is safe.</li>
+          <li>Making these interfaces read-only means they can be declared
+          <a href="../generics/#covariance_and_contravariance">covariant</a> in their type
+          parameters.</li>
+          </ul>
+          
+          
+          <p id="the_module_ceyloncollection_contains_general...">The module <code>ceylon.collection</code> contains general-purpose implementations of
+          these interfaces, along with APIs for building and mutating collections:
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/collection/1.3.3/module-doc/MutableList.type.html"><code>MutableList</code></a>,
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/collection/1.3.3/module-doc/MutableMap.type.html"><code>MutableMap</code></a>,
+          and <a href="https://modules.ceylon-lang.org/repo/1/ceylon/collection/1.3.3/module-doc/MutableSet.type.html"><code>MutableSet</code></a>.</p>
+          
+          <h2 id="theres_more">There's more...</h2>
+          
+          <p id="the_language_module_isnt_by...">The language module isn't by itself a platform for building applications.
+          It's a minimal set of basic types that form part of the language definition
+          itself. The Ceylon SDK provides a set of platform modules—basic building
+          blocks for all sorts of programs—including
+          <a href="https://herd.ceylon-lang.org/modules/ceylon.collection">ceylon.collection</a>,
+          <a href="https://herd.ceylon-lang.org/modules/ceylon.file">ceylon.file</a>,
+          <a href="https://herd.ceylon-lang.org/modules/ceylon.process">ceylon.process</a>,
+          <a href="https://herd.ceylon-lang.org/modules/ceylon.dbc">ceylon.dbc</a>,
+          <a href="https://herd.ceylon-lang.org/modules/ceylon.json">ceylon.json</a>,
+          <a href="https://herd.ceylon-lang.org/modules/ceylon.math">ceylon.math</a>,
+          <a href="https://herd.ceylon-lang.org/modules/ceylon.unicode">ceylon.unicode</a>,
+          <a href="https://herd.ceylon-lang.org/modules/ceylon.net">ceylon.net</a>,
+          <a href="https://herd.ceylon-lang.org/modules/ceylon.logging">ceylon.logging</a>,
+          <a href="https://herd.ceylon-lang.org/modules/ceylon.test">ceylon.test</a>,
+          <a href="https://herd.ceylon-lang.org/modules/ceylon.time">ceylon.time</a>,
+          <a href="https://herd.ceylon-lang.org/modules/ceylon.regex">ceylon.regex</a>,
+          <a href="https://herd.ceylon-lang.org/modules/ceylon.transaction">ceylon.transaction</a>,
+          <a href="https://herd.ceylon-lang.org/modules/ceylon.promise">ceylon.promise</a>, and
+          <a href="https://herd.ceylon-lang.org/modules/ceylon.locale">ceylon.locale</a>.</p>
+          
+          <p id="next_were_going_to_come...">Next we're going to come back to the subject of <a href="../initialization">object initialization</a>,
+          and deal with a subtle problem affecting languages like Java and C#.</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

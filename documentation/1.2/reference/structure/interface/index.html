@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Interface Declarations</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.2/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.2/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.2/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.2/examples">Examples</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.2/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.2/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.2/reference">Reference</a></h3>
+            
+            <ul>
+<li><a href="#usage">Usage
+            </a></li>
+<li><a href="#description">Description
+            </a></li>
+<ul>
+<li><a href="#type_parameters">Type parameters
+            </a></li>
+<li><a href="#satisfying_interfaces">Satisfying interfaces
+            </a></li>
+<li><a href="#enumerated_interfaces">Enumerated interfaces
+            </a></li>
+<li><a href="#declaration_section">Declaration section
+            </a></li>
+<li><a href="#members">Members
+            </a></li>
+<li><a href="#different_kinds_of_interface">Different kinds of interface
+            </a></li>
+<li><a href="#_shared_interfaces"><code>shared</code> interfaces
+            </a></li>
+<li><a href="#_sealed_interfaces"><code>sealed</code> interfaces
+            </a></li>
+<li><a href="#aliases">Aliases
+            </a></li>
+<li><a href="#metamodel">Metamodel
+            </a></li>
+</ul>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.2/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.2/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.2/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_12_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.2, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.2/reference/structure/interface.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.2/reference/structure/interface.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="interface_declarations">Interface Declarations</h1>
+          
+          <p id="an_interface_is_a_stateless...">An interface is a stateless <a href="../type-declaration">type declaration</a> that, unlike a <a href="../class">class declaration</a>:</p>
+          
+          <ul>
+          <li>may not hold references to other objects,</li>
+          <li>does not define initialization logic, and</li>
+          <li>cannot be directly instantiated.</li>
+          </ul>
+          
+          
+          <p id="interfaces_support_a_more_flexible...">Interfaces support a more flexible inheritance model: <em>multiple inheritance</em>.
+          "Diamond" inheritance is not a problem for interfaces, because interfaces
+          don't have state or logic to initialize that state.</p>
+          
+          <h2 id="usage">Usage
+          </h2>
+          
+          
+          <p id="a_trivial_interface_declaration_looks...">A trivial interface declaration looks like this:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>interface Trivial {
+    /* declarations of interface members */
+}
+</code></pre>
+          
+          <p id="the_general_form_of_an...">The general form of an interface declaration looks like this:</p>
+          
+          <pre><code>ANNOTATIONS
+interface Example
+        &lt;TYPE-PARAMETERS&gt;
+        of ENUMERATED-SUBINTERFACES
+        satisfies SUPER-INTERFACES
+        given TYPE-PARAMETER-CONSTRAINTS {
+    INTERFACE-BODY
+}
+</code></pre>
+          
+          <p id="where">Where:</p>
+          
+          <ul>
+          <li>
+<code>ANNOTATIONS</code> is a list of interface <a href="../annotation">annotations</a>
+</li>
+          <li>
+<code>TYPE-PARAMETERS</code> is a <code>,</code>-separated list of <a href="#type_parameters">type parameters</a>
+</li>
+          <li>
+<code>ENUMERATED-SUBINTERFACES</code> is a <code>|</code>-separated list of <a href="#enumerated_classes">interface types</a>
+</li>
+          <li>
+<code>SUPER-INTERFACES</code> is a <code>&amp;</code>-separated list of <a href="#satisfying_interfaces">interface type expressions</a>
+</li>
+          <li>
+<code>TYPE-PARAMETER-CONSTRAINTS</code> is a list of <a href="../type-parameters#constraints">constraints on type parameters</a>
+          declared in the type parameter list</li>
+          <li>
+<code>INTERFACE-BODY</code> is the <a href="#declaration_section">declaration section</a> of the interface</li>
+          </ul>
+          
+          
+          <p id="due_to_the_stateless_nature...">Due to the stateless nature of interfaces, their declarations have:</p>
+          
+          <ul>
+          <li>no parameter list after the interface name (as there is in a <a href="../class">class declaration</a>).</li>
+          <li>no <code>extends</code> clause</li>
+          <li>no initializer section in the interface body: It contains only member declarations.</li>
+          </ul>
+          
+          
+          <h2 id="description">Description
+          </h2>
+          
+          
+          
+          
+          <h3 id="type_parameters">Type parameters
+          </h3>
+          
+          
+          <p id="an_interface_may_have_a...">An interface may have a list of <a href="../type-parameters">type parameters</a>
+          enclosed in angle brackets (<code>&lt;</code> and <code>&gt;</code>) after the interface name.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>interface Generic&lt;Foo, Bar&gt; {
+    /* declarations of interface members 
+       type parameters Foo and Bar are treated as a types */
+}
+</code></pre>
+          
+          <p id="an_interface_with_type_parameters...">An interface with type parameters is sometimes called a <em>generic interface</em>.</p>
+          
+          <p id="an_interface_declaration_with_type...">An interface declaration with type parameters may also have a <code>given</code> clause
+          for each declared type parameter to
+          <a href="../type-parameters#constraints">constrain the argument types</a>:</p>
+          
+          <pre data-language="ceylon"><code>interface Constrained&lt;Foo, Bar&gt;
+        given Foo satisfies Baz1&amp;Baz2
+        given Bar of Gee1|Gee2 {
+    /* declarations of interface members 
+       type parameters Foo and Bar treated as a types */
+}
+</code></pre>
+          
+          <h3 id="satisfying_interfaces">Satisfying interfaces
+          </h3>
+          
+          
+          <p id="the_satisfies_clause_is_used...">The <code>satisfies</code> clause is used to specify that the interface being declared is a
+          <a href="../type-declaration#declarative_subtyping">subtype</a>
+          of the given interface type.</p>
+          
+          <!-- cat: interface I1 {} interface I2 {} -->
+          
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>interface I satisfies I1 &amp; I2 {
+    /* declarations of class members */
+}
+</code></pre>
+          
+          <p id="_is_used_as_the..."><code>&amp;</code> is used as the separator between satisfied interface types
+          because the interface (<code>I</code>) is being declared as a subtype of an
+          <a href="../type#union_and_intersection">intersection type</a> (<code>I1&amp;I2</code>).</p>
+          
+          <p id="if_an_interface_is_declared...">If an interface is declared without using the <code>satisfies</code> keyword,
+          it does not directly inherit any interfaces. However, <em>all</em>
+          interfaces are considered to inherit the class
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Object.type.html"><code>Object</code></a>.</p>
+          
+          <h3 id="enumerated_interfaces">Enumerated interfaces
+          </h3>
+          
+          
+          <p id="the_subtypes_of_an_enumerated...">The subtypes of an enumerated interface can be constrained to a
+          list of named interfaces, classes, or toplevel anonymous classes
+          using the <code>of</code> clause. If the interface <code>I</code> is permitted only two
+          direct subtypes, the interface <code>I1</code>, and the class <code>C1</code>, its
+          declaration would look like this:</p>
+          
+          <!-- cat: interface I1 satisfies I {} class C1() satisfies I {} -->
+          
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>interface I of I1 | C1 {
+    /* declarations of interface members */
+}
+</code></pre>
+          
+          <p id="then_i1_and_i2_are...">Then <code>I1</code> and <code>I2</code> are called the <em>cases</em> of <code>I</code>.</p>
+          
+          <h3 id="declaration_section">Declaration section
+          </h3>
+          
+          
+          
+          
+          <h3 id="members">Members
+          </h3>
+          
+          
+          <p id="the_permitted_members_of_interfaces...">The permitted members of interfaces are <a href="../class">classes</a>,
+          <a href="../interface">interfaces</a>, <a href="../function">methods</a>, and
+          <a href="../value">attributes</a>.</p>
+          
+          <p id="note_that_an_interface_cannot...">Note that an interface cannot have an <a href="../object"><code>object</code></a> member.</p>
+          
+          <h3 id="different_kinds_of_interface">Different kinds of interface
+          </h3>
+          
+          
+          
+          
+          <h3 id="_shared_interfaces">
+<code>shared</code> interfaces
+          </h3>
+          
+          
+          <p id="a_toplevel_interface_declaration_or...">A toplevel interface declaration, or an interface declaration nested
+          inside the body of a containing class or interface, may be annotated
+          <a href="../../annotation/shared"><code>shared</code></a>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared class C() {
+    /* declarations of class members */
+}
+</code></pre>
+          
+          <ul>
+          <li>A toplevel <code>shared</code> interface is visible wherever the package that
+          contains it is visible.</li>
+          <li>A <code>shared</code> interface nested inside a class or interface is visible
+          wherever the containing class or interface is visible.</li>
+          </ul>
+          
+          
+          <h3 id="_sealed_interfaces">
+<code>sealed</code> interfaces
+          </h3>
+          
+          
+          <p id="an_interface_declaration_can_be...">An interface declaration can be annotated <code>sealed</code> which prevents
+          the declaration of subclasses and subinterfaces outside the module
+          in which the sealed interface is declared. This provides a way to
+          share an interface's type with other modules.</p>
+          
+          <h3 id="aliases">Aliases
+          </h3>
+          
+          
+          <p id="an_interface_alias_is_a...">An <em>interface alias</em> is a kind of <a href="../alias#interface_aliases">alias</a>.</p>
+          
+          <h3 id="metamodel">Metamodel
+          </h3>
+          
+          
+          <p id="interface_declarations_can_be_manipulated...">Interface declarations can be manipulated at runtime via their representation as
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/meta/declaration/InterfaceDeclaration.type.html"><code>InterfaceDeclaration</code></a>
+          instances. An <em>applied interface</em> (i.e. with all type parameters specified) corresponds to
+          either an
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/meta/model/Interface.type.html"><code>Interface</code></a> or
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/meta/model/MemberInterface.type.html"><code>MemberInterface</code></a> model instance.</p>
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li><a href="../class">Class declarations</a></li>
+          <li>
+<a href="/documentation/current/spec/html_single/index.html#interfaces">Interfaces</a> in the Ceylon
+          language spec</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

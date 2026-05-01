@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Ceylon 1.1 progress report</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2014/07/14/wildcards/">Why I distrust wildcards and why we need them anyway</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2014/10/09/ceylon-1/">Ceylon 1.1.0 is now available</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="ceylon_11_progress_report">
+            Ceylon 1.1 progress report
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              10 Aug 2014
+            </div>
+            <div class="tags">
+            </div>
+          </div>
+          <div class="body">
+            <p id="ceylon_11_has_been_in...">Ceylon 1.1 has been in development for 6 months already, so
+            it's way past time for a progress report! Since the release
+            is nearly ready, this is going to have to take the form of a
+            summary of what we've been working on. Well, that's a
+            daunting task, since we've already closed more than 650
+            issues in the compiler and language module, and 300 in the
+            IDE. Phew!</p>
+            
+            <p id="the_top_priorities_for_ceylon...">The top priorities for Ceylon 1.1 were:</p>
+            
+            <ul>
+            <li>Finalize and freeze the language module APIs.</li>
+            <li>Clean up and minimize the use of Java and JavaScript
+            native code in the language module.</li>
+            <li>Mop up remaining issues affecting Java interop.</li>
+            <li>Performance.</li>
+            <li>IDE build performance.</li>
+            <li>Finish <code>ceylon.collection</code> and freeze its public API.</li>
+            </ul>
+            
+            
+            <p id="naturally_weve_also_fixed_hundreds...">Naturally, we've also fixed hundreds of bugs unrelated to
+            those priorities.</p>
+            
+            <h2 id="language_changes">Language changes</h2>
+            
+            <p id="there_have_been_very_few...">There have been very few changes to the language, which has
+            been considered stable since last year's 1.0 release. The
+            big new features in 1.1 are:</p>
+            
+            <ul>
+            <li>Support for <a href="/blog/2014/07/14/wildcards">use-site variance</a>.</li>
+            <li>Introduction of a <code>Byte</code> class that may be optimized by
+            the compiler to <code>byte</code> on the JVM.</li>
+            <li>Type inference for parameters of anonymous functions that
+            occur as arguments in positional argument lists.</li>
+            </ul>
+            
+            
+            <p id="other_notable_changes_are">Other notable changes are:</p>
+            
+            <ul>
+            <li>Powerful disjointness analysis for sequence and tuple
+            types.</li>
+            <li>Allow comprehensions to begin with an <code>if</code> clause.</li>
+            <li>New <code>sealed</code> annotation to prevent extension or
+            instantiation of a type outside the module in which it is
+            defined.</li>
+            <li>Introduction of <code>dynamic</code> interfaces, designed for
+            wrapping native JavaScript APIs.</li>
+            <li>Redefined <code>-</code> operator to work for any <code>Invertible</code>.</li>
+            <li>Allow metamodel references to <code>object</code>s and members of
+            <code>object</code>s.</li>
+            <li>
+<code>try (x)</code> was changed to distinguish between the
+            lifecycles of <code>Obtainable</code> and <code>Destroyable</code> resources.</li>
+            <li>The type of the expression <code>{}</code> is now <code>{Nothing*}</code>
+            instead of <code>[]</code>.</li>
+            <li>Allow refinement of multiple overloaded versions of a Java
+            supertype method.</li>
+            <li>Added ability to <code>catch</code> instances of <code>Throwable</code>.</li>
+            <li>Minor adjustment to type argument inference algorithm for
+            covariant and contravariant type parameters.</li>
+            <li>Change to the syntax for dynamic enumeration expressions
+            in native JavaScript interop.</li>
+            <li>
+<code>case (foo, bar)</code> is now written <code>case (foo|bar)</code>.</li>
+            <li>Removal of operator-style invocation expressions.</li>
+            </ul>
+            
+            
+            <p id="the_last_four_changes_are...">The last four changes are breaking changes but should not
+            impact very many programs.</p>
+            
+            <p id="finally_note_that">Finally, note that:</p>
+            
+            <ul>
+            <li>Runnable functions must now be <code>shared</code>, eliminating an
+            inconsistency between Ceylon on JVM and on JS.</li>
+            </ul>
+            
+            
+            <h2 id="language_module_changes">Language module changes</h2>
+            
+            <p id="for_the_11_release_weve...">For the 1.1 release, we've invested a lot of thought and
+            development effort in the language module, carefully
+            reviewing its design and scope, reducing the use of native
+            code to an absolute minimum, optimizing performance, and
+            picking on anything that looked like a mistake.</p>
+            
+            <p id="therefore_this_release_makes_several...">Therefore, this release makes several breaking changes,
+            which will impact existing programs. As of Ceylon 1.1, the
+            language module is considered stable, and we won't make
+            further breaking changes.</p>
+            
+            <ul>
+            <li>Addition of a raft of new methods and functions for
+            working with streams.</li>
+            <li>Optimization of the performance of <code>Array</code>, along with
+            some minor improvements to interop with Java native arrays.</li>
+            <li>Removal of the <code>Cloneable</code> interface, and addition of a
+            <code>clone()</code> method to <code>Collection</code>.</li>
+            <li>Addition of <code>Throwable</code>.</li>
+            <li>Replacement of <code>Closeable</code> with <code>Obtainable</code> and
+            <code>Destroyable</code>.</li>
+            <li>
+<code>Correspondence.items()</code> changed to <code>getAll()</code>.</li>
+            <li>
+<code>Map</code>s and <code>Entry</code>s may now have null items.</li>
+            <li>Various minor changes to the operations of <code>Iterable</code>,
+            <code>List</code>, and <code>Map</code>, including breaking changes to the
+            signatures of <code>Iterable.sequence()</code> and <code>Iterable.fold()</code>.</li>
+            <li>
+<code>ArraySequence</code> is now <code>sealed</code> and may be instantiated
+            via the <code>sequence()</code> function.</li>
+            <li>Substantial redesign of <code>Enumerable</code> and <code>Range</code>.</li>
+            <li>Several changes to the type hierarchy for numeric types.</li>
+            <li>Improvements to <code>StringBuilder</code>.</li>
+            <li>Removal of <code>SequenceBuilder</code>, of redundant functions
+            <code>entries()</code> and <code>coalesce()</code>, and of <code>LazyList</code>, <code>LazySet</code>,
+            and <code>LazyMap</code>.</li>
+            <li>Addition of <code>Array.sortInPlace()</code>.</li>
+            </ul>
+            
+            
+            <h2 id="modularity">Modularity</h2>
+            
+            <p id="were_currently_investing_effort_in...">We're currently investing effort in trying to make it easier
+            to use Ceylon modules outside of the Ceylon module runtime.</p>
+            
+            <ul>
+            <li>Ceylon <code>.car</code> archives now include automatically generated
+            OSGi and Maven metadata, and can execute in an OSGi
+            container.</li>
+            <li>New API for cross-platform resource loading.</li>
+            <li>Support for deploying Ceylon modules to
+            <a href="http://vertx.io">Vert.x</a>.</li>
+            </ul>
+            
+            
+            <h2 id="sdk">SDK</h2>
+            
+            <p id="notable_changes_to_the_sdk...">Notable changes to the SDK include:</p>
+            
+            <ul>
+            <li>Introduction of <code>ceylon.locale</code>, <code>ceylon.logging</code>, and
+            <code>ceylon.promise</code>.</li>
+            <li>Many enhancements to <code>ceylon.collection</code>, including
+            addition of <code>ArrayList</code>, <code>TreeSet</code>, <code>TreeMap</code>, and
+            <code>PriorityQueue</code> classes, along with <code>Stack</code> and <code>Queue</code>
+            interfaces.</li>
+            <li>Various improvements to <code>ceylon.dbc</code>.</li>
+            </ul>
+            
+            
+            <p id="the_collections_module_is_now...">The collections module is now considered stable, and its API
+            is frozen.</p>
+            
+            <p id="additionally_the_ceylontest_module_has...">Additionally, the <code>ceylon.test</code> module has been
+            significantly enhanced, including the following improvements:</p>
+            
+            <ul>
+            <li>New <code>testSuit</code>, <code>testListeners</code>, and <code>testExecutor</code>
+            annotations.</li>
+            <li>Redesigned events model.</li>
+            <li>HTML report generation in <code>ceylon.test</code>.</li>
+            <li>Support for TAP v13 (Test Anything Protocol).</li>
+            <li>Many improvements to <code>ceylon.test</code>.</li>
+            <li>Addition of <code>ceylon test-js</code> command.</li>
+            </ul>
+            
+            
+            <h2 id="ide">IDE</h2>
+            
+            <p id="development_of_the_ide_has...">Development of the IDE has been extremely active, with many
+            new features and major performance enhancements.</p>
+            
+            <ul>
+            <li>Complete rework of build process, for much improved
+            performance.</li>
+            <li>New refactorings: Move Out, Make Receiver, Move to Unit,
+            Extract Parameter, Collect Parameters, Invert Boolean,
+            Safe Delete.</li>
+            <li>Major enhancements to the Change Parameters refactoring.</li>
+            <li>Inline refactoring now works for shared class/interface
+            members.</li>
+            <li>Much better handling of anonymous functions and function
+            references in Extract and Inline refactorings.</li>
+            <li>Brand new high quality code formatter.</li>
+            <li>Rewritten Ceylon Explorer with much better presentation of
+            modules and modular dependencies.</li>
+            <li>New navigation actions: Open in Type Hierarchy View,
+            Go to Refined Declaration.</li>
+            <li>Popup Quick Find References and Recently Edited Files.</li>
+            <li>Graphical Visualize Modular Dependencies.</li>
+            <li>Further integration of "linked mode" with refactorings and
+            quick assists.</li>
+            <li>Useful Format Block source action.</li>
+            <li>Auto-escape special characters when pasting into string
+            literals.</li>
+            <li>Synchronization of all keyboard accelerators with JDT
+            equivalents (by popular request).</li>
+            <li>Save actions in Ceylon Editor preferences.</li>
+            <li>IntelliJ-style "chain completion" (hit ctrl-space twice).</li>
+            <li>Propose toplevel functions applying to a type alongside
+            members of the type.</li>
+            <li>Several new options for customizing autocompletion and
+            appearance in Ceylon Editor preferences.</li>
+            <li>New quick fixes/assists: convert between string
+            interpolation and concatenation, convert to/from verbatim
+            string, add satisfied interfaces, add type parameter,
+            change named argument list to positional, fill in
+            argument names, export module, convert to verbose form
+            refinement, print expression, fix refining method signature,
+            change to <code>if (exists)</code>, change module version, assign to
+            <code>for</code>/<code>try</code>/<code>if (exists)</code>/<code>if (nonempty)</code>/<code>if (is)</code>.</li>
+            <li>Run As Ceylon Test on node.js.</li>
+            <li>Support for running all tests in a project or source
+            folder.</li>
+            <li>New default color scheme for syntax highlighting and many
+            other aesthetic improvements.</li>
+            </ul>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2014/08/10/progress-report/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

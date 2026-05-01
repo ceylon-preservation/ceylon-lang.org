@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Let it work</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2011/12/02/positional-invocation/">Implementing Method Invocation in ceylonc</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2011/12/20/ceylon-m1-newton/">First official release of Ceylon</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="let_it_work">
+            Let it work
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/stephane-epardaud/">Stéphane Épardaud</a>
+            </div>
+            <div class="date">
+              08 Dec 2011
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/compiler/">
+                compiler
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <p id="hi_my_name_is_stéphane...">Hi, my name is Stéphane Épardaud and I´ll be your technical writer today :)</p>
+            
+            <p id="i_want_to_talk_a...">I want to talk a bit about some of the challenges we faced in the Ceylon compiler, and the solutions
+            we found. As is described in the <a href="/code/contribute/#ceylon_compiler_components">compiler architecture page</a>
+            the backend of the Ceylon compiler extends OpenJDK´s Javac compiler by translating Ceylon source code into
+            Javac AST, which is then compiled into bytecode by Javac. Some of the reasons why we went this route of
+            extending Javac rather than create our own compiler from scratch are that:</p>
+            
+            <ul>
+            <li>We are guaranteed to generate valid bytecode, because it has to be valid Java code, since it´s checked
+            by Javac.</li>
+            <li>We can compile Java and Ceylon code at the same time, without needing to write a Java parser
+            and compiler. (Well this is not technically true in <a href="/documentation/1.0/roadmap/#milestone_1">M1</a>,
+            but it will definitely be possible).</li>
+            </ul>
+            
+            
+            <p id="but_there_are_things_we...">But there are things we can´t do properly in Java, and here I´m going to give you an example where we
+            scratched our heads in trying to find a proper mapping.</p>
+            
+            <h1 id="attributes_instead_of_fields">Attributes instead of fields</h1>
+            
+            <p id="in_ceylon_we_don´t_have...">In Ceylon, we don´t have Java fields, we have <em>attributes</em>, which are similar to JavaBean´s properties.
+            This means that Ceylon attributes are translated to JavaBean getters and setters. And for interoperability
+            we map JavaBean properties to Ceylon attributes. Now the biggest challenge with using JavaBean getter and setter
+            methods in place of fields is that we want attributes to support the same operations you can do on Java fields,
+            such as the <code>++</code> operation. How do we map this:</p>
+            
+            <pre data-language="ceylon"><code>class Counter() {
+    Natural n = 0;
+}
+Counter c = Counter();
+Natural n = c.n++;
+</code></pre>
+            
+            <p id="into_working_java_code_which...">Into working Java code which looks like this (optimised for <code>long</code> because otherwise <code>++</code>
+            <a href="/documentation/1.0/reference/operator/increment/">is polymorphic</a>):</p>
+            
+            <pre data-language="java"><code>class Counter{
+    long n;
+    long getN(){
+        return n;
+    }
+    void setN(long n){
+        this.n = n;
+    }
+}
+Counter c = new Counter();
+long n = c.getN()++;
+</code></pre>
+            
+            <p id="wait_a_minute_this_is...">Wait a minute: this is not valid!</p>
+            
+            <p id="so_the_problem_is_that...">So the problem is that there are a lot of operations you can do on
+            <a href="http://en.wikipedia.org/wiki/Value_(computer_science)">l-values</a>,
+            that is, variables which can be assigned. To summarize the difference between <em>l-values</em> and <em>r-values</em>, the following mnemonics
+            helps: an <em>l-value</em> is something which can be assigned and read, it can appear as the <em>left</em> side of an assignment, while an
+            <em>r-value</em> is an expression that can only be read and not assigned. In our example, <code>c.n</code> is an <em>l-value</em> while <code>2 + 2</code> would be
+            an <em>r-value</em>.</p>
+            
+            <p id="so_we_expect_to_be...">So we expect to be able to do every assignment operation on <em>l-values</em>, such as <code>:=</code>, <code>+=</code> and <code>++</code>. The problem we face is that
+            in Java, <code>c.n</code> is an <em>l-value</em> but when using getters, <code>c.getN()</code> is not: it´s an <code>r-value</code>, you can´t assign to it, you can´t
+            do <code>++</code> on it. For that you need to use the setter. Now the thing is that setters in JavaBean return <code>void</code>, so they´re not
+            expressions, or even an <code>l-value</code>: they´re statements. And we can´t put statements inside expressions. For instance we can´t do:</p>
+            
+            <pre data-language="java"><code>Counter c = new Counter();
+long n = c.setN(c.getN()+1);
+</code></pre>
+            
+            <p id="we_cannot_do_that_because...">We cannot do that because <code>setN()</code> is a statement: it returns void. Plus that would actually be an incorrect way to define <code>++</code>,
+            since we need to return the old value of <code>n</code> prior to the increment, so we´d need a temporary variable. The only way to have
+            statements inside expressions in Java is to create an anonymous class:</p>
+            
+            <pre data-language="java"><code>Counter c = new Counter();
+long n = new Object(){
+    long postIncrement(Counter c){
+        long previousValue = c.getN();
+        c.setN(previousValue+1);
+        return previousValue;
+    }
+}.postIncrement(c);
+</code></pre>
+            
+            <p id="and_the_solution_to_all...">And the solution to all other other assignment operations are similar: anonymous classes for things as trivial as <code>++</code>, surely
+            this is crazy? If only there were some other way, short of generating bytecode ourselves (in which case we can do whatever we
+            want without needing do make it translatable into Java).</p>
+            
+            <h1 id="let_it_be…">Let it be…</h1>
+            
+            <p id="so_one_day_we´re_looking...">So one day we´re looking inside OpenJDK´s Javac to try to find something, and we stumble upon mention of a <code>comma</code> operator. For
+            those who don´t know <a href="http://en.wikipedia.org/wiki/C_(programming_language"><code>C</code></a>),
+            the <a href="http://en.wikipedia.org/wiki/Comma_operator">comma operator</a> (<code>,</code>) allows you to execute several
+            expressions and return the right-most expression value.</p>
+            
+            <p id="we_look_at_this_and...">We look at this and we think: “this can´t be right, Java doesn´t have the comma operator, we´d know”. So why is it there? Looking
+            a bit more we discover that it´s there to support <code>++</code> on <em>boxed</em> <code>Integer</code> values. Because this isn´t a primitive operation,
+            you need the same sort of workaround we have:</p>
+            
+            <pre data-language="java"><code>Integer i = new Integer(0);
+Integer j = new Object(){
+    Integer postIncrement(Integer previousValue){
+        // assuming you could assign a captured variable:
+        i = new Integer(previousValue.intValue() + 1);
+        return previousValue;
+    }
+}.postIncrement(i);
+</code></pre>
+            
+            <p id="so_they_use_this_operator...">So they use this operator in order to save a temporary value in an expression context, where you normally can´t. And upon
+            further examination it turns out that they (the OpenJDK Javac authors) implemented the comma operator using an even more
+            generic exppression: a <code>Let</code> expression!</p>
+            
+            <p id="i´m_very_familiar_with_let...">I´m very familiar with <em>let</em> expressions, such as they are in
+            <a href="http://en.wikipedia.org/wiki/Scheme_(programming_language)#Block_structure">Scheme</a> or in
+            <a href="http://en.wikipedia.org/wiki/ML_(programming_language)">ML</a>, but I´m sure many of you are not, so in short:</p>
+            
+            <p id="a_let_expression_allows_you...">A <em>let</em> expression allows you to declare and bind new variables in a local scope, run statements and return an expression from
+            this scope, all in the context of an expression.</p>
+            
+            <p id="so_let´s_rewrite_our_previous...">So let´s rewrite our previous example in pseudo-Java with <code>let</code>:</p>
+            
+            <pre data-language="java"><code>Integer i = new Integer(0);
+Integer j = (let
+              // store the previous value in a temporary variable
+              Integer previousValue = i;
+             in 
+              // assign the new value
+              i = new Integer(previousValue.intValue() + 1);
+              // return the previous value
+              return previousValue;);
+</code></pre>
+            
+            <p id="now_obviously_this_is_not...">Now, obviously this is not valid Java, because <code>let</code> expressions are not part of the Java language, but the OpenJDK Javac
+            compiler uses this construct behind the scenes to rewrite parts of the Java AST into pseudo-code that can be translated
+            into efficient bytecode in the end. All they needed was an AST node to represent this, and support from the bytecode
+            generator to support this AST type.</p>
+            
+            <p id="and_guess_what_since_we...">And guess what: since we feed Java AST to Javac we can use this construct :)</p>
+            
+            <p id="in_fact_this_is_precisely...">In fact this is precisely how we solved most of our issues, such as the <code>++</code> operator:</p>
+            
+            <pre data-language="java"><code>Counter c = new Counter();
+long n = (let
+           long previousValue = c.getN();
+          in
+           c.setN(previousValue+1);
+           return previousValue;);
+</code></pre>
+            
+            <p id="this_solution_allows_us_to...">This solution allows us to define every assignment operator such as <code>:=</code>, <code>++</code> or <code>+=</code> on attributes, that are mapped
+            into JavaBean getter/setter methods using efficient code.</p>
+            
+            <p id="all_we_needed_to_do...">All we needed to do was to add some bits of support for <code>let</code> expressions inside Javac because they never needed to get
+            them so early in the AST so it was missing some support in one or two phases of the compiler, but peanuts really.</p>
+            
+            <h1 id="conclusion">Conclusion</h1>
+            
+            <p id="when_we_set_out_to...">When we set out to extend the Javac compiler we didn´t really know what to expect, but over time we´ve found it has a really
+            solid API and is very well done and documented. We were able to extend it in ways it was never imagined to be extended, and
+            it followed along nicely. Not only that but we found out that the OpenJDK developers, when faced with the issue of <code>++</code> on boxed
+            <code>Integers</code> didn´t just hack along some quick and dirty way to fix it: they went ahead and implemented a much more powerful and
+            generic way to solve every similar issue with the <code>let</code> expression. Congratulation guys, you did good and it was worth it,
+            because thanks to you we can implement really crazy stuff.</p>
+            
+            <p id="we´re_now_using_this_let...">We´re now using this <code>let</code> expression for implementing many operators and features, such as:</p>
+            
+            <ul>
+            <li>
+<a href="/documentation/1.0/reference/operator/invoke/">named parameter invocation</a>,
+            to keep source-file evaluation order before reordering the parameters for the callee,</li>
+            <li>the <a href="/documentation/1.0/reference/operator/nullsafe-invoke/"><code>?.</code></a>, <code>?</code>
+            and <a href="/documentation/1.0/reference/operator/nullsafe-lookup"><code>?[]</code></a> null-safe operators, to store the
+            temporary variable before we test it for null.</li>
+            </ul>
+            
+            
+            <p id="so_thanks_openjdk_authors_thanks...">So thanks, OpenJDK authors, thanks to you we´ll have efficient compilation of Ceylon code :)</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2011/12/08/let-it-work/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

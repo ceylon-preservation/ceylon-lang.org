@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Add a new page</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="codepage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="selected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="licenses"><a href="/code/licenses">Licenses</a></h3>
+            
+            <h3 id="nightly_builds"><a href="https://ci-ceylon.rhcloud.com/">Nightly builds</a></h3>
+            
+            <h3 id="get_the_source"><a href="/code/source">Get the source</a></h3>
+            
+            <h3 id="contribute"><a href="/code/contribute">Contribute</a></h3>
+            
+            <h3 id="improve_the_website"><a href="/code/website">Improve the website</a></h3>
+            
+            <h3 id="report_a_bug"><a href="/code/issues">Report a bug</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Code
+          </div>
+        </div>
+        <div id="core-page">
+          <h1 id="add_a_new_page">Add a new page</h1>
+          
+          <p id="the_best_way_to_add...">The best way to add and edit a page is to look how other pages are done and
+          start from here. The following page gives you some keys to understand the code.</p>
+          
+          <ul>
+<li><a href="#site_structure">Site structure
+          </a></li>
+<li><a href="#page_metadata">Page metadata
+          </a></li>
+<ul>
+<li><a href="#tab_mandatory">tab (mandatory)
+          </a></li>
+<li><a href="#layout_mandatory">layout (mandatory)
+          </a></li>
+<li><a href="#milestone">milestone
+          </a></li>
+<li><a href="#toc">toc
+          </a></li>
+</ul>
+<li><a href="#write_the_actual_page_content">Write the actual page content :)
+          </a></li>
+</ul>
+          
+          
+          <p id=""></p>
+          
+          <p id="you_can_build_pages_in...">You can build pages in two formats, Markdown (.md) and haml (<code>.html.haml</code>).
+          The warmly recommend using Markdown.</p>
+          
+          <p id="you_can_find_two_sample...">You can find two sample files for <a href="/code/website/md-sample">.md</a> and
+          <a href="/code/website/haml-sample">.html.haml</a> syntaxes. Look at them especially the .md file.</p>
+          
+          <h2 id="site_structure">Site structure
+          </h2>
+          
+          
+          <p id="the_site_is_separated_in...">The site is separated in a few different (self explanatory) sections</p>
+          
+          <ul>
+          <li>Home page</li>
+          <li>Learn it: the documentation section</li>
+          <li>Download: how to download Ceylon</li>
+          <li>Community: everything related to forums, mailing lists, events, the team etc</li>
+          <li>Code: how to get and hack the Ceylon code and the website</li>
+          <li>Blog: the blog entry</li>
+          </ul>
+          
+          
+          <p id="most_pages_belong_to_one...">Most pages belong to one of these categories and the right tab is highlighted.</p>
+          
+          <h2 id="page_metadata">Page metadata
+          </h2>
+          
+          
+          <p id="each_page_comes_with_some...">Each page comes with some metadata.</p>
+          
+          <ul>
+          <li>
+<code>title</code> (mandatory): the page title</li>
+          <li>
+<code>author</code> (mandatory): the author or comma separated list of authors</li>
+          <li>
+<code>tab</code> (mandatory): the tab that ought to be highlighted</li>
+          <li>
+<code>layout</code> (mandatory): the page layout to use</li>
+          <li>
+<code>milestone</code>: the milestone for the feature (will display a milestone tag)</li>
+          <li>
+<code>toc</code>: table of content</li>
+          <li>
+<code>doc_root</code>: documentation relative URL to root (only useful in the documentation section, see more at <a href="../edit-page/#documentation_section">Edit a page</a>)</li>
+          </ul>
+          
+          
+          <p id="each_metadata_can_be_accesssed...">Each metadata can be accesssed via <code>#{page.metadata}</code> in your page. For example <code>#{page.title}</code></p>
+          
+          <h3 id="tab_mandatory">tab (mandatory)
+          </h3>
+          
+          
+          <p id="the_list_of_accepted_tab...">The list of accepted tab names is: <code>home</code>, <code>documentation</code>, <code>download</code>, <code>code</code>, <code>blog</code>.</p>
+          
+          <h3 id="layout_mandatory">layout (mandatory)
+          </h3>
+          
+          
+          <p id="there_are_several_layouts_depending...">There are several layouts depending on where you are in the website structure:</p>
+          
+          <ul>
+          <li>
+<code>default</code>: this is the default layout if outside of any specific structure</li>
+          <li>
+<code>blog</code>: use this layout of a blog entry</li>
+          <li>
+<code>code</code>: use this layout for pages in a code section</li>
+          <li>
+<code>community</code>: use this layout for community pages</li>
+          <li>
+<code>documentation</code>: use this layout of documentation pages</li>
+          <li>
+<code>faq</code>: use this layout for FAQ pages</li>
+          <li>
+<code>tour</code>: use this layout for a tour page</li>
+          </ul>
+          
+          
+          <p id="if_you_add_a_page...">If you add a page that ought to be in one of the structure menu, edit its respective <code>_layout</code> file.
+          Make sure to use absolute links in menus eg <code>/code/website/add-page</code>.</p>
+          
+          <h3 id="milestone">milestone
+          </h3>
+          
+          
+          <p id="you_can_ensure_that_a...">You can ensure that a milestone tag appears at the top of a page if the feature is planned for a later release.</p>
+          
+          <p id="available_values_are_milestone_1...">Available values are <code>Milestone 1</code>, <code>Milestone 2</code> or <code>Milestone 3</code>.</p>
+          
+          <h3 id="toc">toc
+          </h3>
+          
+          
+          <p id="you_can_automatically_generate_the...">You can automatically generate the table of content based on the page metadata:</p>
+          
+          <ul>
+          <li>Add <code>toc: true</code> in the file header</li>
+          <li>add <code>#{page.table_of_contents}</code> where you want the table to appear</li>
+          </ul>
+          
+          
+          <p id="you_should_see_a_table...">You should see a table of content similar to the top of this page.</p>
+          
+          <h2 id="write_the_actual_page_content">Write the actual page content :)
+          </h2>
+          
+          
+          <p id="check_out_edit_a_page">Check out <a href="/code/website/edit-page">Edit a page</a>.</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

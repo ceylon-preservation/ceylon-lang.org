@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Why I distrust wildcards and why we need them anyway</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2014/05/12/ranges/">Ranges and slices</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2014/08/10/progress-report/">Ceylon 1.1 progress report</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="why_i_distrust_wildcards_and_why_we_need_them_anyway">
+            Why I distrust wildcards and why we need them anyway
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              14 Jul 2014
+            </div>
+            <div class="tags">
+            </div>
+          </div>
+          <div class="body">
+            <p id="in_any_programming_language_that...">In any programming language that combines subtype polymorphism
+            (object orientation) with parametric polymorphism (generics),
+            the question of <em>variance</em> arises. Suppose I have a list of
+            strings, type <code>List&lt;String&gt;</code>. Can I pass that to a function
+            which accepts <code>List&lt;Object&gt;</code>? Let's start with this definition:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>interface List&lt;T&gt; {
+    void add(T element);
+    Iterator&lt;T&gt; iterator();
+    ...
+}
+</code></pre>
+            
+            <h2 id="broken_covariance">Broken covariance</h2>
+            
+            <p id="intuitively_we_might_at_first...">Intuitively, we might at first think that this should be
+            allowed. This looks OK:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>void iterate(List&lt;Object&gt; list) {
+    Iterator&lt;Object&gt; it = list.iterator();
+    ...
+}
+iterate(ArrayList&lt;String&gt;());
+</code></pre>
+            
+            <p id="indeed_certain_languages_including_eiffel...">Indeed, certain languages, including Eiffel and Dart do
+            accept this code. Sadly, it's unsound, as can be seen in the
+            following example:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>//Eiffel/Dart-like language with 
+//broken covariance:
+void put(List&lt;Object&gt; list) {
+    list.add(10);
+}
+put(ArrayList&lt;String&gt;());
+</code></pre>
+            
+            <p id="here_we_pass_a_liststring...">Here we pass a <code>List&lt;String&gt;</code> to a function accepting
+            <code>List&lt;Object&gt;</code>, which attempts to add an <code>Integer</code> to the
+            list.</p>
+            
+            <p id="java_makes_this_same_mistake...">Java makes this same mistake with arrays. The following code
+            compiles:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>//Java:
+void put(Object[] list) {
+    list[0]=10;
+}
+put(new String[1]);
+</code></pre>
+            
+            <p id="it_fails_at_runtime_with...">It fails at runtime with an <code>ArrayStoreException</code>.</p>
+            
+            <h2 id="use_site_variance">Use-site variance</h2>
+            
+            <p id="java_takes_a_different_approach...">Java takes a different approach, however, for generic class
+            and interface types. By default, a class or interface type
+            is <em>invariant</em>, which is to say, that:</p>
+            
+            <ul>
+            <li>
+<code>L&lt;U&gt;</code> is assignable to <code>L&lt;V&gt;</code> if and only if <code>U</code> is
+            exactly the same type as <code>V</code>.</li>
+            </ul>
+            
+            
+            <p id="since_this_is_extremely_inconvenient...">Since this is <em>extremely</em> inconvenient much of the time,
+            Java supports something called <em>use-site variance</em>, where:</p>
+            
+            <ul>
+            <li>
+<code>L&lt;U&gt;</code> is assignable to <code>L&lt;? extends V&gt;</code> if <code>U</code> is a
+            subtype of <code>V</code>, and</li>
+            <li>
+<code>L&lt;U&gt;</code> is assignable to <code>L&lt;? super V&gt;</code> if <code>U</code> is a
+            supertype of <code>V</code>.</li>
+            </ul>
+            
+            
+            <p id="the_ugly_syntax__extends...">The ugly syntax <code>? extends V</code> or <code>? super V</code> is called a
+            <em>wildcard</em>. We also say that:</p>
+            
+            <ul>
+            <li>
+<code>L&lt;? extends V&gt;</code> is <em>covariant</em> in <code>V</code>, and that</li>
+            <li>
+<code>L&lt;? super V&gt;</code> is <em>contravariant</em> in <code>V</code>.</li>
+            </ul>
+            
+            
+            <p id="since_javas_wildcard_notation_is...">Since Java's wildcard notation is so ugly, we're not going
+            to use it anymore in this discussion. Instead, we'll write
+            wildcards using the keywords <code>in</code> and <code>out</code> for
+            contravariance and covariance respectively. Thus:</p>
+            
+            <ul>
+            <li>
+<code>L&lt;out V&gt;</code> is <em>covariant</em> in <code>V</code>, and</li>
+            <li>
+<code>L&lt;in V&gt;</code> is <em>contravariant</em> in <code>V</code>.</li>
+            </ul>
+            
+            
+            <p id="a_given_v_is_called...">A given <code>V</code> is called the <em>bound</em> of the wildcard:</p>
+            
+            <ul>
+            <li>
+<code>out V</code> is an <em>upper-bounded</em> wildcard, and <code>V</code> is its upper
+            bound, and</li>
+            <li>
+<code>in V</code> is a <em>lower-bounded</em> wildcard, and <code>V</code> is its lower
+            bound.</li>
+            </ul>
+            
+            
+            <p id="in_theory_we_could_have...">In theory, we could have a wildcard with both an upper and
+            lower bound, for example, <code>L&lt;out X in Y&gt;</code>.</p>
+            
+            <p id="we_can_express_multiple_upper...">We can express multiple upper bounds or multiple lower bounds
+            using an intersection type, for example, <code>L&lt;out U&amp;V&gt;</code> or
+            <code>L&lt;in U&amp;V&gt;</code>.</p>
+            
+            <p id="note_that_the_type_expressions...">Note that the type expressions <code>L&lt;out Anything&gt;</code> and
+            <code>L&lt;in Nothing&gt;</code> refer to exactly the same type, and this
+            type is a supertype of all instantiations of <code>L</code>.</p>
+            
+            <p id="youll_often_see_people_refer...">You'll often see people refer to wildcarded types as
+            <em>existential types</em>. What they mean by this is that if I
+            know that <code>list</code> is of type <code>List&lt;out Object&gt;</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>List&lt;out Object&gt; list;
+</code></pre>
+            
+            <p id="then_i_know_that_there...">Then I know that there exists an unknown type <code>T</code>, a subtype
+            of <code>Object</code>, such that <code>list</code> is of type <code>List&lt;T&gt;</code>.</p>
+            
+            <p id="alternatively_we_can_take_a...">Alternatively, we can take a more Ceylonic point of view,
+            and say that <code>List&lt;out Object&gt;</code> is the union of all types
+            <code>List&lt;T&gt;</code> where <code>T</code> is a subtype of <code>Object</code>.</p>
+            
+            <p id="in_a_system_with_use...">In a system with use-site variance, the following code does
+            not compile:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>void iterate(List&lt;Object&gt; list) {
+    Iterator&lt;Object&gt; it = list.iterator();
+    ...
+}
+iterate(ArrayList&lt;String&gt;()); //error: List&lt;String&gt; not a List&lt;Object&gt;
+</code></pre>
+            
+            <p id="but_this_code_does">But this code does:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>void iterate(List&lt;out Object&gt; list) {
+    Iterator&lt;out Object&gt; it = list.iterator();
+    ...
+}
+iterate(ArrayList&lt;String&gt;());
+</code></pre>
+            
+            <p id="correctly_this_code_does_not...">Correctly, this code does not compile:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>void put(List&lt;out Object&gt; list) {
+    list.add(10); //error: Integer is not a Nothing
+}
+put(ArrayList&lt;String&gt;());
+</code></pre>
+            
+            <p id="now_were_at_the_entrance...">Now we're at the entrance to the rabbit hole. In order to
+            integrate wildcarded types into the type system, while
+            rejecting unsound code like the above example, we need a
+            much more complicated algorithm for type argument
+            substitution.</p>
+            
+            <h2 id="member_typing_in_use_site_variance">Member typing in use-site variance</h2>
+            
+            <p id="that_is_when_we_have...">That is, when we have a generic type like <code>List&lt;T&gt;</code>, with a
+            method <code>void add(T element)</code>, instead of just
+            straightforwardly substituting <code>Object</code> for <code>T</code>, like we do
+            with ordinary invariant types, we need to consider the
+            <em>variance</em> of the location in which the type parameter
+            occurs. In this case, <code>T</code> occurs in a <em>contravariant location</em>
+            of the type <code>List</code>, namely, as the type of a method parameter.
+            The complicated algorithm, which I won't write down here,
+            tells us that we should substitute <code>Nothing</code>, the bottom type,
+            in this location.</p>
+            
+            <p id="now_imagine_that_our_list...">Now imagine that our <code>List</code> interface has a <code>partition()</code>
+            method with this signature:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>interface List&lt;T&gt; {
+    List&lt;List&lt;T&gt;&gt; partition(Integer length);
+    ...
+}
+</code></pre>
+            
+            <p id="what_is_the_return_type..."> What is the return type of <code>partition()</code> for a
+             <code>List&lt;out Y&gt;</code>? Well, without losing precision, it is:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code> List&lt;in List&lt;in Y out Nothing&gt; out List&lt;in Nothing out Y&gt;&gt;
+</code></pre>
+            
+            <p id="ouch">Ouch.</p>
+            
+            <p id="since_nobody_in_their_right...">Since nobody in their right mind wants to have to think
+            about types like this, a sensible language would throw away
+            some of those bounds, leaving something like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>List&lt;out List&lt;out Y&gt;&gt;
+</code></pre>
+            
+            <p id="which_is_vaguely_acceptable_sadly...">Which is vaguely acceptable. Sadly, even in this very simple
+            case, we're already well beyond the point where the programmer
+            can easily follow along with what the typechecker is doing.</p>
+            
+            <p id="so_heres_the_essence_of...">So here's the essence of why I distrust use-site variance:</p>
+            
+            <ul>
+            <li>A strong principle in the design of Ceylon is that the
+            programmer should always be able to reproduce the
+            reasoning of the compiler. It is <em>very</em> difficult to
+            reason about some of the complex types that arise with
+            use-site variance.</li>
+            <li>It has a viral effect: once those wildcard types get a
+            foothold in the code, they start to propagate, and it's
+            quite hard to get back to my ordinary invariant types.</li>
+            </ul>
+            
+            
+            <h2 id="declaration_site_variance">Declaration-site variance</h2>
+            
+            <p id="a_much_saner_alternative_to...">A much saner alternative to use-site variance is
+            <em>declaration-site variance</em>, where we specify the variance
+            of a generic type when we declare it. This is the system we
+            use in Ceylon. Under this system, we need to split <code>List</code>
+            into three interfaces:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>interface List&lt;out T&gt; {
+     Iterator&lt;T&gt; iterator();
+     List&lt;List&lt;T&gt;&gt; partition(Integer length);
+     ...
+}
+
+interface ListMutator&lt;in T&gt; {
+    void add(T element);
+}
+
+interface MutableList&lt;T&gt;
+    satisfies List&lt;T&gt;&amp;ListMutator&lt;T&gt; {}
+</code></pre>
+            
+            <p id="list_is_declared_to_be..."><code>List</code> is declared to be a covariant type, <code>ListMutator</code> a
+            contravariant type, and <code>MutableList</code> an invariant subtype
+            of both.</p>
+            
+            <p id="it_might_seem_that_the...">It might seem that the requirement for multiple interfaces
+            is a big disadvantage of declaration-site variance, but it
+            often turns out to be useful to separate mutation from
+            read operations, and:</p>
+            
+            <ul>
+            <li>mutating operations are very often invariant, whereas</li>
+            <li>read operations are very often covariant.</li>
+            </ul>
+            
+            
+            <p id="now_we_can_write_our...">Now we can write our functions like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>void iterate(List&lt;Object&gt; list) {
+    Iterator&lt;Object&gt; it = list.iterator();
+    ...
+}
+iterate(ArrayList&lt;String&gt;());
+
+void put(ListMutator&lt;Integer&gt; list) {
+    list.add(10);
+}
+put(ArrayList&lt;String&gt;()); //error: List&lt;String&gt; is not a ListMutator&lt;Integer&gt;
+</code></pre>
+            
+            <p id="you_can_read_more_about...">You can read more about declaration-site variance
+            <a href="http://ceylon-lang.org/documentation/1.0/tour/generics/">here</a>.</p>
+            
+            <h2 id="why_we_need_use_site_variance_in_ceylon">Why we need use-site variance in Ceylon</h2>
+            
+            <p id="sadly_java_doesnt_have_declaration...">Sadly, Java doesn't have declaration-site variance, and
+            clean interoperation with Java is something that is very
+            important to us. I don't like adding a major feature to the
+            typesystem of our language purely for the purposes of
+            interoperation with Java, and so I've resisted adding
+            wildcards to Ceylon for years. In the end, reality and
+            practicality won, and my stubborness lost. So Ceylon 1.1
+            now features use-site variance with single-bounded wildcards.</p>
+            
+            <p id="ive_tried_to_keep_this...">I've tried to keep this feature as tightly constrained as
+            possible, with just the minimum required for decent Java
+            interop. That means that, like in Java:</p>
+            
+            <ul>
+            <li>there are no double-bounded wildcards, of form
+            <code>List&lt;in X out Y&gt;</code>, and</li>
+            <li>a wildcarded type can not occur in the <code>extends</code> or
+            <code>satisfies</code> clause of a class or interface definition.</li>
+            </ul>
+            
+            
+            <p id="furthermore_unlike_java">Furthermore, unlike Java:</p>
+            
+            <ul>
+            <li>there are no implicitly-bounded wildcards, upper bounds
+            must always be written in explicitly, and</li>
+            <li>there is no support for <em>wildcard capture</em>.</li>
+            </ul>
+            
+            
+            <p id="wildcard_capture_is_a_very...">Wildcard capture is a very clever feature of Java, which
+            makes use of the "existential" interpretation of a wildcard
+            type. Given a generic function like this one:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>List&lt;T&gt; unmodifiableList&lt;T&gt;(List&lt;T&gt; list) =&gt; ... :
+</code></pre>
+            
+            <p id="java_would_let_me_call...">Java would let me call <code>unmodifiableList()</code>, passing a
+            wildcarded type like <code>List&lt;out Object&gt;</code>, returning another
+            wildcarded <code>List&lt;out Object&gt;</code>, reasoning that there is some
+            unknown <code>X</code>, a subtype of <code>Object</code> for which the invocation
+            would be well-typed. That is, this code is considered
+            well-typed, even though the type <code>List&lt;out Object&gt;</code> is not
+            assignable to <code>List&lt;T&gt;</code> for any <code>T</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>List&lt;out Object&gt; objects = .... ;
+List&lt;out Object&gt; unmodifiable = unmodifiableList(objects);
+</code></pre>
+            
+            <p id="in_java_typing_errors_involving...">In Java, typing errors involving wildcard capture
+            are almost impossible to understand, since they involve the
+            unknown, and undenoteable, type. I have no plans to add
+            support for wildcard capture to Ceylon.</p>
+            
+            <h2 id="try_it_out">Try it out</h2>
+            
+            <p id="use_site_variance_is_already...">Use-site variance is already implemented and already works
+            in Ceylon 1.1, which you can get from GitHub, if you're
+            super-motivated.</p>
+            
+            <p id="even_though_the_main_motivation...">Even though the main motivation for this feature was great
+            Java interop, there will be other, hopefully rare, occasions
+            where wildcards will be useful. That doesn't, however,
+            indicate any significant shift in our approach. We will
+            continue using declaration-site variance in the Ceylon SDK
+            except in extreme cases.</p>
+            
+            <p id="update">UPDATE:</p>
+            
+            <p id="i_just_realized_i_forgot...">I just realized I forgot to say thanks to Ross Tate for
+            helping me with the finer points of the member typing
+            algorithm for use site variance. Very tricky stuff that Ross
+            knows off the top of his head!</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2014/07/14/wildcards/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

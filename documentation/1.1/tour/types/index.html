@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Union, intersection, and enumerated types</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.1/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.1/tour">Tour of Ceylon</a></h3>
+            
+            <ol>
+            <li><a href="/documentation/1.1/tour/basics">Basics</a></li>
+            <li><a href="/documentation/1.1/tour/classes">Classes</a></li>
+            <li><a href="/documentation/1.1/tour/attributes-control-structures">Attributes and variables, control structures</a></li>
+            <li><a href="/documentation/1.1/tour/inheritance">Inheritance, refinement, and interfaces</a></li>
+            <li><a href="/documentation/1.1/tour/anonymous-member-classes">Anonymous and member classes</a></li>
+            <li><a href="/documentation/1.1/tour/sequences">Streams, sequences, and tuples</a></li>
+            <li><a href="/documentation/1.1/tour/typeinference">Type aliases and type inference</a></li>
+            <li><a href="/documentation/1.1/tour/types">Union, intersection, and enumerated types</a></li>
+            <li><a href="/documentation/1.1/tour/generics">Generics</a></li>
+            <li><a href="/documentation/1.1/tour/modules">Packages and modules</a></li>
+            <li><a href="/documentation/1.1/tour/functions">Functions</a></li>
+            <li><a href="/documentation/1.1/tour/named-arguments">Named arguments</a></li>
+            <li><a href="/documentation/1.1/tour/comprehensions">Comprehensions</a></li>
+            <li><a href="/documentation/1.1/tour/language-module">Language module</a></li>
+            <li><a href="/documentation/1.1/tour/initialization">Initialization</a></li>
+            <li><a href="/documentation/1.1/tour/annotations">Annotations and the metamodel</a></li>
+            <li><a href="/documentation/1.1/tour/interop">Interoperation with Java</a></li>
+            <li><a href="/documentation/1.1/tour/dynamic">Dynamic typing</a></li>
+            </ol>
+            
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.1/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <!-- ### [Tutorial videos](/documentation/1.1/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.1/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.1/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.1/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.1/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.1/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Tour of Ceylon (1.1)
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_11_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.1, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <h1 id="union_intersection_and_enumerated_types">Union, intersection, and enumerated types</h1>
+          
+          <p id="this_is_the_eighth_step...">This is the eighth step in the Tour of Ceylon. In the
+          <a href="../typeinference">previous installment</a> we learned about type aliases and
+          type inference. Let's continue our exploration of Ceylon's type system.</p>
+          
+          <p id="in_this_chapter_were_going...">In this chapter, we're going to discuss the closely related topics of <em>union
+          and intersection types</em> and <em>enumerated types</em>. In this area, Ceylon's type
+          system works quite differently to other languages with static typing.</p>
+          
+          <h2 id="narrowing_the_type_of_an_object_reference">Narrowing the type of an object reference</h2>
+          
+          <p id="in_any_language_with_subtyping...">In any language with subtyping there is the (hopefully) occasional need to
+          perform narrowing conversions. In most statically-typed languages, this is a
+          two-part process. For example, in Java, we first test the type of the object
+          using the <code>instanceof</code> operator, and then attempt to downcast it using a
+          C-style typecast. This is quite curious, since there are virtually no good
+          uses for <code>instanceof</code> that don't involve an immediate cast to the tested
+          type, and typecasts without type tests are dangerously non-typesafe.</p>
+          
+          <p id="as_you_can_imagine_ceylon...">As you can imagine, Ceylon, with its emphasis upon static typing, does
+          things differently. Ceylon doesn't have C-style typecasts. Instead, we
+          must test and narrow the type of an object reference in one step, using the
+          special <code>if (is ... )</code> construct. This construct is very, very similar
+          to <a href="../basics#dealing_with_objects_that_arent_there"><code>if (exists ... )</code></a> and
+          <a href="../sequences#sequences"><code>if (nonempty ... )</code></a>, which we met earlier.</p>
+          
+          <!-- try-pre:
+              interface Printable {
+                shared formal void printObject();
+              }
+              class PrintableString(String string) satisfies Printable{
+                shared actual void printObject() { print(string); }
+              }
+          -->
+          
+          
+          <!-- try-post:
+              printIfPrintable("foo");
+              printIfPrintable(PrintableString("bar"));
+          -->
+          
+          
+          <!-- cat: interface Printable { shared formal void print(); } -->
+          
+          
+          <pre data-language="ceylon"><code>void printIfPrintable(Object obj) {
+    if (is Printable obj) {
+        obj.printObject();
+    }
+}
+</code></pre>
+          
+          <p id="theres_also_a_special_if...">There's also a special <code>if (!is ... )</code> construct which comes in handy
+          from time to time.</p>
+          
+          <p id="the_switch_statement_can_be...">The <code>switch</code> statement can be used in a similar way:</p>
+          
+          <!-- try-pre:
+              class Hello(String txt) {
+                  shared void printMsg() { print("Hello, ``txt``"); }
+              }
+              class Person(firstName, lastName) {
+                  shared String firstName;
+                  shared String lastName;
+              }
+          -->
+          
+          
+          <!-- try-post:
+          switchingPrint(Hello("World"));
+          switchingPrint(Person("Pietje", "Pluk"));
+          switchingPrint("foo");
+          -->
+          
+          
+          <!-- cat: 
+              class Hello() { 
+                  shared void printMsg() {
+                  }
+              } 
+              class Person(String firstName) { 
+                  shared String firstName = firstName; 
+              } 
+          -->
+          
+          
+          <pre data-language="ceylon"><code>void switchingPrint(Object obj) {
+    switch(obj)
+    case (is Hello) {
+        obj.printMsg();
+    }
+    case (is Person) {
+        print(obj.firstName);
+    }
+    else {
+        print(obj.string);
+    }
+}
+</code></pre>
+          
+          <p id="these_constructs_protect_us_from...">These constructs protect us from inadvertantly writing code that would
+          cause a <code>ClassCastException</code> in Java, just like <code>if (exists ... )</code>
+          protects us from writing code that would cause a <code>NullPointerException</code>.</p>
+          
+          <p id="the_if_is__...">The <code>if (is ... )</code> construct actually narrows to an intersection type.</p>
+          
+          <h2 id="intersection_types">Intersection types</h2>
+          
+          <p id="an_expression_is_assignable_to...">An expression is assignable to an <em>intersection type</em>, written <code>X&amp;Y</code>, if it is
+          assignable to <em>both</em> <code>X</code> and <code>Y</code>. For example, since
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/Tuple.type.html"><code>Tuple</code></a>
+          is a subtype of
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/Iterable.type.html"><code>Iterable</code></a>
+          and of
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/Correspondence.type.html"><code>Correspondence</code></a>,
+          the tuple type <code>[String,String]</code> is also a subtype of the intersection
+          <code>{String*} &amp; Correspondence&lt;Integer,String&gt;</code>. The supertypes of
+          an intersection type include all supertypes of every intersected type.</p>
+          
+          <p id="therefore_the_following_code_is...">Therefore, the following code is well-typed:</p>
+          
+          <pre data-language="ceylon"><code>{String*} &amp; Correspondence&lt;Integer,String&gt; strings 
+        = ["hello", "world"];
+String? str = strings.get(0);  //call get() of Correspondence
+Integer size = strings.size;  //call size of Iterable
+</code></pre>
+          
+          <p id="now_consider_this_code_to...">Now consider this code, to see the effect of <code>if (is ...)</code>:</p>
+          
+          <pre data-language="ceylon"><code>{String*} strings = ["hello", "world"];
+if (is Correspondence&lt;Integer,String&gt; strings) {
+    //here strings has type 
+    //{String*} &amp; Correspondence&lt;Integer,String&gt;
+    String? str = strings.get(0);
+    Integer size = strings.size;
+}
+</code></pre>
+          
+          <p id="inside_the_body_of_the...">Inside the body of the <code>if</code> construct, <code>strings</code> has the type
+          <code>{String*} &amp; Correspondence&lt;Integer,String&gt;</code>, so we can call
+          operations of both <code>Iterable</code> and of <code>Correspondence</code>.</p>
+          
+          <h2 id="union_types">Union types</h2>
+          
+          <p id="an_expression_is_assignable_to_a...">An expression is assignable to a <em>union type</em>, written <code>X|Y</code>, if it is assignable
+          to <em>either</em> <code>X</code> or <code>Y</code>. The type <code>X|Y</code> is always a supertype of both <code>X</code> and <code>Y</code>.
+          The following code is well-typed:</p>
+          
+          <!-- try:
+              void printType( String | Integer | Float val) {
+                  switch(val)
+                  case(is String) { print("String: ``val``"); }
+                  case(is Integer) { print("Integer: ``val``"); }
+                  case(is Float) { print("Float: ``val``"); }
+              }
+          
+              printType("hello");
+              printType(69);
+              printType(-1.0);
+          -->
+          
+          
+          <!-- check:none:pedagogical -->
+          
+          
+          <pre data-language="ceylon"><code>void printType(String|Integer|Float val) { ... }
+
+printType("hello");
+printType(69);
+printType(-1.0);
+</code></pre>
+          
+          <p id="but_what_operations_does_a...">But what operations does a type like <code>String|Integer|Float</code> have? What are
+          its supertypes? Well, the answer is pretty intuitive: <code>T</code> is a supertype of
+          <code>X|Y</code> if and only if it is a supertype of both <code>X</code> and <code>Y</code>. The Ceylon compiler
+          determines this automatically. So the following code is also well-typed:</p>
+          
+          <pre data-language="ceylon"><code>Integer|Float x = -1;
+Number num = x;  // Number is a supertype of both Integer and Float
+String|Integer|Float val = x; // String|Integer|Float is a supertype of Integer|Float
+Object obj = val; // Object is a supertype of String, Integer, and Float
+</code></pre>
+          
+          <p id="however_the_following_code_is...">However, the following code is <em>not</em> well-typed, since
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/Number.type.html"><code>Number</code></a>
+          is not a supertype of
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/String.type.html"><code>String</code></a>.</p>
+          
+          <!-- check:none:demoing compile error -->
+          
+          
+          <pre data-language="ceylon"><code>String|Integer|Float x = -1;
+Number num = x; //compile error: String is not a subtype of Number
+</code></pre>
+          
+          <p id="of_course_its_very_common...">Of course, it's very common to narrow an expression of union type using a
+          <code>switch</code> statement. Usually, the Ceylon compiler forces us to write an <code>else</code>
+          clause in a <code>switch</code>, to remind us that there might be additional cases which
+          we have not handled. But if we exhaust all cases of a union type, the compiler
+          will let us leave off the <code>else</code> clause.</p>
+          
+          <!-- try-post:
+              printType("hello");
+              printType(69);
+              printType(-1.0);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>void printType(String|Integer|Float val) {
+    switch (val)
+    case (is String) { print("String: ``val``"); }
+    case (is Integer) { print("Integer: ``val``"); }
+    case (is Float) { print("Float: ``val``"); }
+}
+</code></pre>
+          
+          <p id="a_union_type_is_a...">A union type is a kind of <em>enumerated type</em>.</p>
+          
+          <h3 id="gotcha">Gotcha!</h3>
+          
+          <p id="the_cases_of_a_switch...">The <code>case</code>s of a <code>switch</code> statement must be <a href="#more_about_disjointness">disjoint</a>.
+          Since <code>String</code>, <code>Integer</code>, and <code>Float</code> are disjoint types, the above <code>switch</code>
+          statement is legal. If a union type is formed from types which aren't disjoint,
+          those types can't be used as distinct <code>case</code>s.</p>
+          
+          <h2 id="enumerated_types">Enumerated types</h2>
+          
+          <p id="sometimes_its_useful_to_be...">Sometimes it's useful to be able to do the same kind of thing with the
+          subtypes of a class or interface. First, we need to explicitly enumerate the
+          subtypes of the type using the <code>of</code> clause:</p>
+          
+          <!-- implicit-id:Polar:
+              class Polar(Float radius, Float angle) extends Point() {
+                  shared Float radius = radius;
+                  shared Float angle = angle;
+              }
+              class Cartesian(Float x, Float y) extends Point() {
+                  shared Float x = x;
+                  shared Float y = y;
+              }
+          -->
+          
+          
+          
+          
+          <!-- try-post:
+              class Polar(radius, angle) extends Point() {
+                  shared Float radius;
+                  shared Float angle;
+              }
+              class Cartesian(x, y) extends Point() {
+                  shared Float x;
+                  shared Float y;
+              }
+          -->
+          
+          
+          <!-- id:Point -->
+          
+          
+          <pre data-language="ceylon"><code>abstract class Point()
+        of Polar | Cartesian {
+    // ...
+}
+</code></pre>
+          
+          <!-- cat-id: Polar -->
+          
+          
+          <p id="this_makes_point_into_ceylons...">(This makes <code>Point</code> into Ceylon's version of what the functional programming
+          community calls an "algebraic" or "sum" type.)</p>
+          
+          <p id="now_the_compiler_wont_let...">Now the compiler won't let us declare additional subclasses of <code>Point</code>, and
+          so the union type <code>Polar|Cartesian</code> is exactly the same type as <code>Point</code>.
+          Therefore, we can write <code>switch</code> statements without an <code>else</code> clause:</p>
+          
+          <!-- try-pre:
+              abstract class Point() of Polar | Cartesian { }
+              class Polar(radius, angle) extends Point() {
+                  shared Float radius;
+                  shared Float angle;
+              }
+              class Cartesian(x, y) extends Point() {
+                  shared Float x;
+                  shared Float y;
+              }
+          -->
+          
+          
+          <!-- try-post:
+              printPoint(Polar(10.0, 0.31));
+              printPoint(Cartesian(4.0, 5.0));
+          -->
+          
+          
+          <!-- cat-id: Point -->
+          
+          
+          <!-- cat-id: Polar -->
+          
+          
+          <pre data-language="ceylon"><code>void printPoint(Point point) {
+    switch (point)
+    case (is Polar) {
+        print("r = " + point.radius.string);
+        print("theta = " + point.angle.string);
+    }
+    case (is Cartesian) {
+        print("x = " + point.x.string);
+        print("y = " + point.y.string);
+    }
+}
+</code></pre>
+          
+          <p id="now_its_usually_considered_bad...">Now, it's usually considered bad practice to write long <code>switch</code> statements
+          that handle all subtypes of a type. It makes the code non-extensible. Adding
+          a new subclass to <code>Point</code> means breaking all the <code>switch</code> statements that
+          exhaust its subtypes. In object-oriented code, we usually try to refactor
+          constructs like this to use an abstract method of the superclass that is
+          overridden as appropriate by subclasses.</p>
+          
+          <p id="however_there_is_a_class...">However, there is a class of problems where this kind of refactoring isn't
+          appropriate. In most object-oriented languages, these problems are usually
+          solved using the "visitor" pattern.</p>
+          
+          <h2 id="visitors">Visitors</h2>
+          
+          <p id="lets_consider_the_following_tree...">Let's consider the following tree visitor implementation:</p>
+          
+          <!-- id:tree -->
+          
+          
+          <pre data-language="ceylon"><code>abstract class Node() {
+    shared formal void accept(Visitor v);
+}
+
+class Leaf(shared Object element) 
+        extends Node() {
+    accept(Visitor v) =&gt; v.visitLeaf(this);
+}
+
+class Branch(shared Node left, shared Node right) 
+        extends Node() {
+    accept(Visitor v) =&gt; v.visitBranch(this);
+}
+
+interface Visitor {
+    shared formal void visitLeaf(Leaf l);
+    shared formal void visitBranch(Branch b);
+}
+</code></pre>
+          
+          <p id="we_can_create_a_method...">We can create a method which prints out the tree by implementing the <code>Visitor</code>
+          interface:</p>
+          
+          <!-- try-pre:
+              abstract class Node() {
+                  shared formal void accept(Visitor v);
+              }
+              
+              class Leaf(shared Object element) 
+                      extends Node() {
+                  accept(Visitor v) => v.visitLeaf(this);
+              }
+              
+              class Branch(shared Node left, shared Node right) 
+                      extends Node() {
+                  accept(Visitor v) => v.visitBranch(this);
+              }
+              
+              interface Visitor {
+                  shared formal void visitLeaf(Leaf l);
+                  shared formal void visitBranch(Branch b);
+              }
+          
+          -->
+          
+          
+          <!-- try-post:
+          
+              printTree(Branch(Branch(Leaf("aap"), Leaf("noot")), Leaf("mies")));
+          -->
+          
+          
+          <!-- cat-id:tree -->
+          
+          
+          <pre data-language="ceylon"><code>void printTree(Node node) {
+    object printVisitor satisfies Visitor {
+        shared actual void visitLeaf(Leaf leaf) {
+            print("Found a leaf: ``leaf.element``!");
+        }
+        shared actual void visitBranch(Branch branch) {
+            branch.left.accept(this);
+            branch.right.accept(this);
+        }
+    }
+    node.accept(printVisitor);
+}
+</code></pre>
+          
+          <p id="notice_that_the_code_of...">Notice that the code of <code>printVisitor</code> looks just like a <code>switch</code> statement.
+          It must explicitly enumerate all subtypes of <code>Node</code>. It "breaks" if we add a
+          new subtype of <code>Node</code> to the <code>Visitor</code> interface. This is correct, and is the
+          desired behavior; "break" means that the compiler lets us know that we have
+          to update our code to handle the new subtype.</p>
+          
+          <p id="in_ceylon_we_can_achieve...">In Ceylon, we can achieve the same effect, with less verbosity, by
+          enumerating the subtypes of <code>Node</code> in its definition, and using a <code>switch</code>:</p>
+          
+          <!-- id:tree2 -->
+          
+          
+          <pre data-language="ceylon"><code>abstract class Node() of Leaf | Branch {}
+
+class Leaf(shared Object element) 
+        extends Node() {}
+
+class Branch(shared Node left, shared Node right) 
+        extends Node() {}
+</code></pre>
+          
+          <p id="our_print_method_is_now...">Our <code>print()</code> method is now much simpler, but still has the desired behavior
+          of "breaking" when a new subtype of <code>Node</code> is added.</p>
+          
+          <!-- try-pre:
+              abstract class Node() of Leaf | Branch {}
+              
+              class Leaf(shared Object element) 
+                      extends Node() {}
+              
+              class Branch(shared Node left, shared Node right) 
+                      extends Node() {}
+          
+          -->
+          
+          
+          <!-- try-post:
+          
+              printTree(Branch(Branch(Leaf("aap"), Leaf("noot")), Leaf("mies")));
+          -->
+          
+          
+          <!-- cat-id:tree2 -->
+          
+          
+          <pre data-language="ceylon"><code>void printTree(Node node) {
+    switch (node)
+    case (is Leaf) {
+        print("Found a leaf: ``node.element``!");
+    }
+    case (is Branch) {
+        printTree(node.left);
+        printTree(node.right);
+    }
+}
+</code></pre>
+          
+          <h2 id="enumerated_interfaces">Enumerated interfaces</h2>
+          
+          <p id="ordinarily_ceylon_wont_let_us...">Ordinarily, Ceylon won't let us use interface types as <code>case</code>s of a <code>switch</code>.
+          If <code>File</code>, <code>Directory</code>, and <code>Link</code> are interfaces, we ordinarily can't write:</p>
+          
+          <!-- try:
+              interface File {}
+              interface Directory {}
+              interface Link {}
+              class SymLink() satisfies Link {}
+          
+              File|Directory|Link resource = SymLink();
+              switch (resource) 
+              case (is File) { }
+              case (is Directory) { } //compile error: cases are not disjoint
+              case (is Link) { }  //compile error: cases are not disjoint
+          -->
+          
+          
+          <pre data-language="ceylon"><code>File|Directory|Link resource = ... ;
+switch (resource) 
+case (is File) { ... }
+case (is Directory) { ... } //compile error: cases are not disjoint
+case (is Link) { ... }  //compile error: cases are not disjoint
+</code></pre>
+          
+          <p id="the_problem_is_that_the...">The problem is that the cases are not <em>disjoint</em>. We could have a class that
+          satisfies both <code>File</code> and <code>Directory</code>, and then we wouldn't know which branch
+          to execute!</p>
+          
+          <p id="in_all_our_previous_examples...">(In all our previous examples, our <code>case</code>s referred to types which were
+          provably disjoint, because they were classes, which support only single
+          inheritance.)</p>
+          
+          <p id="theres_a_workaround_however_when...">There's a workaround, however. When an interface has enumerated subtypes, the
+          compiler enforces those subtypes to be disjoint. So if we define the following
+          enumerated interface:</p>
+          
+          <!-- try:
+              interface Resource of File | Directory | Link { }
+          
+              interface File satisfies Resource {}
+              interface Directory satisfies Resource {}
+              interface Link satisfies Resource {}
+          -->
+          
+          
+          <pre data-language="ceylon"><code>interface Resource of File | Directory | Link { ... }
+</code></pre>
+          
+          <p id="then_the_following_declaration_is...">Then the following declaration is an error:</p>
+          
+          <!-- try-pre:
+              interface Resource of File | Directory | Link { }
+              interface File satisfies Resource {}
+              interface Directory satisfies Resource {}
+              interface Link satisfies Resource {}
+          
+          -->
+          
+          
+          <pre data-language="ceylon"><code>class DirectoryFile() 
+        satisfies File &amp; Directory {} //compile error: File and Directory are disjoint types
+</code></pre>
+          
+          <p id="now_this_is_accepted_by...">Now this is accepted by the compiler:</p>
+          
+          <!-- try:
+              interface Resource of File | Directory | Link { }
+              interface File satisfies Resource {}
+              interface Directory satisfies Resource {}
+              interface Link satisfies Resource {}
+              class SymLink() satisfies Link {}
+          
+              Resource resource = SymLink();
+              switch (resource) 
+              case (is File) { print("File"); }
+              case (is Directory) { print("Directory"); }
+              case (is Link) { print("Link"); }
+          -->
+          
+          
+          <pre data-language="ceylon"><code>Resource resource = ... ;
+switch (resource) 
+case (is File) { ... }
+case (is Directory) { ... }
+case (is Link) { ... }
+</code></pre>
+          
+          <p id="the_compiler_is_pretty_clever...">The compiler is pretty clever when it comes to reasoning about disjointness
+          and exhaustion. For example, this is acceptable:</p>
+          
+          <!-- try:
+              interface Resource of File | Directory | Link { }
+              interface File satisfies Resource {}
+              interface Directory satisfies Resource {}
+              interface Link satisfies Resource {}
+              class SymLink() satisfies Link {}
+          
+              Resource resource = SymLink();
+              switch (resource) 
+              case (is File|Directory) { print("File or Directory"); }
+              case (is Link) { print("Link"); }
+          -->
+          
+          
+          <pre data-language="ceylon"><code>Resource resource = ... ;
+switch (resource) 
+case (is File|Directory) { ... }
+case (is Link) { ... }
+</code></pre>
+          
+          <p id="as_is_this">As is this:</p>
+          
+          <!-- try:
+              interface Resource of File | Directory | Link { }
+              interface File satisfies Resource {}
+              interface Directory satisfies Resource {}
+              interface Link satisfies Resource {}
+              class SymLink() satisfies Link {}
+          
+              Resource? resource = SymLink();
+              switch (resource) 
+              case (is File|Directory) { print("File or Directory"); }
+              case (is Link) { print("Link"); }
+              case (null) { print("null"); }
+          -->
+          
+          
+          <pre data-language="ceylon"><code>Resource? resource = ... ;
+switch (resource) 
+case (is File|Directory) { ... }
+case (is Link) { ... }
+case (null) { ... }
+</code></pre>
+          
+          <p id="as_is_this_still_assuming...">As is this, still assuming the above declaration of <code>Resource</code>:</p>
+          
+          <!-- try:
+              interface Resource of File | Directory | Link { }
+              interface File satisfies Resource {}
+              interface Directory satisfies Resource {}
+              interface Link satisfies Resource {}
+              class SymLink() satisfies Link {}
+          
+              File|Link resource = SymLink();
+              switch (resource) 
+              case (is File) { print("File"); }
+              case (is Link) { print("Link"); }
+          -->
+          
+          
+          <pre data-language="ceylon"><code>File|Link resource = ... ;
+switch (resource) 
+case (is File) { ... }
+case (is Link) { ... }
+</code></pre>
+          
+          <p id="if_youre_interested_in_knowing...">If you're interested in knowing more about how this works,
+          <a href="/blog/2012/01/25/enumerated-types/#how_the_compiler_reasons_about_enumerated_types">read this</a>.</p>
+          
+          <h2 id="enumerated_instances">Enumerated instances</h2>
+          
+          <p id="ceylon_doesnt_have_anything_exactly...">Ceylon doesn't have anything exactly like Java's <code>enum</code> declaration. But we
+          can emulate the effect using the <code>of</code> clause.</p>
+          
+          <!-- id:Suit -->
+          
+          
+          <pre data-language="ceylon"><code>abstract class Suit(String name)
+        of hearts | diamonds | clubs | spades {}
+
+object hearts extends Suit("hearts") {}
+object diamonds extends Suit("diamonds") {}
+object clubs extends Suit("clubs") {}
+object spades extends Suit("spades") {}
+</code></pre>
+          
+          <p id="were_allowed_to_use_the...">We're allowed to use the names of <code>object</code> declarations in the <code>of</code> clause.</p>
+          
+          <p id="now_we_can_exhaust_all...">Now we can exhaust all cases of <code>Suit</code> in a <code>switch</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>void printSuit(Suit suit) {
+    switch (suit)
+    case (hearts) { print("Heartzes"); }
+    case (diamonds) { print("Diamondzes"); }
+    case (clubs) { print("Clidubs"); }
+    case (spades) { print("Spidades"); }
+}
+</code></pre>
+          
+          <p id="note_that_these_cases_are...">Note that these cases are value cases, not <code>case (is...)</code> type cases. They
+          don't narrow the type of <code>suit</code>.</p>
+          
+          <p id="yes_this_is_a_bit...">Yes, this is a bit more verbose than a Java <code>enum</code>, but it's also somewhat
+          more flexible.</p>
+          
+          <p id="we_can_handle_multiple_cases...">We can handle multiple cases in a single <code>case</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>void printColor(Suit suit) {
+    switch (suit)
+    case (hearts|diamonds) { print("Red"); }
+    case (clubs|spades) { print("Black"); }
+}
+</code></pre>
+          
+          <p id="for_a_couple_of_more...">For a couple of more practical examples, check out the definitions of
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/Boolean.type.html"><code>Boolean</code></a> and
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/Comparison.type.html"><code>Comparison</code></a> in the
+          language module.</p>
+          
+          <h2 id="more_about_disjointness">More about disjointness</h2>
+          
+          <p id="as_weve_seen_disjointness_is...">As we've seen, <em>disjointness</em> is a useful property for two types to have, since
+          it lets us use them as cases of the same <code>switch</code> statement. Therefore, the
+          compiler expends some effort to determine if two types are disjoint. For
+          example:</p>
+          
+          <ul>
+          <li>if <code>X</code> and <code>Y</code> are classes, <code>X</code> is not a subclass of <code>Y</code>, and <code>Y</code> is not a
+          subclass of <code>X</code>, then <code>X</code> and <code>Y</code> are disjoint,</li>
+          <li>if <code>X</code> is a <code>final</code> class and <code>Y</code> is an interface not satisfied by <code>X</code>, then
+          <code>X</code> and <code>Y</code> are disjoint, and</li>
+          <li>two instantiations of a generic type may be disjoint, for example,
+          <code>MutableList&lt;String&gt;</code> and <code>MutableList&lt;Integer&gt;</code>.</li>
+          </ul>
+          
+          
+          <p id="theres_much_more_information_about...">(There's much more information about disjointness in <a href="../../spec">the spec</a>.)</p>
+          
+          <p id="when_the_compiler_encounters_an...">When the compiler encounters an intersection type involving disjoint types,
+          for example, <code>String&amp;Integer</code>, it automatically simplifies this type to the
+          bottom type <code>Nothing</code>.</p>
+          
+          <h2 id="coverage_and_the_of_operator">Coverage and the <code>of</code> operator</h2>
+          
+          <p id="the_of_clause_of_an...">The <code>of</code> clause of an enumerated type lets us define a relationship called
+          <em>coverage</em> between types. Coverage is related to, but not the same as,
+          subtyping. For example:</p>
+          
+          <ul>
+          <li>
+<code>X|Y</code> covers <code>X</code> for any type <code>Y</code>, and</li>
+          <li>if <code>T</code> has the enumerated cases <code>X</code>, <code>Y</code>, and <code>Z</code>, then <code>X|Y|Z</code> covers <code>T</code>.</li>
+          </ul>
+          
+          
+          <p id="if_the_union_of_the...">If the union of the types of all cases of a <code>switch</code> covers the <code>switch</code>ed
+          expression type, then we know that the whole <code>switch</code> statement is exhaustive.</p>
+          
+          <p id="again_theres_much_more_information...">(Again, there's much more information about coverage in <a href="../../spec">the spec</a>.)</p>
+          
+          <p id="if_a_type_covers_another...">If a type covers another type, then we can use the <code>of</code> operator to safely
+          narrow from the second type to the first type, even if the second type is not
+          strictly-speaking a subtype of the first type, according to Ceylon's type system.
+          Going back to an earlier example, we could write:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Resource resource = ... ;
+File|Directory|Link fileOrDirOrLink = resource of File|Directory|Link;
+</code></pre>
+          
+          <p id="this_is_more_often_useful...">This is more often useful for self types.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Comparable&lt;Type&gt; comparable = .... ;
+Type type = comparable of Type;
+</code></pre>
+          
+          <h2 id="theres_more">There's more...</h2>
+          
+          <p id="you_can_read_a_bit...">You can read a bit more about enumerated types in Ceylon in
+          <a href="/blog/2012/01/25/enumerated-types">this blog post</a>.</p>
+          
+          <p id="next_well_explore_ceylons_generic...">Next we'll explore Ceylon's <a href="../generics">generic type system</a> in more depth.</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

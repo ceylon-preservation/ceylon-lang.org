@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: On three-legged elephants</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2013/12/12/ceylon-tour-comes-to-paris/">Ceylon Tour comes to Paris</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2013/12/16/ceylon-test-news/">When ceylon.test met meta-model</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="on_three_legged_elephants">
+            On three-legged elephants
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              13 Dec 2013
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/language-design/">
+                language design
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <p id="ive_often_argued_that_good...">I've often argued that good design—of a language, library, or
+            framework—isn't about packing in as many features as possible
+            into your solution, rather it's about discovering a small set of
+            interlocking features that act to reinforce each other. That is to
+            say, we want to maximize the power/expressiveness of our solution,
+            while simultaneously minimizing the surface area. I am, furthermore,
+            quite often willing to sacrifice some <em>flexibility</em> for <em>elegance</em>.
+            It's my view that elegant solutions are easier to learn, more
+            enjoyable to use, and easier to abstract over.</p>
+            
+            <p id="with_this_in_mind_i...">With this in mind, I would like to consider a problem that language
+            designers have been working on for at least two decades: how to
+            combine <em>subtype polymorphism</em> with <em>parametric polymorphism</em> (generics).
+            This is a central problem faced by any object-oriented language with
+            static typing. Recent languages have come progressively closer to a
+            satisfying solution, but I would like to submit, if it doesn't sound
+            too self-serving, that Ceylon offers the most satisfying solution so
+            far.</p>
+            
+            <p id="our_mascot_is_trompon_the...">Our mascot is Trompon the elephant, because an elephant has four
+            legs and would fall over if one of his legs were missing. Ceylon's
+            type system is exactly like this! (Yes, this is a baxplanation.)</p>
+            
+            <p id="the_four_legs_of_the...">The four legs of the type system are:</p>
+            
+            <ul>
+            <li>declaration site variance</li>
+            <li>ad hoc union and intersection types</li>
+            <li>type inference based on principal typing</li>
+            <li>covariant refinement and principal
+            instantiation inheritance</li>
+            </ul>
+            
+            
+            <p id="if_we_were_to_take...">If we were to take away any one of those four characteristics, all
+            of a sudden stuff that Just Works would simply not work anymore, or,
+            even if we could make it work, it would turn out way more complex,
+            and involve reasoning that is difficult for the programmer to
+            reproduce.</p>
+            
+            <p id="consider_this_really_simple_line...">Consider this really simple line of code:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>value animals = ArrayList { Cat(), Dog(), Person() };
+</code></pre>
+            
+            <p id="the_inferred_type_of_animals...">The inferred type of <code>animals</code> is <code>ArrayList&lt;Cat|Dog|Person&gt;</code>.</p>
+            
+            <ul>
+            <li>If we were to take away declaration site covariance, then <code>animals</code>
+            would not be assignable to <code>List&lt;Animal&gt;</code>.</li>
+            <li>If we were to take away union and intersection types, then the
+            process for inferring the type argument would be ambiguous and much
+            more complex. (Ceylon's type argument inference algorithm is defined
+            in two pages of pseudocode in the language specification, which sounds
+            like a lot, until you realize how problematic and underspecified this
+            algorithm is in other languages, and that the actual implementation
+            of the algorithm is not much more longer.)</li>
+            <li>If we were to take away type inference, or principal typing, we would
+            need to explicitly write down some uninteresting types in this line
+            of code.</li>
+            </ul>
+            
+            
+            <p id="minus_any_one_of_these...">Minus any one of these characteristics, we're left with a <a href="http://www.telegraph.co.uk/earth/wildlife/4966620/Mosha-the-elephant-gets-prosthetic-leg.html">three-legged
+            elephant</a>.</p>
+            
+            <p id="principal_instantiation_inheritance_is_a...">Principal instantiation inheritance is a kind-of hidden feature of
+            Ceylon that we don't talk about much, even though we use it extensively
+            throughout the design of our container types. It lets us say, for example,
+            that a <code>List&lt;Element&gt;</code> is a <code>Ranged&lt;List&lt;Element&gt;&gt;</code>, and that a
+            <code>Sequence&lt;Element&gt;</code> is a  <code>List&lt;Element&gt;&amp;Ranged&lt;Sequence&lt;Element&gt;&gt;</code>.
+            Principal instantiation inheritance meshes really nicely with
+            declaration-site covariance, and with ad hoc union/intersection types.
+            Consider the following code:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>List&lt;String&gt;|Integer[] ranged = ... ;
+value span = ranged.span(0,max); 
+</code></pre>
+            
+            <p id="here_the_inferred_type_of...">Here, the inferred type of <code>span</code> is <code>List&lt;String&gt;|Integer[]</code>. Isn't
+            that nice? The typechecker has reasoned that the <em>principal supertype
+            instantiation</em> of <code>Ranged</code> for <code>List&lt;String&gt;|Integer[]</code> is the type
+            <code>Ranged&lt;List&lt;String&gt;|Integer[]&gt;</code>, and thereby determined the perfect
+            return type for <code>span()</code>.</p>
+            
+            <p id="if_we_were_to_take_away...">If we were to take away any one of declaration site covariance,
+            principal instantiation inheritance, or union types, then this
+            reasoning would no longer be sound. The elephant would fall on his
+            ass.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2013/12/13/three-legged-elephants/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

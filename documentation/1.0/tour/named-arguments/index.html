@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Named arguments</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.0/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.0/tour">Tour of Ceylon</a></h3>
+            
+            <ol>
+            <li><a href="/documentation/1.0/tour/basics">Basics</a></li>
+            <li><a href="/documentation/1.0/tour/classes">Classes</a></li>
+            <li><a href="/documentation/1.0/tour/attributes-control-structures">Attributes and variables, control structures</a></li>
+            <li><a href="/documentation/1.0/tour/inheritance">Inheritance, refinement, and interfaces</a></li>
+            <li><a href="/documentation/1.0/tour/anonymous-member-classes">Anonymous and member classes</a></li>
+            <li><a href="/documentation/1.0/tour/sequences">Iterables, sequences, and tuples</a></li>
+            <li><a href="/documentation/1.0/tour/typeinference">Type aliases and type inference</a></li>
+            <li><a href="/documentation/1.0/tour/types">Union, intersection, and enumerated types</a></li>
+            <li><a href="/documentation/1.0/tour/generics">Generics</a></li>
+            <li><a href="/documentation/1.0/tour/modules">Packages and modules</a></li>
+            <li><a href="/documentation/1.0/tour/functions">Functions</a></li>
+            <li><a href="/documentation/1.0/tour/named-arguments">Named arguments</a></li>
+            <li><a href="/documentation/1.0/tour/comprehensions">Comprehensions</a></li>
+            <li><a href="/documentation/1.0/tour/language-module">Language module</a></li>
+            <li><a href="/documentation/1.0/tour/initialization">Initialization</a></li>
+            <li><a href="/documentation/1.0/tour/annotations">Annotations and the metamodel</a></li>
+            <li><a href="/documentation/1.0/tour/interop">Interoperation with Java</a></li>
+            <li><a href="/documentation/1.0/tour/dynamic">Dynamic typing</a></li>
+            </ol>
+            
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.0/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="tutorial_videos"><a href="/documentation/1.0/videos">Tutorial videos</a></h3>
+            
+            <h3 id="language_specification"><a href="/documentation/1.0/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.0/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.0/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.0/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.0/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Tour of Ceylon
+            <span style="color:#8d5e0b">(1.0)</span>
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_10_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.0, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <h1 id="named_arguments">Named arguments</h1>
+          
+          <p id="this_is_the_twelfth_leg...">This is the twelfth leg in the Tour of Ceylon. In the
+          <a href="../functions">previous leg</a> we learnt about functions. This part builds
+          on that by covering Ceylon's support for calling functions using <em>named
+          arguments</em>.</p>
+          
+          <h2 id="named_arguments-2">Named arguments</h2>
+          
+          <p id="consider_the_following_function">Consider the following function:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:Requires IO -->
+          
+          
+          <!-- id:printf -->
+          
+          
+          <pre data-language="ceylon"><code>void printf(Writer to, String format, {Object*} values) { 
+    // ... 
+}
+</code></pre>
+          
+          <p id="weve_seen_lots_of_examples...">We've seen lots of examples of invoking a function or instantiating a class
+          using a familiar C-style syntax where arguments are delimited by parentheses
+          and separated by commas. Arguments are matched to parameters by their
+          position in the list. Let's see one more example, just in case:</p>
+          
+          <!-- implicit-id:Store:
+          abstract class PaymentMethod() of cash | creditCard | debitCard {}
+          object cash extends PaymentMethod() {}
+          object creditCard extends PaymentMethod() {}
+          object debitCard extends PaymentMethod() {}
+          
+          abstract class Currency() of usd | gbp | eur {}
+          object usd extends Currency() {}
+          object gbp extends Currency() {}
+          object eur extends Currency() {}
+          
+          class User(String name) {
+              shared String name = name;
+              shared PaymentMethod paymentMethod = cash;
+          }
+          
+          class Order(Integer total, Integer confirmationNumber) {
+              shared Integer total = total;
+              shared Integer confirmationNumber = confirmationNumber;
+              shared Currency currency = usd;
+          }
+              
+          class Payment(PaymentMethod method, Currency currency, Integer amount) {}
+          -->
+          
+          
+          
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:Requires IO -->
+          
+          
+          <!-- cat-id:printf -->
+          
+          
+          <!-- cat-id: Store -->
+          
+          
+          <!-- cat: void m(User user, Order order) { -->
+          
+          
+          <pre data-language="ceylon"><code>printf(writer, 
+       "Thanks, %s. You have been charged %.2f. 
+        Your confirmation number is %d.",
+       { user.name, order.total, order.confimationNumber });
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="this_works_fine_however_ceylon...">This works fine. However, Ceylon provides an alternative function
+          invocation protocol that is usually easier to read when there are more than
+          one or two arguments:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:Requires IO -->
+          
+          
+          <!-- cat-id:printf -->
+          
+          
+          <!-- cat-id: Store -->
+          
+          
+          <!-- cat: void m(User user, Order order) { -->
+          
+          
+          <pre data-language="ceylon"><code>printf {
+    to = writer;
+    format = "Thanks, %s. You have been charged %.2f. 
+              Your confirmation number is %d.";
+    values = { user.name, order.total, order.confimationNumber };
+};
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="this_invocation_protocol_is_called...">This invocation protocol is called a <em>named argument list</em>. We can recognize a
+          named argument list by the use of braces as delimiters instead of parentheses.
+          Notice that arguments are separated by semicolons. We explicitly specify the
+          name of each parameter.</p>
+          
+          <p id="we_usually_format_named_argument...">We usually format named argument invocations across multiple lines.</p>
+          
+          <h2 id="iterable_arguments">Iterable arguments</h2>
+          
+          <p id="since_the_parameter_values_is...">Since the parameter <code>values</code> is of type <code>Iterable</code>, we're allowed to abbreviate
+          this, leaving out the parameter name and the braces surrounding the iterable
+          construction expression:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:Requires IO -->
+          
+          
+          <!-- cat-id:printf -->
+          
+          
+          <!-- cat-id: Store -->
+          
+          
+          <!-- cat: void m(User user, Order order) { -->
+          
+          
+          <pre data-language="ceylon"><code>printf {
+    to = writer;
+    format = "Thanks, %s. You have been charged %.2f. 
+              Your confirmation number is %d.";
+    user.name, order.total, order.confimationNumber
+};
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="indeed_we_can_usually_leave...">Indeed, we can usually leave out the parameter names entirely.</p>
+          
+          <h2 id="named_arguments_to_variadic_parameters">Named arguments to variadic parameters</h2>
+          
+          <p id="to_pass_a_named_argument...">To pass a named argument to a variadic parameter, just wrap the arguments in
+          a sequence:</p>
+          
+          <pre data-language="ceylon"><code>Float product(Float+ floats) {
+    variable value product = floats.first;
+    for (float in floats.rest) {
+        product*=float;
+    }
+    return product;
+}
+
+print(product(2.0, 3.0, 4.0));              //positional args
+print(product { floats=[2.0, 3.0, 4.0]; }); //same thing, with a named arg
+</code></pre>
+          
+          <h2 id="leaving_out_the_parameter_names">Leaving out the parameter names</h2>
+          
+          <p id="contrary_to_the_description_of...">Contrary to the description of this feature as a "named argument list",
+          we're actually allowed to leave out the names of the parameters if we
+          write the arguments down in the right order:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:Requires IO -->
+          
+          
+          <!-- cat-id:printf -->
+          
+          
+          <!-- cat-id: Store -->
+          
+          
+          <!-- cat: void m(User user, Order order) { -->
+          
+          
+          <pre data-language="ceylon"><code>printf {
+    writer;
+    "Thanks, %s. You have been charged %.2f. 
+     Your confirmation number is %d.";
+    user.name, order.total, order.confimationNumber
+};
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="yes_theres_a_great_reason...">Yes, there's a great reason for this, as we're about to see!</p>
+          
+          <h2 id="declarative_object_instantiation_syntax">Declarative object instantiation syntax</h2>
+          
+          <p id="the_following_classes_define_a...">The following classes define a data structure for defining tables:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:pedagogical -->
+          
+          
+          <pre data-language="ceylon"><code>class Table(String title, Integer rows, Border border, 
+                {Column*} columns) {}
+
+class Column(String heading, Integer width, 
+                String content(Integer row)) {}
+
+class Border(Integer padding, Integer weight) {}
+</code></pre>
+          
+          <p id="of_course_we_could_build...">Of course, we could build a <code>Table</code> using positional argument lists and
+          anonymous functions:</p>
+          
+          <!-- try-pre:
+              class Table(String title, Integer rows, Border border, 
+                              {Column*} columns) {}
+              
+              class Column(String heading, Integer width, 
+                              String content(Integer row)) {}
+              
+              class Border(Integer padding, Integer weight) {}
+              
+          -->
+          
+          
+          <!-- check:none:pedagogical -->
+          
+          
+          <pre data-language="ceylon"><code>Table table = Table("Squares", 5, Border(2,1), 
+        { Column("x",10, (Integer row) =&gt; row.string), 
+          Column("x^2",12, (Integer row) =&gt; (row^2).string) });
+</code></pre>
+          
+          <p id="however_its_far_more_common...">However, it's far more common to use named arguments to build a complex
+          graph of objects. In this section we're going to meet some new features of
+          named argument lists, that make it especially convenient to build object
+          graphs.</p>
+          
+          <p id="first_note_that_the_syntax...">First, note that the syntax we've already seen for specifying a named argument
+          value looks exactly like the syntax for refining a <code>formal</code> attribute. If you
+          think about it, taking into account that a function parameter may accept
+          references to other functions, the whole problem of specifying values for named
+          parameters starts to look a lot like the problem of refining abstract members.
+          Therefore, Ceylon will let us reuse much of the member declaration syntax
+          inside a named argument list.</p>
+          
+          <p id="its_legal_to_include_the...">It's legal to include the following constructs in a named argument list:</p>
+          
+          <ul>
+          <li>function declarations—specify the argument of a parameter that accepts a
+          function,</li>
+          <li>
+<code>object</code> (anonymous class) declarations—are most useful for specifying
+          the value of a parameter whose type is an interface or abstract class, and</li>
+          <li>getter declarations—lets us compute the value of an argument inline.</li>
+          </ul>
+          
+          
+          <p id="this_helps_explain_why_named...">This helps explain why named argument lists are delimited by braces: the
+          fully general syntax for a named argument list is very, very close to the
+          syntax for a class, function, or attribute body. Notice, again, how flexibility
+          derives from language regularity.</p>
+          
+          <p id="so_we_could_rewrite_the...">So we could rewrite the code that builds a <code>Table</code> as follows:</p>
+          
+          <!-- try-pre:
+              class Table(String title, Integer rows, Border border, 
+                              {Column*} columns) {}
+              
+              class Column(String heading, Integer width, 
+                              String content(Integer row)) {}
+              
+              class Border(Integer padding, Integer weight) {}
+          
+          -->
+          
+          
+          <!-- check:none:pedagogical -->
+          
+          
+          <pre data-language="ceylon"><code>Table table = Table {
+    title="Squares";
+    rows=5;
+    border = Border {
+        padding=2;
+        weight=1;
+    };
+    Column {
+        heading="x";
+        width=10;
+        function content(Integer row) 
+                =&gt; row.string;
+    },
+    Column {
+        heading="x^2";
+        width=12;
+        function content(Integer row) 
+                =&gt; (row^2).string;
+    }
+};
+</code></pre>
+          
+          <p id="notice_that_weve_specified_the...">Notice that we've specified the value of the parameter named <code>content</code> using the
+          usual syntax for declaring a function.</p>
+          
+          <p id="even_better_using_the_shortcuts...">Even better, using the shortcuts we've already seen, our example can be further
+          abbreviated like this:</p>
+          
+          <!-- try-pre:
+              class Table(String title, Integer rows, Border border, 
+                              {Column*} columns) {}
+              
+              class Column(String heading, Integer width, 
+                              String content(Integer row)) {}
+              
+              class Border(Integer padding, Integer weight) {}
+          
+          -->
+          
+          
+          <!-- check:none:pedagogical -->
+          
+          
+          <pre data-language="ceylon"><code>Table table = Table {
+    title="Squares";
+    rows=5;
+    Border {
+        padding=2;
+        weight=1;
+    };
+    Column {
+        heading="x";
+        width=10;
+        content(Integer row) 
+                =&gt; row.string;
+    },
+    Column {
+        heading="x^2";
+        width=10;
+        content(Integer row) 
+                =&gt; (row^2).string;
+    }
+};
+</code></pre>
+          
+          <p id="notice_how_weve_transformed_our...">Notice how we've transformed our code from a form which emphasized invocation
+          into a form that emphasizes declaration of a hierarchical structure.
+          Semantically, the two forms are equivalent. But in terms of readability,
+          they are quite different.</p>
+          
+          <p id="we_could_put_the_above...">We could put the above totally declarative code in a file by itself and it
+          would look like some kind of "mini-language" for defining tables. In fact,
+          it's executable Ceylon code that may be validated for syntactic correctness by
+          the Ceylon compiler and then compiled to Java bytecode or JavaScript. Even
+          better, the Ceylon IDE will provide authoring support for our mini-language.
+          In complete contrast to the DSL support in some dynamic languages, any Ceylon
+          DSL is completely typesafe! You can think of the definition of the <code>Table</code>,
+          <code>Column</code> and <code>Border</code> classes as defining the "schema" or "grammar" of the
+          mini-language. (In fact, they are really defining a syntax tree for the
+          mini-language.)</p>
+          
+          <p id="now_lets_see_an_example...">Now let's see an example of a named argument list with an inline getter
+          declaration:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:Needs more Store -->
+          
+          
+          <pre data-language="ceylon"><code>shared class Payment(PaymentMethod method, 
+                     Currency currency, 
+                     Float amount) {}
+
+Payment payment {
+    method = user.paymentMethod;
+    currency = order.currency;
+    value amount {
+        variable Float total = 0.0;
+        for (item in order.items) {
+            total += item.quantity * item.product.unitPrice;
+        }
+        return total;
+    }
+}
+</code></pre>
+          
+          <p id="finally_heres_an_example_of...">Finally, here's an example of a named argument list with an inline <code>object</code>
+          declaration:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:parse:pedagogical -->
+          
+          
+          <pre data-language="ceylon"><code>shared interface Observable {
+    shared void addObserver(Observer&lt;Nothing&gt; observer) { 
+        // ... 
+    }
+}
+
+shared interface Observer&lt;in Event&gt; {
+    shared formal void on(Event event);
+}
+
+observable.addObserver {
+    object observer 
+            satisfies Observer&lt;UpdateEvent&gt; {
+        on(UpdateEvent e) =&gt; 
+                print("Update:" + e.string);
+    }
+};
+</code></pre>
+          
+          <p id="note_that_observert_is_assignable...">(Note that <code>Observer&lt;T&gt;</code> is assignable to <code>Observer&lt;Nothing&gt;</code> for any type
+          <code>T</code>, since <code>Observer&lt;T&gt;</code> is contravariant in its type parameter <code>T</code>. If this
+          doesn't make sense, please read the section on <a href="../generics">generics</a> again.)</p>
+          
+          <p id="of_course_as_we_saw...">Of course, as we saw in the leg on <a href="../functions">functions</a>, a better way to
+          solve this problem might be to eliminate the <code>Observer</code> interface and pass a
+          function directly:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:parse:pedagogical -->
+          
+          
+          <pre data-language="ceylon"><code>shared interface Observable {
+    shared void addObserver&lt;Event&gt;(void on(Event event)) { ... }
+}
+
+observable.addObserver {
+    void on(UpdateEvent e) =&gt; 
+            print("Update:" + e.string);
+};
+</code></pre>
+          
+          <h2 id="defining_user_interfaces">Defining user interfaces</h2>
+          
+          <p id="the_platform_module_ceylonhtml_is...">The platform module <code>ceylon.html</code> is a library for writing HTML templates in
+          Ceylon. A fragment of static HTML looks something like this:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:parse:Requires ceylon.html -->
+          
+          
+          <pre data-language="ceylon"><code>Html {
+    doctype = html5;
+    Head {
+        title = "Ceylon: home page";
+        Link { 
+            rel = stylesheet; 
+            type = css; 
+            href = "/styles/screen.css"; 
+            id = "stylesheet"; 
+        }
+    };
+    Body {
+        H2 ( "Welcome to Ceylon ``language.version``!" ),
+        P ( "Now get your code on :)" )
+    };
+}
+</code></pre>
+          
+          <p id="even_though_this_looks_like...">Even though this looks like some kind of templating language, it's just an
+          ordinary expression.</p>
+          
+          <h2 id="theres_more">There's more...</h2>
+          
+          <p id="theres_plenty_of_potential_applications...">There's plenty of potential applications of this syntax aside from user
+          interface definition. For example, Ceylon lets us use a named argument list to
+          specify the arguments of a program element annotation. But we'll have to come
+          back to the subject of <a href="../annotations">annotations</a> in a future installment.</p>
+          
+          <p id="the_next_section_introduces_yet...">The <a href="../comprehensions">next section</a> introduces yet another way to specify an
+          argument to a function: <em>comprehensions</em>.</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

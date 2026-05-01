@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Blog tagged exceptions</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-light-top">
+             
+          </div>
+          <div class="sidebar-block">
+            <h3 id="recent_posts">Recent posts</h3>
+            <div id="blog-archive">
+              <h4 id="ceylon_to_move_to_the_eclipse_foundation_by_stéphane_épardaud__gavin_king_21_august_2017">
+                <a href="/blog/2017/08/21/eclipse-ceylon/">Ceylon to move to the Eclipse Foundation</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Stéphane Épardaud &amp; Gavin King
+                <br>
+                21 August 2017
+              </h4>
+              <h4 id="ceylon_133_is_now_available_by_gavin_king_21_august_2017">
+                <a href="/blog/2017/08/21/ceylon-1-3-3/">Ceylon 1.3.3 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                21 August 2017
+              </h4>
+              <h4 id="ceylon_132_is_now_available_by_gavin_king_03_march_2017">
+                <a href="/blog/2017/03/03/ceylon-1-3-2/">Ceylon 1.3.2 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                03 March 2017
+              </h4>
+              <h4 id="ceylon_131_is_now_available_by_gavin_king_22_november_2016">
+                <a href="/blog/2016/11/22/ceylon-1-3-1/">Ceylon 1.3.1 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                22 November 2016
+              </h4>
+              <h4 id="ceylon_130_is_now_available_by_gavin_king_19_september_2016">
+                <a href="/blog/2016/09/19/ceylon-1-3-0/">Ceylon 1.3.0 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                19 September 2016
+              </h4>
+            </div>
+            <h3 id="tags">Tags</h3>
+            <div class="tag-cloud">
+              <div class="tag-cloud">
+                <ul>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/100/">
+                        1.0.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/110/">
+                        1.1.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/12/">
+                        1.2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/120/">
+                        1.2.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/121/">
+                        1.2.1
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/122/">
+                        1.2.2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/130/">
+                        1.3.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/131/">
+                        1.3.1
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/132/">
+                        1.3.2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/133/">
+                        1.3.3
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m1/">
+                        M1
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m2/">
+                        M2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m3/">
+                        M3
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m4/">
+                        M4
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m5/">
+                        M5
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m6/">
+                        M6
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/android/">
+                        android
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/ceylon-js/">
+                        ceylon-js
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/ceylon-model/">
+                        ceylon-model
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/code/">
+                        code
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/compiler/">
+                        compiler
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/conference/">
+                        conference
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/constructors/">
+                        constructors
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/design/">
+                        design
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/design-interop-herd/">
+                        design interop herd
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/error-handling/">
+                        error handling
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/exceptions/">
+                        exceptions
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/feedback/">
+                        feedback
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/forum/">
+                        forum
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/generics/">
+                        generics
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/gsoc/">
+                        gsoc
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/guice/">
+                        guice
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/herd/">
+                        herd
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/httpd/">
+                        httpd
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/ide/">
+                        ide
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/interop/">
+                        interop
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/interview/">
+                        interview
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/ios/">
+                        ios
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/java/">
+                        java
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/language-design/">
+                        language design
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/mobile/">
+                        mobile
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/modularity/">
+                        modularity
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-2">
+                      <a href="/blog/tags/news/">
+                        news
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/osgi/">
+                        osgi
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/podcast/">
+                        podcast
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-7">
+                      <a href="/blog/tags/progress/">
+                        progress
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-4">
+                      <a href="/blog/tags/release/">
+                        release
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/roadmap/">
+                        roadmap
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/runtime/">
+                        runtime
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/sdk/">
+                        sdk
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-2">
+                      <a href="/blog/tags/site/">
+                        site
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/test/">
+                        test
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/tools/">
+                        tools
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/typesafety/">
+                        typesafety
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/typescript/">
+                        typescript
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/weld/">
+                        weld
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <h3 id="authors">Authors</h3>
+            <div class="tag-cloud">
+              <div class="tag-cloud">
+                <ul>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/bastien-jansen/">
+                        Bastien Jansen
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/david-festal/">
+                        David Festal
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/emmanuel-bernard/">
+                        Emmanuel Bernard
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-6">
+                      <a href="/blog/authors/gavin-king/">
+                        Gavin King
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/lucas-werkmeister/">
+                        Lucas Werkmeister
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-3">
+                      <a href="/blog/authors/stephane-epardaud/">
+                        Stéphane Épardaud
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/stephane-epardaud--gavin-king/">
+                        Stéphane Épardaud &amp; Gavin King
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/tako-schotanus/">
+                        Tako Schotanus
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/tom-bentley/">
+                        Tom Bentley
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/tomas-hradec/">
+                        Tomáš Hradec
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="point-light-end">
+             
+          </div>
+          <a href="/+" style="cursor:pointer;margin-left:auto;margin-right:auto;display:block;text-align:center;padding-top:10px;padding-bottom:0px">
+            <span style="display:inline-block;font-weight:bold;vertical-align:top;margin-right:5px;margin-top:8px;">Follow Ceylon:</span>
+          </a>
+          <p style="cursor:pointer;margin-left:auto;margin-right:auto;margin-top:2px;display:block;text-align:center;padding-top:0px" id="">
+            <a href="/+">
+              <i alt="Google Plus" class="fa fa-google-plus-square fa-2x" height="32" width="32"></i>
+            </a>
+            <a href="http://twitter.com/ceylonlang">
+              <i alt="Twitter" class="fa fa-twitter-square fa-2x" height="32" width="32"></i>
+            </a>
+            <a href="https://www.facebook.com/ceylonlang">
+              <i alt="Facebook" class="fa fa-facebook-square fa-2x" height="32" width="32"></i>
+            </a>
+          </p>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="core-page">
+          <h1 id="blog_tagged_exceptions">
+            Blog tagged exceptions
+          </h1>
+          <div class="post">
+            <h1 class="title" id="modelling_failure_in_ceylon">
+              <a href="/blog/2015/12/14/failure/">Modelling failure in Ceylon</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/gavin-king/">Gavin King</a>
+              </div>
+              <div class="date">
+                14 December 2015
+              </div>
+              <div class="tags">
+                <a href="/blog/tags/error-handling/">
+                  error handling
+                </a>
+                <a href="/blog/tags/exceptions/">
+                  exceptions
+                </a>
+              </div>
+            </div>
+            <div class="body">
+              <p id="in_all_programming_languages_we...">In all programming languages, we need to deal with operations
+              than can "fail":</p>
+              
+              <ul>
+              <li>a pure function might fail to produce a result, or</li>
+              <li>an impure function might fail to produce its desired
+              side-effect (create a new file, or whatever).</li>
+              </ul>
+              
+              
+              <p id="in_neither_case_can_we...">In neither case can we just blindly continue with the rest
+              of the computation. In the first case, the result of the
+              function might be the input to some other function. In the
+              second case, subsequent operations might assume that the
+              side-effect occurred (that the file now exists, or whatever).</p>
+              
+              <p id="thus_its_clear_that_there...">Thus, it's clear that there must be some way for an operation
+              to signal failure to the calling code. There are two broad
+              mechanisms provided by programming languages for signalling
+              failure:</p>
+              
+              <ol>
+              <li>Failure may be indicated via return values: an error code,
+              <code>null</code>, a <a href="/documentation/1.2/tour/types/#union_types">union type</a>,
+              or a <a href="/documentation/1.2/tour/types/#enumerated_types">sum (enumerated) type</a>,
+              for example, <code>Option</code>/<code>Maybe</code> or <code>Either</code>.</li>
+              <li>Failures may be signalled and handled within some sort of
+              exception or "panic" facility.</li>
+              </ol>
+              
+              
+              <p id="most_modern_programming_languages_support...">Most modern programming languages support both of these
+              mechanisms, though of course the details vary. In particular,
+              languages offer varying degrees of typesafety.</p>
+              
+              <ul>
+              <li>In languages with proper support for sum types or union
+              types, return values may be used to model failure in a very
+              robust and typesafe way.</li>
+              <li>In languages with some sort of <em>effect typing</em>, for example,
+              Java-style checked exceptions, the exceptions are themselves
+              typesafe.</li>
+              </ul>
+              
+              
+              <p id="by_typesafe_what_i_mean...">By <em>typesafe</em> what I mean is that an operation that can fail
+              declares the possibility of failure in its signature, and
+              the immediately calling code is forced by the compiler to
+              explicitly handle the failure.</p>
+              
+              <h2 id="types_of_failure">Types of failure</h2>
+              
+              <p id="so_what_facilities_should_a...">So what facilities <em>should</em> a language offer for modelling
+              failure? Return codes or exceptions? Typesafe or not? To
+              arrive at a partial answer to this question, let's start with
+              the following classification of "failures":</p>
+              
+              <ul>
+              <li>Some failures represent problems that the immediately
+              calling code is very unlikely to be able to recover from.
+              Examples include transaction rollbacks, network failures,
+              low memory conditions, or stack overflows.</li>
+              <li>Some failures are typically the result of bugs in the
+              program logic. Examples include assertion failures,
+              division by zero, and use of null pointers. This is a
+              class of failure that, as far as possible, we would like
+              to detect at compile time, but no type system will ever be
+              powerful enough to detect <em>all</em> of these failures. After a
+              few minutes of thought, you should be able to convince
+              yourself this class of problems is actually a subclass of
+              the first class: how can any computation possibly recover
+              meaningfully from a bug in its own logic?</li>
+              <li>Finally, there are "failures" that often represent
+              recoverable conditions. For example, one might recover
+              from a nonexistent file by creating a file. Note that
+              failures in this class need not <em>always</em> be recoverable.</li>
+              </ul>
+              
+              
+              <p id="given_this_classification_i_arrive...">Given this classification, I arrive relatively quickly at
+              the following conclusions.</p>
+              
+              <h3 id="handling_recoverable_failures">Handling recoverable failures</h3>
+              
+              <p id="for_recoverable_conditions_the_failure...">For "recoverable" conditions, the failure should be typesafe.
+              The compiler should be able to verify that the calling code
+              has made an explicit decision on what to do about the failure:
+              recovering from it, or transforming it into an unrecoverable
+              failure. We want to prevent recoverable failures from going
+              unnoticed by accident.</p>
+              
+              <p id="its_clear_that_unchecked_exceptions—or...">It's clear that unchecked exceptions—or other untypesafe
+              solutions such as returning <code>null</code> in a language like Java
+              where <code>null</code> is untypesafe—don't prevent this, and allow
+              failure conditions to go unnoticed, leading to bugs.</p>
+              
+              <p id="the_most_convenient_elegant_and...">The most convenient, elegant, and efficient way to represent
+              a recoverable failure is a union-typed return value. For
+              example, if I have a function for parsing JSON, and it can
+              fail for illegal input, I could use a function with the
+              following signature:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>JsonObject|ParseError parseJson() =&gt; ... ;
+</code></pre>
+              
+              <p id="or_if_it_seems_that...">Or, if it seems that <code>ParseError</code> carries no useful information,
+              I could just use <code>Null</code> instead:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>JsonObject? parseJson() =&gt; ... ;
+</code></pre>
+              
+              <p id="alternatively_in_some_advanced_cases...">Alternatively, in some advanced cases, one could use a sum
+              (enumerated) return type.</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>interface ParseResult of ParseSuccessful | ParseError {}
+class ParseSuccessful(shared JsonObject result) satisfies ParseResult {}
+class ParseError(shared String message) satisfies ParseResult {}
+
+ParseResult parseJson() =&gt; ... ;
+</code></pre>
+              
+              <p id="this_is_not_usually_necessary...">This is not usually necessary in Ceylon, however.</p>
+              
+              <h3 id="handling_unrecoverable_failures">Handling unrecoverable failures</h3>
+              
+              <p id="now_for_unrecoverable_conditions_the...">Now, for "unrecoverable" conditions, the failure should be an
+              untyped (unchecked) exception. For an unrecoverable failure,
+              we shouldn't be polluting the calling code with concerns it
+              can't possibly do anything useful with. We want the failure
+              to propagate quickly and transparently to some centralized,
+              generic, infrastructure-level error handling.</p>
+              
+              <p id="note_that_since_unchecked_exceptions...">Note that, since unchecked exceptions don't appear in the
+              signature of the operation, the caller doesn't receive any
+              kind of "fair warning" that they can occur. They represent
+              a sort of designed-in "hole" in the type system.</p>
+              
+              <h3 id="when_in_doubt">When in doubt</h3>
+              
+              <p id="but_wait_youre_probably_thinking...">But wait, you're probably thinking, haven't I left a huge
+              question begging here?</p>
+              
+              <blockquote><p id="what_about_failure_that_doesnt...">What about failure that doesn't fall cleanly into
+              "recoverable" or "unrecoverable"?</p></blockquote>
+              
+              <p id="isnt_there_a_huge_grey...">Isn't there a huge grey area there, filled with failures that
+              are <em>sometimes</em> recoverable by the immediately-calling code?</p>
+              
+              <p id="indeed_there_is_and_i...">Indeed there is. And I would say that, as a rule of thumb,
+              <em>treat these failures as recoverable</em>.</p>
+              
+              <p id="consider_our_parsejson_function_above...">Consider our <code>parseJson()</code> function above. A syntax error in
+              the given JSON text could easily be the result of a bug in
+              our program, but, crucially, <em>it's not a bug in <code>parseJson()</code>
+              itself.</em> The code that knows whether it's a program bug or
+              something else is the calling code, not the <code>parseJson()</code>
+              function.</p>
+              
+              <p id="and_its_always_easy_for...">And it's always easy for the calling code to transform a
+              recoverable failure into an unrecoverable failure. For
+              example:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>assert (is JsonObject result = parseJson(json));
+//result must be a JsonObject here
+</code></pre>
+              
+              <p id="or">Or:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>value result = parseJson(json);
+if (is ParseError result) {
+    throw AssertionError(result.message);
+}
+//result must be a JsonObject here
+</code></pre>
+              
+              <p id="that_is_when_in_doubt...">That is, when in doubt, we make the calling code explicitly
+              document its assumptions.</p>
+              
+              <p id="looking_at_this_another_way...">Looking at this another way, we err on the side of typesafety,
+              since having too many unchecked exceptions starts to undermine
+              the whole value of the static type system.</p>
+              
+              <p id="furthermore_its_quite_likely_that...">Furthermore, it's quite likely that the calling code is better
+              placed to produce an error with more meaningful information
+              than the code it's calling (though I have not shown that in
+              the snippets above).</p>
+              
+              <h2 id="three_things_to_consider">Three things to consider</h2>
+              
+              <p id="i_promised_a_partial_answer...">I promised a "partial" answer to my original question, because
+              there are still a couple of questions that I'm not sure I have
+              a completely bottled answer to, and there's debate over these
+              issues in the Ceylon community.</p>
+              
+              <h3 id="is_assertionerror_overused">Is <code>AssertionError</code> overused?</h3>
+              
+              <p id="first_what_kind_of_failures...">First, what kind of failures are legitimate uses of
+              <code>AssertionError</code>? Should every <code>AssertionError</code> represent a
+              bug in the program? Is it ever reasonable for a library to
+              throw an <code>AssertionError</code> when it encounters a situation it
+              considers misuse of its API? Is it acceptable for generic
+              exception handling code to recover from an <code>AssertionError</code>,
+              or should <code>AssertionError</code>s be considered fatal?</p>
+              
+              <p id="my_answers_would_be_yes...">My answers would be yes, yes, and yes. But perhaps that
+              implies that it was a mistake to follow Java in making
+              <code>AssertionError</code> an <code>Error</code> instead of a plain <code>Exception</code>.
+              (This leads to a larger debate about the role of <code>Error</code>.)</p>
+              
+              <h3 id="is_null_overused">Is <code>Null</code> overused?</h3>
+              
+              <p id="second_the_class_null_is...">Second, the class <code>Null</code> is a seductively convenient way to
+              represent failure of functions which return a value. But are
+              we overusing it? Would it have been better to make the return
+              type of <code>Map&lt;Key,Item&gt;.get()</code> be <code>Item|NoItem&lt;Key&gt;</code> instead
+              of the much more generic type <code>Item?</code>, that is, <code>Item|Null</code>?</p>
+              
+              <p id="perhaps_in_a_sense_returning...">Perhaps. In a sense, returning <code>null</code> is like throwing
+              <code>Exception</code>: a little too generic. But since a null return
+              value must be handled by the immediately calling code, which
+              is much better placed to know what this instance of <code>null</code>
+              represents, it's not as harmful as a generic <code>Exception</code>
+              which is handled far from its source.</p>
+              
+              <p id="whether_you_agree_with_that...">Whether you agree with that or not, it still might be best
+              to avoid operations where <code>null</code> can result from multiple
+              different failure conditions. I have broken this rule in the
+              past, and I'm going to be more careful in future.</p>
+              
+              <h3 id="functions_with_no_useful_return_value">Functions with no useful return value</h3>
+              
+              <p id="third_for_functions_with_no...">Third, for functions with no useful return value, that is,
+              functions which are called only for their side-effect—where
+              the calling code has the option of simply ignoring any return
+              value representing failure—should we err on the side of
+              throwing an exception?</p>
+              
+              <p id="or_alternatively_should_the_language...">Or, alternatively, should the language offer some way to
+              force the caller to do <em>something</em> with the return value of
+              non-<code>void</code> function?</p>
+              
+              <p id="ceylon_doesnt_have_and_wont...">Ceylon doesn't have (and won't have) checked exceptions, but
+              one could argue that this is the one situation where they
+              would be most useful.</p>
+              
+              <h2 id="conclusion">Conclusion</h2>
+              
+              <p id="so_ultimately_there_are_some...">So, ultimately, there are some unanswered questions, and grey
+              areas, but it seems to me that at least we have a rather
+              strong conceptual framework in which to investigate these
+              problems. And it's clear that the combination of
+              facilities—union types, together with unchecked
+              exceptions—is a powerful foundation for robust failure
+              handling.</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2015/12/14/failure/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="pagination-links">
+<span class="current-page">1</span> </div>
+        </div>
+        <script type="text/javascript">
+          //<![CDATA[
+            /* place div.expandable to 
+             * - minHeight by default 
+             * - full size on click
+             * - back to minHeight on second click
+             * with a jQuery animation
+             */
+            var minHeight=150;
+            $(document).ready( function() {
+              $("div.expandable").height(minHeight);     
+              $("div.expandable").click(function(e) 
+                {
+                  if( !$(e.target).is("a")) {
+                    $this = $(this); 
+                    var currentHeight = $this.height();
+                    if(currentHeight==minHeight) {
+                      $this.css('height', 'auto');
+                    }
+                    else{
+                      $this.css('height', minHeight + 'px');
+                    };
+                    var height = $this.height();
+                    $this.css('height', currentHeight + 'px');
+                    $this.animate({'height':height}, 500);
+                }
+              })
+            });
+          //]]>
+        </script>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:04</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

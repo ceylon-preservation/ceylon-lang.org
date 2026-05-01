@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Functions</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.0/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.0/tour">Tour of Ceylon</a></h3>
+            
+            <ol>
+            <li><a href="/documentation/1.0/tour/basics">Basics</a></li>
+            <li><a href="/documentation/1.0/tour/classes">Classes</a></li>
+            <li><a href="/documentation/1.0/tour/attributes-control-structures">Attributes and variables, control structures</a></li>
+            <li><a href="/documentation/1.0/tour/inheritance">Inheritance, refinement, and interfaces</a></li>
+            <li><a href="/documentation/1.0/tour/anonymous-member-classes">Anonymous and member classes</a></li>
+            <li><a href="/documentation/1.0/tour/sequences">Iterables, sequences, and tuples</a></li>
+            <li><a href="/documentation/1.0/tour/typeinference">Type aliases and type inference</a></li>
+            <li><a href="/documentation/1.0/tour/types">Union, intersection, and enumerated types</a></li>
+            <li><a href="/documentation/1.0/tour/generics">Generics</a></li>
+            <li><a href="/documentation/1.0/tour/modules">Packages and modules</a></li>
+            <li><a href="/documentation/1.0/tour/functions">Functions</a></li>
+            <li><a href="/documentation/1.0/tour/named-arguments">Named arguments</a></li>
+            <li><a href="/documentation/1.0/tour/comprehensions">Comprehensions</a></li>
+            <li><a href="/documentation/1.0/tour/language-module">Language module</a></li>
+            <li><a href="/documentation/1.0/tour/initialization">Initialization</a></li>
+            <li><a href="/documentation/1.0/tour/annotations">Annotations and the metamodel</a></li>
+            <li><a href="/documentation/1.0/tour/interop">Interoperation with Java</a></li>
+            <li><a href="/documentation/1.0/tour/dynamic">Dynamic typing</a></li>
+            </ol>
+            
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.0/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="tutorial_videos"><a href="/documentation/1.0/videos">Tutorial videos</a></h3>
+            
+            <h3 id="language_specification"><a href="/documentation/1.0/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.0/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.0/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.0/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.0/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Tour of Ceylon
+            <span style="color:#8d5e0b">(1.0)</span>
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_10_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.0, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <h1 id="functions">Functions</h1>
+          
+          <p id="this_is_the_eleventh_part...">This is the eleventh part of the Tour of Ceylon. In the <a href="../modules">previous leg</a>
+          we looked at packages and modules. This leg covers first class and higher-order
+          functions.</p>
+          
+          <h2 id="first_class_and_higher_order_functions">First class and higher order functions</h2>
+          
+          <p id="ceylon_isnt_a_functional_language...">Ceylon isn't a functional language: it has variable attributes and so methods
+          can have <em>side effects</em>. But one thing Ceylon has in common with functional
+          programming languages is that it lets you treat functions as values, which in
+          some people's eyes makes the language a kind of hybrid. In truth, there's
+          nothing remotely new about having functions-as-values in an object oriented
+          language—for example, Smalltalk, one of the first and still one of the
+          cleanest object oriented languages, was built around this idea. Anyway, Ceylon,
+          like Smalltalk and a number of other object oriented languages, lets you treat
+          a function as an object and pass it around the system.</p>
+          
+          <p id="in_this_installment_were_going...">In this installment, we're going to discuss Ceylon's support for first class
+          and higher order functions. A little bit of PL jargon:</p>
+          
+          <ul>
+          <li>
+<em>First class function</em> support means the ability to treat a function as a
+           value, assigning it to variables, and passing it as an argument.</li>
+          <li>A <em>higher order function</em> is a function that accepts other functions as
+          arguments, or returns another function.</li>
+          </ul>
+          
+          
+          <p id="its_clear_that_these_two...">It's clear that these two ideas go hand-in-hand, so we'll just use the term
+          "higher order functions" from now on.</p>
+          
+          <h2 id="representing_the_type_of_a_function">Representing the type of a function</h2>
+          
+          <p id="ceylon_is_a_very_statically...">Ceylon is a (very) statically typed language. So if we're going to treat a
+          function as a value, the very first question that arises is: What is the
+          type of the function? We need a way to encode the return type and parameter
+          types of a function into the type system. Remember that Ceylon doesn't have
+          "primitive" types. A strong design principle is that every type should be
+          representable within the type system as a class or interface declaration.</p>
+          
+          <p id="in_ceylon_a_single_type...">In Ceylon, a single type
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/Callable.type.html"><code>Callable</code></a>
+          abstracts <em>all</em> functions. Its declaration is the following:</p>
+          
+          <!-- check:none -->
+          
+          
+          <pre data-language="ceylon"><code>shared interface Callable&lt;out Return, in Arguments&gt; 
+        given Arguments satisfies Anything[] {}
+</code></pre>
+          
+          <p id="the_type_parameter_return_represents...">The type parameter <code>Return</code> represents the return type of the function. The
+          sequenced type parameter <code>Arguments</code>, which must be a sequence type,
+          represents the parameter types of the function. We can encode any parameter
+          list as a tuple type. For example, the parameter list <code>(String s, Float x)</code>
+          is encoded as the tuple type <code>[String,Float]</code>.</p>
+          
+          <p id="so_take_the_following_function">So, take the following function:</p>
+          
+          <!-- try-post:
+          
+              print(sum(4, 2));
+          -->
+          
+          
+          <pre data-language="ceylon"><code>function sum(Integer x, Integer y) =&gt; x+y;
+</code></pre>
+          
+          <p id="the_type_of_sum_is">The type of <code>sum()</code> is:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none -->
+          
+          
+          <pre data-language="ceylon"><code>Callable&lt;Integer,[Integer,Integer]&gt;
+</code></pre>
+          
+          <p id="what_about_void_functions_well...">What about <code>void</code> functions? Well, the return type of a <code>void</code> function is
+          considered to be <code>Anything</code>. So the type of a function like <code>print()</code> is:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none -->
+          
+          
+          <pre data-language="ceylon"><code>Callable&lt;Anything,[Anything]&gt;
+</code></pre>
+          
+          <p id="folks_who_have_a_background...">Folks who have a background in languages like ML might have expected that
+          <code>void</code> would be identified with some "unit" type, for example, <code>Null</code>, or
+          perhaps <code>[]</code>. But this approach would mean that a non-<code>void</code> method would
+          not be able to refine a <code>void</code> method, and that a non-<code>void</code> function would
+          not be able to be assigned to a <code>void</code> functional parameter. Therefore,
+          perfectly reasonable code would be rejected by the compiler.</p>
+          
+          <p id="note_that_a_void_function...">Note that a <code>void</code> function with a concrete implementation implicitly returns
+          the value <code>null</code>. This is different to a function declared to return the type
+          <code>Anything</code>, which may return any value at all, but must do it explicitly, via
+          a <code>return</code> statement. The following functions have the same type, <code>Anything()</code>,
+          but don't do exactly the same thing:</p>
+          
+          <pre data-language="ceylon"><code>Anything hello() { 
+    print("hello");
+    return "hello";
+}
+
+void hello() { 
+    print("hello");
+    //implicitly returns null
+}
+</code></pre>
+          
+          <p id="you_shouldnt_rely_upon_a...">You shouldn't rely upon a function that is declared <code>void</code> returning <code>null</code>,
+          because it might be a method that is refined by a non-<code>void</code> method, or a
+          reference to a non-<code>void</code> function.</p>
+          
+          <p id="we_can_abbreviate_callable_types...">We can abbreviate <code>Callable</code> types with a little syntax sugar:</p>
+          
+          <ul>
+          <li>
+<code>Integer(Integer,Integer)</code> means <code>Callable&lt;Integer,[Integer,Integer]&gt;</code>,
+           and, likewise,</li>
+          <li>
+<code>Anything(String)</code> means <code>Callable&lt;Anything,[String]&gt;</code>.</li>
+          </ul>
+          
+          
+          <h2 id="defining_higher_order_functions">Defining higher order functions</h2>
+          
+          <p id="we_now_have_enough_machinery...">We now have enough machinery to be able to write higher order functions.
+          For example, we could create a <code>repeat()</code> function that repeatedly executes
+          a function.</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:BROKEN -->
+          
+          
+          <pre data-language="ceylon"><code>void repeat(Integer times, 
+        Anything(Integer) perform) {
+    for (i in 1..times) {
+        perform(i);
+    }
+}
+</code></pre>
+          
+          <p id="lets_try_it">Let's try it:</p>
+          
+          <!-- try-pre:
+              void repeat(Integer times, 
+                      Anything(Integer) perform) {
+                  for (i in 1..times) {
+                      perform(i);
+                  }
+              }
+          -->
+          
+          
+          <pre data-language="ceylon"><code>void printNum(Integer n) =&gt; print(n);
+repeat(10, printNum);
+</code></pre>
+          
+          <p id="which_would_print_the_numbers...">Which would print the numbers 1 to 10 to the console.</p>
+          
+          <p id="theres_one_problem_with_this...">There's one problem with this. In Ceylon, as we'll see later, we often call
+          functions using named arguments, but the Callable type does not encode the
+          names of the function parameters. So Ceylon has an alternative, more elegant,
+          syntax for declaring a parameter of type <code>Callable</code>:</p>
+          
+          <!-- try-post:
+          
+              void printNum(Integer n) => print(n);
+              repeat(10, printNum);
+          -->
+          
+          
+          <!-- id:repeat -->
+          
+          
+          <pre data-language="ceylon"><code>void repeat(Integer times, 
+        void perform(Integer n)) {
+    for (i in 1..times) {
+        perform { n=i; };
+    }
+}
+</code></pre>
+          
+          <p id="this_version_is_also_slightly...">This version is also slightly more readable, so it's the preferred syntax.</p>
+          
+          <h2 id="function_references">Function references</h2>
+          
+          <p id="when_a_name_of_a...">When a name of a function appears without any arguments, like <code>printNum</code> does
+          above, it's called a <em>function reference</em>. A function reference is the thing
+          that really has the type <code>Callable</code>. In this case, <code>printNum</code> has the type
+          <code>Callable&lt;Anything,[Integer]&gt;</code>, or simply <code>Anything(Integer)</code>.</p>
+          
+          <p id="now_remember_how_we_said...">Now, remember how we said that <code>Anything</code> is both the return type of a <code>void</code>
+          function, and also the logical root of the type hierarchy? Well that's useful
+          here, since it means that we can assign a function with any return type to any
+          parameter which expects a <code>void</code> function, as long as the parameter lists
+          match:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- id:attemptPrint -->
+          
+          
+          <pre data-language="ceylon"><code>Boolean attemptPrint(Integer n) {
+    try {
+        print(n);
+        return true;
+    }
+    catch (Exception e) {
+        return false;
+    }
+}
+</code></pre>
+          
+          <p id="and_call_it_like_this">And call it like this</p>
+          
+          <!-- try-pre:
+              void repeat(Integer times, 
+                      void perform(Integer n)) {
+                  for (i in 1..times) {
+                      perform { n=i; };
+                  }
+              }
+              Boolean attemptPrint(Integer n) {
+                  try {
+                      print(n);
+                      return true;
+                  }
+                  catch (Exception e) {
+                      return false;
+                  }
+              }
+          
+          -->
+          
+          
+          <!-- cat-id:repeat -->
+          
+          
+          <!-- cat-id:attemptPrint -->
+          
+          
+          <!-- cat: void m() { -->
+          
+          
+          <pre data-language="ceylon"><code>repeat(10, attemptPrint);
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="another_way_we_can_produce...">Another way we can produce a function reference is by partially applying a
+          method to a receiver expression. For example, we could write the following:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- id:Hello -->
+          
+          
+          <pre data-language="ceylon"><code>class Hello(String name) {
+    shared void say(Integer n) {
+        print("Hello, ``name``, for the ``n``th time!");
+    }
+}
+</code></pre>
+          
+          <p>And call it like this:</p>
+          
+          <!-- try-pre:
+              void repeat(Integer times, 
+                      void perform(Integer n)) {
+                  for (i in 1..times) {
+                      perform { n=i; };
+                  }
+              }
+          
+              class Hello(String name) {
+                  shared void say(Integer n) {
+                      print("Hello, ``name``, for the ``n``th time!");
+                  }
+              }
+          -->
+          
+          
+          <!-- cat-id:repeat -->
+          
+          
+          <!-- cat-id:Hello -->
+          
+          
+          <!-- cat: void m() { -->
+          
+          
+          <pre data-language="ceylon"><code>repeat(10, Hello("Gavin").say);
+</code></pre>
+          
+          <!-- cat: } -->
+          
+          
+          <p id="here_the_expression_hellogavinsay_has...">Here the expression <code>Hello("Gavin").say</code> has the same type as <code>print</code> above.
+          It is of type <code>Anything(Integer)</code>.</p>
+          
+          <h2 id="static_method_and_attribute_references">Static method and attribute references</h2>
+          
+          <p id="a_static_method_reference_is...">A static method reference is a reference to a method, qualified by the type
+          which declares the method.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>value say = Hello.say;
+</code></pre>
+          
+          <p id="in_a_static_method_reference...">In a static method reference, there's no receiving instance of the type! We
+          have not provided any instance of <code>Hello</code> in this snippet. What we just wrote
+          is quite different to this:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>value say = Hello("Gavin").say;
+</code></pre>
+          
+          <p id="so_for_a_static_method...">So for a static method reference, to invoke the method, we must provide two
+          items of information:</p>
+          
+          <ul>
+          <li>first, an instance of the type, and</li>
+          <li>then, the arguments of the function.</li>
+          </ul>
+          
+          
+          <p id="we_provide_these_two_items...">We provide these two items in distinct argument lists:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>value say = Hello.say;
+value sayHello = say(Hello("World"));
+sayHello(3);
+</code></pre>
+          
+          <p id="or_simply">Or, simply:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>value say = Hello.say;
+say(Hello("World"))(3);
+</code></pre>
+          
+          <p id="lets_fill_in_the_types...">Let's fill in the types, to see what's really going on here:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Anything(Integer)(Hello) say = Hello.say;
+Anything(Integer) sayHello = say(Hello("World"));
+sayHello(3);
+</code></pre>
+          
+          <p id="that_is_a_static_function...">That is, a static function reference is a function that returns a
+          function.</p>
+          
+          <p id="a_static_attribute_reference_is...">A static attribute reference is a reference to an attribute, qualified by
+          the type which declares the attribute.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Polar coord = .... ;
+value angle = Polar.angle;
+value radius = Polar.angle;
+Float a = angle(coord);
+Float radius = radius(coord);
+</code></pre>
+          
+          <p id="just_to_be_sure_lets...">Just to be sure, let's fill in the types:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Polar coord = .... ;
+Float(Polar) angle = Polar.angle;
+Float(Polar) radius = Polar.angle;
+Float a = angle(coord);
+Float radius = radius(coord);
+</code></pre>
+          
+          <p id="static_attribute_references_work_especially...">Static attribute references work especially well with the
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/Iterable.type.html#map"><code>map()</code></a>
+          method of <code>Iterable</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>{String*} names = people.map(Person.name); 
+</code></pre>
+          
+          <h2 id="curried_functions">Curried functions</h2>
+          
+          <p id="a_method_or_function_may...">A method or function may be declared in <em>curried</em> form, allowing the method
+          or function to be partially applied to its arguments. A curried function has
+          multiple lists of parameters:</p>
+          
+          <!-- try-post:
+          
+              print(adder(4)(2.0));
+          -->
+          
+          
+          <pre data-language="ceylon"><code>Float adder(Integer n)(Float x) =&gt; x+n;
+</code></pre>
+          
+          <p id="the_adder_function_has_type...">The <code>adder()</code> function has type <code>Float(Float)(Integer)</code>. We can invoke it
+          with a single integer argument to get a reference to a function of type
+          <code>Float(Float)</code>, and store this reference as a function, like this:</p>
+          
+          <!-- try-pre:
+              Float adder(Integer n)(Float x) => x+n;
+          
+          -->
+          
+          
+          <!-- try-post:
+          
+              print(addOne(4.0));
+          -->
+          
+          
+          <pre data-language="ceylon"><code>Float addOne(Float x);
+addOne = adder(1);
+</code></pre>
+          
+          <p id="or_as_a_value_like...">Or as a value, like this:</p>
+          
+          <!-- try-pre:
+              Float adder(Integer n)(Float x) => x+n;
+          
+          -->
+          
+          
+          <!-- try-post:
+          
+              print(addOne(4.0));
+          -->
+          
+          
+          <pre data-language="ceylon"><code>Float(Float) addOne = adder(1);
+</code></pre>
+          
+          <p id="there_only_real_difference_between...">(There only real difference between these two approaches is that in the
+          first case we get to assign a name to the parameter of <code>addOne()</code>.)</p>
+          
+          <p id="when_we_subsequently_invoke_addone...">When we subsequently invoke <code>addOne()</code>, the actual body of <code>adder()</code> is
+          finally executed, producing a <code>Float</code>:</p>
+          
+          <!-- try-pre:
+              Float adder(Integer n)(Float x) => x+n;
+              Float addOne(Float x);
+              addOne = adder(1);
+          
+          -->
+          
+          
+          <!-- try-post:
+          
+              print(three);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>Float three = addOne(2.0);
+</code></pre>
+          
+          <h3 id="gotcha">Gotcha!</h3>
+          
+          <p id="did_you_notice_that_order...">Did you notice that order of parameter lists is reversed in a type
+          expression compared to a function declaration? Look again:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>void printSum(String desc)(Float x, Float y) =&gt; print(desc + (x+y).string);
+Anything(Float,Float)(String) printSumRef = printSum;
+</code></pre>
+          
+          <p id="the_order_of_parameter_lists...">The order of parameter lists in the function declaration reflects the order in
+          which we supply arguments when we invoke the function. But in a function type
+          expression, the return type comes always comes before the parameter types, so
+          therefore the parameters which must be supplied <em>first</em> come at the <em>last</em> in
+          the function type.</p>
+          
+          <h2 id="anonymous_functions">Anonymous functions</h2>
+          
+          <p id="the_most_famous_higher_order...">The most famous higher-order functions are a trio of functions for tranforming,
+          filtering, and summarizing sequences of values. In Ceylon, these three functions,
+          <code>map()</code>, <code>filter()</code>, and <code>fold()</code> are methods of the interface
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/Iterable.type.html"><code>Iterable</code></a>.
+          (They even have a fourth, slightly less glamorous friend called <code>find()</code>, also a
+          method of <code>Iterable</code>.)</p>
+          
+          <p id="as_youve_probably_noticed_all...">As you've probably noticed, all the functions we've defined so far have been
+          declared with a name, using a traditional C-like syntax. There's nothing wrong
+          with passing a named function to <code>map()</code> or <code>filter()</code>, and indeed that is often
+          useful:</p>
+          
+          <!-- try-pre:
+              value measurements = { 3.4, 8.7, 1.7, 13.1, 7.7, 1.2 };
+          
+          -->
+          
+          
+          <!-- try-post:
+          
+              print(max);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>Float max = measurements.fold(0.0, largest&lt;Float&gt;);
+</code></pre>
+          
+          <p id="however_quite_commonly_its_inconvenient...">However, quite commonly, it's inconvenient to have to declare a whole named
+          function just to pass it to <code>map()</code>, <code>filter()</code>, <code>fold()</code> or <code>find()</code>. Instead,
+          we can declare an <em>anonymous function</em> inline, as part of the argument list:</p>
+          
+          <!-- try-pre:
+              value measurements = { 3.4, 8.7, 1.7, 13.1, 7.7, 1.2 };
+          
+          -->
+          
+          
+          <!-- try-post:
+          
+              print(max);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>Float max = measurements.fold(0.0, 
+        (Float max, Float num) =&gt; 
+                num&gt;max then num else max);
+</code></pre>
+          
+          <p id="an_anonymous_function_has">An anonymous function has:</p>
+          
+          <ul>
+          <li>optionally, the keyword <code>function</code> or <code>void</code>, and then</li>
+          <li>a parameter list, enclosed in parentheses, followed by</li>
+          <li>a fat arrow, <code>=&gt;</code>, with an expression, or</li>
+          <li>a block.</li>
+          </ul>
+          
+          
+          <p id="so_we_could_rewrite_the...">So we could rewrite the above using a block</p>
+          
+          <!-- try-pre:
+              value measurements = { 3.4, 8.7, 1.7, 13.1, 7.7, 1.2 };
+          
+          -->
+          
+          
+          <!-- try-post:
+          
+              print(max);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>Float max = measurements.fold(0.0, 
+        (Float max, Float num) {
+            return num&gt;max then num else max;
+        });
+</code></pre>
+          
+          <p id="note_that_its_quite_difficult...">Note that it's quite difficult to come up with a good way to format anonymous
+          functions with blocks, so it's usually better to just give the function a
+          name and use it by reference.</p>
+          
+          <h2 id="more_about_higher_order_functions">More about higher-order functions</h2>
+          
+          <p id="lets_see_a_more_practical...">Let's see a more practical example, which mixes both ways of representing a
+          function type.</p>
+          
+          <p id="suppose_we_have_some_kind...">Suppose we have some kind of user interface component which can be observed by
+          other objects in the system. We could use something like Java's
+          <code>Observer</code>/<code>Observable</code> pattern:</p>
+          
+          <!-- try-pre:
+              interface Event { }
+          -->
+          
+          
+          <pre data-language="ceylon"><code>interface Observer {
+    shared formal void observe(Event event);
+}
+abstract class Component() {
+
+    variable {Observer*} observers = {};
+
+    shared void addObserver(Observer observer) {
+        observers = {observer, *observers};
+    }
+
+    shared void fire(Event event) {
+        for (o in observers) {
+            o.observe(event);
+        }
+    }
+}
+</code></pre>
+          
+          <p id="but_now_all_event_observers...">But now all event observers have to implement the interface <code>Observer</code>, which
+          has just one method. Why don't we cut out the interface, and let event
+          observers just register a function object as their event listener? In the
+          following code, we define the <code>addObserver()</code> method to accept a function as
+          a parameter.</p>
+          
+          <!-- try-pre:
+              interface Event { }
+          -->
+          
+          
+          <pre data-language="ceylon"><code>abstract class Component() {
+
+    variable {Anything(Event)*} observers = {};
+
+    shared void addObserver(void observe(Event event)) {
+        observers = {observe, *observers};
+    }
+
+    shared void fire(Event event) {
+        for (observe in observers) {
+            observe(event);
+        }
+    }
+}
+</code></pre>
+          
+          <p id="here_we_see_the_difference...">Here we see the difference between the two ways of specifying a function type:</p>
+          
+          <ul>
+          <li>
+<code>void observe(Event event)</code> is more readable in parameter lists, where
+          <code>observe</code> is the name of the parameter, but</li>
+          <li>
+<code>Anything(Event)</code> is useful in container types such as iterables.</li>
+          </ul>
+          
+          
+          <p id="now_any_event_observer_can...">Now, any event observer can just pass a reference to one of its own methods to
+          <code>addObserver()</code>:</p>
+          
+          <!-- try-pre:
+              interface Event { }
+              abstract class Component() {
+                   
+                  variable {Anything(Event)*} observers = {};
+                   
+                  shared void addObserver(void observe(Event event)) {
+                      observers = {observe, *observers};
+                  }
+                   
+                  shared void fire(Event event) {
+                      for (observe in observers) {
+                          observe(event);
+                      }
+                  }
+              }
+          
+          -->
+          
+          
+          <!-- check:parse:Depends on Component, above, which requires OpenList -->
+          
+          
+          <pre data-language="ceylon"><code>class Listener(Component component) {
+
+    void onEvent(Event e) {
+        // respond to the event
+        // ...
+    }
+
+    component.addObserver(onEvent);
+
+    // ...
+
+}
+</code></pre>
+          
+          <p id="when_the_name_of_a...">When the name of a method appears in an expression without a list of arguments
+          after it, it is a reference to the method, not an invocation of the method.
+          Here, the expression <code>onEvent</code> is an expression of type <code>Anything(Event)</code> that
+          refers to the method <code>onEvent()</code>.</p>
+          
+          <p id="if_onevent_were_shared_we...">If <code>onEvent()</code> were <code>shared</code>, we could even wire together the <code>Component</code> and
+          <code>Listener</code> from some other code, to eliminate the dependency of <code>Listener</code>
+          on <code>Component</code>:</p>
+          
+          <!-- try-pre:
+              interface Event { }
+              abstract class Component() {
+                   
+                  variable {Anything(Event)*} observers = {};
+                   
+                  shared void addObserver(void observe(Event event)) {
+                      observers = {observe, *observers};
+                  }
+                   
+                  shared void fire(Event event) {
+                      for (observe in observers) {
+                          observe(event);
+                      }
+                  }
+              }
+          
+          -->
+          
+          
+          <!-- check:parse:Depends on Component, above, which requires OpenList -->
+          
+          
+          <pre data-language="ceylon"><code>class Listener() {
+
+    shared void onEvent(Event e) {
+        // respond to the event
+        // ...
+    }
+
+    // ...
+
+}
+void listen(Component component, Listener listener) {
+    component.addObserver(listener.onEvent);
+}
+</code></pre>
+          
+          <p id="here_the_syntax_listeneronevent_is...">Here, the syntax <code>listener.onEvent</code> is a kind of partial application of the
+          method <code>onEvent()</code>. It doesn't cause the <code>onEvent()</code> method to be
+          executed (because we haven't supplied all the parameters yet). Rather, it
+          results in a function that packages together the method reference <code>onEvent</code>
+          and the method receiver <code>listener</code>.</p>
+          
+          <p id="its_also_possible_to_declare...">It's also possible to declare a method that returns a function. Let's
+          consider adding the ability to remove observers from a <code>Component</code>. We could
+          use a <code>Subscription</code> interface:</p>
+          
+          <!-- try-pre:
+              interface Event { }
+          -->
+          
+          
+          <pre data-language="ceylon"><code>interface Subscription {
+    shared formal void cancel();
+}
+abstract class Component() {
+
+    variable {Anything(Event)*} observers = {};
+
+    shared Subscription addObserver(void observe(Event event)) {
+        observers = {observe, *observers};
+        object subscription satisfies Subscription {
+            cancel() =&gt; observers = 
+                    { for (o in observers) if (o!=observe) o };
+        }
+        return subscription;
+    }
+
+    shared void fire(Event event) {
+        for (observe in observers) {
+            observe(event);
+        }
+    }
+
+}
+</code></pre>
+          
+          <p id="but_a_simpler_solution_might...">But a simpler solution might be to just eliminate the interface and return the
+          <code>cancel()</code> method directly:</p>
+          
+          <!-- try-pre:
+              interface Event { }
+          -->
+          
+          
+          <pre data-language="ceylon"><code>abstract class Component() {
+
+    variable {Anything(Event)*} observers = {};
+
+    shared Anything() addObserver(void observe(Event event)) {
+        observers = {observe, *observers};
+        return void () =&gt; observers = 
+                    { for (o in observers) if (o!=observe) o };
+    }
+
+    shared void fire(Event event) {
+        for (observe in observers) {
+            observe(event);
+        }
+    }
+
+}
+</code></pre>
+          
+          <p id="here_we_define_an_anonymous...">Here, we define an anonymous function inside the body of the <code>addObserver()</code>
+          method, and return a reference to this function from the outer method. The
+          reference to the anonymous function returned by <code>addObserver()</code> can be called
+          by any code that obtains the reference.</p>
+          
+          <p id="in_case_youre_wondering_the...">In case you're wondering, the type of the function <code>addObserver()</code> is
+          <code>Anything()(Anything(Event))</code>.</p>
+          
+          <p id="notice_that_the_anonymous_function...">Notice that the anonymous function is able to use the parameter <code>observe</code> of
+          <code>addObserver()</code>. We say that the inner method receives a <em>closure</em> of the
+          non-<code>variable</code> locals and parameters of the outer method—just like a method
+          of a class receives a closure of the class initialization parameters and locals
+          of the class initializer. In general, any inner class, method, or attribute
+          declaration always receives the closure of the members of the class, method, or
+          attribute declaration in which it is enclosed. This is an example of how regular
+          the language is.</p>
+          
+          <p id="we_could_invoke_our_method...">We could invoke our method like this:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none -->
+          
+          
+          <pre data-language="ceylon"><code>addObserver(onEvent)();
+</code></pre>
+          
+          <p id="but_if_we_were_planning...">But if we were planning to use the method in this way, there would be no good
+          reason for giving it two parameter lists. It's much more likely that we're
+          planning to store or pass the reference to the inner method somewhere before
+          invoking it.</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none -->
+          
+          
+          <pre data-language="ceylon"><code>Anything() cancel = addObserver(onEvent);
+// ...
+cancel();
+</code></pre>
+          
+          <p id="the_first_line_demonstrates_how...">The first line demonstrates how a function reference can be stored. The second
+          line of code simply invokes the returned reference to <code>cancel()</code>.</p>
+          
+          <!--
+          We've already seen how an attribute can be defined using a block of code. Now 
+          we see that a method can be defined using a specifier. So, if you like, you 
+          can start thinking of a method as an attribute of type `Callable`—an 
+          attribute with parameters. Or if you prefer, you can think of an attribute as 
+          a member with zero parameter lists, and of a method as a member with one or 
+          more parameter lists. Either kind of member can be defined by reference, using 
+          `=`, or directly, by specifying a block of code to be executed.
+          
+          Cool, huh? That's more regularity.
+          -->
+          
+          
+          <h2 id="composition_and_curry">Composition and curry</h2>
+          
+          <p id="the_function_compose_performs_function...">The function <code>compose()</code> performs <em>function composition</em>. For example, given
+          the functions <code>print()</code> and <code>plus()</code> in <code>ceylon.language</code>, with the following
+          signatures:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared void print(Anything line) { ... }
+
+shared Value plus&lt;Value&gt;(Value x, Value y)
+    given Value satisfies Summable&lt;Value&gt; { ... }
+</code></pre>
+          
+          <p id="we_can_see_that_the...">We can see that the type of the function reference <code>print</code> is <code>Anything(Anything)</code>,
+          and that the type of the function reference <code>plus&lt;Float&gt;</code> is <code>Float(Float,Float)</code>.
+          Then we can write the following:</p>
+          
+          <pre data-language="ceylon"><code>Anything(Float,Float) printSum = compose(print,plus&lt;Float&gt;);
+printSum(2.0,2.0); //prints 4.0
+</code></pre>
+          
+          <p id="the_function_curry_produces_a...">The function <code>curry()</code> produces a function with multiple parameter lists, given
+          a function with multiple parameters:</p>
+          
+          <!-- try-pre:
+              Anything(Float,Float) printSum = compose(print,plus<Float>);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>Anything(Float)(Float) printSumCurried = curry(printSum);
+Anything(Float) printPlus2 = printSumCurried(2.0);
+printPlus2(2.0); //prints 4.0
+</code></pre>
+          
+          <p id="the_function_uncurry_does_the...">The function <code>uncurry()</code> does the opposite, giving us back our original uncurried
+          signature:</p>
+          
+          <!-- try-pre:
+              Anything(Float,Float) printSum = compose(print,plus<Float>);
+              Anything(Float)(Float) printSumCurried = curry(printSum);
+          -->
+          
+          
+          <!-- try-post:
+              printSumUncurried(2.0,2.0);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>Anything(Float,Float) printSumUncurried = uncurry(printSumCurried);
+</code></pre>
+          
+          <p id="note_that_compose_curry_and...">Note that <code>compose()</code>, <code>curry()</code>, and <code>uncurry()</code> are ordinary functions, written
+          in Ceylon.</p>
+          
+          <h2 id="the_spread_operator">The spread operator</h2>
+          
+          <p id="weve_already_seen_a_few...">We've already seen a few examples of the spread operator. We've seen how to use
+          it to instantiate an iterable:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>{ "hello", *names }
+</code></pre>
+          
+          <p id="or_a_tuple">Or a tuple:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>[x, y, *labels]
+</code></pre>
+          
+          <p id="we_can_also_use_it...">We can also use it when calling a function. Consider the following function:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>String formatDate(String format, 
+                  Integer day, 
+                  Integer|String month, 
+                  Integer year) {
+    ...
+}
+</code></pre>
+          
+          <p id="and_suppose_we_have_a...">And suppose we have a tuple representing a date:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>value date = [15, "January", 2010];
+</code></pre>
+          
+          <p id="then_we_can_pass_the...">Then we can pass the date to our function like this:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>formatDate("dd MMMMM yyyy", *date)
+</code></pre>
+          
+          <p id="notice_that_the_type_of...">Notice that the type of the tuple <code>["dd MMMMM yyyy", *date]</code> is:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>[String,Integer,String,Integer] 
+</code></pre>
+          
+          <p id="now_consider_type_of_the...">Now consider type of the function <code>formatDate</code>. It is:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>String(String,Integer,Integer|String,Integer)
+</code></pre>
+          
+          <p id="or_rather">Or rather:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Callable&lt;String,[String,Integer,Integer|String,Integer]&gt;
+</code></pre>
+          
+          <p id="since_the_tuple_type_stringintegerstringinteger...">Since the tuple type <code>[String,Integer,String,Integer]</code> is a subtype of
+          <code>[String,Integer,Integer|String,Integer]</code>, the invocation is well-typed.
+          This demonstrates the relationship between tuples and function argument!</p>
+          
+          <!--
+          ## Curry, uncurry and function composition
+          
+          A method reference like `Float.times` is represented in "curried" form in Ceylon. 
+          I can write:
+          
+              Float twoTimes(Float x) = 2.0.times;
+          
+          Here, the expression `2.times` is a typical first-class function reference 
+          produced by the partial application of the method 
+          
+          [`times()`](https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/Numeric.type.html#times) 
+          to the receiver expression `2.0`.
+          
+          But I can also write:
+          
+              Float times(Float x)(Float y) = Float.times;
+          
+          Actually, the expression `Float.times` is really a metamodel reference to a 
+          method declaration. The type `Method<Float,Float,Float>` is a subtype of 
+          `Callable<Callable<Float,Float>,Float>`, so we can treat it as a 
+          function reference.
+          
+          Therefore, an alternative definition of `twoTimes()` is:
+          
+              Float twoTimes(Float x) = Float.times(2);
+          
+          (We're partially applying `Float.times` by supplying one of its two 
+          argument lists.)
+          
+          Unfortunately, the following isn't correctly typed:
+          
+              Float product(Float x, Float y) = Float.times;  //error: Float.times not a Callable<Float,Float,Float>
+          
+          The problem is that `Float.times`, when considered as a function reference, 
+          is a higher-order function that accepts a 
+          [`Float`](https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/Float.type.html) 
+          and returns a function that accepts a `Float`, not a first-order function 
+          that accepts two `Float`s.
+          
+          So how can we transform the method reference `Float.times` into an "uncurried" 
+          function with a single parameter list?
+          
+          Well, one really simple way would be to fall back to writing:
+          
+              Float product(Float x, Float y) {
+                  return x.times(y);   //or even: x*y
+              }
+          
+          But there's another way. Instead, we're going to use a really cool higher-order 
+          function that will be part of the Ceylon language module. It's just two lines 
+          of code, so I'm sure you'll immediately understand it:
+          
+              R uncurry<R,T,P*>(R curried(T t)(P* p))(T receiver, P* args) {
+                  return curried(receiver)(args);
+              }
+          
+          Whoah! What's *that*?
+          
+          Well, let's try to unwind this:
+          
+          * First, it's a function with two parameter lists, so `uncurry()()` is a 
+            function that returns a function.
+          * The first parameter list contains a single argument which also has two 
+            parameter lists, so the argument `curried()()` is also a function that 
+            returns a function.
+          * `curried()()` has an argument of form `P*`, a sequenced type parameter,
+            so we know that `curried()()` is somehow abstracted over functions with 
+            arbitrary lists of parameters.
+          * The second parameter list contains two arguments, of the same types as the 
+            parameters of the individual arguments of the parameter lists of 
+            `curried()()`. These are the parameters of the function returned by 
+            `uncurry()()`.
+          
+          So what `uncurry()()` is doing is taking a function in curried form, where the 
+          second parameter list can have an arbitrary number of parameters, and 
+          producing a different function with just one parameter list, including all the 
+          original parameters of the argument function. It's "flattening" the parameter 
+          lists of `curried()()` into a single list of parameters. So we can write the 
+          following:
+          
+              Float product(Float x, Float y) = uncurry(Float.times);
+          
+          Other kinds of operations on functions can be represented in a similar way. Consider:
+          
+              R curry<R,T,P*>(R uncurried(T t, P* p))(T receiver)(P* args) {
+                  return uncurried(receiver,args);
+              }
+          
+          This function does precisely the opposite of `uncurry()()`, it takes the 
+          first parameter of an argument function, and separates it out into its own 
+          parameter list, allowing the argument function to be partially applied:
+          
+              Float times(Float x)(Float y) = curry(product);
+              Float double(Float y) = times(2.0);
+          
+          Now consider:
+          
+              R compose<R,S,P*>(R f (S s), S g(P* p))(P* args) {
+                  return f(g(args));
+              }
+          
+          This function composes two functions:
+          
+              Float incrementThenDouble(Float x) = compose(2.0.times,1.0.plus);
+          
+          Fortunately, you won't need to be writing functions like 
+          `curry()()`, `uncurry()()` and `compose()()` yourself. They're general 
+          purpose tools that are packaged as part of the 
+          [`ceylon.language`](https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/index.html)
+          module. Nevertheless, it's nice to know that machinery like this is 
+          expressible within the type system of Ceylon. 
+          -->
+          
+          
+          <h2 id="theres_more">There's more...</h2>
+          
+          <p id="youll_find_a_more_detailed...">You'll find a more detailed discussion of how Ceylon represents function
+          types using tupes <a href="/blog/2013/01/21/abstracting-over-functions/">here</a>,
+          including an in-depth discussion of <code>compose()</code> and <code>curry()</code>.</p>
+          
+          <p id="now_were_going_to_talk...">Now we're  going to talk about Ceylon's syntax for <a href="../named-arguments">named argument
+          lists</a> and for defining user interfaces and
+          structured data.</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

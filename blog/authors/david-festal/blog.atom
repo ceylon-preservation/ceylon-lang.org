@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<feed xml:lang="en-US" xmlns="http://www.w3.org/2005/Atom">
+  <id>http://localhost:4242/blog/david-festal/</id>
+  <title>Blog of David Festal</title>
+  <updated>2015-12-14T00:00:00+00:00</updated>
+  <link href="http://localhost:4242/blog/authors/david-festal/blog.atom" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4242/" rel="alternate" type="text/html" />
+  <entry>
+    <id>http://localhost:4242/blog/2015/12/14/maintenance-update-for-1-2-0-IDE</id>
+    <title>First maintenance update for the Ceylon IDE version 1.2.0</title>
+    <updated>2015-12-14T00:00:00+00:00</updated>
+    <link href="http://localhost:4242/blog/2015/12/14/maintenance-update-for-1-2-0-IDE" rel="alternate" type="text/html" />
+    <author>
+      <name>David Festal</name>
+    </author>
+    <summary>
+      Introducing the first Ceylon IDE maintenance update
+      
+      Just after the release of Ceylon 1.2.0, we started managing a maintenance branch of the IDE-related
+      code, that will always be fully compatible with the last release of the Ceylon (Command line distribution and SDK).
+      
+      This way we've already been able to very easily backport to this branch many bug fixes or enhancements
+      implemented on the main development branch.
+      
+      As a result, the first maintenance update of the Ceylon IDE plugin for Eclipse, which fixes about 30 issues, has just been
+      published onto the main Ceylon IDE update site.
+      
+      So if you currently use the version 1.2.0 of the Ceylon...
+    </summary>
+    <content type="html">
+      &lt;h2&gt;Introducing the first Ceylon IDE maintenance update&lt;/h2&gt;
+      
+      &lt;p&gt;Just after the release of &lt;a href=&quot;http://localhost:4242/blog/2015/10/29/ceylon-1-2-0/&quot;&gt;Ceylon 1.2.0&lt;/a&gt;, we started managing a &lt;strong&gt;maintenance branch&lt;/strong&gt; of the IDE-related
+      code, that will always be &lt;strong&gt;fully compatible&lt;/strong&gt; with the last release of the Ceylon (Command line distribution and SDK).&lt;/p&gt;
+      
+      &lt;p&gt;This way we've already been able to very easily backport to this branch many bug fixes or enhancements
+      implemented on the main development branch.&lt;/p&gt;
+      
+      &lt;p&gt;As a result, the first maintenance update of the &lt;a href=&quot;http://localhost:4242/documentation/1.2/ide/&quot;&gt;Ceylon IDE plugin for Eclipse&lt;/a&gt;, which fixes about 30 issues, has just been
+      published onto the main Ceylon IDE &lt;a href=&quot;http://localhost:4242/eclipse/updatesite/&quot;&gt;update site&lt;/a&gt;.&lt;/p&gt;
+      
+      &lt;p&gt;So if you currently use the version 1.2.0 of the Ceylon IDE Eclipse plugin, simply run the
+      &lt;code&gt;Check For Updates&lt;/code&gt; command in the Eclipse &lt;code&gt;Help&lt;/code&gt; menu, and Eclipse should propose you to update the Ceylon IDE
+      features.&lt;/p&gt;
+      
+      &lt;p&gt;And if you still don't use the Ceylon IDE Eclipse plugin, just &lt;a href=&quot;http://localhost:4242/documentation/1.2/ide/install&quot;&gt;install&lt;/a&gt; it and give it a try now.&lt;/p&gt;
+      
+      &lt;h2&gt;Source tracking&lt;/h2&gt;
+      
+      &lt;p&gt;Of course each maintenance update will be tagged inside the GitHub source repositories.&lt;/p&gt;
+      
+      &lt;p&gt;So as soon as we know the version of the &lt;code&gt;Ceylon IDE&lt;/code&gt; feature, visible from the Eclipse &lt;code&gt;About&lt;/code&gt; dialog:&lt;/p&gt;
+      
+      &lt;div style=&quot;text-align:center;&quot;&gt;
+      &lt;img src=&quot;http://localhost:4242/images/screenshots/blog/2015-12-14-maintenance-update-for-1.2.0-IDE/about-ceylon-ide.png&quot; style=&quot;box-shadow: 0 0 10px #888;margin-left:5px;&quot; width=&quot;679px&quot; height=&quot;auto&quot;&gt;
+      &lt;/div&gt;
+      
+      
+      &lt;p&gt;we can immediately checkout the &lt;strong&gt;precise&lt;/strong&gt; source code corresponding to a Ceylon IDE installation.&lt;/p&gt;
+      
+      &lt;p&gt;This will help us &lt;strong&gt;reproducing more easily&lt;/strong&gt;, and &lt;strong&gt;fixing more quickly&lt;/strong&gt;, any issue encountered on the production Ceylon IDE.&lt;/p&gt;
+      
+      &lt;h2&gt;Maintenance update release notes&lt;/h2&gt;
+      
+      &lt;p&gt;Detailed release notes of this maintenance update can be found &lt;a href=&quot;https://github.com/ceylon/ceylon-ide-eclipse/releases/tag/com.redhat.ceylon.eclipse.feature_1.2.0.v20151214-1608-Final&quot;&gt;here&lt;/a&gt;,
+      and related commits can be found &lt;a href=&quot;https://github.com/ceylon/ceylon-ide-eclipse/compare/1.2.0...com.redhat.ceylon.eclipse.feature_1.2.0.v20151214-1608-Final&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+      
+      &lt;h2&gt;Issues&lt;/h2&gt;
+      
+      &lt;p&gt;Bugs and suggestions may be reported in GitHub's
+      &lt;a href=&quot;https://github.com/ceylon/ceylon-ide-eclipse/issues&quot;&gt;issue tracker&lt;/a&gt;.&lt;/p&gt;
+      
+      &lt;h2&gt;About Ceylon&lt;/h2&gt;
+      
+      &lt;p&gt;Ceylon is a highly understandable object-oriented language
+      with static typing. The language features:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;an emphasis upon &lt;strong&gt;readability&lt;/strong&gt; and a strong bias toward
+      &lt;strong&gt;omission or elimination of potentially-harmful or
+      potentially-ambiguous constructs&lt;/strong&gt; and toward highly
+      &lt;strong&gt;disciplined use of static types&lt;/strong&gt;,&lt;/li&gt;
+      &lt;li&gt;an extremely powerful and uncommonly elegant type system
+      combining subtype and parametric polymorphism with:
+      
+      &lt;ul&gt;
+      &lt;li&gt;first-class &lt;strong&gt;union and intersection types&lt;/strong&gt;,&lt;/li&gt;
+      &lt;li&gt;both &lt;strong&gt;declaration-site and use-site variance&lt;/strong&gt;, and&lt;/li&gt;
+      &lt;li&gt;the use of principal types for &lt;strong&gt;local type inference&lt;/strong&gt;
+      and &lt;strong&gt;flow-sensitive typing&lt;/strong&gt;,&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;a unique treatment of &lt;strong&gt;function and tuple types&lt;/strong&gt;,
+      enabling powerful abstractions, along with the most
+      &lt;strong&gt;elegant approach to &lt;code&gt;null&lt;/code&gt;&lt;/strong&gt; of any modern language,&lt;/li&gt;
+      &lt;li&gt;first-class constructs for defining &lt;strong&gt;modules and
+      dependencies between modules&lt;/strong&gt;,&lt;/li&gt;
+      &lt;li&gt;a very flexible syntax including &lt;strong&gt;comprehensions&lt;/strong&gt; and
+      support for expressing &lt;strong&gt;tree-like structures&lt;/strong&gt;,&lt;/li&gt;
+      &lt;li&gt;
+      &lt;strong&gt;fully-reified generic types&lt;/strong&gt;, on both the JVM and
+      JavaScript virtual machines, and a unique &lt;strong&gt;typesafe
+      metamodel&lt;/strong&gt;.&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;p&gt;More information about these language features may be
+      found in the &lt;a href=&quot;http://localhost:4242/features&quot;&gt;feature list&lt;/a&gt; and
+      &lt;a href=&quot;http://localhost:4242/documentation/1.2/introduction/&quot;&gt;quick introduction&lt;/a&gt;.&lt;/p&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>http://localhost:4242/blog/2014/10/10/ceylon-osgi-jee</id>
+    <title>Write in Ceylon, deploy as OSGI, use in Java EE</title>
+    <updated>2014-10-10T00:00:00+00:00</updated>
+    <link href="http://localhost:4242/blog/2014/10/10/ceylon-osgi-jee" rel="alternate" type="text/html" />
+    <author>
+      <name>David Festal</name>
+    </author>
+    <summary>
+      ... or how to use Ceylon inside Java EE application servers.
+      
+      The Ceylon language is inherently modular, and is shipped with a complete
+      infrastructure that allows leveraging this modularity out-of-the box.
+      However Ceylon is not captive of its own infrastructure. After the Java
+      and JS interoperability efforts, the 1.1.0 version has brought out-of-the-box
+      compatibility with OSGI, which enables running Ceylon code inside many other
+      containers.
+      
+      Every module archive produced by the Ceylon compiler contains OSGI headers
+      in its MANIFEST file, that describe the module as it should seen by OSGI
+      containers.
+      
+      Containers tested so far are:
+      
+      
+      Apache Felix 4.4.1,
+      Oracle Glassfish v4.1,
+      Equinox platform,
+      JBoss WildFly 8.0.0.alpha3 (with JBossOSGi installed)
+      
+      
+      
+      Of course, the Ceylon distribution...
+    </summary>
+    <content type="html">
+      &lt;h3&gt;... or how to use Ceylon inside Java EE application servers.&lt;/h3&gt;
+      
+      &lt;p&gt;The Ceylon language is inherently modular, and is shipped with a complete
+      infrastructure that allows leveraging this modularity out-of-the box.
+      However Ceylon is &lt;em&gt;not captive of its own infrastructure&lt;/em&gt;. After the Java
+      and JS interoperability efforts, the 1.1.0 version has brought out-of-the-box
+      compatibility with OSGI, which enables running Ceylon code inside many other
+      containers.&lt;/p&gt;
+      
+      &lt;p&gt;Every module archive produced by the Ceylon compiler contains OSGI headers
+      in its MANIFEST file, that describe the module as it should seen by OSGI
+      containers.&lt;/p&gt;
+      
+      &lt;p&gt;Containers tested so far are:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;Apache Felix 4.4.1,&lt;/li&gt;
+      &lt;li&gt;Oracle Glassfish v4.1,&lt;/li&gt;
+      &lt;li&gt;Equinox platform,&lt;/li&gt;
+      &lt;li&gt;JBoss WildFly 8.0.0.alpha3 (with JBossOSGi installed)&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;p&gt;Of course, the Ceylon distribution and SDK modules should first be added
+      inside the OSGI container as OSGI bundles.&lt;/p&gt;
+      
+      &lt;p&gt;But instead of writing long explanations here, let me direct you to some
+      concrete examples provided, with the required instructions, in the
+      following repository:&lt;/p&gt;
+      
+      &lt;p&gt;&lt;a href=&quot;https://github.com/davidfestal/Ceylon-Osgi-Examples/&quot;&gt;https://github.com/davidfestal/Ceylon-Osgi-Examples/&lt;/a&gt;&lt;/p&gt;
+      
+      &lt;p&gt;For the moment, it contains a single example that, though very simple, will
+      give you the main steps to start.&lt;/p&gt;
+      
+      &lt;p&gt;It also shows the use of a Ceylon module &lt;em&gt;totally outside Ceylon's standard
+      infrastructure&lt;/em&gt;, even &lt;em&gt;outside the JBoss world&lt;/em&gt;, in a
+      &lt;strong&gt;Web application servlet running on a Glassfish v4.1 application server&lt;/strong&gt;.
+      But of course you should be able to run it inside other OSGI-enabled
+      application servers or containers.&lt;/p&gt;
+      
+      &lt;p&gt;In the next examples we'll try to go further an do more interesting things
+      such as providing services, using Ceylon annotations (which are compatible
+      with Java annotations), or using OSGI services.&lt;/p&gt;
+      
+      &lt;p&gt;Please report any problem you might encounter while testing, and feel free
+      to submit pull requests for any other successful use cases  you might have
+      built.&lt;/p&gt;
+      
+      &lt;p&gt;Looking forward for your remarks, and for the time to write the following
+      examples.&lt;/p&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>http://localhost:4242/blog/2012/01/10/ceylon-ide-m1-newton</id>
+    <title>First official release of Ceylon IDE</title>
+    <updated>2012-01-10T00:00:00+00:00</updated>
+    <link href="http://localhost:4242/blog/2012/01/10/ceylon-ide-m1-newton" rel="alternate" type="text/html" />
+    <author>
+      <name>David Festal</name>
+    </author>
+    <summary>
+      Today, we're proud to announce the first official release of the Ceylon IDE.
+      
+      
+      
+      This release is fully compatible with the already-released Ceylon M1 "Newton"
+      command line distribution which contains the compiler, documentation
+      compiler, language module, and runtime. On the other hand, Ceylon IDE can be
+      used as a standalone Ceylon development tool, even if the full Ceylon
+      distribution is not already separately installed.
+      
+      You can install Ceylon IDE from our Eclipse plugin update site.
+      The welcome page is a gentle
+      way to get started with Ceylon.
+      
+      Main features
+      
+      A full list of features with screenshots can be found here.
+      
+      Among the features that have greatly enriched the IDE since its first
+      pre-release...
+    </summary>
+    <content type="html">
+      &lt;p&gt;Today, we're proud to announce the first official release of the &lt;a href=&quot;http://localhost:4242/documentation/1.0/ide&quot;&gt;Ceylon IDE&lt;/a&gt;.&lt;/p&gt;
+      
+      &lt;p&gt;&lt;img src=&quot;http://localhost:4242/images/screenshots/teaser2.png&quot; alt=&quot;teaser&quot;&gt;&lt;/p&gt;
+      
+      &lt;p&gt;This release is fully compatible with the already-released &lt;a href=&quot;http://localhost:4242/blog/2011/12/20/ceylon-m1-newton?utm_source=blog&amp;amp;utm_medium=web&amp;amp;utm_content=blog&amp;amp;utm_campaign=IDE_1_0_M1release&quot;&gt;Ceylon M1 &quot;Newton&quot;
+      command line distribution&lt;/a&gt; which contains the compiler, documentation
+      compiler, language module, and runtime. On the other hand, Ceylon IDE can be
+      used as a standalone Ceylon development tool, even if the full Ceylon
+      distribution is not already separately installed.&lt;/p&gt;
+      
+      &lt;p&gt;You can install Ceylon IDE from our &lt;a href=&quot;http://localhost:4242/documentation/1.0/ide/install?utm_source=blog&amp;amp;utm_medium=web&amp;amp;utm_content=ide_install&amp;amp;utm_campaign=IDE_1_0_M1release&quot;&gt;Eclipse plugin update site&lt;/a&gt;.
+      The &lt;a href=&quot;http://localhost:4242/documentation/1.0/ide/screenshots#welcome_page&quot;&gt;welcome page&lt;/a&gt; is a gentle
+      way to get started with Ceylon.&lt;/p&gt;
+      
+      &lt;h3&gt;Main features&lt;/h3&gt;
+      
+      &lt;p&gt;A full list of features with screenshots can be found &lt;a href=&quot;http://localhost:4242/documentation/1.0/ide?utm_source=blog&amp;amp;utm_medium=web&amp;amp;utm_content=ide&amp;amp;utm_campaign=IDE_1_0_M1release&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+      
+      &lt;p&gt;Among the features that have greatly enriched the IDE since its first
+      pre-release builds, the following stand out:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;A Ceylon perspective, welcome page, and cheat sheets.&lt;/li&gt;
+      &lt;li&gt;Wizards to create new Ceylon projects, modules, packages, and units.&lt;/li&gt;
+      &lt;li&gt;Cross-project dependencies and navigation: add another Ceylon project on
+      the build path, and dependencies are automatically handled.&lt;/li&gt;
+      &lt;li&gt;Full integration with the Ceylon module architecture: resolve dependencies
+      in an external module repository, and easily export your Ceylon project
+      as a module to a selected repository.&lt;/li&gt;
+      &lt;li&gt;Enhancements to refactorings, including the ability to refactor even in
+      dirty (unsaved) editors.&lt;/li&gt;
+      &lt;li&gt;New quick-fixes: for example, when an identifier is unknown, automatically
+      create a new file containing a stub for the missing declaration.&lt;/li&gt;
+      &lt;li&gt;Improved autocompletion: proposals are now sorted to prioritize those
+      which are assignable to the expected type, as well as those which are
+      declared nearby.&lt;/li&gt;
+      &lt;li&gt;Customization: easily configure your own colors for syntax highlighting.&lt;/li&gt;
+      &lt;li&gt;And, of course, many adjustments and bug fixes to provide a stable release.&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;h3&gt;About Ceylon&lt;/h3&gt;
+      
+      &lt;p&gt;&lt;a href=&quot;http://localhost:4242/documentation/1.0/introduction/?utm_source=blog&amp;amp;utm_medium=web&amp;amp;utm_content=introduction&amp;amp;utm_campaign=IDE_1_0_M1release&quot;&gt;This page&lt;/a&gt;
+      provides a quick introduction to the language. &lt;a href=&quot;http://localhost:4242/documentation/1.0/spec&quot;&gt;The draft language specification&lt;/a&gt;
+      is the complete definition.&lt;/p&gt;
+      
+      &lt;h3&gt;Source code&lt;/h3&gt;
+      
+      &lt;p&gt;The source code for Ceylon, its specification, and its website, and its IDE is
+      freely available from GitHub:&lt;/p&gt;
+      
+      &lt;p&gt;&lt;a href=&quot;https://github.com/ceylon&quot;&gt;https://github.com/ceylon&lt;/a&gt;&lt;/p&gt;
+      
+      &lt;h3&gt;Issues&lt;/h3&gt;
+      
+      &lt;p&gt;Bugs and suggestions may be reported in GitHub's issue tracker.&lt;/p&gt;
+      
+      &lt;h3&gt;Community&lt;/h3&gt;
+      
+      &lt;p&gt;The Ceylon community site includes
+      &lt;a href=&quot;http://localhost:4242/documentation/1.0/?utm_source=blog&amp;amp;utm_medium=web&amp;amp;utm_content=documentation&amp;amp;utm_campaign=IDE_1_0_M1release&quot;&gt;documentation&lt;/a&gt;,
+      the &lt;a href=&quot;http://localhost:4242/documentation/1.0/spec&quot;&gt;current draft of the language specification&lt;/a&gt;,
+      the &lt;a href=&quot;http://localhost:4242/documentation/1.0/roadmap?utm_source=blog&amp;amp;utm_medium=web&amp;amp;utm_content=roadmap&amp;amp;utm_campaign=IDE_1_0_M1release&quot;&gt;roadmap&lt;/a&gt;
+      and information about &lt;a href=&quot;http://localhost:4242/code?utm_source=blog&amp;amp;utm_medium=web&amp;amp;utm_content=code&amp;amp;utm_campaign=IDE_1_0_M1release&quot;&gt;getting involved&lt;/a&gt;.&lt;/p&gt;
+      
+      &lt;p&gt;&lt;a href=&quot;http://ceylon-lang.org&quot;&gt;http://ceylon-lang.org&lt;/a&gt;&lt;/p&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>http://localhost:4242/blog/2011/11/10/debugging-support-update</id>
+    <title>Update on the debugging support in the IDE</title>
+    <updated>2011-11-10T00:00:00+00:00</updated>
+    <link href="http://localhost:4242/blog/2011/11/10/debugging-support-update" rel="alternate" type="text/html" />
+    <author>
+      <name>David Festal</name>
+    </author>
+    <summary>
+      Basic support for debugging ceylon programs is now available in the IDE plugin on GitHub.
+      
+      Description of available support
+      
+      How to install
+      
+      From the sources
+      
+      For those who already have the ceylon-ide-eclipse plugin project in the Eclipse workspace,
+      just pull the last GitHub version and run with a "Eclipse Application" launch configuration.
+      
+      From the update site
+      
+      
+      From within Eclipse, install or update the Ceylon plugin through the Ceylon Update Site : http://ceylon-lang.org/eclipse/updatesite/
+      Restart Eclipse
+      You should be able to use basic debugging support
+      
+      
+      
+      How to use it
+      
+      Start debugging a ceylon program
+      
+      In order to debug a ceylon program, just do the following :
+      - When editing a ceylon source file, you can...
+    </summary>
+    <content type="html">
+      &lt;p&gt;Basic support for debugging ceylon programs is now available in the IDE plugin on GitHub.&lt;/p&gt;
+      
+      &lt;h2&gt;Description of available support&lt;/h2&gt;
+      
+      &lt;h3&gt;How to install&lt;/h3&gt;
+      
+      &lt;h4&gt;From the sources&lt;/h4&gt;
+      
+      &lt;p&gt;For those who already have the ceylon-ide-eclipse plugin project in the Eclipse workspace,
+      just pull the last GitHub version and run with a &quot;Eclipse Application&quot; launch configuration.&lt;/p&gt;
+      
+      &lt;h4&gt;From the update site&lt;/h4&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;From within Eclipse, install or update the Ceylon plugin through the Ceylon Update Site : &lt;code&gt;http://ceylon-lang.org/eclipse/updatesite/&lt;/code&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Restart Eclipse&lt;/li&gt;
+      &lt;li&gt;You should be able to use basic debugging support&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;h3&gt;How to use it&lt;/h3&gt;
+      
+      &lt;h4&gt;Start debugging a ceylon program&lt;/h4&gt;
+      
+      &lt;p&gt;In order to debug a ceylon program, just do the following :
+      - When editing a ceylon source file, you can add a breakpoint by double-clicking in the editor ruler.
+      - In the Package Explorer, select the ceylon source file.
+      - In the contextual menu, start the following command : &lt;code&gt;Debug as -&amp;gt; Ceylon Application&lt;/code&gt;
+      - If more than one top-level definition is available in the source file, a dialog allows you to choose the one you want to debug.
+      - The program is then started and paused at the first breakpoint.
+      - You can then use the &lt;code&gt;Step into&lt;/code&gt;, &lt;code&gt;Step over&lt;/code&gt; and &lt;code&gt;Step out&lt;/code&gt; or &lt;code&gt;Resume&lt;/code&gt; buttons, just as with JDT debugging.&lt;/p&gt;
+      
+      &lt;h4&gt;Step Filtering&lt;/h4&gt;
+      
+      &lt;p&gt;In order to avoid going into unwanted stackframes when stepping into the code, you should activate debug step filtering in the Eclipse general preferences :
+      &lt;code&gt;Java -&amp;gt; Debug -&amp;gt; Step Filtering&lt;/code&gt;&lt;/p&gt;
+      
+      &lt;p&gt;Select all the proposed filters, as well as the simple getters and setters.&lt;/p&gt;
+      
+      &lt;h4&gt;Variables View&lt;/h4&gt;
+      
+      &lt;p&gt;The &lt;code&gt;Variables&lt;/code&gt; is available in the &lt;code&gt;Debug&lt;/code&gt; perspective, and shows the variables in the current stack frame context.
+      variables are shown in their Java flavour (that means how they had been translated to Java). However thanks to the Ceylon-Java mapping,
+      the variable representation of objects is very near to what is declared in the ceylon file.&lt;/p&gt;
+      
+      &lt;p&gt;For the moment, the &lt;code&gt;Change value&lt;/code&gt; contextual command only works for simple types such as String or numeric values.&lt;/p&gt;
+      
+      &lt;h4&gt;Breakpoints View&lt;/h4&gt;
+      
+      &lt;p&gt;The &lt;code&gt;Breakpoints&lt;/code&gt; view is also available and, for each breakpoint, allows enabling/disable it, but also setting a hit count.
+      However do to the type of breakpoint used internally, it is not possible to add a breakpoint condition for the moment.&lt;/p&gt;
+      
+      &lt;h3&gt;Known problems and limitations&lt;/h3&gt;
+      
+      &lt;h4&gt;Line problems&lt;/h4&gt;
+      
+      &lt;p&gt;It might happen that when paused on a specific stack frame, the instruction pointer is not positioned on the right corresponding line in the ceylon source file.
+      This is due to wrong line information in the class files generated by the ceylon compiler.
+      Such errors should be reported with the corresponding source code and erroneous lines, so that the corresponding problem in the compiler code would be corrected and additional tests implemented.&lt;/p&gt;
+      
+      &lt;h4&gt;Limitations&lt;/h4&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;In the &lt;code&gt;Variables&lt;/code&gt; view, the &lt;code&gt;Open Declared Type&lt;/code&gt; and &lt;code&gt;Open Declared Type Hierarchy&lt;/code&gt; contextual commands don't work, since for now the variables are seen as pure Java variables. Thus the source file of the Ceylon objects cannot be found.
+      This will be solved once the plugin is able to support a true Ceylon-specific debug model (see next section).&lt;/li&gt;
+      &lt;li&gt;Also in the &lt;code&gt;Variables&lt;/code&gt; view, the &lt;code&gt;Watch&lt;/code&gt; contextual command doesn't work : the &lt;code&gt;Watches&lt;/code&gt; is opened but the expressions are not successfully parsed and evaluated. This will also require some overloading of the standard JDT Debug support.&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;h2&gt;Next steps&lt;/h2&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;Extend/override JDT debug model in order to :
+      
+      &lt;ul&gt;
+      &lt;li&gt;add ceylon-specific step filters (e.g. for attribute generated getters, etc ...),&lt;/li&gt;
+      &lt;li&gt;define ceytlon-specific lin-breakpoints that allow advanced usages such as conditions,&lt;/li&gt;
+      &lt;li&gt;manage variables and values and type references with the ceylon semantics,&lt;/li&gt;
+      &lt;li&gt;etc ...&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Provide a more powerful breakpoint support (conditions, watchpoints, etc ...)&lt;/li&gt;
+      &lt;li&gt;Override the expression management to support ceylon code parsing/evaluation&lt;/li&gt;
+      &lt;li&gt;Allow ceylon code snippets in breakpoint cnditions for example&lt;/li&gt;
+      &lt;li&gt;etc ...&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;p&gt;Some (many) of those next steps, which mainly consist in extending/overriding existing implementations in JDT debug plugin,
+       imply building a Ceylon-specific logical core resource model, by extending the JDT core model.&lt;/p&gt;
+    </content>
+  </entry>
+</feed>

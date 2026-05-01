@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: First official release of Ceylon IDE</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2012/01/05/reification-project/">Cross-platform reified types for Ceylon</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2012/01/10/goals/">Principles that guide this project</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="first_official_release_of_ceylon_ide">
+            First official release of Ceylon IDE
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/david-festal/">David Festal</a>
+            </div>
+            <div class="date">
+              10 Jan 2012
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/release/">
+                release
+              </a>
+              <a href="/blog/tags/progress/">
+                progress
+              </a>
+              <a href="/blog/tags/m1/">
+                M1
+              </a>
+              <a href="/blog/tags/ide/">
+                ide
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <p id="today_were_proud_to_announce...">Today, we're proud to announce the first official release of the <a href="/documentation/1.0/ide">Ceylon IDE</a>.</p>
+            
+            <p id=""><img src="/images/screenshots/teaser2.png" alt="teaser"></p>
+            
+            <p id="this_release_is_fully_compatible...">This release is fully compatible with the already-released <a href="/blog/2011/12/20/ceylon-m1-newton?utm_source=blog&amp;utm_medium=web&amp;utm_content=blog&amp;utm_campaign=IDE_1_0_M1release">Ceylon M1 "Newton"
+            command line distribution</a> which contains the compiler, documentation
+            compiler, language module, and runtime. On the other hand, Ceylon IDE can be
+            used as a standalone Ceylon development tool, even if the full Ceylon
+            distribution is not already separately installed.</p>
+            
+            <p id="you_can_install_ceylon_ide...">You can install Ceylon IDE from our <a href="/documentation/1.0/ide/install?utm_source=blog&amp;utm_medium=web&amp;utm_content=ide_install&amp;utm_campaign=IDE_1_0_M1release">Eclipse plugin update site</a>.
+            The <a href="/documentation/1.0/ide/screenshots#welcome_page">welcome page</a> is a gentle
+            way to get started with Ceylon.</p>
+            
+            <h3 id="main_features">Main features</h3>
+            
+            <p id="a_full_list_of_features...">A full list of features with screenshots can be found <a href="/documentation/1.0/ide?utm_source=blog&amp;utm_medium=web&amp;utm_content=ide&amp;utm_campaign=IDE_1_0_M1release">here</a>.</p>
+            
+            <p id="among_the_features_that_have...">Among the features that have greatly enriched the IDE since its first
+            pre-release builds, the following stand out:</p>
+            
+            <ul>
+            <li>A Ceylon perspective, welcome page, and cheat sheets.</li>
+            <li>Wizards to create new Ceylon projects, modules, packages, and units.</li>
+            <li>Cross-project dependencies and navigation: add another Ceylon project on
+            the build path, and dependencies are automatically handled.</li>
+            <li>Full integration with the Ceylon module architecture: resolve dependencies
+            in an external module repository, and easily export your Ceylon project
+            as a module to a selected repository.</li>
+            <li>Enhancements to refactorings, including the ability to refactor even in
+            dirty (unsaved) editors.</li>
+            <li>New quick-fixes: for example, when an identifier is unknown, automatically
+            create a new file containing a stub for the missing declaration.</li>
+            <li>Improved autocompletion: proposals are now sorted to prioritize those
+            which are assignable to the expected type, as well as those which are
+            declared nearby.</li>
+            <li>Customization: easily configure your own colors for syntax highlighting.</li>
+            <li>And, of course, many adjustments and bug fixes to provide a stable release.</li>
+            </ul>
+            
+            
+            <h3 id="about_ceylon">About Ceylon</h3>
+            
+            <p id="this_page_provides_a_quick..."><a href="/documentation/1.0/introduction/?utm_source=blog&amp;utm_medium=web&amp;utm_content=introduction&amp;utm_campaign=IDE_1_0_M1release">This page</a>
+            provides a quick introduction to the language. <a href="/documentation/1.0/spec">The draft language specification</a>
+            is the complete definition.</p>
+            
+            <h3 id="source_code">Source code</h3>
+            
+            <p id="the_source_code_for_ceylon...">The source code for Ceylon, its specification, and its website, and its IDE is
+            freely available from GitHub:</p>
+            
+            <p id="httpsgithubcomceylon"><a href="https://github.com/ceylon">https://github.com/ceylon</a></p>
+            
+            <h3 id="issues">Issues</h3>
+            
+            <p id="bugs_and_suggestions_may_be...">Bugs and suggestions may be reported in GitHub's issue tracker.</p>
+            
+            <h3 id="community">Community</h3>
+            
+            <p id="the_ceylon_community_site_includes...">The Ceylon community site includes
+            <a href="/documentation/1.0/?utm_source=blog&amp;utm_medium=web&amp;utm_content=documentation&amp;utm_campaign=IDE_1_0_M1release">documentation</a>,
+            the <a href="/documentation/1.0/spec">current draft of the language specification</a>,
+            the <a href="/documentation/1.0/roadmap?utm_source=blog&amp;utm_medium=web&amp;utm_content=roadmap&amp;utm_campaign=IDE_1_0_M1release">roadmap</a>
+            and information about <a href="/code?utm_source=blog&amp;utm_medium=web&amp;utm_content=code&amp;utm_campaign=IDE_1_0_M1release">getting involved</a>.</p>
+            
+            <p id="httpceylon_langorg"><a href="http://ceylon-lang.org">http://ceylon-lang.org</a></p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2012/01/10/ceylon-ide-m1-newton/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

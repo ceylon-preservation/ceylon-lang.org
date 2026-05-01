@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Constructors in Ceylon</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2015/06/12/more-type-functions/">A little more about type functions</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2015/07/04/model/">Why build your own type system?</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="constructors_in_ceylon">
+            Constructors in Ceylon
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              21 Jun 2015
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/constructors/">
+                constructors
+              </a>
+              <a href="/blog/tags/12/">
+                1.2
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <p id="since_the_earliest_versions_of...">Since the earliest versions of Ceylon, we've supported a
+            streamlined syntax for class initialization where the
+            parameters of a class are listed right after the class name,
+            and initialization logic goes directly in the body of the
+            class.</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>class Color(shared Integer rgba) {
+
+    assert (0 &lt;= rgba &lt;= #FFFFFFFF);
+
+    function encodedValue(Integer slot)
+            =&gt; rgba.rightLogicalShift(8*slot).and(#FF);
+
+    shared Integer alpha =&gt; encodedValue(3);
+
+    shared Integer red =&gt; encodedValue(2);
+    shared Integer green =&gt; encodedValue(1);
+    shared Integer blue =&gt; encodedValue(0);
+
+    function hex(Integer int) =&gt; formatInteger(int, 16);
+
+    string =&gt; "Color { \ 
+               alpha=``hex(alpha)``, \ 
+               red=``hex(red)``, \ 
+               green=``hex(green)``, \ 
+               blue=``hex(blue)`` }";
+
+}
+</code></pre>
+            
+            <p id="we_can_instantiate_a_class...">We can instantiate a class like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Color red = Color(#FFFF0000);
+</code></pre>
+            
+            <p id="the_ability_to_refer_to...">The ability to refer to parameters of the class directly
+            from the members of the class really helps cut down on
+            verbosity, and most of the time this is a really comfortable
+            way to write code.</p>
+            
+            <p id="however_as_weve_seen_over...">However, as we've seen over the past few years of writing
+            Ceylon code, there are moments when we would really
+            appreciate the ability to write a class with multiple
+            initialization paths, something like constructors in Java,
+            C#, or C++. To be clear, in the overwhelmingly common
+            case—something more than 90% of classes, I would
+            estimate—constructors are unnecessary and uncomfortable.
+            But we still need a good solution for the remaining trickier
+            cases.</p>
+            
+            <p id="a_couple_of_especially_compelling...">A couple of especially compelling cases we ran into were:</p>
+            
+            <ul>
+            <li>the class <code>Array</code> in <code>ceylon.language</code>, which can be
+            allocated with a list of elements, or with a size and a
+            single element value, and</li>
+            <li>cloning copy constructors, used, for example, to implement
+            <code>HashMap.clone()</code> and <code>HashSet.clone()</code>.</li>
+            </ul>
+            
+            
+            <p id="unfortunately_ive_always_found_the...">Unfortunately, I've always found the design of constructors
+            that Java and C# inherited from C++ to be a bit strange and
+            inexpressive. So before I tell you what we've done about
+            constructors in Ceylon 1.2, let me start by explaining what
+            I think is wrong with constructors in Java.</p>
+            
+            <h2 id="whats_wrong_with_constructors_in_java">What's wrong with constructors in Java?</h2>
+            
+            <p id="as_alluded_above_the_biggest...">As alluded above, the biggest problem with the constructor
+            syntax in languages that borrow from C++ is that in the
+            common case of a class with just one constructor, the
+            parameters of that constructor aren't available in the body
+            of the class, leading to awful code like the following:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="java"><code>class Point {
+    public float x;
+    public float y;
+    public Point(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
+    public String toString() {
+        return "(" + x + ", " + y + ")";
+    }
+}
+</code></pre>
+            
+            <p id="this_hurts_fortunately_weve_already...">This hurts. Fortunately, we've already made that pain go
+            away in Ceylon.</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>class Point(shared Float x, shared Float y) {
+    string =&gt; "(``x``, ``y``)";
+}
+</code></pre>
+            
+            <p id="so_lets_look_at_some...">So let's look at some additional issues with constructors in
+            Java.</p>
+            
+            <p id="to_begin_with_the_syntax...">To begin with, the syntax is irregular. In C-like languages,
+            the grammar for a declaration is:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Modifier* (Keyword|Type) Identifier OtherStuff
+</code></pre>
+            
+            <p id="constructors_strangely_dont_conform_to...">Constructors, strangely, don't conform to this general
+            schema, having been bolted on later.</p>
+            
+            <p id="second_the_constructors_of_a...">Second, the constructors of a class are all forced to have
+            the same name. This seems like a quite bizarre restriction:</p>
+            
+            <ul>
+            <li>If they all have the same name, why not declare them with
+            a keyword instead of an identifier? DRY, anyone?</li>
+            <li>It's a restriction that robs me of expressiveness. Instead
+            of <code>new ColorWithRGBAndAlpha(r,g,b,a)</code>, giving me a clue
+            as to the semantics of the arguments, I write just
+            <code>new Color(r,g,b,a)</code>, and the reader is left guessing.</li>
+            <li>Constructors thus run into Java's totally broken support
+            for overloading. I can't have a constructor that takes
+            a <code>List&lt;Float&gt;</code> and another which takes a <code>List&lt;Integer&gt;</code>,
+            since these two parameter types have the same erasure.</li>
+            <li>Constructor references (<code>Class::new</code> in Java) can be
+            ambiguous, depending on the context.</li>
+            </ul>
+            
+            
+            <p id="third_constructors_arent_forced_to...">Third, constructors aren't forced to initialize the instance
+            variables of the class. All Java types have a "default"
+            (zero or null) value, and if you forget to initialize an
+            instance variable in Java, you'll get a <code>NullPointerException</code>,
+            or, worse, an incorrect zero value at runtime. These problems
+            most certainly belong to the class of problems that I expect
+            a static type system to be able to detect, and, indeed, in
+            other contexts Java <em>does</em> detect uninitialized variables.</p>
+            
+            <p id="further_note_that_this_would...">Further note that this would be an even bigger problem in
+            Ceylon, because most types don't have <code>null</code> as an instance,
+            so there is no obvious "default" value.</p>
+            
+            <p id="as_usual_my_purpose_here...">As usual, my purpose here isn't to bash Java, but to justify
+            why we've done things differently in Ceylon.</p>
+            
+            <h2 id="named_constructors_and_default_constructors">Named constructors and  default constructors</h2>
+            
+            <p id="by_contrast_the_newly_introduced...">By contrast, the newly introduced syntax for constructors in
+            Ceylon is regular, expressive, and doesn't rely on
+            overloading (which Ceylon doesn't support, except when
+            interoperating with native Java code). Here's the basic
+            syntax for a constructor:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>new withFooAndBar(Foo foo, Bar bar)
+        extends anotherConstructor(foo) {
+    //do stuff
+}
+</code></pre>
+            
+            <p id="when_the_class_to_which...">When the class to which the constructor belongs directly
+            extends <code>Basic</code>, the <code>extends</code> clause is optional.</p>
+            
+            <p id="and_heres_an_example_of...">And here's an example of how it's used:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>class Color {
+
+    shared Integer rgba;
+
+    //default constructor
+    shared new (Integer rgba) {
+        assert (0 &lt;= rgba &lt;= #FFFFFFFF);
+        this.rgba = rgba;
+    }
+
+    //named constructor
+    shared new withRGB(
+        Integer red, Integer green, Integer blue, 
+        Integer alpha = #FF) {
+        assert (0 &lt;= red &lt;= #FF, 
+                0 &lt;= green &lt;= #FF, 
+                0 &lt;= blue &lt;= #FF);
+        rgba = 
+                alpha.leftLogicalShift(24) +
+                red.leftLogicalShift(16) +
+                green.leftLogicalShift(8) +
+                blue;
+    }
+
+    //another named constructor
+    shared new withRGBIntensities(
+        Float red, Float green, Float blue, 
+        Float alpha = 1.0) {
+        assert (0.0 &lt;= red &lt;= 1.0, 
+                0.0 &lt;= green &lt;= 1.0, 
+                0.0 &lt;= blue &lt;= 1.0);
+        function int(Float intensity) 
+                =&gt; (intensity*#FF).integer;
+        rgba = 
+                int(alpha).leftLogicalShift(24) +
+                int(red).leftLogicalShift(16) +
+                int(green).leftLogicalShift(8) +
+                int(blue);
+    }
+
+    function encodedValue(Integer slot)
+            =&gt; rgba.rightLogicalShift(8*slot).and(#FF);
+
+    shared Integer alpha =&gt; encodedValue(3);
+
+    shared Integer red =&gt; encodedValue(2);
+    shared Integer green =&gt; encodedValue(1);
+    shared Integer blue =&gt; encodedValue(0);
+
+    function hex(Integer int) =&gt; formatInteger(int, 16);
+
+    string =&gt; "Color { \ 
+               alpha=``hex(alpha)``, \ 
+               red=``hex(red)``, \ 
+               green=``hex(green)``, \ 
+               blue=``hex(blue)`` }";
+
+}
+</code></pre>
+            
+            <p id="constructor_declarations_are_indicated_with...">Constructor declarations are indicated with the keyword <code>new</code>,
+            and have a name which begins with a lowercase letter. We call
+            a constructor like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Color red = Color.withRGBIntensities(1.0, 0.0, 0.0);
+</code></pre>
+            
+            <p id="or_using_named_arguments_like...">Or, using named arguments, like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Color red = 
+    Color.withRGBIntensities { 
+        red = 1.0; 
+        green = 0.0;
+        blue = 0.0;
+    };
+</code></pre>
+            
+            <p id="a_function_reference_to_a...">A function reference to a constructor has a natural syntax:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Color(Float,Float,Float) createColor
+        = Color.withRGBIntensities;
+</code></pre>
+            
+            <p id="a_class_may_have_a...">A class may have a constructor, called the <em>default constructor</em>,
+            with no name. Instantiation via the default constructor works
+            just like instantiation of a class without constructors:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Color red = Color(#FFFF0000);
+</code></pre>
+            
+            <p id="a_class_isnt_required_to...">A class isn't required to have a default constructor, but
+            most classes will have one.</p>
+            
+            <p id="why_do_we_need_the...">Why do we need the concept of a default constructor? Well,
+            because a class with constructors <em>may not have a parameter
+            list</em>. Wait, let's stop and reemphasize that caveat, because
+            it's an important one:</p>
+            
+            <blockquote><p id="you_cant_add_constructors_to...">You can't add constructors to a class with a parameter
+            list! Instead, you must first rewrite the class to use
+            a "default constructor" for its "normal" initialization
+            logic.</p></blockquote>
+            
+            <p id="however_a_class_with_constructors...">However, a class with constructors may still have
+            initialization logic directly in the body of the class. For
+            example, the following is perfectly legal:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>class Color {
+
+    shared Integer rgba;
+
+    shared new (Integer rgba) {
+        this.rgba = rgba;
+    }
+
+    shared new withRGB(
+        Integer red, Integer green, Integer blue, 
+        Integer alpha = #FF) {
+        assert (0 &lt;= red &lt;= #FF, 
+                0 &lt;= green &lt;= #FF, 
+                0 &lt;= blue &lt;= #FF);
+        rgba = 
+                alpha.leftLogicalShift(24) +
+                red.leftLogicalShift(16) +
+                green.leftLogicalShift(8) +
+                blue;
+    }
+
+    shared new withRGBIntensities(
+        Float red, Float green, Float blue, 
+        Float alpha = 1.0) {
+        assert (0.0 &lt;= red &lt;= 1.0, 
+                0.0 &lt;= green &lt;= 1.0, 
+                0.0 &lt;= blue &lt;= 1.0);
+        function int(Float intensity) 
+                =&gt; (intensity*#FF).integer;
+        rgba = 
+                int(alpha).leftLogicalShift(24) +
+                int(red).leftLogicalShift(16) +
+                int(green).leftLogicalShift(8) +
+                int(blue);
+    }
+
+    //executed for every constructor
+    assert (0 &lt;= rgba &lt;= #FFFFFFFF);
+
+    //other members
+    ...
+}
+</code></pre>
+            
+            <p id="the_last_assert_statement_is...">The last <code>assert</code> statement is executed every time the class
+            is instantiated.</p>
+            
+            <h2 id="value_constructors">Value constructors</h2>
+            
+            <p id="the_constructors_weve_just_seen...">The constructors we've just seen are termed <em>callable
+            constructors</em> in the language specification, because they
+            declare parameters. We also have <em>value constructors</em>, which
+            don't declare parameters, and which are executed once, the
+            first time the constructor is evaluated in the context to
+            which the class belongs. For a toplevel class, a value
+            constructor is a singleton.</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>class Color {
+
+    shared Integer rgba;
+
+    //default constructor
+    shared new (Integer rgba) {
+        this.rgba = rgba;
+    }
+
+    //value constructors
+
+    shared new white {
+        rgba = #FFFFFFFF;
+    }
+
+    shared new red {
+        rgba = #FFFF0000;
+    }
+
+    shared new green {
+        rgba = #FF00FF00;
+    }
+
+    shared new blue {
+        rgba = #FF0000FF;
+    }
+
+    //etc
+    ...
+
+}
+</code></pre>
+            
+            <p id="we_can_use_a_value...">We can use a value constructor like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Color red = Color.red;
+</code></pre>
+            
+            <p id="sometimes_the_constructors_of_a...">Sometimes the constructors of a class share certain
+            initialization logic. If that logic doesn't depend upon the
+            parameters of the class, we can put it directly in the body
+            of the class, as we've already seen. But if it <em>does</em> depend
+            upon the parameters, we often need to take a different tack.</p>
+            
+            <h2 id="constructor_delegation">Constructor delegation</h2>
+            
+            <p id="to_facilitate_reuse_of_initialization...">To facilitate reuse of initialization logic within a class,
+            it's useful to allow a constructor to delegate to a different
+            constructor of the same class. For this, we use the <code>extends</code>
+            clause:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Integer int(Float intensity) 
+        =&gt; (intensity*#FF).integer;
+
+class Color {
+
+    shared Integer rgba;
+
+    shared new (Integer rgba) {
+        this.rgba = rgba;
+    }
+
+    //value constructors delegate to the default constructor
+
+    shared new white 
+            extends Color(#FFFFFFFF) {}
+
+    shared new red 
+            extends Color(#FFFF0000) {}
+
+    shared new green 
+            extends Color(#FF00FF00) {}
+
+    shared new blue 
+            extends Color(#FF0000FF) {}
+
+    shared new withRGB(
+        Integer red, Integer green, Integer blue, 
+        Integer alpha = #FF) {
+        assert (0 &lt;= red &lt;= #FF, 
+                0 &lt;= green &lt;= #FF, 
+                0 &lt;= blue &lt;= #FF);
+        rgba = 
+                alpha.leftLogicalShift(24) +
+                red.leftLogicalShift(16) +
+                green.leftLogicalShift(8) +
+                blue;
+    }
+
+    shared new withRGBIntensities(
+        Float red, Float green, Float blue, 
+        Float alpha = 1.0) 
+            //delegate to other named constructor
+            extends withRGB(int(red), 
+                            int(green), 
+                            int(blue),
+                            int(alpha)) {}
+
+    assert (0 &lt;= rgba &lt;= #FFFFFFFF);
+
+    //other members
+    ...
+}
+</code></pre>
+            
+            <p id="a_constructor_may_only_delegate...">A constructor may only delegate to a constructor defined
+            earlier in the body of the class.</p>
+            
+            <p id="note_that_weve_written_extends...">Note that we've written <code>extends Color(#FFFFFFFF)</code> to
+            delegate to the default constructor of <code>Color</code>.</p>
+            
+            <h2 id="definite_initialization_and_partial_constructors">Definite initialization and partial constructors</h2>
+            
+            <p id="an_ordinary_constructor_like_colorwithrgb...">An ordinary constructor like <code>Color.withRGB()</code> or
+            <code>Color.withRGBIntensities()</code> has a responsibility to
+            initialize every value reference belonging to the class that
+            is either:</p>
+            
+            <ul>
+            <li>
+<code>shared</code>, or</li>
+            <li>used ("captured") by another member of the class.</li>
+            </ul>
+            
+            
+            <p id="the_ceylon_compiler_enforces_this...">The Ceylon compiler enforces this responsibility at compile
+            time and will reject the code unless it can prove that every
+            value reference has been fully initialized, either:</p>
+            
+            <ul>
+            <li>by every ordinary constructor, or</li>
+            <li>in the body of the class itself.</li>
+            </ul>
+            
+            
+            <p id="this_rule_would_make_it...">This rule would make it difficult to factor out common logic
+            contained in constructors if it weren't for the notion of a
+            <em>partial constructor</em>. For a partial constructor, the
+            requirement that all references are fully initialized is
+            relaxed. But a partial constructor may not be used to
+            directly instantiate the class. It may only be called from
+            the <code>extends</code> clause of another constructor of the same
+            class. A partial constructor is indicated by the <code>abstract</code>
+            annotation:</p>
+            
+            <p id="heres_a_contrived_example">Here's a contrived example:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>class ColoredPoint {
+    shared Point point;
+    shared Color color;
+
+    //partial constructor
+    abstract new withColor(Color color) {
+        this.color = color;
+    }
+
+    shared new forCartesianCoords(Color color, 
+        Float x, Float y) 
+            //delegate to partial constructor
+            extends withColor(color) {
+        point = Point.cartesian(x, y);
+    }
+
+    shared new forPolarCoords(Color color, 
+        Float r, Float theta) 
+            //delegate to partial constructor
+            extends withColor(color) {
+        point = Point.polar(r, theta);
+    }
+
+    ...
+
+}
+</code></pre>
+            
+            <p id="so_far_weve_only_seen...">So far, we've only seen how to delegate to another
+            constructor of the same class. But when a class extends a
+            superclass, every constructor must ultimately
+            delegate—perhaps indirectly—to a constructor of
+            the superclass.</p>
+            
+            <h2 id="constructors_and_inheritance">Constructors and inheritance</h2>
+            
+            <p id="a_class_may_extend_a...">A class may extend a class with constructors, for example:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>class ColoredPoint2(color, Float x, Float y) 
+        extends Point.cartesian(x, y) {
+    shared Color color;
+    ...
+}
+</code></pre>
+            
+            <p id="a_more_interesting_case_is...">A more interesting case is when the extending class itself
+            has constructors:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>class ColoredPoint extends Point {
+    shared Color color;
+
+    shared new forCartesianCoords(Color color, 
+        Float x, Float y)
+            //delegate to Point.cartesian()
+            extends cartesian(x, y) {
+        this.color = color;
+    }
+
+    shared new forPolarCoords(Color color, 
+        Float r, Float theta)
+            //delegate to Point.polar()
+            extends polar(r, theta) {
+        this.color = color;
+    }
+
+    ...
+}
+</code></pre>
+            
+            <p id="in_this_example_the_constructors...">In this example, the constructors delegate directly to
+            constructors of the superclass.</p>
+            
+            <h3 id="ordering_of_initialization_logic">Ordering of initialization logic</h3>
+            
+            <p id="with_constructor_delegation_together_with...">With constructor delegation, together with initialization
+            logic defined directly in the body of the class, you must
+            be imagining that initialization can get pretty convoluted.</p>
+            
+            <p id="well_no_the_general_principle...">Well, no. The general principle of initialization in Ceylon
+            remains unchanged: initialization always flows from top to
+            bottom, allowing the typechecker to verify that every <code>value</code>
+            is initialized before it is used.</p>
+            
+            <p id="consider_this_class">Consider this class:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>class Class {
+    print(1);
+    abstract new partial() {
+        print(2);
+    }
+    print(3);
+    shared new () extends partial() {
+        print(4);
+    }
+    print(5);
+    shared new create() extends partial() {
+        print(6);
+    }
+    print(7);
+}
+</code></pre>
+            
+            <p id="calling_class_results_in_the...">Calling <code>Class()</code> results in the following output:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>1
+2
+3
+4
+5
+7
+</code></pre>
+            
+            <p id="calling_classcreate_results_in_this...">Calling <code>Class.create()</code> results in this output:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>1
+2
+3
+5
+6
+7
+</code></pre>
+            
+            <p id="all_quite_orderly_and_predictable">All quite orderly and predictable!</p>
+            
+            <p id="in_the_comments_david_hagen...">In the <a href="http://ceylon-lang.org/blog/2015/06/21/constructors/#comment-2091964265">comments</a>,
+            David Hagen suggests a way of understanding how constructor
+            delegation and ordering works.</p>
+            
+            <h2 id="using_value_constructors_to_emulate_enums">Using value constructors to emulate enums</h2>
+            
+            <p id="you_might_already_have_noticed...">You might already have noticed that if a class <em>only</em> has
+            value constructors, it's very similar to a Java <code>enum</code>.</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared class Day {
+    shared actual String string;
+    abstract new named(String name) {
+        string = name;
+    } 
+    shared new sunday extends named("SUNDAY") {}
+    shared new monday extends named("MONDAY") {}
+    shared new tuesday extends named("TUESDAY") {}
+    shared new wednesday extends named("WEDNESDAY") {}
+    shared new thursday extends named("THURSDAY") {}
+    shared new friday extends named("FRIDAY") {}
+    shared new saturday extends named("SATURDAY") {}
+}
+</code></pre>
+            
+            <p id="we_therefore_let_you_use...">We therefore let you use value constructors in a <code>switch</code>
+            statement. The ability to <code>switch</code> over value constructors
+            can be viewed as an extension of the pre-existing facility
+            for <code>switch</code>ing over literal values of types like <code>Integer</code>,
+            <code>Character</code>, and <code>String</code>.</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Day day = ... ;
+String message;
+switch (day)
+case (Day.friday) { 
+    message = "thank god"; 
+}
+case (Day.sunday | Day.saturday) { 
+    message = "we could be having this conversation with beer"; 
+}
+else {
+    message = "need more coffee";
+}
+print(message);
+</code></pre>
+            
+            <p id="but_when_we_noticed_the...">But when we noticed the similarity to Java <code>enum</code>s, we
+            decided to take the idea a little further than what Java
+            offers here. Java enumerations are <em>open</em>, in the sense that
+            a <code>switch</code> statement which covers all enumerated values of
+            an <code>enum</code> must still include a <code>default</code> case to be
+            considered exhaustive by definite assignment and definite
+            return checking.</p>
+            
+            <p id="but_in_ceylon_we_also...">But in Ceylon we also have the notion of <em>closed</em>
+            enumerated types, where the "default" case—the <code>else</code>
+            clause of Ceylon's <code>switch</code> statement—may be omitted,
+            but the whole <code>switch</code> will still be considered exhaustive.</p>
+            
+            <p id="note_api_designers_should_be...">Note: API designers should be careful to only "close" an
+            enumeration that won't grow new value constructors in future
+            revisions of the API. <code>Day</code> and <code>Boolean</code> are good examples
+            of closed enumerations. <code>ErrorType</code> is an examples of an
+            open enumeration.</p>
+            
+            <p id="if_we_add_an_of...">If we add an <code>of</code> clause to <code>Day</code>, it will be considered a
+            closed enumeration.</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared class Day 
+        of sunday | monday | tuesday | wednesday | 
+           thursday | friday | saturday {
+    shared actual String string;
+    abstract new named(String name) {
+        string = name;
+    } 
+    shared new sunday extends named("SUNDAY") {}
+    shared new monday extends named("MONDAY") {}
+    shared new tuesday extends named("TUESDAY") {}
+    shared new wednesday extends named("WEDNESDAY") {}
+    shared new thursday extends named("THURSDAY") {}
+    shared new friday extends named("FRIDAY") {}
+    shared new saturday extends named("SATURDAY") {}
+}
+</code></pre>
+            
+            <p id="now_ceylon_will_consider_a...">Now Ceylon will consider a <code>switch</code> statement that covers
+            all the value constructors as an exhaustive <code>switch</code>, and we
+            can write the following code without needing an <code>else</code>
+            clause:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Day day = ... ;
+String message;
+switch (day)
+case (Day.monday | Day.tuesday | 
+      Day.wednesday | Day.thursday) { 
+    message = "need more coffee"; 
+}
+case (Day.friday) { 
+    message = "thank god"; 
+}
+case (Day.sunday | Day.saturday) { 
+    message = "we could be having this conversation with beer"; 
+}
+print(message);
+</code></pre>
+            
+            <p id="this_is_an_alternative_to...">This is an alternative to the <a href="http://ceylon-lang.org/documentation/1.1/tour/types/#enumerated_instances">existing pattern for emulating
+            Java-style <code>enum</code>s</a>.</p>
+            
+            <h2 id="a_final_word">A final word</h2>
+            
+            <p id="the_design_ive_presented_here...">The design I've presented here is the final result of a
+            thought process that spanned five years. I personally found
+            this to be a surprisingly difficult problem to address in a
+            principled way. For a time, I hoped to not even need to have
+            constructors in the language at all. But ultimately I'm very
+            happy with the end result. It seems to me not only
+            principled and consistent with the rest of the language, but
+            also very expressive and powerful.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2015/06/21/constructors/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

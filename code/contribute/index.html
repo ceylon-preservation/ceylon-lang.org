@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Contributing to the compiler backend</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="codepage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="selected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="licenses"><a href="/code/licenses">Licenses</a></h3>
+            
+            <h3 id="nightly_builds"><a href="https://ci-ceylon.rhcloud.com/">Nightly builds</a></h3>
+            
+            <h3 id="get_the_source"><a href="/code/source">Get the source</a></h3>
+            
+            <h3 id="contribute"><a href="/code/contribute">Contribute</a></h3>
+            
+            <h3 id="improve_the_website"><a href="/code/website">Improve the website</a></h3>
+            
+            <h3 id="report_a_bug"><a href="/code/issues">Report a bug</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Code
+          </div>
+        </div>
+        <div id="core-page">
+          <h1 id="contributing_to_the_compiler_backend">Contributing to the compiler backend</h1>
+          
+          <h2 id="getting_the_source">Getting the source</h2>
+          
+          <ul>
+          <li>Make sure you have the <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Java 7 JDK</a> and <a href="http://ant.apache.org/">Ant 1.8+</a> installed and that both are working correctly (if you installed Ant using your platform's package manager make sure it installed the <code>ant-junit.jar</code> as well, which can be found in a package named <code>ant-junit</code> or <code>ant-optional</code> depending on your distribution)</li>
+          <li>Make sure you have <a href="https://help.github.com/articles/set-up-git">Git set up correctly</a>
+</li>
+          <li>Create a new directory for the Ceylon project</li>
+          <li>Open a terminal and change to the newly created directory</li>
+          </ul>
+          
+          
+          <p id="and_now_you_either_set...">And now you either set things up for HTTPS access (recommended for most people):</p>
+          
+          <ul>
+          <li>Clone the <code>ceylon</code> repository:</li>
+          </ul>
+          
+          
+          <pre data-language="shell"><code>$ git clone https://github.com/eclipse/ceylon.git
+</code></pre>
+          
+          <p id="if_you_encounter_an_issue...">(If you encounter an issue like "fatal: unable to access 'https://github.com/eclipse/ceylon.git/':
+          Failed connect to github.com:443; No error", make sure you've set up your proxy as git config, ie:</p>
+          
+          <pre data-language="shell"><code>$ git config --global http.proxy http://userName:password@proxyServer:port 
+</code></pre>
+          
+          <p id="that_should_fix_it">that should fix it.)</p>
+          
+          <p id="or_you_set_things_up...">Or you set things up for SSH access (mainly contributors with push access):</p>
+          
+          <ul>
+          <li>Make sure you have <a href="https://help.github.com/articles/generating-ssh-keys">GitHub SSH access set up correctly</a>
+</li>
+          <li>Clone the <code>ceylon</code> repository:</li>
+          </ul>
+          
+          
+          <pre data-language="shell"><code>$ git clone git@github.com:eclipse/ceylon.git
+</code></pre>
+          
+          <p id="after_performing_one_of_the...">After performing one of the two above cloning operations continue with the following:</p>
+          
+          <ul>
+          <li>Build the complete distribution by running</li>
+          </ul>
+          
+          
+          <pre data-language="shell"><code>$ cd ceylon
+$ ant clean dist
+</code></pre>
+          
+          <p id="after_this_youll_have_a...">After this you'll have a newly built distribution in the <code>dist/dist</code> folder of your current directory.
+          You can run the <code>ceylon</code> command without any further setup or installation by simply running</p>
+          
+          <pre data-language="shell"><code>$ dist/dist/bin/ceylon
+</code></pre>
+          
+          <p id="but_its_advisable_to_add...">But it's advisable to add the <code>ceylon</code> command to your search path (either by adding the <code>bin</code> folder to your search path or by creating a symbolic link to it in an appropriate place like <code>~/bin/</code>).</p>
+          
+          <p id="if_at_any_time_you...">If at any time you want to update the distribution to the latest code from GitHub just run</p>
+          
+          <pre data-language="shell"><code>$ ant update
+$ ant clean dist
+</code></pre>
+          
+          <p id="nb_the_update_command_assumes...">NB: The <code>update</code> command assumes that your projects are "clean", that is you don't have uncommitted changes.
+          If that's not the case you'll have to manually update those projects or first stash your changes (using <code>git stash</code>).</p>
+          
+          <h2 id="setting_up_eclipse">Setting up Eclipse</h2>
+          
+          <ul>
+          <li>Import all projects you find in the <code>ceylon</code> folder into Eclipse (see <a href="https://github.com/eclipse/ceylon/blob/master/README.eclipse">README.eclipse</a> in ceylon-compiler)</li>
+          <li>Configure Eclipse's code formatting for the project's minimal <a href="#coding_style">coding style</a>.</li>
+          <li>Set your default <code>Text file encoding</code> to <code>UTF-8</code> and your default <code>New text file line delimiter</code> to <code>Unix</code> in your Eclipse preferences (<code>Window</code> -&gt; <code>Preferences</code> -&gt; <code>General</code> -&gt; <code>Workspace</code>). Or at least set it in the properties for each of the imported projects (Right-click on the project, select <code>Properties</code> then <code>Resource</code>).</li>
+          <li>In Eclipse, run the unit tests: <code>com.redhat.ceylon.compiler.test.ConcurrentTests</code>
+</li>
+          </ul>
+          
+          
+          <h2 id="setting_up_the_sdk">Setting up the SDK</h2>
+          
+          <p id="if_you_want_to_work...">If you want to work on any of the SDK modules you simply clone the SDK project and build it like this:</p>
+          
+          <pre data-language="shell"><code>$ git clone https://github.com/eclipse/ceylon-sdk.git
+$ cd ceylon-sdk
+$ ant clean publish
+</code></pre>
+          
+          <p id="but_perhaps_an_easier_way...">But perhaps an easier way is to do it from the root of the <code>ceylon</code> project like this:</p>
+          
+          <pre data-language="shell"><code>$ ant setup-sdk
+$ ant clean-sk sdk
+</code></pre>
+          
+          <p id="this_will_clone_the_ceylon...">This will clone the <code>ceylon-sdk</code> repository in the parent directory of the <code>ceylon</code> project.</p>
+          
+          <h2 id="forking_a_project">Forking a project</h2>
+          
+          <p id="when_you_have_decided_on...">When you have decided on which project you are going to work you'll have to fork it in GitHub.
+          For this example we assume you'll be working on <code>ceylon</code>.</p>
+          
+          <ul>
+          <li>Go to the <a href="https://github.com/eclipse">Ceylon project on GitHub</a> and click on the repository you'll be working on</li>
+          <li>Click the <code>Fork</code> button (in the top left of the page)</li>
+          <li>Now on the main page of your forked repository copy the <strong>SSH</strong> url</li>
+          <li>Go inside the local directory that corresponds with the repository (<code>ceylon</code>) and run</li>
+          </ul>
+          
+          
+          <pre data-language="shell"><code>$ git remote set-url origin THE_URL_YOU_JUST_COPIED
+</code></pre>
+          
+          <ul>
+          <li>Test if you did it right (the result should be "Current branch master is up to date")</li>
+          </ul>
+          
+          
+          <pre data-language="shell"><code>$ git pull --rebase
+</code></pre>
+          
+          <ul>
+          <li>Add an "upstream" alias for easy remote access:</li>
+          </ul>
+          
+          
+          <pre data-language="shell"><code>$ git remote add upstream git@github.com:eclipse/ceylon.git
+</code></pre>
+          
+          <h2 id="typical_workflow">Typical workflow</h2>
+          
+          <ol>
+          <li>Check out the <a href="https://github.com/eclipse/ceylon/issues">list of issues</a> for things to do.
+          
+          <ol>
+          <li>Try your luck on issues tagged <code>beginner</code> or <code>ceylondoc</code>
+</li>
+          <li>Don't take on issues tagged <code>inprogress</code>
+</li>
+          </ol>
+          </li>
+          <li>Ask on our ceylon-dev mailing list for what to do.</li>
+          <li>Assign the issue to you and add the <code>inprogress</code> tag</li>
+          <li>Create a new branch for the new feature <code>$ git checkout -b my-next-feature-name</code>
+</li>
+          <li>Fix everything</li>
+          <li>Make small commits, one for each functionality (ex: added this function, added new feature, added tests for new feature): <code>$ git add …; git commit</code>
+          
+          <ol>
+          <li>Possibly if you need to, use <code>git add -p …</code> to commit only parts of a file.</li>
+          <li>Don't forget to mention the issue number in the commit message so it's linked to the issue</li>
+          </ol>
+          </li>
+          <li>Once you're done with your patches, go back to the master branch to update it with the latest upstream changes: <code>$ git checkout master; git pull upstream master</code>
+</li>
+          <li>Send your updated master branch to your github fork: <code>$ git push</code>
+</li>
+          <li>Rebase your work on the latest master: <code>$ git checkout my-next-feature-name; git rebase master</code>
+</li>
+          <li>Push your branch to github: <code>$ git push origin my-next-feature-name</code>
+</li>
+          <li>Make a pull request for your branch</li>
+          <li>Go to https://github.com/YOUR_GITHUB_USERNAME/ceylon</li>
+          <li>Select your <code>my-next-feature-name</code> branch</li>
+          <li>Click on <code>Pull request</code>
+</li>
+          <li>Describe your work and click on <code>Send pull request</code>
+</li>
+          <li>Now the compiler team will be notified and incorporate the patches in upstream.</li>
+          <li>Now you can go back to your master branch and ask for new things to do: <code>$ git checkout master</code>
+</li>
+          <li>Don't forget to keep your master branch up-to-date and push it to your fork: <code>$ git pull upstream master; git push</code>
+</li>
+          <li>WHEN your work has been accepted upstream (and not before) you can delete you feature branch (locally and remotely): <code>$ git branch -d next-feature-name,$ git push origin :next-feature-name</code>
+          
+          <ol>
+          <li>Don't forget to close the issue and remove the <code>inprogress</code> tag</li>
+          </ol>
+          </li>
+          </ol>
+          
+          
+          <h2 id="ceylon_compiler_components">Ceylon compiler components</h2>
+          
+          <p id="these_are_the_various_major...">These are the various major parts of the Ceylon compiler.</p>
+          
+          <ul>
+          <li>Runner commands (for now a few batch/shell scripts in ceylon/compiler-java/bin to start the compiler)</li>
+          <li>Parser (part of the ceylon/typechecker component, translates ceylon source into a ceylon tree)</li>
+          <li>Type checker (part of the ceylon/typechecker component, checks a ceylon tree and builds its model)</li>
+          <li>Model (part of the ceylon/model component, represents meta information about ceylon declarations and types)</li>
+          <li>Transformer (translates a ceylon tree and model into a java tree)</li>
+          <li>Model loader (translates compiled java and ceylon class files into a ceylon model)</li>
+          <li>Javac (does all the rest, including type checking java source, loading class files and turning java trees into bytecode)</li>
+          <li>Runtime (copy of the ceylon/typechecker runtime but coded in Java so we can use it without requiring the compiler to support all the features of the runtime)</li>
+          </ul>
+          
+          
+          <p id="the_ceylon_compiler_is_an...">The ceylon compiler is an extension of the Javac compiler, which handles both .java and .ceylon files.</p>
+          
+          <p id="the_process_for_the_code...">The process for the code is roughly the following:</p>
+          
+          <ol>
+          <li>You invoke <code>ceylon/dist/dist/bin/ceylon compile</code>
+</li>
+          <li>It calls in com.redhat.ceylon.compiler.tools.LanguageCompiler</li>
+          <li>That parses every ceylon file into a ceylon tree</li>
+          <li>LanguageCompiler's superclass calls com.redhat.ceylon.compiler.codegen.CeylonEnter</li>
+          <li>CeylonEnter loads compiled java classes and starts building a model (java.lang.<em>, ceylon.language.</em>, com.redhat.ceylon.compiler.metadata.java.*)</li>
+          <li>CeylonEnter invokes the typechecker on the ceylon trees</li>
+          <li>The typechecker loads more compiled classes with the help of the model loader</li>
+          <li>We run the transformer com.redhat.ceylon.compiler.codegen.CeylonTransformer on the ceylon trees, to produce java trees</li>
+          <li>We hand over the java trees to javac, which compiles them into bytecode</li>
+          </ol>
+          
+          
+          <p id="now_lets_see_each_relevant...">Now let's see each relevant part in more details</p>
+          
+          <h3 id="runner_commands">Runner commands</h3>
+          
+          <p id="we_have_one_top_level...">We have one top-level command, <code>ceylon</code> which takes a subcommand as it's
+          first argument. In particular</p>
+          
+          <ul>
+          <li>
+<code>ceylon compile</code> invokes the compiler, taking similar arguments to <code>javac</code>
+</li>
+          <li>
+<code>ceylon run</code> runs a ceylon toplevel method, takes similar arguments to <code>java</code>
+</li>
+          <li>
+<code>ceylon doc</code> generates documentation for ceylon files, takes similar arguments to <code>javadoc</code>
+</li>
+          </ul>
+          
+          
+          <h3 id="parser_and_typechecker">Parser and Typechecker</h3>
+          
+          <p id="they_are_part_of_the...">They are part of the ceylon/typechecker component. Best to ask Emmanuel or Gavin about that part, or by
+          <a href="https://github.com/eclipse/ceylon/issues">filing an issue</a>.</p>
+          
+          <h3 id="generator">Generator</h3>
+          
+          <p id="those_are_the_classes_in...">Those are the classes in com.redhat.ceylon.compiler.codegen.<em>Transformer</em>. CeylonTransformer is the root, it has the following interesting methods:</p>
+          
+          <ul>
+          <li>makeJCCompilationUnitPlaceholder() which is invoked after parsing a ceylon tree to generate an empty java tree with a reference to the ceylon tree which we'll need later.</li>
+          <li>convertAfterTypeChecking() which is invoked by CeylonEnter and fills a java tree from a type-checked ceylon tree with its model built</li>
+          <li>various methods for use by deleguate generators</li>
+          </ul>
+          
+          
+          <p id="the_code_generation_is_split...">The code generation is split in ClassTransformer, ExpressionTransformer and StatementTransformer.</p>
+          
+          <p id="the_general_strategy_is_to...">The general strategy is to walk a ceylon tree using a visitor which adds support for a specific ceylon tree node (see com.redhat.ceylon.compiler.typechecker.tree.Tree) and invokes the proper transformer(Tree.Something) method on the proper Gen part.</p>
+          
+          <h3 id="model_loader">Model Loader</h3>
+          
+          <p id="most_of_the_stuff_is...">Most of the stuff is in com.redhat.ceylon.compiler.codegen.CeylonModelLoader. The trick here is to load compiled java/ceylon classes and to convert them to ceylon Model classes (com.redhat.ceylon.compiler.typechecker.model.Declaration).</p>
+          
+          <p id="because_classes_contain_references_to...">Because classes contain references to other classes which may not have been translated yet, we do this process in two phases:</p>
+          
+          <ul>
+          <li>Declaration convertToDeclaration(ClassSymbol): creates a mostly-empty lazy Declaration for a given compiled class (see LazyValue, LazyClass, LazyInterface) which will be auto-completed lazily on demand when the typechecker needs the info.</li>
+          <li>complete() which completes the lazy Declarations by looking deep into the compiled classes to generate the complete Model (for instance looking at a class's methods, attributes, super type, interfaces…)</li>
+          </ul>
+          
+          
+          <h3 id="tests">Tests</h3>
+          
+          <p id="we_have_the_following_types...">We have the following types of tests:</p>
+          
+          <ul>
+          <li>Transformer tests: we make a test ceylon file for a single compiler feature (for instance <code>foo()</code> to test a method call), which we compile and check that the java output matches the expected java code.</li>
+          <li>Model loader tests: we make a test ceylon file with all variations of a feature (for instance all possible ways to declare a method, or an attribute), we compile it, then we compile another ceylon file which contains a reference to declarations from the first ceylon file, which are then loaded from the compiled class, via the model loader. We then compare the typechecker's model from the first compilation with the model loader's model from the second to see if everything matches.</li>
+          <li>Runner tests: we compile a ceylon file and run it to see if it runs</li>
+          <li>Unit tests: we test various methods of the compiler in a classic way</li>
+          <li>Ceylon unit tests: we write the tests in ceylon and run them.</li>
+          </ul>
+          
+          
+          <h2 id="typical_work_in_transformer">Typical work in Transformer</h2>
+          
+          <ol>
+          <li>Find a feature to add (or find a test to fix, then skip to #4)</li>
+          <li>Make sure no tests exist for it (or find a failing test for it)</li>
+          <li>Write a test for it (find a proper place)</li>
+          <li>Add the <code>.ceylon</code> file for the test</li>
+          <li>Add the JUnit <code>@Test</code> method to invoke the test</li>
+          <li>Run the test</li>
+          <li>Look at the output, you will see the ceylon tree and the java output (unless an exception is thrown)</li>
+          <li>If an exception is thrown, fix the exception, commit the fix and start over</li>
+          <li>If not, look at the java code</li>
+          <li>If the java code doesn't look correct, either correct it or ask on the mailing list how to correct it</li>
+          <li>Save the java code to the <code>.src</code> file</li>
+          <li>Run the test</li>
+          <li>If the test passes, commit and make pull request</li>
+          <li>If the java code doesn't match the expected java code, then go find where it fails in the Transformer</li>
+          <li>If there is already a visitor method for the tree node type that fails (see the tree dump), find its transform() method to fix it</li>
+          <li>If not, add a visitor method for the failing tree node and a transform() method for it</li>
+          <li>Run the test and repeat until fixed</li>
+          </ol>
+          
+          
+          <h2 id="coding_style">Coding Style</h2>
+          
+          <p id="were_not_very_hung_up...">We're not very hung up about coding styles. The main requirement is that it's
+          easy to read. The best piece of advice is to try to mimic the style of
+          existing sources.</p>
+          
+          <p id="there_are_two_stylistic_things...">There are two stylistic things which will probably result
+          us asking a contributor to amend a pull request:</p>
+          
+          <ol>
+          <li>Indentation should be 4 spaces (and no tabs)</li>
+          <li>Use of braces should follow the One True Brace Style. In other words:
+          
+          <ul>
+          <li>an opening brace is always on the same line as (the last bit of) the
+          statement or declaration it's delimiting the block of,</li>
+          <li>a closing brace is on a line by itself, unless</li>
+          <li>it is a closing brace in a clause of some larger statement, for example
+          the closing brace before an <code>else</code> clause.</li>
+          </ul>
+          </li>
+          </ol>
+          
+          
+          <p id="heres_an_example">Here's an example:</p>
+          
+          <pre data-language="java"><code>void m(int num) {
+    if (num &lt; 0) {
+        // ...
+    } else if (num &gt; 0) {
+        // ...
+    } else {
+        // ...
+    }
+
+}
+</code></pre>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

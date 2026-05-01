@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: &lt;ceylon-import-jar&gt; Ant task</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.0/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.0/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.0/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="tutorial_videos"><a href="/documentation/1.0/videos">Tutorial Videos</a></h3>
+            
+            <h3 id="language_specification"><a href="/documentation/1.0/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.0/reference">Reference</a></h3>
+            
+            <ul>
+<li><a href="#usage">Usage
+            </a></li>
+<li><a href="#description">Description
+            </a></li>
+<ul><li><a href="#parameters">Parameters
+            </a></li></ul>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.0/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.0/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.0/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+            <span style="color:#8d5e0b">(1.0)</span>
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_10_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.0, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <h1 id="ceylon_import_jar_ant_task">
+<code>&lt;ceylon-import-jar&gt;</code> Ant task</h1>
+          
+          <h2 id="usage">Usage
+          </h2>
+          
+          
+          <p id="note_you_must_declare_the..."><strong>Note</strong>: You must <a href="../ant">declare the tasks with a <code>&lt;typedef&gt;</code></a>.</p>
+          
+          <p id="to_import_the_example_foo...">To import the <code>example-foo-1.1.jar</code> file in a Ceylon repository residing
+          in the <code>build</code> directory as version 1.1 of module <code>com.example.foo</code>:</p>
+          
+          <pre data-language="html"><code>&lt;target name="import" depends="ceylon-ant-taskdefs"&gt;
+  &lt;ceylon-import-jar jar="example-foo-1.1.jar" 
+    module="com.example.foo/1.1"&gt;
+    &lt;rep url="build"/&gt;
+  &lt;/ceylon-import-jar&gt;
+&lt;/target&gt;
+</code></pre>
+          
+          <h2 id="description">Description
+          </h2>
+          
+          
+          <p id="the_ceylon_import_jar_ant...">The <code>&lt;ceylon-import-jar&gt;</code> ant task makes it possible to import a legacy Java jar file into
+          a Ceylon repository as a module. Dependencies for the imported module can be specified
+          by making use of module descriptor XML or property files which are described in the section
+          on <a href="../../structure/module/#legacy_modules">legacy modules</a>.</p>
+          
+          <h3 id="parameters">Parameters
+          </h3>
+          
+          
+          
+          
+          <table class="ant-parameters">
+          <tbody>
+          <tr>
+          <th>Attribute</th>
+          <th>Description</th>
+          <th>Required</th>
+          </tr>
+          
+          <tr>
+          <td id="param-module"><code>module</code></td>
+          <td>The module and version to use for the imported jar file. Ex: `com.example.foo/1.1`.</td>
+          <td>Yes</td>
+          </tr>
+          
+          <tr>
+          <td><code>jar</code></td>
+          <td>The path to the jar file to import. Ex: `lib/example-foo-1.1.jar`.</td>
+          <td>Yes</td>
+          </tr>
+          
+          <tr>
+          <td id="param-descriptor"><code>descriptor</code></td>
+          <td>A path to an optional desciptor XML or properties file.</td>
+          <td>No</td>
+          </tr>
+          
+          <tr>
+          <td><code>out</code></td>
+          <td>The output module repository (which must be publishable).</td>
+          <td>No, default is <i>modules</i>
+</td>
+          </tr>
+          
+          <tr>
+          <td><code>user</code></td>
+          <td>The user name to use when connecting to the output repository. Only used for HTTP output repositories.</td>
+          <td>No</td>
+          </tr>
+          
+          <tr>
+          <td><code>pass</code></td>
+          <td>The password to use when connecting to the output repository. Only used for HTTP output repositories.</td>
+          <td>No</td>
+          </tr>
+          
+          <tr>
+          <td><code>verbose</code></td>
+          <td>Whether the documentation generator should emit verbose logging information. The zero or more of the
+          following flags can be passed separated by commas: 'all' or 'loader'.
+          If you do not pass a flag 'all' will be assumed.</td>
+          <td>No</td>
+          </tr>
+          
+          </tbody>
+          </table>
+          
+          
+          
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li>How to <a href="../ant">declare the tasks with a <code>&lt;typedef&gt;</code></a>.</li>
+          <li>Descriptor files for <a href="../../structure/module/#legacy_modules">legacy modules</a>
+</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

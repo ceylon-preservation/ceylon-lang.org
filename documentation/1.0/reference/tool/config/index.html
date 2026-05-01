@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Ceylon toolset configuration</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.0/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.0/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.0/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="tutorial_videos"><a href="/documentation/1.0/videos">Tutorial Videos</a></h3>
+            
+            <h3 id="language_specification"><a href="/documentation/1.0/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.0/reference">Reference</a></h3>
+            
+            <ul>
+<li><a href="#example_configuration_file">Example configuration file
+            </a></li>
+<li><a href="#configuration_file_location">Configuration file location
+            </a></li>
+<li><a href="#configuration_file_structure">Configuration file structure
+            </a></li>
+<ul>
+<li><a href="#basics">Basics
+            </a></li>
+<li><a href="#more_about_keys">More about keys
+            </a></li>
+<li><a href="#more_about_sections">More about sections
+            </a></li>
+</ul>
+<li><a href="#configuration_file_contents">Configuration file contents
+            </a></li>
+<ul>
+<li><a href="#_defaults_section"><code>[defaults]</code> section
+            </a></li>
+<li><a href="#_compiler_section"><code>[compiler]</code> section
+            </a></li>
+<li><a href="#_repositories_section"><code>[repositories]</code> section
+            </a></li>
+<li><a href="#_repository_sections"><code>[repository]</code> sections
+            </a></li>
+<ul>
+<li><a href="#_system_repository"><code>SYSTEM</code> repository
+            </a></li>
+<li><a href="#_cache_repository"><code>CACHE</code> repository
+            </a></li>
+<li><a href="#_local_repository"><code>LOCAL</code> repository
+            </a></li>
+<li><a href="#_user_repository"><code>USER</code> repository
+            </a></li>
+<li><a href="#_remote_repository"><code>REMOTE</code> repository
+            </a></li>
+<li><a href="#the_repositories_section_revisited">The <code>[repositories]</code> section revisited
+            </a></li>
+</ul>
+<li><a href="#_keystore_section"><code>[keystore]</code> section
+            </a></li>
+<li><a href="#_proxy_section"><code>[proxy]</code> section
+            </a></li>
+</ul>
+</ul>
+            
+            
+            <p id=""></p>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.0/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.0/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.0/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+            <span style="color:#8d5e0b">(1.0)</span>
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_10_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.0, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <h1 id="ceylon_toolset_configuration">Ceylon toolset configuration</h1>
+          
+          <p id="the_ceylon_tools_use_a...">The ceylon tools use a <code>git</code>-like configuration file format for
+          configuring their behaviour.</p>
+          
+          <h2 id="example_configuration_file">Example configuration file
+          </h2>
+          
+          
+          
+          
+          <pre><code># Put the cache on the huge disk
+[repository "CACHE"]
+url=/huge-disk/tom/ceylon/repocache
+
+# Define the company repo
+[repository "CompanyRepo"]
+url=http://repo.example.com
+password-alias=company-repo-password
+
+# Append the company repo to the "remote"
+[repositories]
+global=/usr/local/ceylon/repo
+remote=+CompanyRepo
+
+# define a keystore to put my passwords in
+[keystore]
+file=/home/tom/toms-keys
+
+# define a proxy for accessing the network
+[proxy]
+host=webproxy
+port=8000
+user=tom
+password-alias=proxy-password
+</code></pre>
+          
+          <h2 id="configuration_file_location">Configuration file location
+          </h2>
+          
+          
+          <p id="there_are_several_configuration_files...">There are several configuration files that can affect the configuration
+          of the Ceylon tool chain. They go from least specific at the level of the
+          system itself which affect all projects and all users to most specific at
+          the level of a single project affecting only that project.</p>
+          
+          <p id="the_first_configuration_file_that...">The first configuration file that gets read is the one at the system level
+          which on Linux and Mac OS is <code>/etc/ceylon/config</code> and on (modern) Windows
+          something like <code>C:\ProgramData\ceylon\config</code>.</p>
+          
+          <p id="after_that_comes_the_users...">After that comes the user's own configuration file which holds those values
+          that only apply to that specific user. On Linux it is <code>/home/&lt;username&gt;/.ceylon/config</code>,
+          on Mac OS it is <code>/Users/&lt;username&gt;/.ceylon/config</code> and on (modern) Windows
+          it is something like <code>C:\Users\&lt;username&gt;\.ceylon\config</code>.</p>
+          
+          <p id="and_finally_comes_the_most...">And finally comes the most specific configuration file which is located
+          in a subfolder of the current working directory: <code>.ceylon/config</code>.
+          This means it depends on where you are executing the <code>ceylon</code> command from!
+          (When using an IDE the current working directory is the project folder itself)</p>
+          
+          <p id="now_in_reality_its_a...">Now in reality it's a bit more complex than this, because before reading that
+          local file Ceylon will first see if a configuration file exists in the
+          <code>.ceylon</code> folder of the <em>parent</em> folder of the current working directory.
+          And before reading <em>that</em> one it will see if one exists in <em>its</em> parent folder
+          etc etc all the way up to the root of the file system (it will ignore the
+          user's and system configurtation files if it happens to encounter thme while
+          traversing the file ssytem). This provides us with the possibility to set
+          configuration options for a group of projects.</p>
+          
+          <h2 id="configuration_file_structure">Configuration file structure
+          </h2>
+          
+          
+          
+          
+          <h3 id="basics">Basics
+          </h3>
+          
+          
+          <p id="a_configuration_file_consists_of...">A configuration file consists of <em>sections</em> with <em>key/value pairs</em> and <em>comments</em>.
+          A <em>section</em> consists of a name surrounded by square brackets:</p>
+          
+          <pre><code>[examplesection]
+</code></pre>
+          
+          <p id="these_names_must_start_with...">These names must start with a letter and for the rest can only contain letters and
+          digits (and periods as we'll see later, but they are not part of the name).</p>
+          
+          <p id="we_can_also_add_comments...">We can also add comments, either on their own line or at the end of an existing line:</p>
+          
+          <pre><code># A comment on its own line
+[examplesection] # Another comment
+</code></pre>
+          
+          <p id="within_sections_we_can_define...">Within sections we can define key/value pairs, each on their own line:</p>
+          
+          <pre><code>[examplesection]
+some-setting=300
+</code></pre>
+          
+          <h3 id="more_about_keys">More about keys
+          </h3>
+          
+          
+          <p id="key_names_can_only_contain...">Key names can only contain letters, digits and dashes. To unambiguously refer
+          to a certain key in a certain section you can use the "complete name" which
+          for the above setting is <code>example-section.some-setting</code>. Its value is <code>300</code>.
+          In this form all leading and trailing spaces and tabs are ignored (as are comments),
+          so the following is exactly the same as the above:</p>
+          
+          <pre><code>[ example-section ]
+some-setting  =  300 # Some comment
+</code></pre>
+          
+          <p id="key_names_and_main_section...">Key names and main section names can never contain spaces or tabs, but values can.
+          In those cases that you need to specify leading or trailing spaces and tabs as part
+          of the value you need to <em>quote</em> the value like this:</p>
+          
+          <pre><code>[example-section]
+text=" An example text "
+</code></pre>
+          
+          <p id="spaces_and_tabs_within_the...">Spaces and tabs within the quotes are part of the value, any spaces and tabs outside
+          them are ignored.</p>
+          
+          <p id="sometimes_it_is_necessary_to...">Sometimes it is necessary to specify values that span multiple lines, the easiest way
+          to do that is like this:</p>
+          
+          <pre><code>[lines]
+long-text-unquoted=A very\
+very\
+long line.
+long-text-quoted= "Another very\
+very\
+long line."
+</code></pre>
+          
+          <p id="and_the_final_item_on...">And the final item on the topic of values are <em>escapes</em>, sometimes it's necessary to
+          be able to specify special character that cannot (easily) be entered in another way:</p>
+          
+          <pre><code>[escapes]
+escape1=\t # A single TAB character
+escape2=\n # A single NEWLINE character
+escape3="\"" # A double-quote character, so you can use them in quoted values
+escape4=\\ # A single backslash, so you can use backslashes in values
+</code></pre>
+          
+          <p id="nb_using_escapes_the_above...">NB: using escapes the above <code>[lines]</code> example could be rewritten like:</p>
+          
+          <pre><code>[lines]
+long-text-unquoted=A very\nvery\nlong line.
+long-text-quoted= "Another very\nvery\nlong line."
+</code></pre>
+          
+          <p id="and_that_would_be_exactly...">And that would be exactly the same. It's up to you to decide what you prefer.</p>
+          
+          <h3 id="more_about_sections">More about sections
+          </h3>
+          
+          
+          <p id="now_back_to_sections_for...">Now back to sections. For complex configurations it is possible to divide sections
+          into sub-sections (and sub-sub-sections or sub-sub-sub-etc if necessary).
+          This can be done in two different ways, either quoted or unquoted:</p>
+          
+          <pre><code>[examplesection "Sub section 1"]
+some-setting=300
+</code></pre>
+          
+          <pre><code>[examplesection "Sub section 2"]
+some-setting=400
+</code></pre>
+          
+          <pre><code>[examplesection.subsection1]
+some-setting=100
+</code></pre>
+          
+          <pre><code>[examplesection.subsection2]
+some-setting=200
+</code></pre>
+          
+          <p id="in_the_quoted_version_the...">In the quoted version the name sub-section can contain almost any characters
+          you want and is meant to give more human-friendly names, in the unquoted version
+          the name of the sub-section must adhere to the same rules as for the main
+          section name (starts with a letter and only letters and digits after that)
+          and names are separated by a period.</p>
+          
+          <h2 id="configuration_file_contents">Configuration file contents
+          </h2>
+          
+          
+          
+          
+          <h3 id="_defaults_section">
+<code>[defaults]</code> section
+          </h3>
+          
+          
+          <p id="the_defaults_section_is_used...">The <code>[defaults]</code> section is used to change the default behaviour of the ceylon
+          tool chain. The possible settings include:</p>
+          
+          <ul>
+          <li>
+<code>encoding</code> - the file encoding to use when reading source files (does not have
+          a default value, if not specified the default file encoding for the platform
+          is assumed)</li>
+          <li>
+<code>offline</code> - when set to <code>yes</code> (or <code>true</code>) will prevent the tool chains from
+          trying to download modules from remote repositories (defaults to <code>no</code> (<code>false</code>)).</li>
+          </ul>
+          
+          
+          <h3 id="_compiler_section">
+<code>[compiler]</code> section
+          </h3>
+          
+          
+          <p id="the_compiler_section_is_mainly...">The <code>[compiler]</code> section is mainly used to change the default behaviour of the compile tool.
+          The possible settings include:</p>
+          
+          <ul>
+          <li><p id="source___this_has..."><code>source</code> - This has the same effect as supplying <code>--source</code> on the command line.
+          It takes a path to a folder containing sources. Can be specified multiple times.</p></li>
+          <li><p id="resource___this_has..."><code>resource</code> - This has the same effect as supplying <code>--resource</code> on the command line.
+          It takes a path to a folder containing resources. Can be specified multiple times.</p></li>
+          </ul>
+          
+          
+          <p id="btw_although_it_appears_in...">BTW: although it appears in the <code>[compiler]</code> section these settings actually affect
+          any tools that take <code>--source</code> or <code>--resource</code> options. If a tool normally takes only
+          a single of these options the first in the list will be used.</p>
+          
+          <h3 id="_repositories_section">
+<code>[repositories]</code> section
+          </h3>
+          
+          
+          <p id="ceylon_uses_a_set_of...">Ceylon uses a set of local and remote repositories for its modules. The order and
+          significance of the lookup (which is fixed) is:</p>
+          
+          <ul>
+          <li>
+<code>system</code> - Essential system modules</li>
+          <li>
+<code>cache</code>  - A cache of modules that were previously downloaded from remote repositories</li>
+          <li>
+<code>output</code> - Where the compiler stores newly created modules</li>
+          <li>
+<code>lookup</code> - Other local repositories</li>
+          <li>
+<code>global</code> - Predefined user and system global repositories</li>
+          <li>
+<code>remote</code> - User defined remote repositories</li>
+          </ul>
+          
+          
+          <p id="the_repositories_section_can_be...">The <code>[repositories]</code> section can be used to override the default values for those
+          entries thereby changing or extending the lookup order. Take a look at the following
+          example:</p>
+          
+          <pre><code>[repositories]
+output=./output # Store new modules in the local `output` folder
+cache=/huge-disk/tom/ceylon/repocache # Store the cached modules on a bigger disk
+lookup=./modules
+lookup=./extra-modules
+lookup=/usr/local/ceylon/even-more-modules
+remote=http://ceylon.example.com # An external site with Ceylon modules
+</code></pre>
+          
+          <p id="first_of_all_the_values...">First of all, the values for <code>ouput</code> and <code>cache</code> (as well as <code>system</code>, but you should
+          normally never try overriding it) can only be specified once, while the others (<code>lookup</code>,
+          <code>global</code> and <code>remote</code>) can be specified multiple times, Ceylon will try them one by one
+          in the order you specify in this list.</p>
+          
+          <p id="nb_when_we_say_in...">NB: When we say "in the order you specify" we refer to the ones with the same key name,
+          so if you add several <code>remote</code> repositories they will be tried in the order you specify,
+          but you cannot change the main ordering: <code>lookup</code> repositories will always be tried before
+          <code>global</code>, which will always be tried before <code>remote</code>.</p>
+          
+          <p id="now_looking_at_lookup_we...">Now looking at <code>lookup</code> we see that it's specified 3 times, but one of those lines contains
+          a path to the local <code>modules</code> folder, which (as we will see later) is actually already part
+          of the default <code>lookup</code> list. So why is it specified here again? Well, it is important to
+          realize that in the configuration file we can only <em>override</em> existing values, we cannot
+          change them or append to them, so when overriding a value like <code>lookup</code> without changing the
+          default behaviour we must take care to include existing values.</p>
+          
+          <p id="the_global_entry_isnt_mentioned...">The <code>global</code> entry isn't mentioned in the above example because in general it is advisable
+          to leave it alone, it contains a list of predefined repositories, among which is the main
+          Ceylon repository itself that contains most of the interesting 3rd party modules. You should
+          only need to override it if for some reason you do <em>not</em> want the default behaviour.</p>
+          
+          <p id="the_remote_entry_doesnt_have...">The <code>remote</code> entry doesn't have any default value, so it can be easily used without having
+          to worry about pre-existing values. It's specifically meant to add extra (normally remote)
+          respositories that will be tried after all other options have been exhausted.</p>
+          
+          <h3 id="_repository_sections">
+<code>[repository]</code> sections
+          </h3>
+          
+          
+          <p id="so_far_when_specifying_respositories...">So far when specifying respositories we have been using simple files system paths and HTTP
+          URLs, but this might not be enough in certain cases. You might want to refer to a complex
+          URL from the command line for example without having to type it each time. Or in the case
+          of a remote output repository it might be necessary to authenticate before you will be
+          allowed to push anything to that server.</p>
+          
+          <p id="for_that_porpose_we_can...">For that porpose we can create a <code>[repository]</code> definition. Because all respository definitions
+          are actually sub-sections of <code>[repository]</code> they require a name. An example could be:</p>
+          
+          <pre><code>[repository "CompanyRepo"]
+url=http://ceylon.example.com
+user=fubar
+password=secret!
+</code></pre>
+          
+          <p id="supported_properties_include">Supported properties include:</p>
+          
+          <ul>
+          <li>
+<code>url</code> - the URL of the repository. Besides remote URLs like <code>http://repo.example.com</code> and <code>aether</code>,
+          this includes references to folders on the local file system, either absolute like <code>/huge-disk/tom/ceylon/repocache</code>
+          or relative to the project folder like <code>modules</code> or <code>./my-modules</code>. This property is required.</li>
+          <li>
+<code>user</code> - the user name if the repository requires authentication</li>
+          <li>
+<code>password</code> - the plain text password if the repository allows plain text authentication</li>
+          <li>
+<code>password-alias</code> - the name of an alias in a <code>[keystore]</code> which holds the
+          password, an alternative to using the <code>password</code> property.</li>
+          <li>
+<code>password-keystore</code> - the name of the <code>[keystore]</code> which holds
+          the <code>password-alias</code>, if not the default <code>[keystore]</code>
+</li>
+          </ul>
+          
+          
+          <p id="using_repository_definitions_like_the...">Using <code>[repository]</code> definitions like the above you can now refer to it from within the
+          <code>[repositories]</code> section like this (pay attention to the <code>+</code> sign which is required):</p>
+          
+          <pre><code>[repositories]
+remote=+CompanyRepo
+</code></pre>
+          
+          <p id="you_can_now_also_refer...">You can now also refer to this repository from the command line, for example when pushing
+          a compiled module to the secure company repository:</p>
+          
+          <pre data-language="shell"><code>$ ceylon compile --out +CompanyRepo com.example.mymodule
+</code></pre>
+          
+          <p id="there_are_a_few_built...">There are a few built-in repository names, as follows:</p>
+          
+          <h4 id="_system_repository">
+<code>SYSTEM</code> repository
+          </h4>
+          
+          
+          <p id="the_system_repository_holds_the...">The system repository holds the modules necessary to use the ceylon tools, for
+          example the compiler and language module. By default it is located in the
+          <code>repo</code> directory of the ceylon installation.</p>
+          
+          <pre><code>[repository "SYSTEM"]
+url=CEYLON_HOME/repo
+</code></pre>
+          
+          <h4 id="_cache_repository">
+<code>CACHE</code> repository
+          </h4>
+          
+          
+          <p id="the_cache_repository_contains_all...">The cache repository contains all modules fetched from remote repositories,
+          so they don't have to be downloaded each time they're needed. By default it is
+          located in the <code>.ceylon/cache</code> folder located in the user's home directory.</p>
+          
+          <pre><code>[repository "CACHE"]
+url=~/.ceylon/cache
+</code></pre>
+          
+          <h4 id="_local_repository">
+<code>LOCAL</code> repository
+          </h4>
+          
+          
+          <p id="the_local_repository_is_where...">The local repository is where modules are stored that are created by compiling local
+          projects. By default it is specified as the folder <code>modules</code> relative to the current
+          project folder.</p>
+          
+          <pre><code>[repository "LOCAL"]
+url=./modules
+</code></pre>
+          
+          <h4 id="_user_repository">
+<code>USER</code> repository
+          </h4>
+          
+          
+          <p id="the_user_repository_is_where...">The user repository is where a user can store modules that will be available to them
+          for execution regardless of the current folder the user runs the program. By default
+          it is located in the <code>.ceylon/repo</code> folder located in the user's home directory.
+          This can be overridden by setting the <code>ceylon.config</code> system property to point to
+          the file that should be used.</p>
+          
+          <pre><code> [repository "USER"]
+url=~/.ceylon/repo
+</code></pre>
+          
+          <h4 id="_remote_repository">
+<code>REMOTE</code> repository
+          </h4>
+          
+          
+          <p id="the_remote_repository_points_to...">The remote repository points to the official Ceylon module repository ("The Herd")
+          that contains all the official Ceylon SDK modules and all other freely available
+          3rd party modules. By default this is <code>https://herd.ceylon-lang.org</code>.</p>
+          
+          <pre><code>[repository "REMOTE"]
+url=https://herd.ceylon-lang.org
+</code></pre>
+          
+          <h4 id="the_repositories_section_revisited">The <code>[repositories]</code> section revisited
+          </h4>
+          
+          
+          <p id="this_paragraph_doesnt_really_contain..."><em>This paragraph doesn't really contain any infomation necessary to be able to work
+          with the Ceylon tool chain, but it might be interesting for completeness sake.</em></p>
+          
+          <p id="looking_at_the_above_list...">Looking at the above list we now have sufficient information to be able to know what
+          the default <code>[repositories]</code> section would look like:</p>
+          
+          <pre><code>[repositories]
+system=+SYSTEM
+cache=+CACHE
+output=+LOCAL
+lookup=+LOCAL
+global=+USER
+global=+REMOTE
+</code></pre>
+          
+          <p id="this_also_means_that_if...">This also means that if you define your own <code>[repository]</code> section with one of the
+          above pre-defined names you will <em>override</em> the default location for that repository.
+          (So in fact there are two ways of overriding pre-defined repositories)</p>
+          
+          <h3 id="_keystore_section">
+<code>[keystore]</code> section
+          </h3>
+          
+          
+          <p id="although_the_config_file_supports...">Although the config file supports specifying passwords in plain text, it also
+          supports them being stored in external keystores. The default keystore is
+          defined in the <code>[keystore]</code> section. Additional named <code>[keystore]</code>s can also be
+          defined. Each keystore corresponds to a <code>java.security.KeyStore</code>.</p>
+          
+          <p>Supported properties include:</p>
+          
+          <ul>
+          <li>
+<code>file</code> the name of a keystore file, for those keystores which are file based.</li>
+          <li>
+<code>store-type</code> - the <code>KeyStore</code> type. Default: <code>jceks</code>.</li>
+          <li>
+<code>store-provider</code> - the <code>KeyStore</code> provider. Default: <code>SunJCE</code>.</li>
+          </ul>
+          
+          
+          <h3 id="_proxy_section">
+<code>[proxy]</code> section
+          </h3>
+          
+          
+          
+          
+          <span class="milestone" title="Support for this feature was introduced in Milestone 6">Milestone 6</span><p id="the_proxy_section_defines_a...">The <code>[proxy]</code> section defines a HTTP proxy to use when accessing the network.</p>
+          
+          <p>Supported properties include:</p>
+          
+          <ul>
+          <li>
+<code>host</code> - the hostname of the proxy server</li>
+          <li>
+<code>port</code> - the TCP port number of the proxy server. Default: <code>8080</code>.</li>
+          <li>
+<code>user</code> - the proxy user name, if authenticating to the proxy is required</li>
+          <li>
+<code>password</code> - the proxy password, in plain text, or</li>
+          <li>
+<code>password-alias</code> - the alias of a <code>[keystore]</code> entry which holds the
+           password, an alternative to using the <code>password</code> property</li>
+          <li>
+<code>non-proxy-hosts</code> - a host name which can be accessed directly, without
+          going via the proxy.</li>
+          </ul>
+          
+          
+          <p id="tools_should_use_the_oss...">Tools should use the OS's default proxy settings automatically. If you want
+          the tools to not use any proxy, you can do us using an empty <code>[proxy]</code> section.</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

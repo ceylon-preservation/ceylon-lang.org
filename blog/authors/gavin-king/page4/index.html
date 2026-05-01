@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Blog of Gavin King</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="gavin_kings_feed"><a href="/blog/authors/gavin-king/blog.atom">Gavin King's Feed</a></h3>
+          </div>
+          <div class="point-dark-bottom">
+             
+          </div>
+          <div class="point-light-top">
+             
+          </div>
+          <div class="sidebar-block">
+            <div class="expandable">
+              <h3 id="bio">Bio</h3>
+              <p id="gavin_king_leads_the_ceylon...">Gavin King leads the Ceylon project at Red Hat. Gavin is the creator of
+              <a href="http://hibernate.org">Hibernate</a>, a popular object/relational persistence
+              solution for Java, and the <a href="http://seamframework.org">Seam Framework</a>, an
+              application framework for enterprise Java. He's contributed to the Java
+              Community Process as JBoss and then Red Hat representative for the EJB and
+              JPA specifications and as lead of the
+              <a href="http://jcp.org/en/jsr/detail?id=299">CDI specification</a>.</p>
+              
+              <p id="gavin_now_works_full_time...">Gavin now works full time on Ceylon, polishing the language specification,
+              developing the compiler frontend, working on the IDE, and thinking about
+              the SDK and future of the platform. He's still a fan of Java, and of other
+              languages, especially Smalltalk, Python, and ML.</p>
+              
+              <p id="you_can_follow_him_on...">You can <a href="https://profiles.google.com/gavin.king">follow him on G+</a> or on
+              <a href="https://twitter.com/1ovthafew">twitter</a>.</p>
+            </div>
+          </div>
+          <div class="point-light-bottom">
+             
+          </div>
+          <div class="point-light-top">
+             
+          </div>
+          <div class="sidebar-block">
+            <h3 id="recent_posts">Recent posts</h3>
+            <div id="blog-archive">
+              <h4 id="ceylon_to_move_to_the_eclipse_foundation_by_stéphane_épardaud__gavin_king_21_august_2017">
+                <a href="/blog/2017/08/21/eclipse-ceylon/">Ceylon to move to the Eclipse Foundation</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Stéphane Épardaud &amp; Gavin King
+                <br>
+                21 August 2017
+              </h4>
+              <h4 id="ceylon_133_is_now_available_by_gavin_king_21_august_2017">
+                <a href="/blog/2017/08/21/ceylon-1-3-3/">Ceylon 1.3.3 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                21 August 2017
+              </h4>
+              <h4 id="ceylon_132_is_now_available_by_gavin_king_03_march_2017">
+                <a href="/blog/2017/03/03/ceylon-1-3-2/">Ceylon 1.3.2 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                03 March 2017
+              </h4>
+              <h4 id="ceylon_131_is_now_available_by_gavin_king_22_november_2016">
+                <a href="/blog/2016/11/22/ceylon-1-3-1/">Ceylon 1.3.1 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                22 November 2016
+              </h4>
+              <h4 id="ceylon_130_is_now_available_by_gavin_king_19_september_2016">
+                <a href="/blog/2016/09/19/ceylon-1-3-0/">Ceylon 1.3.0 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                19 September 2016
+              </h4>
+            </div>
+            <h3 id="tags">Tags</h3>
+            <div class="tag-cloud">
+              <div class="tag-cloud">
+                <ul>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/100/">
+                        1.0.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/110/">
+                        1.1.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/12/">
+                        1.2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/120/">
+                        1.2.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/121/">
+                        1.2.1
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/122/">
+                        1.2.2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/130/">
+                        1.3.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/131/">
+                        1.3.1
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/132/">
+                        1.3.2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/133/">
+                        1.3.3
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m1/">
+                        M1
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m2/">
+                        M2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m3/">
+                        M3
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m4/">
+                        M4
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m5/">
+                        M5
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m6/">
+                        M6
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/android/">
+                        android
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/ceylon-js/">
+                        ceylon-js
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/ceylon-model/">
+                        ceylon-model
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/code/">
+                        code
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/compiler/">
+                        compiler
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/conference/">
+                        conference
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/constructors/">
+                        constructors
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/design/">
+                        design
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/design-interop-herd/">
+                        design interop herd
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/error-handling/">
+                        error handling
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/exceptions/">
+                        exceptions
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/feedback/">
+                        feedback
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/forum/">
+                        forum
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/generics/">
+                        generics
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/gsoc/">
+                        gsoc
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/guice/">
+                        guice
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/herd/">
+                        herd
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/httpd/">
+                        httpd
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/ide/">
+                        ide
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/interop/">
+                        interop
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/interview/">
+                        interview
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/ios/">
+                        ios
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/java/">
+                        java
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/language-design/">
+                        language design
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/mobile/">
+                        mobile
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/modularity/">
+                        modularity
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-2">
+                      <a href="/blog/tags/news/">
+                        news
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/osgi/">
+                        osgi
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/podcast/">
+                        podcast
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-7">
+                      <a href="/blog/tags/progress/">
+                        progress
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-4">
+                      <a href="/blog/tags/release/">
+                        release
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/roadmap/">
+                        roadmap
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/runtime/">
+                        runtime
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/sdk/">
+                        sdk
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-2">
+                      <a href="/blog/tags/site/">
+                        site
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/test/">
+                        test
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/tools/">
+                        tools
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/typesafety/">
+                        typesafety
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/typescript/">
+                        typescript
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/weld/">
+                        weld
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <h3 id="authors">Authors</h3>
+            <div class="tag-cloud">
+              <div class="tag-cloud">
+                <ul>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/bastien-jansen/">
+                        Bastien Jansen
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/david-festal/">
+                        David Festal
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/emmanuel-bernard/">
+                        Emmanuel Bernard
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-6">
+                      <a href="/blog/authors/gavin-king/">
+                        Gavin King
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/lucas-werkmeister/">
+                        Lucas Werkmeister
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-3">
+                      <a href="/blog/authors/stephane-epardaud/">
+                        Stéphane Épardaud
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/stephane-epardaud--gavin-king/">
+                        Stéphane Épardaud &amp; Gavin King
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/tako-schotanus/">
+                        Tako Schotanus
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/tom-bentley/">
+                        Tom Bentley
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/tomas-hradec/">
+                        Tomáš Hradec
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="point-light-end">
+             
+          </div>
+          <a href="/+" style="cursor:pointer;margin-left:auto;margin-right:auto;display:block;text-align:center;padding-top:10px;padding-bottom:0px">
+            <span style="display:inline-block;font-weight:bold;vertical-align:top;margin-right:5px;margin-top:8px;">Follow Ceylon:</span>
+          </a>
+          <p style="cursor:pointer;margin-left:auto;margin-right:auto;margin-top:2px;display:block;text-align:center;padding-top:0px" id="">
+            <a href="/+">
+              <i alt="Google Plus" class="fa fa-google-plus-square fa-2x" height="32" width="32"></i>
+            </a>
+            <a href="http://twitter.com/ceylonlang">
+              <i alt="Twitter" class="fa fa-twitter-square fa-2x" height="32" width="32"></i>
+            </a>
+            <a href="https://www.facebook.com/ceylonlang">
+              <i alt="Facebook" class="fa fa-facebook-square fa-2x" height="32" width="32"></i>
+            </a>
+          </p>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="core-page">
+          <h1 id="blog_of_gavin_king">
+            Blog of Gavin King
+          </h1>
+          <div class="post">
+            <h1 class="title" id="tuple_and_entry_destructuring">
+              <a href="/blog/2014/12/29/destructuring/">Tuple and entry destructuring</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/gavin-king/">Gavin King</a>
+              </div>
+              <div class="date">
+                29 December 2014
+              </div>
+              <div class="tags">
+              </div>
+            </div>
+            <div class="body">
+              <p id="the_next_release_of_ceylon...">The next release of Ceylon features an interesting range of
+              new language features, including constructors, <code>if</code> and
+              <code>switch</code> expression, <code>let</code> and <code>object</code> expressions, and
+              <em>destructuring</em> of tuples and entries. In this post, I'm
+              going to describe our new syntax for destructuring.</p>
+              
+              <p id="a_destructuring_statement_looks_a...">A destructuring statement looks a lot like a normal value
+              declaration, except that where we would expect to see the
+              value name, a <em>pattern</em> occurs instead.</p>
+              
+              <p id="an_entry_pattern_is_indicated...">An <em>entry</em> pattern is indicated using the skinny arrow <code>-&gt;</code>
+              we use to construct entries:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>String-&gt;Integer entry = "one"-&gt;1;
+value key-&gt;item = entry;    //destructure the Entry
+</code></pre>
+              
+              <p id="a_tuple_pattern_is_indicated...">A <em>tuple pattern</em> is indicated with brackets:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>[String,Integer] pair = ["one",1];
+value [first,second] = pair;    //destructure the Tuple
+</code></pre>
+              
+              <p id="the_pattern_variables_key_item...">The <em>pattern variables</em>, <code>key</code>, <code>item</code>, <code>first</code>, and <code>second</code>
+              are just regular local values.</p>
+              
+              <p id="we_can_nest_tuple_and...">We can nest tuple and entry patterns:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>String-&gt;[String,Integer] entry = "one"-&gt;["one",1];
+value key-&gt;[first,second] = entry;
+</code></pre>
+              
+              <p id="a_tuple_pattern_may_have...">A tuple pattern may have a tail variable, indicated with a
+              <code>*</code>:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>[String+] ints = 1..100;
+value [first,*rest] = ints;    //destructure the Sequence
+</code></pre>
+              
+              <p id="this_syntax_resembles_the_spread...">(This syntax resembles the spread operator.)</p>
+              
+              <p id="patterns_may_optionally_indicate_an...">Patterns may optionally indicate an explicit type:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>value String key-&gt;[String first, Integer second] = entry;
+</code></pre>
+              
+              <p id="pattern_based_destructuring_can_occur...">Pattern-based destructuring can occur in a number of other
+              places in the language. A pattern can occur in a <code>for</code> loop:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>for ([x, y] in points) { ... }
+
+for (key-&gt;item in map) { ... }
+</code></pre>
+              
+              <p id="or_in_an_exists_or...">Or in an <code>exists</code> or <code>nonempty</code> condition:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>if (exists index-&gt;item = stream.indexed.first) { ... }
+
+if (nonempty [first,*rest] = sequence) { ... }
+</code></pre>
+              
+              <p id="or_in_a_let_expression">Or in a <code>let</code> expression:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>value dist = let ([x,y] = point) sqrt(x^2+y^2);
+</code></pre>
+              
+              <p id="you_might_wonder_why_we...">You might wonder why we decided to introduce this syntax, or
+              at least, why we decided to do it <em>now</em>. Well, I suppose the
+              simple answer is that it always felt a bit incomplete or
+              unfinished to have a language with tuples but no convenient
+              destructuring syntax for them. Especially when we did already
+              have destructuring for entries, but only in <code>for</code>, as a
+              special case.</p>
+              
+              <p id="but_looking_into_the_future...">But looking into the future, you could also choose to see
+              this as us dipping our toes in the water of eventual support
+              for <em>pattern matching</em>. I remain ambivalent about pattern
+              matching, and it's certainly not something we find that the
+              language is missing or needs, but lots of folks tell us they
+              like it in other languages, so we're keeping our options
+              open. Fortunately, the syntax described above will scale
+              nicely to more complex patterns in a full pattern matching
+              facility.</p>
+              
+              <p id="this_functionality_is_already_implemented...">This functionality is already implemented and available in
+              github.</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2014/12/29/destructuring/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="post">
+            <h1 class="title" id="useless_lying_version_ranges">
+              <a href="/blog/2014/12/01/version-ranges/">Useless lying version ranges</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/gavin-king/">Gavin King</a>
+              </div>
+              <div class="date">
+                01 December 2014
+              </div>
+              <div class="tags">
+                <a href="/blog/tags/modularity/">
+                  modularity
+                </a>
+              </div>
+            </div>
+            <div class="body">
+              <p id="a_frequent_request_from_the...">A frequent request from the Ceylon community is support for
+              version ranges in expressing module dependencies. There's no
+              doubt that our current module system is too inflexible in
+              terms of dependency resolution in the face of version
+              conflicts, and I have some reasonable ideas about how to
+              address that problem without needing version ranges. But I
+              would like to document precisely why I think version ranges
+              are strictly-speaking useless at best, and harmful at worst.</p>
+              
+              <p id="first_a_philosophical_point_version...">First, a philosophical point: version ranges encourage module
+              authors to make untested or untestable claims about their
+              modules, such as:</p>
+              
+              <blockquote><p id="mymodule_is_compatible_with_otherdependency..."><code>my.module</code> is compatible with  <code>other.dependency</code>
+              version 2.x.</p></blockquote>
+              
+              <p id="yeah_right_cos_youve_actually...">Yeah, right, 'cos you've <em>actually tested</em> <code>my.module</code> with
+              every single minor version and point release of
+              <code>other.dependency</code>, including all the versions that have not
+              even been released yet! Sorry, but I simply don't believe
+              you and I have to assume you're lying to me. <em>Almost nobody</em>
+              tests their program or library with many different versions
+              of its dependencies, and it's easy to see why they don't: as
+              soon as we have a program with several dependencies, we face
+              a factorial explosion of dependency version combinations.</p>
+              
+              <p id="ok_sure_you_might_argue...">OK, sure, you might argue, but version ranges are still
+              <em>better than nothing</em>. Alright, alright. I'm not the kind of
+              guy who much buys into the notion that something broken is
+              better than nothing, but I realize I'm in the minority on
+              that one, 'cos, y'know, <em>worse is better</em>, as the neckbeards
+              keep telling me.</p>
+              
+              <p id="so_lets_see_what_we...">So let's see what we could do to make the most of version
+              ranges. Let's consider the problem first from the point of
+              view of two library authors assigning version ranges to their
+              modules, and then from the point of view of the program or
+              person assembling these modules.</p>
+              
+              <p id="lets_suppose_my_library_xy...">Let's suppose my library <code>x.y</code> depends on <code>org.hibernate</code>. I
+              tested and released <code>x.y</code> with the then-current version of
+              <code>org.hibernate</code>, which was <code>4.1.3</code>. What version range would
+              I have chosen when declaring this dependency?</p>
+              
+              <ul>
+              <li>Well, for the lower bound I decided to lie and write
+              <code>4.1.0</code>. Typically, I hadn't actually <em>tested</em> <code>x.y</code> with
+              versions <code>4.1.0</code>, <code>4.1.1</code> and <code>4.1.2</code>, but I had been
+              using <code>4.1.2</code> in development at one stage and it seemed to
+              work, and I didn't see any particular reason it wouldn't
+              also work with <code>4.1.0</code> and <code>4.1.1</code>. On the other hand,
+              maybe I could have just picked <code>4.1.3</code>. (It's not going to
+              matter for the rest of this argument.)</li>
+              <li>For the upper bound, I had no clue. How could I possibly
+              have known at the time which future unreleased version of
+              <code>org.hibernate</code> would break my library? Assigning the
+              upper bound of <code>4.1.3</code> would have seemed much too
+              restrictive, so what I did was assume that <code>org.hibernate</code>
+              is following the completely untestable
+              <a href="http://semver.org/">semantic versioning</a> standard, and
+              that future versions of Hibernate 4.x would not have any
+              bugs.</li>
+              </ul>
+              
+              
+              <p id="thus_i_arrived_at_the...">Thus, I arrived at the version range <code>4.[1.0-]</code> using some
+              imaginary syntax I just pulled out of my ahem, excuse me,
+              invented for the sake of argument.</p>
+              
+              <p id="a_critical_thing_to_notice...">A critical thing to notice here is that, from the point of
+              view of the library authors, there is <em>no reasonable way to
+              determine an accurate upper bound to the version range</em>.
+              This is utterly typical and normal and is the case for
+              almost any library author!</p>
+              
+              <p id="now_sometime_later_you_released...">Now, sometime later, you released your library <code>a.b</code>, which
+              also depends on <code>org.hibernate</code>. At this point, the current
+              release of <code>org.hibernate</code> was <code>4.2.0</code>. Quite atypically,
+              you actually <em>do</em> test your library with a previous version
+              of its dependency, and so you know that it is actually
+              compatible with <code>4.1.5</code> (the latest release of <code>4.1.x</code>).
+              Thus, you arrive at the version range <code>4.[1.5-]</code>.</p>
+              
+              <p id="now_suppose_some_poor_soul...">Now suppose some poor soul wants to use both our libraries
+              together in their program, thus taking advantage of the bugs
+              in both of them. So now, when assembling the program, what
+              version of  <code>org.hibernate</code> should the module system choose.
+              Let's consider the reasonable options:</p>
+              
+              <ul>
+              <li>Pick the latest release that fits the version ranges, that
+              is, the latest release of 4.x. This approach means that a
+              new release of <code>org.hibernate</code> can break our application.
+              We're picking a release which hasn't been tested with
+              either <code>x.y</code> or <code>a.b</code>. Not acceptable.</li>
+              <li>Pick the earliest release that fits the version ranges, in
+              this case <code>4.1.5</code>. This is better. At least there's a
+              chance that one of the libraries (in this case, <code>a.b</code>) has
+              actually been tested with this version. Still, according
+              to this strategy the system could in general pick a
+              dependency version that's earlier than all the current
+              versions when the libraries were developed. That seems
+              quite suboptimal.</li>
+              <li>Pick 4.2.0, since that was the current version of
+              <code>org.hibernate</code> when one of the libraries was developed,
+              so we <em>know for a fact</em> that it works with at least one of
+              the libraries, and it's newer that the version that the
+              other library was developed with. This seems to me like
+              it's by far the most robust and natural strategy.</li>
+              </ul>
+              
+              
+              <p id="there_are_some_variations_on...">There are some variations on this scenario, which raise
+              other possible choices, and I'm going to let you experiment
+              with the variations yourself, and see how it affects the
+              conclusion. But as far as I can tell, there's essentially
+              no common scenario in which the third strategy isn't at
+              least as good as any other possible strategy.</p>
+              
+              <p id="and_now_note_that_this...">And now note that this third strategy doesn't actually use
+              version ranges at all! We can write down this strategy
+              without reference to version ranges. It just says: pick the
+              latest version of the dependency among the versions with
+              which the libraries were developed. Version ranges don't
+              really add any useful additional information to that,
+              especially in light of the fact that upper bounds are
+              essentially impossible to determine, and even lower bounds
+              often lie. Why inject additional inaccurate information into
+              the mix when we already have an algorithm that produces a
+              result without depending on guesses and lies and
+              unverifiable assumptions? (I apologize for going all logical
+              positivist on your arse.)</p>
+              
+              <p id="what_do_you_think_am...">What do you think? Am I wrong? Is there some reasonably
+              common scenario where the module system can be expected to
+              produce a better outcome with the addition of version range
+              information? Is there a scenario in which upper bound
+              information <em>doesn't</em> lie? Is there a strategy involving
+              version ranges that is unambiguously better than my
+              admittedly unsophisticated "pick the latest version"
+              approach?</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2014/12/01/version-ranges/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="post">
+            <h1 class="title" id="new_features_coming_soon">
+              <a href="/blog/2014/11/03/plan/">New features coming soon</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/gavin-king/">Gavin King</a>
+              </div>
+              <div class="date">
+                03 November 2014
+              </div>
+              <div class="tags">
+              </div>
+            </div>
+            <div class="body">
+              <p id="weve_been_spending_time_discussing...">We've been spending time discussing the priorities for development
+              of Ceylon 1.1.5 and 1.2, including soliciting
+              <a href="/blog/2014/10/19/plan/">community feedback</a>. The plan is still
+              suprisingly fluid right now, but there are a number of things that
+              we've already started working on, or have decided to start working
+              on, and so in the interest of transparency, I thought I would share
+              them.</p>
+              
+              <p id="warning_were_not_committing_to..."><em>Warning:</em> we're not committing to a timeframe or release version for
+              most of these features. It's merely a summary of what we're working
+              on now, or plan to start work on soon.</p>
+              
+              <h2 id="serialization">Serialization</h2>
+              
+              <p id="as_already_announced_ceylonlanguage_115...">As already announced, <code>ceylon.language</code> 1.1.5 will feature an API for
+              <a href="https://github.com/ceylon/ceylon-spec/issues/704">Serialization</a>.
+              Note that this API does not itself specify a serialization format.
+              Rather, it's a general-purpose and platform-neutral facility for
+              marshalling objects to and from a serialized stream. Serialization
+              libraries founded on this API may serialize to text-based formats
+              like JSON or XML, to binary formats, or even to a database via ORM.</p>
+              
+              <p id="work_on_this_api_is...">Work on this API is already well-advanced. Tom has already done the
+              Java implementation, and Enrique has got it working in JavaScript.</p>
+              
+              <h2 id="type_argument_inference_for_function_references">Type argument inference for function references</h2>
+              
+              <p id="in_ceylon_11_we_made...">In Ceylon 1.1, we made it possible to leave off the type of a
+              parameter of an anonymous function that occurs in an argument list,
+              letting the type be inferred by the compiler, for example:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>{Float*} measurements = ... ;
+Float product = measurements.fold(1.0)((x,y)=&gt;x*y);
+</code></pre>
+              
+              <p id="in_ceylon_115_ive_extended...">In Ceylon 1.1.5, I've extended this approach to cover references
+              to generic functions. So now, instead of this:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>{Float*} measurements = ... ;
+Float product = measurements.fold(1.0)(times&lt;Float&gt;);
+</code></pre>
+              
+              <p id="you_can_write_this">You can write this:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>{Float*} measurements = ... ;
+Float product = measurements.fold(1.0)(times);
+</code></pre>
+              
+              <p id="this_even_works_for_static...">This even works for static value references, so instead of this:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>{[Float+]*} sequences = ... ;
+{Float*} heads = sequences.map(Iterable&lt;Float&gt;.first);
+</code></pre>
+              
+              <p id="you_can_write_simply_this">You can write simply this:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>{[Float+]*} sequences = ... ;
+{Float*} heads = sequences.map(Iterable.first);
+</code></pre>
+              
+              <p id="this_is_already_implemented_and...">This is already implemented, and you can try it out in git. It will
+              be released in Ceylon 1.1.5.</p>
+              
+              <h2 id="named_constructors">Named constructors</h2>
+              
+              <p id="in_ceylon_11_there_is...">In Ceylon 1.1, there is only one "constructor" of a class, the body
+              of the class itself. For the vast majority of classes this is far
+              more elegant and convenient. But in a minority of cases, there is
+              a true need to have multiple initialization paths, and so we've
+              designed a <code>new</code> syntax to support that. It took us a while to come
+              up with something elegant and regular that didn't break the block
+              structure of the language or the rules about definite initialization,
+              but I'm very happy with the final outcome.</p>
+              
+              <p id="since_ceylon_doesnt_have_overloading...">Since Ceylon doesn't have overloading (except for Java interop),
+              constructors have distinct names.</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>class Point {
+    shared Float x;
+    shared Float y;
+
+    //the "default" constructor
+    shared new Point(Float x, Float y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    //an additional constructor
+    shared new Diagonal(Float d) {
+        x = (d^2/2)^0.5 * d.sign;
+        y = x;
+    }
+}
+</code></pre>
+              
+              <p id="every_constructor_must_initialize_all...">Every constructor must initialize all members which are left
+              uninitialized by the body of the class, and must delegate to a
+              constructor of the superclass (in this case, they delegate to
+              <code>Basic()</code> by default). Now we can create a <code>Point</code> in two
+              different ways:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Point p1 = Point(2.0, 3.0);  //call the default constructor
+Point p2 = Point.Diagonal(1.0);
+</code></pre>
+              
+              <p id="the_typechecker_already_supports_constructors...">The typechecker already supports constructors, and Tom has made
+              good progress on implementing this feature for the Java backend.
+              I'm not sure if this will make it into 1.1.5, but if it does
+              then we might actually need to rename 1.1.5 to 1.2, given that
+              this is a pretty significant enhancement to the language itself.</p>
+              
+              <h2 id="extensions_to_the_expression_syntax">Extensions to the expression syntax</h2>
+              
+              <p id="were_making_several_extensions_to...">We're making several extensions to the expression syntax. These
+              features are already supported in the typechecker, but not yet
+              by the backends. Note that these features are especially useful
+              when combined with certain other features of the language, like
+              comprehensions, anonymous functions, named argument lists, and
+              fat arrow function definitions.</p>
+              
+              <h3 id="inline_object_expressions">Inline <code>object</code> expressions</h3>
+              
+              <p id="an_inline_anonymous_object_expression...">An <a href="https://github.com/ceylon/ceylon-spec/issues/333">inline anonymous <code>object</code> expression</a>
+              is very similar to an anonymous class in Java, and is useful in
+              essentially the same cases. For example:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>printAll(object satisfies {Integer+} {
+    iterator() =&gt;
+        object satisfies Iterator&lt;Integer&gt; {
+            variable value current = 0;
+            next() =&gt; current++;
+        };
+});
+</code></pre>
+              
+              <h3 id="let_expressions">
+<code>let</code> expressions</h3>
+              
+              <p id="a_let_expression_allows_the...">A <a href="https://github.com/ceylon/ceylon-spec/issues/747"><code>let</code> expression</a>
+              allows the definition of new <code>value</code>s within an expression. For
+              example:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Float d = ... ;
+value ptl = let (x = (d^2/2)^0.5 * d.sign) Point(x,x);
+</code></pre>
+              
+              <h3 id="inline_if_and_switch_expressions">Inline <code>if</code> and <code>switch</code> expressions</h3>
+              
+              <p id="ceylons_then_and_else_operators...">Ceylon's <code>then</code> and <code>else</code> operators are nice, but they don't
+              do anything special in terms of flow-sensitive typing, so we
+              quite often run into cases where we're forced to use a whole
+              <code>if</code> or <code>switch</code> statement in a block. To alleviate that minor
+              source of discomfort, we're now going to let you use
+              <a href="https://github.com/ceylon/ceylon-spec/issues/503"><code>if</code></a> and
+              <a href="https://github.com/ceylon/ceylon-spec/issues/556"><code>switch</code></a>
+              within expressions. For example:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>String string(Object it)
+        =&gt; if (is Person it) 
+           then it.name 
+           else it.string;
+</code></pre>
+              
+              <p id="or">Or:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>String name(Person|Org it)
+        =&gt; switch (it) 
+           case (is Org) it.tradingName 
+           case (is Person) it.firstName + " " + it.lastName;
+</code></pre>
+              
+              <h2 id="cayla_web_framework">Cayla web framework</h2>
+              
+              <p id="frameworks_for_developing_web_applications...">Frameworks for developing web applications are a top request from
+              the community. After some discussion, we've decided to focus first
+              on the <em>server side</em>, and come back later to the problem of
+              client-side web frameworks. Note that there's no problem at all
+              with using a native JS client-side web framework to call a Ceylon
+              module compiled to JavaScript.</p>
+              
+              <p id="julien_is_going_to_work...">Julien is going to work on getting
+              <a href="https://github.com/vietj/ceylon-cayla">Cayla</a>, a web framework
+              for use on Vert.x, ready for release.</p>
+              
+              <p id="to_showcase_cayla_ceylon_and...">To showcase Cayla, Ceylon, and Vert.x, Julien is going to do a
+              partial port of Ceylon Herd from Java/Play to Ceylon/Cayla. That
+              should make for a great demo.</p>
+              
+              <h2 id="sdk_modules_ceylonhtml_and_ceylonpromise">SDK modules <code>ceylon.html</code> and <code>ceylon.promise</code>
+</h2>
+              
+              <p id="cayla_will_offer_a_choice...">Cayla will offer a choice of templating technologies, but one of
+              the options we obviously want to offer is templates written in
+              Ceylon. In order to avoid the cost of rebuilding the template
+              from scratch on each request, <code>ceylon.html</code> needs to be enhanced
+              to support a mix of static nodes and nodes which are created or
+              rendered dynamically.</p>
+              
+              <p id="work_on_cayla_will_also...">Work on Cayla will also likely necessitate improvements to
+              <code>ceylon.promise</code>, and, in particular, we need to make this
+              module cross-platform (right now it is only available on the
+              JVM).</p>
+              
+              <h2 id="java_ee_integration">Java EE integration</h2>
+              
+              <p id="toby_crawley_has_started_work...">Toby Crawley has started work on integration with Java EE. The
+              first order of business here is to make it easy to write a
+              servlet in Ceylon and package it into a <code>war</code> archive. After
+              that, we'll need to make sure Ceylon works well with CDI, JPA,
+              JAX-RS, etc.</p>
+              
+              <h2 id="improved_debugging_in_ceylon_ide">Improved debugging in Ceylon IDE</h2>
+              
+              <p id="david_is_going_to_work...">David is going to work on making Eclipse's debugger work better
+              with Ceylon. This is now the only really major feature missing
+              from Ceylon IDE, so when he's done with that, he's going to move
+              onto the #1 requested feature from the Ceylon community, which
+              is...</p>
+              
+              <h2 id="intellij_based_ide_for_ceylon">IntelliJ-based IDE for Ceylon</h2>
+              
+              <p id="the_intellij_plugin_for_ceylon...">The IntelliJ plugin for Ceylon is still rudimentary, and not yet
+              ready for release. But now that the Eclipse-based IDE is feature
+              complete, we're going to refocus our tooling development efforts
+              on IntelliJ.</p>
+              
+              <p id="note_that_this_doesnt_really...">Note that this doesn't really represent a change of direction
+              for us; I'm an Eclipse user, I prefer Eclipse, and I see no good
+              reason to change to IntelliJ. That's especially true since
+              whenever I discover a nice feature of IntelliJ, I just go ahead
+              and reimplement it in Ceylon IDE ;-) However, we recognize that
+              there are plenty of folks on the other side of the fence, who,
+              preferring IntelliJ, and likewise seeing no reason to change,
+              deserve a great plugin for Ceylon. So I hereby promise that we
+              will have absolutely awesome tooling for <em>both</em> these IDEs.</p>
+              
+              <h2 id="source_maps">Source maps</h2>
+              
+              <p id="to_make_it_easy_to...">To make it easy to debug Ceylon code running on a JavaScript
+              virtual machine, Enrique is going to add support for source maps
+              to <code>ceylon compile-js</code>.</p>
+              
+              <h2 id="consume_typescript_interface_definitions">Consume Typescript interface definitions</h2>
+              
+              <p id="microsofts_typescript_project_which_recently...">Microsoft's Typescript project (which recently took inspiration
+              from Ceylon by adopting our approach to union types and flow
+              sensitive typing) has put a whole lot of work into defining
+              statically typed definitions of important APIs in the JavaScript
+              world. Now that Ceylon 1.1 has <a href="/blog/2014/10/13/dynamic-interfaces">dynamic interfaces</a>
+              it's at least in principle possible to have a well-defined
+              transformation from a Typescript API definition to a Ceylon type.
+              This could take the form of a mechanical source translator, or
+              even a "model loader" for the Ceylon compiler. Stef is going to
+              investigate this.</p>
+              
+              <h2 id="more">More</h2>
+              
+              <p id="the_above_is_an_incomplete...">The above is an incomplete list. If the thing you're waiting for
+              (Android!!) isn't on that list, that doesn't mean we don't want
+              to work on it, it just means I don't yet have a concrete plan for
+              actually starting work on it right now. Feel very welcome to bug
+              us about it in comments or on the mailing list or IRC :-)</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2014/11/03/plan/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="post">
+            <h1 class="title" id="planning_the_future_of_ceylon_1x">
+              <a href="/blog/2014/10/19/plan/">Planning the future of Ceylon 1.x</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/gavin-king/">Gavin King</a>
+              </div>
+              <div class="date">
+                19 October 2014
+              </div>
+              <div class="tags">
+              </div>
+            </div>
+            <div class="body">
+              <p id="with_the_release_of_ceylon...">With the release of <a href="/blog/2014/10/09/ceylon-1/">Ceylon 1.1</a>, we've
+              reached a point where we need to do some serious thinking about what
+              are our priorities for the development of Ceylon 1.1.5, 1.2, and
+              beyond. I definitely don't yet have a crystal clear vision of what is
+              going to be in 1.2, so we're also looking for community feedback on
+              this.</p>
+              
+              <p id="i_do_know_of_one...">I <em>do</em> know of one item which is the top priority right now, and will
+              be the main feature of Ceylon 1.1.5:</p>
+              
+              <ul>
+              <li>
+<a href="https://github.com/ceylon/ceylon-spec/issues/704">Serialization</a>.</li>
+              </ul>
+              
+              
+              <p id="this_was_a_feature_that...">This was a feature that slipped from Ceylon 1.0, and which again
+              narrowly missed out on inclusion in Ceylon 1.1. The concept behind
+              serialization in Ceylon is to have an API responsible for assembling
+              and disassembling objects that is agnostic as to the actual format of
+              the serialized stream. Of course, this API also has to be platform
+              neutral, in order to allow serialization between programs running on
+              the JVM and programs running on a JavaScript VM. Tom Bentley already
+              has a working prototype implementation. Once this feature is done,
+              we can start working on serialization libraries supporting JSON and
+              whatever else.</p>
+              
+              <p id="i_also_count_the_following...">I also count the following as a high priority areas of work:</p>
+              
+              <ul>
+              <li>Java EE integration, and support for technologies like JPA and CDI.</li>
+              <li>Adding <a href="https://github.com/ceylon/ceylon-spec/issues/685">properties</a>
+              to the language, that is, a new syntax for attribute references,
+              allowing easy MVC UI bindings.</li>
+              <li>Improving the Cayla web framework, and <code>ceylon.html</code>.</li>
+              </ul>
+              
+              
+              <p id="beyond_that_were_not_sure...">Beyond that, we're not sure where else we should concentrate development
+              effort. Here are some things that stick out to me:</p>
+              
+              <ul>
+              <li>Addition of named
+              <a href="https://github.com/ceylon/ceylon-spec/issues/796">constructors</a>,
+              allowing multiple ways to instantiate and initialize a class.</li>
+              <li>
+<a href="https://github.com/ceylon/ceylon-compiler/issues/1865">AST transformers</a>—a
+              system of compiler plugins, based around <code>ceylon.ast</code>, enabling
+              advanced compile-time metaprogramming, which would form the foundation
+              for LINQ-style queries, interceptors and proxies, and autogeneration
+              of <code>equals()</code>, <code>hash</code>, and <code>string</code>, and more.</li>
+              <li>Addition of a syntax for expressing
+              <a href="https://github.com/ceylon/ceylon-spec/issues/902">patterns in BNF</a>.</li>
+              <li>The Ceylon plugin for IntelliJ IDEA.</li>
+              <li>Android support.</li>
+              <li>
+<a href="https://github.com/ceylon/ceylon-spec/issues/667">Assemblies</a>—a
+              facility for packaging multiple modules into a deployable
+              "application".</li>
+              <li>New platform modules defining <code>dynamic</code> interfaces for typesafe
+              interaction with JavaScript APIs such as the DOM, jQuery, etc.</li>
+              <li>
+<a href="https://github.com/ceylon/ceylon-compiler/issues/1859">Interoperation with dynamic languages on the
+              JVM</a>, via
+              Ceylon's <code>dynamic</code> blocks and <code>dynamic</code> interfaces.</li>
+              <li>Enabling the use of Ceylon for
+              <a href="https://github.com/ceylon/ceylon-spec/issues/200">scripting</a>.</li>
+              </ul>
+              
+              
+              <p id="we_cant_do_all_of...">We can't do all of this in Ceylon 1.2. Therefore, we're looking for
+              feedback from the community. Let us know, here in comments, or <a href="https://groups.google.com/forum/?utm_medium=email&amp;utm_source=footer#!topic/ceylon-users/hl0lZXTn_eY">on
+              the mailing list</a>,
+              what you feel is missing from Ceylon, either from the above list, or
+              whatever else you think is important.</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2014/10/19/plan/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="post">
+            <h1 class="title" id="typesafe_apis_for_the_browser">
+              <a href="/blog/2014/10/13/dynamic-interfaces/">Typesafe APIs for the browser</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/gavin-king/">Gavin King</a>
+              </div>
+              <div class="date">
+                13 October 2014
+              </div>
+              <div class="tags">
+              </div>
+            </div>
+            <div class="body">
+              <p id="a_new_feature_in_ceylon...">A new feature in Ceylon 1.1, that I've not blogged about before, is
+              <em>dynamic interfaces</em>. This was something that Enrique and I worked
+              on together with Corbin Uselton, one of our GSoC students.</p>
+              
+              <p id="ordinarily_when_we_interact_with...">Ordinarily, when we interact with JavaScript objects, we do it from
+              within a <code>dynamic</code> block, where Ceylon's usual scrupulous typechecking
+              is suppressed. The problem with this approach is that if it's an API
+              I use regularly, my IDE can't help me get remember the names and
+              signatures of all the operations of the API.</p>
+              
+              <p id="dynamic_interfaces_make_it_possible...">Dynamic interfaces make it possible to ascribe static types to an
+              untyped JavaScript API. For example, we could write a dynamic
+              interface for the HTML 5 <code>CanvasRenderingContext2D</code> like this:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>dynamic CanvasRenderingContext2D {
+    shared formal variable String|CanvasGradient|CanvasPattern fillStyle;
+    shared formal variable String font;
+
+    shared formal void beginPath();
+    shared formal void closePath();
+
+    shared formal void moveTo(Integer x, Integer y);
+    shared formal void lineTo(Integer x, Integer y);
+
+    shared formal void fill();
+    shared formal void stroke();
+
+    shared formal void fillText(String text, Integer x, Integer y, Integer maxWidth=-1);
+
+    shared formal void arc(Integer x, Integer y, Integer radius, Float startAngle, Float endAngle, Boolean anticlockwise);
+    shared formal void arcTo(Integer x1, Integer y1, Integer x2, Float y2, Integer radius);
+
+    shared formal void bezierCurveTo(Integer cp1x, Integer cp1y, Integer cp2x, Float cp2y, Integer x, Integer y);
+
+    shared formal void strokeRect(Integer x, Integer y, Integer width, Integer height);
+    shared formal void fillRect(Integer x, Integer y, Integer width, Integer height);
+    shared formal void clearRect(Integer x, Integer y, Integer width, Integer height);
+
+    shared formal CanvasGradient createLinearGradient(Integer x0, Integer y0, Integer x1, Integer y1);
+    shared formal CanvasGradient createRadialGradient(Integer x0, Integer y0, Integer r0, Integer x1, Integer y1, Integer r1);
+    shared formal CanvasPattern createPattern(dynamic image, String repetition);
+
+    //TODO: more operations!!
+}
+
+dynamic CanvasGradient {
+    shared formal void addColorStop(Integer offset, String color);
+}
+
+dynamic CanvasPattern {
+    //todo
+}
+</code></pre>
+              
+              <p id="now_if_we_assign_an...">Now, if we assign an instance of JavaScript's <code>CanvasRenderingContext2D</code> to this interface
+              type, we won't need to be inside a <code>dynamic</code> block when we call its methods. You can try it
+              out in your own browser by clicking the "TRY ONLINE" button!</p>
+              
+              <!-- try:
+                  dynamic CanvasRenderingContext2D {
+                      shared formal variable String|CanvasGradient|CanvasPattern fillStyle;
+                      shared formal variable String font;
+                      
+                      shared formal void beginPath();
+                      shared formal void closePath();
+                      
+                      shared formal void moveTo(Integer x, Integer y);
+                      shared formal void lineTo(Integer x, Integer y);
+                      
+                      shared formal void fill();
+                      shared formal void stroke();
+                      
+                      shared formal void fillText(String text, Integer x, Integer y, Integer maxWidth=-1);
+                      
+                      shared formal void arc(Integer x, Integer y, Integer radius, Float startAngle, Float endAngle, Boolean anticlockwise);
+                      shared formal void arcTo(Integer x1, Integer y1, Integer x2, Float y2, Integer radius);
+                      
+                      shared formal void bezierCurveTo(Integer cp1x, Integer cp1y, Integer cp2x, Float cp2y, Integer x, Integer y);
+                      
+                      shared formal void strokeRect(Integer x, Integer y, Integer width, Integer height);
+                      shared formal void fillRect(Integer x, Integer y, Integer width, Integer height);
+                      shared formal void clearRect(Integer x, Integer y, Integer width, Integer height);
+                      
+                      shared formal CanvasGradient createLinearGradient(Integer x0, Integer y0, Integer x1, Integer y1);
+                      shared formal CanvasGradient createRadialGradient(Integer x0, Integer y0, Integer r0, Integer x1, Integer y1, Integer r1);
+                      shared formal CanvasPattern createPattern(dynamic image, String repetition);
+                      
+                      //TODO: more operations!!
+                  }
+                  
+                  dynamic CanvasGradient {
+                      shared formal void addColorStop(Integer offset, String color);
+                  }
+                  
+                  dynamic CanvasPattern {
+                      //todo
+                  }
+              
+                  CanvasRenderingContext2D ctx;
+                  
+                  dynamic {
+                      dynamic win = openCanvasWindow();
+                      dynamic canvas = win.ceylonCanvas;
+                      canvas.width = 600;
+                      canvas.height = 300;
+                      ctx = canvas.getContext("2d");
+                  }
+                  
+                  ctx.fillStyle = "navy";
+                  ctx.fillRect(50, 50, 235, 60);
+                  ctx.beginPath();
+                  ctx.moveTo(100,50);
+                  ctx.lineTo(60,5);
+                  ctx.lineTo(75,75);
+                  ctx.fill();
+                  ctx.fillStyle = "orange";
+                  ctx.font = "40px PT Sans";
+                  ctx.fillText("Hello world!", 60, 95);
+              -->
+              
+              
+              <pre data-language="ceylon"><code>CanvasRenderingContext2D ctx;
+dynamic {
+    //get the CanvasRenderingContext2D from the 
+    //canvas element using dynamically typed code
+    ctx = ... ;
+}
+
+//typesafe code, checked at compile time 
+ctx.fillStyle = "navy";
+ctx.fillRect(50, 50, 235, 60);
+ctx.beginPath();
+ctx.moveTo(100,50);
+ctx.lineTo(60,5);
+ctx.lineTo(75,75);
+ctx.fill();
+ctx.fillStyle = "orange";
+ctx.font = "40px PT Sans";
+ctx.fillText("Hello world!", 60, 95);
+</code></pre>
+              
+              <p id="notice_that_we_dont_need...">Notice that we don't need to ascribe an explicit type to <em>every</em>
+              operation of the interface. We can leave some methods, or even
+              just some parameters of a method untyped, by declaring them
+              <code>dynamic</code>. Such operations may only be called from within a
+              <code>dynamic</code> block, however.</p>
+              
+              <p id="a_word_of_caution_dynamic...">A word of caution: dynamic interfaces are a convenient fiction.
+              They can help make it easier to work with an API in your IDE,
+              but at runtime there is nothing Ceylon can do to ensure that
+              the object you assign to the dynamic interface type <em>actually
+              implements the operations</em> you've ascribed to it.</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2014/10/13/dynamic-interfaces/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="pagination-links">
+<a href="/blog/authors/gavin-king/page3/" class="previous-link">Previous</a> <a href="/blog/authors/gavin-king/" class="page-link">1</a> <a href="/blog/authors/gavin-king/page2/" class="page-link">2</a> <a href="/blog/authors/gavin-king/page3/" class="page-link">3</a> <span class="current-page">4</span> <a href="/blog/authors/gavin-king/page5/" class="page-link">5</a> <span class="skip">...</span><a href="/blog/authors/gavin-king/page12/" class="page-link">12</a> <a href="/blog/authors/gavin-king/page13/" class="page-link">13</a> <a href="/blog/authors/gavin-king/page5/" class="next-link">Next</a> </div>
+        </div>
+        <script type="text/javascript">
+          //<![CDATA[
+            /* place div.expandable to 
+             * - minHeight by default 
+             * - full size on click
+             * - back to minHeight on second click
+             * with a jQuery animation
+             */
+            var minHeight=150;
+            $(document).ready( function() {
+              $("div.expandable").height(minHeight);     
+              $("div.expandable").click(function(e) 
+                {
+                  if( !$(e.target).is("a")) {
+                    $this = $(this); 
+                    var currentHeight = $this.height();
+                    if(currentHeight==minHeight) {
+                      $this.css('height', 'auto');
+                    }
+                    else{
+                      $this.css('height', minHeight + 'px');
+                    };
+                    var height = $this.height();
+                    $this.css('height', currentHeight + 'px');
+                    $this.animate({'height':height}, 500);
+                }
+              })
+            });
+          //]]>
+        </script>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:04</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Blog of Gavin King</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="gavin_kings_feed"><a href="/blog/authors/gavin-king/blog.atom">Gavin King's Feed</a></h3>
+          </div>
+          <div class="point-dark-bottom">
+             
+          </div>
+          <div class="point-light-top">
+             
+          </div>
+          <div class="sidebar-block">
+            <div class="expandable">
+              <h3 id="bio">Bio</h3>
+              <p id="gavin_king_leads_the_ceylon...">Gavin King leads the Ceylon project at Red Hat. Gavin is the creator of
+              <a href="http://hibernate.org">Hibernate</a>, a popular object/relational persistence
+              solution for Java, and the <a href="http://seamframework.org">Seam Framework</a>, an
+              application framework for enterprise Java. He's contributed to the Java
+              Community Process as JBoss and then Red Hat representative for the EJB and
+              JPA specifications and as lead of the
+              <a href="http://jcp.org/en/jsr/detail?id=299">CDI specification</a>.</p>
+              
+              <p id="gavin_now_works_full_time...">Gavin now works full time on Ceylon, polishing the language specification,
+              developing the compiler frontend, working on the IDE, and thinking about
+              the SDK and future of the platform. He's still a fan of Java, and of other
+              languages, especially Smalltalk, Python, and ML.</p>
+              
+              <p id="you_can_follow_him_on...">You can <a href="https://profiles.google.com/gavin.king">follow him on G+</a> or on
+              <a href="https://twitter.com/1ovthafew">twitter</a>.</p>
+            </div>
+          </div>
+          <div class="point-light-bottom">
+             
+          </div>
+          <div class="point-light-top">
+             
+          </div>
+          <div class="sidebar-block">
+            <h3 id="recent_posts">Recent posts</h3>
+            <div id="blog-archive">
+              <h4 id="ceylon_to_move_to_the_eclipse_foundation_by_stéphane_épardaud__gavin_king_21_august_2017">
+                <a href="/blog/2017/08/21/eclipse-ceylon/">Ceylon to move to the Eclipse Foundation</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Stéphane Épardaud &amp; Gavin King
+                <br>
+                21 August 2017
+              </h4>
+              <h4 id="ceylon_133_is_now_available_by_gavin_king_21_august_2017">
+                <a href="/blog/2017/08/21/ceylon-1-3-3/">Ceylon 1.3.3 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                21 August 2017
+              </h4>
+              <h4 id="ceylon_132_is_now_available_by_gavin_king_03_march_2017">
+                <a href="/blog/2017/03/03/ceylon-1-3-2/">Ceylon 1.3.2 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                03 March 2017
+              </h4>
+              <h4 id="ceylon_131_is_now_available_by_gavin_king_22_november_2016">
+                <a href="/blog/2016/11/22/ceylon-1-3-1/">Ceylon 1.3.1 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                22 November 2016
+              </h4>
+              <h4 id="ceylon_130_is_now_available_by_gavin_king_19_september_2016">
+                <a href="/blog/2016/09/19/ceylon-1-3-0/">Ceylon 1.3.0 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                19 September 2016
+              </h4>
+            </div>
+            <h3 id="tags">Tags</h3>
+            <div class="tag-cloud">
+              <div class="tag-cloud">
+                <ul>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/100/">
+                        1.0.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/110/">
+                        1.1.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/12/">
+                        1.2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/120/">
+                        1.2.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/121/">
+                        1.2.1
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/122/">
+                        1.2.2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/130/">
+                        1.3.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/131/">
+                        1.3.1
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/132/">
+                        1.3.2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/133/">
+                        1.3.3
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m1/">
+                        M1
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m2/">
+                        M2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m3/">
+                        M3
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m4/">
+                        M4
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m5/">
+                        M5
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m6/">
+                        M6
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/android/">
+                        android
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/ceylon-js/">
+                        ceylon-js
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/ceylon-model/">
+                        ceylon-model
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/code/">
+                        code
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/compiler/">
+                        compiler
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/conference/">
+                        conference
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/constructors/">
+                        constructors
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/design/">
+                        design
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/design-interop-herd/">
+                        design interop herd
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/error-handling/">
+                        error handling
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/exceptions/">
+                        exceptions
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/feedback/">
+                        feedback
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/forum/">
+                        forum
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/generics/">
+                        generics
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/gsoc/">
+                        gsoc
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/guice/">
+                        guice
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/herd/">
+                        herd
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/httpd/">
+                        httpd
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/ide/">
+                        ide
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/interop/">
+                        interop
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/interview/">
+                        interview
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/ios/">
+                        ios
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/java/">
+                        java
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/language-design/">
+                        language design
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/mobile/">
+                        mobile
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/modularity/">
+                        modularity
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-2">
+                      <a href="/blog/tags/news/">
+                        news
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/osgi/">
+                        osgi
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/podcast/">
+                        podcast
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-7">
+                      <a href="/blog/tags/progress/">
+                        progress
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-4">
+                      <a href="/blog/tags/release/">
+                        release
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/roadmap/">
+                        roadmap
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/runtime/">
+                        runtime
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/sdk/">
+                        sdk
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-2">
+                      <a href="/blog/tags/site/">
+                        site
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/test/">
+                        test
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/tools/">
+                        tools
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/typesafety/">
+                        typesafety
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/typescript/">
+                        typescript
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/weld/">
+                        weld
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <h3 id="authors">Authors</h3>
+            <div class="tag-cloud">
+              <div class="tag-cloud">
+                <ul>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/bastien-jansen/">
+                        Bastien Jansen
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/david-festal/">
+                        David Festal
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/emmanuel-bernard/">
+                        Emmanuel Bernard
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-6">
+                      <a href="/blog/authors/gavin-king/">
+                        Gavin King
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/lucas-werkmeister/">
+                        Lucas Werkmeister
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-3">
+                      <a href="/blog/authors/stephane-epardaud/">
+                        Stéphane Épardaud
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/stephane-epardaud--gavin-king/">
+                        Stéphane Épardaud &amp; Gavin King
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/tako-schotanus/">
+                        Tako Schotanus
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/tom-bentley/">
+                        Tom Bentley
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/tomas-hradec/">
+                        Tomáš Hradec
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="point-light-end">
+             
+          </div>
+          <a href="/+" style="cursor:pointer;margin-left:auto;margin-right:auto;display:block;text-align:center;padding-top:10px;padding-bottom:0px">
+            <span style="display:inline-block;font-weight:bold;vertical-align:top;margin-right:5px;margin-top:8px;">Follow Ceylon:</span>
+          </a>
+          <p style="cursor:pointer;margin-left:auto;margin-right:auto;margin-top:2px;display:block;text-align:center;padding-top:0px" id="">
+            <a href="/+">
+              <i alt="Google Plus" class="fa fa-google-plus-square fa-2x" height="32" width="32"></i>
+            </a>
+            <a href="http://twitter.com/ceylonlang">
+              <i alt="Twitter" class="fa fa-twitter-square fa-2x" height="32" width="32"></i>
+            </a>
+            <a href="https://www.facebook.com/ceylonlang">
+              <i alt="Facebook" class="fa fa-facebook-square fa-2x" height="32" width="32"></i>
+            </a>
+          </p>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="core-page">
+          <h1 id="blog_of_gavin_king">
+            Blog of Gavin King
+          </h1>
+          <div class="post">
+            <h1 class="title" id="ceylon_m5_progress_report">
+              <a href="/blog/2013/02/15/progress-report/">Ceylon M5 progress report</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/gavin-king/">Gavin King</a>
+              </div>
+              <div class="date">
+                15 February 2013
+              </div>
+              <div class="tags">
+                <a href="/blog/tags/progress/">
+                  progress
+                </a>
+              </div>
+            </div>
+            <div class="body">
+              <p id="ceylon_m4_was_released_back...">Ceylon M4 was <a href="/blog/2012/10/29/ceylon-m4-analytical-engine">released</a>
+              back at the end of October, more than three months ago, so you might be
+              wondering what the hell have we been up to and where in hell is that
+              M5 release we promised! At the very least you deserve a progress report.</p>
+              
+              <p id="so_whats_going_on_is...">So what's going on is that M5 has gone quite a bit off the roadmap. This
+              was kind of my last chance to revisit some design choices I made a couple
+              of years ago before there was any kind of compiler for Ceylon or libraries
+              written in Ceylon. Inevitably, there were some things that seemed like a
+              good idea at the time, but:</p>
+              
+              <ul>
+              <li>I never really managed to sell to everyone else,</li>
+              <li>we ended up falling out of love with, or</li>
+              <li>just didn't quite work out in practice once we started writing real
+              code.</li>
+              </ul>
+              
+              
+              <p id="this_was_really_our_last...">This was really our last opportunity to fix things like that, so we've
+              lost some time there.</p>
+              
+              <p id="additionally_there_was_one_thing...">Additionally, there was one thing, namely <em>tuples</em>, that I didn't think
+              we were going to need, that we did wind up needing, and accommodating
+              it elegantly into the language was actually somewhat disruptive. This
+              also cost some time, and there is still some unfinished work there.</p>
+              
+              <p id="finally_we_decided_to_throw...">Finally, we decided to throw away almost all the human-compiled code
+              in the language module and compile it with the Ceylon compiler instead.
+              That was hard work, but it sure makes as feel a lot more secure and
+              saves us a lot of pain when we add things to the language module.</p>
+              
+              <p id="so_the_bad_news_is...">So the bad news is that, given the above, some functionality is going
+              to slip from M5, and therefore M5 will <em>not</em> be a feature-complete
+              implementation of the language. In particular, it wont have support
+              for:</p>
+              
+              <ul>
+              <li>annotations,</li>
+              <li>serialization, or</li>
+              <li>the metamodel (reflection).</li>
+              </ul>
+              
+              
+              <p id="it_will_have_the_following...">It <em>will</em> have the following new features:</p>
+              
+              <ul>
+              <li>tuples</li>
+              <li>direct interop with native JavaScript APIs via the new <code>dynamic</code>
+              block (more on this in a separate post)</li>
+              <li>the <code>:</code> operator</li>
+              <li>verbatim strings</li>
+              <li>fat arrow <code>=&gt;</code> abbreviation for defining single-expression functions</li>
+              <li>the <code>late</code> annotation</li>
+              <li>binary and hexadecimal numeric literals</li>
+              <li>defaulted type parameters</li>
+              <li>experimental support for reified generics</li>
+              <li>
+<em>many</em> miscellaneous minor improvements to the syntax and typing
+              rules of the language</li>
+              <li>
+<code>ceylon.time</code> module</li>
+              <li>
+<code>ceylon.net.httpd</code> package (a HTTP server)</li>
+              <li>the <code>compose()</code> and <code>curry()</code> functions</li>
+              </ul>
+              
+              
+              <p id="please_dont_try_to_tell...">(Please don't try to tell me that's not a pretty impressive list!)</p>
+              
+              <p id="i_also_finally_found_the...">I also finally found the time to give the language specification some
+              love, after several months of neglect, so it's now up to date with all
+              this new work. Ceylon is a better language now, I'm certain of it.</p>
+              
+              <p id="well_ive_a_little_more...">Well, I've a little more bad news: M5 is still not ready :-(</p>
+              
+              <ul>
+              <li>Stef's currently putting the finishing touches on his initial
+              implementation of reified generics,</li>
+              <li>David's working on some performance issues with compilation inside
+              the IDE that we would prefer to see fixed in M5,</li>
+              <li>Roland Tepp is finishing off work on the initial release of
+              <code>ceylon.time</code>,</li>
+              <li>Matej Lazar is doing some API improvements to <code>ceylon.net.httpd</code>,
+              and</li>
+              <li>there's still a bunch of backend bugs that need fixing.</li>
+              </ul>
+              
+              
+              <p id="bear_with_us_its_frankly...">Bear with us. It's frankly very painful for us to have not had a
+              release in almost four months, but in a funny way that's more of a
+              sign of how close we are now to delivering something you can
+              really use to write real applications.</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2013/02/15/progress-report/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="post">
+            <h1 class="title" id="things_static_type_systems_shouldnt_have">
+              <a href="/blog/2013/01/21/static-type-system-mistakes/">Things static type systems shouldn't have</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/gavin-king/">Gavin King</a>
+              </div>
+              <div class="date">
+                21 January 2013
+              </div>
+              <div class="tags">
+                <a href="/blog/tags/language-design/">
+                  language design
+                </a>
+              </div>
+            </div>
+            <div class="body">
+              <p id="if_youve_worked_with_any...">If you've worked with any programming language, you have gripes about
+              it. All design involves compromises, and all languages have warts. More
+              interesting are the warts that are shared by many languages. Here's a
+              short list of things that are extremely common in static type systems,
+              that I think are almost always mistakes.</p>
+              
+              <h2 id="a_populated_bottom_type">A populated bottom type</h2>
+              
+              <p id="by_definition_the_bottom_type...">By definition, the bottom type is a type with no values. If <code>null</code> is
+              an instance of the bottom type, that's a hole in the type system. Yes,
+              yes, it's done for convenience. But if we were to go round adding holes
+              into our type system every time we run into something slightly
+              inconvenient, we may as well just give up and go use a dynamic language.</p>
+              
+              <h2 id="non_denoteable_types">Non-denoteable types</h2>
+              
+              <p id="a_non_denoteable_type_is...">A non-denoteable type is a type which can't be written down in the
+              programming language itself. Many languages with sophisticated static
+              type systems require the use of non-denoteable types to typecheck the
+              code. This almost guarantees that the programmer can't always reproduce
+              the compiler's reasoning, or understand the resulting error messages.</p>
+              
+              <h2 id="aggressively_replacing_unions_with_intersections">Aggressively replacing unions with intersections</h2>
+              
+              <p id="for_some_reason_theres_some...">For some reason, there's some kind of prejudice against union types.
+              Your typical compiler, upon encountering something internally that is
+              naturally a union type, immediately attempts to replace it with the
+              intersection of its supertypes. This doesn't make a whole lot of sense
+              to me, since in these languages both unions and intersections are
+              usually equally non-denoteable, and this operation involves throwing
+              away a whole lot of useful information about the type.</p>
+              
+              <h2 id="assigning_references_a_single_immutable_type">Assigning references a single immutable type</h2>
+              
+              <p id="a_value_has_an_immutable...">A value has an immutable type. A reference to a value doesn't need to.
+              Indeed, what the compiler knows (or rather <em>could know</em>) about the type
+              of a reference changes depending upon precisely where we are in the code.
+              But there's a strong tradition that each named reference has a single
+              declared or inferred type everywhere it is used. This tradition even
+              infects Ceylon to some extent (though this will change in future versions).</p>
+              
+              <h2 id="primitive_types_or_primitively_defined_compound_types">Primitive types or primitively-defined compound types</h2>
+              
+              <p id="i_hesitated_to_put_this...">I hesitated to put this one on the list. There <em>is</em> an approach to building
+              a static type system where we start with certain primitive values, layer
+              tuple support over those types, layer records over tuples, and eventually
+              arrive at generic abstract data types. I'm <em>not</em> talking about that kind of
+              type system. What I'm talking about is where we start with a totally general
+              way of defining abstract data types, and then stick some extra primitive
+              types into the system because we find our supposedly totally general thing
+              to be inadequate.</p>
+              
+              <h2 id="overloading_and_implicit_type_conversions">Overloading and implicit type conversions</h2>
+              
+              <p id="yes_yes_i_know_they...">Yes, yes, I know they seem convenient. But in fact the benefits provided by
+              overloading or implicit type conversions are almost entirely trivial. They
+              just don't increase the <em>expressiveness</em> of your type system. And they
+              really screw up type inference, which is why you don't see these things in
+              academic or research languages. Dynamic languages don't have anything like
+              overloading or implicit type conversions, and nobody misses them. Because
+              you don't need 'em. They're an abuse of the static type information.</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2013/01/21/static-type-system-mistakes/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="post">
+            <h1 class="title" id="abstracting_over_functions">
+              <a href="/blog/2013/01/21/abstracting-over-functions/">Abstracting over functions</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/gavin-king/">Gavin King</a>
+              </div>
+              <div class="date">
+                21 January 2013
+              </div>
+              <div class="tags">
+              </div>
+            </div>
+            <div class="body">
+              <p id="last_week_i_was_finally...">Last week, I was finally able to write the functions <code>compose()</code> and <code>curry()</code>
+              in Ceylon and compile them with the Ceylon compiler. These functions are
+              general purpose higher order functions that operate on other functions at a
+              very high level of abstraction. In most programming languages, it's very easy
+              to define a <code>compose()</code> function that works for functions with just one
+              parameter. For example, in Ceylon:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>X compose&lt;X,Y,Z&gt;(X(Y) f, Y(Z) g)(Z z) =&gt; f(g(z));
+</code></pre>
+              
+              <p id="in_this_function_signature_f...">In this function signature, <code>f()</code> and <code>g()</code> are functions with one parameter where
+              the return type of <code>g()</code> is the same as the parameter type of <code>f()</code>. The resulting
+              function is also a function with one parameter, and has the same return type
+              as <code>f()</code> and the same parameter type as <code>g()</code>.</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>String format(Float|Integer number) { .... }
+value printf = compose(print,format);
+printf(1.0); //prints 1.0
+</code></pre>
+              
+              <p id="now_things_get_trickier_when...">Now, things get trickier when <code>g()</code> has more than one parameter. Imagine the
+              following definition of <code>format()</code>:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>String format(String pattern, Float|Integer number) { .... }
+</code></pre>
+              
+              <p id="this_function_has_the_type...">This function has the type <code>String(String,Float|Integer)</code>, which can't be a
+              <code>Y(Z)</code>, no matter what argument types we choose or infer for <code>Y</code> and <code>Z</code>. To
+              see this more clearly, and to see how we can come up with a more powerful
+              definition of <code>compose()</code>, we're going to have to understand how Ceylon really
+              represents function types. But first we're going to need to understand tuples.</p>
+              
+              <h2 id="tuples">Tuples</h2>
+              
+              <p id="ceylon_recently_grew_tuples_ive...">Ceylon recently grew tuples. I've heard all sorts of arguments for including
+              tuples in the language, but what finally convinced me was realizing that they
+              were a simpler way to represent function types.</p>
+              
+              <p id="so_a_major_goal_of...">So a major goal of adding tuples to the language was to add zero additional
+              complexity to the type system. So tuples are instances of an ordinary class,
+              <code>Tuple</code>, which you can see defined
+              <a href="https://raw.github.com/ceylon/ceylon.language/master/src/ceylon/language/Tuple.ceylon">here</a>.</p>
+              
+              <p id="a_tuple_is_a_linked...">A tuple is a linked list where each link in the list encodes the static type
+              of the element. Without syntax sugar, we can write:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>value point = Tuple(0.0, Tuple(0.0, Tuple("origin")));
+</code></pre>
+              
+              <p id="i_bet_youre_wondering_what...">I bet you're wondering what type <code>point</code> has. Well, if you really <em>have</em> to
+              know, it's:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Tuple&lt;Float|String,Float,Tuple&lt;Float|String,Float,Tuple&lt;String,String,Empty&gt;&gt;&gt; 
+</code></pre>
+              
+              <p id="phew_fortunately_we_never_see...">Phew! Fortunately we never see this type, because Ceylon lets us abbreviate it
+              to <code>[Float,Float,String]</code>, and the IDE always shows us the abbreviated form.
+              We can also use the square brackets to instantiate tuples, letting us write:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>[Float,Float,String] point = [0.0, 0.0, "origin"];
+</code></pre>
+              
+              <p id="yep_tuples_are_square_in...">(Yep, tuples are square in Ceylon. Don't worry, you'll quickly get used to
+              that.)</p>
+              
+              <p id="a_tuple_is_a_sequence...">A tuple is a sequence (<code>Tuple</code> is a subclass of <code>Sequence</code>), so the following
+              is well-typed:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>&lt;Float|String&gt;[] seq = point;
+Null|Float|String first = seq[0];
+</code></pre>
+              
+              <p id="now_what_makes_a_tuple...">Now, what makes a tuple special is that we can access its elements without
+              losing their static type information. We can write:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Float x = point.first;
+Float y = point.rest.first;
+String label = point.rest.rest.first;
+</code></pre>
+              
+              <p id="i_should_emphasize_that_were...">I should emphasize that we're not seeing any magic here. You could write your
+              own <code>MyTuple</code> class and reproduce the exact same behavior!</p>
+              
+              <p id="i_bet_youre_wondering_what_happens...">I bet you're wondering what happens if I type <code>point.rest.rest.rest.first</code>.
+              Well, take a closer look at the verbose type of <code>point</code> again. The chain of
+              "links" is terminated by <code>Empty</code>, Ceylon's empty sequence type. And the type
+              of <code>first</code> on <code>Empty</code> is <code>Null</code>. So we have:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Null zippo = point.rest.rest.rest.first;
+</code></pre>
+              
+              <p id="that_is_the_expression_is...">That is, the expression is provably <code>null</code>. Provable within the type system,
+              that is.</p>
+              
+              <p id="of_course_we_dont_want...">Of course, we don't want to make you write out suff like <code>point.rest.rest.first</code>
+              whenever you need to get something out of a tuple. A tuple is a sequence, so
+              you can access its elements using the index operator, for example:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Integer i = ... ;
+Null|Float|String ith = point[i];
+</code></pre>
+              
+              <p id="but_as_a_special_convenience...">But, as a special convenience, when the index is a literal integer, the compiler
+              will treat it as if it were a chain of calls to <code>rest</code> and <code>first</code>:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Float x = point[0];
+Float y = point[1];
+String label = point[2];
+Null zippo = point[3];
+</code></pre>
+              
+              <p id="a_chain_of_tuple_instances...">A chain of <code>Tuple</code> instances doesn't need to be terminated by an <code>Empty</code>. It may,
+              alternatively, be terminated by a nonempty sequence, any instance of <code>Sequence</code>.
+              We can write the following:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>String[] labels = ["origin", "center"];
+[Float, Float, String*] point = [0.0, 0.0, *labels];
+</code></pre>
+              
+              <p id="the_type_float_float_string...">The type <code>[Float, Float, String*]</code> is an abbreviation for:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Tuple&lt;Float|String,Float,Tuple&lt;Float|String,Float,String[]&gt;&gt; 
+</code></pre>
+              
+              <p id="it_represents_a_sequence_of...">It represents a sequence of two <code>Float</code>s, followed by an unknown number of
+              <code>String</code>s. So the following is well-typed:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>[Float, Float, String*] point0 = [0.0, 0.0];
+[Float, Float, String*] point1 = [0.0, 0.0, "origin"];
+[Float, Float, String*] point2 = [0.0, 0.0, "origin", "center"];
+</code></pre>
+              
+              <p id="well_now_see_how_all...">We'll now see how all this is useful for abstracting over function parameter
+              types.</p>
+              
+              <h2 id="function_types">Function types</h2>
+              
+              <p id="an_instance_of_the_interface...">An instance of the interface <code>Callable</code> is a function.</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>shared interface Callable&lt;out Return, in Arguments&gt; 
+        given Arguments satisfies Anything[] {}
+</code></pre>
+              
+              <p id="going_back_to_our_function...">Going back to our function <code>format()</code> above, its type is:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Callable&lt;String,[String,Float|Integer]&gt;
+</code></pre>
+              
+              <p id="you_can_see_that_weve...">You can see that we've represented the parameter types of the function using a
+              tuple type. That is to say, Ceylon views a function as accepting a tuple of
+              arguments, and producing a single value. Indeed, Ceylon even lets use write
+              that explicitly:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>[String,Float] args = ["%5.2f", 1.0];
+print(format(*args));
+</code></pre>
+              
+              <p id="here_we_spread_the_elements...">Here we "spread" the elements of the tuple <code>args</code> across the parameters of the
+              function <code>format()</code>, just like you can do in some dynamically typed languages!</p>
+              
+              <p id="now_consider_a_function_with...">Now consider a function with a variadic argument:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code> String format(String pattern, Float|Integer* numbers) { .... }
+</code></pre>
+              
+              <p id="this_function_accepts_a_string...">This function accepts a <code>String</code>, followed by any number of <code>Float</code>s and
+              <code>Integer</code>s. We can represent its type as follows:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code> Callable&lt;String,[String,Float|Integer*]&gt;
+</code></pre>
+              
+              <p id="we_usually_abbreviate_function_types...">We usually abbreviate function types, writing <code>String(String,Float|Integer)</code>
+              or <code>String(String,Float|Integer*)</code> for the function types above.</p>
+              
+              <p id="ceylon_also_has_defaulted_parameters...">Ceylon also has defaulted parameters. The function type <code>String(String,String=)</code>
+              means <code>Callable&lt;String,[String]|[String,String]&gt;</code> and represents a function whose
+              second parameter has a default value.</p>
+              
+              <p id="notice_how_given_the_definitions...">Notice how, given the definitions we've just seen, assignability between function
+              types works out correctly:</p>
+              
+              <ul>
+              <li>a <code>String(Object)</code> is an instance of <code>Object(String)</code>,</li>
+              <li>a <code>String(String=)</code> is an instance of <code>String()</code> and of <code>String(String)</code>, and</li>
+              <li>a <code>String(String*)</code> is an instance of <code>String()</code>, of <code>String(String)</code>, and of
+              <code>String(String,String)</code>.</li>
+              </ul>
+              
+              
+              <h2 id="function_composition_and_currying">Function composition and currying</h2>
+              
+              <p id="finally_we_have_the_machinery...">Finally we have the machinery we need to define <code>compose()</code> and <code>curry()</code>.</p>
+              
+              <p id="the_signature_of_compose_is">The signature of <code>compose()</code> is:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>shared Callable&lt;X,Args&gt; compose&lt;X,Y,Args&gt;(X(Y) x, Callable&lt;Y,Args&gt; y) 
+        given Args satisfies Anything[]
+</code></pre>
+              
+              <p id="notice_how_the_type_parameter...">Notice how the type parameter <code>Args</code> abstracts over all possible parameter lists,
+              just as it does in the definition of <code>Callable</code>. To actually implement <code>compose()</code>,
+              I'm going to need to resort to two <code>native</code> functions that I can't yet implement
+              within the language. I can write down their signatures, however, so this isn't
+              a limitation of the type system itself:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>shared native Callable&lt;Return,Args&gt; flatten&lt;Return,Args&gt;
+            (Return tupleFunction(Args tuple))
+        given Args satisfies Anything[];
+
+shared native Return unflatten&lt;Return,Args&gt;
+            (Callable&lt;Return,Args&gt; flatFunction)(Args args)
+        given Args satisfies Anything[];
+</code></pre>
+              
+              <p id="if_youre_not_extremely_interested...">If you're not <em>extremely</em> interested, you can skip over these declarations, and
+              just look at an example of what they do:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>String([String,Float|Integer]) unflatFormat = unflatten(format);
+String(String,Float|Integer) flatFormat = flatten(unflatFormat);
+</code></pre>
+              
+              <p id="that_is_unflatten_takes_any...">That is, <code>unflatten()</code> takes any function with any parameter list, and returns a
+              function that accepts a single tuple of the same length as the original parameter
+              list. On the other hand, <code>flatten()</code> does the opposite. It takes a function that
+              accepts a single tuple, and returns a function with a parameter list of the same
+              length as the tuple.</p>
+              
+              <p id="ok_now_we_can_implement...">OK, now we can implement <code>compose()</code>:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>shared Callable&lt;X,Args&gt; compose&lt;X,Y,Args&gt;(X(Y) f, Callable&lt;Y,Args&gt; g) 
+        given Args satisfies Anything[]
+               =&gt; flatten((Args args) =&gt; f(unflatten(g)(args)));
+</code></pre>
+              
+              <p id="perhaps_i_should_unpack_this...">Perhaps I should unpack this slightly for readability:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>shared Callable&lt;X,Args&gt; compose&lt;X,Y,Args&gt;(X(Y) f, Callable&lt;Y,Args&gt; g) 
+        given Args satisfies Anything[] {
+    X composed(Args args) {
+        Y y = unflatten(g)(args);
+        return f(y);
+    }
+    return flatten(composed);
+}
+</code></pre>
+              
+              <p id="the_definition_of_curry_is...">The definition of <code>curry()</code> is similarly dense:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>shared Callable&lt;Return,Rest&gt; curry&lt;Return,Argument,First,Rest&gt;
+            (Callable&lt;Return,Tuple&lt;Argument,First,Rest&gt;&gt; f)
+            (First first)
+        given First satisfies Argument 
+        given Rest satisfies Argument[] 
+                =&gt; flatten((Rest args) =&gt; unflatten(f)(Tuple(first, args)));
+</code></pre>
+              
+              <p id="this_function_accepts_a_function...">This function accepts a function with at least one parameter and returns a function
+              with two parameter lists, the first parameter list has the first parameter of the
+              original function, and the second parameter list has the rest of the parameters.</p>
+              
+              <p id="great_now_we_can_write">Great! Now we can write:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>value printf = compose(print,format);
+printf("%5.2f", 1.0); //prints 1.00
+value printFloat = curry(printf)("%5.2f");
+printFloat(2.5); //prints 2.50
+</code></pre>
+              
+              <h2 id="a_final_word">A final word</h2>
+              
+              <p id="this_post_has_been_long...">This post has been long and quite involved. I hope some of you made it this far.
+              This isn't typical Ceylon code we're looking at here. We're starting to move into
+              the field of metaprogramming, which is <em>just</em> becoming possible in Ceylon. What
+              I'm really trying to demonstrate here is how Ceylon layers sophisticated constructs
+              as pure syntax sugar over a relatively simple type system. I'm trying to show that
+              you can have things like tuple and function types without defining them primitively
+              as part of the type system, or resorting to inelegant hacks like <code>F1</code>, <code>F2</code>, <code>F3</code>,
+              <code>Tuple1</code>, <code>Tuple2</code>, <code>Tuple3</code>, etc. And indeed it works out <em>better</em> this way, I
+              believe.</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2013/01/21/abstracting-over-functions/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="post">
+            <h1 class="title" id="some_new_screenshots">
+              <a href="/blog/2012/10/31/new-screenshots/">Some new screenshots</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/gavin-king/">Gavin King</a>
+              </div>
+              <div class="date">
+                31 October 2012
+              </div>
+              <div class="tags">
+              </div>
+            </div>
+            <div class="body">
+              <p id="if_youre_interested_heres_some...">If you're interested, here's some screenshots of some of the newer stuff
+              in Ceylon IDE.</p>
+              
+              <p id="heres_what_the_brand_new...">Here's what the brand new Repository Explorer view looks like:</p>
+              
+              <p><img src="/images/screenshots/m4/repo-explorer.png" alt="repo-explorer"></p>
+              
+              <p id="the_repository_explorer_helps_us...">The repository explorer helps us find the module we're looking for, in
+              the repositories configured for a project, all the way to Ceylon Herd.
+              But you don't even usually need to use the Repository Explorer, because
+              the IDE will propose module named and versions when editing the module
+              descriptor.</p>
+              
+              <p><img src="/images/screenshots/m4/module-completion.png" alt="module-completion"></p>
+              
+              <p id="the_actual_repositories_available_to...">The actual repositories available to you can be configured in the New
+              Ceylon Project wizard, or in the project properties:</p>
+              
+              <p><img src="/images/screenshots/m4/module-repos.png" alt="module-repos"></p>
+              
+              <p id="from_the_project_properties_page...">From the project properties page, you can also enable compilation to
+              JavaScript:</p>
+              
+              <p><img src="/images/screenshots/m4/compiler-settings.png" alt="compiler-settings.png"></p>
+              
+              <p id="weve_finally_resolved_the_performance...">We've <em>finally</em> resolved the performance issues we were having in the
+              IDE when writing code that depends upon the Java SDK. Of course, doc
+              hover, autocompletion, and hyperlink navigation works even for
+              Java declarations:</p>
+              
+              <p><img src="/images/screenshots/m4/java-interop.png" alt="java-interop"></p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2012/10/31/new-screenshots/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="post">
+            <h1 class="title" id="assertions_in_ceylon">
+              <a href="/blog/2012/10/30/assertions/">Assertions in Ceylon</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/gavin-king/">Gavin King</a>
+              </div>
+              <div class="date">
+                30 October 2012
+              </div>
+              <div class="tags">
+              </div>
+            </div>
+            <div class="body">
+              <p id="a_distinguishing_characteristic_of_ceylon...">A distinguishing characteristic of Ceylon is that exceptions aren't used
+              to represent programming errors. Well, that statement is a little vague
+              or even over-broad, so let me make it more concrete with several
+              examples of exceptions that I think always indicate a programming error
+              in Java:</p>
+              
+              <ul>
+              <li><code>NullPointerException</code></li>
+              <li><code>ClassCastException</code></li>
+              <li><code>IndexOutOfBoundsException</code></li>
+              </ul>
+              
+              
+              <p id="the_big_problem_with_these...">The big problem with these exceptions is that they undermine the static
+              type system.</p>
+              
+              <p id="sure_all_exceptions_work_around...">Sure, all exceptions work around the type system—that's basically
+              what we have exceptions <em>for</em>. And when you're talking about exceptions
+              that represent transient conditions that can legitimately occur in a
+              production system, and you're using the exception to transmit information
+              from one part of the system (that can fail) to a completely different
+              part of the system (that knows what to do in the case of failure) without
+              forcing awareness of the failure onto every bit of intermediate code that
+              occurs between these two bits of the system, then I think that's very
+              reasonable.</p>
+              
+              <p id="but_thats_not_the_role...">But that's not the role of the exceptions above. These exceptions:</p>
+              
+              <ul>
+              <li>should <em>never</em> occur at runtime in a production system</li>
+              <li>represent problems that must be fixed by the programmer editing code</li>
+              <li>tend to hide the "corner" condition they represent from someone reading
+              the code</li>
+              <li>are much too low-level to carry any useful information about the
+              real problem</li>
+              </ul>
+              
+              
+              <p id="instead_ceylon_tries_to_encode...">Instead, Ceylon tries to encode these "corner" conditions into the type
+              system. The compiler won't let you write:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>print(process.arguments[1].uppercased);
+</code></pre>
+              
+              <p id="this_code_isnt_well_typed...">This code isn't well-typed because <code>process.arguments[1]</code> is of type
+              <code>String?</code>, reflecting the fact that there might not be a second element
+              in the list <code>process.arguments</code>.</p>
+              
+              <p id="instead_youre_forced_to_at...">Instead you're forced to at least take into account the possibility that
+              there are less than two arguments:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>if (exists arg = process.arguments[1]) {
+    print(arg.uppercased);
+}
+else {
+    throw Exception("missing second argument");
+}
+</code></pre>
+              
+              <p id="i_know_some_of_you...">I know some of you reading this are itching to condemn Ceylon for making
+              you write three lines of code instead of one. But, as I find myself
+              repeating over and over, we spend <em>much</em> more time reading other people's
+              code than we spend writing our own code, and the second code example
+              makes it much clearer to the reader that there is another case that
+              needs to be taken into account. Furthermore the exception carries much
+              more information about what went wrong than an <code>IndexOutOfBoundsException</code>
+              would.</p>
+              
+              <p id="but_what_if_ask_my...">But <em>what if</em>, ask my doubters, I already <em>know</em> that there is more than
+              one argument? What if my code looks like this:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>if (process.arguments.size&gt;=3) {
+    if (exists arg = process.arguments[1]) {
+        print(arg.uppercased);
+    }
+    else {
+        throw Exception("missing second argument");
+    }
+}
+</code></pre>
+              
+              <p id="in_this_case_its_clear...">In this case, it's clear that the exception can <em>never</em> occur. I'm
+              forced to write code that simply <em>never</em> executes at runtime, under any
+              scenario!</p>
+              
+              <p id="well_thats_a_great_point...">Well, that's a great point, and it's exactly why we've introduced the
+              <code>assert</code> statement in M4. An assertion failure, unlike an exception,
+              always represents a programming error—in production code, an
+              assertion should never fail.</p>
+              
+              <p id="now_sure_assertion_failures_are...">Now, sure, assertion failures <em>are</em> represented by a kind of exception,
+              but unlike <code>NullPointerException</code> or <code>IndexOutOfBoundsException</code>, this
+              exception is <em>much</em> more likely to carry useful information about the
+              cause of the failure. And the assertion helps document the assumptions
+              made by the code, for the benefit of people coming along and reading it
+              later.</p>
+              
+              <p id="we_can_rewrite_the_example...">We can rewrite the example above like this:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>if (process.arguments.size&gt;=3) {
+    assert(exists arg = process.arguments[1]);
+    print(arg.uppercased);
+}
+</code></pre>
+              
+              <p id="or_even_like_this">Or even like this:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>value arg = process.arguments[1];
+if (process.arguments.size&gt;=3) {
+    assert(exists arg);
+    print(arg.uppercased);
+}
+</code></pre>
+              
+              <p id="you_can_assert_an_exists...">You can <code>assert</code> an <code>exists</code>, <code>nonempty</code>, <code>is</code>, or boolean condition,
+              all the same options you have with <code>if</code> or <code>while</code>.</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>Object person = ... ;
+assert (is Person person);
+print(person.name);
+</code></pre>
+              
+              <p id="note_that_this_is_a...">Note that this is a <em>lot</em> like a traditional Java-style typecast, but
+              the syntax reflects a much more disciplined approach to the problem.</p>
+              
+              <p id="youre_encouraged_to_add_some...">You're encouraged to add some extra information to document the
+              assertion:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>value arg = process.arguments[1];
+if (process.arguments.size&gt;=3) {
+    doc "second argument must be provided"
+    assert(exists arg);
+    print(arg.uppercased);
+}
+</code></pre>
+              
+              <p id="the_documentation_appears_in_the...">The documentation appears in the assertion failure message.</p>
+              
+              <p id="this_documentation_becomes_especially_useful...">This documentation becomes especially useful if start using Extract
+              Function to refactor this code:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>void printSecondArg(String? arg) {
+    doc "second argument must be provided"
+    assert(exists arg);
+    print(arg);
+}
+
+value arg = process.arguments[1];
+if (process.arguments.size&gt;=3) {
+    printSecondArg(arg);
+}
+</code></pre>
+              
+              <p id="in_future_the_ceylon_documentation...">In future, the Ceylon documentation tool will automatically include
+              assertions like this about method parameter values in a list of method
+              preconditions.</p>
+              
+              <p id="a_single_assert_statement_may...">A single <code>assert</code> statement may assert multiple conditions, for
+              example:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>value first = process.arguments[0];
+value second = process.arguments[1];
+if (process.arguments.size&gt;=3) {
+    assert(exists first, exists second);
+    print(first + ", " + second);
+}
+</code></pre>
+              
+              <p id="for_the_record_by_popular...">For the record, by popular demand, Ceylon M4 even lets us include multiple
+              conditions in an <code>if</code> or <code>while</code> statement:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>if (exists first = process.arguments[0],
+    exists second = process.arguments[1]) {
+    print(first + ", " + second);
+}
+</code></pre>
+            </div>
+            <div class="tail">
+               <a href="/blog/2012/10/30/assertions/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="pagination-links">
+<a href="/blog/authors/gavin-king/page8/" class="previous-link">Previous</a> <a href="/blog/authors/gavin-king/" class="page-link">1</a> <a href="/blog/authors/gavin-king/page2/" class="page-link">2</a> <span class="skip">...</span><a href="/blog/authors/gavin-king/page8/" class="page-link">8</a> <span class="current-page">9</span> <a href="/blog/authors/gavin-king/page10/" class="page-link">10</a> <span class="skip">...</span><a href="/blog/authors/gavin-king/page12/" class="page-link">12</a> <a href="/blog/authors/gavin-king/page13/" class="page-link">13</a> <a href="/blog/authors/gavin-king/page10/" class="next-link">Next</a> </div>
+        </div>
+        <script type="text/javascript">
+          //<![CDATA[
+            /* place div.expandable to 
+             * - minHeight by default 
+             * - full size on click
+             * - back to minHeight on second click
+             * with a jQuery animation
+             */
+            var minHeight=150;
+            $(document).ready( function() {
+              $("div.expandable").height(minHeight);     
+              $("div.expandable").click(function(e) 
+                {
+                  if( !$(e.target).is("a")) {
+                    $this = $(this); 
+                    var currentHeight = $this.height();
+                    if(currentHeight==minHeight) {
+                      $this.css('height', 'auto');
+                    }
+                    else{
+                      $this.css('height', minHeight + 'px');
+                    };
+                    var height = $this.height();
+                    $this.css('height', currentHeight + 'px');
+                    $this.animate({'height':height}, 500);
+                }
+              })
+            });
+          //]]>
+        </script>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:04</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

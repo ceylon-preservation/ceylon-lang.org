@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Parameters</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.3/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.3/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.3/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.3/examples">Examples</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.3/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.3/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.3/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.3/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.3/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide_for_intellij"><a href="/documentation/1.3/ide/intellij">Ceylon IDE for IntelliJ</a></h3>
+            
+            <h3 id="ceylon_ide_for_eclipse"><a href="/documentation/1.3/ide/eclipse">Ceylon IDE for Eclipse</a></h3>
+            
+            <h3 id="vertx"><a href="http://vertx.io/docs/vertx-core/ceylon/">Vert.x</a></h3>
+          </div>
+          <div class="point-dark-bottom">
+             
+          </div>
+          <div class="point-light-top"></div>
+          <div class="toc">
+            <ul>
+<li><a href="#usage">Usage
+            </a></li>
+<li><a href="#description">Description
+            </a></li>
+<ul>
+<li><a href="#parameter_lists">Parameter lists
+            </a></li>
+<ul>
+<li><a href="#defaulted_parameters">Defaulted parameters
+            </a></li>
+<li><a href="#variadic_methods_and_varargs">Variadic methods (and 'varargs')
+            </a></li>
+</ul>
+<li><a href="#invocation">Invocation
+            </a></li>
+<li><a href="#multiple_parameter_lists">Multiple parameter lists
+            </a></li>
+</ul>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+          </div>
+          <div class="point-light-end"></div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+          </div>
+        </div>
+        <div id="core-page">
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.3/reference/structure/parameter-list.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.3/reference/structure/parameter-list.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="parameters">Parameters</h1>
+          
+          <p id="a_function_or_class_initializer...">A function or class initializer has a <em>parameter list</em> declaring the parameters
+          of the function or class. A parameter list may contain zero or more <em>parameters</em>.</p>
+          
+          <h2 id="usage">Usage
+          </h2>
+          
+          
+          <p id="you_have_the_choice_between...">You have the choice between 'inline' style:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>class Example(Integer int, String name) {
+}
+
+void example(Integer int, void print(String name)) {
+}
+</code></pre>
+          
+          <p id="and_reference_style">And 'reference' style:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>class Example(int, name) {
+    Integer int;
+    String name;
+}
+
+void example(int, print) {
+    Integer int;
+    void print(String name);
+}
+</code></pre>
+          
+          <p id="the_second_style_is_preferred...">The second style is preferred when the parameters are annotated.</p>
+          
+          <h2 id="description">Description
+          </h2>
+          
+          
+          
+          
+          <h3 id="parameter_lists">Parameter lists
+          </h3>
+          
+          
+          <p id="syntactically_a_parameter_list_is...">Syntactically, a parameter list is a comma separated list enclosed in parentheses
+          following the <a href="../type-parameters">type parameter list</a>. Each parameter is either:</p>
+          
+          <ul>
+          <li>zero or more annotations, a type expression, a name, and, optionally, a
+          one or more parameter lists, or</li>
+          <li>a reference to a value or function declaration in the class or function body
+          that follows.</li>
+          </ul>
+          
+          
+          <p id="a_parameter_with_its_own...">A parameter with its own parameter list is called a <em>callable parameter</em>, and
+          its type is a function type. A function with no parameter list is called a
+          <em>value parameter</em>.</p>
+          
+          <h4 id="defaulted_parameters">Defaulted parameters
+          </h4>
+          
+          
+          <p id="a_default_argument_for_a...">A default argument for a parameter may be specified.</p>
+          
+          <p id="for_a_value_parameter_the...">For a value parameter, the default argument expression follows the parameter
+          name, separated with an equals sign:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>void example(Integer int, 
+        String name = int==0 then "zero" else "") {
+}
+</code></pre>
+          
+          <p id="for_a_callable_parameter_the...">For a callable parameter, the default argument expression follows the
+          parameter's parameter list, separated with a fat arrow (<code>=&gt;</code>):</p>
+          
+          <pre data-language="ceylon"><code>void example(String name(Integer int) 
+        =&gt; int == 0 then "zero" else "") {
+}
+</code></pre>
+          
+          <p id="a_defaulted_parameter_allows_the...">A defaulted parameter allows the function or class to be
+          <a href="../../expression/invocation">invoked</a> without an argument for that parameter.</p>
+          
+          <p id="parameters_with_default_values_may...">Parameters with default values may be called  <em>optional parameters</em> (not to be confused with an <em>optional type</em> <code>T?</code>) or
+          <em>defaulted parameters</em>. Parameters without default values may be called
+          <em>required parameters</em>. The default argument expression may be called the
+          <em>default argument</em>.</p>
+          
+          <p id="to_avoid_ambiguity_defaulted_parameters...">To avoid ambiguity, defaulted parameters are only permitted after all the
+          required parameters in the parameter list.</p>
+          
+          <h4 id="variadic_methods_and_varargs">Variadic methods (and 'varargs')
+          </h4>
+          
+          
+          <p id="note_in_ceylon_functions_which..."><strong>Note:</strong> In Ceylon, functions which accept an <code>Iterable</code> parameter are
+          generally preferred over variadic functions, since <code>Iterable</code>s may be
+          evaluated lazily by the called function or class, whereas the arguments
+          to a variadic parameter must be evaluated and packaged into a sequence
+          before the function or class is called.</p>
+          
+          <p id="a_variadic_function_has_a...">A <em>variadic function</em> has a <em>variadic parameter</em> as the last parameter
+          in the parameter list.</p>
+          
+          <p id="there_are_two_different_kinds...">There are two different kinds of variadic parameter:</p>
+          
+          <ul>
+          <li>
+<em>Possibly-empty variadic parameters</em> allow the function or class to be
+          <a href="../../expression/invocation">invoked</a> with the caller specifying zero
+          or more arguments for that parameter. Syntactically, a possibly-empty
+          variadic parameter is declared with a type expression followed by an
+          asterisk, <code>*</code>, and then the parameter name.
+          From within the function or class the parameter has the type <a href="../type-declaration#Sequential"><code>T[]</code></a>.
+          A possibly-empty variadic parameter's default argument is implictly
+          the empty sequence <code>[]</code>.</li>
+          <li>
+<em>Nonempty variadic parameters</em> allow the function or class to be
+          <a href="../../expression/invocation">invoked</a> with the caller specifying one
+          or more arguments for that parameter.  Syntactically, non-empty
+          variadic parameters are declared with a type expression followed by a
+          plus sign, <code>+</code>, and then the parameter name.
+          From within the function or class the parameter has the type <a href="../type-declaration#Sequence"><code>[T+]</code></a>.
+          A nonempty variadic parameter doesn't have a default argument, and so
+          none of the preceding parameters may be <a href="#defaulted_parameters">defaulted</a>.</li>
+          </ul>
+          
+          
+          <p id="for_example">For example</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>void variadic(String string, Integer* ints) {
+    /* method body: statements 
+       parameter ints has type Integer[] here */
+}
+</code></pre>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>void nonemptyVariadic(String+ strings) {
+    /* method body: statements 
+       parameter strings has type [String+] here */
+}
+</code></pre>
+          
+          <h3 id="invocation">Invocation
+          </h3>
+          
+          
+          <p id="when_a_reference_to_the...">When a reference to the function or class is the primary of an
+          <a href="../../expression/invocation">invocation</a>, the caller supplies an
+          either a <a href="../../expression/positional-argument-list">positional argument list</a>
+          or a <a href="../../expression/named-argument-list">named argument list</a>
+          whose type, expressed
+          in terms of <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Tuple.type.html"><code>Tuple</code></a>,
+          must be a subtype of the type of the parameter list, also expressed
+          as a tuple type.</p>
+          
+          <h3 id="multiple_parameter_lists">Multiple parameter lists
+          </h3>
+          
+          
+          <p id="a_function_can_have_multiple...">A function can have multiple parameter lists. A function with multiple
+          parameters lists is equivalent to a function with one parameter list
+          that returns a function.</p>
+          
+          <p id="heres_an_example">Here's an example:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>String name(String firstName)(String secondName) {
+    return firstName + " " + secondName;
+}
+</code></pre>
+          
+          <p id="this_is_equivalent_to_the...">This is equivalent to the following higher-order function that returns
+          an anonymous function:</p>
+          
+          <pre data-language="ceylon"><code>String(String) name(String firstName) 
+        =&gt; (String secondName) {
+            return firstName + " " + secondName;
+        };
+</code></pre>
+          
+          <p id="note_a_class_may_not..."><strong>Note</strong>: A class may not have multiple parameter lists.</p>
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li><a href="../type-parameters">Type parameters</a></li>
+          <li><a href="../class"><code>class</code> declaration</a></li>
+          <li><a href="../function/"><code>function</code> declaration</a></li>
+          <li>
+<a href="/documentation/current/spec/html_single/index.html#parameters">Parameters</a> in the Ceylon
+          language spec</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

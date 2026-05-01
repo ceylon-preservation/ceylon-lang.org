@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Project layout and tooling</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.3/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.3/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.3/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.3/examples">Examples</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.3/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.3/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.3/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.3/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.3/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide_for_intellij"><a href="/documentation/1.3/ide/intellij">Ceylon IDE for IntelliJ</a></h3>
+            
+            <h3 id="ceylon_ide_for_eclipse"><a href="/documentation/1.3/ide/eclipse">Ceylon IDE for Eclipse</a></h3>
+            
+            <h3 id="vertx"><a href="http://vertx.io/docs/vertx-core/ceylon/">Vert.x</a></h3>
+          </div>
+          <div class="point-dark-bottom">
+             
+          </div>
+          <div class="point-light-top"></div>
+          <div class="toc">
+            <ul><ul>
+<li><a href="#compiling_a_module_with_no_dependencies">Compiling a module with no dependencies
+            </a></li>
+<li><a href="#compiling_a_module_with_dependencies">Compiling a module with dependencies
+            </a></li>
+<li><a href="#including_resources">Including resources
+            </a></li>
+<li><a href="#compiling_api_documentation">Compiling API documentation
+            </a></li>
+<li><a href="#publishing_to_a_local_or_remote_repository">publishing to a local or remote repository
+            </a></li>
+<li><a href="#running_a_module">Running a module
+            </a></li>
+</ul></ul>
+            
+            
+            <p id=""></p>
+          </div>
+          <div class="point-light-end"></div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+          </div>
+        </div>
+        <div id="core-page">
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.3/reference/tool/examples.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.3/reference/tool/examples.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="project_layout_and_tooling">Project layout and tooling</h1>
+          
+          <p id="ceylons_command_line_tools_accessible...">Ceylon's command line tools, accessible via the <a href="../ceylon"><code>ceylon</code></a>
+          work best if you follow the standard project layout.</p>
+          
+          <ul>
+          <li>Ceylon source goes in the <code>./source</code> directory,</li>
+          <li>sources go in the <code>./resource</code> directory, and</li>
+          <li>compiler output is generated into the <code>./modules</code> directory.</li>
+          </ul>
+          
+          
+          <h3 id="compiling_a_module_with_no_dependencies">Compiling a module with no dependencies
+          </h3>
+          
+          
+          <p id="lets_suppose_youre_writing_netexamplefoo...">Let's suppose you're writing <code>net.example.foo</code>. Your project directory
+          might be layed out like this:</p>
+          
+          <pre><code>README
+source/
+  net/
+    example/
+      foo/
+        Foo.ceylon
+        FooService.ceylon
+        module.ceylon
+documentation/
+  manual.html
+</code></pre>
+          
+          <p id="here_the_source_code_is...">Here, the source code is in a directory called <code>source</code> (which is the
+          default and saves us having to pass a <code>--src</code> command line option to
+          [<code>ceylon compile</code>][]). From the project directory (the directory which
+          contains the <code>source</code> directory) you can compile using the command:</p>
+          
+          <pre data-language="shell"><code>ceylon compile net.example.foo
+</code></pre>
+          
+          <p id="this_command_will_compile_the...">This command will compile the source code files (<code>Foo.ceylon</code> and
+          <code>FooService.ceylon</code>) into a module archive and publish it to the default
+          output repository, <code>modules</code>. (You'd use the <code>--out build</code> option to
+          publish to <code>build</code> instead). Now your project directory looks something
+          like this:</p>
+          
+          <pre><code>README
+source/
+  net/
+    example/
+      foo/
+        Foo.ceylon
+        FooService.ceylon
+        module.ceylon
+modules/
+  net/
+    example/
+      foo/
+        1.0/
+          net.example.foo-1.0.car
+          net.example.foo-1.0.car.sha1
+          net.example.foo-1.0.src
+          net.example.foo-1.0.src.sha1
+documentation/
+  manual.html
+</code></pre>
+          
+          <p id="the_src_file_is_the...">The <code>.src</code> file is the source archive which can be used by tools such
+          as the IDE, for source code browsing. The <code>.sha1</code> files each contains a
+          checksum of the like-named <code>.car</code> file and can be used to detect corrupted
+          archives.</p>
+          
+          <h3 id="compiling_a_module_with_dependencies">Compiling a module with dependencies
+          </h3>
+          
+          
+          <p id="now_lets_suppose_your_project...">Now, let's suppose your project gains a dependency on <code>com.example.bar</code>
+          version <code>3.1.4</code>. Having declared that module and version as a dependency
+          in your <code>module.ceylon</code> <a href="#dependencies_and_module_descriptors">descriptor</a>
+          you'd need to tell <code>ceylon compile</code> which repositories to look in to find
+          the dependencies.</p>
+          
+          <p id="one_possibility_is_that_you...">One possibility is that you already have a repository containing
+          <code>com.example.bar/3.1.4</code> locally on your machine. If it's in your default
+          repository (<code>~/.ceylon/repo</code>) then you don't need to do anything, the same
+          commands will work:</p>
+          
+          <pre data-language="shell"><code>ceylon compile net.example.foo
+</code></pre>
+          
+          <p id="alternatively_if_you_have_some...">Alternatively if you have some other local repository you can specify it
+          using the <code>--rep</code> option.</p>
+          
+          <p id="the_ceylon_herd_is_an...">The [Ceylon Herd][] is an online module repository which contains open
+          source Ceylon modules. As it happens, the Herd is one of the default
+          repositories <code>ceylon compile</code> knows about. So if <code>com.example.bar/3.1.4</code>
+          is in the Herd then the command to compile <code>net.example.foo</code> would remain
+          pleasingly short:</p>
+          
+          <pre data-language="shell"><code>ceylon compile net.example.foo
+</code></pre>
+          
+          <p id="thats_right_its_the_same...">(That's right, it's the same as before.) By the way, you can disable the
+          default repositories with the <code>--no-default-repositories</code> option if you
+          want to.</p>
+          
+          <p id="if_comexamplebar314_were_in_another...">If <code>com.example.bar/3.1.4</code> were in <em>another</em> repository, let's say
+          <code>http://repo.example.com</code>, then the command would be:</p>
+          
+          <pre data-language="shell"><code>ceylon compile
+  --rep http://repo.example.com 
+  net.example.foo
+</code></pre>
+          
+          <p id="were_breaking_the_command_across...">(We're breaking the command across multiple lines for clarity here, you
+          would need to write the command on a single line.) You can specify multiple
+          <code>--rep</code> options as necessary if you have dependencies coming from multiple
+          repositories.</p>
+          
+          <h3 id="including_resources">Including resources
+          </h3>
+          
+          
+          <p id="to_include_resources_in_the...">To include resources in the module archive, you must place them in the
+          <em>resource directory</em>, named <code>resource</code> by default:</p>
+          
+          <pre><code>README
+source/
+  net/
+    example/
+      foo/
+        Foo.ceylon
+        FooService.ceylon
+        module.ceylon
+resource/
+  net/
+    example/
+      foo/
+        foo.properties
+</code></pre>
+          
+          <p id="resources_in_the_subdirectory_resourcenetexamplefoo...">Resources in the subdirectory <code>resource/net/example/foo</code> are packaged into
+          the module archive for <code>net.example.foo</code>.</p>
+          
+          <h3 id="compiling_api_documentation">Compiling API documentation
+          </h3>
+          
+          
+          <p id="you_can_generate_api_documentation...">You can generate API documentation using [<code>ceylon doc</code>][] like this:</p>
+          
+          <pre data-language="shell"><code>ceylon doc net.example.foo
+</code></pre>
+          
+          <p id="this_will_create_a_the...">This will create a the directory <code>modules/net/example/foo/1.0/module-doc/</code>
+          containing the HTML-format documentation.</p>
+          
+          <h3 id="publishing_to_a_local_or_remote_repository">publishing to a local or remote repository
+          </h3>
+          
+          
+          <p id="when_you_are_ready_you...">When you are ready, you can publish the module somewhere other people can
+          use it. Let's say that you want to publish to <code>http://ceylon.example.net/repo</code>.
+          You can just compile again, this time specifying an <code>--out</code> option:</p>
+          
+          <pre data-language="shell"><code>ceylon compile
+  --rep http://repo.example.com 
+  --out http://ceylon.example.net/repo
+  net.example.foo
+</code></pre>
+          
+          <p id="or_if_your_module_is...">Or, if your module is already compiled, you can publish it using
+          [<code>ceylon copy</code>][] to replicate the existing artifacts to a the output
+          repository.</p>
+          
+          <pre data-language="shell"><code>ceylon copy
+  --out http://ceylon.example.net/repo
+  net.example.foo/1.0
+</code></pre>
+          
+          <p id="its_worth_noting_that_by...">It's worth noting that by taking advantage of the sensible defaults for
+          things like source code directory and output repository, as we have here,
+          you save yourself a lot of typing.</p>
+          
+          <h3 id="running_a_module">Running a module
+          </h3>
+          
+          
+          <p id="lets_continue_the_example_we...">Let's continue the example we had before where <code>net.example.foo</code> version <code>1.0</code>
+          was published to <code>http://ceylon.example.net/repo</code>. Now suppose you want to
+          actually run the module (possibly from another computer).</p>
+          
+          <p id="if_the_dependencies_comexamplebar314_from...">If the dependencies (<code>com.example.bar/3.1.4</code>, from before) can be found in the
+          default repositories the [<code>ceylon run</code>][] command is:</p>
+          
+          <pre data-language="shell"><code>ceylon run
+  --rep http://ceylon.example.net/repo
+  net.example.foo/1.0
+</code></pre>
+          
+          <p id="you_can_pass_options_too...">You can pass options too (which are available to the program via the top level
+          <code>process</code> object):</p>
+          
+          <pre data-language="shell"><code>ceylon run
+  --rep http://ceylon.example.net/repo
+  net.example.foo/1.0
+  my options
+</code></pre>
+          
+          <p id="if_one_of_the_dependencies...">If one of the dependencies isn't available from a default repository you will
+          need to specify a repository that contains it using another <code>--rep</code>:</p>
+          
+          <pre data-language="shell"><code>ceylon run
+  --rep http://ceylon.example.net/repo
+  --rep http://repo.example.com
+  net.example.foo/1.0
+  my options
+</code></pre>
+          
+          <p id="the_easiest_case_of_course...">The easiest case, of course, is where the module and its dependencies are all
+          available in the default repositories (such as the Herd, or <code>~/.ceylon/repo</code>):</p>
+          
+          <pre data-language="shell"><code>ceylon run net.example.foo/1.0
+</code></pre>
+          
+          <p id="but_when_you_really_do...">But when you really do need to override the defaults, there's a great way to
+          do it just once.</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

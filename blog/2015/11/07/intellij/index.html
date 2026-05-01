@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Porting Ceylon IDE to IntelliJ</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2015/10/29/ceylon-1-2-0/">Ceylon 1.2.0 is now available</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2015/11/12/openshift/">Running Ceylon on OpenShift</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="porting_ceylon_ide_to_intellij">
+            Porting Ceylon IDE to IntelliJ
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              07 Nov 2015
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/ceylon-model/">
+                ceylon-model
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <p id="weve_had_many_questions_about...">We've had many questions about developing Ceylon in IntelliJ IDEA,
+            so I thought it would be worth a quick status update.</p>
+            
+            <p id="tldr_the_screenshots_are_below"><strong>TL;DR:</strong> The <a href="#screenshots">screenshots</a> are below.</p>
+            
+            <p id="as_you_might_know_ceylon...">As you might know, Ceylon already has the most <a href="/documentation/1.2/ide/features/">feature rich IDE</a>
+            of any modern language for the JVM, with some features that even
+            the Java IDE for Eclipse doesn't have. But IntelliJ users don't
+            like having to switch to Eclipse when they code Ceylon, so a few
+            months ago we got serious about porting Ceylon IDE to IntelliJ.
+            Bastien Jansen is working on this fulltime, together with David
+            Festal from <a href="http://www.serli.com/">SERLI</a>.</p>
+            
+            <p id="the_approach_theyre_taking_is...">The approach they're taking is to refactor reusable functionality
+            of Ceylon IDE out into a separate project <a href="https://github.com/ceylon/ceylon-ide-common">ceylon-ide-common</a>.
+            Simultaneously they're rewriting the common code in Ceylon (which
+            David reports is really helping simplify and improve the code).
+            Then this "abstracted" code is reused in the <a href="https://github.com/ceylon/ceylon-ide-intellij">ceylon-ide-intellij</a>
+            project—which is also being written in Ceylon—and in
+            <a href="https://github.com/ceylon/ceylon-ide-eclipse">ceylon-ide-eclipse</a>. Thus, <code>ceylon-ide-common</code> gives us a common
+            foundation for both IDEs, and enables us to get some really
+            sophisticated functionality into the IntelliJ IDE very quickly.</p>
+            
+            <p id="even_better_once_ceylon_ide...">Even better, once <code>ceylon-ide-common</code> is stabilized, we can reuse
+            it elsewhere, for example, in the <a href="https://github.com/ceylon/ceylon-web-ide-backend">Web IDE</a>, or in the new
+            (experimental) plugin for NetBeans. Bastien was able to add
+            autocompletion to the experimental Netbeans plugin in about 2-3
+            hours.</p>
+            
+            <p id="this_also_all_demonstrates_just...">This also all demonstrates just how well Ceylon's Java interop
+            works in practice. Here we have Java calling Ceylon and Ceylon
+            calling back to Java all over the place!</p>
+            
+            <p id="the_intellij_plugin_isnt_really...">The IntelliJ plugin isn't really usable just yet, since David is
+            still working on abstraction of the Ceylon IDE incremental builder,
+            but we expect to have a first release in a handful of months.</p>
+            
+            <h3 id="screenshots">Screenshots</h3>
+            
+            <p id="ceylon_ide_for_intellij_already...">Ceylon IDE for IntelliJ already features completion:</p>
+            
+            <div style="text-align:center;">
+            <img alt="completion" src="/images/screenshots/intellij/completion.png" width="80%">
+            </div>
+            
+            
+            <p id="including_linked_mode_argument_completion">Including linked mode argument completion:</p>
+            
+            <div style="text-align:center;">
+            <img alt="linked mode" src="/images/screenshots/intellij/linked-mode.png" width="50%">
+            </div>
+            
+            
+            <p id="outline_view_and_hover">Outline view and hover:</p>
+            
+            <div style="text-align:center;">
+            <img alt="outline" src="/images/screenshots/intellij/outline.jpg" width="40%">
+               
+            <img alt="hover" src="/images/screenshots/intellij/doc.jpg" width="45%">
+            </div>
+            
+            
+            <p id="live_error_reporting">Live error reporting:</p>
+            
+            <div style="text-align:center;">
+            <img alt="errors" src="/images/screenshots/intellij/errors.jpg" width="80%">
+            </div>
+            
+            
+            <p id="and_execution">And execution:</p>
+            
+            <div style="text-align:center;">
+            <img alt="run" src="/images/screenshots/intellij/run.png" width="40%">
+            </div>
+            
+            
+            <p id="much_more_functionality_is_coming...">Much more functionality is coming soon!</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2015/11/07/intellij/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

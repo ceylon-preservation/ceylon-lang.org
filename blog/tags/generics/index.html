@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Blog tagged generics</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-light-top">
+             
+          </div>
+          <div class="sidebar-block">
+            <h3 id="recent_posts">Recent posts</h3>
+            <div id="blog-archive">
+              <h4 id="ceylon_to_move_to_the_eclipse_foundation_by_stéphane_épardaud__gavin_king_21_august_2017">
+                <a href="/blog/2017/08/21/eclipse-ceylon/">Ceylon to move to the Eclipse Foundation</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Stéphane Épardaud &amp; Gavin King
+                <br>
+                21 August 2017
+              </h4>
+              <h4 id="ceylon_133_is_now_available_by_gavin_king_21_august_2017">
+                <a href="/blog/2017/08/21/ceylon-1-3-3/">Ceylon 1.3.3 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                21 August 2017
+              </h4>
+              <h4 id="ceylon_132_is_now_available_by_gavin_king_03_march_2017">
+                <a href="/blog/2017/03/03/ceylon-1-3-2/">Ceylon 1.3.2 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                03 March 2017
+              </h4>
+              <h4 id="ceylon_131_is_now_available_by_gavin_king_22_november_2016">
+                <a href="/blog/2016/11/22/ceylon-1-3-1/">Ceylon 1.3.1 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                22 November 2016
+              </h4>
+              <h4 id="ceylon_130_is_now_available_by_gavin_king_19_september_2016">
+                <a href="/blog/2016/09/19/ceylon-1-3-0/">Ceylon 1.3.0 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                19 September 2016
+              </h4>
+            </div>
+            <h3 id="tags">Tags</h3>
+            <div class="tag-cloud">
+              <div class="tag-cloud">
+                <ul>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/100/">
+                        1.0.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/110/">
+                        1.1.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/12/">
+                        1.2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/120/">
+                        1.2.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/121/">
+                        1.2.1
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/122/">
+                        1.2.2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/130/">
+                        1.3.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/131/">
+                        1.3.1
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/132/">
+                        1.3.2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/133/">
+                        1.3.3
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m1/">
+                        M1
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m2/">
+                        M2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m3/">
+                        M3
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m4/">
+                        M4
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m5/">
+                        M5
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m6/">
+                        M6
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/android/">
+                        android
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/ceylon-js/">
+                        ceylon-js
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/ceylon-model/">
+                        ceylon-model
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/code/">
+                        code
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/compiler/">
+                        compiler
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/conference/">
+                        conference
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/constructors/">
+                        constructors
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/design/">
+                        design
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/design-interop-herd/">
+                        design interop herd
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/error-handling/">
+                        error handling
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/exceptions/">
+                        exceptions
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/feedback/">
+                        feedback
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/forum/">
+                        forum
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/generics/">
+                        generics
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/gsoc/">
+                        gsoc
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/guice/">
+                        guice
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/herd/">
+                        herd
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/httpd/">
+                        httpd
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/ide/">
+                        ide
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/interop/">
+                        interop
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/interview/">
+                        interview
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/ios/">
+                        ios
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/java/">
+                        java
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/language-design/">
+                        language design
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/mobile/">
+                        mobile
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/modularity/">
+                        modularity
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-2">
+                      <a href="/blog/tags/news/">
+                        news
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/osgi/">
+                        osgi
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/podcast/">
+                        podcast
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-7">
+                      <a href="/blog/tags/progress/">
+                        progress
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-4">
+                      <a href="/blog/tags/release/">
+                        release
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/roadmap/">
+                        roadmap
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/runtime/">
+                        runtime
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/sdk/">
+                        sdk
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-2">
+                      <a href="/blog/tags/site/">
+                        site
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/test/">
+                        test
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/tools/">
+                        tools
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/typesafety/">
+                        typesafety
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/typescript/">
+                        typescript
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/weld/">
+                        weld
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <h3 id="authors">Authors</h3>
+            <div class="tag-cloud">
+              <div class="tag-cloud">
+                <ul>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/bastien-jansen/">
+                        Bastien Jansen
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/david-festal/">
+                        David Festal
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/emmanuel-bernard/">
+                        Emmanuel Bernard
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-6">
+                      <a href="/blog/authors/gavin-king/">
+                        Gavin King
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/lucas-werkmeister/">
+                        Lucas Werkmeister
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-3">
+                      <a href="/blog/authors/stephane-epardaud/">
+                        Stéphane Épardaud
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/stephane-epardaud--gavin-king/">
+                        Stéphane Épardaud &amp; Gavin King
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/tako-schotanus/">
+                        Tako Schotanus
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/tom-bentley/">
+                        Tom Bentley
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/tomas-hradec/">
+                        Tomáš Hradec
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="point-light-end">
+             
+          </div>
+          <a href="/+" style="cursor:pointer;margin-left:auto;margin-right:auto;display:block;text-align:center;padding-top:10px;padding-bottom:0px">
+            <span style="display:inline-block;font-weight:bold;vertical-align:top;margin-right:5px;margin-top:8px;">Follow Ceylon:</span>
+          </a>
+          <p style="cursor:pointer;margin-left:auto;margin-right:auto;margin-top:2px;display:block;text-align:center;padding-top:0px" id="">
+            <a href="/+">
+              <i alt="Google Plus" class="fa fa-google-plus-square fa-2x" height="32" width="32"></i>
+            </a>
+            <a href="http://twitter.com/ceylonlang">
+              <i alt="Twitter" class="fa fa-twitter-square fa-2x" height="32" width="32"></i>
+            </a>
+            <a href="https://www.facebook.com/ceylonlang">
+              <i alt="Facebook" class="fa fa-facebook-square fa-2x" height="32" width="32"></i>
+            </a>
+          </p>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="core-page">
+          <h1 id="blog_tagged_generics">
+            Blog tagged generics
+          </h1>
+          <div class="post">
+            <h1 class="title" id="intersections_and_variance">
+              <a href="/blog/2013/11/17/intersections-and-variance/">Intersections and variance</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/gavin-king/">Gavin King</a>
+              </div>
+              <div class="date">
+                17 November 2013
+              </div>
+              <div class="tags">
+                <a href="/blog/tags/generics/">
+                  generics
+                </a>
+              </div>
+            </div>
+            <div class="body">
+              <p id="warning_the_following_post_is..."><em>Warning: the following post is for people who enjoy
+              thinking about types, and want to understand how the
+              Ceylon compiler reasons about them. This post is partly
+              an attempt to demystify
+              <a href="http://ceylon-lang.org/documentation/1.0/spec/html/typesystem.html#principalinstantiations">§3.7 of the spec</a>.
+              To understand the following, you first need to understand
+              how <a href="/documentation/1.0/tour/generics/#covariance_and_contravariance">variance</a>
+              works in Ceylon.</em></p>
+              
+              <h3 id="snap_quiz">Snap quiz!</h3>
+              
+              <p id="consider">Consider:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>MutableList&lt;Topic&gt; | MutableList&lt;Queue&gt; list;
+</code></pre>
+              
+              <ol>
+              <li>What is the type of <code>list.first</code>?</li>
+              <li>What is the type of the parameter of <code>list.add()</code>?</li>
+              </ol>
+              
+              
+              <h3 id="background">Background</h3>
+              
+              <p id="one_of_the_key_goals...">One of the key goals of Ceylon's type system is to make
+              subtyping and generics play nicely together. Almost
+              every object-oriented language since C++ and Eiffel has
+              tried this, and more recent languages have been getting
+              gradually closer to a really convincing solution, without,
+              in my opinion, completely <em>nailing</em> it. Ceylon's
+              contribution, of course, is to introduce first-class union
+              and intersection types to the mix. In this post we'll see
+              one of the ways in which they help.</p>
+              
+              <h3 id="four_useful_identities">Four useful identities</h3>
+              
+              <p id="to_begin_to_fully_understand...">To begin to fully understand how the Ceylon typechecker
+              reasons about generic types, you need to grasp the central
+              importance of the following identities:</p>
+              
+              <ol>
+              <li>Given a covariant type <code>List&lt;Element&gt;</code>, the
+              union <code>List&lt;String&gt;|List&lt;Integer&gt;</code> is a subtype of
+              <code>List&lt;String|Integer&gt;</code>.</li>
+              <li>Given a contravariant type <code>ListMutator&lt;Element&gt;</code>,
+              the union <code>ListMutator&lt;Queue&gt;|ListMutator&lt;Topic&gt;</code>
+              is a subtype of <code>ListMutator&lt;Queue&amp;Topic&gt;</code>.</li>
+              <li>Given a covariant type <code>List&lt;Element&gt;</code>, the
+              intersection <code>List&lt;Queue&gt;&amp;List&lt;Topic&gt;</code> is a subtype
+              of <code>List&lt;Queue&amp;Topic&gt;</code>.</li>
+              <li>Given a contravariant type <code>ListMutator&lt;Element&gt;</code>,
+              the intersection <code>ListMutator&lt;String&gt;&amp;ListMutator&lt;Integer&gt;</code>
+              is a subtype of <code>ListMutator&lt;String|Integer&gt;</code>.</li>
+              </ol>
+              
+              
+              <p id="note_that_in_each_identity...">Note that in each identity, we take a union or
+              intersection of two <em>instantiations</em> of the same generic
+              type, and produce an instantiation of the generic type
+              that is a supertype of the union or intersection.</p>
+              
+              <p id="these_identities_are_actually_quite...">These identities are actually quite intuitive. No? OK
+              then, let's consider them one at a time, and convince
+              ourselves that they make sense:</p>
+              
+              <ol>
+              <li>If we have a list that, when iterated, either produces
+              <code>String</code>s or produces <code>Integer</code>s then clearly every
+              object it produces is either a <code>String</code> or an <code>Integer</code>.</li>
+              <li>If we have a list in which we can either insert
+              <code>Queue</code>s or insert <code>Topic</code>s, then we clearly have a list
+              in which we can insert something that is both a  <code>Queue</code>
+              and a <code>Topic</code>.</li>
+              <li>If we have a list that, when iterated produces only
+              <code>Queue</code>s, and, when iterated, produces only <code>Topic</code>s,
+              then clearly every object it produces must be both a
+              <code>Queue</code> and a <code>Topic</code>.</li>
+              <li>If we have a list in which we can both insert a
+              <code>String</code> and insert an <code>Integer</code>, then we clearly
+              have a list in which we can insert something that we
+              know is either a <code>String</code> or an <code>Integer</code>.</li>
+              </ol>
+              
+              
+              <p id="satisfied_good">Satisfied? Good.</p>
+              
+              <h3 id="generic_supertypes_and_principal_instantiations">Generic supertypes and principal instantiations</h3>
+              
+              <p id="so_how_are_these_identities...">So, how are these identities useful? Well, imagine that
+              we have a type <code>T</code> whose supertypes include multiple
+              distinct instantiations of a generic type. For example,
+              imagine that <code>T</code> has the supertypes <code>List&lt;String&gt;</code> and
+              <code>List&lt;Integer&gt;</code>. And suppose we want to determine the
+              type of one of the members inherited by <code>T</code> from the
+              generic type, say
+              <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/List.type.html#first"><code>List.first</code></a>.</p>
+              
+              <p id="then_we_would_first_need...">Then we would first need to form a <em>principal
+              instantiation</em> of the generic type <code>List</code>. In this case
+              the principal instantiation would be
+              <code>List&lt;String|Integer&gt;</code>, according to identity 1. It's a
+              "principal" instantiation because every other
+              instantiation of <code>List</code> that is a supertype of <code>T</code> is
+              also a supertype of <code>List&lt;String|Integer&gt;</code>. That it is
+              even possible to form a principal instantiation like this
+              is one of the things that makes Ceylon's type system
+              special. Now we can determine the type of <code>first</code> by
+              substituting <code>String|Integer</code> for the type parameter of
+              <code>List</code>. For the record, the result is the type
+              <code>String|Integer|Null</code>.</p>
+              
+              <p id="a_type_like_t_arises...">A type like <code>T</code> arises when we explicitly write down an
+              intersection like <code>List&lt;Queue&gt;&amp;List&lt;Topic&gt;</code>, or a union
+              like <code>List&lt;String&gt;|List&lt;Integer&gt;</code>, but it also arises
+              through the use of inheritance.</p>
+              
+              <h3 id="principal_instantiation_inheritance">Principal instantiation inheritance</h3>
+              
+              <p id="in_java_a_type_can...">In Java, a type can only inherit a single instantiation
+              of a supertype. A class can't inherit (either directly
+              or indirectly) both <code>List&lt;Queue&gt;</code> <em>and</em> <code>List&lt;Topic&gt;</code>
+              in Java. We call this inheritance model <em>single
+              instantiation inheritance</em>. Ceylon features a more
+              flexible model called <em>principal instantiation
+              inheritance</em><sup>1</sup>, where this restriction does not
+              apply. I'm allowed to write:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>interface Queues satisfies List&lt;Queue&gt; { ... }
+interface Topics satisfies List&lt;Topic&gt; { ... }
+
+class Endpoints() satisfies Queues &amp; Topics { ... }
+</code></pre>
+              
+              <p id="in_which_case_endpoints_is...">In which case, <code>Endpoints</code> is a subtype of
+              <code>List&lt;Queue&gt;&amp;List&lt;Topic&gt;</code>. Then the typechecker uses
+              identity 3 above to <em>automatically</em> infer that
+              <code>Endpoints</code> is a <code>List&lt;Queue&amp;Topic&gt;</code>. Other languages
+              can't do this.</p>
+              
+              <h3 id="problem_invariant_types">Problem: invariant types</h3>
+              
+              <p id="now_notice_something_about_the...">Now notice something about the identities above: they
+              don't say anything about <em>invariant</em> types. Unfortunately,
+              I simply can't form a principal instantiation of
+              <code>MutableList</code> that is a supertype of
+              <code>MutableList&lt;Queue&gt;&amp;MutableList&lt;Topic&gt;</code>. Or at least I
+              can't within Ceylon's type system as it exists today.</p>
+              
+              <p id="caveat_im_not_a_fan..."><em>Caveat: I'm not a fan of use-site variance. I've been
+              too burned by it in Java. However, if we do ever decide
+              to introduce use-site variance in Ceylon, which does
+              remain a real possibility, what I've just said will no
+              longer apply, since this instantiation:</em></p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>MutableList&lt;in Queue&amp;Topic out Queue|Topic&gt; 
+</code></pre>
+              
+              <p id="would_be_a_principal_supertype..."><em>would be a principal supertype for
+              <code>MutableList&lt;Queue&gt;&amp;MutableList&lt;Topic&gt;</code>. But who the
+              hell wants to have to deal with nasty-looking types
+              like that?</em></p>
+              
+              <h3 id="conclusion">Conclusion</h3>
+              
+              <p id="the_significance_of_this_is...">The significance of this is that we should, where
+              reasonable, be careful with how we use invariant types
+              in Ceylon. To be sure, we still need invariant types,
+              especially for concrete implementations like the class
+              <code>Endpoints</code> above, but we should try to declare public
+              APIs on covariant and contravariant types.</p>
+              
+              <p id="consider_the_case_of_mutablelist...">Consider the case of <code>MutableList</code>. What I'm saying is
+              that its interesting operations should all be inherited
+              from the covariant <code>List</code> and the contravariant
+              <code>ListMutator</code>. It doesn't matter much whether we declare
+              <code>MutableList</code> as a mixin interface like this:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>shared interface MutableList&lt;Element&gt; 
+        satisfies List&lt;Element&gt; &amp; 
+                  ListMutator&lt;Element&gt; { ... }
+</code></pre>
+              
+              <p id="or_just_as_a_type...">Or just as a type alias, like this:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>shared alias MutableList&lt;Element&gt; 
+        =&gt; List&lt;Element&gt; &amp; ListMutator&lt;Element&gt;;
+</code></pre>
+              
+              <p id="in_either_case_the_following...">In either case, the following code<sup>2</sup> is accepted
+              by the typechecker, assuming the interesting operations
+              <code>first</code> and <code>add()</code> are defined on <code>List</code> and <code>ListMutator</code>
+              respectively:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>void doSomeStuff(MutableList&lt;Topic&gt;|MutableList&lt;Queue&gt; list) {
+    Topic|Queue|Null topicOrQueue = list.first;
+    if (!topicOrQueue exists) {
+        Topic&amp;Queue topicAndQueue = .... ;
+        list.add(topicAndQueue);
+    }
+    ...
+}
+</code></pre>
+              
+              <p id="here_were_calling_both_producer...">Here we're calling both "producer" and "consumer" operations
+              of the invariant type <code>MutableList</code> on an intersection of
+              distinct instantiations of <code>MutableList</code>. The typechecker
+              determined that the principal instantiation of the covariant
+              supertype is <code>List&lt;Topic|Queue&gt;</code> and that the principal
+              instantiation of the contravariant supertype is
+              <code>ListMutator&lt;Topic&amp;Queue&gt;</code>, and that therefore the code is
+              sound.</p>
+              
+              <p id="1the_notion_of_principal_instantiation..."><sup>1</sup>The notion of principal instantiation inheritance
+              is mainly based on Ross Tate's research. As far as I know, the
+              idea of combining principal instantiation inheritance with
+              union and intersection types is original to Ceylon.</p>
+              
+              <p id="2thanks_for_riener_zwitzerloot_for..."><sup>2</sup>Thanks for Riener Zwitzerloot for this example and
+              for inspiring this post.</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2013/11/17/intersections-and-variance/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="pagination-links">
+<span class="current-page">1</span> </div>
+        </div>
+        <script type="text/javascript">
+          //<![CDATA[
+            /* place div.expandable to 
+             * - minHeight by default 
+             * - full size on click
+             * - back to minHeight on second click
+             * with a jQuery animation
+             */
+            var minHeight=150;
+            $(document).ready( function() {
+              $("div.expandable").height(minHeight);     
+              $("div.expandable").click(function(e) 
+                {
+                  if( !$(e.target).is("a")) {
+                    $this = $(this); 
+                    var currentHeight = $this.height();
+                    if(currentHeight==minHeight) {
+                      $this.css('height', 'auto');
+                    }
+                    else{
+                      $this.css('height', minHeight + 'px');
+                    };
+                    var height = $this.height();
+                    $this.css('height', currentHeight + 'px');
+                    $this.animate({'height':height}, 500);
+                }
+              })
+            });
+          //]]>
+        </script>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:04</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

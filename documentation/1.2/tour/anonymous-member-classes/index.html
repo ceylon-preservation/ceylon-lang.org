@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Anonymous and member classes</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.2/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.2/tour">Tour of Ceylon</a></h3>
+            
+            <ol>
+            <li><a href="/documentation/1.2/tour/basics">Basics</a></li>
+            <li><a href="/documentation/1.2/tour/classes">Classes</a></li>
+            <li><a href="/documentation/1.2/tour/attributes-control-structures">Attributes and variables, control structures</a></li>
+            <li><a href="/documentation/1.2/tour/inheritance">Inheritance, refinement, and interfaces</a></li>
+            <li><a href="/documentation/1.2/tour/anonymous-member-classes">Anonymous and member classes</a></li>
+            <li><a href="/documentation/1.2/tour/sequences">Streams, sequences, and tuples</a></li>
+            <li><a href="/documentation/1.2/tour/typeinference">Type aliases and type inference</a></li>
+            <li><a href="/documentation/1.2/tour/types">Union, intersection, and enumerated types</a></li>
+            <li><a href="/documentation/1.2/tour/generics">Generics</a></li>
+            <li><a href="/documentation/1.2/tour/modules">Packages and modules</a></li>
+            <li><a href="/documentation/1.2/tour/functions">Functions</a></li>
+            <li><a href="/documentation/1.2/tour/named-arguments">Named arguments</a></li>
+            <li><a href="/documentation/1.2/tour/comprehensions">Comprehensions</a></li>
+            <li><a href="/documentation/1.2/tour/language-module">Language module</a></li>
+            <li><a href="/documentation/1.2/tour/initialization">Initialization and constructors</a></li>
+            <li><a href="/documentation/1.2/tour/annotations">Annotations and the metamodel</a></li>
+            <li><a href="/documentation/1.2/tour/interop">Interoperation with Java</a></li>
+            <li><a href="/documentation/1.2/tour/dynamic">Dynamic typing</a></li>
+            </ol>
+            
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.2/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.2/examples">Examples</a></h3>
+            
+            <!-- ### [Tutorial videos](/documentation/1.2/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.2/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.2/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.2/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.2/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.2/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Tour of Ceylon
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_12_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.2, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.2/tour/anonymous-member-classes.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.2/tour/anonymous-member-classes.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="anonymous_and_member_classes">Anonymous and member classes</h1>
+          
+          <p id="this_is_the_fifth_stop...">This is the fifth stop in our Tour of Ceylon. In the
+          <a href="../inheritance">previous leg</a> we learned about inheritance and refinement.
+          It's time to round out our introduction to object-oriented programming in
+          Ceylon by learning about <em>anonymous classes</em> and <em>member classes</em>.</p>
+          
+          <h2 id="anonymous_classes">Anonymous classes</h2>
+          
+          <p id="if_a_class_has_no...">If a class has no parameters, it's often possible to use a shortcut
+          declaration which defines a named instance of the class, without providing
+          any actual name for the class itself. This is usually most useful when we're
+          extending an <code>abstract</code> class or implementing an interface.</p>
+          
+          <!-- implicit-id:polar: 
+              "A polar coordinate"
+              class Polar(Float angle, Float radius) {
+                  
+                  shared Polar rotate(Float rotation) =>
+                          Polar(angle+rotation, radius);
+                  
+                  shared Polar dilate(Float dilation) =>
+                          Polar(angle, radius*dilation);
+                  
+                  "The default description"
+                  shared default String description => 
+                          "(``radius``,``angle``)";
+                  
+              }
+          -->
+          
+          
+          
+          
+          <!-- try-pre:
+              "A polar coordinate"
+              class Polar(Float angle, Float radius) {
+                  "The default description"
+                  shared default String description => "(``radius``,``angle``)";
+                  shared actual String string => description;
+              }
+          -->
+          
+          
+          <!-- try-post:
+              print(origin);
+          -->
+          
+          
+          <!-- cat-id:polar -->
+          
+          
+          <pre data-language="ceylon"><code>"The origin"
+object origin extends Polar(0.0, 0.0) {
+    description =&gt; "origin";
+}
+</code></pre>
+          
+          <p id="an_anonymous_class_may_extend...">An anonymous class may extend an ordinary class and satisfy interfaces.</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none:Requires IO -->
+          
+          
+          <pre data-language="ceylon"><code>shared object consoleWriter satisfies Writer {
+    formatter = StringFormatter();
+    write(String string) =&gt; process.write(string);
+}
+</code></pre>
+          
+          <p id="the_downside_to_an_object...">The downside to an <code>object</code> declaration is that if we ever need to write
+          code that refers to the concrete type of <code>origin</code> or <code>consoleWriter</code>, we
+          must use the very ugly syntax <code>\Iorigin</code> or <code>\IconsoleWriter</code> as the type
+          name.</p>
+          
+          <p id="thus_you_occasionally_see_the...">Thus, you occasionally see the following pattern in Ceylon:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>abstract class Unit() of unit {
+    //operations
+}
+object unit extends Unit() {}
+</code></pre>
+          
+          <p id="if_unit_and_unit_are...">If <code>Unit</code> and <code>unit</code> are toplevel declarations, then <code>Unit</code> is called a
+          <em>unit type</em>, since it has exactly one instance.</p>
+          
+          <h3 id="gotcha">Gotcha!</h3>
+          
+          <p id="later_well_see_that_its...">Later, we'll see that
+          it's usually better to write a class like <code>Unit</code> as a class with a
+          <a href="../initialization/#value_constructors">value constructor</a>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>class Unit {
+    shared new unit {}
+    //operations
+}
+</code></pre>
+          
+          <p id="and_well_also_learn_that...">And we'll also learn that <code>object</code> declarations are really just a syntax
+          sugar for a value constructor after all.</p>
+          
+          <h2 id="is_an_anonymous_class_a_singleton">Is an anonymous class a singleton?</h2>
+          
+          <p id="you_might_be_tempted_to...">You might be tempted to think of <code>object</code> declarations as defining singletons,
+          but that's not quite right:</p>
+          
+          <ul>
+          <li>A <em>toplevel</em> object declaration does indeed define a singleton.</li>
+          <li>An object declaration nested inside a class defines an object per instance
+          of the containing class.</li>
+          <li>An object declaration nested inside a method, getter, or setter results in
+          a new object each time the method, getter, or setter is executed.</li>
+          </ul>
+          
+          
+          <p id="lets_see_how_this_can...">Let's see how this can be useful:</p>
+          
+          <!-- try-pre:
+              interface Subscriber {}
+              object subscribers {
+                  shared void append(Subscriber s) {}
+                  shared void remove(Subscriber s) {}
+              }
+          
+          -->
+          
+          
+          <!-- check:none:Requires Mutable List -->
+          
+          
+          <pre data-language="ceylon"><code>interface Subscription {
+    shared formal void cancel();
+}
+
+Subscription register(Subscriber s) {
+    subscribers.append(s);
+    object subscription satisfies Subscription {
+        cancel() =&gt; subscribers.remove(s);
+    }
+    return subscription;
+}
+</code></pre>
+          
+          <p id="notice_how_this_code_example...">Notice how this code example makes clever use of the fact that the nested
+          <code>object</code> declaration receives a closure of the locals defined in the containing
+          method declaration!</p>
+          
+          <p id="a_different_way_to_think...">A different way to think about the difference between <code>object</code> and <code>class</code> is
+          to think of a <code>class</code> as a parameterized <code>object</code>. (Of course, there's one big
+          difference: a <code>class</code> declaration defines a named type that we can refer to in
+          other parts of the program.) We'll see later that, analogously, Ceylon lets us
+          think of a method as a parameterized attribute.</p>
+          
+          <p id="an_object_declaration_can_refine...">An <code>object</code> declaration can refine an attribute declared <code>formal</code> or <code>default</code>,
+          as long as it is a subtype of the declared type of the attribute.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared abstract class App() {
+    shared formal OutputStream stream;  //formal attribute
+    ...
+}
+
+class ConsoleApp() extends App() {
+    shared actual object stream        //object refines the attribute
+            satisfies OutputStream { ... }
+    ...
+}
+</code></pre>
+          
+          <p id="however_an_object_may_not...">However, an <code>object</code> may not itself be declared <code>formal</code> or <code>default</code>.</p>
+          
+          <h2 id="anonymous_class_expressions">Anonymous class expressions</h2>
+          
+          <p id="we_can_even_write_an...">We can even write an anonymous class "inline" in an expression,
+          for example:</p>
+          
+          <!-- try-pre:
+              interface Subscriber {}
+              object subscribers {
+                  shared void append(Subscriber s) {}
+                  shared void remove(Subscriber s) {}
+              }
+          
+          -->
+          
+          
+          <!-- check:none:Requires Mutable List -->
+          
+          
+          <pre data-language="ceylon"><code>interface Subscription {
+    shared formal void cancel();
+}
+
+Subscription register(Subscriber s) {
+    subscribers.append(s);
+    return object satisfies Subscription {
+        cancel() =&gt; subscribers.remove(s);
+    };
+}
+</code></pre>
+          
+          <h2 id="member_classes_and_member_class_refinement">Member classes and member class refinement</h2>
+          
+          <p id="youre_probably_used_to_the...">You're probably used to the idea of an "inner" or <em>nested</em> class in
+          Java—a class declaration nested inside another class or method. Since
+          Ceylon is a language with a recursive block structure, the idea of a nested
+          class is more than natural. But in Ceylon, a non-<code>abstract</code> nested class is
+          actually considered a polymorphic member of the containing type.</p>
+          
+          <p id="lets_start_with_the_following...">Let's start with the following example: <code>BufferedReader</code> defines the member
+          class <code>Buffer</code>.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>class BufferedReader(Reader reader)
+        satisfies Reader {
+    shared default class Buffer()
+            satisfies List&lt;Character&gt; { ... }
+    ...
+}
+</code></pre>
+          
+          <p id="the_member_class_buffer_is...">The member class <code>Buffer</code> is annotated shared, so we can instantiate it like
+          this:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>BufferedReader br = BufferedReader(ExampleReader());
+BufferedReader.Buffer b = br.Buffer();
+</code></pre>
+          
+          <p id="note_that_a_nested_type...">Note that a nested type name must be qualified by the containing type name
+          when used outside of the containing type.</p>
+          
+          <p id="the_member_class_buffer_is_also...">The member class <code>Buffer</code> is also annotated <code>default</code>, so we can refine it in
+          a subtype of <code>BufferedReader</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>class BufferedFileReader(File file)
+        extends BufferedReader(FileReader(file)) {
+    shared actual class Buffer()
+            extends super.Buffer() { ... }
+    ...     
+}
+</code></pre>
+          
+          <p id="thats_right_ceylon_lets_us...">That's right: Ceylon lets us "override" a member class defined by a supertype!</p>
+          
+          <p id="note_that_bufferedfilereaderbuffer_is_a...">Note that <code>BufferedFileReader.Buffer</code> is a subclass of <code>BufferedReader.Buffer</code>.</p>
+          
+          <p id="now_the_instantiation_brbuffer_above...">Now the instantiation <code>br.Buffer()</code> above is a polymorphic operation! It might
+          return an instance of <code>BufferedFileReader.Buffer</code> or an instance of
+          <code>BufferedReader.Buffer</code>, depending upon whether <code>br</code> refers to a plain
+          <code>BufferedReader</code> or to a <code>BufferedFileReader</code>. This is more than a cute trick.
+          Polymorphic instantiation lets us eliminate the "factory method pattern" from
+          our code.</p>
+          
+          <p id="notice_how_unlike_in_java...">Notice how, unlike in Java or C#, where polymorphism is only for <em>methods</em>,
+          Ceylon features polymorphism for attributes, methods, and member classes.</p>
+          
+          <h2 id="formal_member_classes">Formal member classes</h2>
+          
+          <p id="its_even_possible_to_define...">It's even possible to define a <code>formal</code> member class of an <code>abstract</code> class. A
+          <code>formal</code> member class can declare <code>formal</code> members.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>abstract class BufferedReader(Reader reader)
+        satisfies Reader {
+    shared formal class Buffer() {
+        shared formal Byte read();
+    }
+    ...
+}
+</code></pre>
+          
+          <p id="in_this_case_a_concrete...">In this case, a concrete subclass of the <code>abstract</code> class must refine the
+          <code>formal</code> member class.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared class BufferedFileReader(File file)
+        extends BufferedReader(FileReader(file)) {
+    shared actual class Buffer()
+             extends super.Buffer() {
+         shared actual Byte read() {
+             ...
+         }
+    }
+    ...
+}
+</code></pre>
+          
+          <p id="even_though_abstract_classes_and...">Even though <code>abstract</code> classes and <code>formal</code> classes seem like quite similar
+          concepts, there's a really big difference:</p>
+          
+          <ul>
+          <li>An <code>abstract</code> nested class <em>may not</em> be instantiated, and <em>need not</em> be
+          refined by concrete subclasses of the containing class.</li>
+          <li>A <code>formal</code> member class <em>may</em> be instantiated, and <em>must</em> be refined by every
+          subclass of the containing class.</li>
+          </ul>
+          
+          
+          <p id="note_that_this_difference_explains...">Note that this difference explains why Ceylon has a special-purpose annotation
+          to distinguish a formal member. We can't use <code>abstract</code> to declare a formal
+          member, since that would be ambiguous in the case of a nested class.</p>
+          
+          <p id="its_an_interesting_exercise_to...">It's an interesting exercise to compare Ceylon's member class refinement with
+          the functionality of Java dependency injection frameworks. Both mechanisms
+          provide a means of abstracting the instantiation operation of a type. You can
+          think of the subclass that refines a member type as filling the same role as a
+          dependency configuration in a dependency injection framework.</p>
+          
+          <h2 id="theres_more">There's more...</h2>
+          
+          <p id="member_classes_and_member_class...">Member classes and member class refinement allows Ceylon to support <em>type families</em>.
+          We're not going to discuss type families in this tour.</p>
+          
+          <p id="next_were_going_to_meet...">Next, we're going to meet <a href="../sequences">iterable objects</a>, along with sequences,
+          Ceylon's take on the "array" type, and tuples.</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

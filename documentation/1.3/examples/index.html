@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Example programs and applications</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.3/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.3/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.3/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.3/examples">Examples</a></h3>
+            
+            <!--  ### [Tutorial videos](/documentation/1.3/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.3/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.3/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.3/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.3/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide_for_intellij"><a href="/documentation/1.3/ide/intellij">Ceylon IDE for IntelliJ</a></h3>
+            
+            <h3 id="ceylon_ide_for_eclipse"><a href="/documentation/1.3/ide/eclipse">Ceylon IDE for Eclipse</a></h3>
+            
+            <h3 id="vertx"><a href="http://vertx.io/docs/vertx-core/ceylon/">Vert.x</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Learn
+          </div>
+        </div>
+        <div id="core-page">
+          <h1 id="example_programs_and_applications">Example programs and applications</h1>
+          
+          <p id="were_collecting_examples_here">We're collecting examples here.</p>
+          
+          <h2 id="examples_of_client_side_ceylon">Examples of client-side Ceylon</h2>
+          
+          <p id="we_have_three_small_demo...">We have three small demo application which illustrate the use
+          of Ceylon in a web browser:</p>
+          
+          <ul>
+          <li><a href="http://try.ceylon-lang.org/?gist=bd41b47f325b6d32514a">Solar System Example</a></li>
+          <li><a href="http://try.ceylon-lang.org/?gist=4b2cfe43bfa7571e73e7">Oscilloscope Example</a></li>
+          <li><a href="http://try.ceylon-lang.org/?gist=8860a7a70fb92e306f1f">Game of Life Example</a></li>
+          </ul>
+          
+          
+          <p id="furthermore">Furthermore:</p>
+          
+          <ul>
+          <li>The <a href="http://try.ceylon-lang.org/?gist=796bc92790af4cd3db54a88853518c56">Ceylon Services Example</a> demonstrates the use of
+          Ceylon service providers, an abstraction of the Java
+          service loader facility, on the JavaScript platform.</li>
+          </ul>
+          
+          
+          <h2 id="examples_of_ceylon_on_mobile_platforms">Examples of Ceylon on mobile platforms</h2>
+          
+          <p id="this_example_project_shows_how..."><a href="https://github.com/gavinking/DisplayingBitmaps">This example project</a> shows how to use
+          Ceylon to create an Android application in Android Studio.
+          It uses the <a href="https://github.com/ceylon/ceylon-gradle-android">Ceylon Gradle plugin for Android</a> to integrate
+          with the Android toolchain.</p>
+          
+          <p id="the_universal_media_player_is...">The <a href="https://github.com/gavinking/UniversalMusicPlayer">Universal Media Player</a> is a much more elaborate sample,
+          but depends on Ceylon 1.3.3, which is not yet released. The
+          process of developing the example application is discussed in
+          <a href="/community/presentations/ceylon-on-android.pdf">this presentation</a>.</p>
+          
+          <h2 id="examples_of_server_side_ceylon">Examples of server-side Ceylon</h2>
+          
+          <p id="ceylon_is_a_fantastic_language...">Ceylon is a fantastic language for writing microservices:</p>
+          
+          <ul>
+          <li>
+<a href="https://github.com/DiegoCoronel/ceylon-jboss-swarm/">Wildfly Swarm and Ceylon</a> demonstrates the use of Ceylon
+          to write a Java EE-based microservice for <a href="http://wildfly-swarm.io/">Swarm</a>, using
+          JPA, CDI, and JAX-RS, and of the <code>ceylon swarm</code> command to
+          package it as a "fat" jar. Alternatively, you can use
+          <code>ceylon war</code> to package it as a web archive and run it on a
+          Java EE application server! The technologies demonstrated
+          here are discussed in <a href="/community/presentations/ceylon-swarm.pdf">this presentation</a>.</li>
+          <li>
+<a href="https://github.com/DiegoCoronel/ceylon-spring-boot">Spring Boot and Ceylon</a> demonstrates the use of Ceylon
+          with <a href="https://projects.spring.io/spring-boot/">Spring Boot</a> and Spring Data.</li>
+          <li>The <a href="https://github.com/vert-x3/vertx-examples/tree/master/ceylon">Vert.x examples</a> include several samples showing how
+          to use Ceylon in <a href="http://vertx.io/">Vert.x</a>.</li>
+          <li>
+<a href="https://github.com/ceylon/ceylon-examples-spark">Spark with Ceylon</a> demonstrates how to use the Spark web
+          framework in Ceylon.</li>
+          <li>
+<a href="https://github.com/ceylon/ceylon-examples-jooby">Jooby with Ceylon</a> contains two very simple examples of
+          the Jooby web framework.</li>
+          <li>The <a href="https://github.com/bjansen/gyokuro/tree/master/demos/gyokuro/demo">gyokuro demos</a> show off the <a href="http://bjansen.github.io/gyokuro/">gyokuro</a> web
+          framework, which is written in Ceylon.</li>
+          <li>The <a href="https://github.com/gavinking/ceylon-examples-vaadin">Vaadin JAAS example</a> demonstrates how to write a Java
+          EE web application using <a href="https://vaadin.com/home">Vaadin</a> and JAAS.</li>
+          </ul>
+          
+          
+          <p id="documentation_for_ceylon_and_vertx...">Documentation for Ceylon and Vert.x can be found at the
+          <a href="http://vertx.io/docs/vertx-core/ceylon/">Vert.x site</a>.</p>
+          
+          <h2 id="examples_of_full_stack_applications">Examples of full-stack applications</h2>
+          
+          <ul>
+          <li>The <a href="https://github.com/eclipse/ceylon-web-ide-backend">Ceylon Web IDE</a> is a great example of how to build a
+          modern web application using Ceylon, making use of Ceylon's
+          HTTP and JSON APIs, and interoperation with native Java
+          libraries. The example even supports deployment to
+          the <a href="https://openshift.redhat.com/">OpenShift</a> cloud platform.</li>
+          <li>The Ceylon <a href="https://github.com/sgalles/ceylon-dddsample">DDDSample</a> demonstrates the use of Ceylon to
+          write a complete Java EE application, making use of JPA,
+          CDI, EJB, JAX-RS, JMS, JSF, and Facelets.</li>
+          </ul>
+          
+          
+          <h2 id="simple_examples">Simple examples</h2>
+          
+          <p id="learn_how_to_use_ceylon...">Learn how to use Ceylon with these Java frameworks:</p>
+          
+          <ul>
+          <li>
+<a href="https://github.com/ceylon/ceylon-examples-jdk">JDK Collections and Streams in Ceylon</a> shows how easy
+          and natural it is to use Java's collections and streams
+          APIs directly from Ceylon.</li>
+          <li>
+<a href="https://github.com/ceylon/ceylon-examples-jpa">Java Persistence in Ceylon</a> demonstrates the use of JPA
+          for Object/Relational Mapping.</li>
+          <li>For Java-style dependency injection, check out
+          <a href="https://github.com/ceylon/ceylon-examples-di">Weld and Guice with Ceylon</a>, based on
+          <a href="/blog/2015/12/01/weld-guice/">this blog post</a>.</li>
+          <li>The <a href="https://github.com/ceylon/ceylon-examples-javafx">JavaFX Samples for Ceylon</a> show how to write a
+          JavaFX UI in Ceylon.</li>
+          <li>The <a href="https://github.com/ceylon/ceylon-examples-rx">RxJava examples</a> project is a port of the basic
+          <a href="https://github.com/ReactiveX/RxJava">RxJava</a> examples from the <a href="https://github.com/ReactiveX/RxJava/wiki/How-To-Use-RxJava">RxJava documentation</a> to
+          Ceylon.</li>
+          <li>
+<a href="https://github.com/ceylon/ceylon-examples-jogl">OpenGL in Ceylon</a> shows the use of <a href="http://jogamp.org/">JOGL</a> in a Swing
+          application.</li>
+          <li>This <a href="https://github.com/xkr47/ceylon-swing-with-intellij-ui-designer">IntelliJ UI designer example</a> shows how to use
+          IntelliJ IDEA's <a href="https://www.jetbrains.com/help/idea/2016.2/gui-designer-reference.html">GUI Designer</a>.</li>
+          <li>The <a href="https://github.com/bjansen/ceylon-jooq-example">jOOQ Ceylon example</a> demonstrates the use of the
+          jOOQ library, as documented in <a href="http://bjansen.github.io/ceylon/2015/08/24/ceylon-plus-jooq-equals-heart.html">this blog post</a>.</li>
+          <li>The <a href="https://github.com/gavinking/ceylon-examples-lwjgl">Ceylon LWJGL samples</a> project demonstrates the use
+          of the <a href="https://www.lwjgl.org/">Lightweight Java Game Library</a>.</li>
+          </ul>
+          
+          
+          <h2 id="osgi_examples">OSGi examples</h2>
+          
+          <p id="the_ceylon_osgi_examples_demonstrate...">The <a href="https://github.com/davidfestal/Ceylon-Osgi-Examples">Ceylon OSGi examples</a> demonstrate how to use Ceylon
+          modules as OSGi bundles, and how to:</p>
+          
+          <ul>
+          <li>run the Ceylon <a href="https://herd.ceylon-lang.org/modules/ceylon.http.server">HTTP server</a> inside an OSGi container,</li>
+          <li>call standard OSGi services,</li>
+          <li>integrate with <a href="https://ops4j1.jira.com/wiki/display/paxweb/Pax+Web">Pax Web</a> in order to produce a web
+          application packaged as a single Ceylon module, or</li>
+          <li>write an Eclipse plugin.</li>
+          </ul>
+          
+          
+          <h2 id="npm_examples">NPM examples</h2>
+          
+          <p id="the_ceylon_npm_integration_examples...">The <a href="https://github.com/ceylon/ceylon-examples-npm">Ceylon NPM integration examples</a> project contains some
+          very simple examples showing how a Ceylon module can make use
+          of JavaScript modules belonging to the <a href="https://www.npmjs.com/">node package manager</a>.</p>
+          
+          <h2 id="examples_of_libraries">Examples of libraries</h2>
+          
+          <p id="the_ceylon_sdk_includes_plenty...">The <a href="https://github.com/eclipse/ceylon-sdk">Ceylon SDK</a> includes
+          plenty of good examples of Ceylon code, including:</p>
+          
+          <ul>
+          <li>
+<a href="https://github.com/eclipse/ceylon-sdk/tree/master/source/ceylon/collection"><code>ceylon.collection</code></a> demonstrates some very typical usage
+          of generics.</li>
+          <li>
+<a href="https://github.com/eclipse/ceylon-sdk/tree/master/source/ceylon/file"><code>ceylon.file</code></a> demonstrates the use of enumerated types
+          and shows how to wrap a native Java API.</li>
+          <li>
+<a href="https://github.com/eclipse/ceylon-sdk/tree/master/source/ceylon/regex"><code>ceylon.regex</code></a>
+          is a cross-platform module that demonstrates the use of
+          <code>native</code> declarations and <code>dynamic</code> blocks.</li>
+          <li>
+<a href="https://github.com/eclipse/ceylon-sdk/tree/master/source/ceylon/locale"><code>ceylon.locale</code></a> is a cross-platform module that
+          demonstrates the use of resource loading.</li>
+          <li>
+<a href="https://github.com/eclipse/ceylon-sdk/tree/master/source/ceylon/test"><code>ceylon.test</code></a> demonstrates some very typical usage of
+          the metamodel.</li>
+          <li>
+<a href="https://github.com/eclipse/ceylon-sdk/tree/master/source/ceylon/promise"><code>ceylon.promise</code></a> demonstrates advanced use of abstraction
+          over function types.</li>
+          <li>
+<a href="https://github.com/eclipse/ceylon-sdk/blob/master/source/ceylon/json/"><code>ceylon.json</code></a> illustrates a
+          <a href="https://github.com/eclipse/ceylon-sdk/blob/master/source/ceylon/json/Value.ceylon">rather cool use of union types</a>.</li>
+          </ul>
+          
+          
+          <h2 id="example_ceylon_plugins">Example <code>ceylon</code> plugins</h2>
+          
+          <p id="a_plugin_for_the_ceylon...">A plugin for the <code>ceylon</code> command is a great way to improve
+          your productivity.</p>
+          
+          <ul>
+          <li>
+<a href="https://github.com/ceylon/ceylon.swarm"><code>ceylon swarm</code></a> is a super-simple plugin that just wraps an
+          existing Java library.</li>
+          <li>
+<a href="https://github.com/eclipse/ceylon.formatter"><code>ceylon format</code></a> is much more elaborate.</li>
+          </ul>
+          
+          
+          <h2 id="examples_of_real_life_wartsn_all_production_code">Examples of real life warts-'n-all production code</h2>
+          
+          <p id="the_ceylon_ide_common_and...">The <a href="https://github.com/eclipse/ceylon-ide-common">Ceylon IDE Common</a> and <a href="https://github.com/eclipse/ceylon-ide-intellij">Ceylon IDE for IntelliJ</a>
+          projects sure aren't beautiful polished example code, but they
+          do show how cleanly Ceylon interoperates with hairy, real-world,
+          legacy Java APIs.</p>
+          
+          <p id="the_ceylon_plugin_for_vs...">The <a href="https://github.com/jvasileff/vscode-ceylon">Ceylon plugin for VS Code</a> exhibits a whole completely
+          different approach to implementing tooling in Ceylon.</p>
+          
+          <p id="the_ceylon_dart_project_shows...">The <a href="https://github.com/jvasileff/ceylon-dart">Ceylon Dart</a> project shows that it's possible to write a
+          whole backend for the Ceylon compiler in Ceylon.</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

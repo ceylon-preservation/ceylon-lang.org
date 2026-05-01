@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: String literals</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.2/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.2/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.2/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.2/examples">Examples</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.2/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.2/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.2/reference">Reference</a></h3>
+            
+            <ul>
+<li><a href="#usage">Usage
+            </a></li>
+<li><a href="#description">Description
+            </a></li>
+<ul>
+<li><a href="#escaping">Escaping
+            </a></li>
+<li><a href="#unicode_characters">Unicode characters
+            </a></li>
+<li><a href="#line_spanning">Line spanning
+            </a></li>
+<li><a href="#interpolation">Interpolation
+            </a></li>
+</ul>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.2/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.2/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.2/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_12_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.2, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.2/reference/literal/string.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.2/reference/literal/string.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="string_literals">
+<code>String</code> literals</h1>
+          
+          <p id="a_literal_notation_for_a...">A literal notation for a <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/String.type.html"><code>String</code></a>
+          value.</p>
+          
+          <h2 id="usage">Usage
+          </h2>
+          
+          
+          <p id="a_string_literal_is_written...">A <code>String</code> literal is written between paired double quotes:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>String example = "This is a trivial example";
+String escaping = "\"Escaping\" with a backslash";
+String multiline = "Strings may
+                    span lines";// note indentation, see below
+</code></pre>
+          
+          <p id="a_verbatim_string_literal_is...">A verbatim <code>String</code> literal is written between paired triple-double quotes:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>String verbatim = """&lt;p&gt;"Almost, but not quite, entirely unlike tea."&lt;/p&gt;"""
+</code></pre>
+          
+          <h2 id="description">Description
+          </h2>
+          
+          
+          
+          
+          <h3 id="escaping">Escaping
+          </h3>
+          
+          
+          <p id="plain_string_literals_may_contain...">Plain string literals may contain <em>escape sequences</em>. Backslash is used as an
+          escape character. The following characters <em>must</em> be escaped when they're
+          used within a plain <code>String</code> literal:</p>
+          
+          <ul>
+          <li>backslash, <code>\</code>, must be written as <code>\\</code>
+</li>
+          <li>double quote, <code>"</code>, must be written as <code>\"</code>
+</li>
+          <li>backtick, <code>`</code>, must be written as <code>\`</code>
+</li>
+          </ul>
+          
+          
+          <p id="in_a_plain_string_literal...">In a plain <code>String</code> literal, the following traditional C-style escape sequences
+          are also supported:</p>
+          
+          <ul>
+          <li>tab, <code>\t</code>
+</li>
+          <li>newline, <code>\n</code>
+</li>
+          <li>return, <code>\r</code>
+</li>
+          <li>form feed, <code>\f</code>
+</li>
+          <li>backspace, <code>\b</code>
+</li>
+          <li>single quote, <code>\'</code>
+</li>
+          </ul>
+          
+          
+          <p id="in_contrast_verbatim_string_literals...">In contrast, verbatim <code>String</code> literals do not support <em>any</em> escaping, so you
+          can use characters like <code>"</code>, <code>\</code>, and <code>`</code> freely, with their literal
+          interpretation.</p>
+          
+          <h3 id="unicode_characters">Unicode characters
+          </h3>
+          
+          
+          <p id="you_can_use_the_same...">You can use the same <a href="../character/#unicode_escapes">unicode escapes</a> within
+          plain string literals as in <code>Character</code> literals. Like this:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>String quotation = "I think, \{#2234} I am"; // Unicode therefore symbol
+</code></pre>
+          
+          <p id="or_using_the_unicode_character...">Or using the Unicode character name:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>String quotation = "I think, \{THEREFORE} I am";
+</code></pre>
+          
+          <p id="of_course_you_can_also...">Of course, you can also directly embed a Unicode character in a <code>String</code>
+          literal:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>String quotation = "I think, ∴ I am";
+</code></pre>
+          
+          <p id="but_this_is_highly_discouraged...">But this is highly discouraged, since it causes problems when sharing source
+          code across operating systems with different default character encodings.</p>
+          
+          <h3 id="line_spanning">Line spanning
+          </h3>
+          
+          
+          <p id="string_literals_may_span_lines...">String literals may span lines. A line break in a string literal <em>always</em>
+          results in a (Unix-style) newline character in the resulting <code>String</code>,
+          irrespective of the platform-specific character used to encode the end
+          of line in the source file itself.</p>
+          
+          <p id="for_example_a_multiline_string...">For example, a multiline string in a source file which uses <code>\r\n</code> as line
+          separator (the Windows convention) will be compiled to a string which uses
+          <code>\n</code> as line separator.</p>
+          
+          <p id="if_a_different_convention_is...">If a different convention is really required, use <a href="#escaping">escaping</a>
+          instead of line spanning literals.</p>
+          
+          <p id="every_line_of_a_string...">Every line of a string literal spanning multiple lines is understood to
+          begin at the same column. Leading whitespace is automatically stripped
+          from the resulting <code>String</code>. For example:</p>
+          
+          <pre data-language="ceylon"><code>String greeting = "Hello
+                   World";
+</code></pre>
+          
+          <p id="and">And:</p>
+          
+          <pre data-language="ceylon"><code>String greeting = """Hello
+                     World""";
+</code></pre>
+          
+          <p id="are_both_exactly_equivalent_to">Are both exactly equivalent to:</p>
+          
+          <pre data-language="ceylon"><code>String greeting = "Hello\nWorld";
+</code></pre>
+          
+          <h3 id="interpolation">Interpolation
+          </h3>
+          
+          
+          <p id="plain_strings_containing_two_backticks...">Plain strings containing two backticks, <code>``</code>, are not considered
+          literal strings, but <a href="../../expression/string-template">string templates</a>.</p>
+          
+          <p id="verbatim_strings_do_not_support...">Verbatim strings do not support interpolation.</p>
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li>
+<a href="../../../tour/basics/#strings_and_string_interpolation"><code>String</code> literals</a>
+          in the Tour of Ceylon</li>
+          <li><a href="/documentation/current/spec/html_single/index.html#stringliterals"><code>String</code> literals in the language specification</a></li>
+          <li><a href="../../expression/string-template"><code>String</code> templates</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

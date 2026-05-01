@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Annotations</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.1/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.1/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.1/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.1/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.1/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.1/reference">Reference</a></h3>
+            
+            <ul>
+<li><a href="#usage">Usage
+            </a></li>
+<li><a href="#description">Description
+            </a></li>
+<ul>
+<li><a href="#annotation_class_declaration">Annotation class declaration
+            </a></li>
+<li><a href="#annotation_constructor_declaration">Annotation constructor declaration
+            </a></li>
+<li><a href="#constraining_annotations">Constraining Annotations
+            </a></li>
+<li><a href="#program_elements">Program Elements
+            </a></li>
+<li><a href="#using_annotations">Using annotations
+            </a></li>
+<li><a href="#language_module_annotations">Language module annotations
+            </a></li>
+</ul>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.1/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.1/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.1/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference (1.1)
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_11_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.1, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <h1 id="annotations">Annotations</h1>
+          
+          <p id="an_annotation_encodes_metadata_about...">An annotation encodes metadata about a <a href="#program_elements">program element</a>.</p>
+          
+          <h2 id="usage">Usage
+          </h2>
+          
+          
+          <p id="some_example_annotation_constructor_declarations">Some example annotation constructor <em>declarations</em>:</p>
+          
+          <!-- check:none -->
+          
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared Deprecated deprecated() {
+    return Deprecated();
+}
+shared Description doc(String description) {
+    return Description(description);
+}
+shared Authors by(String* authors) {
+    return Authors (*authors);
+}
+</code></pre>
+          
+          <p id="an_example_of_the_use...">An example of the use of <code>deprecated</code> and <code>by</code>:</p>
+          
+          <pre data-language="ceylon"><code>deprecated
+by("Tom")
+class AnnotatedClass() {
+}
+</code></pre>
+          
+          <h2 id="description">Description
+          </h2>
+          
+          
+          <p id="an_annotation_is_composed_of...">An annotation is composed of two parts:</p>
+          
+          <ul>
+          <li><p id="an_annotation_class_which_is...">an annotation <code>class</code>, which is the type of the value that
+          the annotation has when it is obtained at runtime.</p></li>
+          <li><p id="an_annotation_constructor_which_is...">an annotation constructor, which is used at development
+          time to annotate program elements.</p></li>
+          </ul>
+          
+          
+          <p id="a_given_annotation_class_can...">A given annotation class can have zero, one or many annotation constructors.</p>
+          
+          <h3 id="annotation_class_declaration">Annotation class declaration
+          </h3>
+          
+          
+          <p id="an_annotation_class_must_be...">An annotation class must be a toplevel class
+          annotated with the <code>final</code> and <code>annotation</code> annotations
+          and it must be a direct subclass of either
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/Annotation.type.html"><code>Annotation</code></a>,
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/OptionalAnnotation.type.html"><code>OptionalAnnotation</code></a> or
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/SequencedAnnotation.type.html"><code>SequencedAnnotation</code></a>.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>final annotation class Example(shared String description) 
+        extends Annotation() {
+}
+</code></pre>
+          
+          <p id="any_class_parameters_must_be...">Any class parameters must be of one of the allowed types:</p>
+          
+          <ul>
+          <li>
+<code>Integer</code>, <code>Byte</code>, <code>Character</code>, <code>Float</code>, <code>String</code>
+</li>
+          <li>
+<a href="../type-declaration/#enumerated_types">Enumerated types</a> where all the cases are <code>object</code> declarations
+          (which includes <code>Boolean</code>).</li>
+          <li>A subtype of <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/meta/declaration/Declaration.type.html"><code>Declaration</code></a>
+</li>
+          <li>Another annotation class.</li>
+          <li>
+<code>Iterable</code>s, <code>Sequence</code>s or <code>Tuple</code>s of the above.</li>
+          </ul>
+          
+          
+          <p id="there_are_no_special_constraints...">There are no special constraints on the initialization or declaration sections of an annotation class.
+          In particular the class parameters may be <code>shared</code> or not.</p>
+          
+          <h3 id="annotation_constructor_declaration">Annotation constructor declaration
+          </h3>
+          
+          
+          <p id="an_annotation_constructor_must_be...">An annotation constructor must be a <a href="../type-declaration#top_level_declarations">top-level</a> <a href="../function/">function</a>
+          annotated with <code>annotation</code>, with a return type that is an <a href="#annotation_class_declaration">annotation class</a>.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>annotation Example eg() =&gt; Example("");
+annotation Example example(String description="") 
+    =&gt; Example(description);
+</code></pre>
+          
+          <p id="any_parameters_must_be_of...">Any parameters must be of one of the permitted types for an annotation class (see above list).</p>
+          
+          <p id="the_body_of_the_annotation...">The body of the annotation constructor is quite limited:</p>
+          
+          <ul>
+          <li>The only permitted statement is a <code>return</code> statement, whose expression is the
+          instantiation of an annotation class.</li>
+          <li>The arguments to the annotation class instantiation are limited to
+          
+          <ul>
+          <li>parameters of the constructor,</li>
+          <li>String, Character, Integer and Float literals,</li>
+          <li>the <code>object</code> cases of parameters of an enumerated type (e.g. <code>true</code> and <code>false</code>),</li>
+          <li>declaration literals (e.g. <code>`class String`</code>)</li>
+          <li>
+<code>Tuple</code> and <code>Iterable</code> enumerations of the above</li>
+          <li>Spread arguments of the above</li>
+          </ul>
+          </li>
+          </ul>
+          
+          
+          <p id="defaulted_parameter_expressions_for_constructor...">Defaulted parameter expressions for constructor parameters are limited by the same rules as the
+          annotation class instantiation arguments.</p>
+          
+          <h3 id="constraining_annotations">Constraining Annotations
+          </h3>
+          
+          
+          <p id="annotation_classes_must_be_a...">Annotation classes must be a subclass of <code>Annotation</code>.</p>
+          
+          <ul>
+          <li>Using <code>Annotation</code> as the superclass means the annotation class can be used on any
+          program element that supports annotations. The annotation may appear at most once.</li>
+          <li>
+<code>Annotation</code> has a subclass, <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/metamodel/ConstrainedAnnotation.type.html"><code>ConstrainedAnnotation</code></a>,
+          which allows more fine-grained control over where and how the annotation may be used.
+          Its enumerated subclasses are:
+          
+          <ul>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/metamodel/OptionalAnnotation.type.html"><code>OptionalAnnotation</code></a>
+          for annotations which occur at most once on a given program element, and</li>
+          <li>
+<a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/metamodel/SequencedAnnotation.type.html"><code>SequencedAnnotation</code></a>
+          which can occur more than once on a given program element.</li>
+          </ul>
+          </li>
+          </ul>
+          
+          
+          <h3 id="program_elements">Program Elements
+          </h3>
+          
+          
+          <p id="a_constrainedannotation_may_constrain_the...">A <code>ConstrainedAnnotation</code> may constrain the program elements where it is allowed to
+          be used to any of the types satisfying
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/metamodel/Annotated.type.html"><code>Annotated</code></a>, which are</p>
+          
+          <ul>
+          <li>
+<a href="../class">Class declarations</a>, <a href="../class#alises">class aliases</a> and their <a href="../parameter-list">parameters</a>,</li>
+          <li>
+<a href="../interface">Interface declarations</a> and <a href="../interface#aliases">interface alises</a>
+</li>
+          <li>
+<a href="../function">Function declarations</a> and their <a href="../parameter-list">parameters</a>
+</li>
+          <li>
+<a href="../value">Value declarations</a>), and their setters</li>
+          <li>
+<a href="../module#descriptor">Module descriptors</a> and their <code>import</code>s.</li>
+          <li><a href="../package#descriptor">Package descriptors</a></li>
+          </ul>
+          
+          
+          <h3 id="using_annotations">Using annotations
+          </h3>
+          
+          
+          <p id="to_use_an_annotation_you...">To use an annotation you preceed the program element with an invocation of the annotation constructor:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>example()
+class AnnotatedExample() {
+    // ...
+}
+
+example("Annotating a function")
+void anotherExample() {
+}
+
+example{ description = "Annotating a function"; }
+String namedArguments =&gt; "Good, eh?";
+</code></pre>
+          
+          <p id="as_a_special_case_and...">As a special case, and to make
+          it extra easy to write such documentation, annotating
+          program elements with a <code>String</code> literal is a shortcut syntax for
+          annotating the element with the <code>doc</code> annotation.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>"Some documentation about [[DocExample]]"
+class DocExample() {
+    // ...
+}
+</code></pre>
+          
+          <h3 id="language_module_annotations">Language module annotations
+          </h3>
+          
+          
+          <p id="there_is_specific_documentation_on...">There is specific documentation on each of the language module annotations</p>
+          
+          <ul class="linear">
+            <li><a href="../../annotation/abstract/"><code>abstract</code></a></li>
+            <li><a href="../../annotation/actual/"><code>actual</code></a></li>
+            <li><a href="../../annotation/annotation/"><code>annotation</code></a></li>
+            <li><a href="../../annotation/default/"><code>default</code></a></li>
+            <li><a href="../../annotation/deprecated/"><code>deprecated</code></a></li>
+            <li><a href="../../annotation/doc/"><code>doc</code></a></li>
+            <li><a href="../../annotation/by/"><code>by</code></a></li>
+            <li><a href="../../annotation/formal/"><code>formal</code></a></li>
+            <li><a href="../../annotation/final/"><code>final</code></a></li>
+            <li><a href="../../annotation/late/"><code>late</code></a></li>
+            <li><a href="../../annotation/license/"><code>license</code></a></li>
+            <li><a href="../../annotation/native/"><code>native</code></a></li>
+            <li><a href="../../annotation/optional/"><code>optional</code></a></li>
+            <li><a href="../../annotation/sealed/"><code>sealed</code></a></li>
+            <li><a href="../../annotation/see/"><code>see</code></a></li>
+            <li><a href="../../annotation/shared/"><code>shared</code></a></li>
+            <li><a href="../../annotation/throws/"><code>throws</code></a></li>
+            <li><a href="../../annotation/tagged/"><code>tagged</code></a></li>
+            <li><a href="../../annotation/variable/"><code>variable</code></a></li>
+          </ul>
+          
+          
+          
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li>
+<a href="../../../tour/annotations">Annotations</a> on the Tour of Ceylon</li>
+          <li><a href="../keyword">Keywords</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

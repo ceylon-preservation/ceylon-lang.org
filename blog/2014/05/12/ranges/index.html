@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Ranges and slices</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2014/05/10/about-plus/">About the plus symbol</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2014/07/14/wildcards/">Why I distrust wildcards and why we need them anyway</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="ranges_and_slices">
+            Ranges and slices
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              12 May 2014
+            </div>
+            <div class="tags">
+            </div>
+          </div>
+          <div class="body">
+            <p id="i_guess_weve_all_seen...">I guess we've all seen Dijkstra's
+            <a href="http://www.cs.utexas.edu/users/EWD/transcriptions/EWD08xx/EWD831.html">famous argument</a>
+            that a range of natural numbers should be expressed using an
+            inclusive lower bound and exclusive upper bound, and that, as
+            a corollary, arrays should be indexed from 0. It's a thought
+            provoking little nugget of reasoning, though it fails to
+            contemplate several objections, including that:</p>
+            
+            <ul>
+            <li>The inclusive lower bound/exclusive upper bound combination
+            (let's call that a <em>Dijkstra range</em>) isn't natural for a
+            range which includes negative integers. The range <code>start&lt;=i&lt;=0</code>
+            would be written as <code>start&lt;=i&lt;1</code>. Dijkstra ranges are
+            nastily asymmetrical!</li>
+            <li>Zero-based indexing is infuriatingly inconvenient when
+            accessing the last element of an array, or when indexing
+            from the end of the array. Who here loves <code>array[length-i-1]</code>?
+            This inconvenience, at least arguably, outweighs the
+            convenience of being able to write <code>0&lt;=i&lt;length</code> instead of
+            <code>1&lt;=i&lt;length+1</code>, and thus substantially undermines Dijkstra's
+            case for zero-based indexing, <em>even if we accept his argument
+            for Dijkstra ranges!</em>
+</li>
+            <li>Two endpoints isn't the only way to specify a range of
+            integers!</li>
+            </ul>
+            
+            
+            <p id="ceylon_doesnt_have_a_traditional...">Ceylon doesn't have a traditional <code>for</code> loop, and we don't
+            iterate list elements by looping over the indices of the list.
+            Nevertheless, we still need a way to express ranges of integers.
+            Our solution to this problem is a bit different to other
+            languages, and amounts to a partial rejection of Dijkstra's
+            conclusions, so it's worth explaining the reasoning behind it.</p>
+            
+            <h2 id="ranges">Ranges</h2>
+            
+            <p id="our_design_is_premised_on...">Our design is premised on the observation that we almost never,
+            <em>in practice</em>, naturally find ourselves with an inclusive lower
+            bound/exclusive upper bound combination. What naturally arises
+            in our program is almost always either:</p>
+            
+            <ul>
+            <li>two (inclusive) endpoints, or</li>
+            <li>an (inclusive) starting point and a length.</li>
+            </ul>
+            
+            
+            <p id="using_a_dijkstra_range_we...">Using a Dijkstra range, we can express either case without too
+            much discomfort:</p>
+            
+            <ul>
+            <li><code>start&lt;=i&lt;end+1</code></li>
+            <li><code>start&lt;=i&lt;start+length</code></li>
+            </ul>
+            
+            
+            <p id="thus_we_can_view_the...">Thus, we can view the traditional use of Dijkstra ranges as a
+            sort of compromise between these two cases: a choice that makes
+            neither option too painful.</p>
+            
+            <p id="but_of_course_by_clearly...">But, of course, by clearly distinguishing these two common
+            cases, it becomes clear that both case are amenable to further
+            optimization. Thus, Ceylon provides two options for expressing
+            a range of integers:</p>
+            
+            <ul>
+            <li>The <em>spanned range</em> operator expresses a range in terms of
+            its two endpoints as <code>start..end</code>. In the case that <code>end&lt;start</code>,
+            the range is of <em>decreasing</em> values. In the case that
+            <code>end==start</code>, the range has exactly one value.</li>
+            <li>The <em>segmented range</em> operator expresses a range in terms of
+            its starting point and length as <code>start:length</code>. In the case
+            of a nonpositive length, the range is empty.</li>
+            </ul>
+            
+            
+            <p id="thus_a_traditional_c_style...">Thus, a traditional C-style <code>for</code> loop of this form:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>for (i=0; i&lt;length; i++) { ... }
+</code></pre>
+            
+            <p id="is_written_like_this">is written like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>for (i in 0:length) { ... }
+</code></pre>
+            
+            <p id="now_since_integers_arent_the...">Now, since integers aren't the only things we can form ranges
+            of, the <code>..</code> and <code>:</code> operators are generalized to any type <code>T</code>
+            that satisfies the interfaces <code>Ordinal &amp; Comparable&lt;T&gt;</code>. So,
+            for example, we can iterate the letters of the English alphabet
+            like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>for (c in 'a'..'z') { ... }
+</code></pre>
+            
+            <h2 id="slices">Slices</h2>
+            
+            <p id="a_closely_related_problem_is...">A closely related problem is that of "slicing" lists. Python
+            uses Dijkstra ranges to express a slice of a list, so
+            <code>list[start:end]</code> contains the elements
+            <code>list[start], list[start+1], ..., list[end-1]</code>. For the
+            reasons already given above, this is a reasonable compromise.</p>
+            
+            <p id="ceylon_goes_one_better_giving...">Ceylon goes one better, giving you the choice between:</p>
+            
+            <ul>
+            <li>The <em>span</em> operator, written <code>list[start..end]</code> for the
+            elements <code>list[start], list[start+1], ..., list[end]</code>.</li>
+            <li>The <em>segment</em> operator, written <code>list[start:length]</code> for the
+            elements <code>list[start], list[start+1], ..., list[start+length-1]</code>.</li>
+            </ul>
+            
+            
+            <p id="the_span_and_segment_operators...">The span and segment operators are defined in terms of the
+            rather abstract interface <code>Ranged</code> and therefore apply to more
+            than just <code>List</code>s. For example, the platform module
+            <code>ceylon.collection</code> lets you express subranges of a <code>SortedMap</code>
+            or <code>SortedSet</code> using these operators.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2014/05/12/ranges/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Value and attribute declarations</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.3/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.3/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.3/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.3/examples">Examples</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.3/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.3/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.3/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.3/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.3/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide_for_intellij"><a href="/documentation/1.3/ide/intellij">Ceylon IDE for IntelliJ</a></h3>
+            
+            <h3 id="ceylon_ide_for_eclipse"><a href="/documentation/1.3/ide/eclipse">Ceylon IDE for Eclipse</a></h3>
+            
+            <h3 id="vertx"><a href="http://vertx.io/docs/vertx-core/ceylon/">Vert.x</a></h3>
+          </div>
+          <div class="point-dark-bottom">
+             
+          </div>
+          <div class="point-light-top"></div>
+          <div class="toc">
+            <ul>
+<li><a href="#usage">Usage
+            </a></li>
+<li><a href="#description">Description
+            </a></li>
+<ul>
+<li><a href="#value_type">Value type
+            </a></li>
+<ul><li><a href="#type_inference">Type inference
+            </a></li></ul>
+<li><a href="#reference_values">Reference values
+            </a></li>
+<ul><li><a href="#_variable_reference_values"><code>variable</code> reference values
+            </a></li></ul>
+<li><a href="#getters">Getters
+            </a></li>
+<li><a href="#setters">Setters
+            </a></li>
+<li><a href="#attribute_receiver">Attribute receiver
+            </a></li>
+<li><a href="#different_kinds_of_value">Different kinds of value
+            </a></li>
+<ul>
+<li><a href="#_late_values"><code>late</code> values
+            </a></li>
+<li><a href="#_formal_and_default_attributes"><code>formal</code> and <code>default</code> attributes
+            </a></li>
+<li><a href="#_shared_values"><code>shared</code> values
+            </a></li>
+</ul>
+<li><a href="#metamodel">Metamodel
+            </a></li>
+</ul>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+          </div>
+          <div class="point-light-end"></div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+          </div>
+        </div>
+        <div id="core-page">
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.3/reference/structure/value.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.3/reference/structure/value.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="value_and_attribute_declarations">Value and attribute declarations</h1>
+          
+          <p id="there_are_two_kinds_of...">There are two kinds of <em>value</em>:</p>
+          
+          <ul>
+          <li>A <em>reference</em> holds state, that is, a reference to another object.</li>
+          <li>A value defined as a getter (with, optionally, a matching setter)
+          does not directly hold state, instead it defines how a "derived"
+          value is computed.</li>
+          </ul>
+          
+          
+          <p id="crucially_users_of_the_value...">Crucially, users of the value cannot distinguish a
+          reference value from a getter value.</p>
+          
+          <p id="when_a_value_is_a...">When a value is a member of a type, is it called an <em>attribute</em>.</p>
+          
+          <h2 id="usage">Usage
+          </h2>
+          
+          
+          <p id="a_trivial_reference">A trivial reference:</p>
+          
+          <pre data-language="ceylon"><code>String trivalReference = "Alice";
+</code></pre>
+          
+          <p id="a_trivial_getter">A trivial getter:</p>
+          
+          <pre data-language="ceylon"><code>String trivialSpecifiedGetter =&gt; "Bob";
+</code></pre>
+          
+          <p id="a_trivial_getter_and_setter">A trivial getter and setter:</p>
+          
+          <pre data-language="ceylon"><code>Integer trivialValueWithBlock {
+    return i+10;
+}
+assign trivialValueWithBlock {
+    i = trivialValueWithBlock-10;
+}
+</code></pre>
+          
+          <p id="the_setter_uses_the_assign...">The setter uses the <code>assign</code> keyword, and has the same name as the
+          corresponding getter.</p>
+          
+          <p id="the_general_form_of_a...">The general form of a value can look like any of these:</p>
+          
+          <pre><code>ANNOTATIONS
+TYPE exampleReference = INITIAL-EXPRESSION;
+// or
+ANNOTATIONS
+TYPE exampleGetterSpecified =&gt; GETTER-EXPRESSION;
+// or
+ANNOTATIONS
+TYPE exampleGetterBlock {
+    GETTER-BODY
+}
+// or
+ANNOTATIONS
+TYPE exampleGetterBlock {
+    GETTER-BODY
+}
+assign exampleGetterBlock {
+    SETTER-BODY
+}
+</code></pre>
+          
+          <p id="where">Where:</p>
+          
+          <ul>
+          <li>
+<code>ANNOTATIONS</code> is a list of value <a href="../annotation">annotations</a>
+</li>
+          <li>
+<code>TYPE</code> is a <a href="../type">type expression</a> for the
+          <a href="#value_type">type the reference</a> returned when the value is evaluated</li>
+          <li>
+<code>INITIAL-EXPRESSION</code> is the intial value of the reference</li>
+          <li>
+<code>GETTER-EXPRESSION</code> is the <a href="#function_specifiers">specified value</a> of
+          the getter</li>
+          <li>
+<code>GETTER-BODY</code> is a <a href="#function_blocks">block</a> of statements</li>
+          <li>
+<code>SETTER-BODY</code> is a <a href="#function_blocks">block</a> of statements</li>
+          </ul>
+          
+          
+          <h2 id="description">Description
+          </h2>
+          
+          
+          
+          
+          <h3 id="value_type">Value type
+          </h3>
+          
+          
+          <p id="a_non_local_value_declaration...">A non-local value declaration always specifies the <em>type</em> of the value.</p>
+          
+          <h4 id="type_inference">Type inference
+          </h4>
+          
+          
+          <p id="local_value_and_attribute_declarations...">Local value and attribute declarations don't need to explictly declare a
+          type, but can instead use <a href="../type-inference">type inference</a> via the
+          <code>value</code> keyword.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>void f() {
+    value string = ""; //inferred type String
+}
+</code></pre>
+          
+          <h3 id="reference_values">Reference values
+          </h3>
+          
+          
+          <p id="reference_values_are_just_holders...">Reference values are just holders of state.</p>
+          
+          <p id="a_toplevel_reference_represents_a...">A toplevel reference represents a "global constant" (or variable).</p>
+          
+          <p id="a_reference_attribute_declared_within...">A reference attribute declared within a class body represents state
+          associated with an instance of the class (similar to a <em>field</em> in other
+          programming languages).</p>
+          
+          <p id="a_local_reference_that_is...">A local reference (that is, a reference declared within a block)
+          represents state associated with execution of that block (similar to a
+          <em>local variable</em> in other programming languages).</p>
+          
+          <p id="reference_values_are_computed_when...">Reference values are computed when the value is specified or assigned
+          and the exact same instance returned thereafter (unless the value is
+          <code>variable</code> and is reassigned).</p>
+          
+          <h4 id="_variable_reference_values">
+<code>variable</code> reference values
+          </h4>
+          
+          
+          <p id="if_a_reference_value_is...">If a reference value is annotated
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html#variable"><code>variable</code></a>,
+          it can be <a href="../../../reference/operator/assign">assigned</a> more
+          than once. Otherwise it must be <a href="../../statement/specification">specified</a>
+          exactly once.</p>
+          
+          <p id="the_specification_or_assignment_must...">The specification or assignment must occur before its first use.</p>
+          
+          <h3 id="getters">Getters
+          </h3>
+          
+          
+          <p id="a_getter_defines_a_derived...">A getter defines a derived value that is computed every time the
+          value is required (unlike a reference value).</p>
+          
+          <p id="from_the_point_of_view...">From the point of view of the code evaluating a value, it is impossible
+          to determine whether the value is implemented as a reference or as a
+          getter. It's even possible to refine a reference with a getter, or vice
+          versa.</p>
+          
+          <p id="like_function_declarations_you_can...">Like <a href="../function">function declarations</a>, you can either use a
+          block of statements or the <em>fat arrow</em> (<code>=&gt;</code>) syntax if the value can be
+          computed from a single expression.</p>
+          
+          <h3 id="setters">Setters
+          </h3>
+          
+          
+          <p id="a_setter_defines_what_to...">A setter defines what to do when a derived variable value is assigned.</p>
+          
+          <p id="from_the_point_of_view_of...">From the point of view of the code assigning a value, it is impossible to
+          determine whether the value is implemented as a reference or as a setter.
+          It's even possible to refine a <code>variable</code> reference with a getter/setter
+          pair, or vice versa.</p>
+          
+          <p id="every_setter_must_have_a...">Every setter must have a corresponding getter with the same name.</p>
+          
+          <p id="the_getter_declaration_must_occur...">The getter declaration must occur earlier in the body containing the
+          setter declaration.</p>
+          
+          <h3 id="attribute_receiver">Attribute receiver
+          </h3>
+          
+          
+          <p id="attribute_evaluations_have_a_receiver...">Attribute evaluations have a <em>receiver</em>, an instance of the type that
+          declares the attribute. Within the getter or setter body, the expression
+          <a href="../../expression/this"><code>this</code></a> refers to this receiving instance.</p>
+          
+          <p id="a_top_level_value_does...">A <a href="../type-declaration#top_level_declarations">top level</a> value does not
+          have a receiver.</p>
+          
+          <h3 id="different_kinds_of_value">Different kinds of value
+          </h3>
+          
+          
+          
+          
+          <h4 id="_late_values">
+<code>late</code> values
+          </h4>
+          
+          
+          <p id="a_value_can_be_declared...">A value can be declared <a href="../../annotation/late/"><code>late</code></a> in which case the
+          <a href="../../annotation/late/#description">definite specification</a> validation is
+          not performed.</p>
+          
+          <h4 id="_formal_and_default_attributes">
+<code>formal</code> and <code>default</code> attributes
+          </h4>
+          
+          
+          <p id="an_attribute_declaration_may_be...">An attribute declaration may be annotated <a href="../../annotation/formal"><code>formal</code></a>
+          or <a href="../../annotation/default"><code>default</code></a>. A formal or default attribute must
+          also be annotated <code>shared</code>.</p>
+          
+          <p id="a_formal_attribute_does_not...">A formal attribute does not specify an implementation. A formal attribute
+          must be refined by concrete classes which inherit the containing class or
+          interface.</p>
+          
+          <p id="a_default_attribute_may_be...">A <code>default</code> attribute may be refined by types which inherit the containing
+          class or interface.</p>
+          
+          <h4 id="_shared_values">
+<code>shared</code> values
+          </h4>
+          
+          
+          <p id="a_toplevel_value_declaration_or...">A toplevel value declaration, or a value declaration nested inside the
+          body of a containing class or interface, may be annotated
+          <a href="../../annotation/shared"><code>shared</code></a>.</p>
+          
+          <ul>
+          <li>A toplevel <code>shared</code> value declaration is visible wherever the package that
+          contains it is visible.</li>
+          <li>A <code>shared</code> value declaration nested inside a class or interface is visible
+          wherever the containing class or interface is visible.</li>
+          </ul>
+          
+          
+          <h3 id="metamodel">Metamodel
+          </h3>
+          
+          
+          <p id="value_declarations_can_be_manipulated...">Value declarations can be manipulated at runtime via their representation as
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/meta/declaration/ValueDeclaration.type.html"><code>ValueDeclaration</code></a>
+          instances. An <em>applied function</em> (i.e. with all type parameters specified)
+          corresponds to either a
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/meta/model/Value.type.html"><code>Value</code></a> or
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/meta/model/Attribute.type.html"><code>Attribute</code></a> model
+          instance.</p>
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li><a href="../compilation-unit">Compilation unit</a></li>
+          <li><a href="../class"><code>class</code> declarations</a></li>
+          <li><a href="../interface"><code>interface</code> declarations</a></li>
+          <li><a href="../object"><code>object</code> declarations</a></li>
+          <li>
+<a href="/documentation/current/spec/html_single/index.html#values">Values</a> in the Ceylon language spec</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

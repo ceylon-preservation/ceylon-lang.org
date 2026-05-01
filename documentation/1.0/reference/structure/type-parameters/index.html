@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Type Parameters</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.0/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.0/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.0/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="tutorial_videos"><a href="/documentation/1.0/videos">Tutorial Videos</a></h3>
+            
+            <h3 id="language_specification"><a href="/documentation/1.0/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.0/reference">Reference</a></h3>
+            
+            <ul>
+<li><a href="#usage">Usage
+            </a></li>
+<li><a href="#description">Description
+            </a></li>
+<ul>
+<li><a href="#type_constructors">Type constructors
+            </a></li>
+<li><a href="#type_parameter_lists">Type parameter lists
+            </a></li>
+<ul><li><a href="#variance">Variance
+            </a></li></ul>
+<li><a href="#constraints">Constraints
+            </a></li>
+<ul><li><a href="#examples">Examples
+            </a></li></ul>
+<li><a href="#defaulted_type_parameters">Defaulted type parameters
+            </a></li>
+</ul>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.0/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.0/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.0/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+            <span style="color:#8d5e0b">(1.0)</span>
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_10_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.0, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <h1 id="type_parameters">Type Parameters</h1>
+          
+          <p id="class_interface_and_function_declarations..."><a href="../class/">Class</a>, <a href="../interface/">interface</a> and <a href="../function/">function</a>
+          declarations may have one or more type parameters.</p>
+          
+          <h2 id="usage">Usage
+          </h2>
+          
+          
+          <p id="a_simple_type_parameterized_or...">A simple type-parameterized (or <em>generic</em>) class might look like this:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>class Class&lt;out Element&gt;(Element* elements) {
+    /* declarations of class members */
+}
+</code></pre>
+          
+          <p id="a_simple_type_parameterised_or...">A simple type-parameterised (or <em>generic</em>) function might look like this:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>void fun&lt;First,Second&gt;(First first, Second second) {
+
+}
+</code></pre>
+          
+          <p id="note_by_convention_type_parameters..."><strong>Note</strong>: By convention, type parameters are given meaningful names rather
+          than single letter names, such as <code>T</code>, <code>U</code>, <code>V</code>, etc, as is common in many
+          other languages.</p>
+          
+          <h2 id="description">Description
+          </h2>
+          
+          
+          
+          
+          <h3 id="type_constructors">Type constructors
+          </h3>
+          
+          
+          <p id="conceptually_a_parameterized_class_or...">Conceptually, a parameterized class or interface declaration is a <em>type
+          constructor</em>, that is, a function from types to types. It produces a type
+          given a tuple of compatible type arguments.</p>
+          
+          <p id="conceptually_a_parameterized_class_or_function...">Conceptually, a parameterized class or function declaration defines a
+          function that produces the signature of an invokable operation given a
+          tuple of compatible type arguments.</p>
+          
+          <p id="note_we_often_view_the..."><strong>Note</strong>: we often view the definition of a generic class or function as
+          a <em>template</em> for producing a class or function. However, this is a
+          slightly misleading mental model. Generics in Ceylon are very different
+          to C++-style templates, and are ultimately derived from the approach taken
+          in languages like ML.</p>
+          
+          <h3 id="type_parameter_lists">Type parameter lists
+          </h3>
+          
+          
+          <p id="a_type_parameter_list_is...">A type parameter list is a comma separated list of type names enclosed
+          in angle brackets (<code>&lt;</code> and <code>&gt;</code>). The type parameter list occurs directly
+          after the class, interface, or function name, and before any
+          <a href="../parameter-list">value parameter list</a>.</p>
+          
+          <h4 id="variance">Variance
+          </h4>
+          
+          
+          <p id="the_type_names_in_the...">The type names in the type parameter list of a class, interface, or
+          function may optionally be preceded by a variance modifier
+          <code>in</code> (indicating a <em>contravariant</em> type parameter) or
+          <code>out</code> (indicating a <em>covariant</em> type parameter). Type parameters without
+          either modifier are <em>invariant</em>.</p>
+          
+          <p id="references_to_contravariant_and_covariant...">References to contravariant and covariant type parameters are only
+          permitted in certain locations within the type-parameterised declaration.
+          For example a covariant type parameter of a class is not permitted to
+          occur in the parameter list of a method of the class. Likewise, a
+          contravariant type parameter of the class is not permitted as the method's
+          return type.</p>
+          
+          <h3 id="constraints">Constraints
+          </h3>
+          
+          
+          <p id="type_parameterized_declarations_may_have...">Type-parameterized declarations may have a <code>given</code> clause for each declared
+          type parameter to constrain the permitted type argument.</p>
+          
+          <p id="the_constraints_are">The constraints are:</p>
+          
+          <ul>
+          <li>An <em>upper bound</em>, <code>given X satisfies T</code>, constrains arguments of <code>X</code> to
+          subtypes of <code>T</code>.</li>
+          <li>An <em>enumerated bound</em>, <code>given X of T|U|V</code>, constrains arguments of <code>X</code> to
+          be one of the enumerated types, <code>T</code>, <code>U</code>, or <code>V</code>.</li>
+          </ul>
+          
+          
+          <h4 id="examples">Examples
+          </h4>
+          
+          
+          <p id="the_default_supertype_of_a...">The default supertype of a type parameter is
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/Anything.type.html"><code>Anything</code></a>,
+          so it's common to
+          see type constraints which use <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/Object.type.html"><code>Object</code></a>
+          as an upper bound if the declaration
+          doesn't support
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/Null.type.html"><code>Null</code></a>.
+          An example of this is <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/Set.type.html"><code>Set</code></a>
+          from the language module:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared interface Set&lt;out Element&gt;
+        satisfies Collection&lt;Element&gt; &amp;
+                  Cloneable&lt;Set&lt;Element&gt;&gt;
+        given Element satisfies Object {
+    // ...
+}
+</code></pre>
+          
+          <p id="given_this_declaration_its_not...">Given this declaration it's not allowed to have a <code>Set&lt;String?&gt;</code>, because
+          <code>String?</code> means <code>String|Null</code> and although <code>String</code> satisfies <code>Object</code>,
+          <code>Null</code> does not.</p>
+          
+          <p id="another_example_from_the_language...">Another example from the language module is <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/Comparable.type.html"><code>Comparable</code></a>,
+          declared like this:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared interface Comparable&lt;in Other&gt; of Other 
+        given Other satisfies Comparable&lt;Other&gt; {
+    // ...
+}
+</code></pre>
+          
+          <p id="this_is_an_example_of...">This is an example of a <em>self type</em> bound: The type parameter <code>Other</code> is
+          constrained to itself be <code>Comparable&lt;Other&gt;</code>, loosely meaning that once the
+          type <code>Comparable&lt;Other&gt;</code> is instantiated, <code>Other</code> will be the same type as
+          the type instantiated type. Concretely, in the type instantiation
+          <code>Comparable&lt;Integer&gt;</code>, <code>Other</code> has the type <code>Integer</code>, and is thus a subtype
+          of <code>Comparable&lt;Integer&gt;</code>.</p>
+          
+          <p id="a_final_example_is_the...">A final example is the language module's
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/index.html#sort"><code>sort()</code></a> function, which
+          constrains the type parameter <code>Element</code> so that it can only be called
+          with a <code>Comparable</code> type argument:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared Element[] sort&lt;Element&gt;({Element*} elements) 
+        given Element satisfies Comparable&lt;Element&gt;
+</code></pre>
+          
+          <p id="this_is_necessary_so_that...">This is necessary so that <code>sort()</code> can use the <code>&lt;=&gt;</code> operator to determine
+          how two elements compare, and so that you cannot call <code>sort()</code> with elements
+          which cannot be compared.</p>
+          
+          <h3 id="defaulted_type_parameters">Defaulted type parameters
+          </h3>
+          
+          
+          <p id="just_as_a_parameter_list...">Just as a parameter list can define defaulted parameters, a type argument list
+          can define defaulted type parameters. Here's an example from the language module:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Iterable&lt;out Element, out Absent=Null&gt;
+</code></pre>
+          
+          <p id="this_means_we_can_apply...">This means we can apply the type constructor
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.0.0/module-doc/Iterable.type.html"><code>Iterable</code></a> using either one
+          or two type arguments. If we supply only one type argument, the default type
+          (in this case <code>Null</code>) is used:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>// same as Iterable&lt;String, Null&gt;
+Iterable&lt;String&gt; zeroOrMore; 
+
+Iterable&lt;String, Nothing&gt; oneOrMore;
+</code></pre>
+          
+          <p id="using_a_defaulted_type_parameter...">Using a defaulted type parameter can be used as a more flexible alternative to
+          a <a href="../alias#type_aliases">type <code>alias</code></a>. We could have declared <code>Iterable</code>
+          without a defaulted type parameter and used alises:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>alias PossiblyEmpty&lt;T&gt; =&gt; Iterable&lt;String, Null&gt;
+alias NonEmpty&lt;T&gt; =&gt; Iterable&lt;String, Nothing&gt;
+</code></pre>
+          
+          <p id="in_fact_we_dont_need...">(In fact, we don't need the aliases because Ceylon has built-in syntax sugar
+          for <code>PossiblyEmpty&lt;T&gt;</code> and <code>NonEmpty&lt;T&gt;</code>, the type abbreviations <code>{T*}</code> and
+          <code>{T+}</code>.)</p>
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li><a href="../class"><code>class</code> declaration</a></li>
+          <li><a href="../interface"><code>interface</code> declaration</a></li>
+          <li><a href="../function/"><code>function</code> declaration</a></li>
+          <li>
+<a href="/documentation/current/spec/html_single/index.html#generictypeparameters">Generic type parameters</a>
+          in the Ceylon language spec</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

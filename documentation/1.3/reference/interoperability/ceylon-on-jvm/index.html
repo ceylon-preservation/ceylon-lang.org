@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Starting a Ceylon module from the JVM</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.3/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.3/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.3/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.3/examples">Examples</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.3/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.3/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.3/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.3/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.3/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide_for_intellij"><a href="/documentation/1.3/ide/intellij">Ceylon IDE for IntelliJ</a></h3>
+            
+            <h3 id="ceylon_ide_for_eclipse"><a href="/documentation/1.3/ide/eclipse">Ceylon IDE for Eclipse</a></h3>
+            
+            <h3 id="vertx"><a href="http://vertx.io/docs/vertx-core/ceylon/">Vert.x</a></h3>
+          </div>
+          <div class="point-dark-bottom">
+             
+          </div>
+          <div class="point-light-top"></div>
+          <div class="toc">
+            <ul>
+<li><a href="#description">Description
+            </a></li>
+<li><a href="#note_about_the_metamodel_system">Note about the metamodel system
+            </a></li>
+<li><a href="#using_the_main_api">Using the <code>Main</code> API
+            </a></li>
+<ul>
+<li><a href="#running_ceylon_modules_directly_from_the_command_line_using_java">Running Ceylon modules directly from the command-line using <code>java</code>
+            </a></li>
+<li><a href="#running_ceylon_modules_from_java_code_using_the_main_api">Running Ceylon modules from Java code using the <code>Main</code> API
+            </a></li>
+</ul>
+<li><a href="#using_the_ceylontoolprovider_api">Using the <code>CeylonToolProvider</code> API
+            </a></li>
+<ul>
+<li><a href="#compiling_a_ceylon_module_for_both_backends">Compiling a Ceylon module for both backends
+            </a></li>
+<li><a href="#running_a_ceylon_module_for_both_backends">Running a Ceylon module for both backends
+            </a></li>
+<li><a href="#flat_repositories">Flat repositories
+            </a></li>
+</ul>
+</ul>
+            
+            
+            <p id=""></p>
+          </div>
+          <div class="point-light-end"></div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+          </div>
+        </div>
+        <div id="core-page">
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.3/reference/interoperability/ceylon-on-jvm.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.3/reference/interoperability/ceylon-on-jvm.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="starting_a_ceylon_module_from_the_jvm">Starting a Ceylon module from the JVM</h1>
+          
+          <h2 id="description">Description
+          </h2>
+          
+          
+          <p id="if_you_use_the_ceylon...">If you use the <code>ceylon run</code> command-line, or <code>Run as &gt; Ceylon Application</code> from the Ceylon IDE for Eclipse,
+          your module will run on JBoss Modules, which guarantees that each module will have an isolated
+          class loader (this allows you to have multiple versions of the same module loaded at run time
+          without problem) and the Ceylon metamodel will be automatically set up.</p>
+          
+          <p id="if_you_want_to_invoke...">If you want to invoke Ceylon from your Java program without JBoss Modules, then there are two
+          options available to you:</p>
+          
+          <ul>
+          <li>The <a href="#using_the_main_api"><code>Main</code> API</a> to run Ceylon modules from the Java command line or a
+          Java class with a flat class path, or</li>
+          <li>The <a href="#using_the_ceylontoolprovider_api"><code>CeylonToolProvider</code> API</a> to compile and run Ceylon
+          modules for both Java and JavaScript backends.</li>
+          </ul>
+          
+          
+          <h2 id="note_about_the_metamodel_system">Note about the metamodel system
+          </h2>
+          
+          
+          <p id="ceylon_provides_a_run_time...">Ceylon provides a run-time accessible metamodel, which provides information about the existing
+          modules, packages and types, and is used by reified generics. Java also has a run-time metamodel
+          called <em>reflection</em>, but it is automatically set up by the JVM. Since Ceylon does not have its
+          own VM, the metamodel has to be set up externally. This is automatic when using JBoss Modules,
+          but has to be done manually otherwise.</p>
+          
+          <p id="in_the_future_we_hope...">In the future, we hope to be able to make this set up automatic.</p>
+          
+          <h2 id="using_the_main_api">Using the <code>Main</code> API
+          </h2>
+          
+          
+          <p id="this_is_an_api_provided...">This is an API provided by the <code>ceylon.language</code> module in the <code>com.redhat.ceylon.compiler.java.runtime.Main</code>
+          class. There are two modes of operation: calling it from the <code>java</code> command-line to start Ceylon
+          modules without JBoss Modules, or calling it from Java source code.</p>
+          
+          <p id="both_modes_require_you_to...">Both modes require you to put all the required Ceylon module dependencies of the module you want to run in
+          the classpath, manually. However, the <code>ceylon classpath</code> command will give you the classpath required.</p>
+          
+          <p id="for_example_suppose_you_want...">For example, suppose you want to run the <code>ceylon.formatter</code> module from Java, then you will need all its
+          transitive dependencies loaded in the JVM, so you run <code>ceylon classpath ceylon.formatter</code>:</p>
+          
+          <pre data-language="shell"><code>$ ceylon classpath ceylon.formatter/1.2.1
+/usr/share/ceylon/1.2.1/repo/org/apache/httpcomponents/httpclient/4.3.2/org.apache.httpcomponents.httpclient-4.3.2.jar:/home/stephane/.ceylon/repo/ceylon/test/1.2.1/ceylon.test-1.2.1.car:/usr/share/ceylon/1.2.1/repo/org/apache/httpcomponents/httpcore/4.3.2/org.apache.httpcomponents.httpcore-4.3.2.jar:/usr/share/ceylon/1.2.1/repo/com/redhat/ceylon/common/1.2.1/com.redhat.ceylon.common-1.2.1.jar:/usr/share/ceylon/1.2.1/repo/com/redhat/ceylon/compiler/java/1.2.1/com.redhat.ceylon.compiler.java-1.2.1.jar:/usr/share/ceylon/1.2.1/repo/org/antlr/antlr/2.7.7/org.antlr.antlr-2.7.7.jar:/usr/share/ceylon/1.2.1/repo/com/github/lookfirst/sardine/5.1/com.github.lookfirst.sardine-5.1.jar:/usr/share/ceylon/1.2.1/repo/org/apache/commons/logging/1.1.1/org.apache.commons.logging-1.1.1.jar:/usr/share/ceylon/1.2.1/repo/com/github/rjeschke/txtmark/0.11/com.github.rjeschke.txtmark-0.11.jar:/usr/share/ceylon/1.2.1/repo/ceylon/language/1.2.1/ceylon.language-1.2.1.car:/usr/share/ceylon/1.2.1/repo/org/slf4j/api/1.6.1/org.slf4j.api-1.6.1.jar:/usr/share/ceylon/1.2.1/repo/net/minidev/json-smart/1.1.1/net.minidev.json-smart-1.1.1.jar:/usr/share/ceylon/1.2.1/repo/org/antlr/stringtemplate/3.2.1/org.antlr.stringtemplate-3.2.1.jar:/home/stephane/.ceylon/repo/ceylon/collection/1.2.1/ceylon.collection-1.2.1.car:/home/stephane/.ceylon/repo/ceylon/formatter/1.2.1/ceylon.formatter-1.2.1.car:/usr/share/ceylon/1.2.1/repo/org/antlr/runtime/3.4/org.antlr.runtime-3.4.jar:/usr/share/ceylon/1.2.1/repo/org/jboss/modules/1.3.3.Final/org.jboss.modules-1.3.3.Final.jar:/usr/share/ceylon/1.2.1/repo/com/redhat/ceylon/compiler/js/1.2.1/com.redhat.ceylon.compiler.js-1.2.1.jar:/home/stephane/.ceylon/repo/ceylon/file/1.2.1/ceylon.file-1.2.1.car:/home/stephane/.ceylon/repo/ceylon/interop/java/1.2.1/ceylon.interop.java-1.2.1.car:/usr/share/ceylon/1.2.1/repo/com/redhat/ceylon/maven-support/2.0/com.redhat.ceylon.maven-support-2.0.jar:/usr/share/ceylon/1.2.1/repo/com/redhat/ceylon/module-resolver/1.2.1/com.redhat.ceylon.module-resolver-1.2.1.jar:/usr/share/ceylon/1.2.1/repo/com/redhat/ceylon/typechecker/1.2.1/com.redhat.ceylon.typechecker-1.2.1.jar:/usr/share/ceylon/1.2.1/repo/org/tautua/markdownpapers/core/1.2.7/org.tautua.markdownpapers.core-1.2.7.jar:/usr/share/ceylon/1.2.1/repo/org/apache/commons/codec/1.8/org.apache.commons.codec-1.8.jar:/usr/share/ceylon/1.2.1/repo/org/jboss/jandex/1.0.3.Final/org.jboss.jandex-1.0.3.Final.jar
+</code></pre>
+          
+          <p id="it_is_a_mouthful_to...">It is a mouthful, to be sure, and we plan on removing most of those runtime dependencies in the next release, but
+          it does the job.</p>
+          
+          <p id="of_course_you_can_directly...">Of course, you can directly pass this classpath to Java:</p>
+          
+          <pre data-language="shell"><code>$ java -cp `ceylon classpath ceylon.formatter/1.2.1` ...
+</code></pre>
+          
+          <h3 id="running_ceylon_modules_directly_from_the_command_line_using_java">Running Ceylon modules directly from the command-line using <code>java</code>
+          </h3>
+          
+          
+          <p id="you_can_use_the_comredhatceyloncompilerjavaruntimemain...">You can use the <code>com.redhat.ceylon.compiler.java.runtime.Main</code> as the Java main class to execute your
+          Ceylon modules. For this, you just need to set up the classpath as we’ve already seen, and specify the
+          module you want to run, its main Java class and any arguments you want to pass it:</p>
+          
+          <pre data-language="shell"><code>$ java -cp `ceylon classpath ceylon.formatter/1.2.1` com.redhat.ceylon.compiler.java.runtime.Main ceylon.formatter/1.2.1 ceylon.formatter.run_ args...
+</code></pre>
+          
+          <p id="this_will_set_up_the...">This will set up the metamodel and invoke the <code>ceylon.formatter</code> module in a flat classpath.</p>
+          
+          <h3 id="running_ceylon_modules_from_java_code_using_the_main_api">Running Ceylon modules from Java code using the <code>Main</code> API
+          </h3>
+          
+          
+          <p id="similarly_you_can_achieve_the...">Similarly, you can achieve the same using the API in <code>Main</code> if you already set up your classpath manually,
+          this will set up the metamodel and invoke the <code>ceylon.formatter</code> module:</p>
+          
+          <pre data-language="java"><code>import com.redhat.ceylon.compiler.java.runtime.Main;
+
+public class Run {
+    public static void main(String[] args){
+        Main.runModule("ceylon.formatter", "1.2.1", "ceylon.formatter.run_");
+    }
+}
+</code></pre>
+          
+          <h2 id="using_the_ceylontoolprovider_api">Using the <code>CeylonToolProvider</code> API
+          </h2>
+          
+          
+          <p id="the_comredhatceyloncompilerjavaruntimetoolsceylontoolprovider_class_from_the...">The <code>com.redhat.ceylon.compiler.java.runtime.tools.CeylonToolProvider</code> class from the <code>ceylon.language</code> module
+          allows you to compile and run Ceylon modules from the JVM for both the JVM and JS backends.</p>
+          
+          <p id="this_api_assumes_you_have...">This API assumes you have the Ceylon distribution in your classpath, but not necessarily the Ceylon modules you
+          want to compile or run (although it is supported too). This means you have to start your JVM with a classpath
+          set to <code>ceylon classpath ceylon.language/1.2.1</code> or a similar classpath provided by a manually created <code>ClassLoader</code>.</p>
+          
+          <h3 id="compiling_a_ceylon_module_for_both_backends">Compiling a Ceylon module for both backends
+          </h3>
+          
+          
+          
+          
+          <pre data-language="java"><code>import com.redhat.ceylon.compiler.java.runtime.tools.*;
+import java.io.File;
+
+public class Run {
+    public static void main(String[] args){
+        CompilerOptions options = new CompilerOptions();
+        options.addModule("com.example");
+
+        CompilationListener listener = new CompilationListener(){
+            @Override
+            public void error(File file, long line, long column, String message){}
+            @Override
+            public void warning(File file, long line, long column, String message){}
+            @Override
+            public void moduleCompiled(String module, String version){}
+        };
+
+        Compiler jvmCompiler = CeylonToolProvider.getCompiler(Backend.Java);
+        jvmCompiler.compile(options, listener);
+
+        Compiler jsCompiler = CeylonToolProvider.getCompiler(Backend.JavaScript);
+        jsCompiler.compile(options, listener);
+    }
+}
+</code></pre>
+          
+          <h3 id="running_a_ceylon_module_for_both_backends">Running a Ceylon module for both backends
+          </h3>
+          
+          
+          <p id="this_will_run_the_given...">This will run the given Ceylon modules in the current JVM for the Java backend, or in a new <code>node.js</code> process
+          for the JavaScript backend.</p>
+          
+          <p id="for_the_java_backend_this...">For the Java backend, this will set up a new <code>ClassLoader</code> which knows how to load all the dependencies of the
+          module you want to run. Again, assuming the <code>ceylon.language</code> module and its dependencies are already in your
+          classpath.</p>
+          
+          <pre data-language="java"><code>import com.redhat.ceylon.compiler.java.runtime.tools.*;
+
+public class Run {
+    public static void main(String[] args){
+        RunnerOptions options = new RunnerOptions();
+        String module = "com.example";
+        String version = "1";
+
+        Runner jvmRunner = CeylonToolProvider.getRunner(Backend.Java, options, module, version);
+        try{
+            jvmRunner.run();
+        }finally{
+            // make sure we release the classloader
+            jvmRunner.cleanup();
+        }
+
+        Runner jsRunner = CeylonToolProvider.getRunner(Backend.JavaScript, options, module, version);
+        try{
+            jsRunner.run();
+        }finally{
+            // make sure we release resources
+            jsRunner.cleanup();
+        }
+    }
+}
+</code></pre>
+          
+          <h3 id="flat_repositories">Flat repositories
+          </h3>
+          
+          
+          <p id="ceylon’s_notion_of_module_repositories...">Ceylon’s notion of <a href="../../repository">module repositories</a> is usually hierarchical, but sometimes you will have jars in your
+          classpath which are all in a flat folder, and if you want to make them accessible to Ceylon modules you can
+          then specify a <em>flat repository</em> to the Ceylon tools so that they <em>see</em> the modules which are in your classpath.</p>
+          
+          <p id="supposing_you_have_all_the...">Supposing you have all the jars from the <code>project/lib</code> folder in your classpath, and you want to tell Ceylon
+          to use it as a flat repository, you can do so like this:</p>
+          
+          <pre data-language="java"><code>import com.redhat.ceylon.compiler.java.runtime.tools.*;
+import java.io.File;
+
+public class Run {
+    public static void main(String[] args){
+        String module = "com.example";
+        String repo = "project/lib";
+
+        CompilerOptions options = new CompilerOptions();
+        options.addModule("com.example");
+        options.addUserRepository("flat:"+repo);
+
+        CompilationListener listener = new CompilationListener(){
+            @Override
+            public void error(File file, long line, long column, String message){}
+            @Override
+            public void warning(File file, long line, long column, String message){}
+            @Override
+            public void moduleCompiled(String module, String version){}
+        };
+
+        Compiler jvmCompiler = CeylonToolProvider.getCompiler(Backend.Java);
+        jvmCompiler.compile(options, listener);
+
+        // now run it
+        RunnerOptions runOptions = new RunnerOptions();
+        runOptions.addUserRepository("flat:"+repo);
+        String version = "1";
+
+        Runner jvmRunner = CeylonToolProvider.getRunner(Backend.Java, runOptions, module, version);
+        try{
+            jvmRunner.run();
+        }finally{
+            // make sure we release the classloader
+            jvmRunner.cleanup();
+        }
+    }
+}
+</code></pre>
+          
+          <p id="ceylon_will_be_able_to...">Ceylon will be able to use <code>project/lib</code> to look up modules, in the form of <code>module.name-version.jar</code>,
+          and will use any of the following files to find the module dependencies:</p>
+          
+          <ul>
+          <li>
+<code>module.name-version.xml</code> in the same folder, or</li>
+          <li>
+<code>META-INF/jbossmodules/module/name/version/module.xml</code> in the jar, or</li>
+          <li>
+<code>META-INF/jbossmodules/module/name/version/module.properties</code> in the jar, or</li>
+          <li>
+<code>META-INF/MANIFEST.MF</code> for OSGi modules in the jar, or</li>
+          <li>
+<code>META-INF/maven/module/name/pom.xml</code> for Maven modules in the jar.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

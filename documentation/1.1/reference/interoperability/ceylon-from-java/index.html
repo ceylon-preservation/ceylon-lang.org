@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Using Ceylon from Java</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.1/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.1/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.1/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.1/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.1/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.1/reference">Reference</a></h3>
+            
+            <ul>
+<li><a href="#description">Description
+            </a></li>
+<ul>
+<li><a href="#declaring_ceylon_types">Declaring Ceylon types
+            </a></li>
+<li><a href="#instantiating_ceylon_classes">Instantiating Ceylon classes
+            </a></li>
+<li><a href="#accessing_ceylon_attributes">Accessing Ceylon attributes
+            </a></li>
+<ul>
+<li><a href="#instance_attributes">Instance attributes
+            </a></li>
+<li><a href="#toplevel_attributes">Toplevel attributes
+            </a></li>
+</ul>
+<li><a href="#calling_ceylon_methods">Calling Ceylon methods
+            </a></li>
+<ul>
+<li><a href="#calling_ceylon_toplevel_methods">Calling Ceylon toplevel methods
+            </a></li>
+<li><a href="#calling_a_ceylon_method_with_default_parameter_values">Calling a Ceylon method with default parameter values
+            </a></li>
+</ul>
+<li><a href="#methods_and_initialisers_with_varargs">Methods and initialisers with varargs
+            </a></li>
+<li><a href="#catching_ceylon_exceptions">Catching Ceylon exceptions
+            </a></li>
+<li><a href="#type_conversions">Type conversions
+            </a></li>
+<ul>
+<li><a href="#convert_from_a_java_type_to_a_ceylon_type">Convert from a Java type to a Ceylon type
+            </a></li>
+<li><a href="#convert_from_a_ceylon_type_to_a_java_type">Convert from a Ceylon type to a Java type
+            </a></li>
+</ul>
+</ul>
+<li><a href="#annotating_java_declarations_with_ceylon_annotations">Annotating Java declarations with Ceylon annotations
+            </a></li>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.1/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.1/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.1/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference (1.1)
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_11_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.1, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <h1 id="using_ceylon_from_java">Using Ceylon from Java</h1>
+          
+          <h2 id="description">Description
+          </h2>
+          
+          
+          <p id="this_page_covers_how_you...">This page covers how you can use Ceylon classes, interfaces etc from Java.</p>
+          
+          <h3 id="declaring_ceylon_types">Declaring Ceylon types
+          </h3>
+          
+          
+          <p id="in_general_a_top_level...">In general, a top level Ceylon types and inner classes compile into a Java
+          type of the same name.</p>
+          
+          <p id="the_situation_is_more_complicated...">The situation is more complicated for inner interfaces. The compiler always
+          generates a top level interface, using the containing type name(s) separated with a dollar (<code>$</code>) and then the interface name, again separated with a dollar. For
+          example this Ceylon:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>class C() {
+    interface I {
+    }
+}
+</code></pre>
+          
+          <p id="results_in_an_interface_like...">results in an interface like this:</p>
+          
+          <pre data-language="java"><code>interface C$I {
+}
+</code></pre>
+          
+          <p id="this_is_done_in_order...">This is done in order to support arbitrary nesting of interfaces and classes
+          within other types, which cannot be expressed in Java.</p>
+          
+          <h3 id="instantiating_ceylon_classes">Instantiating Ceylon classes
+          </h3>
+          
+          
+          <p id="ceylon_types_are_instantiated_like...">Ceylon types are instantiated like every Java type. They have an overloaded
+          constructor for each defaulted parameter.</p>
+          
+          <p id="for_example_suppose_you_have...">For example suppose you have the following Ceylon class:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared class Foo(Integer n = 5, Integer m = n + 1) {
+}
+</code></pre>
+          
+          <p id="then_in_java_you_can...">Then in Java you can instantiate a <code>Foo</code> in three ways:</p>
+          
+          <pre data-language="java"><code>Foo foo1 = new Foo(6, 7);
+Foo foo2 = new Foo(6); // use the default m
+Foo foo3 = new Foo();  // use the default n and m
+</code></pre>
+          
+          <h3 id="accessing_ceylon_attributes">Accessing Ceylon attributes
+          </h3>
+          
+          
+          <p id="if_the_ceylon_attribute_is...">If the Ceylon attribute
+          is annotated <code>shared</code> the Java accessor will be declared <code>public</code>, otherwise
+          it will be annotated <code>private</code>.</p>
+          
+          <h4 id="instance_attributes">Instance attributes
+          </h4>
+          
+          
+          <p id="in_general_a_ceylon_instance...">In general a Ceylon instance attribute compiles into a Java Bean-style getter and
+          (if the attribute is <code>variable</code> or has an <code>assign</code> block) setter.</p>
+          
+          <p id="boolean_attributes_use_get_accessors..."><code>Boolean</code> attributes use <code>get</code> accessors rather than an <code>is</code> accessors.
+          Note that a <code>get</code> accessor is still valid for <code>boolean</code> properties
+          according to the Java Bean specification.</p>
+          
+          <h4 id="toplevel_attributes">Toplevel attributes
+          </h4>
+          
+          
+          <p id="a_toplevel_attribute_is_compiled...">A toplevel attribute is compiled into a class of the same name with an underscore (<code>_</code>)
+          suffix, which is <code>final</code>,
+          has a <code>private</code> constructor, a <code>static</code> getter method and if the attribute is mutable, a
+          corresponding <code>static</code> setter method.</p>
+          
+          <p id="toplevel_attributes_like_the_following">Toplevel attributes like the following:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared variable Boolean bool = true;
+</code></pre>
+          
+          <p id="are_accessed_and_set_using...">Are accessed and set using the following Java code:</p>
+          
+          <pre data-language="java"><code>// bool is the name of the Java class that holds the toplevel attribute 
+boolean value = bool_.getBool$();
+bool_.setBool$(false);
+</code></pre>
+          
+          <h3 id="calling_ceylon_methods">Calling Ceylon methods
+          </h3>
+          
+          
+          <p id="in_general_a_ceylon_method...">In general a Ceylon method compiles directly into a Java method of the same
+          name. The method result type and argument types may not however
+          translate directly because of the <a href="../type-mapping">type mapping rules</a>.</p>
+          
+          <p id="if_a_ceylon_method_name...">If a Ceylon method name is a Java keyword, it will be prefixed with <code>$</code>, like <code>$true</code>.</p>
+          
+          <h4 id="calling_ceylon_toplevel_methods">Calling Ceylon toplevel methods
+          </h4>
+          
+          
+          <p id="a_ceylon_toplevel_method_is...">A Ceylon toplevel method is compiled into a class of the same name with an underscore (<code>_</code>)
+          suffix, which is <code>final</code>,
+          has a <code>private</code> constructor, and a <code>static</code> method of the same name corresponding to the
+          toplevel method.</p>
+          
+          <p id="toplevel_methods_like_the_following">Toplevel methods like the following:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared Boolean foo(Boolean b){
+    return b;
+}
+</code></pre>
+          
+          <p id="are_called_using_the_following...">Are called using the following Java code:</p>
+          
+          <pre data-language="java"><code>// foo is the name of the Java class that holds the toplevel method 
+boolean value = foo_.foo(false);
+</code></pre>
+          
+          <h4 id="calling_a_ceylon_method_with_default_parameter_values">Calling a Ceylon method with default parameter values
+          </h4>
+          
+          
+          <p id="ceylon_methods_can_have_default...">Ceylon methods can have default parameter values. There will be an overloaded method for each defaulted parameter.</p>
+          
+          <p id="for_example_suppose_you_have_the...">For example suppose you have the following Ceylon class:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared class Foo() {
+    shared void foo(Integer n = 5, Integer m = n + 1) {}
+}
+</code></pre>
+          
+          <p id="then_in_java_you_can_invoke...">Then in Java you can invoke <code>Foo.foo()</code> in three ways:</p>
+          
+          <pre data-language="java"><code>Foo f = new Foo();
+f.foo(6, 88);
+f.foo(6); // use the default m
+f.foo();  // use the default n and m
+</code></pre>
+          
+          <h3 id="methods_and_initialisers_with_varargs">Methods and initialisers with varargs
+          </h3>
+          
+          
+          <p id="method_and_initialisers_can_have...">Method and initialisers can have varargs, which are represented in the resulting Java
+          code as a <code>Iterable&lt;? extends T&gt;</code> parameter. There will be an overloaded
+          method if you want to use the sequenced parameter's default value (an empty
+          <code>Iterable</code> by default)</p>
+          
+          <p id="if_you_wish_to_invoke...">If you wish to invoke a Ceylon method or initialiser that supports varargs you need to
+          use the following idiom:</p>
+          
+          <pre data-language="java"><code>// Foo.foo supports varargs of String...
+Foo f = new Foo();
+// use the parameter's default sequence
+f.foo();
+// pass no arguments
+f.foo(ceylon.language.$empty.getEmpty());
+// pass two arguments
+f.foo(new ceylon.language.ArraySequence(ceylon.language.String.instance("a"), 
+                                        ceylon.language.String.instance("b")));
+</code></pre>
+          
+          <h3 id="catching_ceylon_exceptions">Catching Ceylon exceptions
+          </h3>
+          
+          
+          <p id="the_root_of_the_exception...">The root of the exception hierarchy in Ceylon is <code>ceylon.language::Throwable</code>,
+          Unlike Java's <code>Throwable</code>,
+          <code>ceylon.language::Throwable</code> is <code>sealed</code> and the only subclasses available
+          to users are <code>ceylon.language::Exception</code> and <code>ceylon.language::AssertionError</code>.
+          In order to best interoperate between the JVM and the JavaScript virtual
+          machines there's is no Ceylon equivalent to <code>java.lang.Error</code>
+          (in general JavaScript virtual machine errors are uncatchable and fatal).</p>
+          
+          <p id="the_jvm_implementation_of_ceylonlanguageexception...">The JVM implementation of <code>ceylon.language::Exception</code> is a
+          <code>java.lang.RuntimeException</code>. On the other hand, <code>ceylon.language::AssertionError</code> is a
+          <code>java.lang.Error</code> at runtime. This means that pure Ceylon code
+          compiled for the JVM can only generate unchecked exceptions.</p>
+          
+          <p id="impure_ceylon_that_is_ceylon...">Impure Ceylon (that is, Ceylon code which access Java code) may throw
+          <em>any</em> exception that is thrown by that Java code, including checked exceptions.
+          Ceylon methods do not declare <code>throws java.lang.Throwable</code> in their bytecode,
+          even though they can in principle throw <code>Throwable</code>. In practice
+          Ceylon methods are very unlikely to throw <code>Throwable</code> itself
+          (because Java methods are unlikely to), but Ceylon methods are quite likely
+          to throw <code>java.lang.Exception</code>. So unless you know otherwise, it's
+          probably sensible to wrap calls to Ceylon methods in a Java-side
+          <code>try/catch</code> which handles this possibility.</p>
+          
+          <p id="if_you_really_need_to...">If you really need to catch <code>java.lang.Error</code> from Ceylon you have two choices:</p>
+          
+          <ul>
+          <li><p id="you_can_catch_ceylonlanguagethrowable_and...">you can catch <code>ceylon.language::Throwable</code> and then decide whether
+          you really have the error you're interested in (e.g. from
+          its error message). This has a tendency to be bug-prone
+          (exception messages can change), but doesn't require your module to
+          be JVM only.</p></li>
+          <li><p id="if_youre_willing_to_have...">if you're willing to have a JVM-only module you can
+          explicitly import <code>java.lang.Error</code> and catch it directly.</p></li>
+          </ul>
+          
+          
+          <h3 id="type_conversions">Type conversions
+          </h3>
+          
+          
+          <p id="if_you_need_to_convert...">If you need to convert a Java or Ceylon type according to the
+          <a href="../type-mapping">type mapping rules</a>, you can do so using the following
+          methods.</p>
+          
+          <h4 id="convert_from_a_java_type_to_a_ceylon_type">Convert from a Java type to a Ceylon type
+          </h4>
+          
+          
+          
+          
+          <table>
+              <tr>
+                  <th>Java type</th>
+                  <th>Convert to Ceylon object</th>
+              </tr>
+              <tr>
+                  <td><code>boolean b</code></td>
+                  <td><code>ceylon.language.Boolean.instance(b)</code></td>
+              </tr>
+              <tr>
+                  <td><code>byte x</code></td>
+                  <td>
+<code>ceylon.language.Byte.instance(x)</code> <span class="milestone" title="Support for this feature was introduced in version 1.1">1.1</span>
+</td>
+              </tr>
+              <tr>
+                  <td>
+<code>short x</code>, <code>int x</code>, <code>long x</code>
+</td>
+                  <td><code>ceylon.language.Integer.instance(x)</code></td>
+              </tr>
+              <tr>
+                  <td>
+<code>float x</code>, <code>double x</code>
+</td>
+                  <td><code>ceylon.language.Float.instance(x)</code></td>
+              </tr>
+              <tr>
+                  <td><code>char c</code></td>
+                  <td><code>ceylon.language.Character.instance(c)</code></td>
+              </tr>
+              <tr>
+                  <td><code>T[] a</code></td>
+                  <td><code>ceylon.language.Array.instance(a)</code></td>
+              </tr>
+              <tr>
+                  <td><code>java.lang.String s</code></td>
+                  <td><code>ceylon.language.String.instance(s)</code></td>
+              </tr>
+          </table>
+          
+          
+          
+          
+          <h4 id="convert_from_a_ceylon_type_to_a_java_type">Convert from a Ceylon type to a Java type
+          </h4>
+          
+          
+          
+          
+          <table>
+              <tr>
+                  <th>Ceylon type</th>
+                  <th>Convert to Java object</th>
+              </tr>
+              <tr>
+                  <td><code>ceylon.language.Boolean b</code></td>
+                  <td><code>b.booleanValue()</code></td>
+              </tr>
+              <tr>
+                  <td><code>ceylon.language.Byte b</code></td>
+                  <td>
+<code>b.byteValue()</code> <span class="milestone" title="Support for this feature was introduced in version 1.1">1.1</span>
+</td>
+              </tr>
+              <tr>
+                  <td><code>ceylon.language.Integer i</code></td>
+                  <td><code>i.longValue()</code></td>
+              </tr>
+              <tr>
+                  <td><code>ceylon.language.Float f</code></td>
+                  <td><code>f.doubleValue()</code></td>
+              </tr>
+              <tr>
+                  <td><code>ceylon.language.Character c</code></td>
+                  <td><code>c.intValue()</code></td>
+              </tr>
+              <tr>
+                  <td><code>ceylon.language.Array a</code></td>
+                  <td><code>a.toArray()</code></td>
+              </tr>
+              <tr>
+                  <td><code>ceylon.language.String s</code></td>
+                  <td><code>s.toString()</code></td>
+              </tr>
+          </table>
+          
+          
+          
+          
+          <h2 id="annotating_java_declarations_with_ceylon_annotations">Annotating Java declarations with Ceylon annotations
+          </h2>
+          
+          
+          <p id="ceylon_annotation_classes_are_compiled...">Ceylon annotation classes are compiled into Java annotation types (<code>@interface</code>s).
+          Each annotation class parameter is mapped to an annotation type member.
+          This means it's mostly a matter of adding the Ceylon annotation types
+          to your Java declarations.</p>
+          
+          <ul>
+          <li>The name of the annotation type is the name of the annotation class
+          with <code>$annotation</code> appended</li>
+          <li>Annotation classes that subclass <code>SequencedAnnotation</code> have an extra
+          wrapper annotation type, which holds an array of the individual
+          annotations. The name of this wrapper annotation type is the
+          name of the annotation class with <code>$annotations</code> appended.</li>
+          <li>Annotation classes that subclass <code>ConstrainedAnnotation</code> have their
+          program element constraints transformed into a
+          <code>@Target</code> constaint. However, due to the differing semantics for
+          constraining annotations it's not a bijective mapping.</li>
+          <li>Due to the constraints placed on annotation types by the Java language
+          and virtual machine to type mapping differs
+          
+          <ul>
+          <li>
+<code>Iterable</code>, <code>Sequence</code> and <code>Tuple</code>-typed parameters are
+          all mapped to a Java array of the relevant type.</li>
+          <li>Declaration references are mapped to <code>java.lang.String</code> using a special syntax
+          detailed below.</li>
+          <li>
+<code>object</code>s of enumerated types mapped to the <code>java.lang.Class</code>
+          for the anonymous class.</li>
+          </ul>
+          </li>
+          </ul>
+          
+          
+          <p id="the_grammar_for_the_declaration...">The grammar for the Declaration reference syntax is as follows:</p>
+          
+          <pre data-language="ceylon"><code>ref              ::= version? module ;
+                     // note: version is optional to support looking up the
+                     // runtime version of a package, once we support this
+version          ::= ':' SENTINEL ANYCHAR* SENTINEL ;
+module           ::= dottedIdent package? ;
+dottedIdent      ::= ident ('.' ident)* ;
+package          ::= ':' ( relativePackage | absolutePackage ) ? ( ':' declaration ) ? ;
+                     // note: if no absolute or relative package given, it's the 
+                     // root package of the module
+relativePackage  ::= dottedIdent ;
+absolutePackage  ::= '.' dottedIdent ;
+                     // note: to suport package names which don't start 
+                     // with the module name
+declaration      ::= type | function | value ;
+type             ::= class | interface ;
+class            ::= 'C' ident ( '.' member )?
+interface        ::= 'I' ident ( '.' member )?
+member           ::= declaration ;
+function         ::= 'F' ident ;
+value            ::= 'V' ident ;
+</code></pre>
+          
+          <p id="for_example_the_classdeclaration_for...">For example the <code>ClassDeclaration</code> for <code>ceylon.language::String</code> in ceylon.language
+          version 0.6 would be <code>::0.6:ceylon.language::CString</code>, and for the value <code>true</code>
+          it would be <code>::0.6:ceylon.language::Vtrue</code>.</p>
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li><a href="../java-from-ceylon">Calling Java from Ceylon</a></li>
+          <li>The <a href="../type-mapping">type mapping rules</a>
+</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

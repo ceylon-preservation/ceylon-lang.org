@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Language design Frequently Asked Questions</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.1/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.1/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.1/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <!-- ### [Tutorial Videos](/documentation/1.1/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.1/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.1/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.1/faq">FAQs</a></h3>
+            
+            <ul>
+            <li><a href="/documentation/1.1/faq">Common</a></li>
+            <li><a href="/documentation/1.1/faq/language-design">Language design</a></li>
+            </ul>
+            
+            
+            <h3 id="roadmap"><a href="/documentation/1.1/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.1/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            FAQs (1.1)
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_11_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.1, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <h1 id="faq_about_language_design">FAQ about language design</h1>
+          
+          <ul>
+<li><a href="#overview">Overview
+          </a></li>
+<ul>
+<li><a href="#goals">Goals
+          </a></li>
+<li><a href="#functional_programming">Functional programming
+          </a></li>
+</ul>
+<li><a href="#syntax">Syntax
+          </a></li>
+<ul>
+<li><a href="#string_interpolation_syntax">String interpolation syntax
+          </a></li>
+<li><a href="#semicolons_at_the_end_of_line">Semicolons <code>;</code> at the end of line?
+          </a></li>
+<li><a href="#parentheses_in_control_structures">Parentheses <code>()</code> in control structures
+          </a></li>
+<li><a href="#required_braces_in_control_structures">Required braces <code>{}</code> in control structures
+          </a></li>
+<li><a href="#prefix_instead_of_postfix_type_annotations">Prefix instead of postfix type annotations
+          </a></li>
+<li><a href="#colon_vs_extends_for_inheritance">Colon <code>:</code> vs. <code>extends</code> for inheritance
+          </a></li>
+<li><a href="#_implements_vs_satisfies"><code>implements</code> vs. <code>satisfies</code>
+          </a></li>
+<li><a href="#prefix_form_for_is_type_exists_and_nonempty">Prefix form for <code>is Type</code>, <code>exists</code>, and <code>nonempty</code>
+          </a></li>
+</ul>
+<li><a href="#declaration_modifiers">Declaration modifiers
+          </a></li>
+<ul>
+<li><a href="#verbosity_of_modifier_annotations">Verbosity of modifier annotations
+          </a></li>
+<li><a href="#_shared_vs_public"><code>shared</code> vs. <code>public</code>
+          </a></li>
+<li><a href="#no_protected_modifier">No <code>protected</code> modifier?
+          </a></li>
+<li><a href="#_overrides_vs_actual"><code>overrides</code> vs. <code>actual</code>
+          </a></li>
+<li><a href="#_abstract_vs_formal"><code>abstract</code> vs. <code>formal</code>
+          </a></li>
+<li><a href="#the_variable_modifier">The <code>variable</code> modifier
+          </a></li>
+</ul>
+<li><a href="#language_features">Language features
+          </a></li>
+<ul>
+<li><a href="#optional_types">Optional types
+          </a></li>
+<li><a href="#union_and_intersection_types">Union and intersection types
+          </a></li>
+<li><a href="#structural_typing">Structural typing
+          </a></li>
+<li><a href="#overloading">Overloading
+          </a></li>
+<li><a href="#implicit_type_conversions">Implicit type conversions
+          </a></li>
+<li><a href="#pattern_matching">Pattern matching
+          </a></li>
+<li><a href="#extension_methods">Extension methods
+          </a></li>
+<li><a href="#variance">Variance
+          </a></li>
+<li><a href="#type_classes">Type classes
+          </a></li>
+<li><a href="#type_constructor_parameterization">Type constructor parameterization
+          </a></li>
+<li><a href="#generalized_algebraic_types">Generalized algebraic types
+          </a></li>
+<li><a href="#checked_exceptions">Checked exceptions
+          </a></li>
+</ul>
+</ul>
+          
+          
+          <p id=""></p>
+          
+          <p id="you_probably_want_to_take...">You probably want to take the <a href="../../tour">Tour</a> before
+          reading this, or the questions might not make sense.</p>
+          
+          <p id="designing_a_language_is_about...">Designing a language is about trade offs. Some features are
+          sacrificed to make room for others and some syntax ideas are
+          abandoned to better fit the language goals.</p>
+          
+          <h2 id="overview">Overview
+          </h2>
+          
+          
+          
+          
+          <h3 id="goals">Goals
+          </h3>
+          
+          
+          <blockquote><p id="what_are_the_design_goals...">What are the design goals of this language?</p></blockquote>
+          
+          <p id="heres_a_list_of_some...">Here's a list of some of the ideas motivating the design of
+          Ceylon. The language should:</p>
+          
+          <ul>
+          <li>have a very regular syntax, and a uniform type system without
+          primitively-defined special cases,</li>
+          <li>be easy to read and understand, even for beginners, even for
+          non-Ceylon-programmers reading your Ceylon code on your blog
+          or on GitHub,</li>
+          <li>be extremely typesafe, completely avoiding the use of
+          exceptions to handle any kind of typing-related problem,
+          including things like null references and missing list
+          elements,</li>
+          <li>avoid introducing primitively-defined constructs in favor of
+          providing syntax sugar for common cases that would otherwise
+          be unacceptably verbose,</li>
+          <li>have a static type checker that reasons about the code
+          according to intuitive rules that can always be reproduced
+          by the programmer, and using only denotable types that can
+          be written down in the language itself,</li>
+          <li>have excellent tool support, including extremely helpful
+          and understandable error messages, and powerful IDEs,</li>
+          <li>offer a typesafe hierarchical syntax for treelike structures,
+          especially user interfaces, this completely eliminating XML
+          from the picture,</li>
+          <li>provide excellent, completely integrated support for
+          modularity,</li>
+          <li>make it easier to write more generic code, and provide
+          support for disciplined metaprogramming,</li>
+          <li>reuse the good of Java, while remaining open to good ideas
+          from other language families,</li>
+          <li>abstract away from differences between the target virtual
+          machine platforms, and</li>
+          <li>have a specification that defines with precision the
+          syntax, semantics, and type system, using fully-specified
+          terminology.</li>
+          </ul>
+          
+          
+          <p id="at_a_slightly_more_abstract...">At a slightly more abstract level, you can read about the five
+          important concerns that guide the design of the whole platform
+          <a href="/blog/2012/01/10/goals/">here</a>.</p>
+          
+          <h3 id="functional_programming">Functional programming
+          </h3>
+          
+          
+          <blockquote><p id="is_ceylon_a_functional_programming...">Is Ceylon a functional programming language?</p></blockquote>
+          
+          <p id="before_i_can_answer_please...">Before I can answer, please first tell me what you mean by
+          that. What makes a <em>programming language</em> "functional"?</p>
+          
+          <p id="i_suppose_i_can_try...">I suppose I can try to take a bit of a guess at what you
+          <em>might</em> mean, but that leaves me even more confused:</p>
+          
+          <ul>
+          <li>Does it mean that all functions are pure (without side
+          effect) and there are no variables? Then Lisp and ML aren't
+          functional? So the only well-known functional language is
+          Haskell?</li>
+          <li>Does it mean support for higher-order functions? Then
+          Smalltalk, Python, Ruby, JavaScript, C#, Java 8, Ceylon,
+          and arguably even C are all functional programming languages?</li>
+          <li>Does it mean no loops? What if a programming language defines
+          <code>for</code> as a syntax sugar for a function call? Oh, so then
+          "functional programming language" boils down to not having
+          <code>break</code>, <code>continue</code> and <code>return</code>?</li>
+          <li>Does it mean support for parametric polymorphism? Then C#
+          and Java 5 are functional?</li>
+          <li>Could it mean an emphasis upon higher-level abstractions
+          named after definitions in category theory? Then, again,
+          Scheme and ML are excluded?</li>
+          </ul>
+          
+          
+          <p id="perhaps_what_you_really_want...">Perhaps what you really want to ask is:</p>
+          
+          <blockquote><p id="does_ceylon_encourage_you_to...">Does Ceylon encourage you to write code using immutability,
+          parametric polymorphism, and higher order functions?</p></blockquote>
+          
+          <p id="well_then_thats_easy_yes...">Well then, that's easy: yes, it certainly does.</p>
+          
+          <h2 id="syntax">Syntax
+          </h2>
+          
+          
+          
+          
+          <h3 id="string_interpolation_syntax">String interpolation syntax
+          </h3>
+          
+          
+          <blockquote><p id="why_not_hello_name_or...">Why not <code>"Hello $name"</code> or <code>"Hello ${name.uppercased}"</code>?</p></blockquote>
+          
+          <p id="primarily_because_it_looks_a...">Primarily because it looks a bit cleaner for defining text
+          in user interfaces or other treelike structures.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Html hello {
+    Head head { title="Greeting"; }
+    Body body {
+        P { "Hello ``name``. Welcome back!" }
+    }
+}
+</code></pre>
+          
+          <p id="we_did_originally_investigate_the...">We did originally investigate the <code>${...}</code> syntax, but it
+          turns out that syntax would require a stateful lexer and,
+          since <code>}</code> is a legal token in the language, is more fragile
+          when editing code in an IDE. Anyway, some of us just don't
+          love seeing dollar signs all over the place. It reminds us
+          of languages we don't like.</p>
+          
+          <h3 id="semicolons_at_the_end_of_line">Semicolons <code>;</code> at the end of line?
+          </h3>
+          
+          
+          <blockquote><p id="optional_semicolons_are_in_fashion...">Optional semicolons are in fashion! All the kids at school
+          are doing it!</p></blockquote>
+          
+          <p id="well_which_of_the_following...">Well, which of the following do you prefer to look at:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared variable 
+oneToMany column("PID") 
+synchronized
+Person person = somePerson;
+</code></pre>
+          
+          <p id="where_shared_and_variable_are...">where <code>shared</code> and <code>variable</code> are just ordinary annotations,
+          or, alternatively:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared variable 
+@oneToMany @column("PID") 
+@synchronized
+Person person = somePerson
+</code></pre>
+          
+          <p id="where_shared_and_variable_are_keywords">where <code>shared</code> and <code>variable</code> are keywords?</p>
+          
+          <p id="its_a_choice_between_semicolons...">It's a choice between semicolons or the ugly <code>@annotation</code>
+          syntax for user-defined annotations. You need one or the other,
+          or your language can't be parsed. Languages which ditch the
+          semicolon <em>have</em> to introduce a special punctuation for
+          annotations, and that means that they also have to keywordize
+          common modifiers like <code>public</code>, <code>virtual</code>, etc, since they
+          just can't stomach this nasty syntax for their own annotations
+          (they can't bring themselves to make you write <code>@public</code> or
+          <code>@virtual</code>).</p>
+          
+          <p id="this_problem_becomes_especially_acute...">This problem becomes especially acute when the language
+          designer realizes they want to introduce a <em>new</em> modifier,
+          like <code>override</code> or <code>tailrec</code>, and we end up with the
+          loveliness of <code>@Override</code> or <code>@tailrec</code>. In Ceylon, since our
+          modifiers aren't keywords, we can cleanly introduce new
+          modifiers when needed, without breaking existing code. Indeed,
+          we've already done it: in 1.1, we added <code>sealed</code>.</p>
+          
+          <p id="we_chose_what_we_think...">We chose what we think is the lesser of two evils.</p>
+          
+          <p id="ceylon_has_so_many_other...">Ceylon has so many other more powerful ways to reduce
+          verbosity, that semicolons are simply small beer.</p>
+          
+          <h3 id="parentheses_in_control_structures">Parentheses <code>()</code> in control structures
+          </h3>
+          
+          
+          <blockquote><p id="why_do_i_need_the...">Why do I need the parentheses in <code>if (something) { ... }</code>?</p></blockquote>
+          
+          <p id="because_something___...">Because <code>something { ... }</code> is a legal expression in Ceylon
+          (a named argument function invocation), making <code>if something { ... }</code>
+          ambiguous.</p>
+          
+          <h3 id="required_braces_in_control_structures">Required braces <code>{}</code> in control structures
+          </h3>
+          
+          
+          <blockquote><p id="why_cant_we_make_the...">Why can't we make the braces optional for control structures
+          with a single-statement bodies?</p></blockquote>
+          
+          <p id="same_reason__is_a...">Same reason: <code>{}</code> is a legal expression in the language, so
+          <code>if (something) {</code> would be quite ambiguous.</p>
+          
+          <h3 id="prefix_instead_of_postfix_type_annotations">Prefix instead of postfix type annotations
+          </h3>
+          
+          
+          <blockquote><p id="why_do_you_follow_c...">Why do you follow C and Java in putting type annotations
+          first, instead of Pascal and ML in putting them after the
+          declaration name?</p></blockquote>
+          
+          <p id="because_we_think_this">Because we think this:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared Float e = ....
+shared Float log(Float b, Float x) { ... }
+</code></pre>
+          
+          <p id="is_simply_much_easier_to...">Is simply much easier to read than this:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared value e: Float = .... 
+shared function log(b: Float, x: Float): Float { ... }
+</code></pre>
+          
+          <p id="and_we_simply_dont_understand...">And we simply don't understand how anyone could possibly
+          think otherwise!</p>
+          
+          <h3 id="colon_vs_extends_for_inheritance">Colon <code>:</code> vs. <code>extends</code> for inheritance
+          </h3>
+          
+          
+          <blockquote><p id="why_extends_instead_of_the...">Why <code>extends</code> instead of the much more compact <code>:</code>?</p></blockquote>
+          
+          <p id="its_partially_a_matter_of...">It's partially a matter of taste. But the real reason is that
+          if you want to use <code>:</code> for <code>extends</code>, you then need to come
+          up with punctuation that means <code>satisfies</code>, <code>abstracts</code>, <code>of</code>,
+          etc, and you wind up in a rabbit hole of cryptic character
+          combinations like <code>:&gt;</code>, <code>&lt;:</code>, <code>%&gt;</code>, etc, etc.</p>
+          
+          <p id="in_general_ceylon_favors_being...">In general, Ceylon favors being more explicit at the cost of
+          being a little more verbose, so we prefer keywords and
+          annotations to cryptic punctuation.</p>
+          
+          <h3 id="_implements_vs_satisfies">
+<code>implements</code> vs. <code>satisfies</code>
+          </h3>
+          
+          
+          <blockquote><p id="did_you_really_have_to...">Did you really have to go and rename <code>implements</code>?!</p></blockquote>
+          
+          <p id="ceylon_uses_satisfies_to_specify...">Ceylon uses <code>satisfies</code> to specify a supertype in three
+          locations:</p>
+          
+          <ul>
+          <li>a class may satisfy an interface,</li>
+          <li>an interface may satisfy an interface, or</li>
+          <li>a type parameter may satisfy any type.</li>
+          </ul>
+          
+          
+          <p id="ceylon_uses_extends_to_specify...">Ceylon uses <code>extends</code> to specify a supertype in one situation:</p>
+          
+          <ul>
+          <li>a class may extend a class.</li>
+          </ul>
+          
+          
+          <p id="unlike_in_java_the_syntax...">Unlike in Java, the syntax of the <code>extends</code> and <code>satisfies</code>
+          clauses are quite different. The <code>extends</code> clause specifies
+          a single type, <em>with arguments to instantiate the type</em>. The
+          <code>satisfies</code> clause always specifies an intersection of types,
+          and never has arguments.</p>
+          
+          <p id="now_in_principle_we_could...">Now, in principle we could have used the keyword <code>implements</code>
+          instead of <code>satisfies</code>. But is it natural to say that a type
+          parameter "implements" its upper bounds? Is it natural to say
+          that one interface "implements" a second interface? We don't
+          think so.</p>
+          
+          <p id="the_designers_of_java_didnt...">The designers of Java didn't think so either, which is why in
+          Java, irregularly, a class <code>implements</code> interfaces, but an
+          interface <code>extends</code> interfaces, even though the syntax and
+          semantics are otherwise identical!</p>
+          
+          <p id="whats_nice_here_is_that...">What's nice here is that type constraints in Ceylon have a
+          syntax that is regular with class and interface declarations.
+          Consider:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>class Singleton&lt;Element&gt;(Element element)
+        satisfies Sequence&lt;Element&gt;
+        given Element satisfies Object { ... }
+</code></pre>
+          
+          <p id="many_other_languages_including_java...">Many other languages, including Java, have an ugly or
+          irregular syntax for the upper bound type constraint
+          <code>given Element satisfies Object</code>. In Ceylon, it's regular
+          and it reads well. We don't think
+          <code>given Element implements Object</code> would have been as elegant
+          here. A type parameter doesn't "implement" anything.</p>
+          
+          <h3 id="prefix_form_for_is_type_exists_and_nonempty">Prefix form for <code>is Type</code>, <code>exists</code>, and <code>nonempty</code>
+          </h3>
+          
+          
+          <blockquote><p id="wouldnt_it_be_much_more...">Wouldn't it be much more natural to write <code>name exists</code>
+          or <code>person is Employee</code> instead of <code>exists name</code> and
+          <code>is Employee person</code>?</p></blockquote>
+          
+          <p id="yes_but_it_would_not...">Yes, but it would not work well in two situations:</p>
+          
+          <p id="first_when_declaring_a_variable...">First, when declaring a variable inline in a control structure
+          condition, for example:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>  if (exists second = seq[1]) { ... }
+</code></pre>
+          
+          <p id="the_following_doesnt_work_because...">The following doesn't work because <code>exists</code> has a higher
+          precedence than <code>=</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>  if (second = seq[1] exists) { ... } //confusing unsupported syntax
+</code></pre>
+          
+          <p id="second_when_combined_with_the...">Second, when combined with the <code>!</code> (not) operator:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>  if (!is Employee person) { ... }
+</code></pre>
+          
+          <p id="the_following_reads_ambiguously_because...">The following reads ambiguously, because it's not immediately
+          clear that <code>!</code> has a lower precedence than <code>is</code>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>  if (!person is Employee) { ... } //confusing unsupported syntax
+</code></pre>
+          
+          <h2 id="declaration_modifiers">Declaration modifiers
+          </h2>
+          
+          
+          
+          
+          <h3 id="verbosity_of_modifier_annotations">Verbosity of modifier annotations
+          </h3>
+          
+          
+          <blockquote><p id="why_dont_you_have_better...">Why don't you have better defaults for <code>shared</code>, etc?</p></blockquote>
+          
+          <p id="of_course_we_could_have...">Of course, we could have chosen to make shared visibility the
+          default, providing a <code>private</code> annotation to restrict access.
+          But that would have been very harmful to modularity, a key
+          goal of the language.</p>
+          
+          <p id="the_best_default_is_the...">The "best" default is the <em>most restrictive</em> option. Otherwise,
+          the developer of a module might accidently make something
+          shared that they don't intend to make shared, and
+          be forced to either continue to support the
+          unintentionally-shared operation for the rest of the life of
+          the module, or break clients. There would be nothing the
+          compiler could do to warn you when you <em>accidently</em> left off
+          a <code>private</code> annotation. On the other hand, if you accidentally
+          leave off a <code>shared</code> annotation, the compiler will let you
+          know about that.</p>
+          
+          <p id="by_the_same_token_defaulting...">By the same token, defaulting to shared visibility would mean
+          that clients can't trust the APIs they use. You would never
+          be quite sure that the API you're using <em>really</em> meant to
+          publish some operation, or whether the developer just forgot
+          to add a <code>private</code> annotation.</p>
+          
+          <p id="precisely_the_same_arguments_apply...">Precisely the same arguments apply to refinement and the
+          <code>default</code> annotation, and to mutability and the <code>variable</code>
+          annotation. Following Java, we could have made <code>default</code> the
+          default ;-) and, likewise, we could have made <code>variable</code> the
+          default, providing a Java-like <code>final</code> annotation to specify
+          the more restrictive option. But then I'm never sure if you
+          <em>really</em> meant for some operation of your API to be refinable
+          or settable by a client, and if you <em>really</em> designed your
+          class to tolerate that—or if you just forgot to add
+          <code>final</code>.</p>
+          
+          <h3 id="_shared_vs_public">
+<code>shared</code> vs. <code>public</code>
+          </h3>
+          
+          
+          <blockquote><p id="why_on_earth_did_you...">Why on earth did you rename <code>public</code>?</p></blockquote>
+          
+          <p id="ceylon_has_a_quite_different...">Ceylon has a quite different model for specifying visibility,
+          with just one annotation instead of the three annotations we
+          would have needed to handle our four visibility levels. We
+          have:</p>
+          
+          <ul>
+          <li>private,</li>
+          <li>package-private,</li>
+          <li>module-private, and</li>
+          <li>public.</li>
+          </ul>
+          
+          
+          <p id="so_the_shared_annotation_does...">So the <code>shared</code> annotation does indeed sometimes mean "public".
+          But on the other hand it sometimes means package-private or
+          module-private! A <code>shared</code> declaration is only public if every
+          containing declaration, along with the containing package, is
+          also <code>shared</code>.</p>
+          
+          <h3 id="no_protected_modifier">No <code>protected</code> modifier?
+          </h3>
+          
+          
+          <blockquote><p id="why_is_there_no_protected...">Why is there no <code>protected</code> visibility modifier in Ceylon?</p></blockquote>
+          
+          <p id="in_our_view_there_is...">In our view, there is zero software-engineering justification
+          for <code>protected</code>. A dependency is a dependency. Whether it's
+          coming from a subtype or not is completely irrelevant. What
+          <em>does</em> matter is what package or module the dependency comes
+          from.</p>
+          
+          <p id="our_visibility_levels_are_designed...">Our visibility levels are designed to serve objective software
+          engineering ends, not vague superstitions.</p>
+          
+          <h3 id="_overrides_vs_actual">
+<code>overrides</code> vs. <code>actual</code>
+          </h3>
+          
+          
+          <blockquote><p id="why_rename_overrides">Why rename <code>overrides</code>?</p></blockquote>
+          
+          <p id="the_word_override_is_a...">The word "override" is a verb, and doesn't read well when
+          combined with other annotations. Annotations read best
+          together when they're all adjectives.</p>
+          
+          <h3 id="_abstract_vs_formal">
+<code>abstract</code> vs. <code>formal</code>
+          </h3>
+          
+          
+          <blockquote><p id="why_do_you_use_formal...">Why do you use <code>formal</code> to define an abstract member?</p></blockquote>
+          
+          <p id="ceylon_supports_member_classes_and...">Ceylon supports member classes and member class refinement.
+          And so for nested classes, <code>abstract</code> and <code>formal</code> are both
+          meaningful modifiers with quite different semantics!</p>
+          
+          <p id="an_abstract_nested_class_is...">An <code>abstract</code> nested class is a different thing to a <code>formal</code>
+          member class. A <code>formal</code> class can be instantiated. An
+          <code>abstract</code> class cannot be.</p>
+          
+          <p id="actually_if_you_think_about...">Actually, if you think about it carefully, you'll notice that
+          in Java <code>abstract</code> means something completely different for
+          classes to what it means for members. That works out OK in
+          Java because Java doesn't have member class refinement.</p>
+          
+          <h3 id="the_variable_modifier">The <code>variable</code> modifier
+          </h3>
+          
+          
+          <blockquote><p id="why_isnt_variable_a_keyword">Why isn't <code>variable</code> a keyword?</p></blockquote>
+          
+          <p id="all_declarations_in_ceylon_follow...">All declarations in Ceylon follow a regular grammar
+          expressible in BNF:</p>
+          
+          <!-- lang: bnf -->
+          
+          
+          <pre data-language="ceylon"><code>Annotation*
+(keyword | Type) Name 
+TypeParameters? Parameters*
+("of" CaseTypes)? 
+("extends" ExtendedType)? 
+("satisfies" SatisfiedTypes)?
+TypeConstraint*
+Definition
+</code></pre>
+          
+          <p id="now_with_this_in_mind...">Now with this in mind, consider the syntax of a variable
+          declaration with an explicit type. We write:</p>
+          
+          <pre data-language="ceylon"><code>variable Integer count = 0;
+</code></pre>
+          
+          <p id="if_variable_were_a_keyword...">If <code>variable</code> were a keyword, this declaration would not
+          actually conform to the grammar above, since it would be of
+          the form <code>keyword Type Name</code>. So, instead, by making it an
+          annotation instead of a keyword, we preserve the regularity
+          of the language, at the cost of making a variable declaration
+          with inferred type <em>slightly</em> more verbose than in some other
+          languages:</p>
+          
+          <pre data-language="ceylon"><code>variable value count = 0;
+</code></pre>
+          
+          <p id="were_perfectly_comfortable_with_that...">We're perfectly comfortable with that tradeoff, since
+          <code>variable</code> declarations are actually surprisingly uncommon
+          in Ceylon. We quite intentionally require a little ceremony
+          here.</p>
+          
+          <h2 id="language_features">Language features
+          </h2>
+          
+          
+          
+          
+          <h3 id="optional_types">Optional types
+          </h3>
+          
+          
+          <blockquote><p id="how_is_ceylons_t_type...">How is Ceylon's <code>T?</code> type different to an <code>Option&lt;T&gt;</code> or
+          <code>Maybe t</code> type? What's wrong with a Java-like null?</p></blockquote>
+          
+          <p id="in_languages_which_dont_support...">In languages which don't support first-class union types,
+          <code>null</code> is either:</p>
+          
+          <ul>
+          <li>a primitive value, like in Java, C#, Smalltalk, Python,
+          Ruby, etc, or</li>
+          <li>a case of an algebraic type, like in ML or Haskell.</li>
+          </ul>
+          
+          
+          <p id="some_languages_notably_scala_and...">(Some languages, notably Scala, and now also Java 8, have
+          <em>both</em> kinds of null, but this only happens because the
+          language designers realized how harmful primitive <code>null</code> is
+          too late in the evolution of the language.)</p>
+          
+          <p id="primitive_null_values_are_usually...">Primitive null values are usually defined to be assignable to
+          the language's bottom type if it has one, or, equivalently,
+          to all types if it doesn't. We believe that this has been an
+          enormous mistake with many practical consequences.</p>
+          
+          <p id="some_newer_languages_attempt_to...">(Some newer languages attempt to remedy this by introducing
+          a kind of primitive optional type with null as a primitive
+          value of that. We eschew the use of primitive special types
+          defined by fiat in the language spec, viewing such constructs
+          as the root of much evil.)</p>
+          
+          <p id="on_the_other_hand_using...">On the other hand, using an algebraic type for optional values
+          gives you typesafety, since <code>Option&lt;T&gt;</code> is not assignable to
+          <code>T</code>, but is also quite inconvenient. Every time you assign a
+          value of type T to <code>Option&lt;T&gt;</code>, you need to instantiate a
+          <code>Some&lt;T&gt;</code> to wrap up your T. And if you have a collection
+          which can contain null values, you'll get an instance of <code>Some</code>
+          for every element of the collection, even if the collection
+          contains very few null values.</p>
+          
+          <p id="by_using_a_union_type...">By using a union type, <code>Null|T</code>, Ceylon spares you the
+          need to wrap your <code>T</code>. And there's zero overhead at runtime,
+          because the compiler erases Ceylon's <code>null</code> object to a JVM
+          primitive <code>null</code>. To the best of our knowledge no other
+          existing language uses this simple, safe, and convenient
+          model.</p>
+          
+          <h3 id="union_and_intersection_types">Union and intersection types
+          </h3>
+          
+          
+          <blockquote><p id="why_are_union_types_so...">Why are union types so important in Ceylon?</p></blockquote>
+          
+          <p id="first_class_union_types_first...">First-class union types first made an appearance when we
+          started trying to figure out a sane approach to generic type
+          argument inference. One of the big problems in Java's generics
+          system is that the compiler often infers types that are
+          "non-denotable", i.e. not representable within the Java
+          language. This results in <em>really</em> confusing error messages.
+          That never happens in Ceylon, since union and intersection
+          types are denotable.</p>
+          
+          <p id="as_soon_as_we_embraced...">As soon as we embraced the need for union types, they became
+          a natural solution for the problem of how to represent optional
+          values (things which can be null) within the type system.</p>
+          
+          <p id="once_we_started_to_explore...">Once we started to explore some of the corner cases in our
+          type argument inference algorithm, we <a href="http://in.relation.to/Bloggers/UnionTypesAndCovarianceOrWhyWeNeedIntersections">discovered that we were
+          also going to need first-class intersection
+          types</a>.</p>
+          
+          <p id="later_we_realized_that_union...">Later, we realized that union and intersection types have
+          lots of other advantages. For example, they help make
+          overloading unnecessary. And they make it easy to reason about
+          algebraic/enumerated types. And intersections help us to
+          narrow types. For example:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Foo foo = ... ;
+if (is Bar foo) {
+    //foo has type Foo&amp;Bar here!
+}
+</code></pre>
+          
+          <p id="eventually_we_realized_all_kinds...">Eventually we realized all kinds of wonderful uses for unions
+          and intersections and they're now the most distinctive and
+          unique feature of the language. They're what makes Ceylon
+          ceylonic.</p>
+          
+          <h3 id="structural_typing">Structural typing
+          </h3>
+          
+          
+          <blockquote><p id="wouldnt_structural_typing_be_nice">Wouldn't structural typing be nice?</p></blockquote>
+          
+          <p id="structural_typing_is_a_kind...">Structural typing is a kind of static "duck" typing. It's an
+          interesting path to get some of the flexibility of a dynamic
+          language in a language with static types. A structural type
+          is a bit like an interface in Java 7 (not like an interface
+          in Ceylon!). But in a language with structural typing, a
+          class does not have to <em>explicitly</em> declare that it is a
+          subtype of the structural type to be considered assignable
+          to the structural type. Instead, the compiler just validates
+          that the class provides operations that match the operations
+          declared by the structural type wherever an instance of a
+          class is assigned to a structural type.</p>
+          
+          <p id="the_problem_with_a_structural...">The problem with a structural type system is that, just like
+          the dynamic type systems that inspire it, it doesn't work
+          very well with tools. If I select a member of a class, and
+          ask for all references, or select a member of an interface,
+          and ask for all implementations, I'll get an <em>approximate</em>
+          list of results. If I ask my IDE to rename a member of a
+          class or interface, it might do a smaller or bigger
+          refactoring than I want; it might even break my code!</p>
+          
+          <p id="this_isnt_the_right_thing...">This isn't the right thing for a language intended for
+          writing very large programs.</p>
+          
+          <p id="furthermore_were_very_skeptical_of...">Furthermore, we're very skeptical of the claim that
+          structural typing is really significantly more flexible than
+          nominative typing, since so-called "structural" types are
+          in fact only partially structural. All the operations of the
+          structural type still have names! So you're never going to
+          find a class that satisfies a structural type by fortunate
+          serendipity. The chance of the names and signatures of
+          several separate operations of the class <em>just happening</em> to
+          align with the names and signatures of the structural type
+          is essentially zero except for in <em>extremely</em> trivial cases.
+          In practice, the classes which satisfy a given structural
+          type are going to need to be designed for that, with
+          knowledge of the structural type, just like in a nominative
+          type system. Thus, it seems to us better to make that
+          relationship explicit as it is in a nominative type system.</p>
+          
+          <p id="indeed_some_of_the_flexibility...">Indeed, some of the flexibility that is claimed to be an
+          advantage of structural typing is actually more likely to be
+          achievable in practice via the use of union and intersection
+          types.</p>
+          
+          <p id="theres_one_place_however_where...">There's one place, however, where structural types certainly
+          do work: <em>function types</em>. Thus, function types in Ceylon
+          are indeed structural types, unlike in Java 8, where you
+          have an explosion of single-method interfaces!</p>
+          
+          <h3 id="overloading">Overloading
+          </h3>
+          
+          
+          <blockquote><p id="why_doesnt_ceylon_have_overloading">Why doesn't Ceylon have overloading?</p></blockquote>
+          
+          <p id="well_overloading_interacts_with_a...">Well, overloading interacts with a number of other language
+          features though, in truth, the interactions could probably
+          be controlled by sufficiently restricting the signature of
+          overloaded declarations. And overloading also maps badly to
+          both the JVM, where generic types are erased from signatures,
+          and to JavaScript, where all typing information is
+          completely erased from signatures. But there are potential
+          workarounds for this problem, too.</p>
+          
+          <p id="the_are_really_two_main...">The are really two main reasons why overloading doesn't make
+          much sense in Ceylon:</p>
+          
+          <ol>
+          <li>support for union types, default arguments, and variadic
+          parameters (varargs) make overloading unnecessary, and</li>
+          <li>function references to overloaded declarations are
+          ambiguous.</li>
+          </ol>
+          
+          
+          <p id="nevertheless_for_interoperability_ceylon_does...">Nevertheless, for interoperability, Ceylon, <em>does</em> let you
+          call overloaded methods and constructors of classes defined
+          in Java. As of 1.1, it even lets you refine multiple
+          overloaded versions of a method when extending a Java class
+          or interface.</p>
+          
+          <h3 id="implicit_type_conversions">Implicit type conversions
+          </h3>
+          
+          
+          <blockquote><p id="why_doesnt_ceylon_have_any...">Why doesn't Ceylon have any kind of implicit type
+          conversions?</p></blockquote>
+          
+          <p id="an_implicit_type_conversion_is...">An implicit type conversion is a type conversion that is
+          inserted automatically by the compiler when a the type of an
+          expression is not assignable to the thing is being assigned
+          to. For example, the Java compiler automatically inserts a
+          call to <code>Long.toString()</code> in the following code:</p>
+          
+          <pre data-language="java"><code>System.out.println("The time is: " + System.currentTimeMillis());
+</code></pre>
+          
+          <p id="some_languages_go_as_far...">Some languages go as far as to allow the user to define their
+          own implicit type conversions.</p>
+          
+          <p id="ceylon_doesnt_have_any_kind...">Ceylon doesn't have any kind of implicit type conversion,
+          user-defined or otherwise. Every expression in Ceylon has a
+          unique well-defined principal type.</p>
+          
+          <p id="the_power_of_implicit_type...">The power of implicit type conversions comes partly from their
+          ability to work around some of the designed-in limitations of
+          the type system. But these limitations have a purpose! In
+          particular, the prohibitions against:</p>
+          
+          <ul>
+          <li>inheriting the same generic type twice, with different type
+          arguments (in most languages),</li>
+          <li>inheriting two different implementations of the same member
+          (in many languages with mixin inheritance), and</li>
+          <li>overloading (in Ceylon).</li>
+          </ul>
+          
+          
+          <p id="implicit_type_conversions_are_an...">Implicit type conversions are an end-run around these
+          restrictions, reintroducing the ambiguities that these
+          restrictions exist to prevent. Any language with user-defined
+          implicit type conversions is almost guaranteed to be riddled
+          with unintuitive corner cases.</p>
+          
+          <p id="furthermore_its_extremely_difficult_to...">Furthermore, it's extremely difficult to imagine a language
+          with implicit type conversions that preserves the following
+          important properties of the type system:</p>
+          
+          <ul>
+          <li>transitivity of the assignability relationship,</li>
+          <li>distributivity of the assignability relationship over
+          covariant container types,</li>
+          <li>the semantics of the identity <code>===</code> operator, and</li>
+          <li>the ability to infer generic type arguments of an invocation
+          or instantiation.</li>
+          </ul>
+          
+          
+          <p id="implicit_type_conversion_is_designed...">Implicit type conversion is designed to look a little bit
+          like subtyping to the user of an API, but it's <em>not</em> subtyping,
+          it doesn't obey the rules of subtyping, and it screws up the
+          simple intuitive relationship between subtyping and
+          assignability.</p>
+          
+          <p id="this_problem_is_especially_acute...">This problem is especially acute in a language with extensive
+          type inference.</p>
+          
+          <p id="for_example_an_implicit_conversion...">For example, an implicit conversion doesn't "distribute over" a
+          container type. If <code>A</code> is assignable to <code>B</code>, then we expect a
+          <code>List&lt;A&gt;</code> to be a <code>List&lt;B&gt;</code>. And we might expect the expression
+          <code>List(b,a)</code> to be of inferred type <code>List&lt;B&gt;</code>. Neither of these
+          expectations are well-founded in a type system with implicit
+          conversions.</p>
+          
+          <p id="in_ceylon_you_can_trust...">In Ceylon, you can trust your intuitions about subtyping and
+          assignability because "<code>A</code> is assignable to <code>B</code>" is equivalent
+          to "<code>A</code> is a subtype of <code>B</code>", always, everywhere, and
+          transitively!</p>
+          
+          <p id="it_gets_worse_user_defined...">It gets worse. User-defined implicit type conversions work by
+          having the compiler introduce hidden invocations of arbitrary
+          user-written procedural code, code that could potentially have
+          side-effects or make use of temporal state. Thus, the observable
+          behavior of the program can depend upon precisely where and
+          how the compiler introduces these "magic" calls.</p>
+          
+          <p id="finally_back_to_our_first...">Finally, back to our first example, Java's special-case implict
+          type conversion of <code>Object</code> to <code>String</code> actually breaks the
+          associativity of the <code>+</code> operator! Quick, what does this do:</p>
+          
+          <pre data-language="java"><code>print("1 + 1 = " + 1 + 1);
+</code></pre>
+          
+          <p id="all_this_additional_complexity_just...">All this additional complexity, just to avoid <em>one method call?</em></p>
+          
+          <p id="thanks_but_no_thanks">Thanks, but no thanks!</p>
+          
+          <h3 id="pattern_matching">Pattern matching
+          </h3>
+          
+          
+          <blockquote><p id="will_ceylon_add_pattern_matching">Will Ceylon add pattern matching?</p></blockquote>
+          
+          <p id="pattern_matching_means_conditional_statements..."><em>Pattern matching</em> means conditional statements which package
+          together branching and destructuring. A value is matched
+          against a list of patterns and the branch associated with the
+          pattern is executed, with values automatically assigned to
+          variables embedded in the pattern. For example:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>  switch (sequence)
+  case ([]) { empty(); }
+  case ([x]) { singleton(x); }
+  case ([x,y]) { pair(x,y); }
+  else {} 
+</code></pre>
+          
+          <p id="we_will_probably_eventually_add...">We will probably, eventually, add pattern matching to Ceylon,
+          though we're not yet certain of exactly what form it will
+          take. For now, we're leaving our options open so when can do
+          this in the most elegant possible way when the time comes.</p>
+          
+          <p id="note_that_there_is_little...">Note that there is little urgency for this feature, since
+          Ceylon's flow-sensitive typing already quite comfortably
+          solves some of the most common usecases for pattern matching.</p>
+          
+          <p id="further_note_that_ceylon_12...">Further note that Ceylon 1.2 introduces pattern-based
+          destructuring for entries, sequences, and tuples in
+          specification statements, <code>let</code> expressions, <code>for</code> loops and
+          comprehensions, and in <code>exists</code> and <code>nonempty</code> conditions.</p>
+          
+          <h3 id="extension_methods">Extension methods
+          </h3>
+          
+          
+          <blockquote><p id="will_ceylon_support_extension_methods">Will Ceylon support extension methods?</p></blockquote>
+          
+          <p id="its_remotely_possible_but_we...">It's remotely possible, but we don't think we need them.</p>
+          
+          <p id="an_extension_method_or_attribute...">An extension method or attribute is a method or attribute
+          introduced to a type within a certain lexical scope. For
+          example, we might want to introduce an <code>uppercaseString</code>
+          attribute to <code>Object</code> by writing an extension method like
+          this:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared String uppercaseString(Object this) {
+    return this.string.uppercased
+}
+</code></pre>
+          
+          <p id="or_a_printme_method_to...">Or a <code>printMe()</code> method to <code>String</code> like this:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared void printMe(String this)() {
+    print(this);
+}
+</code></pre>
+          
+          <p id="the_perceived_need_for_extension...">The perceived need for extension methods arises in object
+          oriented languages where all functions are forced to belong
+          to a class, where <code>static</code> method invocations feel
+          uncomfortable, and are not well-supported by tooling.</p>
+          
+          <p id="in_ceylon_toplevel_functions_are...">In Ceylon, toplevel functions are a totally natural and
+          comfortable part of the language, this discomfort simply
+          doesn't arise. Ceylon IDE can even suggest the toplevel
+          functions applying to a type from the completion popup.</p>
+          
+          <h3 id="variance">Variance
+          </h3>
+          
+          
+          <blockquote><p id="why_does_ceylon_support_two...">Why does Ceylon support two systems of generic type
+          variance?</p></blockquote>
+          
+          <p id="ceylon_embraces_the_concept_of...">Ceylon embraces the concept of <em>declaration site variance</em>,
+          where the variance of a type parameter is specified where a
+          type is defined. For example:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>interface Collection&lt;out Element&gt; { ... }
+</code></pre>
+          
+          <p id="this_spares_us_from_having...">This spares us from having to write, as in Java, things like
+          <code>Collection&lt;? extends String&gt;</code> everywhere we use the type.
+          However, declaration site variance is strictly less powerful
+          than use site variance. We can't form a covariant type from
+          an invariant type like in Java.</p>
+          
+          <p id="however_to_support_awesome_interoperation...">However, to support awesome interoperation with Java generics,
+          Ceylon also supports Java-style wildcards, using this syntax:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Array&lt;Integer&gt; ints = array(2, 4, 6);
+Array&lt;out Object&gt; objects = ints;
+</code></pre>
+          
+          <p id="since_array_is_invariant_in...">Since <code>Array</code> is invariant in its type parameter, <code>Array&lt;Integer&gt;</code>
+          isn't an <code>Array&lt;Object&gt;</code>. It can't be, because the signature
+          of the <code>set()</code> method of <code>Array&lt;Object&gt;</code> is:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>void set(Integer index, Object item)
+</code></pre>
+          
+          <p id="so_you_can_put_things...">So you can put things that aren't <code>Integer</code>s in an <code>Array&lt;Object&gt;</code>.</p>
+          
+          <p id="but_arrayinteger_is_an_arrayout...">But <code>Array&lt;Integer&gt;</code> <em>is</em> an <code>Array&lt;out Object&gt;</code>, where the
+          signature of the <code>set()</code> method is:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>void setItem(Integer index, Nothing item)
+</code></pre>
+          
+          <p id="ie_contravariant_occurrences_of_the...">(i.e. contravariant occurrences of the type parameter would
+          take the value <code>Nothing</code> in the covariant instantiation of
+          the invariant type.)</p>
+          
+          <p id="we_dont_love_use_site...">We don't love use-site variance, but at least it's simpler
+          and cleaner in Ceylon than in Java.</p>
+          
+          <h3 id="type_classes">Type classes
+          </h3>
+          
+          
+          <blockquote><p id="will_ceylon_ever_have_type...">Will Ceylon ever have type classes?</p></blockquote>
+          
+          <p id="its_possible_likely_even_from...">It's possible, likely even. From our point of view, a type
+          class is a type satisfied by the metatype of a type. Indeed,
+          we view a type class as a kind of reified type argument.
+          Since Ceylon already supports reified types with typesafe
+          metatypes, it's not unreasonable to consider providing the
+          ability to introduce an additional type to the metatype of a
+          type. Then we would support <em>metatype constraints</em> of form
+          <code>T is Metatype</code>, for example:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Num sum&lt;Num&gt;(Num* numbers)
+        given Num is Number {
+    variable Num total=Num.zero;
+    for (num in numbers) {
+        total=Num.sum(total,num);
+    }
+    return total;
+}
+</code></pre>
+          
+          <p id="here_number_is_a_metatype...">Here, <code>Number</code> is a <em>metatype</em> (a type class) implemented by
+          the reified type of <code>Num</code>, not by <code>Num</code> itself.</p>
+          
+          <h3 id="type_constructor_parameterization">Type constructor parameterization
+          </h3>
+          
+          
+          <blockquote><p id="will_ceylon_have_type_constructor...">Will Ceylon have type constructor parameterization /
+          higher kinds?</p></blockquote>
+          
+          <p id="its_still_possible_in_some...">It's still possible, in some future version of the language.</p>
+          
+          <p id="there_is_even_a_branch...">There is even a branch of the Ceylon typechecker which
+          features support for type constructor parameterization.
+          However, this branch has been set aside for now because we
+          realized that the feature wasn't very useful without type
+          constructor <em>inference</em>, and that, unlike with ordinary type
+          argument inference, there doesn't seem to be a well-defined
+          algorithm for inferring type constructors that doesn't have
+          nasty broken behavior in corner cases.</p>
+          
+          <p id="to_understand_what_this_is...">To understand what this is all about, we need to take a
+          slightly different perspective on the notion of a generic
+          type to the one that folks coming from C++ usually have.
+          Instead of thinking about a parameterized type as a kind of
+          template, we'll think about it as a <em>type constructor</em>,
+          meaning a function from types to types. Give it a list of
+          argument types, and the type constructor will give you back
+          a new type.</p>
+          
+          <p id="so_from_this_perspective_sequence...">So, from this perspective, <code>Sequence</code> is a type constructor,
+          <code>String</code> is an argument type, and <code>Sequence&lt;String&gt;</code> is the
+          resulting type produced by the type constructor.</p>
+          
+          <p id="generics_parametric_polymorphism_is_the...">"Generics" (parametric polymorphism) is the ability to
+          abstract the definition of a function or type over other
+          unknown types. Then type constructor parameterization is the
+          ability to abstract the definition of a function or type not
+          only over types but also over type constructors.</p>
+          
+          <p id="without_type_constructor_parameterization_we...">Without type constructor parameterization, we can't form
+          certain higher-order abstractions, the most famous of which
+          is <code>Functor</code>, which abstracts over "container types" that
+          support the ability to <code>map()</code> a function to elements.
+          (Another famous example is <code>Monad</code>.)</p>
+          
+          <h3 id="generalized_algebraic_types">Generalized algebraic types
+          </h3>
+          
+          
+          <blockquote><p id="will_ceylon_support_gadts">Will Ceylon support GADTs?</p></blockquote>
+          
+          <p id="possibly_to_some_limited_extent...">Possibly, to some limited extent, in some future version.</p>
+          
+          <p id="a_gadt_is_a_sophisticated...">A GADT is a sophisticated kind of algebraic type where the
+          cases of the type depend upon the value of one of its type
+          arguments. Consider:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>abstract class Expression&lt;T&gt;()
+        of Sum&lt;T&gt; | FloatLiteral | IntegerLiteral 
+        given T of Float | Integer {}
+class FloatLiteral() extends Expression&lt;Float&gt;()  {}
+class IntegerLiteral() extends Expression&lt;Integer&gt;() {}
+</code></pre>
+          
+          <p id="gadt_support_means_that_the...">GADT support means that the compiler is able to reason that
+          when it has an expression of type <code>Expression&lt;Float&gt;</code> then
+          it can't possibly be an <code>IntegerLiteral</code>.</p>
+          
+          <p id="however_there_are_some_hairy...">However, there are some hairy decidability issues associated
+          with GADTs that we havn't begun to tackle yet.</p>
+          
+          <h3 id="checked_exceptions">Checked exceptions
+          </h3>
+          
+          
+          <blockquote><p id="why_doesnt_ceylon_have_checked...">Why doesn't Ceylon have checked exceptions?</p></blockquote>
+          
+          <p id="most_people_agree_that_checked...">Most people agree that checked exceptions were a mistake in
+          Java, and new frameworks and libraries almost never use them.
+          We're in agreement with the designers of other later languages
+          such as C#, which chose not to have checked exceptions.</p>
+          
+          <p id="and_if_you_think_about...">And if you think about it carefully, the main reason for
+          having exceptions in the first place is to work around the
+          declared static types of our functions.</p>
+          
+          <p id="if_we_wanted_to_declare...">If we wanted to declare the exception as part of the signature
+          of a function, we could just declare it in the return type
+          like this:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Integer|NegativeException fib(Integer n) { ... }
+</code></pre>
+          
+          <p id="the_reason_for_using_an...">The reason for using an exception is that we <em>don't</em> want to
+          force the direct caller of <code>fib()</code> to account for the
+          exceptional case. Rather, the exception is a way to have the
+          function not fulfill its promise to return an <code>Integer</code>,
+          without breaking the soundess of the type system.</p>
+          
+          <p id="ok_sure_java_doesnt_have...">(OK, sure, Java doesn't have union types, so you can't write
+          the above in Java, which I suppose provides a partial
+          motivation for having checked exceptions in <em>Java</em>. But we're
+          talking about Ceylon here.)</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

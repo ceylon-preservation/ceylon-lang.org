@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: assert statement</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.1/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.1/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.1/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.1/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.1/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.1/reference">Reference</a></h3>
+            
+            <ul>
+<li><a href="#usage">Usage
+            </a></li>
+<li><a href="#description">Description
+            </a></li>
+<ul>
+<li><a href="#execution">Execution
+            </a></li>
+<li><a href="#purpose">Purpose
+            </a></li>
+<li><a href="#conditions">Conditions
+            </a></li>
+</ul>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.1/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.1/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.1/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference (1.1)
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_11_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.1, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <h1 id="assert_statement">
+<code>assert</code> statement</h1>
+          
+          <p id="the_assert_statement_validates_a...">The <code>assert</code> statement validates a given condition, throwing an <code>AssertionError</code>
+          if the condition is not satisfied. An assertion may narrow the type of values as
+          seen by subsequent statements.</p>
+          
+          <h2 id="usage">Usage
+          </h2>
+          
+          
+          <p id="the_general_form_of_the...">The general form of the <code>assert</code> statement is</p>
+          
+          <!-- check:none -->
+          
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>assert ( /* some conditions */ );
+</code></pre>
+          
+          <h2 id="description">Description
+          </h2>
+          
+          
+          <p id="unlike_the_assert_statement_in...">Unlike the <code>assert</code> statement in the Java programming language, <code>assert</code> in
+          Ceylon cannot be disabled at runtime. It's important to know about bugs that
+          occur in running production systems, and assertions help us find out about
+          them.</p>
+          
+          <h3 id="execution">Execution
+          </h3>
+          
+          
+          <p id="the_condition_or_conditions_in...">The condition (or conditions) in the <code>assert</code> statement are evaluated in the
+          order they occur. If they are all satisfied, then execution continues with the
+          statement immediately following the <code>assert</code>. Otherwise, an
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/AssertionError.type.html"><code>AssertionError</code></a>
+          is thrown with information about the condition that was violated.</p>
+          
+          <h3 id="purpose">Purpose
+          </h3>
+          
+          
+          <p id="assert_is_used_to_make..."><code>assert</code> is used to make assertions:</p>
+          
+          <ul>
+          <li>regarding program invariants which the programmer <em>knows</em> to be true, but
+          which cannot be proved to be true within the type system, or</li>
+          <li>about preconditions required by an API, which cannot be enforced within
+          the type system.</li>
+          </ul>
+          
+          
+          <p id="failure_of_an_assertion_represents...">Failure of an assertion represents a bug in the program or misuse of the API.</p>
+          
+          <p id="heres_an_example_using_the...">Here's an example using the
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/index.html#parseInteger"><code>parseInteger()</code></a>
+          function from <code>ceylon.language</code> which returns <code>Integer?</code>, forcing the caller
+          to handle the possibility that the argument was not <code>String</code> representing
+          a number:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>value num = parseInteger("1");
+// before the assert statement num is of type Integer?
+assert (exists num);
+// after the assert statement num is of type Integer
+value plusOne = num + 1;
+</code></pre>
+          
+          <p id="here_parseinteger_is_being_called...">Here, <code>parseInteger()</code> is being called with a <code>String</code> literal which we
+          <em>know</em> is a valid number. The type checker cannot know this, however,
+          because it can only reason about types, not about what the <code>parseInteger()</code>
+          function does for a particular input value.</p>
+          
+          <p id="heres_a_different_example_from...">Here's a different example, from the internal implementation of that
+          function:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared Integer? parseInteger(String string, Integer radix = 10) {
+    assert (radix &gt;= minRadix, radix &lt;= maxRadix);
+    ...
+}
+</code></pre>
+          
+          <p id="here_the_assertion_imposes_a...">Here, the assertion imposes a constraint upon the argument <code>radix</code>. If
+          a client calls <code>parseInteger()</code> with an illegal value for <code>radix</code>, then
+          the <code>AssertionError</code> will indicate this.</p>
+          
+          <h3 id="conditions">Conditions
+          </h3>
+          
+          
+          <p id="the_conditions_in_an_assert...">The conditions in an <code>assert</code> statement form a
+          <a href="../conditions#condition_lists">condition list</a>.</p>
+          
+          <p id="any_expression_of_type_boolean...">Any expression of type <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/Boolean.type.html"><code>Boolean</code></a>
+          may be occur in the condition list of an <code>assert</code> statement. The <code>assert</code>
+          statement also supports the use of typing conditions:</p>
+          
+          <ul>
+          <li>
+<a href="../conditions/#_is_conditions"><code>is</code> conditions</a>,</li>
+          <li>
+<a href="../conditions/#_exists_conditions"><code>exists</code> conditions</a>, and</li>
+          <li>
+<a href="../conditions/#_nonempty_conditions"><code>nonempty</code> conditions</a>.</li>
+          </ul>
+          
+          
+          <p id="these_conditions_narrow_the_type...">These conditions narrow the type of a reference in the statements following
+          the <code>assert</code>, and in later conditions in the condition list.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>void printSqrt(Object x) {
+    assert (is Float x, x &gt;= 0.0);
+    print(x^0.5);
+}
+</code></pre>
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li>The <a href="../if"><code>if</code> statement</a> statement and the <a href="../throw"><code>throw</code> statement</a>
+          statement can be used together to achieve a similar effect.</li>
+          <li>
+<a href="/documentation/current/spec/html_single/index.html#assertions">Assertions</a> in the Ceylon language
+          specification</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

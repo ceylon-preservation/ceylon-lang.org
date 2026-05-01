@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Type abbreviations</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.3/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.3/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.3/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.3/examples">Examples</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.3/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.3/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.3/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.3/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.3/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide_for_intellij"><a href="/documentation/1.3/ide/intellij">Ceylon IDE for IntelliJ</a></h3>
+            
+            <h3 id="ceylon_ide_for_eclipse"><a href="/documentation/1.3/ide/eclipse">Ceylon IDE for Eclipse</a></h3>
+            
+            <h3 id="vertx"><a href="http://vertx.io/docs/vertx-core/ceylon/">Vert.x</a></h3>
+          </div>
+          <div class="point-dark-bottom">
+             
+          </div>
+          <div class="point-light-top"></div>
+          <div class="toc">
+            <ul>
+<li><a href="#usage">Usage
+            </a></li>
+<li><a href="#description">Description
+            </a></li>
+<ul>
+<li><a href="#callable">Callable
+            </a></li>
+<li><a href="#variadic_parameters">Variadic parameters
+            </a></li>
+</ul>
+<li><a href="#see_also">See Also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+          </div>
+          <div class="point-light-end"></div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+          </div>
+        </div>
+        <div id="core-page">
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.3/reference/structure/type-abbreviation.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.3/reference/structure/type-abbreviation.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="type_abbreviations">Type abbreviations</h1>
+          
+          <p id="some_types_are_so_commonly...">Some types are so commonly used in Ceylon that there are special
+          abbreviations for them.</p>
+          
+          <h2 id="usage">Usage
+          </h2>
+          
+          
+          <p id="here_are_some_examples">Here are some examples:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>T?          // T|Null
+{T*}        // Iterable&lt;T,Null&gt;
+{T+}        // Iterable&lt;T,Nothing&gt;, has at least one element
+[T*] or T[] // Sequential&lt;T&gt;
+[]          // Empty
+[T+]        // Sequence&lt;T&gt;
+X-&gt;Y        // Entry&lt;X,Y&gt;
+</code></pre>
+          
+          <p id="certain_abbreviations_have_a_recursive...">Certain abbreviations have a
+          <a href="/documentation/current/spec/html_single/index.html#typenameabbreviations">recursive definition</a>,
+          so we can't enumerate all the possibilities here.</p>
+          
+          <p id="there_are_abbreviations_for_tuple...">There are abbreviations for tuple types:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>[T]         // The 1-tuple Tuple&lt;T, T, Empty&gt;
+[X,Y]       // The 2-tuple Tuple&lt;X|Y, X, Tuple&lt;Y, Y, Empty&gt;&gt;
+            // whose first element is an X and whose 
+            // second element is a Y
+[X,Y*]      // The *-tuple Tuple&lt;X|Y, X, Sequential&lt;Y&gt;&gt;
+            // whose first element is an X and 
+            // which has zero or more further elements 
+            // each of type Y
+[X,Y+]      // The +-tuple Tuple&lt;X|Y, X, Sequence&lt;Y&gt;&gt;
+            // whose first element is an X and 
+            // which has one or more further elements 
+            // each of type Y
+</code></pre>
+          
+          <p id="and_for_function_types">And for function types:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>R()         // Callable&lt;R,[]&gt;, function with no parameters
+R(P1,P2)    // Callable&lt;R,[P1,P2]&gt;, function with two parameters
+R(P1,P2=)   // Callable&lt;R,[P1]|[P1,P2]&gt;, function with defaulted param
+R(P*)       // Callable&lt;R,[P1*]&gt;, variadic function
+R(P+)       // Callable&lt;R,[P1+]&gt;, nonempty variadic function
+</code></pre>
+          
+          <h2 id="description">Description
+          </h2>
+          
+          
+          <p id="the_above_abbreviations_can_be...">The above abbreviations can be used anywhere a type is expected.</p>
+          
+          <h3 id="callable">Callable
+          </h3>
+          
+          
+          <p id="the_type_abbtreviation_rp1p2_is...">The type abbtreviation <code>R(P1,P2)</code> is the same as <code>Callable&lt;R,[P1,P2]&gt;</code>,
+          which is the type of a function which takes parameters of types <code>P1</code> and <code>P2</code>
+          and returns an <code>R</code>. <code>R(P1,P2)</code> may also be the type of the class <code>R</code>
+          if its initializer takes parameters of types <code>P1</code> and <code>P2</code>.</p>
+          
+          <p id="for_higher_order_callables_there...">For higher order <code>Callable</code>s, there is the potential for some confusion.
+          Consider the following abbreviated <code>Callable</code> type:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code> Bar(String)(Foo)
+</code></pre>
+          
+          <p id="this_is_the_type_of...">This is the type of the function:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Bar higher(Foo)(String) {
+    // ...
+}
+</code></pre>
+          
+          <p id="notice_how_the_string_and...">Notice how the <code>String</code> and <code>Foo</code> swapped places?</p>
+          
+          <p id="if_you_think_about_it...">If you think about it, <code>higher</code> could be declared like this:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>Bar(String) higher2(Foo) {
+    // ...
+}
+</code></pre>
+          
+          <p id="and_when_you_write_it...">And when you write it that way, it's not really surprising that <code>higher2</code>
+          itself has type <code>Bar(String)(Foo)</code>.</p>
+          
+          <h3 id="variadic_parameters">Variadic parameters
+          </h3>
+          
+          
+          <p id="although_not_technically_a_type...">Although not technically a type abbreviation,
+          <a href="../parameter-list/">variadic parameters</a> are declared using a syntax that
+          looks similar to the <code>Callable</code>, <code>Iterable</code>, and <code>Tuple</code> abbreviations above:</p>
+          
+          <!-- try: -->
+          
+          
+          <!-- check:none -->
+          
+          
+          <pre data-language="ceylon"><code>T*        // a possibly empty variadic parameter
+T+        // a non-empty variadic parameter
+</code></pre>
+          
+          <p id="of_course_its_no_coincidence...">Of course, it's no coincidence that the function <code>Float sum(Float+ floats)</code>
+          has the function type <code>Float(Float+)</code>.</p>
+          
+          <h2 id="see_also">See Also
+          </h2>
+          
+          
+          <ul>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Null.type.html"><code>Null</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Sequential.type.html"><code>Sequential</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Sequence.type.html"><code>Sequence</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Empty.type.html"><code>Empty</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Iterable.type.html"><code>Iterable</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Tuple.type.html"><code>Tuple</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Callable.type.html"><code>Callable</code></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

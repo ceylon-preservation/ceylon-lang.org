@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: First Ceylon Tour in Paris</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2013/12/23/reduce/">The signature of reduce() in Ceylon</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2014/02/19/oo-not-imperative/">Object-oriented != imperative</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="first_ceylon_tour_in_paris">
+            First Ceylon Tour in Paris
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/stephane-epardaud/">Stéphane Épardaud</a>
+            </div>
+            <div class="date">
+              05 Feb 2014
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/conference/">
+                conference
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <p id="the_ceylon_team_recently_had...">The Ceylon team recently had its almost yearly face-to-face meeting in Paris. For those not
+            familiar with how the Ceylon team works (and indeed how most of the open-source development
+            teams work in Red Hat), the Ceylon team consists in surprisingly few individuals working
+            remotely, and distributed world-wide. This includes not only developers such as me, paid
+            by Red Hat to work full-time on Ceylon, but also the community of Ceylon enthusiasts who
+            contribute time, code or discussions in their free time, without financial compensation other
+            than the satisfaction of helping Ceylon be that much better that much sooner.</p>
+            
+            <p id="this_means_that_yes_we...">This means that yes, we do all work without seeing each other in person in most cases. Naturally,
+            we communicate a lot in order to work together, but in our case that means via the Ceylon mailing
+            list, or IRC channel, or via our issue tracker. We don't even do voice chats. This is pretty great
+            for the Ceylon community, as 99% of our discussions are thus online and in the open and visible. I
+            say 99% because there's always cases where there are some one-to-one discussions we have over private
+            channels, especially when we want to prepare surprises :)</p>
+            
+            <p id="an_interesting_consequence_of_that...">An interesting consequence of that is that we have met surprisingly few people of the team in person.
+            A few of us met physically during conferences, others by being geographically close, and others yet
+            during our previous face-to-face meeting two years ago in Barcelona, when we were very few. But overall,
+            most of us had never seen each other in person, which is why we try to hold yearly face-to-faces.</p>
+            
+            <p id="the_primary_purpose_of_meeting...">The primary purpose of meeting together in my opinion is to have social interactions and talk about
+            something else than work for once. It also allows us to lock people in a room and prevent them from
+            going out before they've looked at something or given their opinion on something, which is something
+            that can't happen so easily when distributed. An example of that is when Loïc (one of our great
+            free-time contributors) came to present us <code>ceylon.build</code> and wanted our opinion, which we had
+            somewhat neglected to give previously, due to poor planning on our part.</p>
+            
+            <center>
+            <embed type="application/x-shockwave-flash" src="https://static.googleusercontent.com/external_content/picasaweb.googleusercontent.com/slideshow.swf" width="600" height="400" flashvars="host=picasaweb.google.com&amp;captions=1&amp;hl=en_GB&amp;feat=flashalbum&amp;RGB=0x000000&amp;feed=https%3A%2F%2Fpicasaweb.google.com%2Fdata%2Ffeed%2Fapi%2Fuser%2F103036382695763273919%2Falbumid%2F5972503475009012801%3Falt%3Drss%26kind%3Dphoto%26hl%3Den_GB" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>
+            </center>
+            
+            
+            <p id="we_did_also_discuss_things...">We did also discuss things such as language features, roadmap and priorities, but those have already
+            been reflected openly via our mailing list and issue tracker, where the discussion can continue.</p>
+            
+            <p id="the_last_pretty_big_advantage...">The last (pretty big) advantage of being all together at the same place, was that we could take
+            this opportunity to hold our first Ceylon Tour conference!</p>
+            
+            <h2 id="the_first_ceylon_tour_conference_in_paris">The first Ceylon Tour conference in Paris</h2>
+            
+            <p id="thanks_to_the_guys_from...">Thanks to the guys from <a href="http://www.irill.org">IRILL</a> we were able to secure a very nice room to hold
+            our first Ceylon conference, for free, where I'm glad to say lots of people showed up. We had people
+            from from Slovenia, Germany and Austria, not to mention all over France and yes, even Paris. We were
+            very surprised by the fact that people came from further than Paris, but it shows that Ceylon generates
+            lots of interest.</p>
+            
+            <p id="we_held_the_following_talks...">We held the following talks during the morning :</p>
+            
+            <h3 id="ceylon_introduction">Ceylon introduction</h3>
+            
+            <center>
+            <iframe src="http://www.slideshare.net/slideshow/embed_code/30854671?rel=0" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+            <div style="margin-bottom:5px">
+             <strong> <a href="https://www.slideshare.net/UnFroMage/ceylon-introduction-by-stphane-pardaud" title="Ceylon introduction by Stéphane Épardaud" target="_blank">Ceylon introduction by Stéphane Épardaud</a> </strong>
+            </div>
+            </center>
+            
+            
+            <h3 id="ceylon_idioms">Ceylon idioms</h3>
+            
+            <center>
+            <iframe src="http://www.slideshare.net/slideshow/embed_code/30854189?rel=0" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/UnFroMage/gavin-idioms" title="Ceylon idioms by Gavin King" target="_blank">Ceylon idioms by Gavin King</a> </strong>
+</div>
+            </center>
+            
+            
+            <h3 id="cayla_and_vertx_in_ceylon">Cayla and Vert.x in Ceylon</h3>
+            
+            <center>
+            <iframe src="http://www.slideshare.net/slideshow/embed_code/30854155?rel=0" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/UnFroMage/gavin-cayla" title="Cayla and Vert.x in Ceylon, by Gavin King" target="_blank">Cayla and Vert.x in Ceylon, by Gavin King</a> </strong>
+</div>
+            </center>
+            
+            
+            <h3 id="ceylon_sdk">Ceylon SDK</h3>
+            
+            <center>
+            <iframe src="http://www.slideshare.net/slideshow/embed_code/30854663?rel=0" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/UnFroMage/2014-01ceylontoursdk" title="Ceylon SDK by Stéphane Épardaud" target="_blank">Ceylon SDK by Stéphane Épardaud</a> </strong> </div>
+            </center>
+            
+            
+            <h3 id="ceylonbuild">ceylon.build</h3>
+            
+            <center>
+            <iframe src="http://www.slideshare.net/slideshow/embed_code/30854193?rel=0" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/UnFroMage/loic-build" title="Ceylon.build by Loïc Rouchon" target="_blank">Ceylon.build by Loïc Rouchon</a> </strong>
+</div>
+            </center>
+            
+            
+            <h3 id="ceylontest">ceylon.test</h3>
+            
+            <center>
+            <iframe src="http://www.slideshare.net/slideshow/embed_code/30854118?rel=0" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/UnFroMage/tomas-test" title="Ceylon.test by Thomáš Hradec" target="_blank">Ceylon.test by Thomáš Hradec</a> </strong>
+</div>
+            </center>
+            
+            
+            <h3 id="ceylon_module_repositories">Ceylon module repositories</h3>
+            
+            <center>
+            <iframe src="http://www.slideshare.net/slideshow/embed_code/30854132?rel=0" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/UnFroMage/ales-cmr" title="Ceylon module repositories by Aleš Justin" target="_blank">Ceylon module repositories by Aleš Justin</a> </strong>
+</div>
+            </center>
+            
+            
+            <h3 id="ceylonjava_interop">Ceylon/Java interop</h3>
+            
+            <center>
+            <iframe src="http://www.slideshare.net/slideshow/embed_code/30854207?rel=0" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/UnFroMage/tako-interop" title="Ceylon/Java interop by Tako Schotanus" target="_blank">Ceylon/Java interop by Tako Schotanus</a> </strong>
+</div>
+            </center>
+            
+            
+            <h3 id="ceylon_workshop">Ceylon workshop</h3>
+            
+            <p id="and_in_the_afternoon_we...">And in the afternoon we had a great Ceylon workshop where people got to code in Ceylon, driven and helped
+            by Gavin, and I'm glad to say that after 4 hours of workshop, most people were still not only awake, but
+            engaged and coding, rather than just checking their email :)</p>
+            
+            <h3 id="the_next_ceylon_tour">The next Ceylon Tour?</h3>
+            
+            <p id="all_in_all_were_very...">All in all, we're very happy with the event, the content, the turnout and to answer the questions we got
+            when we announced the first Ceylon Tour in Paris, yes we will try to plan another round in other locations,
+            such as London, Berlin and the USA. If you think we should hold a Ceylon Tour event in your country/city,
+            let us know and we'll happily discuss it.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2014/02/05/first-ceylon-tour-in-paris/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

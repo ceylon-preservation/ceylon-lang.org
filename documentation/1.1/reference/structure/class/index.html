@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Class Declarations</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.1/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.1/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.1/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.1/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.1/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.1/reference">Reference</a></h3>
+            
+            <ul>
+<li><a href="#usage">Usage
+            </a></li>
+<li><a href="#description">Description
+            </a></li>
+<ul>
+<li><a href="#type_parameters">Type parameters
+            </a></li>
+<li><a href="#initializer_parameters">Initializer parameters
+            </a></li>
+<ul><li><a href="#callable_type">Callable type
+            </a></li></ul>
+<li><a href="#extending_classes">Extending classes
+            </a></li>
+<li><a href="#satisfying_interfaces">Satisfying interfaces
+            </a></li>
+<li><a href="#enumerated_classes">Enumerated classes
+            </a></li>
+<li><a href="#initializer">Initializer
+            </a></li>
+<li><a href="#declaration_section">Declaration section
+            </a></li>
+<ul>
+<li><a href="#members">Members
+            </a></li>
+<li><a href="#member_class_refinement">Member class refinement
+            </a></li>
+</ul>
+<li><a href="#different_kinds_of_class">Different kinds of class
+            </a></li>
+<ul>
+<li><a href="#concrete_classes">Concrete classes
+            </a></li>
+<li><a href="#abstract_classes">Abstract classes
+            </a></li>
+<li><a href="#_shared_classes"><code>shared</code> classes
+            </a></li>
+<li><a href="#_formal_classes"><code>formal</code> classes
+            </a></li>
+<li><a href="#_default_classes"><code>default</code> classes
+            </a></li>
+<li><a href="#_sealed_classes"><code>sealed</code> classes
+            </a></li>
+</ul>
+<li><a href="#aliases">Aliases
+            </a></li>
+<li><a href="#metamodel">Metamodel
+            </a></li>
+</ul>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.1/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.1/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.1/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference (1.1)
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_11_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.1, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <h1 id="class_declarations">Class Declarations</h1>
+          
+          <p id="a_class_is_a_stateful...">A class is a stateful <a href="../type-declaration">type declaration</a> that:</p>
+          
+          <ul>
+          <li>may hold references to other objects,</li>
+          <li>may define initialization logic and initialization parameters, and</li>
+          <li>except in the case of an <code>abstract</code> or <code>formal</code> class, may be instantiated.</li>
+          </ul>
+          
+          
+          <p id="a_class_may_inherit_another...">A class may inherit another class, but classes are restricted to a
+          <em>single inheritance</em> model. That is, a class inherits exactly <em>one</em>
+          other class. Since single inheritance is quite often too restrictive,
+          a class may also satisfy an arbitrary number of <a href="../interface">interfaces</a>.</p>
+          
+          <h2 id="usage">Usage
+          </h2>
+          
+          
+          <p id="a_trivial_class_declaration_looks...">A trivial class declaration looks like this:</p>
+          
+          <!-- id:c -->
+          
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>class Trivial() {
+    /* declarations of class members */
+}
+</code></pre>
+          
+          <p id="the_general_form_of_a...">The general form of a class declaration looks like this:</p>
+          
+          <pre><code>ANNOTATIONS
+class Example
+        &lt;TYPE-PARAMETERS&gt;
+        (INITIALIZER-PARAMETERS) 
+        of ENUMERATED-SUBCLASSES
+        extends SUPER-CLASS-INVOCATION
+        satisfies SUPER-INTERFACES
+        given TYPE-PARAMETER-CONSTRAINTS {
+    CLASS-BODY
+}
+</code></pre>
+          
+          <p id="where">Where:</p>
+          
+          <ul>
+          <li>
+<code>ANNOTATIONS</code> is a list of class <a href="../annotation">annotations</a>
+</li>
+          <li>
+<code>TYPE-PARAMETERS</code> is a <code>,</code>-separated list of <a href="../#type_parameters">type parameters</a>
+</li>
+          <li>
+<code>INITIALIZER-PARAMETERS</code> is a <code>,</code>-separated list of <a href="../parameter-list">value parameters</a>
+</li>
+          <li>
+<code>ENUMERATED-SUBCLASSES</code> is a <code>|</code>-separated list of <a href="#enumerated_classes">class types</a>
+</li>
+          <li>
+<code>SUPER-CLASS-INVOCATION</code> is <a href="#extending_classes">class invocation expression</a> for the superclass initializer</li>
+          <li>
+<code>SUPER-INTERFACES</code> is a <code>&amp;</code>-separated list of <a href="#satisfying_interfaces">interface type expressions</a>
+</li>
+          <li>
+<code>TYPE-PARAMETER-CONSTRAINTS</code> is a list of <a href="../type-parameters#constraints">constraints on type parameters</a>
+          declared in the type parameter list</li>
+          <li>
+<code>CLASS-BODY</code> is the <a href="#initializer">initializer section</a> of the class,
+          followed by the <a href="#declaration_section">declaration section</a> of the class</li>
+          </ul>
+          
+          
+          <h2 id="description">Description
+          </h2>
+          
+          
+          
+          
+          <h3 id="type_parameters">Type parameters
+          </h3>
+          
+          
+          <p id="a_class_declaration_may_have...">A class declaration may have a list of <a href="../type-parameters">type parameters</a>
+          enclosed in angle brackets (<code>&lt;</code> and <code>&gt;</code>) after the class name:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>class Generic&lt;Foo, Bar&gt;() {
+    /* declarations of class members 
+       type parameters Foo and Bar are treated as a types */
+}
+</code></pre>
+          
+          <p id="a_class_with_type_parameters...">A class with type parameters is sometimes called a <em>generic class</em>.</p>
+          
+          <p id="a_class_declaration_with_type...">A class declaration with type parameters may also have a <code>given</code> clause
+          for each declared type parameter to
+          <a href="../type-parameters#constraints">constrain the argument types</a>:</p>
+          
+          <pre data-language="ceylon"><code>class Constrained&lt;Foo, Bar&gt;() 
+        given Foo satisfies Baz1&amp;Baz2
+        given Bar of Gee1|Gee2 {
+    /* declarations of class members 
+       type parameters Foo and Bar treated as a types */
+}
+</code></pre>
+          
+          <h3 id="initializer_parameters">Initializer parameters
+          </h3>
+          
+          
+          <p id="every_class_declaration_must_have...">Every class declaration must have a <a href="../parameter-list">parameter list</a>,
+          because any class can be invoked to create instances of the class.
+          (Even an <code>abstract</code> class, which will be invoked by its subclasses).</p>
+          
+          <p id="the_initializer_parameters_are_visible...">The initializer parameters are visible to statements in
+          the <a href="#initializer">class initializer</a>.</p>
+          
+          <h4 id="callable_type">Callable type
+          </h4>
+          
+          
+          <p id="a_class_may_be_viewed...">A class may be viewed as a function that produces new instances of
+          the class. The <em>callable type</em> of a class expresses, in terms of
+          the interface <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/Callable.type.html"><code>Callable</code></a>,
+          the type of this function.</p>
+          
+          <p id="for_example_the_callable_type...">For example the callable type of</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>class CallableExample(Integer int, Boolean bool) =&gt; "";
+</code></pre>
+          
+          <p id="is_callableexampleinteger_boolean_because_the...">is <code>CallableExample(Integer, Boolean)</code>, because the class initializer takes
+          <code>Integer</code> and <code>Boolean</code> parameters and invoking the class results in a
+          <code>CallableExample</code> instance being returned to the caller.</p>
+          
+          <p id="regular_functions_also_have_a...">(Regular functions also have a <a href="../function/#callable_type">callable type</a>.)</p>
+          
+          <h3 id="extending_classes">Extending classes
+          </h3>
+          
+          
+          <p id="the_extends_clause_is_used...">The <code>extends</code> clause is used simultaneously to:</p>
+          
+          <ul>
+          <li>specify that the class being declared is a
+          <a href="../type-declaration#declarative_subtyping">subtype</a>
+          of the given class type and,</li>
+          <li>
+<a href="../../expression/invocation/">invoke</a> that class's initializer.</li>
+          </ul>
+          
+          
+          <!-- cat-id:c -->
+          
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>class S() extends C() {
+    /* declarations of class members */
+}
+</code></pre>
+          
+          <p id="if_a_class_is_declared...">If a class is declared without using the <code>extends</code> keywords, it is a
+          subclass of <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/Basic.type.html"><code>Basic</code></a>.</p>
+          
+          <h3 id="satisfying_interfaces">Satisfying interfaces
+          </h3>
+          
+          
+          <p id="the_satisfies_clause_is_used...">The <code>satisfies</code> clause is used to specify that the class being declared is a
+          <a href="../type-declaration#declarative_subtyping">subtype</a>
+          of the given interface type.</p>
+          
+          <!-- cat: interface I1 {} interface I2 {} -->
+          
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>class C() satisfies I1 &amp; I2 {
+    /* declarations of class members */
+}
+</code></pre>
+          
+          <p id="_is_used_as_the..."><code>&amp;</code> is used as the separator between satisfied interface types
+          because the class (<code>C</code>) is being declared as a subtype of an
+          <a href="../type#union_and_intersection">intersection type</a> (<code>I1&amp;I2</code>).</p>
+          
+          <p id="if_a_class_is_declared_without...">If a class is declared without using the <code>satisfies</code> keyword, it does
+          not <em>directly</em> inherit any interfaces. However, it may indirectly
+          inherit interfaces via its superclass.</p>
+          
+          <h3 id="enumerated_classes">Enumerated classes
+          </h3>
+          
+          
+          <p id="the_subclasses_of_an_abstract...">The subclasses of an <code>abstract</code> class can be constrained to a list of
+          named class types (including toplevel anonymous classes) using the <code>of</code> clause.
+          If the class <code>C</code> is permitted only two direct subclasses, <code>S1</code> and <code>S2</code>,
+          its declaration would look like this:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>abstract class C() of S1 | S2 {
+    /* declarations of class members */
+}
+</code></pre>
+          
+          <p id="the_subclasses_have_to_extend...">The subclasses have to <code>extend</code> <code>C</code>:</p>
+          
+          <pre data-language="ceylon"><code>class S1() extends C() {
+}
+class S"() extends C() {
+}
+</code></pre>
+          
+          <p id="then_s1_and_s2_are...">Then <code>S1</code> and <code>S2</code> are called the <em>cases</em> of <code>C</code>.</p>
+          
+          <p id="if_a_class_has_enumerated...">If a class has enumerated subclasses we can use the subclasses as
+          <code>is</code> cases in a
+          <a href="../../statement/switch#caseis_assignability_condition"><code>switch</code> statement</a>.</p>
+          
+          <h3 id="initializer">Initializer
+          </h3>
+          
+          
+          <p id="the_class_initializer_executes_when...">The class <em>initializer</em> executes when instances of the class are created
+          (also known as <em>class instantiation</em>).
+          The parameters to the initializer are specified in parenthesis after the
+          name of the class in the <code>class</code> declaration.</p>
+          
+          <p id="the_body_of_a_class...">The body of a class must <em>definitely initialize</em> every member of the class.
+          The following code will be rejected by the compiler because if <code>bool</code>
+          is false <code>greeting</code> does not get initialized:</p>
+          
+          <pre data-language="ceylon"><code>class C(Boolean bool) {
+    shared String greeting;
+    if (bool) {
+        greeting = "hello";
+    }
+}
+</code></pre>
+          
+          <p id="the_typechecker_figures_out_for...">The typechecker figures out for itself the point in the class at which all
+          class members have been initialized. Everything before this point is in
+          the <em>initializer section</em> of the class, and everything after this point
+          is in the <em>declaration section</em>. In the initializer section you
+          can't use a declaration before it's been declared.</p>
+          
+          <p id="note_that_abstract_classes_cannot...">Note that <code>abstract</code> classes cannot be invoked directly, but
+          they are still invoked in the <code>extends</code> clause of their subclasses.</p>
+          
+          <h3 id="declaration_section">Declaration section
+          </h3>
+          
+          
+          
+          
+          <h4 id="members">Members
+          </h4>
+          
+          
+          <p id="the_permitted_members_of_classes...">The permitted members of classes are <a href="../class">classes</a>,
+          <a href="../interface">interfaces</a>, <a href="../function">methods</a>, <a href="../value">attributes</a>,
+          and <a href="../object"><code>object</code>s</a>.</p>
+          
+          <h4 id="member_class_refinement">Member class refinement
+          </h4>
+          
+          
+          <p id="an_inner_class_of_a...">An inner class of a class or interface can be subject to
+          <em>member class refinement</em>, which means its instantiation will be
+          polymorphic.</p>
+          
+          <p id="heres_an_example_where_a...">Here's an example where a <code>Reader</code> class declares that concrete
+          subclasses <em>must</em> (because we used <code>formal</code>) provide an <code>actual Buffer</code>
+          inner class.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared abstract class Reader() {
+    shared formal class Buffer(Character* chars)
+            satisfies Sequence&lt;Character&gt; {}
+    // ...
+}
+
+shared class FileReader(File file) 
+        extends Reader() {
+    shared actual class Buffer(Character* chars)
+            extends super.Buffer(*chars) {
+        // ...
+    }
+    // ...
+}
+</code></pre>
+          
+          <p id="within_reader_and_elsewhere_we...">Within <code>Reader</code> (and elsewhere) we can instantiate the relevant kind of
+          <code>Buffer</code> with a normal instantiation, <code>Buffer(chars)</code>. This allows each
+          subclass of <code>Reader</code> to implement an appropriate kind of <code>Buffer</code>.</p>
+          
+          <p id="member_class_refinement_is_a...">Member class refinement is a lot like the 'abstract factory' pattern in
+          other object-oriented languages, but it's a lot less verbose.</p>
+          
+          <p id="only_formal_and_default_member...">Only <code>formal</code> and <code>default</code> member classes are subject to member class
+          refinement. A <code>formal</code> member class <em>must</em> be refined by concrete subtypes
+          of the type declaring the member class—just like a <code>formal</code> method
+          or attribute. A <code>default</code> member class <em>may</em> be refined—just like
+          a <code>default</code> method or attribute.</p>
+          
+          <p id="in_a_subtype_of_the...">In a subtype of the type declaring the member class, the member class
+          (i.e. in <code>FileReader.Buffer</code> from the example above) must:</p>
+          
+          <ul>
+          <li>be declared <code>actual</code>,</li>
+          <li>have the same name as the member class in the declaring type (<code>Buffer</code>
+          in the example),</li>
+          <li>have a parameter list with a compatible signature and,</li>
+          <li>extend the member class (you'll need to use
+          <a href="../../expression/index.html#supertype_reference"><code>super</code></a>
+          in the <code>extends</code> clause).</li>
+          </ul>
+          
+          
+          <p id="refined_member_types_are_similar...">Refined member types are similar to, but not the same as, <em>virtual types</em>,
+          which Ceylon does not support.</p>
+          
+          <h3 id="different_kinds_of_class">Different kinds of class
+          </h3>
+          
+          
+          
+          
+          <h4 id="concrete_classes">Concrete classes
+          </h4>
+          
+          
+          <p id="a_class_that_can_be...">A class that can be instantiated is
+          <em>concrete</em>. It follows that <code>abstract</code> or <code>formal</code> classes are not concrete.</p>
+          
+          <h4 id="abstract_classes">Abstract classes
+          </h4>
+          
+          
+          <p id="an_abstract_class_is_a...">An <em>abstract class</em> is a class that may not be instantiated. Abstract classes
+          may declare <a href="../../annotation/formal"><code>formal</code></a> members. An abstract class
+          declaration must be annotated <a href="../../annotation/abstract"><code>abstract</code></a>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>abstract class C() {
+    /* declarations of class members */
+}
+</code></pre>
+          
+          <p id="naturally_abstract_classes_compete_with...">Naturally, abstract classes compete with interfaces, since both an abstract
+          class and an interface may contain a mix of concrete and formal members. The
+          crucial difference is:</p>
+          
+          <ul>
+          <li>an abstract class may contain or inherit state and initialization logic,
+          whereas</li>
+          <li>interfaces support a full multiple inheritance model.</li>
+          </ul>
+          
+          
+          <p id="nevertheless_it_is_often_unclear...">Nevertheless, it is often unclear whether a certain situation calls for an
+          interface or an abstract class. Our advice is to incline in favor of using
+          an interface, where reasonable.</p>
+          
+          <h4 id="_shared_classes">
+<code>shared</code> classes
+          </h4>
+          
+          
+          <p id="a_toplevel_class_declaration_or...">A toplevel class declaration, or a class declaration nested inside the body
+          of a containing class or interface, may be annotated
+          <a href="../../annotation/shared"><code>shared</code></a>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>shared class C() {
+    /* declarations of class members */
+}
+</code></pre>
+          
+          <ul>
+          <li>A toplevel <code>shared</code> class is visible wherever the package that contains it
+          is visible.</li>
+          <li>A <code>shared</code> class nested inside a class or interface is visible wherever the
+          containing class or interface is visible.</li>
+          </ul>
+          
+          
+          <h4 id="_formal_classes">
+<code>formal</code> classes
+          </h4>
+          
+          
+          <p id="a_class_declaration_nested_inside...">A class declaration nested inside the body of a containing class or interface
+          may be annotated <a href="../../annotation/formal"><code>formal</code></a>. A formal class must
+          also be annotated <code>shared</code>.</p>
+          
+          <p id="like_abstract_classes_formal_classes...">Like abstract classes, formal classes may have formal members. Unlike abstract
+          classes, formal classes may be instantiated.</p>
+          
+          <p id="a_formal_class_must_be...">A <code>formal</code> class must be <a href="#member_class_refinement">refined</a> by concrete
+          subclasses of the containing class or interface.</p>
+          
+          <h4 id="_default_classes">
+<code>default</code> classes
+          </h4>
+          
+          
+          <p id="a_class_declaration_nested_inside_the...">A class declaration nested inside the body of a containing class or interface
+          may be annotated <a href="../../annotation/default"><code>default</code></a>. A default class must
+          also be annotated <code>shared</code>.</p>
+          
+          <p id="a_default_class_may_be...">A <code>default</code> class may be <a href="#member_class_refinement">refined</a> by types which
+          inherit the containing class or interface.</p>
+          
+          <h4 id="_sealed_classes">
+<code>sealed</code> classes
+          </h4>
+          
+          
+          <p id="a_class_declaration_annotated_sealed...">A class declaration annotated <code>sealed</code> cannot be instantiated (either
+          in an invocation expression or in an extends clause) outside the module
+          in which it is defined. This provides a way to share a
+          class's type with other modules while retaining control over subclassing
+          and instance creation.</p>
+          
+          <h3 id="aliases">Aliases
+          </h3>
+          
+          
+          <p id="a_class_alias_is_a...">A <em>class alias</em> is a kind of <a href="../alias/#class_aliases">alias</a>.</p>
+          
+          <h3 id="metamodel">Metamodel
+          </h3>
+          
+          
+          <p id="class_declarations_can_be_manipulated...">Class declarations can be manipulated at runtime via their representation as
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/meta/declaration/ClassDeclaration.type.html"><code>ClassDeclaration</code></a>
+          instances. An <em>applied class</em> (i.e. with all type parameters specified)
+          corresponds to either a
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/meta/model/Class.type.html"><code>Class</code></a> or
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/meta/model/MemberClass.type.html"><code>MemberClass</code></a>
+          model instance.</p>
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li><a href="../interface/">Interface declarations</a></li>
+          <li>
+<a href="/documentation/current/spec/html_single/index.html#classes">Classes</a> in the Ceylon language spec</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

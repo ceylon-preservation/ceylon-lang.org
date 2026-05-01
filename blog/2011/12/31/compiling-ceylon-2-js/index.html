@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Compiling Ceylon to JavaScript</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2011/12/23/ide-screenshots/">Last minute gifts - IDE screenshots and forums</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2012/01/02/prototypes-ceylon-js/">Prototypes vs lexical scope in the Ceylon JavaScript compiler</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="compiling_ceylon_to_javascript">
+            Compiling Ceylon to JavaScript
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              31 Dec 2011
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/ceylon-js/">
+                ceylon-js
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <p id="weve_always_talked_about_ceylon...">We've always talked about Ceylon as a language for the JVM,
+            since that's the platform we use every day and the one we
+            think has the most to offer for server-side computing. But
+            it's not the only VM out there, and there is very little in
+            the definition of Ceylon that is JVM-specific. A couple of
+            days ago I finally found time to work on a little project
+            that's been nagging at me for a while: compiling Ceylon to
+            JavaScript.</p>
+            
+            <p id="why_would_anyone_want_to...">Why would anyone want to do that? Well, here's a few ideas:</p>
+            
+            <ul>
+            <li>to do client side development using a modern statically
+            typed language,</li>
+            <li>to reuse server-side code on the client,</li>
+            <li>to run Ceylon code on <a href="http://nodejs.org/">node</a>, or</li>
+            <li>for easy experimentation in a <a href="http://en.wikipedia.org/wiki/Read-eval-print_loop">REPL</a>.</li>
+            </ul>
+            
+            
+            <p id="i_had_anticipated_that_the...">I had anticipated that the language translation part of this
+            would be a pretty easy task, and it turns out to be even
+            easier than I had imagined. JavaScript isn't a very big
+            language, so it took me two or three hours to re-learn it
+            (or, more accurately, learn it properly for the first time),
+            and I was ready to start generating code!</p>
+            
+            <p id="some_things_that_made_this...">Some things that made this job especially easy:</p>
+            
+            <ul>
+            <li>Ceylon has well-defined semantics defined in a <a href="/documentation/1.0/spec">written
+            specification</a>. This is absolutely
+            key for any kind of multi-platform-oriented language.</li>
+            <li>The Ceylon compiler has a <a href="/code/architecture/">layered architecture</a>
+            with a well-defined API between the parser/typechecker and
+            the back end. Indeed, the two projects are developed by
+            completely independent teams. Therefore, adding a new
+            backend is an easy task.</li>
+            <li>JavaScript lacks a native type system, and all objects are
+            essentially just associative arrays. This makes it an
+            <em>especially</em> easy target for language translation. I had
+            not fully appreciated just how much difference this makes!</li>
+            <li>Ceylon and JavaScript both view a "class" as just a
+            special kind of function. Un-<code>shared</code> Ceylon declarations
+            map naturally to JavaScript's lexical scope, and <code>shared</code>
+            declarations map naturally to object members. JavaScript
+            and Ceylon have similar treatment of closure and of
+            first-class function references.</li>
+            <li>Neither Ceylon nor JavaScript has overloading. Indeed, the
+            way you do overloading in Ceylon, using
+            <a href="/documentation/1.0/introduction#principal_typing_union_types_and_intersection_types">union types</a>,
+            is a totally natural match for how the problem is solved
+            in dynamic languages!</li>
+            </ul>
+            
+            
+            <p id="on_the_other_hand_there...">On the other hand, there is one area where JavaScript is
+            extremely, embarrassingly, inadequate: modularity. After
+            a bit of googling around, I decided we should map Ceylon
+            packages to <a href="http://www.commonjs.org/">Common JS</a> modules. CommonJS is more of a
+            server-side oriented solution, but apparently there are
+            tools to repackage CommonJS modules for the browser. (The
+            structure I've gone for is one script per package, grouped
+            together in directories by module and module version.) We'll
+            see how we go with this solution. It's certainly convenient
+            for running Ceylon modules on <a href="http://nodejs.org/">node</a>.</p>
+            
+            <p id="from_the_javascript_side_you...">From the JavaScript side, you can load a Ceylon package
+            named <code>foo.bar.baz</code> from version <code>1.0</code> of a module named
+            <code>foo.bar</code> like this:</p>
+            
+            <pre data-language="javascript"><code>var foobarbaz=require('foo/bar/1.0/foo.bar.baz');
+</code></pre>
+            
+            <p id="now_its_easy_to_instantiate...">Now it's easy to instantiate a class named <code>Counter</code> and
+            call its methods and attributes:</p>
+            
+            <pre data-language="javascript"><code>var counter = foobarbaz.Counter();
+counter.inc();
+console.log(counter.getCount());
+</code></pre>
+            
+            <p id="ive_pushed_what_i_have...">I've pushed what I have so far to the new <a href="https://github.com/ceylon/ceylon-js">ceylon-js</a>
+            repository in GitHub. I've been focusing on the "hard bits"
+            like multiple inheritance, nested classes, modularity,
+            named argument invocations, encapsulation, etc., so what's
+            there today is missing some of the more basic stuff like
+            operators and control structures. And we need to reimplement
+            the language module in JavaScript. Still, it's likely that
+            the JavaScript backend will soon overtake the JVM backend
+            in terms of feature completeness. Of course, I'm looking for
+            contributors!</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2011/12/31/compiling-ceylon-2-js/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

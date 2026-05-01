@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Blog tagged site</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-light-top">
+             
+          </div>
+          <div class="sidebar-block">
+            <h3 id="recent_posts">Recent posts</h3>
+            <div id="blog-archive">
+              <h4 id="ceylon_to_move_to_the_eclipse_foundation_by_stéphane_épardaud__gavin_king_21_august_2017">
+                <a href="/blog/2017/08/21/eclipse-ceylon/">Ceylon to move to the Eclipse Foundation</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Stéphane Épardaud &amp; Gavin King
+                <br>
+                21 August 2017
+              </h4>
+              <h4 id="ceylon_133_is_now_available_by_gavin_king_21_august_2017">
+                <a href="/blog/2017/08/21/ceylon-1-3-3/">Ceylon 1.3.3 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                21 August 2017
+              </h4>
+              <h4 id="ceylon_132_is_now_available_by_gavin_king_03_march_2017">
+                <a href="/blog/2017/03/03/ceylon-1-3-2/">Ceylon 1.3.2 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                03 March 2017
+              </h4>
+              <h4 id="ceylon_131_is_now_available_by_gavin_king_22_november_2016">
+                <a href="/blog/2016/11/22/ceylon-1-3-1/">Ceylon 1.3.1 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                22 November 2016
+              </h4>
+              <h4 id="ceylon_130_is_now_available_by_gavin_king_19_september_2016">
+                <a href="/blog/2016/09/19/ceylon-1-3-0/">Ceylon 1.3.0 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                19 September 2016
+              </h4>
+            </div>
+            <h3 id="tags">Tags</h3>
+            <div class="tag-cloud">
+              <div class="tag-cloud">
+                <ul>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/100/">
+                        1.0.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/110/">
+                        1.1.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/12/">
+                        1.2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/120/">
+                        1.2.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/121/">
+                        1.2.1
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/122/">
+                        1.2.2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/130/">
+                        1.3.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/131/">
+                        1.3.1
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/132/">
+                        1.3.2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/133/">
+                        1.3.3
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m1/">
+                        M1
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m2/">
+                        M2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m3/">
+                        M3
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m4/">
+                        M4
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m5/">
+                        M5
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m6/">
+                        M6
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/android/">
+                        android
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/ceylon-js/">
+                        ceylon-js
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/ceylon-model/">
+                        ceylon-model
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/code/">
+                        code
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/compiler/">
+                        compiler
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/conference/">
+                        conference
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/constructors/">
+                        constructors
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/design/">
+                        design
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/design-interop-herd/">
+                        design interop herd
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/error-handling/">
+                        error handling
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/exceptions/">
+                        exceptions
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/feedback/">
+                        feedback
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/forum/">
+                        forum
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/generics/">
+                        generics
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/gsoc/">
+                        gsoc
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/guice/">
+                        guice
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/herd/">
+                        herd
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/httpd/">
+                        httpd
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/ide/">
+                        ide
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/interop/">
+                        interop
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/interview/">
+                        interview
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/ios/">
+                        ios
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/java/">
+                        java
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/language-design/">
+                        language design
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/mobile/">
+                        mobile
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/modularity/">
+                        modularity
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-2">
+                      <a href="/blog/tags/news/">
+                        news
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/osgi/">
+                        osgi
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/podcast/">
+                        podcast
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-7">
+                      <a href="/blog/tags/progress/">
+                        progress
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-4">
+                      <a href="/blog/tags/release/">
+                        release
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/roadmap/">
+                        roadmap
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/runtime/">
+                        runtime
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/sdk/">
+                        sdk
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-2">
+                      <a href="/blog/tags/site/">
+                        site
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/test/">
+                        test
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/tools/">
+                        tools
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/typesafety/">
+                        typesafety
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/typescript/">
+                        typescript
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/weld/">
+                        weld
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <h3 id="authors">Authors</h3>
+            <div class="tag-cloud">
+              <div class="tag-cloud">
+                <ul>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/bastien-jansen/">
+                        Bastien Jansen
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/david-festal/">
+                        David Festal
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/emmanuel-bernard/">
+                        Emmanuel Bernard
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-6">
+                      <a href="/blog/authors/gavin-king/">
+                        Gavin King
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/lucas-werkmeister/">
+                        Lucas Werkmeister
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-3">
+                      <a href="/blog/authors/stephane-epardaud/">
+                        Stéphane Épardaud
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/stephane-epardaud--gavin-king/">
+                        Stéphane Épardaud &amp; Gavin King
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/tako-schotanus/">
+                        Tako Schotanus
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/tom-bentley/">
+                        Tom Bentley
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/tomas-hradec/">
+                        Tomáš Hradec
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="point-light-end">
+             
+          </div>
+          <a href="/+" style="cursor:pointer;margin-left:auto;margin-right:auto;display:block;text-align:center;padding-top:10px;padding-bottom:0px">
+            <span style="display:inline-block;font-weight:bold;vertical-align:top;margin-right:5px;margin-top:8px;">Follow Ceylon:</span>
+          </a>
+          <p style="cursor:pointer;margin-left:auto;margin-right:auto;margin-top:2px;display:block;text-align:center;padding-top:0px" id="">
+            <a href="/+">
+              <i alt="Google Plus" class="fa fa-google-plus-square fa-2x" height="32" width="32"></i>
+            </a>
+            <a href="http://twitter.com/ceylonlang">
+              <i alt="Twitter" class="fa fa-twitter-square fa-2x" height="32" width="32"></i>
+            </a>
+            <a href="https://www.facebook.com/ceylonlang">
+              <i alt="Facebook" class="fa fa-facebook-square fa-2x" height="32" width="32"></i>
+            </a>
+          </p>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="core-page">
+          <h1 id="blog_tagged_site">
+            Blog tagged site
+          </h1>
+          <div class="post">
+            <h1 class="title" id="welcome_to_ceylon_langorg">
+              <a href="/blog/2011/11/17/welcome/">Welcome to ceylon-lang.org!</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/gavin-king/">Gavin King</a>
+              </div>
+              <div class="date">
+                17 November 2011
+              </div>
+              <div class="tags">
+                <a href="/blog/tags/site/">
+                  site
+                </a>
+              </div>
+            </div>
+            <div class="body">
+              <p id="today_were_proud_to_announce...">Today, we're proud to announce a dedicated Ceylon community,
+              <a href="http://ceylon-lang.org">ceylon-lang.org</a>. Simultaneously,
+              we're opening up access to our <a href="/code/source/">git repositories</a>
+              and even providing a special pre-release build of the
+              <a href="/documentation/1.0/ide">Ceylon IDE</a>, only for the truly
+              adventurous.</p>
+              
+              <p id="were_not_yet_quite_ready...">We're not yet quite ready to release
+              <a href="/documentation/1.0/roadmap/">Milestone 1</a>, due to a number of
+              unsolved bugs and integration issues. But we're working really
+              hard to get these sorted out!</p>
+              
+              <p id="im_taking_this_opportunity_to...">I'm taking this opportunity to thank Red Hat's James Cobb for
+              the web design, Emmanuel Bernard for setting up the
+              infrastructure behind this site, and Tom Bentley for helping
+              with much of the content. And, while I'm mentioning people's
+              names, I would also like to thank new hires Stef Épardaud and
+              Tako Schotanus for all the work they did getting the compiler
+              up and running as volunteer contributors before coming on
+              board, and David Festal from SERLI for making the IDE happen.</p>
+              
+              <p id="if_youre_interested_in_contributing...">If <em>you're</em> interested in contributing to Ceylon, now is a
+              really great time to <a href="/code">get involved</a>!</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2011/11/17/welcome/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="post">
+            <h1 class="title" id="wire_the_site_with_spec_and_ceylondoc">
+              <a href="/blog/2011/11/07/building-site-spec-ceylondoc/">Wire the site with spec and ceylondoc</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/emmanuel-bernard/">Emmanuel Bernard</a>
+              </div>
+              <div class="date">
+                07 November 2011
+              </div>
+              <div class="tags">
+                <a href="/blog/tags/site/">
+                  site
+                </a>
+              </div>
+            </div>
+            <div class="body">
+              <p id="the_site_now_integrates_the...">The site now integrates the specification and the ceylondoc for <code>ceylon.language</code>.</p>
+              
+              <h2 id="how_to_build_the_integrated_site">How to build the integrated site</h2>
+              
+              <p id="run_build_sitesh_from_the...">Run <code>./build-site.sh</code> from the root of your <code>ceylon-lang.org</code> repository.
+              This will</p>
+              
+              <ul>
+              <li>clone or refresh the ceylon-spec, ceylon.language and ceylon-compiler
+              repos</li>
+              <li>build the documentation as of the latest in master</li>
+              <li>push the bits in the generated directory of awestruct</li>
+              </ul>
+              
+              
+              <p id="navigation_from_the_site_proper...">Navigation from the site proper to the spec or the ceylon.language doc should work
+              when serving the awestruct website.</p>
+              
+              <h2 id="how_to_reference_the_spec_or_the_ceylondoc">How to reference the spec or the ceylondoc</h2>
+              
+              <p id="this_information_is_out_dated..."><em>This information is out dated and has changed in later versions of the website, check out <a href="/code/website/edit-page/#documentation_section">our how to edit a page</a> section.</em></p>
+              
+              <p id="if_you_want_to_point...">If you want to point the spec to a user in the site, point to <a href="/documentation/1.0/spec">/documentation/1.0/spec</a>.
+              This page show the spec in HTML, HTML in single page and PDF.</p>
+              
+              <p id="if_you_want_to_point_to...">If you want to point to a specific paragraph in the spec, use the variable <code>site.urls.spec.current</code> and
+              the anchor to the paragraph in the spec.</p>
+              
+              <p id="eg_this_is_a_pointer...">eg This is a <strong>[</strong>pointer to the spec<strong>](#{site.urls.spec}#</strong><em>anchor-in-spec</em><strong>)</strong>.</p>
+              
+              <p id="that_means_the_specification_anchors...">That means the specification anchors should be stable.</p>
+              
+              <p id="likewise_to_point_to_a...">Likewise, to point to a ceylondoc entry, use the variable <code>site.urls.apidocs</code>.</p>
+              
+              <p id="doc_for_comparablesiteurlsapidoc_currentceylonlanguagecomparablehtml"><strong>[</strong>Doc for <code>Comparable</code><strong>](#{site.urls.apidoc_current}</strong><em>/ceylon/language/Comparable.html</em><strong>)</strong></p>
+              
+              <p id="by_using_these_placeholders_we...">By using these placeholders, we will be able to move the spec or ceylondoc to other places.
+              Note that <a href="/documentation/1.0/api">/documentation/1.0/api</a> page is pretty useless as it is but
+              should be fixed in ceylondoc.</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2011/11/07/building-site-spec-ceylondoc/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="post">
+            <h1 class="title" id="changed_syntax_highlighting">
+              <a href="/blog/2011/10/05/syntax-highlighting/">Changed syntax highlighting</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/tom-bentley/">Tom Bentley</a>
+              </div>
+              <div class="date">
+                05 October 2011
+              </div>
+              <div class="tags">
+                <a href="/blog/tags/site/">
+                  site
+                </a>
+              </div>
+            </div>
+            <div class="body">
+              <p id="ive_been_writing_quite_a...">I've been writing quite a lot of <a href="/documentation/1.0/reference">documentation</a>
+              lately, and my <a href="/blog/2011/09/26/site-improvements">previous decision</a> to require an HTML
+              comment in order to get syntax highlighting of Ceylon code started to look
+              like the wrong choice.
+              Since the vast majority of the code blocks on the site are going
+              to be Ceylon source, and since we're (almost?) always going to want that
+              highlighted I've changed the rules:</p>
+              
+              <ul>
+              <li>Now <em>all</em> indented code blocks will be <em>assumed</em> to be Ceylon source code
+              that requires syntax highlighting, unless indicated otherwise.</li>
+              <li>If the source code is not Ceylon, you can use a <code>&lt;!-- lang: foo --&gt;</code>
+              comment (having setup the syntax highlighter and <code>gsub</code> transformer
+              to do highlighting for the language <code>foo</code>).</li>
+              <li>If you don't want any highlighting at all use <code>&lt;!-- lang: none --&gt;</code>
+</li>
+              </ul>
+            </div>
+            <div class="tail">
+               <a href="/blog/2011/10/05/syntax-highlighting/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="post">
+            <h1 class="title" id="improved_syntax_highlighting_and_deep_linking">
+              <a href="/blog/2011/09/26/site-improvements/">Improved syntax highlighting and deep linking</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/tom-bentley/">Tom Bentley</a>
+              </div>
+              <div class="date">
+                26 September 2011
+              </div>
+              <div class="tags">
+                <a href="/blog/tags/site/">
+                  site
+                </a>
+              </div>
+            </div>
+            <div class="body">
+              <p id="a_couple_of_improvements_to...">A couple of improvements to the site generation have been added.</p>
+              
+              <h3 id="syntax_highlighting">Syntax highlighting</h3>
+              
+              <p id="we_were_previously_using_literal...">We were previously using literal <code>&lt;pre&gt;</code> blocks in markdown pages so that we
+              could set the CSS necessary for the syntax highlighter. The <em>big</em> downside of
+              this was the need to HTML-escape the code within those <code>&lt;pre&gt;</code> blocks. Using
+              an <a href="http://awestruct.org/">awestruct</a> 'transformer' it's now possible to use
+              the more natural markdown way of including example code
+              (i.e. using indentation), which means you don't have to worry about using
+              HTML entities for &lt;, &amp; etc.</p>
+              
+              <p id="by_default_pre_blocks_will...">By default <code>&lt;pre&gt;</code> blocks will <em>not</em> be subject to highlighting. To enable
+              highlighting simply preceed the block with an HTML comment hinting at the
+              language being included. For example</p>
+              
+              <pre data-language="ceylon"><code>    class Foo() {
+        void bar() {
+
+        }
+    }
+</code></pre>
+              
+              <p id="its_also_easy_to_have...">It's also easy to have a page with syntax highlighting of multiple
+              languages, by using an appropriate hint.</p>
+              
+              <p id="for_those_who_are_interested...">For those who are interested, the way this works is having a transformer
+              perform a global <code>gsub</code> on the generated output using a suitable regular
+              expression to pick out the code blocks generated by markdown.</p>
+              
+              <h3 id="deep_linking">Deep linking</h3>
+              
+              <p id="markdown_by_itself_doesnt_allow...">Markdown by itself doesn't allow the author to put <code>id</code> attributes or anchors
+              (<code>&lt;a name="..."&gt;</code>) in the generated HTML, which is annoying if you want to link
+              to a particular part of the page. You can of course put <code>&lt;a name="..."&gt;</code>
+              elements in yourself, but:</p>
+              
+              <ul>
+              <li>It clutters up the nice markdown with HTML.</li>
+              <li>It forces you to ensure the uniqueness of the ids you use.</li>
+              <li>It's tedious.</li>
+              </ul>
+              
+              
+              <p id="using_another_transformer_we_now...">Using another transformer we now generate id attributes automatically for all
+              <code>&lt;h*&gt;</code> and <code>&lt;p&gt;</code> elements. For headings we use the heading text (suitably
+              munged into an XML NAME). For paragraphs we use the first few words (again
+              suitable normalized, and also worrying about uniqueness). If an element
+              already has an <code>id</code> then it's untouched. If there's a matching <code>id</code>
+              (or <code>name</code>, since they share the same namespace), steps are taken to
+              disambiguate the generated one.</p>
+              
+              <p id="the_long_and_the_short...">The long and the short of this is that we can now easily and accurately link
+              into the middle of documents. The <em>caveat</em> is that you should be aware that
+              changing the first few words of a paragraph (or the text of a heading) is
+              likely to break any links which point to it. To prevent such broken links
+              you can always use an explicit <code>&lt;a name=""&gt;</code> at the relevant point.</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2011/09/26/site-improvements/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="post">
+            <h1 class="title" id="home_page_has_a_news_section">
+              <a href="/blog/2011/08/29/news-section/">Home page has a news section</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/emmanuel-bernard/">Emmanuel Bernard</a>
+              </div>
+              <div class="date">
+                29 August 2011
+              </div>
+              <div class="tags">
+                <a href="/blog/tags/site/">
+                  site
+                </a>
+              </div>
+            </div>
+            <div class="body">
+              <p id="the_website_home_page_now...">The website home page now has an automatically filled news section.</p>
+              
+              <p id="when_you_want_to_advertize...">When you want to advertize a news, add a file <code>yyyy-mm-some-text.md</code> to <code>_data/news</code> with the following structure</p>
+              
+              <pre><code>---
+title: 'My exciting news'
+date: 29 August, 2011
+more_info_url: /my/url/with/more/details
+effective_date: 20110829
+---
+Some exciting news today.
+</code></pre>
+              
+              <p id="a_typical_example_would_be...">A typical example would be <code>2011-08-news-section.md</code></p>
+              
+              <pre><code>---
+title: 'News section is up'
+date: 29 August, 2011
+more_info_url: /blog/2011-08-29-news-section/
+effective_date: 20110829
+---
+The website news section is now up.
+</code></pre>
+              
+              <h3 id="note">Note</h3>
+              
+              <p id="i_could_have_reused_blog...">I could have reused blog entries tagged #news but it turns out that the first 50 characters a
+              not often useful. So I've decided to go for the explicit <code>_data/news</code> structure.</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2011/08/29/news-section/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="pagination-links">
+<span class="current-page">1</span> <a href="/blog/tags/site/page2/" class="page-link">2</a> <a href="/blog/tags/site/page2/" class="next-link">Next</a> </div>
+        </div>
+        <script type="text/javascript">
+          //<![CDATA[
+            /* place div.expandable to 
+             * - minHeight by default 
+             * - full size on click
+             * - back to minHeight on second click
+             * with a jQuery animation
+             */
+            var minHeight=150;
+            $(document).ready( function() {
+              $("div.expandable").height(minHeight);     
+              $("div.expandable").click(function(e) 
+                {
+                  if( !$(e.target).is("a")) {
+                    $this = $(this); 
+                    var currentHeight = $this.height();
+                    if(currentHeight==minHeight) {
+                      $this.css('height', 'auto');
+                    }
+                    else{
+                      $this.css('height', minHeight + 'px');
+                    };
+                    var height = $this.height();
+                    $this.css('height', currentHeight + 'px');
+                    $this.animate({'height':height}, 500);
+                }
+              })
+            });
+          //]]>
+        </script>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:04</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

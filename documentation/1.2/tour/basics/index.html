@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Basics</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.2/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.2/tour">Tour of Ceylon</a></h3>
+            
+            <ol>
+            <li><a href="/documentation/1.2/tour/basics">Basics</a></li>
+            <li><a href="/documentation/1.2/tour/classes">Classes</a></li>
+            <li><a href="/documentation/1.2/tour/attributes-control-structures">Attributes and variables, control structures</a></li>
+            <li><a href="/documentation/1.2/tour/inheritance">Inheritance, refinement, and interfaces</a></li>
+            <li><a href="/documentation/1.2/tour/anonymous-member-classes">Anonymous and member classes</a></li>
+            <li><a href="/documentation/1.2/tour/sequences">Streams, sequences, and tuples</a></li>
+            <li><a href="/documentation/1.2/tour/typeinference">Type aliases and type inference</a></li>
+            <li><a href="/documentation/1.2/tour/types">Union, intersection, and enumerated types</a></li>
+            <li><a href="/documentation/1.2/tour/generics">Generics</a></li>
+            <li><a href="/documentation/1.2/tour/modules">Packages and modules</a></li>
+            <li><a href="/documentation/1.2/tour/functions">Functions</a></li>
+            <li><a href="/documentation/1.2/tour/named-arguments">Named arguments</a></li>
+            <li><a href="/documentation/1.2/tour/comprehensions">Comprehensions</a></li>
+            <li><a href="/documentation/1.2/tour/language-module">Language module</a></li>
+            <li><a href="/documentation/1.2/tour/initialization">Initialization and constructors</a></li>
+            <li><a href="/documentation/1.2/tour/annotations">Annotations and the metamodel</a></li>
+            <li><a href="/documentation/1.2/tour/interop">Interoperation with Java</a></li>
+            <li><a href="/documentation/1.2/tour/dynamic">Dynamic typing</a></li>
+            </ol>
+            
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.2/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.2/examples">Examples</a></h3>
+            
+            <!-- ### [Tutorial videos](/documentation/1.2/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.2/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.2/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.2/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.2/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.2/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Tour of Ceylon
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_12_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.2, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.2/tour/basics.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.2/tour/basics.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="basics">Basics</h1>
+          
+          <p id="lets_get_started">Let's get started!</p>
+          
+          <p id="before_we_can_get_into...">Before we can get into any of the really interesting and powerful features of
+          this language, we need to get comfortable with some of the basic syntax, so
+          we'll know what we're looking at later on, when we get up to the really good
+          stuff.</p>
+          
+          <h2 id="string_literals">String literals</h2>
+          
+          <p id="as_we_just_saw_a...">As we <a href="../#a_really_simple_program">just saw</a>, a <em>string literal</em> is text
+          enclosed in double-quotes:</p>
+          
+          <pre data-language="ceylon"><code>print("Hello, World!");
+</code></pre>
+          
+          <p id="string_literals_in_ceylon_may...">String literals in Ceylon may span multiple lines. Try this:</p>
+          
+          <pre data-language="ceylon"><code>print("Hello, 
+       World!");
+</code></pre>
+          
+          <p id="the_output_is">The output is:</p>
+          
+          <pre><code>Hello, 
+World!
+</code></pre>
+          
+          <p id="note_that_because_the_second...">Note that because the second line of the string literal contained whitespace
+          right up until the first character of the first line of the string literal,
+          all that whitespace was automatically removed. This helps us format our
+          code nicely.</p>
+          
+          <p id="its_often_useful_to_collapse...">It's often useful to collapse whitespace in a multiline string literal. The
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/String.type.html"><code>String</code></a>
+          class has an attribute called
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/String.type.html#normalized"><code>normalized</code></a>.
+          We can use it like this:</p>
+          
+          <pre data-language="ceylon"><code>value message = "Hello, 
+                 World!";
+print(message.normalized);
+</code></pre>
+          
+          <p id="which_results_in_the_output">Which results in the output:</p>
+          
+          <pre><code>Hello, World!
+</code></pre>
+          
+          <p id="multiline_strings_are_especially_useful...">Multiline strings are especially useful for adding documentation to a
+          program.</p>
+          
+          <h2 id="adding_inline_documentation">Adding inline documentation</h2>
+          
+          <p id="its_usually_a_good_idea...">It's usually a good idea to add some kind of documentation to important
+          functions like <code>hello()</code>. One way we could do this is by using a C-style
+          comment, either like this:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>/* The classic Hello World program */
+shared void hello() {
+    print("Hello, World!");
+}
+</code></pre>
+          
+          <p id="or_like_this">Or like this:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>//The classic Hello World program
+shared void hello() {
+    print("Hello, World!");
+}
+</code></pre>
+          
+          <p id="but_its_much_better_to...">But it's much better to use the <code>doc</code> annotation for comments that describe
+          declarations.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>doc ("The classic Hello World program")
+by ("Trompon the Elephant")
+see (`function goodbye`)
+throws (`class IOException`)
+shared void hello() {
+    print("Hello, World!");
+}
+</code></pre>
+          
+          <p id="the_doc_by_see_throws...">The <code>doc</code>, <code>by</code>, <code>see</code>, <code>throws</code>, and <code>tagged</code> annotations contain documentation
+          that is included in the output of the Ceylon documentation compiler,
+          <a href="/documentation/current/reference/tool/ceylon/subcommands/ceylon-doc.html"><code>ceylon doc</code></a>.</p>
+          
+          <p id="annotations_like_doc_by_see...">Annotations like <code>doc</code>, <code>by</code>, <code>see</code>, and <code>throws</code>, aren't keywords. They're
+          just ordinary identifiers. The same is true for annotations which are part of
+          the language definition, for example: <code>abstract</code>, <code>variable</code>, <code>shared</code>, <code>formal</code>,
+          <code>default</code>, <code>actual</code>, etc. This is quite different to other C-like languages. (On
+          the other hand, <code>void</code> <em>is</em> a keyword, just like in C or Java.)</p>
+          
+          <p id="since_the_doc_annotation_is...">Since the <code>doc</code> annotation is ubiquitous, its name and parentheses may be left
+          out whenever it occurs as the first annotation in the list of annotations of a
+          program element:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>"The classic Hello World program"
+by ("Trompon the Elephant")
+see (`function goodbye`)
+throws (`class IOException`)
+shared void hello() {
+    print("Hello, World!");
+}
+</code></pre>
+          
+          <h2 id="formatting_inline_documentation">Formatting inline documentation</h2>
+          
+          <p id="the_doc_annotation_may_contain...">The <code>doc</code> annotation may contain <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>
+          formatting.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>"The classic [Hello World program][helloworld]
+ that prints a message to the console, this 
+ time written in [Ceylon][]. 
+
+ This simple program demonstrates:
+
+ 1. how to define a toplevel function, and
+ 2. how to `print()` a literal `String`.
+
+ You can compile and run `hello()` from the 
+ command line like this:
+
+     ceylon compile source/hello.ceylon
+     ceylon run -run hello default
+
+ Or you can use `Run As &gt; Ceylon Application` 
+ in the IDE.
+
+ [helloworld]: http://en.wikipedia.org/wiki/Hello_world_program
+ [Ceylon]: http://ceylon-lang.org"
+
+shared void hello() {
+    print("Hello, World!");
+}
+</code></pre>
+          
+          <p id="since_markdown_is_sensitive_to...">Since Markdown is sensitive to the initial column in which text appears,
+          you need to be careful to indent the lines of the multiline string literal
+          correctly, as we've done here.</p>
+          
+          <h2 id="escape_sequences">Escape sequences</h2>
+          
+          <p id="inside_a_string_literal_you...">Inside a string literal, you can use the escape sequences <code>\n</code>, <code>\t</code>, <code>\\</code>,
+          <code>\"</code> and friends that you're used to from other C-like languages.</p>
+          
+          <pre data-language="ceylon"><code>print("\"Hello!\", said the program.");
+</code></pre>
+          
+          <p id="you_can_also_use_2...">You can also use 2-byte and 4-byte hexadecimal escape sequences to embed
+          Unicode characters in your text.</p>
+          
+          <!-- try-pre:
+              Float calculateE() => 2.71828;
+              Float calculatePi() => 3.14159;
+              
+          -->
+          
+          
+          <pre data-language="ceylon"><code>"The mathematical constant \{#03C0}, the
+ ratio of the circumference of a circle
+ to its diameter."
+Float pi = calculatePi();
+
+"The mathematical constant \{#0001D452},
+ the base of the natural logarithm."
+Float e = calculateE();
+</code></pre>
+          
+          <p id="even_better_you_can_identity...">Even better, you can identity a Unicode character by its name.</p>
+          
+          <!-- try-pre:
+              Float calculateE() => 2.71828;
+              Float calculatePi() => 3.14159;
+              
+          -->
+          
+          
+          <pre data-language="ceylon"><code>"The mathematical constant \{GREEK SMALL LETTER PI}, the 
+ ratio of the circumference of a circle to its diameter."
+Float pi = calculatePi();
+
+"The mathematical constant \{MATHEMATICAL ITALIC SMALL E},
+ the base of the natural logarithm."
+Float e = calculateE();
+</code></pre>
+          
+          <p id="ceylon_strings_are_composed_of...">Ceylon strings are composed of UTF-32 characters, as we'll see
+          <a href="../language-module/#characters_and_character_strings">later in the tour</a>.</p>
+          
+          <h2 id="verbatim_strings">Verbatim strings</h2>
+          
+          <p id="sometimes_escape_sequence_interpolation_is...">Sometimes, escape sequence interpolation is annoying, for example, when
+          embedding code in a string literal. If we use three double-quotes, <code>"""</code>,
+          to delimit our string, we get a <em>verbatim string</em>, which may contain
+          unescaped backslash and double-quote characters:</p>
+          
+          <pre data-language="ceylon"><code>print(""""Hello!", said the program.""");
+</code></pre>
+          
+          <h2 id="string_interpolation_and_concatenation">String interpolation and concatenation</h2>
+          
+          <p id="lets_make_our_program_tell...">Let's make our program tell us a little more about itself.</p>
+          
+          <pre data-language="ceylon"><code>print("Hello, this is Ceylon ``language.version``  
+       running on ``runtime.name`` ``runtime.version``!\n
+       You ran me at ``system.milliseconds`` ms, 
+       with ``process.arguments.size`` arguments.");
+</code></pre>
+          
+          <p id="notice_how_our_message_contains...">Notice how our message contains interpolated expressions, delimited using
+          "doublebacks", that is, two backticks. This is called a <em>string template</em>.</p>
+          
+          <p id="on_my_machine_this_program...">On my machine, this program results in the following output:</p>
+          
+          <pre><code>Hello, this is Ceylon 1.0.0
+running on jvm 1.7!
+
+You ran me at 1362763185067 ms,
+with 0 arguments.
+</code></pre>
+          
+          <p id="the__operator_youre_probably...">The <code>+</code> operator you're probably used to is an alternative way to concatenate
+          strings, and more flexible in many cases:</p>
+          
+          <pre data-language="ceylon"><code>print("Hello, this is Ceylon " + language.version +  
+      " running on " + runtime.name + " " + runtime.version + "!\n" +
+      "You ran me at " + system.milliseconds.string + 
+      " ms, with " + process.arguments.size.string + 
+      " arguments.");
+</code></pre>
+          
+          <p id="note_that_when_we_use...">Note that when we use <code>+</code> to concatenate strings, we have to explicitly
+          invoke the
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Object.type.html#string"><code>string</code></a>
+          attribute to convert numeric expressions to strings. The
+          <code>+</code> operator does not automatically convert its operands to strings, so the
+          following does not compile:</p>
+          
+          <pre data-language="ceylon"><code>print("Hello, this is Ceylon " + language.version +  
+      " running on " + runtime.name + " " + runtime.version + "!\n" +
+      "You ran me at " + system.milliseconds +  //compile error!
+      " ms, with " + process.arguments.size +    //compile error!
+      " arguments.");
+</code></pre>
+          
+          <h2 id="dealing_with_objects_that_arent_there">Dealing with objects that aren't there</h2>
+          
+          <p id="lets_take_a_name_as...">Let's take a name as input from the command line. We have to account for
+          the case where nothing was specified at the command line, which gives us
+          an opportunity to explore how <code>null</code> values are treated in Ceylon, which
+          is quite different to what you're probably used to in Java or C#.</p>
+          
+          <p id="lets_consider_an_overly_verbose...">Let's consider an overly-verbose example to start with. (We'll work our
+          way up to a more convenient form.)</p>
+          
+          <p id="this_doesnt_compile">This <em>doesn't</em> compile:</p>
+          
+          <pre data-language="ceylon"><code>String name = process.arguments.first; //compile error: String? is not assignable to String
+String greeting = "Hello, ``name``!";
+print(greeting);
+</code></pre>
+          
+          <p id="instead_we_have_to_explicitly...">Instead, we have to explicitly accommodate the possibility that there are
+          no arguments:</p>
+          
+          <pre data-language="ceylon"><code>String? name 
+        = process.arguments.first;
+String greeting;
+if (exists name) {
+    greeting = "Hello, ``name``!";
+}
+else {
+    greeting = "Hello, World!";
+}
+print(greeting);
+</code></pre>
+          
+          <p id="the_type_string_indicates_that...">The type <code>String?</code> indicates that <code>name</code> may reference a <code>null</code> value. We
+          use the <code>if (exists ... )</code> control structure to handle the case of a <code>null</code>
+          name separately from the case of a non-<code>null</code> name.</p>
+          
+          <p id="its_possible_to_abbreviate_the...">It's possible to abbreviate the code we just saw by declaring the local <code>name</code>
+          inside the <code>if (exists ... )</code> condition:</p>
+          
+          <pre data-language="ceylon"><code>String greeting;
+if (exists name 
+        = process.arguments.first) {
+    greeting = "Hello, ``name``!";
+}
+else {
+    greeting = "Hello, World!";
+}
+print(greeting);
+</code></pre>
+          
+          <p id="this_is_the_preferred_style...">This is the preferred style most of the time, since we can't actually use
+          <code>name</code> for anything useful outside of the <code>if (exists ... )</code> construct.
+          (But this still isn't the most compact way to write this code.)</p>
+          
+          <h2 id="optional_types">Optional types</h2>
+          
+          <p id="local_variables_parameters_and_attributes...">Local variables, parameters, and attributes that may contain <code>null</code> values
+          must be explicitly declared as being of optional type (the <code>T?</code> syntax).
+          There's simply no way to assign <code>null</code> to a local that isn't of optional type.
+          The compiler won't let you. This is an error:</p>
+          
+          <pre data-language="ceylon"><code>String name = null; //compile error: null is not an instance of String
+</code></pre>
+          
+          <p id="nor_will_the_ceylon_compiler...">Nor will the Ceylon compiler let you do anything dangerous with a value of
+          type <code>T?</code> - that is, anything that could cause a <code>NullPointerException</code> in
+          Java - without first checking that the value is not <code>null</code> using
+          <code>if (exists ... )</code>. The following is also an error:</p>
+          
+          <pre data-language="ceylon"><code>String? name = process.arguments.first;
+print("Hello " + name + "!"); //compile error: name is not Summable
+</code></pre>
+          
+          <p id="in_fact_its_not_even...">In fact, it's not even possible to use the equality operator <code>==</code> with an
+          expression of optional type. We can't write:</p>
+          
+          <!-- try:
+              String? name = process.arguments.first;
+              if (name==null) { } //compile error: name is not Object
+          -->
+          
+          
+          <pre data-language="ceylon"><code>String? name = process.arguments.first;
+if (name==null) { ... } //compile error: name is not Object
+</code></pre>
+          
+          <p id="like_we_can_in_java...">like we can in Java. This helps avoid the undesirable behavior of <code>==</code> in
+          Java where <code>x==y</code> evaluates to true if <code>x</code> and <code>y</code> both evaluate to <code>null</code>.</p>
+          
+          <p id="in_a_language_with_static...">In a language with static typing, we're always wanting to know what the type
+          of something is. So what's the type of <code>null</code>?</p>
+          
+          <p id="thats_easy_to_answer_null...">That's easy to answer: <code>null</code> is a <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Null.type.html"><code>Null</code></a>.</p>
+          
+          <p id="yes_thats_right_the_value...">Yes, that's right: the value <code>null</code> isn't a primitive value in Ceylon, it's
+          just a perfectly ordinary instance of the perfectly ordinary class <code>Null</code>,
+          at least from the point of view of Ceylon's type system.</p>
+          
+          <p id="and_the_syntax_string_is...">And the syntax <code>String?</code> is just an abbreviation for the
+          <a href="../types/#union_types">union type</a> <code>Null|String</code>.</p>
+          
+          <p id="thats_why_we_cant_call...">That's why we can't call operations of <code>String</code> on a <code>String?</code>. It's simply
+          a different type! The <code>if (exists ...)</code> construct narrowed the type of <code>name</code>
+          inside the <code>if</code> block, allowing us to treat <code>name</code> as a <code>String</code> there.</p>
+          
+          <p id="as_an_aside_if_youre...">(As an aside, if you're concerned about performance, it's worth mentioning that
+          the Ceylon compiler does some special magic to transform this value to a virtual
+          machine-level null, all under the covers.)</p>
+          
+          <h2 id="operators_for_handling_null_values">Operators for handling null values</h2>
+          
+          <p id="there_are_a_couple_of...">There are a couple of operators that will make your life easier when dealing
+          with <code>null</code> values. The first is <code>else</code>:</p>
+          
+          <!-- try-pre:
+              String? name = null;
+          -->
+          
+          
+          <!-- try-post:
+              print(greeting);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>String greeting = "Hello, " + (name else "World");
+</code></pre>
+          
+          <p id="the_else_operator_produces">The <code>else</code> operator produces:</p>
+          
+          <ul>
+          <li>its first operand if the first operand is not <code>null</code>, or</li>
+          <li>its second operand otherwise.</li>
+          </ul>
+          
+          
+          <p id="its_a_more_convenient_way...">It's a more convenient way to handle <code>null</code> values in simple cases. You
+          can chain multiple <code>else</code>s:</p>
+          
+          <!-- try-pre:
+              String? firstName = null;
+              String? userId = "joe";
+          -->
+          
+          
+          <!-- try-post:
+              print(name);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>String name = firstName else userId else "Guest";
+</code></pre>
+          
+          <p id="theres_also_an_operator_for...">There's also an operator for <em>producing</em> a null value:</p>
+          
+          <!-- try-pre:
+              String arg = "hello";
+          -->
+          
+          
+          <!-- try-post:
+              print(name else "No name");
+          -->
+          
+          
+          <pre data-language="ceylon"><code>String? name = !arg.trimmed.empty then arg;
+</code></pre>
+          
+          <p id="the_then_operator_produces">The <code>then</code> operator produces</p>
+          
+          <ul>
+          <li>its second operand if its first operand evaluates to <code>true</code>, or</li>
+          <li>
+<code>null</code> otherwise.</li>
+          </ul>
+          
+          
+          <p id="you_can_chain_an_else...">You can chain an <code>else</code> after a <code>then</code> to reproduce the behavior of
+          C's ternary <code>?:</code> operator:</p>
+          
+          <!-- try-pre:
+              String arg = "hello";
+          -->
+          
+          
+          <!-- try-post:
+              print(name);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>String name = !arg.trimmed.empty then arg else "World";
+</code></pre>
+          
+          <p id="however_for_more_complex_conditions...">However, for more complex conditions, it's better to use an <a href="../attributes-control-structures/#if_and_switch_expressions">inline <code>if</code>
+          expression</a>.</p>
+          
+          <p id="finally_the__operator_lets...">Finally, the <code>?.</code> operator lets us call operations on optional types:</p>
+          
+          <!-- try-pre:
+              String? name = null;
+          -->
+          
+          
+          <!-- try-post:
+              print(length);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>Integer length = name?.size else 0;
+</code></pre>
+          
+          <p id="if_name_is_null_namesize...">If <code>name</code> is null, <code>name?.size</code> evaluates to <code>null</code>. Otherwise, the
+          <code>size</code> attribute of <code>String</code> is evaluated.</p>
+          
+          <p id="if_we_need_to_squeeze...">If we need to squeeze a whole chain of <code>then</code>s/<code>else</code>s into a single
+          expression, we can use the "poorman's switch" idiom:</p>
+          
+          <!-- try-pre:
+              Integer int = 1;
+          -->
+          
+          
+          <!-- try-post:
+              print(sign);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>String sign = (int&gt;1P then "enormous")
+         else (int&lt;0 then "negative")
+         else (int&gt;0 then "positive")
+         else "zero";
+</code></pre>
+          
+          <p id="using_else_we_can_finally...">Using <code>else</code>, we can finally simplify our original example to something
+          reasonable:</p>
+          
+          <pre data-language="ceylon"><code>print("Hello, ``process.arguments.first else "World"``!");
+</code></pre>
+          
+          <p id="yes_after_all_that_its...">Yes, after all that, it's a one-liner ;-)</p>
+          
+          <h2 id="functions_and_values">Functions and values</h2>
+          
+          <p id="the_two_most_basic_constructs...">The two most basic constructs found in almost every programming language
+          are functions and variables. In Ceylon, "variables" are, by default,
+          assignable exactly once. That is, they can't be assigned a new value after
+          an initial value has been assigned. Therefore, we use the word <em>value</em> to
+          talk about "variables" collectively, and reserve the word <em>variable</em> to
+          mean a value which is explicitly defined to be reassignable.</p>
+          
+          <pre data-language="ceylon"><code>String bye = "Adios";        //a value
+variable Integer count = 0;  //a variable
+
+bye = "Adieu";  //compile error
+count = 1;      //allowed
+</code></pre>
+          
+          <p id="note_that_even_a_value...">Note that even a value which isn't a variable in this sense, may still be
+          "variable" in the sense that its value varies between different runs of
+          the program, or between contexts within a single execution of the program.</p>
+          
+          <p id="a_value_may_even_be...">A value may even be recalculated every time it is evaluated.</p>
+          
+          <!-- try-pre:
+              value firstName = "David";
+              value lastName = "Hilbert";
+          -->
+          
+          
+          <!-- try-post:
+              print(name);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>String name { return firstName + " " + lastName; } 
+</code></pre>
+          
+          <p id="if_the_values_of_firstname...">If the values of <code>firstName</code> and <code>lastName</code> vary, then the value of
+          <code>name</code> also varies between evaluations.</p>
+          
+          <p id="a_function_takes_this_idea...">A function takes this idea one step further. The value of a function
+          depends not only upon the context in which it is evaluated, but also
+          upon the arguments to its parameters.</p>
+          
+          <!-- try-post:
+              print(sqr(3.5));
+          -->
+          
+          
+          <pre data-language="ceylon"><code>Float sqr(Float x) { return x*x; }
+</code></pre>
+          
+          <p id="in_ceylon_a_value_or...">In Ceylon, a value or function declaration can occur almost anywhere:</p>
+          
+          <ul>
+          <li>as a <em>toplevel</em>, belonging directly to a package,</li>
+          <li>as an <em>attribute</em> or <em>method</em> of a class, or</li>
+          <li>as a <em>block-local</em> declaration inside a different value or function
+          body.</li>
+          </ul>
+          
+          
+          <p id="indeed_as_well_see_later...">Indeed, <a href="../functions/#anonymous_functions">as we'll see later</a>, a
+          value or function declaration may even occur <em>inside an expression</em>
+          in some cases.</p>
+          
+          <p id="functions_declarations_look_pretty_similar...">Functions declarations look pretty similar to what you're probably
+          already used to from other C-like languages, with two exceptions.
+          Ceylon has:</p>
+          
+          <ul>
+          <li>defaulted parameters, and</li>
+          <li>variadic parameters.</li>
+          </ul>
+          
+          
+          <h2 id="defaulted_parameters">Defaulted parameters</h2>
+          
+          <p id="a_function_parameter_may_specify...">A function parameter may specify a default value.</p>
+          
+          <!-- try-post:
+              hello(); //Hello, World!
+              hello("JBoss"); //Hello, JBoss!
+          -->
+          
+          
+          <pre data-language="ceylon"><code>void hello(String name="World") {
+    print("Hello, ``name``!");
+}
+</code></pre>
+          
+          <p id="then_we_dont_need_to...">Then we don't need to specify an argument to the parameter when we
+          call the function:</p>
+          
+          <!-- try-pre:
+              void hello(String name="World") {
+                  print("Hello, ``name``!");
+              }
+          -->
+          
+          
+          <pre data-language="ceylon"><code>hello(); //Hello, World!
+hello("JBoss"); //Hello, JBoss!
+</code></pre>
+          
+          <p id="defaulted_parameters_must_be_declared...">Defaulted parameters must be declared after all required parameters
+          in the parameter list of a function.</p>
+          
+          <h2 id="variadic_parameters">Variadic parameters</h2>
+          
+          <p id="a_variadic_parameter_of_a...">A variadic parameter of a function or class is declared using a postfix
+          asterisk, for example, <code>String*</code>. There may be only one variadic parameter
+          for a function or class, and it must be the last parameter.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>void helloEveryone(String* names) { 
+    // ... 
+}
+</code></pre>
+          
+          <p id="inside_the_function_body_the...">Inside the function body, the parameter <code>names</code> has type <code>[String*]</code>,
+          a <a href="../sequences">sequence type</a>, which we'll learn about later. Thus,
+          we can iterate the parameter using a <code>for</code> loop to get at the individual
+          arguments.</p>
+          
+          <!-- try-pre:
+              void hello(String name) {
+                  print("Hello, ``name``!");
+              }
+          -->
+          
+          
+          <!-- try-post:
+              helloEveryone("world", "mars", "saturn");
+          -->
+          
+          
+          <pre data-language="ceylon"><code>void helloEveryone(String* names) {
+    for (name in names) {
+        hello(name);
+    }
+}
+</code></pre>
+          
+          <p id="a_nonempty_variadic_parameter_is...">A <em>nonempty</em> variadic parameter is declared using a postfix plus sign,
+          for example, <code>String+</code>. In this case, the caller must supply at least
+          one argument.</p>
+          
+          <!-- try-pre:
+              void hello(String name) {
+                  print("Hello, ``name``!");
+              }
+          -->
+          
+          
+          <!-- try-post:
+              helloEveryone("world", "mars", "saturn");
+          -->
+          
+          
+          <pre data-language="ceylon"><code>void helloEveryone(String+ names) {
+    for (name in names) {
+        hello(name);
+    }
+}
+</code></pre>
+          
+          <p id="to_pass_an_argument_to...">To pass an argument to a variadic parameter we have three choices. We
+          could:</p>
+          
+          <ul>
+          <li>provide an explicit list of enumerated arguments,</li>
+          <li>pass an iterable object producing the arguments, or</li>
+          <li>specify a comprehension.</li>
+          </ul>
+          
+          
+          <p id="the_first_case_is_easy">The first case is easy:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>helloEveryone("world", "mars", "saturn");
+</code></pre>
+          
+          <p id="for_the_second_case_ceylon...">For the second case, Ceylon requires us to use the
+          <a href="../functions/#the_spread_operator">spread operator</a>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>String[] everyone = ["world", "mars", "saturn"];
+helloEveryone(*everyone);
+</code></pre>
+          
+          <p id="well_come_back_to_the...">We'll come back to the third case, <a href="../comprehensions">comprehensions</a>,
+          later in the tour.</p>
+          
+          <h2 id="fat_arrows_and_forward_declaration">Fat arrows and forward declaration</h2>
+          
+          <p id="ceylons_expression_syntax_is_much...">Ceylon's expression syntax is much more powerful than Java's, and
+          it's therefore possible to express a lot more in a single compact
+          expression. So it's <em>extremely</em> common to encounter functions and
+          values which simply evaluate and return an expression. So Ceylon
+          lets us abbreviate such function and value definitions using a
+          "fat arrow", <code>=&gt;</code>. For example:</p>
+          
+          <!-- try-pre:
+              value firstName = "David";
+              value lastName = "Hilbert";
+          -->
+          
+          
+          <!-- try-post:
+              print(name);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>String name =&gt; firstName + " " + lastName;
+</code></pre>
+          
+          <p id="or">Or:</p>
+          
+          <!-- try-post:
+              print(sqr(3.5));
+          -->
+          
+          
+          <pre data-language="ceylon"><code>Float sqr(Float x) =&gt; x*x;
+</code></pre>
+          
+          <p id="nows_the_time_to_get...">Now's the time to get comfortable with this syntax, because you're going
+          to be seeing quite a lot of it. Take careful note of the difference between
+          a fat arrow:</p>
+          
+          <!-- try-pre:
+              value firstName = "David";
+              value lastName = "Hilbert";
+          -->
+          
+          
+          <!-- try-post:
+              print(name);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>String name =&gt; firstName + " " + lastName;
+</code></pre>
+          
+          <p id="and_an_assignment">And an assignment:</p>
+          
+          <!-- try-pre:
+              value firstName = "David";
+              value lastName = "Hilbert";
+          -->
+          
+          
+          <!-- try-post:
+              print(name);
+          -->
+          
+          
+          <pre data-language="ceylon"><code>String name = firstName + " " + lastName;
+</code></pre>
+          
+          <p id="in_the_first_example_the...">In the first example, the expression is recomputed every time <code>name</code> is
+          evaluated. In the second example, the expression is computed once and the
+          result assigned to <code>name</code>.</p>
+          
+          <p id="were_even_allowed_to_define...">We're even allowed to define a <code>void</code> function using a fat arrow. Earlier,
+          we could have written <code>hello()</code> like this:</p>
+          
+          <!-- try-post:
+              hello();
+          -->
+          
+          
+          <pre data-language="ceylon"><code>void hello() =&gt; print("Hello, World!");
+</code></pre>
+          
+          <p id="in_java_and_c_were...">In Java and C#, we're allowed to separate the declaration of a variable
+          from the initialization of its value. We've
+          <a href="#dealing_with_objects_that_arent_there">already seen</a> that this is also
+          allowed in Ceylon. So we can write:</p>
+          
+          <!-- try-pre:
+              value firstName = "Walter";
+              value lastName = "Kovacs";
+          -->
+          
+          
+          <pre data-language="ceylon"><code>String name;
+name = firstName + " " + lastName;
+print(name);
+</code></pre>
+          
+          <p id="but_ceylon_even_lets_us...">But Ceylon even lets us do this with fat arrows:</p>
+          
+          <!-- try-pre:
+              value firstName = "Walter";
+              value lastName = "Kovacs";
+          -->
+          
+          
+          <pre data-language="ceylon"><code>String name;
+name =&gt; firstName + " " + lastName;
+print(name);
+</code></pre>
+          
+          <p id="and_even_functions">And even functions:</p>
+          
+          <pre data-language="ceylon"><code>Float sqr(Float x);
+sqr(Float x) =&gt; x*x;
+print(sqr(0.01));
+
+void hello();
+hello() =&gt; print("Hello, World!");
+hello();
+</code></pre>
+          
+          <p id="the_compiler_makes_sure_we...">The compiler makes sure we don't evaluate a value or invoke a function
+          before assigning it a value or specifying its implementation, as we'll see
+          <a href="../initialization/#definite_assignment_and_definite_initialization">later</a>.
+          (Because if we did, it would result in a <code>NullPointerException</code>, which
+          Ceylon doesn't have!)</p>
+          
+          <h2 id="numbers">Numbers</h2>
+          
+          <p id="unfortunately_not_every_program_is...">Unfortunately, not every program is as simple and elegant as "hello world".
+          In business or scientific computing, we often encounter programs that do
+          fiendishly complicated stuff with numbers. Ceylon doesn't have any primitive
+          types, so numeric values are usually represented by the classes
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Integer.type.html"><code>Integer</code></a>
+          and <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Float.type.html"><code>Float</code></a>,
+          which we'll come back to <a href="../language-module/#numeric_types">later in the tour</a>.</p>
+          
+          <p id="float_literals_are_written_with..."><code>Float</code> literals are written with a decimal point, and <code>Integer</code> literals
+          without:</p>
+          
+          <pre data-language="ceylon"><code>Integer one = 1;
+Float zero = 0.0;
+</code></pre>
+          
+          <p id="even_though_theyre_classes_you...">Even though they're classes, you can use all the usual numeric literals and
+          operators with them. For example, the following function efficiently determines
+          if an <code>Integer</code> represents a prime number:</p>
+          
+          <!-- try-post:
+              print(prime(17));
+          -->
+          
+          
+          <pre data-language="ceylon"><code>"Determine if `n` is a prime number."
+throws (`class AssertionError`, "if `n&lt;2`")
+Boolean prime(Integer n) {
+    "`n` must be greater than 1"
+    assert (n&gt;1);
+    if (n&lt;=3) {
+        return true;
+    }
+    else if (n%2==0 || n%3==0) {
+        return false;
+    }
+    else if (n&lt;25) {
+        return true;
+    }
+    else {
+        for (b in 1..((n.float^0.5+1)/6).integer) {
+            if (n%(6*b-1)==0 || n%(6*b+1)==0) {
+                return false;
+            }
+        }
+        else {
+            return true;
+        }
+    }
+}
+</code></pre>
+          
+          <p id="try_it_by_running_the...">Try it, by running the following function:</p>
+          
+          <!-- try-pre:
+              "Determine if `n` is a prime number."
+              throws (`class AssertionError`, "if `n<2`")
+              Boolean prime(Integer n) {
+                  "`n` must be greater than 1"
+                  assert (n>1);
+                  if (n<=3) {
+                      return true;
+                  }
+                  else if (n%2==0 || n%3==0) {
+                      return false;
+                  }
+                  else if (n<25) {
+                      return true;
+                  }
+                  else {
+                      for (b in 1..((n.float^0.5+1)/6).integer) {
+                          if (n%(6*b-1)==0 || n%(6*b+1)==0) {
+                              return false;
+                          }
+                      }
+                      else {
+                          return true;
+                      }
+                  }
+              }
+          -->
+          
+          
+          <!-- try-post:
+              findPrimes();
+          -->
+          
+          
+          <pre data-language="ceylon"><code>"Print a list of all two-digit prime numbers."
+void findPrimes()
+    =&gt; printAll { for (i in 2..99) if (prime(i)) i };
+</code></pre>
+          
+          <p id="heh_this_was_just_a...">Heh, this was just a little teaser to keep you interested. We'll explain
+          the syntax we're using here a bit <a href="../comprehensions">later in the tour</a>.</p>
+          
+          <h2 id="theres_more">There's more...</h2>
+          
+          <p id="ceylon_is_an_object_oriented...">Ceylon is an object-oriented language, so an awful lot of the code we write
+          in Ceylon is contained in a <em>class</em>. Let's <a href="../classes">learn about classes</a>
+          right now, before we come back to <a href="../attributes-control-structures">more of the basic stuff</a>.</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

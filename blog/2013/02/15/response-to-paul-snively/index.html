@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Expressiveness</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2013/02/15/progress-report/">Ceylon M5 progress report</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2013/02/21/httpd/">Ceylon HTTP server</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="expressiveness">
+            Expressiveness
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              15 Feb 2013
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/language-design/">
+                language design
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <p id="i_just_noticed_a_tweet...">I just noticed a tweet by Paul Snively that I thought was interesting.
+            I don't make it my practice to respond to tweets, simply because &gt;99.9%
+            of them are just idiotic. But I'll make an exception here, because I
+            respect Paul, because he frames an interesting issue in a way I agree
+            with, and because his tweet, which I ultimately disagree with, as I'll
+            explain, is certainly at least partly true, at least from a certain
+            perspective. Paul wrote:</p>
+            
+            <blockquote><p id="one_reason_i_prefer_scala...">One reason I prefer #scala to #kotlin or #ceylon is it adheres to the #lisp #smalltalk
+            dictum of not confining expressive power to itself.</p></blockquote>
+            
+            <p id="so_lets_start_by_seeing...">So, let's start by seeing what's right about this. Where in the language
+            definition does Ceylon "reserve expressive power to itself"?</p>
+            
+            <p id="well_the_things_that_stand...">Well, the things that stand out to me are:</p>
+            
+            <ul>
+            <li>control structures,</li>
+            <li>operators,</li>
+            <li>type name abbreviations.</li>
+            </ul>
+            
+            
+            <p id="we_reserve_expressive_power_here...">We "reserve expressive power" here, in the sense that we don't let you
+            write your own <code>MyTuple</code> class, and then instantiate it using this
+            syntax:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>[String,String] myTuple = ["hello","world"];
+</code></pre>
+            
+            <p id="if_you_want_to_use...">If you want to use the brackets, you're stuck with our <code>Tuple</code> class, and
+            if it doesn't suit your needs just right, you're going to have to write:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>MyTuple&lt;String,MyTuple&lt;String&gt;&gt; myTuple = MyTuple("hello",MyTuple("world"));
+</code></pre>
+            
+            <p id="or_whatever_likewise_while_you...">Or whatever. Likewise, while you can certainly use the <code>+</code> operator with
+            your own <code>Complex</code> class, if you want to use it to add a <code>Period</code> to a
+            <code>Datetime</code>, you're out of luck. The <code>Summable&lt;Other&gt;</code> interface expresses
+            that <code>+</code> must be a symmetric operation via the self-type constraint on
+            <code>Other</code>. You're going to have to write:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>value date = delay after now;
+</code></pre>
+            
+            <p id="or_whatever">Or whatever.</p>
+            
+            <p id="now_i_could_write_a...">Now, I could write a long post defending this choice, but here I'll
+            simply note that:</p>
+            
+            <ul>
+            <li>Scala doesn't let you define type abbreviations or control structures
+            either, but</li>
+            <li>it <em>does</em> let you define your own operators.</li>
+            </ul>
+            
+            
+            <p id="that_is_scala_like_plenty...">That is, Scala, like plenty of other languages, lets you take any
+            arbitrary string of unicode characters and turn it into an operator.</p>
+            
+            <p id="and_just_look_at_what...">And just look at what a mess that turned out to be. Sure, there are some
+            nice uses of operator overloading in the Scala world (parser combinators),
+            along with some abominations (SBT). On balance, I, and <em>many</em> others,
+            believe that untrammeled operator overloading has been a net negative in
+            Scala and C++ and other languages that have tried it. So Ceylon takes a
+            middle road: operator polymorphism.</p>
+            
+            <p id="this_means_that_youre_stuck...">This means that <em>you're stuck with the operators we think are important.</em>
+            But at least everyone in the Ceylon community is stuck with the same
+            ones! Which makes Ceylon code much more immediately understandable to
+            someone who knows the syntax of Ceylon, because the things which aren't
+            predefined symbolic operators have meaningful names. So if by
+            "expressive power", you take into account the ability to be <em>understood
+            by others</em>, I think of this as a feature.</p>
+            
+            <p id="fine_anyway_we_can_agree...">Fine, anyway, we can agree to disagree on this one, it's not the main
+            point I want to make.</p>
+            
+            <p id="the_real_point_i_want...">The real point I want to make is that I measure "expressive power" of a
+            language, not mainly by what superficial syntax it supports (though
+            syntax is certainly not unimportant), but rather by what can be expressed
+            within the type system. And here's where it has been a <em>central animating
+            design principle</em> that we weren't going to build in special little escape
+            hatches or ad hoc features for things <em>we</em> think are important. That's
+            why, for example, <code>null</code> is an instance of the ordinary class <code>Null</code> in
+            Ceylon, unlike in Java or Scala where it's a primitively defined value of
+            the bottom type. That's why <code>Tuple</code> is just an ordinary class, and
+            <code>Callable</code> is just an ordinary interface, unlike in many languages where
+            tuple types and function types are defined primitively. That's why the
+            operators we <em>do</em> have are mostly defined to operate against generic
+            interfaces instead of against an enumerated list of language module
+            types.</p>
+            
+            <p id="now_sure_of_course_ceylon...">Now, sure, <em>of course</em> Ceylon could never be compared to Lisp, or even to
+            Smalltalk in this respect. But that's simply an unfair comparison. <em>Of
+            course</em> a dynamically typed language is more expressive than a language
+            with static typing. Duh. You can't reasonably compare the expressiveness
+            of ML or Haskell to Lisp either. But statically typed languages have their
+            own advantages, and that's why static typing is where the real action is
+            right now.</p>
+            
+            <p id="so_i_think_its_a...">So I think it's a misunderstanding of Ceylon to imagine that we're
+            reserving much expressive power to oursevles. No, we don't let you define
+            your own pope operator <code>(-:|-+&gt;</code>, and I guess some people will find that
+            limits their self-expression. But I believe Ceylon will foster other
+            productive avenues for them to express their creativity.</p>
+            
+            <p id="update">UPDATE:</p>
+            
+            <p id="to_take_this_argument_even...">To take this argument even further, consider our rule against the use of
+            non-denoteable types: we don't use non-denotable types, or operations
+            upon types that can't be expressed within the language itself, <em>even
+            internally in the typechecker</em> to reason about your code. Since we needed
+            union and intersection types to reason about generics, we needed to make
+            them a part of the language. And they turned out to be perhaps the most
+            interesting and powerful feature of our typesystem.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2013/02/15/response-to-paul-snively/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

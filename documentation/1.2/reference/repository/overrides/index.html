@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Module overrides</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.2/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.2/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.2/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.2/examples">Examples</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.2/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.2/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.2/reference">Reference</a></h3>
+            
+            <ul>
+<li><a href="#resolving_module_conflicts">Resolving module conflicts
+            </a></li>
+<li><a href="#overrides_file_syntax">Overrides file syntax
+            </a></li>
+<ul>
+<li><a href="#artifact_coordinates_or_module_names">Artifact coordinates or module names
+            </a></li>
+<li><a href="#defining_constants">Defining constants
+            </a></li>
+<li><a href="#removing_a_module_entirely">Removing a module entirely
+            </a></li>
+<li><a href="#overriding_a_module_version_globally">Overriding a module version globally
+            </a></li>
+<li><a href="#replacing_a_module_globally">Replacing a module globally
+            </a></li>
+<li><a href="#overriding_a_single_module_s_dependencies">Overriding a single module's dependencies
+            </a></li>
+<li><a href="#filtering_a_single_module_s_contents">Filtering a single module's contents
+            </a></li>
+</ul>
+<li><a href="#example_google_guice">Example (Google Guice)
+            </a></li>
+<li><a href="#example_hibernate_jpa_solution_1">Example (Hibernate JPA solution 1)
+            </a></li>
+<li><a href="#example_hibernate_jpa_solution_2">Example (Hibernate JPA solution 2)
+            </a></li>
+<li><a href="#example_spark_framework">Example (Spark Framework)
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.2/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.2/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.2/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_12_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.2, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.2/reference/repository/overrides.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.2/reference/repository/overrides.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="module_overrides">Module overrides</h1>
+          
+          <h2 id="resolving_module_conflicts">Resolving module conflicts
+          </h2>
+          
+          
+          <p id="sometimes_module_descriptors_are_not...">Sometimes module descriptors are not correct, especially when dealing with interop and Maven, but
+          sometimes you may even want to override Ceylon module descriptors at compile-time or run-time.</p>
+          
+          <p id="maven_module_descriptors_are_notoriously...">Maven module descriptors are notoriously unchecked, and so a lot of module descriptors will miss direct
+          dependencies because they happen to compile and run by accident when using Maven, which uses a flat
+          classpath containing all the transitive module dependencies. Ceylon uses <code>ClassLoader</code> isolation, and
+          as such needs module descriptors to be correct. Also Maven does not support the notion of <em>sharing</em>
+          module imports, so if a module <code>A</code> makes types from its imported module <code>B</code> visible to the users of
+          <code>A</code>, the import of <code>B</code> must be made <code>shared</code>. Furthermore, Maven supports module version conflict resolution
+          by design, luck or overrides, while Ceylon uses strict module version imports. And last but not least,
+          Maven modules frequently bundles things that should not be made visible, such as other modules or tests,
+          that you may want to exclude.</p>
+          
+          <p id="for_all_these_reasons_we...">For all these reasons, we created an experimental measure that lets you override Maven or Ceylon module descriptors
+          in a single location, called the <code>overrides.xml</code> file, which lets you:</p>
+          
+          <ul>
+          <li>define constants and use them in interpolated XML attributes</li>
+          <li>set a module version (for all modules)</li>
+          <li>replace a module by another module (for all modules)</li>
+          <li>remove a module (for all modules)</li>
+          <li>add/remove module dependencies (per module)</li>
+          <li>edit a module dependency, for example making it <code>shared</code> (per module)</li>
+          <li>include/exclude parts of the jar (for example, to exclude certain packages from a jar)</li>
+          </ul>
+          
+          
+          <p id="the_syntax_is_as_follows">The syntax is as follows:</p>
+          
+          <pre data-language="html"><code>&lt;overrides&gt;
+    &lt;!-- Define a constant to be used in expressions --&gt;
+    &lt;define name="restletVersion" value="2.0.10"/&gt;
+    &lt;!-- Replace all versions of weld with version 1.1.4.Final --&gt;
+    &lt;set groupId="org.jboss.weld" artifactId="weld-osgi-bundle" version="1.1.4.Final"/&gt;
+    &lt;!-- Remove all uses of a module --&gt;
+    &lt;remove groupId="org.jboss.weld" artifactId="weld-osgi-bundle"/&gt;
+    &lt;!-- Edit dependencies of org.restlet.jse:org.restlet/2.0.10 --&gt;
+    &lt;artifact groupId="org.restlet.jse" artifactId="org.restlet" version="${restletVersion}"&gt;
+        &lt;!-- Add/replace a dependency --&gt;
+        &lt;add groupId="org.slf4j" artifactId="slf4j-api" version="1.6.1" shared="true"/&gt;
+        &lt;!-- Remove a dependency --&gt;
+        &lt;remove groupId="org.osgi" artifactId="org.osgi.core" version="4.0.0"/&gt;
+        &lt;!-- Share a dependency --&gt;
+        &lt;share groupId="org.slf4j" artifactId="slf4j-impl"/&gt;
+    &lt;/artifact&gt;
+    &lt;!-- Replace all uses of org.apache.camel:camel-core/2.9.2 with version 2.10 --&gt;
+    &lt;replace groupId="org.apache.camel" artifactId="camel-core" version="2.9.2"&gt;
+        &lt;with groupId="org.apache.camel" artifactId="camel-core" version="2.10"/&gt;
+    &lt;/replace&gt;
+    &lt;!-- Edit dependencies of org.osgi:org.osgi.core/4.0.0 --&gt;
+    &lt;artifact groupId="org.osgi" artifactId="org.osgi.core" version="4.0.0"&gt;
+        &lt;!-- Only include org/osgi/** and META-INF/** --&gt;
+        &lt;filter&gt;
+            &lt;!-- You can include or exclude and the matching is in sequence and stops at the first match --&gt;
+            &lt;include path="org/osgi/**"/&gt;
+            &lt;include path="META-INF/**"/&gt;
+            &lt;exclude path="**"/&gt;
+        &lt;/filter&gt;
+    &lt;/artifact&gt;
+&lt;/overrides&gt;
+</code></pre>
+          
+          <p id="most_command_line_commands_accept...">Most command-line commands accept the <code>--overrides</code> argument to specify this file.</p>
+          
+          <h2 id="overrides_file_syntax">Overrides file syntax
+          </h2>
+          
+          
+          <p id="the_overrides_file_must_be...">The overrides file must be a valid XML file, with a root named <code>overrides</code>
+          or <code>maven-overrides</code> (the root name is ignored in fact), and containing any of
+          the following elements:</p>
+          
+          <h3 id="artifact_coordinates_or_module_names">Artifact coordinates or module names
+          </h3>
+          
+          
+          <p id="every_element_that_works_on...">Every element that works on modules accepts the following XML attributes:</p>
+          
+          <ul>
+          <li>
+<code>groupId</code>: for Maven artifact/group pairs (the <code>artifactId</code> is also required then)</li>
+          <li>
+<code>artifactId</code>: for Maven artifact/group pairs (the <code>groupId</code> is also required then)</li>
+          <li>
+<code>module</code>: for Ceylon module names</li>
+          <li>
+<code>version</code>: an optional artifact/module version which will match every version if missing</li>
+          </ul>
+          
+          
+          <h3 id="defining_constants">Defining constants
+          </h3>
+          
+          
+          <p id="you_define_constants_with_the...">You define constants with the <code>define</code> element:</p>
+          
+          <pre data-language="html"><code>&lt;define name="version" value="2.0.10"/&gt;
+</code></pre>
+          
+          <p id="and_you_use_them_in...">And you use them in any subsequent XML attribute with the <code>${constantName}</code> syntax:</p>
+          
+          <pre data-language="html"><code>&lt;remove module="com.foo.bar" version="${version}"/&gt;
+</code></pre>
+          
+          <h3 id="removing_a_module_entirely">Removing a module entirely
+          </h3>
+          
+          
+          <p id="you_can_remove_a_module...">You can remove a module entirely from every import:</p>
+          
+          <pre data-language="html"><code>&lt;remove module="com.foo.bar"/&gt;
+</code></pre>
+          
+          <p id="this_element_accepts_the_common...">This element accepts the common <a href="#artifact_coordinates_or_module_names">Artifact coordinates or module names</a> attributes.</p>
+          
+          <h3 id="overriding_a_module_version_globally">Overriding a module version globally
+          </h3>
+          
+          
+          <p id="you_can_replace_every_import...">You can replace every import of a given module to use a specific version:</p>
+          
+          <pre data-language="html"><code>&lt;set module="com.foo.bar" version="2"/&gt;
+</code></pre>
+          
+          <p id="this_element_accepts_the_common_artifact...">This element accepts the common <a href="#artifact_coordinates_or_module_names">Artifact coordinates or module names</a> attributes.</p>
+          
+          <h3 id="replacing_a_module_globally">Replacing a module globally
+          </h3>
+          
+          
+          <p id="you_can_replace_every_import_of...">You can replace every import of a given module to use another module:</p>
+          
+          <pre data-language="html"><code>&lt;replace module="com.foo.bar" version="2"&gt;
+    &lt;with module="com.foo.gee" version="3"/&gt;
+&lt;/replace&gt;
+</code></pre>
+          
+          <p id="these_elements_accept_the_common...">These elements accept the common <a href="#artifact_coordinates_or_module_names">Artifact coordinates or module names</a> attributes.</p>
+          
+          <h3 id="overriding_a_single_module_s_dependencies">Overriding a single module's dependencies
+          </h3>
+          
+          
+          <p id="you_can_addreplaceremove_or_share...">You can add/replace/remove or share dependencies of a single module:</p>
+          
+          <pre data-language="html"><code>&lt;module module="com.foo.bar" version="2"&gt;
+    &lt;!-- this will add or replace existing dependencies --&gt;
+    &lt;add module="com.foo.gee" version="3"/&gt;
+    &lt;remove module="com.foo.baz"/&gt;
+    &lt;share module="com.foo.dep"/&gt;
+&lt;/module&gt;
+</code></pre>
+          
+          <p id="or_for_maven_artifacts">Or for Maven artifacts:</p>
+          
+          <pre data-language="html"><code>&lt;artifact groupId="com.foo" artifactId="bar" version="2"&gt;
+    &lt;!-- this will add or replace existing dependencies --&gt;
+    &lt;add groupId="com.foo" artifactId="gee" version="3"/&gt;
+    &lt;remove groupId="com.foo" artifactId="baz"/&gt;
+    &lt;share groupId="com.foo" artifactId="dep"/&gt;
+&lt;/artifact&gt;
+</code></pre>
+          
+          <p id="these_elements_accept_the_common_artifact...">These elements accept the common <a href="#artifact_coordinates_or_module_names">Artifact coordinates or module names</a> attributes.</p>
+          
+          <h3 id="filtering_a_single_module_s_contents">Filtering a single module's contents
+          </h3>
+          
+          
+          <p id="sometimes_modules_include_classes_you...">Sometimes modules include classes you do not want to be seen at runtime,
+          in the metamodel for example, as they are debug/test classes with missing
+          dependencies. You can also exclude them with this:</p>
+          
+          <pre data-language="html"><code>&lt;artifact groupId="org.osgi" artifactId="org.osgi.core" version="4.0.0"&gt;
+    &lt;!-- Only include org/osgi/** and META-INF/** --&gt;
+    &lt;filter&gt;
+        &lt;!-- You can include or exclude and the matching is in sequence and stops at the first match --&gt;
+        &lt;include path="org/osgi/**"/&gt;
+        &lt;include path="META-INF/**"/&gt;
+        &lt;exclude path="**"/&gt;
+    &lt;/filter&gt;
+&lt;/artifact&gt;
+</code></pre>
+          
+          <h2 id="example_google_guice">Example (Google Guice)
+          </h2>
+          
+          
+          <p id="heres_an_overridesxml_file_that...">Here's an <code>overrides.xml</code> file that lets you import
+          <a href="https://github.com/google/guice">Guice</a> from Maven:</p>
+          
+          <pre data-language="html"><code>&lt;overrides xmlns="http://www.ceylon-lang.org/xsd/overrides"&gt;
+    &lt;module groupId="com.google.inject"
+         artifactId="guice"
+            version="4.0"&gt;
+        &lt;share groupId="javax.inject"
+            artifactId="javax.inject"/&gt;
+    &lt;/module&gt;
+&lt;/overrides&gt;
+</code></pre>
+          
+          <p id="you_can_now_import_guice...">You can now <code>import</code> Guice like this:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>native("jvm")
+module com.my.app "1.0.0" {
+    import "com.google.inject:guice" "4.0";
+}
+</code></pre>
+          
+          <p id="note_that_you_dont_need...">Note that you don't need this <code>overrides.xml</code> file at all if you
+          use the <code>--auto-export-maven-dependencies</code> flag which is supported
+          by the command line tools. You can also find this setting on the
+          <strong>Ceylon Build &gt; Module Repositories</strong> page of the
+          <strong>Project &gt; Properties</strong> for your Ceylon project.</p>
+          
+          <h2 id="example_hibernate_jpa_solution_1">Example (Hibernate JPA solution 1)
+          </h2>
+          
+          
+          <p id="heres_an_overridesxml_file_that_lets...">Here's an <code>overrides.xml</code> file that lets you import
+          <a href="http://hibernate.org">Hibernate</a>'s JPA-compliant API from Maven:</p>
+          
+          <pre data-language="html"><code>&lt;overrides xmlns="http://www.ceylon-lang.org/xsd/overrides"&gt;
+    &lt;module groupId="org.hibernate" 
+         artifactId="hibernate-entitymanager"&gt;
+        &lt;share groupId="org.hibernate" 
+            artifactId="hibernate-core"/&gt;
+        &lt;share groupId="org.javassist" 
+            artifactId="javassist"/&gt;
+        &lt;share groupId="org.hibernate.javax.persistence" 
+            artifactId="hibernate-jpa-2.1-api"/&gt;
+    &lt;/module&gt;
+    &lt;module groupId="org.hibernate" 
+         artifactId="hibernate-core"&gt;
+        &lt;add groupId="javax.transaction" 
+          artifactId="jta" 
+             version="1.1"
+              shared="true"/&gt;
+    &lt;/module&gt;
+&lt;/overrides&gt;
+</code></pre>
+          
+          <p id="now_you_can_import_hibernate...">Now you can <code>import</code> Hibernate JPA like this:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>native("jvm")
+module com.my.app "1.0.0" {
+    import "org.hibernate:hibernate-entitymanager" "5.0.4.Final";
+    import "org.hsqldb:hsqldb" "2.3.1";
+}
+</code></pre>
+          
+          <p id="and_define_a_persistence_unit...">And define a persistence unit by placing this XML configuration in
+          <code>resources/com/my/module/ROOT/META-INF/persistence.xml</code> where <code>resources</code>
+          is your Ceylon resources directory:</p>
+          
+          <pre data-language="html"><code>&lt;persistence xmlns="http://java.sun.com/xml/ns/persistence"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+           version="2.0"&gt;
+
+    &lt;persistence-unit name="sample"&gt;
+        &lt;class&gt;com.my.app.Person&lt;/class&gt;
+        &lt;properties&gt;
+            &lt;property name="javax.persistence.jdbc.driver" 
+                     value="org.hsqldb.jdbcDriver"/&gt;
+            &lt;property name="javax.persistence.jdbc.url" 
+                     value="jdbc:hsqldb:mem:testdb"/&gt;
+            &lt;property name="javax.persistence.jdbc.user" 
+                     value="sa"/&gt;
+            &lt;property name="javax.persistence.jdbc.password" 
+                     value=""/&gt;
+            &lt;property name="hibernate.dialect" 
+                     value="org.hibernate.dialect.HSQLDialect"/&gt;
+            &lt;property name="hibernate.hbm2ddl.auto" 
+                     value="update"/&gt;
+        &lt;/properties&gt;
+    &lt;/persistence-unit&gt;
+
+&lt;/persistence&gt;
+</code></pre>
+          
+          <h2 id="example_hibernate_jpa_solution_2">Example (Hibernate JPA solution 2)
+          </h2>
+          
+          
+          <p id="alternatively_instead_of_using_share...">Alternatively, instead of using <code>&lt;share/&gt;</code> in <code>overrides.xml</code>, we can
+          do some of the work with the <code>--auto-export-maven-dependencies</code> flag
+          which is supported by the command line tools. You can also find this
+          setting on the <strong>Ceylon Build &gt; Module Repositories</strong> page of the
+          <strong>Project &gt; Properties</strong> for your Ceylon project.</p>
+          
+          <p id="with_this_flag_enabled_we...">With this flag enabled, we can use the following simplified
+          <code>overrides.xml</code> file:</p>
+          
+          <pre data-language="html"><code>&lt;overrides xmlns="http://www.ceylon-lang.org/xsd/overrides"&gt;
+    &lt;module groupId="org.hibernate" 
+         artifactId="hibernate-core"&gt;
+        &lt;add groupId="javax.transaction" 
+          artifactId="jta" 
+             version="1.1"
+              shared="true"/&gt;
+    &lt;/module&gt;
+&lt;/overrides&gt;
+</code></pre>
+          
+          <p id="however_with_this_solution_we...">However, with this solution, we must explicitly import the JPA API
+          module, since the <code>--auto-export-maven-dependencies</code> flag only affects
+          <em>transitive</em> dependencies.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>native("jvm")
+module com.my.app "1.0.0" {
+    import "org.hibernate:hibernate-entitymanager" "5.0.4.Final";
+    import "org.hibernate.javax.persistence:hibernate-jpa-2.1-api" "1.0.0.Final";
+    import "org.hsqldb:hsqldb" "2.3.1";
+}
+</code></pre>
+          
+          <h2 id="example_spark_framework">Example (Spark Framework)
+          </h2>
+          
+          
+          <p id="spark_depends_on_jetty"><a href="http://sparkjava.com/">Spark</a> depends on
+          <a href="http://www.eclipse.org/jetty/">Jetty</a>.</p>
+          
+          <p id="this_overridesxml_file_allows_spark...">This <code>overrides.xml</code> file allows Spark to be used from Maven:</p>
+          
+          <pre data-language="html"><code>&lt;overrides xmlns="http://www.ceylon-lang.org/xsd/overrides"&gt;
+
+    &lt;module groupId="org.eclipse.jetty" 
+         artifactId="jetty-server"
+            version="9.3.2.v20150730"&gt;
+        &lt;share groupId="org.eclipse.jetty" 
+          artifactId="jetty-io" 
+             version="9.3.2.v20150730"/&gt;
+    &lt;/module&gt;
+
+    &lt;module groupId="org.eclipse.jetty" 
+         artifactId="jetty-io"
+            version="9.3.2.v20150730"&gt;
+        &lt;share groupId="org.eclipse.jetty" 
+          artifactId="jetty-util" 
+             version="9.3.2.v20150730"/&gt;
+    &lt;/module&gt;
+
+    &lt;module groupId="org.eclipse.jetty" 
+         artifactId="jetty-util"
+            version="9.3.2.v20150730"&gt;
+        &lt;share groupId="javax.servlet" 
+            artifactId="javax.servlet-api"
+               version="3.1.0"/&gt;
+    &lt;/module&gt;
+
+&lt;/overrides&gt;
+</code></pre>
+          
+          <p id="now_we_can_import_spark...">Now we can import Spark like this:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>native("jvm") 
+module sparky "1.0.0" {
+    import "com.sparkjava:spark-core" "2.3";
+}
+</code></pre>
+          
+          <p id="alternatively_if_we_use_the...">Alternatively, if we use the <code>--auto-export-maven-dependencies</code>
+          flag, we don't need an <code>overrides.xml</code> file at all. That's
+          probably a more robust solution in this case, given that Jetty
+          comprises a number of internal modules with inter-dependencies
+          that are not all captured in the Maven metadata.</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

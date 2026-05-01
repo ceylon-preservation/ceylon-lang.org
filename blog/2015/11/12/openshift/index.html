@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Running Ceylon on OpenShift</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2015/11/07/intellij/">Porting Ceylon IDE to IntelliJ</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2015/11/20/obr/">One Big Repository</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="running_ceylon_on_openshift">
+            Running Ceylon on OpenShift
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/stephane-epardaud/">Stéphane Épardaud</a>
+            </div>
+            <div class="date">
+              12 Nov 2015
+            </div>
+            <div class="tags">
+            </div>
+          </div>
+          <div class="body">
+            <p id="this_year_we_released_three...">This year we released three different ways you can run your Ceylon code on <a href="https://www.openshift.com/features/technologies.html">OpenShift</a>:</p>
+            
+            <ul>
+            <li>Bare-bones, using the <a href="https://developers.openshift.com/en/ceylon-overview.html#_using_the_ceylon_cartridge">Ceylon cartridge</a>,</li>
+            <li>Writing a verticle in Ceylon, using the <a href="https://developers.openshift.com/en/ceylon-overview.html#_using_the_a_href_vertx_overview_html_vert_x_a_cartridge">Vert.x cartridge</a>, or</li>
+            <li>Packaging your Ceylon application as a <code>.war</code> file and running it on the WildFly cartridge.</li>
+            </ul>
+            
+            
+            <p id="in_this_post_we_will...">In this post we will see how you can write and publish a bare-bones application on
+            <a href="https://openshift.redhat.com/app/login">OpenShift Online</a> using the <a href="https://hub.openshift.com/quickstarts/138-ceylon">OpenShift Ceylon cartridge</a>.
+            The Vert.x and WildFly methods will be described in a later blog post.</p>
+            
+            <p id="the_openshift_ceylon_cartridge_is...">The OpenShift Ceylon cartridge is for OpenShift V2. Yes I know that's old, as it is now V3, but
+            the online version of OpenShift is still V2, so it's still relevant. We are working on the
+            V3 cartridge too, and it should be out soon.</p>
+            
+            <h2 id="writing_a_bare_bones_web_application_with_ceylon">Writing a bare-bones web application with Ceylon</h2>
+            
+            <p id="lets_start_by_creating_a...">Let's start by creating a new Ceylon project:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="shell"><code>$ ceylon new hello-world ceylon-blog-openshift
+Enter module name [com.example.helloworld]: openshift.bare  
+Enter module version [1.0.0]: 1
+Would you like to generate Eclipse project files? (y/n) [y]: n
+Would you like to generate an ant build.xml? (y/n) [y]: n
+$ cd ceylon-blog-openshift
+</code></pre>
+            
+            <p id="now_compile_and_run_it...">Now compile and run it to check that everything is under control:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="shell"><code>$ ceylon compile
+Note: Created module openshift.bare/1
+$ ceylon run openshift.bare/1
+Hello, World!
+</code></pre>
+            
+            <p id="now_lets_make_it_start...">Now let's make it start an HTTP server, by using the <a href="https://modules.ceylon-lang.org/modules/ceylon.net/1.2.0"><code>ceylon.net</code></a> module
+            and adapting its <a href="https://modules.ceylon-lang.org/repo/1/ceylon/net/1.2.0/module-doc/api/index.html">documentation code sample</a>.</p>
+            
+            <p id="first_import_that_module_in...">First import that module in <code>source/openshift/bare/module.ceylon</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>native("jvm")
+module openshift.bare "1" {
+  import ceylon.net "1.2.0";
+}
+</code></pre>
+            
+            <p id="then_use_it_in_sourceopenshiftbarerunceylon">Then use it in <code>source/openshift/bare/run.ceylon</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>import ceylon.io { SocketAddress }
+import ceylon.net.http.server { ... }
+
+shared void start(String host, Integer port){
+    //create a HTTP server
+    value server = newServer {
+        //an endpoint, on the path /hello
+        Endpoint {
+            path = startsWith("/");
+            //handle requests to this path
+            service(Request request, Response response)
+                    =&gt; response.writeString("hello world");
+        }
+    };
+    //start the server
+    server.start(SocketAddress(host, port));
+}
+
+shared void run(){
+    start("127.0.0.1", 8080);
+}
+</code></pre>
+            
+            <p id="lets_run_it">Let's run it:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="shell"><code>$ ceylon compile
+Note: Created module openshift.bare/1
+$ ceylon run openshift.bare/1
+Starting on 127.0.0.1:8080
+Debug: XNIO version 3.3.0.Final 
+Debug: XNIO NIO Implementation Version 3.3.0.Final 
+Httpd started.
+</code></pre>
+            
+            <p id="and_try_it_locally_at...">And try it locally at <a href="http://localhost:8080"><code>http://localhost:8080</code></a>, it should show a web page with <code>hello world</code>.</p>
+            
+            <h2 id="adapt_our_application_for_running_on_openshift">Adapt our application for running on OpenShift</h2>
+            
+            <p id="now_lets_adapt_it_to...">Now let's adapt it to run on OpenShift, where the host name and port are specified by OpenShift,
+            by using the <a href="https://modules.ceylon-lang.org/modules/ceylon.openshift/1.2.0"><code>ceylon.openshift</code></a>
+            module to see if we are running on OpenShift and if yes, bind to the right address.</p>
+            
+            <p id="first_import_the_openshift_module...">First import the OpenShift module in <code>source/openshift/bare/module.ceylon</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>native("jvm")
+module openshift.bare "1" {
+  import ceylon.net "1.2.0";
+  import ceylon.openshift "1.2.0";
+}
+</code></pre>
+            
+            <p id="and_use_it_in_in...">And use it in in <code>source/openshift/bare/run.ceylon</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>import ceylon.openshift { openshift }
+import ceylon.io { SocketAddress }
+import ceylon.net.http.server { ... }
+
+shared void start(String host, Integer port){
+    //create a HTTP server
+    value server = newServer {
+        //an endpoint, on the path /hello
+        Endpoint {
+            path = startsWith("/");
+            //handle requests to this path
+            service(Request request, Response response)
+                    =&gt; response.writeString("hello world");
+        }
+    };
+    //start the server
+    server.start(SocketAddress(host, port));
+}
+
+shared void run(){
+    if(openshift.running){
+        start(openshift.ceylon.ip, openshift.ceylon.port);
+    }else{
+        start("127.0.0.1", 8080);
+    }
+}
+</code></pre>
+            
+            <p id="so_now_it_can_run...">So now it can run either locally as before, or in OpenShift.</p>
+            
+            <h2 id="configuring_our_application_for_the_openshift_ceylon_cartridge">Configuring our application for the OpenShift Ceylon cartridge</h2>
+            
+            <p id="lets_create_the_required_openshift...">Let's create the required OpenShift structure to tell the OpenShift Ceylon
+            cartridge how to run our module. We do this by installing the OpenShift
+            Ceylon command-line plugin:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="shell"><code>$ ceylon plugin install ceylon.openshift/1.2.0
+Scripts for ceylon.openshift installed in /home/stephane/.ceylon/bin/ceylon.openshift
+</code></pre>
+            
+            <p id="and_now_we_run_it">And now we run it:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="shell"><code>$ ceylon openshift init openshift.bare/1
+Installing file .openshift/config/ceylon.properties: Generated
+...
+</code></pre>
+            
+            <p id="for_those_who_want_more...">For those who want more information, or tune how the application is deployed by the OpenShift
+            Ceylon cartridge, <a href="https://github.com/ceylon/openshift-cartridge/blob/master/template/README.md">the documentation has a lot more information</a>.</p>
+            
+            <p id="our_application_is_now_ready...">Our application is now ready to be run on OpenShift.</p>
+            
+            <h2 id="deploying_our_application_to_openshift_online">Deploying our application to OpenShift Online</h2>
+            
+            <p id="now_assuming_you_already_have...">Now, assuming you already have an <a href="https://openshift.redhat.com/app/login">OpenShift Online account</a>,
+            and the <a href="https://developers.openshift.com/en/getting-started-overview.html"><code>rhc</code> command installed</a>,
+            you can proceed to create an OpenShift application with the Ceylon cartridge:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="shell"><code>$ rhc create-app --no-git -a test https://raw.github.com/ceylon/openshift-cartridge/master/metadata/manifest.yml
+The cartridge 'https://raw.github.com/ceylon/openshift-cartridge/master/metadata/manifest.yml' will be downloaded and installed
+
+Application Options
+-------------------
+Domain:     fromage
+Cartridges: https://raw.github.com/ceylon/openshift-cartridge/master/metadata/manifest.yml
+Gear Size:  default
+Scaling:    no
+
+Creating application 'test' ... done
+
+
+Waiting for your DNS name to be available ... done
+
+Your application 'test' is now available.
+
+  URL:        http://test-fromage.rhcloud.com/
+  SSH to:     ...@test-fromage.rhcloud.com
+  Git remote: ssh://...@test-fromage.rhcloud.com/~/git/test.git/
+
+Run 'rhc show-app test' for more details about your app.
+</code></pre>
+            
+            <p id="this_created_our_application_on...">This created our application on OpenShift Online, and gave us a URL at which we can access it (<code>http://test-fromage.rhcloud.com/</code>),
+            as well as a Git repository where we can push our application (<code>ssh://...@test-fromage.rhcloud.com/~/git/test.git/</code>).</p>
+            
+            <p id="now_we_just_have_to...">Now we just have to turn our application into a Git repository and add the <code>openshift</code> remote Url
+            that <code>rhc</code> gave us just above:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="shell"><code>$ git init
+Initialised empty Git repository in /home/stephane/src/java-eclipse/ceylon-blog-openshift/.git/
+$ git remote add openshift ssh://...@test-fromage.rhcloud.com/~/git/test.git/
+</code></pre>
+            
+            <p id="the_ceylon_openshift_cartridge_includes...">The Ceylon OpenShift cartridge includes a demo sample app that we can get rid of by forcing
+            a push of our current application to OpenShift:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="shell"><code>$ git add source .openshift
+$ git commit -m "Initial commit"
+...
+$ git push -f openshift master
+Counting objects: 23, done.
+Delta compression using up to 16 threads.
+Compressing objects: 100% (18/18), done.
+Writing objects: 100% (23/23), 3.79 KiB | 0 bytes/s, done.
+Total 23 (delta 1), reused 0 (delta 0)
+remote: Stopping Ceylon cart
+remote: Application is already stopped
+remote: Repairing links for 1 deployments
+remote: Building git ref 'master', commit 58ab35c
+remote: 
+remote: Building Ceylon app...
+remote: Compiling every module in /var/lib/openshift/../app-root/runtime/repo//source for the JVM:
+remote: Note: Created module openshift.bare/1
+remote: Ceylon build done.
+remote: Preparing build for deployment
+remote: Deployment id is ...
+remote: Activating deployment
+remote: TODO
+remote: Starting Ceylon cart
+remote: Executing /var/lib/openshift/.../ceylon/usr/ceylon-1.2.0/bin/ceylon
+remote: With params: run   --rep=/var/lib/openshift/.../app-root/runtime/repo/.openshift/config/modules --cacherep=/var/lib/openshift/.../app-root/runtime/repo//cache --rep=https://modules.ceylon-lang.org/repo/1/ --rep=/var/lib/openshift/.../app-root/runtime/repo//modules openshift.bare/1 
+remote: With JAVA_OPTS:  -Dcom.redhat.ceylon.common.tool.terminal.width=9999 -Dceylon.cache.repo=/var/lib/openshift/.../app-root/runtime/repo//cache
+remote: Ceylon started with pid: 350715
+remote: Waiting for http server to boot on 127.5.184.1:8080 ... (1/30)
+remote: Waiting for http server to boot on 127.5.184.1:8080 ... (2/30)
+remote: Waiting for http server to boot on 127.5.184.1:8080 ... (3/30)
+remote: Waiting for http server to boot on 127.5.184.1:8080 ... (4/30)
+remote: Found 127.5.184.1:8080 listening port
+remote: 
+remote: -------------------------
+remote: Git Post-Receive Result: success
+remote: Activation status: success
+remote: Deployment completed with status: success
+To ssh://...@test-fromage.rhcloud.com/~/git/test.git/
+   2a29bdf..58ab35c  master -&gt; master
+</code></pre>
+            
+            <p id="thats_it_you_can_now...">That's it, you can now go and check your application online at <code>http://test-fromage.rhcloud.com/</code>.</p>
+            
+            <p id="congratulations">Congratulations!</p>
+            
+            <p id="now_you_can_also_publish...">Now you can also publish your code online, at GitHub or elsewhere, and every time you
+            push your modifications to the <code>openshift</code> remote, your application will be restarted
+            with your changes.</p>
+            
+            <p id="stay_tuned_for_the_vertx...">Stay tuned for the Vert.x and WildFly Ceylon OpenShift deployment guides on this blog.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2015/11/12/openshift/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

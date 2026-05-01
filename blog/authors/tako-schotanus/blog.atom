@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<feed xml:lang="en-US" xmlns="http://www.w3.org/2005/Atom">
+  <id>http://localhost:4242/blog/tako-schotanus/</id>
+  <title>Blog of Tako Schotanus</title>
+  <updated>2016-03-11T00:00:00+00:00</updated>
+  <link href="http://localhost:4242/blog/authors/tako-schotanus/blog.atom" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4242/" rel="alternate" type="text/html" />
+  <entry>
+    <id>http://localhost:4242/blog/2016/03/11/ceylon-1-2-2</id>
+    <title>Ceylon 1.2.2 is now available</title>
+    <updated>2016-03-11T00:00:00+00:00</updated>
+    <link href="http://localhost:4242/blog/2016/03/11/ceylon-1-2-2" rel="alternate" type="text/html" />
+    <author>
+      <name>Tako Schotanus</name>
+    </author>
+    <summary>
+      Four months after the last major release, and exactly one month after the 1.2.1 update,
+      Ceylon 1.2.2 is a new maintenance release, with over 70 issues closed,
+      including new features, improvements and bug fixes such as:
+      
+      
+      you can now use java.lang.Iterable and Java arrays in for statements and comprehensions,
+      the [] lookup operator works on Java lists, maps, and arrays,
+      the in operator works on java.util.Collection and, last but not least,
+      a new ceylon bootstrap command to make it really easy to distribute
+      code to people that don't have Ceylon installed.
+      
+      
+      
+      Note that for the JVM backend, this release is backwards-compatible
+      with the previous releases (1.2.0 and 1.2.1), which...
+    </summary>
+    <content type="html">
+      &lt;p&gt;Four months after the last major release, and exactly one month after the 1.2.1 update,
+      &lt;a href=&quot;http://localhost:4242/download/&quot;&gt;Ceylon 1.2.2&lt;/a&gt; is a new maintenance release, with over &lt;a href=&quot;https://github.com/ceylon/ceylon/issues?q=is%3Aissue+milestone%3A1.2.2+is%3Aclosed&quot;&gt;70 issues&lt;/a&gt; closed,
+      including new features, improvements and bug fixes such as:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;you can now use &lt;code&gt;java.lang.Iterable&lt;/code&gt; and Java arrays in &lt;code&gt;for&lt;/code&gt; statements and comprehensions,&lt;/li&gt;
+      &lt;li&gt;the &lt;code&gt;[]&lt;/code&gt; lookup operator works on Java lists, maps, and arrays,&lt;/li&gt;
+      &lt;li&gt;the &lt;code&gt;in&lt;/code&gt; operator works on &lt;code&gt;java.util.Collection&lt;/code&gt; and, last but not least,&lt;/li&gt;
+      &lt;li&gt;a new &lt;code&gt;ceylon bootstrap&lt;/code&gt; &lt;a href=&quot;http://localhost:4242/documentation/1.2/reference/tool/bootstrap&quot;&gt;command&lt;/a&gt; to make it really easy to distribute
+      code to people that don't have Ceylon installed.&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;p&gt;Note that for the JVM backend, this release is backwards-compatible
+      with the previous releases (&lt;code&gt;1.2.0&lt;/code&gt; and &lt;code&gt;1.2.1&lt;/code&gt;), which means you can use
+      modules compiled with &lt;code&gt;1.2.0&lt;/code&gt; on a &lt;code&gt;1.2.2&lt;/code&gt; distribution out of the box.
+      This is not as easy the other way around, if you want to run modules
+      compiled for &lt;code&gt;1.2.2&lt;/code&gt; on a &lt;code&gt;1.2.0&lt;/code&gt; distribution, which is why we
+      recommend you upgrade to &lt;code&gt;1.2.2&lt;/code&gt;.&lt;/p&gt;
+      
+      &lt;p&gt;Sadly, on the JavaScript backend, we had to break binary compatibility
+      to fix serious interoperation issues, and so modules compiled for &lt;code&gt;1.2.2&lt;/code&gt;
+      and &lt;code&gt;1.2.0&lt;/code&gt; are not compatible. Versions &lt;code&gt;1.2.1&lt;/code&gt; and &lt;code&gt;1.2.2&lt;/code&gt; are binary
+      compatible but can still give problems when used together. We recommend
+      you upgrade your distribution to &lt;code&gt;1.2.2&lt;/code&gt; and recompile your modules.&lt;/p&gt;
+      
+      &lt;h2&gt;About Ceylon&lt;/h2&gt;
+      
+      &lt;p&gt;Ceylon is a modern, modular, statically typed programming
+      language for the Java and JavaScript virtual machines. The
+      language features a flexible and very readable syntax, a
+      unique and uncommonly elegant static type system, a powerful
+      module architecture, and excellent tooling, including an
+      awesome Eclipse-based IDE.&lt;/p&gt;
+      
+      &lt;p&gt;Ceylon enables the development of cross-platform modules
+      that execute portably in both virtual machine environments.
+      Alternatively, a Ceylon module may target one or the other
+      platform, in which case it may interoperate with native code
+      written for that platform.&lt;/p&gt;
+      
+      &lt;h2&gt;In the box&lt;/h2&gt;
+      
+      &lt;p&gt;&lt;a href=&quot;http://localhost:4242/download/&quot;&gt;This release&lt;/a&gt; includes:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;a complete &lt;a href=&quot;http://localhost:4242/documentation/1.2/spec&quot;&gt;language specification&lt;/a&gt; that defines the
+      syntax and semantics of Ceylon in language accessible to
+      the professional developer,&lt;/li&gt;
+      &lt;li&gt;a &lt;a href=&quot;http://localhost:4242/documentation/1.2/reference/tool/ceylon/subcommands/index.html&quot;&gt;command line toolset&lt;/a&gt; including compilers for
+      Java and JavaScript, a documentation compiler, a test
+      runner, a WAR archive packager, and support for executing
+      modular programs on the JVM and Node.js,&lt;/li&gt;
+      &lt;li&gt;a powerful module architecture for code organization,
+      dependency management, and module isolation at runtime,&lt;/li&gt;
+      &lt;li&gt;the &lt;a href=&quot;https://herd.ceylon-lang.org/modules/ceylon.language&quot;&gt;language module&lt;/a&gt;, our minimal,
+      cross-platform foundation of the &lt;a href=&quot;https://modules.ceylon-lang.org/categories/SDK&quot;&gt;Ceylon SDK&lt;/a&gt;, and&lt;/li&gt;
+      &lt;li&gt;a &lt;a href=&quot;http://localhost:4242/documentation/1.2/ide/features/&quot;&gt;full-featured&lt;/a&gt; Eclipse-based integrated
+      development environment.&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;h2&gt;Language&lt;/h2&gt;
+      
+      &lt;p&gt;Ceylon is a highly understandable object-oriented language
+      with static typing. The language features:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;an emphasis upon &lt;strong&gt;readability&lt;/strong&gt; and a strong bias toward
+      &lt;strong&gt;omission or elimination of potentially-harmful or
+      potentially-ambiguous constructs&lt;/strong&gt; and toward highly
+      &lt;strong&gt;disciplined use of static types&lt;/strong&gt;,&lt;/li&gt;
+      &lt;li&gt;an extremely powerful and uncommonly elegant type system
+      combining subtype and parametric polymorphism with:
+      
+      &lt;ul&gt;
+      &lt;li&gt;first-class &lt;strong&gt;union and intersection types&lt;/strong&gt;,&lt;/li&gt;
+      &lt;li&gt;both &lt;strong&gt;declaration-site and use-site variance&lt;/strong&gt;, and&lt;/li&gt;
+      &lt;li&gt;the use of principal types for &lt;strong&gt;local type inference&lt;/strong&gt;
+      and &lt;strong&gt;flow-sensitive typing&lt;/strong&gt;,&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;a unique treatment of &lt;strong&gt;function and tuple types&lt;/strong&gt;,
+      enabling powerful abstractions, along with the most
+      &lt;strong&gt;elegant approach to &lt;code&gt;null&lt;/code&gt;&lt;/strong&gt; of any modern language,&lt;/li&gt;
+      &lt;li&gt;first-class constructs for defining &lt;strong&gt;modules and
+      dependencies between modules&lt;/strong&gt;,&lt;/li&gt;
+      &lt;li&gt;a very flexible syntax including &lt;strong&gt;comprehensions&lt;/strong&gt; and
+      support for expressing &lt;strong&gt;tree-like structures&lt;/strong&gt;,&lt;/li&gt;
+      &lt;li&gt;
+      &lt;strong&gt;fully-reified generic types&lt;/strong&gt;, on both the JVM and
+      JavaScript virtual machines, and a unique &lt;strong&gt;typesafe
+      metamodel&lt;/strong&gt;.&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;p&gt;More information about these language features may be
+      found in the &lt;a href=&quot;http://localhost:4242/features&quot;&gt;feature list&lt;/a&gt; and
+      &lt;a href=&quot;http://localhost:4242/documentation/1.2/introduction/&quot;&gt;quick introduction&lt;/a&gt;.&lt;/p&gt;
+      
+      &lt;h2&gt;IDE&lt;/h2&gt;
+      
+      &lt;p&gt;Ceylon IDE now features the following improvement, along
+      with bugfixes:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;support for the &lt;code&gt;ceylon bootstrap&lt;/code&gt; command&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;h2&gt;SDK&lt;/h2&gt;
+      
+      &lt;p&gt;The &lt;a href=&quot;https://modules.ceylon-lang.org/categories/SDK&quot;&gt;platform modules&lt;/a&gt;, recompiled for 1.2.2, are
+      available in the shared community repository, &lt;a href=&quot;https://herd.ceylon-lang.org&quot;&gt;Ceylon Herd&lt;/a&gt;.&lt;/p&gt;
+      
+      &lt;p&gt;This release introduces a single new platform module:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;
+      &lt;code&gt;ceylon.buffer&lt;/code&gt; is a cross-platform module for converting between
+      text and binary forms of data.&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;p&gt;Along with some enhancements to existing modules:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;
+      &lt;code&gt;ceylon.file&lt;/code&gt; now has functions for creating temporary files and directories,&lt;/li&gt;
+      &lt;li&gt;
+      &lt;code&gt;ceylon.net&lt;/code&gt; now has support for template handlers,&lt;/li&gt;
+      &lt;li&gt;
+      &lt;code&gt;ceylon.html&lt;/code&gt; was rewritten according to HTML5 specification and with support for lazy evaluation.&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;h2&gt;Web IDE&lt;/h2&gt;
+      
+      &lt;p&gt;You can try Ceylon using the &lt;a href=&quot;http://try.ceylon-lang.org&quot;&gt;Web IDE&lt;/a&gt;, featuring syntax highlighting,
+      interactive error reporting, autocompletion, online
+      documentation, and persistence and code sharing via Gist.&lt;/p&gt;
+      
+      &lt;p&gt;The Web IDE serves a dual purpose as a standard example
+      demonstrating the use of Ceylon for web application
+      development and deployment to the &lt;a href=&quot;http://openshift.com&quot;&gt;OpenShift&lt;/a&gt; cloud
+      platform.&lt;/p&gt;
+      
+      &lt;h2&gt;Community&lt;/h2&gt;
+      
+      &lt;p&gt;The Ceylon community site, &lt;a href=&quot;http://ceylon-lang.org&quot;&gt;http://ceylon-lang.org&lt;/a&gt;, includes
+      &lt;a href=&quot;http://localhost:4242/documentation/1.2&quot;&gt;documentation&lt;/a&gt;, and information about
+      &lt;a href=&quot;http://localhost:4242/community/&quot;&gt;getting involved&lt;/a&gt;.&lt;/p&gt;
+      
+      &lt;h2&gt;Source code&lt;/h2&gt;
+      
+      &lt;p&gt;The source code for Ceylon, its specification, and its website,
+      is freely available from &lt;a href=&quot;https://github.com/ceylon&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+      
+      &lt;p&gt;Information about Ceylon's open source licenses is available
+      &lt;a href=&quot;http://localhost:4242/code/licenses/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+      
+      &lt;h2&gt;Issues&lt;/h2&gt;
+      
+      &lt;p&gt;Bugs and suggestions may be reported in GitHub's
+      &lt;a href=&quot;http://localhost:4242/code/issues&quot;&gt;issue tracker&lt;/a&gt;.&lt;/p&gt;
+      
+      &lt;h2&gt;Migrating from Ceylon 1.2.0&lt;/h2&gt;
+      
+      &lt;p&gt;Migration from Ceylon 1.2.0 is easy. To recompile a module for
+      1.2.2:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;First ensure that its dependencies have also been
+      recompiled.&lt;/li&gt;
+      &lt;li&gt;If it imports a Ceylon SDK platform module, upgrade the
+      version number specified by the module &lt;code&gt;import&lt;/code&gt; statement
+      from &lt;code&gt;&quot;1.2.0&quot;&lt;/code&gt; to &lt;code&gt;&quot;1.2.2&quot;&lt;/code&gt; .&lt;/li&gt;
+      &lt;li&gt;If it was compiled against Ceylon &lt;code&gt;1.2.0&lt;/code&gt; you should still
+      be able to use it in &lt;code&gt;1.2.2&lt;/code&gt; for the JVM backend,
+      as it is backwards-compatible. Sadly, this is not the case
+      for the JavaScript backend, and so you will need to recompile
+      your modules with &lt;code&gt;1.2.2&lt;/code&gt;.&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;h2&gt;Acknowledgement&lt;/h2&gt;
+      
+      &lt;p&gt;As always, we're deeply grateful to the community volunteers
+      who contributed a substantial part of the current Ceylon
+      codebase, working in their own spare time. The following
+      people have contributed to Ceylon:&lt;/p&gt;
+      
+      &lt;p&gt;Gavin King,                Stéphane Épardaud,           Tako Schotanus,
+      Tom Bentley,               David Festal,                Enrique Zamudio,
+      Bastien Jansen,            Emmanuel Bernard,            Aleš Justin,
+      Tomáš Hradec,              James Cobb,                  Ross Tate,
+      Max Rydahl Andersen,       Mladen Turk,                 Lucas Werkmeister,
+      Roland Tepp,               Diego Coronel,               Matej Lazar,
+      John Vasileff,             Toby Crawley,                Julien Viet,
+      Loic Rouchon,              Stephane Gallès,             Ivo Kasiuk,
+      Corbin Uselton,            Paco Soberón,                Michael Musgrove,
+      Daniel Rochetti,           Henning Burdack,             Luke deGruchy,
+      Rohit Mohan,               Griffin DeJohn,              Casey Dahlin,
+      Gilles Duboscq,            Tomasz Krakowiak,            Alexander Altman,
+      Alexander Zolotko,         Alex Szczuczko,              Andrés G. Aragoneses,
+      Anh Nhan Nguyen,           Brice Dutheil,               Carlos Augusto Mar,
+      Charles Gould,             Chris Gregory,               klinger,
+      Martin Voelkle,            Mr. Arkansas,                Paŭlo Ebermann,
+      Vorlent,                   Akber Choudhry,              Renato Athaydes,
+      Flavio Oliveri,            Michael Brackx,              Brent Douglas,
+      Lukas Eder,                Markus Rydh,                 Julien Ponge,
+      Pete Muir,                 Nicolas Leroux,              Brett Cannon,
+      Geoffrey De Smet,          Guillaume Lours,             Gunnar Morling,
+      Jeff Parsons,              Jesse Sightler,              Oleg Kulikov,
+      Raimund Klein,             Sergej Koščejev,             Chris Marshall,
+      Simon Thum,                Maia Kozheva,                Shelby,
+      Aslak Knutsen,             Fabien Meurisse,             Sjur Bakka,
+      Xavier Coulon,             Ari Kast,                    Dan Allen,
+      Deniz Türkoglu,            F. Meurisse,                 Jean-Charles Roger,
+      Johannes Lehmann,          allentc,                     Nikolay Tsankov,
+      Chris Horne,               Gabriel Mirea,               Georg Ragaller,
+      Harald Wellmann,           Oliver Gondža,               Stephen Crawley,
+      Byron Clark,               Francisco Reverbel,          Jonas Berlin,
+      Luke Hutchison,            Nikita Ostroumov,            Santiago Rodriguez,
+      Sean Flanigan.&lt;/p&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>http://localhost:4242/blog/2015/11/20/obr</id>
+    <title>One Big Repository</title>
+    <updated>2015-11-20T00:00:00+00:00</updated>
+    <link href="http://localhost:4242/blog/2015/11/20/obr" rel="alternate" type="text/html" />
+    <author>
+      <name>Tako Schotanus</name>
+    </author>
+    <summary>
+      Over the last year and a half it has happened quite frequently that users on our mailing lists or Gitter channels asked: "What is this OBR you people keep talking about?". It was something that would most often be mentioned when we were frustrated with the current project setup making things more difficult than necessary.
+      
+      How it all started
+      
+      To understand what the OBR really is you first need to know how our project was organized all these years. Ceylon started out with nothing but the parser and the code that checks and models our unique typesystem, we call it the "typechecker"....
+    </summary>
+    <content type="html">
+      &lt;p&gt;Over the last year and a half it has happened quite frequently that users on our &lt;a href=&quot;http://groups.google.com/group/ceylon-users&quot;&gt;mailing lists&lt;/a&gt; or &lt;a href=&quot;https://gitter.im/ceylon/user&quot;&gt;Gitter channels&lt;/a&gt; asked: &quot;What is this OBR you people keep talking about?&quot;. It was something that would most often be mentioned when we were frustrated with the current project setup making things more difficult than necessary.&lt;/p&gt;
+      
+      &lt;h2&gt;How it all started&lt;/h2&gt;
+      
+      &lt;p&gt;To understand what the OBR really is you first need to know how our project was organized all these years. Ceylon started out with nothing but the parser and the code that checks and models our unique typesystem, we call it the &quot;typechecker&quot;. When we started working on the compilers new modules got added, first for the Java Virtual Machine, later for JavaScript. Then we added a module that handles downloading and caching of external modules retrieved from the &lt;a href=&quot;https://modules.ceylon-lang.org/&quot;&gt;Herd&lt;/a&gt;. This went on to the point that we wound up with 9 separate but very interdependent projects.&lt;/p&gt;
+      
+      &lt;h2&gt;The problem&lt;/h2&gt;
+      
+      &lt;p&gt;Now of course modularization is a good software engineering practise so there was no problem there. The problem was with the way we had created multiple &lt;a href=&quot;https://github.com/ceylon&quot;&gt;Git repositories&lt;/a&gt; for each of the projects. We started noticing that for certain types of cross-module issues we often had to make changes to multiple repositories at a time. And when you do that, let's say you change 6 repositories for a single bug report or for a single new feature, you lose cohesion. The changes are all separate and you lose sight of the fact that they belong together. So if you need to go back in time looking for a specific problem and when it was introduced and by which code commit it suddenly becomes very hard to synchronize all the repositories in such a way that you get a working system. The famous &lt;code&gt;git bisect&lt;/code&gt; becomes impossible to use.&lt;/p&gt;
+      
+      &lt;p&gt;It also caused minor problems when managing issues on GitHub because users, not knowing, would often open issues on the wrong project which meant manually copying the issue from one project to another (and sometimes even &lt;em&gt;we&lt;/em&gt; didn't know where to put an issue and it would get moved several times).&lt;/p&gt;
+      
+      &lt;h2&gt;Looking for a solution&lt;/h2&gt;
+      
+      &lt;p&gt;So at a certain moment it became obvious that our project setup was working against us, that its structure made certain operations way too hard. A single repository on the other hand wouldn't have those problems. A single big repository, the only one for the entire distribution. So we started calling it the &quot;One Big Repository&quot;, quickly shortened to &quot;OBR&quot;.&lt;/p&gt;
+      
+      &lt;p&gt;But there were doubts that a single repository would become too big and unwieldy. And &lt;em&gt;how&lt;/em&gt; would we go from 9 repositories to just 1? Are there tools to do that? And what about our GitHub issues?&lt;/p&gt;
+      
+      &lt;p&gt;Instead we first looked at tools like &lt;code&gt;git submodule&lt;/code&gt; and &lt;code&gt;git subtree&lt;/code&gt; which would allow us to keep our current projects but still treat them as a one. But after researching it for a while we came to the conclusion that although it might work it &lt;em&gt;does&lt;/em&gt; make things more complex for the developer. And given the fact that most of us aren't Git experts and sometimes have trouble enough with it as it is we decided that the added complexity would not work in our favor. Besides the problem with the GitHub issues being separate would still remain.&lt;/p&gt;
+      
+      &lt;h2&gt;The execution&lt;/h2&gt;
+      
+      &lt;p&gt;One Big Repository it would be then, merging all 9 Ceylon distribution repositories into a single one. But how? No ready-made tools seemed to exist, just fragments of &lt;a href=&quot;http://stackoverflow.com/questions/1425892/how-do-you-merge-two-git-repositories&quot;&gt;scripts&lt;/a&gt; and &lt;a href=&quot;http://stackoverflow.com/questions/13040958/merge-two-git-repositories-without-breaking-file-history&quot;&gt;examples&lt;/a&gt; of &lt;a href=&quot;http://stackoverflow.com/questions/1683531/how-to-import-existing-git-repository-into-another&quot;&gt;complex&lt;/a&gt; &lt;a href=&quot;http://www.harecoded.com/merging-two-three-or-more-git-repositories-keeping-the-log-history-2366393&quot;&gt;Git commands&lt;/a&gt;. And for the GitHub issues we could only rely on their &lt;a href=&quot;https://developer.github.com/v3/&quot;&gt;remote API&lt;/a&gt;.&lt;/p&gt;
+      
+      &lt;p&gt;I will spare you all the nitty gritty details on the many dozens of practise merges we did to get to a point where we were happy enough with the result but finally, last monday on November 16th, we made public the new OBR, the &lt;a href=&quot;https://github.com/ceylon/ceylon&quot;&gt;One Big Repository&lt;/a&gt;!&lt;/p&gt;
+      
+      &lt;h2&gt;How to use it&lt;/h2&gt;
+      
+      &lt;p&gt;Setting up a Ceylon environment for development used to be a big hassle. So much in fact that we created some pretty complex build scripts to do that all for you. So fortunately as a contributor you'd never notice, you'd just type &lt;code&gt;ant setup&lt;/code&gt; and everything would be done for you.&lt;/p&gt;
+      
+      &lt;p&gt;But now things have become still easier, for you as a potential contributor the only that is needed is:&lt;/p&gt;
+      
+      &lt;!-- try: --&gt;
+      
+      
+      &lt;!-- lang: bash --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;$ git clone https://github.com/ceylon/ceylon
+      $ cd ceylon
+      $ ant clean dist
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;For a more thorough explanation on how to set up a development environment and how to go from there to submitting your first contribution please visit &lt;a href=&quot;http://localhost:4242/code/contribute/&quot;&gt;Contributing to the compiler backend&lt;/a&gt;&lt;/p&gt;
+    </content>
+  </entry>
+</feed>

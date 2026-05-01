@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Ceylon Test Eclipse Plugin</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2012/12/21/tuples-and-functions/">Tuples and function types</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2013/01/21/abstracting-over-functions/">Abstracting over functions</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="ceylon_test_eclipse_plugin">
+            Ceylon Test Eclipse Plugin
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/tomas-hradec/">Tomáš Hradec</a>
+            </div>
+            <div class="date">
+              11 Jan 2013
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/ide/">
+                ide
+              </a>
+              <a href="/blog/tags/progress/">
+                progress
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <p id="today_we_would_like_to...">Today we would like to introduce a new eclipse plugin that allows you to run ceylon unit tests,
+            and easily monitor their execution and their output.</p>
+            
+            <p id="it_offers_similar_comfort_and...">It offers similar comfort and integration with IDE as JUnit and even more. Finally, it is part of
+            the Ceylon IDE, so no additional installation is needed.</p>
+            
+            <h2 id="getting_started_with_your_first_ceylon_unit_test">Getting started with your first ceylon unit test</h2>
+            
+            <p id="the_new_test_framework_is...">The new test framework is in the Ceylon SDK module <code>ceylon.test</code>, though this is still an early version
+            and contains only basic functionality, because we need annotations and meta-model support to make it really
+            flamboyant.</p>
+            
+            <p id="so_let’s_start_by_importing...">So let’s start by importing the <code>ceylon.test</code> module in our module descriptor and writing our first test.</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>module com.acme.foo '1.0.0' {
+    import ceylon.test '0.4';
+}
+</code></pre>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>import ceylon.test { ... }
+
+void shouldAlwaysSuccess() {
+    assertEquals(1, 1);
+}
+
+void shouldAlwaysFail() {
+    fail("crash !!!");
+}
+</code></pre>
+            
+            <p id="these_tests_can_be_run...">These tests can be run like any ordinary ceylon application with the following code:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>void run() {
+    TestRunner testRunner = TestRunner();
+    testRunner.addTestListener(PrintingTestListener());
+    testRunner.addTest("com.acme.foo::shouldAlwaysSuccess", shouldAlwaysSuccess);
+    testRunner.addTest("com.acme.foo::shouldAlwaysFail", shouldAlwaysFail);
+    testRunner.run();
+}
+</code></pre>
+            
+            <p id="which_outputs">Which outputs:</p>
+            
+            <pre><code>======================== TESTS STARTED =======================
+com.acme.foo::shouldAlwaysSuccess
+com.acme.foo::shouldAlwaysFail
+======================== TESTS RESULT ========================
+run:     2
+success: 1
+failure: 1
+error:   0
+======================== TESTS FAILED ========================
+</code></pre>
+            
+            <p id="now_let’s_see_the_ide...">Now let’s see the IDE integrations!</p>
+            
+            <h2 id="launch_configuration">Launch configuration</h2>
+            
+            <p id="once_you_have_created_your...">Once you have created your tests, you can create a <em>Ceylon Test Launch Configuration</em>.
+            In this dialog you can specify the tests to run, their arguments, run-time environment, etc…</p>
+            
+            <p id=""><img src="/images/screenshots/ceylon-test-plugin/launch-config.png" alt="launch-config"></p>
+            
+            <p id="in_the_launch_configuration_you...">In the launch configuration you can directly add test methods or whole containers, like classes, packages, modules, or entire projects.</p>
+            
+            <p><img src="/images/screenshots/ceylon-test-plugin/select-test.png" alt="select-test"></p>
+            
+            <p id="as_you_would_expect_a...">As you would expect, a quick way to run ceylon tests is to right click in the <em>Ceylon Explorer</em> or in open editor and select <em>Run-As → Ceylon Test</em>.</p>
+            
+            <h2 id="viewing_test_results">Viewing test results</h2>
+            
+            <p id="the_ceylon_test_view_shows...">The <em>Ceylon Test View</em> shows you the tests run progress and their status.
+            The toolbar has familiar functions:</p>
+            
+            <ul>
+            <li>show next/previous failure,</li>
+            <li>collapse/expand all nodes,</li>
+            <li>filter to only show failing tests,</li>
+            <li>scroll lock,</li>
+            <li>buttons for relaunching or terminating,</li>
+            <li>test runs history, and</li>
+            <li>menu for view customisation (show elapsed time or show tests grouped by packages).</li>
+            </ul>
+            
+            
+            <p><img src="/images/screenshots/ceylon-test-plugin/test-result-view.png" alt="test-result-view"></p>
+            
+            <h2 id="comparing_test_results">Comparing test results</h2>
+            
+            <p id="in_test_runs_history_you...">In <em>Test Runs History</em> you can review test runs history and switch between runs.</p>
+            
+            <p id="but_the_real_killer_feature...">But the real killer feature here happens if you open <em>Compare Test Runs</em> dialog,
+            where you can see which tests have regressed, which tests have been fixed and
+            which tests have been added or removed between two test runs, making it extra
+            easy to get an idea of what your recent work did to the test suite.</p>
+            
+            <p><img src="/images/screenshots/ceylon-test-plugin/test-runs-history.png" alt="test-runs-history"></p>
+            
+            <p><img src="/images/screenshots/ceylon-test-plugin/compare-test-runs.png" alt="compare-test-runs"></p>
+            
+            <h2 id="try_it_now">Try it now</h2>
+            
+            <p id="you_can_try_it_right...">You can try it right away by downloading one of our
+            <a href="/documentation/1.0/ide#installing_the_latest_development_unstable_ide">Ceylon IDE development build</a>.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2013/01/11/ceylon-test-plugin/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

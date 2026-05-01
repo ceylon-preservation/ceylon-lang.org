@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Team blog</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="feed"><a href="/blog/blog.atom">Feed</a></h3>
+          </div>
+          <div class="point-dark-bottom">
+             
+          </div>
+          <div class="point-light-top">
+             
+          </div>
+          <div class="sidebar-block">
+            <h3 id="recent_posts">Recent posts</h3>
+            <div id="blog-archive">
+              <h4 id="ceylon_to_move_to_the_eclipse_foundation_by_stéphane_épardaud__gavin_king_21_august_2017">
+                <a href="/blog/2017/08/21/eclipse-ceylon/">Ceylon to move to the Eclipse Foundation</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Stéphane Épardaud &amp; Gavin King
+                <br>
+                21 August 2017
+              </h4>
+              <h4 id="ceylon_133_is_now_available_by_gavin_king_21_august_2017">
+                <a href="/blog/2017/08/21/ceylon-1-3-3/">Ceylon 1.3.3 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                21 August 2017
+              </h4>
+              <h4 id="ceylon_132_is_now_available_by_gavin_king_03_march_2017">
+                <a href="/blog/2017/03/03/ceylon-1-3-2/">Ceylon 1.3.2 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                03 March 2017
+              </h4>
+              <h4 id="ceylon_131_is_now_available_by_gavin_king_22_november_2016">
+                <a href="/blog/2016/11/22/ceylon-1-3-1/">Ceylon 1.3.1 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                22 November 2016
+              </h4>
+              <h4 id="ceylon_130_is_now_available_by_gavin_king_19_september_2016">
+                <a href="/blog/2016/09/19/ceylon-1-3-0/">Ceylon 1.3.0 is now available</a>
+                <br>
+                <!-- Author is put in an array -->
+                by Gavin King
+                <br>
+                19 September 2016
+              </h4>
+            </div>
+            <h3 id="tags">Tags</h3>
+            <div class="tag-cloud">
+              <div class="tag-cloud">
+                <ul>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/100/">
+                        1.0.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/110/">
+                        1.1.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/12/">
+                        1.2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/120/">
+                        1.2.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/121/">
+                        1.2.1
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/122/">
+                        1.2.2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/130/">
+                        1.3.0
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/131/">
+                        1.3.1
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/132/">
+                        1.3.2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/133/">
+                        1.3.3
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m1/">
+                        M1
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m2/">
+                        M2
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m3/">
+                        M3
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m4/">
+                        M4
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m5/">
+                        M5
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/m6/">
+                        M6
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/android/">
+                        android
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/ceylon-js/">
+                        ceylon-js
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/ceylon-model/">
+                        ceylon-model
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/code/">
+                        code
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/compiler/">
+                        compiler
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/conference/">
+                        conference
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/constructors/">
+                        constructors
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/design/">
+                        design
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/design-interop-herd/">
+                        design interop herd
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/error-handling/">
+                        error handling
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/exceptions/">
+                        exceptions
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/feedback/">
+                        feedback
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/forum/">
+                        forum
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/generics/">
+                        generics
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/gsoc/">
+                        gsoc
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/guice/">
+                        guice
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/herd/">
+                        herd
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/httpd/">
+                        httpd
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/ide/">
+                        ide
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/interop/">
+                        interop
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/interview/">
+                        interview
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/ios/">
+                        ios
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/java/">
+                        java
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/language-design/">
+                        language design
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/mobile/">
+                        mobile
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-1">
+                      <a href="/blog/tags/modularity/">
+                        modularity
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-2">
+                      <a href="/blog/tags/news/">
+                        news
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/osgi/">
+                        osgi
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/podcast/">
+                        podcast
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-7">
+                      <a href="/blog/tags/progress/">
+                        progress
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-4">
+                      <a href="/blog/tags/release/">
+                        release
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/roadmap/">
+                        roadmap
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/runtime/">
+                        runtime
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/sdk/">
+                        sdk
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-2">
+                      <a href="/blog/tags/site/">
+                        site
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/test/">
+                        test
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/tools/">
+                        tools
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/typesafety/">
+                        typesafety
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/typescript/">
+                        typescript
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/tags/weld/">
+                        weld
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <h3 id="authors">Authors</h3>
+            <div class="tag-cloud">
+              <div class="tag-cloud">
+                <ul>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/bastien-jansen/">
+                        Bastien Jansen
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/david-festal/">
+                        David Festal
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/emmanuel-bernard/">
+                        Emmanuel Bernard
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-6">
+                      <a href="/blog/authors/gavin-king/">
+                        Gavin King
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/lucas-werkmeister/">
+                        Lucas Werkmeister
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-3">
+                      <a href="/blog/authors/stephane-epardaud/">
+                        Stéphane Épardaud
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/stephane-epardaud--gavin-king/">
+                        Stéphane Épardaud &amp; Gavin King
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/tako-schotanus/">
+                        Tako Schotanus
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/tom-bentley/">
+                        Tom Bentley
+                      </a>
+                    </span>
+                  </li>
+                  <li>
+                    <span class="tag tag-0">
+                      <a href="/blog/authors/tomas-hradec/">
+                        Tomáš Hradec
+                      </a>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="point-light-end">
+             
+          </div>
+          <a href="/+" style="cursor:pointer;margin-left:auto;margin-right:auto;display:block;text-align:center;padding-top:10px;padding-bottom:0px">
+            <span style="display:inline-block;font-weight:bold;vertical-align:top;margin-right:5px;margin-top:8px;">Follow Ceylon:</span>
+          </a>
+          <p style="cursor:pointer;margin-left:auto;margin-right:auto;margin-top:2px;display:block;text-align:center;padding-top:0px" id="">
+            <a href="/+">
+              <i alt="Google Plus" class="fa fa-google-plus-square fa-2x" height="32" width="32"></i>
+            </a>
+            <a href="http://twitter.com/ceylonlang">
+              <i alt="Twitter" class="fa fa-twitter-square fa-2x" height="32" width="32"></i>
+            </a>
+            <a href="https://www.facebook.com/ceylonlang">
+              <i alt="Facebook" class="fa fa-facebook-square fa-2x" height="32" width="32"></i>
+            </a>
+          </p>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="core-page">
+          <h1 id="team_blog">
+            Team blog
+          </h1>
+          <div class="post">
+            <h1 class="title" id="ceylon_121_is_now_available">
+              <a href="/blog/2016/02/11/ceylon-1-2-1/">Ceylon 1.2.1 is now available</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/stephane-epardaud/">Stéphane Épardaud</a>
+              </div>
+              <div class="date">
+                11 February 2016
+              </div>
+              <div class="tags">
+                <a href="/blog/tags/release/">
+                  release
+                </a>
+                <a href="/blog/tags/news/">
+                  news
+                </a>
+                <a href="/blog/tags/progress/">
+                  progress
+                </a>
+                <a href="/blog/tags/121/">
+                  1.2.1
+                </a>
+              </div>
+            </div>
+            <div class="body">
+              <p id="three_months_after_the_last...">Three months after the last major release,
+              <a href="/download/">Ceylon 1.2.1</a> is a new maintenance release,
+              with almost <a href="https://github.com/ceylon/ceylon/issues?q=is%3Aissue+milestone%3A1.2.1+is%3Aclosed">100 issues</a> closed, including new features,
+              improvements and bug fixes such as:</p>
+              
+              <ul>
+              <li>you can now iterate <code>java.lang.Iterable</code> values in <code>for</code> statements
+              and use <code>java.lang.AutoCloseable</code> values in <code>try</code> statements,</li>
+              <li>support for <a href="/blog/2015/12/17/java9-jigsaw">Java 9 and Jigsaw modules</a>,</li>
+              <li>experimental support for <a href="/blog/2015/06/03/generic-function-refs/">type functions</a> on the JVM,</li>
+              <li>reduced run-time dependencies for your Ceylon program,</li>
+              <li>better interoperation with JavaScript arrays,</li>
+              <li>better compatibility with previous and future Ceylon releases.</li>
+              </ul>
+              
+              
+              <p id="note_that_for_the_jvm...">Note that for the JVM backend, this release is backwards-compatible
+              with the previous major release (<code>1.2.0</code>), which means you can use
+              modules compiled with <code>1.2.0</code> on a <code>1.2.1</code> distribution out of the box.
+              This is not as easy the other way around, if you want to run modules
+              compiled for <code>1.2.1</code> on a <code>1.2.0</code> distribution, which is why we
+              recommend you upgrade to <code>1.2.1</code>.</p>
+              
+              <p id="sadly_on_the_javascript_backend...">Sadly, on the JavaScript backend, we had to break binary compatibility
+              to fix serious interoperation issues, and so modules compiled for <code>1.2.1</code>
+              and <code>1.2.0</code> are not compatible. We recommend you upgrade your distribution
+              to <code>1.2.1</code> and recompile your modules.</p>
+              
+              <h2 id="about_ceylon">About Ceylon</h2>
+              
+              <p id="ceylon_is_a_modern_modular...">Ceylon is a modern, modular, statically typed programming
+              language for the Java and JavaScript virtual machines. The
+              language features a flexible and very readable syntax, a
+              unique and uncommonly elegant static type system, a powerful
+              module architecture, and excellent tooling, including an
+              awesome Eclipse-based IDE.</p>
+              
+              <p id="ceylon_enables_the_development_of...">Ceylon enables the development of cross-platform modules
+              that execute portably in both virtual machine environments.
+              Alternatively, a Ceylon module may target one or the other
+              platform, in which case it may interoperate with native code
+              written for that platform.</p>
+              
+              <h2 id="in_the_box">In the box</h2>
+              
+              <p id="this_release_includes"><a href="/download/">This release</a> includes:</p>
+              
+              <ul>
+              <li>a complete <a href="/documentation/1.2/spec">language specification</a> that defines the
+              syntax and semantics of Ceylon in language accessible to
+              the professional developer,</li>
+              <li>a <a href="/documentation/1.2/reference/tool/ceylon/subcommands/index.html">command line toolset</a> including compilers for
+              Java and JavaScript, a documentation compiler, a test
+              runner, a WAR archive packager, and support for executing
+              modular programs on the JVM and Node.js,</li>
+              <li>a powerful module architecture for code organization,
+              dependency management, and module isolation at runtime,</li>
+              <li>the <a href="https://herd.ceylon-lang.org/modules/ceylon.language">language module</a>, our minimal,
+              cross-platform foundation of the <a href="https://modules.ceylon-lang.org/categories/SDK">Ceylon SDK</a>, and</li>
+              <li>a <a href="/documentation/1.2/ide/features/">full-featured</a> Eclipse-based integrated
+              development environment.</li>
+              </ul>
+              
+              
+              <h2 id="language">Language</h2>
+              
+              <p id="ceylon_is_a_highly_understandable...">Ceylon is a highly understandable object-oriented language
+              with static typing. The language features:</p>
+              
+              <ul>
+              <li>an emphasis upon <strong>readability</strong> and a strong bias toward
+              <strong>omission or elimination of potentially-harmful or
+              potentially-ambiguous constructs</strong> and toward highly
+              <strong>disciplined use of static types</strong>,</li>
+              <li>an extremely powerful and uncommonly elegant type system
+              combining subtype and parametric polymorphism with:
+              
+              <ul>
+              <li>first-class <strong>union and intersection types</strong>,</li>
+              <li>both <strong>declaration-site and use-site variance</strong>, and</li>
+              <li>the use of principal types for <strong>local type inference</strong>
+              and <strong>flow-sensitive typing</strong>,</li>
+              </ul>
+              </li>
+              <li>a unique treatment of <strong>function and tuple types</strong>,
+              enabling powerful abstractions, along with the most
+              <strong>elegant approach to <code>null</code></strong> of any modern language,</li>
+              <li>first-class constructs for defining <strong>modules and
+              dependencies between modules</strong>,</li>
+              <li>a very flexible syntax including <strong>comprehensions</strong> and
+              support for expressing <strong>tree-like structures</strong>,</li>
+              <li>
+<strong>fully-reified generic types</strong>, on both the JVM and
+              JavaScript virtual machines, and a unique <strong>typesafe
+              metamodel</strong>.</li>
+              </ul>
+              
+              
+              <p id="more_information_about_these_language...">More information about these language features may be
+              found in the <a href="/features">feature list</a> and
+              <a href="/documentation/1.2/introduction/">quick introduction</a>.</p>
+              
+              <h2 id="ide">IDE</h2>
+              
+              <p id="ceylon_ide_now_features_the...">Ceylon IDE now features the following improvements, along
+              with many bugfixes and a number of performance enhancements:</p>
+              
+              <ul>
+              <li>improved documentation hover,</li>
+              <li>better UI responsiveness,</li>
+              <li>support running on Java 9.</li>
+              </ul>
+              
+              
+              <p id="a_number_of_important_subsystems...">A number of important subsystems have been abstracted and
+              rewritten in Ceylon, to support the ongoing development of
+              the new IntelliJ-based IDE for Ceylon.</p>
+              
+              <h2 id="sdk">SDK</h2>
+              
+              <p id="the_platform_modules_recompiled_for...">The <a href="https://modules.ceylon-lang.org/categories/SDK">platform modules</a>, recompiled for 1.2.1, are
+              available in the shared community repository, <a href="https://herd.ceylon-lang.org">Ceylon Herd</a>.</p>
+              
+              <p id="this_release_introduces_several_new...">This release introduces several new platform modules:</p>
+              
+              <ul>
+              <li>
+<code>ceylon.numeric</code> is a cross-platform module containing math
+              operations for <code>Integer</code> and <code>Float</code>. In time it will replace parts of
+              the JVM-only <code>ceylon.math</code> module.</li>
+              <li>
+<code>ceylon.decimal</code> is a JVM-only module (but soon to be cross-platform)
+              containing arbitrary-length decimal support. In time it will replace parts of
+              the JVM-only <code>ceylon.math</code> module.</li>
+              <li>
+<code>ceylon.whole</code> is a cross-platform module containing arbitrary-length
+              integer support. In time it will replace parts of
+              the JVM-only <code>ceylon.math</code> module.</li>
+              <li>
+<code>ceylon.random</code> is a cross-platform module containing random number
+              generators. In time it will replace parts of
+              the JVM-only <code>ceylon.math</code> module.</li>
+              <li>
+<code>ceylon.interop.browser</code> contains JavaScript-only interoperation
+              functions and types for the DOM, HTML and <code>XMLHttpRequest</code>.</li>
+              </ul>
+              
+              
+              <p id="along_with_several_api_enhancements...">Along with several API enhancements and bugfixes, including:</p>
+              
+              <ul>
+              <li>Many new features for <code>ceylon.test</code>, the Ceylon Test Suite.</li>
+              <li>Performance improvement of the <code>ceylon.json</code> parser.</li>
+              </ul>
+              
+              
+              <h2 id="web_ide">Web IDE</h2>
+              
+              <p id="you_can_try_ceylon_using...">You can try Ceylon using the <a href="http://try.ceylon-lang.org">Web IDE</a>, featuring syntax highlighting,
+              interactive error reporting, autocompletion, online
+              documentation, and persistence and code sharing via Gist.</p>
+              
+              <p id="the_web_ide_serves_a...">The Web IDE serves a dual purpose as a standard example
+              demonstrating the use of Ceylon for web application
+              development and deployment to the <a href="http://openshift.com">OpenShift</a> cloud
+              platform.</p>
+              
+              <h2 id="community">Community</h2>
+              
+              <p id="the_ceylon_community_site_httpceylon...">The Ceylon community site, <a href="http://ceylon-lang.org">http://ceylon-lang.org</a>, includes
+              <a href="/documentation/1.2">documentation</a>, and information about
+              <a href="/community/">getting involved</a>.</p>
+              
+              <h2 id="source_code">Source code</h2>
+              
+              <p id="the_source_code_for_ceylon...">The source code for Ceylon, its specification, and its website,
+              is freely available from <a href="https://github.com/ceylon">GitHub</a>.</p>
+              
+              <p id="information_about_ceylons_open_source...">Information about Ceylon's open source licenses is available
+              <a href="/code/licenses/">here</a>.</p>
+              
+              <h2 id="issues">Issues</h2>
+              
+              <p id="bugs_and_suggestions_may_be...">Bugs and suggestions may be reported in GitHub's
+              <a href="/code/issues">issue tracker</a>.</p>
+              
+              <h2 id="migrating_from_ceylon_120">Migrating from Ceylon 1.2.0</h2>
+              
+              <p id="migration_from_ceylon_120_is...">Migration from Ceylon 1.2.0 is easy. To recompile a module for
+              1.2.1:</p>
+              
+              <ul>
+              <li>First ensure that its dependencies have also been
+              recompiled.</li>
+              <li>If it imports a Ceylon SDK platform module, upgrade the
+              version number specified by the module <code>import</code> statement
+              from <code>"1.2.0"</code> to <code>"1.2.1"</code> .</li>
+              <li>If it was compiled against Ceylon <code>1.2.0</code> you should still
+              be able to use it in <code>1.2.1</code> for the JVM backend,
+              as it is backwards-compatible. Sadly, this is not the case
+              for the JavaScript backend, and so you will need to recompile
+              your modules with <code>1.2.1</code>.</li>
+              </ul>
+              
+              
+              <h2 id="acknowledgement">Acknowledgement</h2>
+              
+              <p id="as_always_were_deeply_grateful...">As always, we're deeply grateful to the community volunteers
+              who contributed a substantial part of the current Ceylon
+              codebase, working in their own spare time. The following
+              people have contributed to Ceylon:</p>
+              
+              <p id="gavin_king_stéphane_épardaud_tako...">Gavin King, Stéphane Épardaud, Tako Schotanus, Tom Bentley,
+              David Festal, Enrique Zamudio, Bastien Jansen,
+              Emmanuel Bernard, Aleš Justin, Tomáš Hradec, James Cobb,
+              Ross Tate, Max Rydahl Andersen, Mladen Turk,
+              Lucas Werkmeister, Roland Tepp, Diego Coronel, Matej Lazar,
+              John Vasileff, Toby Crawley, Julien Viet, Loic Rouchon,
+              Stephane Gallès, Ivo Kasiuk, Corbin Uselton, Paco Soberón,
+              Michael Musgrove, Daniel Rochetti, Henning Burdack,
+              Luke deGruchy, Rohit Mohan, Griffin DeJohn, Casey Dahlin,
+              Alexander Altman, Alexander Zolotko, Alex Szczuczko,
+              Andrés G. Aragoneses, Anh Nhan Nguyen, Brice Dutheil,
+              Carlos Augusto Mar, Charles Gould, Chris Gregory, klinger,
+              Martin Voelkle, Mr. Arkansas, Paŭlo Ebermann, Vorlent,
+              Akber Choudhry, Renato Athaydes, Flavio Oliveri,
+              Michael Brackx, Brent Douglas, Lukas Eder, Markus Rydh,
+              Julien Ponge, Pete Muir, Nicolas Leroux, Brett Cannon,
+              Geoffrey De Smet, Guillaume Lours, Gunnar Morling,
+              Jeff Parsons, Jesse Sightler, Oleg Kulikov, Raimund Klein,
+              Sergej Koščejev, Chris Marshall, Simon Thum, Maia Kozheva,
+              Shelby, Aslak Knutsen, Fabien Meurisse, Sjur Bakka,
+              Xavier Coulon, Ari Kast, Dan Allen, Deniz Türkoglu,
+              F. Meurisse, Jean-Charles Roger, Johannes Lehmann, allentc,
+              Nikolay Tsankov, Chris Horne, Gabriel Mirea, Georg Ragaller,
+              Harald Wellmann, klinger, Oliver Gondža, Stephen Crawley,
+              Byron Clark, Francisco Reverbel, Jonas Berlin, Luke Hutchison,
+              Nikita Ostroumov, Santiago Rodriguez, Sean Flanigan.</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2016/02/11/ceylon-1-2-1/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="post">
+            <h1 class="title" id="ceylon_on_java_9__jigsaw">
+              <a href="/blog/2015/12/17/java9-jigsaw/">Ceylon on Java 9 + Jigsaw</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/stephane-epardaud/">Stéphane Épardaud</a>
+              </div>
+              <div class="date">
+                17 December 2015
+              </div>
+              <div class="tags">
+                <a href="/blog/tags/interop/">
+                  interop
+                </a>
+                <a href="/blog/tags/progress/">
+                  progress
+                </a>
+                <a href="/blog/tags/compiler/">
+                  compiler
+                </a>
+                <a href="/blog/tags/java/">
+                  java
+                </a>
+                <a href="/blog/tags/modularity/">
+                  modularity
+                </a>
+              </div>
+            </div>
+            <div class="body">
+              <p id="everyone_is_talking_about_modules...">Everyone is talking about modules these days. New languages try to incorporate them,
+              and older languages try to retrofit them in. Which is great news, because modules are
+              essential. Java 9 is around the corner, because it's supposed to come out next year,
+              and the really big new feature is modularity, which it calls the
+              <a href="http://openjdk.java.net/projects/jigsaw/">Jigsaw project</a>.</p>
+              
+              <p id="ceylon_is_a_language_that...">Ceylon is a language that featured modularity from the start, as part of the language
+              and not as an afterthought requiring complex third-party tool integration. In fact,
+              at the time we designed our Java JDK integration (at the time of Java 7), we went
+              as far as using the Jigsaw modularity plans for the JDK (yes Jigsaw got delayed a
+              few times) from the start, requiring JDK users to
+              <a href="/documentation/1.2/reference/interoperability/java-from-ceylon/#importing_jdk_modules">import Jigsaw modules</a>
+              as they were
+              planned at the time, rather than import the whole JDK in one go. So perhaps we were the
+              first ones with a modular JDK, in some sense :)</p>
+              
+              <h2 id="java_9’s_jigsaw">Java 9’s Jigsaw</h2>
+              
+              <p id="jigsaw_is_a_very_large...">Jigsaw is a very large project, which includes the following changes:</p>
+              
+              <ul>
+              <li>
+<a href="http://openjdk.java.net/jeps/200">Modularisation of the JDK</a> into smaller units,
+              such as <code>java.base</code>, <code>java.xml</code> that Ceylon users of the JDK are already familiar with.</li>
+              <li>This modularisation means removal of <code>rt.jar</code> that contained every JDK class. In fact
+              it's been replaced by a <code>bootmodules.jimage</code> file which is not a jar, but whose contents
+              <a href="http://openjdk.java.net/jeps/220">can be accessed by a virtual NIO <code>FileSystem</code> at <code>jrt:/</code></a>.</li>
+              <li>You can <a href="http://openjdk.java.net/projects/jigsaw/spec/">write your own modules</a>.
+              To turn your Java code into a Java 9 module, you simply
+              add a module descriptor in a file called <code>module-info.java</code> (much like Ceylon module
+              descriptors, or Java package descriptors), which describes your module and the Java 9
+              compiler and jar tools will then generate a jar with a <code>module-info.class</code> descriptor
+              at the root of the jar.</li>
+              <li>That <a href="http://cr.openjdk.java.net/~mr/jigsaw/spec/lang-vm.html">module descriptor</a>
+              allows you to specify the module name, the packages it exports,
+              the name of the modules it imports and a few other things. But not versions, unfortunately,
+              which are currently "out of scope" in Java 9.</li>
+              <li>You can run your code as previously from the classpath, or as modules from the
+              <em>module path</em>. The module path is just a folder in which you can place your modules and
+              the JRE will look them up for you based on module name alone.</li>
+              </ul>
+              
+              
+              <h2 id="ceylon_and_jigsaw">Ceylon and Jigsaw</h2>
+              
+              <p id="java_9_has_two_early...">Java 9 has two <em>early-access</em> (EA) downloads for users to try the module system. Only
+              <a href="https://jdk9.java.net/jigsaw/">one of them includes user modules</a>.
+              Make sure you use that one if you want to try out Ceylon running on Java 9.</p>
+              
+              <p id="over_the_past_weeks_ive...">Over the past weeks I've worked on getting Ceylon compiling and running on Java 9. This
+              involved (among other details) the following things:</p>
+              
+              <ul>
+              <li>Generating <code>module-info.class</code> files from Ceylon module descriptors.</li>
+              <li>Generating <code>module-info.class</code> files for the Ceylon distribution modules which are not
+              written in Ceylon (like the compilers or runtime system).</li>
+              <li>Making use of the Java 9 module descriptors for the <code>shared</code> packages information it contains
+              (something supported by Ceylon since the beginning, but which was lacking for plain Java jars).</li>
+              <li>Backporting Java 9 code that deals with modules to the <code>javac</code> fork we use to compile Java
+              files and generate bytecode.</li>
+              <li>Dealing with the removal of <code>rt.jar</code> and the <em>boot classpath</em>.</li>
+              <li>Creating a new tool <code>ceylon jigsaw</code> which allows for the creation of a Java 9 <em>module path</em>.</li>
+              <li>Making sure we can run Ceylon modules as Java 9 modules as an alternative to the four existing
+              JVM runtimes which are the JBoss Modules, classpath, OSGi or Java EE.</li>
+              <li>Make sure we can build and run on any of Java 7,8,9. This means that by default we do not
+              generate Java 9 module descriptors, because several tools have problems dealing with them
+              at this time.</li>
+              <li>We have split some things out of the <code>ceylon.language</code> module so that it no longer depends
+              on the compilers and type-checker, which means a lighter minimal runtime, which will be even
+              further improved in the next weeks with more dependency removals :)</li>
+              </ul>
+              
+              
+              <h2 id="just_tell_me_how_to_try_this">Just tell me how to try this!</h2>
+              
+              <p id="i_will_spare_you_the...">I will spare you the many details of this work, but with help from the Java 9 team, this is how
+              you can run your Ceylon modules on a Java 9 runtime:</p>
+              
+              <ul>
+              <li>Download the <a href="https://jdk9.java.net/jigsaw/">Java 9 EA with Jigsaw</a>.</li>
+              <li>Get the <a href="https://github.com/ceylon/ceylon">Ceylon distribution code</a>,
+              and compile it with <code>ant -Djigsaw=true clean dist</code> to get the Java 9 module descriptors.</li>
+              <li>Write your Ceylon module normally, but compile it with
+              <code>.../ceylon/dist/dist/bin/ceylon compile --generate-module-info</code> to generate the Java 9 module
+              descriptors.</li>
+              <li>Create your Java 9 module path in an <code>mlib</code> folder with
+              <code>.../ceylon/dist/dist/bin/ceylon jigsaw create-mlib my.module/1</code>.</li>
+              <li>Run your Ceylon module on Java 9 with
+              <code>.../jdk1.9.0-jigsaw/bin/java -mp mlib -m ceylon.language my.module/1</code>. At the moment, the
+              <code>ceylon.language</code> module acts as main module and does the required setting up of the Ceylon
+              runtime before loading and invoking your Ceylon module.</li>
+              </ul>
+              
+              
+              <p id="thats_all_there_is_to...">That's all there is to it!</p>
+              
+              <h2 id="caveats">Caveats</h2>
+              
+              <p id="java_9_is_not_complete...">Java 9 is not complete yet, and our support for Java 9 is also not complete. There will be issues
+              and bugs, and in fact we already know of several limitations, such as the following:</p>
+              
+              <ul>
+              <li>While you can import a <em>pure</em> Java 9 module from Ceylon, we will respect its exported packages,
+              but we will not respect its dependencies, because Java 9 modules do not include dependency versions.
+              In fact, even the module's version is not stored in the source module descriptor, but added by
+              an optional flag to the Java 9 <code>jar</code> tool. Ceylon requires module dependencies to describe a
+              version, so we have to combine the Java 9 module descriptor with another descriptor such as an
+              OSGi descriptor or a Maven <code>pom.xml</code> descriptor. This merging of information is not currently done.</li>
+              <li>Java 9 does not currently support optional modules or module cycles. It is not clear if they
+              will support them at this time, unfortunately.</li>
+              <li>The <code>ceylon import-jar</code> tool may complain about module visibility artifacts. We intend to fix this
+              in time, but for now you can use <code>--force</code>.</li>
+              <li>The JDK module list we used in Ceylon has slightly changed in Java 9. This is what we get for
+              being the first to support Jigsaw ;) For example, the <code>javax.xml</code> module has been renamed to
+              <code>java.xml</code>. We have set up aliases so that it "just" works, but there are modules that have
+              been merged, and packages that have changed module, so it will not always work.</li>
+              <li>The Java 9 runtime has been tested, but not as thoroughly as the existing JBoss Modules, classpath,
+              OSGi or Java EE runtimes. We expect a few issues in the Ceylon metamodel.</li>
+              </ul>
+            </div>
+            <div class="tail">
+               <a href="/blog/2015/12/17/java9-jigsaw/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="post">
+            <h1 class="title" id="first_maintenance_update_for_the_ceylon_ide_version_120">
+              <a href="/blog/2015/12/14/maintenance-update-for-1-2-0-IDE/">First maintenance update for the Ceylon IDE version 1.2.0</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/david-festal/">David Festal</a>
+              </div>
+              <div class="date">
+                14 December 2015
+              </div>
+              <div class="tags">
+                <a href="/blog/tags/release/">
+                  release
+                </a>
+                <a href="/blog/tags/news/">
+                  news
+                </a>
+                <a href="/blog/tags/ide/">
+                  ide
+                </a>
+                <a href="/blog/tags/120/">
+                  1.2.0
+                </a>
+              </div>
+            </div>
+            <div class="body">
+              <h2 id="introducing_the_first_ceylon_ide_maintenance_update">Introducing the first Ceylon IDE maintenance update</h2>
+              
+              <p id="just_after_the_release_of...">Just after the release of <a href="/blog/2015/10/29/ceylon-1-2-0/">Ceylon 1.2.0</a>, we started managing a <strong>maintenance branch</strong> of the IDE-related
+              code, that will always be <strong>fully compatible</strong> with the last release of the Ceylon (Command line distribution and SDK).</p>
+              
+              <p id="this_way_weve_already_been...">This way we've already been able to very easily backport to this branch many bug fixes or enhancements
+              implemented on the main development branch.</p>
+              
+              <p id="as_a_result_the_first...">As a result, the first maintenance update of the <a href="/documentation/1.2/ide/">Ceylon IDE plugin for Eclipse</a>, which fixes about 30 issues, has just been
+              published onto the main Ceylon IDE <a href="/eclipse/updatesite/">update site</a>.</p>
+              
+              <p id="so_if_you_currently_use...">So if you currently use the version 1.2.0 of the Ceylon IDE Eclipse plugin, simply run the
+              <code>Check For Updates</code> command in the Eclipse <code>Help</code> menu, and Eclipse should propose you to update the Ceylon IDE
+              features.</p>
+              
+              <p id="and_if_you_still_dont...">And if you still don't use the Ceylon IDE Eclipse plugin, just <a href="/documentation/1.2/ide/install">install</a> it and give it a try now.</p>
+              
+              <h2 id="source_tracking">Source tracking</h2>
+              
+              <p id="of_course_each_maintenance_update...">Of course each maintenance update will be tagged inside the GitHub source repositories.</p>
+              
+              <p id="so_as_soon_as_we...">So as soon as we know the version of the <code>Ceylon IDE</code> feature, visible from the Eclipse <code>About</code> dialog:</p>
+              
+              <div style="text-align:center;">
+              <img src="/images/screenshots/blog/2015-12-14-maintenance-update-for-1.2.0-IDE/about-ceylon-ide.png" style="box-shadow: 0 0 10px #888;margin-left:5px;" width="679px" height="auto">
+              </div>
+              
+              
+              <p id="we_can_immediately_checkout_the...">we can immediately checkout the <strong>precise</strong> source code corresponding to a Ceylon IDE installation.</p>
+              
+              <p id="this_will_help_us_reproducing...">This will help us <strong>reproducing more easily</strong>, and <strong>fixing more quickly</strong>, any issue encountered on the production Ceylon IDE.</p>
+              
+              <h2 id="maintenance_update_release_notes">Maintenance update release notes</h2>
+              
+              <p id="detailed_release_notes_of_this...">Detailed release notes of this maintenance update can be found <a href="https://github.com/ceylon/ceylon-ide-eclipse/releases/tag/com.redhat.ceylon.eclipse.feature_1.2.0.v20151214-1608-Final">here</a>,
+              and related commits can be found <a href="https://github.com/ceylon/ceylon-ide-eclipse/compare/1.2.0...com.redhat.ceylon.eclipse.feature_1.2.0.v20151214-1608-Final">here</a>.</p>
+              
+              <h2 id="issues-2">Issues</h2>
+              
+              <p id="bugs_and_suggestions_may_be_reported...">Bugs and suggestions may be reported in GitHub's
+              <a href="https://github.com/ceylon/ceylon-ide-eclipse/issues">issue tracker</a>.</p>
+              
+              <h2 id="about_ceylon-2">About Ceylon</h2>
+              
+              <p id="ceylon_is_a_highly_understandable_object...">Ceylon is a highly understandable object-oriented language
+              with static typing. The language features:</p>
+              
+              <ul>
+              <li>an emphasis upon <strong>readability</strong> and a strong bias toward
+              <strong>omission or elimination of potentially-harmful or
+              potentially-ambiguous constructs</strong> and toward highly
+              <strong>disciplined use of static types</strong>,</li>
+              <li>an extremely powerful and uncommonly elegant type system
+              combining subtype and parametric polymorphism with:
+              
+              <ul>
+              <li>first-class <strong>union and intersection types</strong>,</li>
+              <li>both <strong>declaration-site and use-site variance</strong>, and</li>
+              <li>the use of principal types for <strong>local type inference</strong>
+              and <strong>flow-sensitive typing</strong>,</li>
+              </ul>
+              </li>
+              <li>a unique treatment of <strong>function and tuple types</strong>,
+              enabling powerful abstractions, along with the most
+              <strong>elegant approach to <code>null</code></strong> of any modern language,</li>
+              <li>first-class constructs for defining <strong>modules and
+              dependencies between modules</strong>,</li>
+              <li>a very flexible syntax including <strong>comprehensions</strong> and
+              support for expressing <strong>tree-like structures</strong>,</li>
+              <li>
+<strong>fully-reified generic types</strong>, on both the JVM and
+              JavaScript virtual machines, and a unique <strong>typesafe
+              metamodel</strong>.</li>
+              </ul>
+              
+              
+              <p id="more_information_about_these_language_features...">More information about these language features may be
+              found in the <a href="/features">feature list</a> and
+              <a href="/documentation/1.2/introduction/">quick introduction</a>.</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2015/12/14/maintenance-update-for-1-2-0-IDE/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="post">
+            <h1 class="title" id="modelling_failure_in_ceylon">
+              <a href="/blog/2015/12/14/failure/">Modelling failure in Ceylon</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/gavin-king/">Gavin King</a>
+              </div>
+              <div class="date">
+                14 December 2015
+              </div>
+              <div class="tags">
+                <a href="/blog/tags/error-handling/">
+                  error handling
+                </a>
+                <a href="/blog/tags/exceptions/">
+                  exceptions
+                </a>
+              </div>
+            </div>
+            <div class="body">
+              <p id="in_all_programming_languages_we...">In all programming languages, we need to deal with operations
+              than can "fail":</p>
+              
+              <ul>
+              <li>a pure function might fail to produce a result, or</li>
+              <li>an impure function might fail to produce its desired
+              side-effect (create a new file, or whatever).</li>
+              </ul>
+              
+              
+              <p id="in_neither_case_can_we...">In neither case can we just blindly continue with the rest
+              of the computation. In the first case, the result of the
+              function might be the input to some other function. In the
+              second case, subsequent operations might assume that the
+              side-effect occurred (that the file now exists, or whatever).</p>
+              
+              <p id="thus_its_clear_that_there...">Thus, it's clear that there must be some way for an operation
+              to signal failure to the calling code. There are two broad
+              mechanisms provided by programming languages for signalling
+              failure:</p>
+              
+              <ol>
+              <li>Failure may be indicated via return values: an error code,
+              <code>null</code>, a <a href="/documentation/1.2/tour/types/#union_types">union type</a>,
+              or a <a href="/documentation/1.2/tour/types/#enumerated_types">sum (enumerated) type</a>,
+              for example, <code>Option</code>/<code>Maybe</code> or <code>Either</code>.</li>
+              <li>Failures may be signalled and handled within some sort of
+              exception or "panic" facility.</li>
+              </ol>
+              
+              
+              <p id="most_modern_programming_languages_support...">Most modern programming languages support both of these
+              mechanisms, though of course the details vary. In particular,
+              languages offer varying degrees of typesafety.</p>
+              
+              <ul>
+              <li>In languages with proper support for sum types or union
+              types, return values may be used to model failure in a very
+              robust and typesafe way.</li>
+              <li>In languages with some sort of <em>effect typing</em>, for example,
+              Java-style checked exceptions, the exceptions are themselves
+              typesafe.</li>
+              </ul>
+              
+              
+              <p id="by_typesafe_what_i_mean...">By <em>typesafe</em> what I mean is that an operation that can fail
+              declares the possibility of failure in its signature, and
+              the immediately calling code is forced by the compiler to
+              explicitly handle the failure.</p>
+              
+              <h2 id="types_of_failure">Types of failure</h2>
+              
+              <p id="so_what_facilities_should_a...">So what facilities <em>should</em> a language offer for modelling
+              failure? Return codes or exceptions? Typesafe or not? To
+              arrive at a partial answer to this question, let's start with
+              the following classification of "failures":</p>
+              
+              <ul>
+              <li>Some failures represent problems that the immediately
+              calling code is very unlikely to be able to recover from.
+              Examples include transaction rollbacks, network failures,
+              low memory conditions, or stack overflows.</li>
+              <li>Some failures are typically the result of bugs in the
+              program logic. Examples include assertion failures,
+              division by zero, and use of null pointers. This is a
+              class of failure that, as far as possible, we would like
+              to detect at compile time, but no type system will ever be
+              powerful enough to detect <em>all</em> of these failures. After a
+              few minutes of thought, you should be able to convince
+              yourself this class of problems is actually a subclass of
+              the first class: how can any computation possibly recover
+              meaningfully from a bug in its own logic?</li>
+              <li>Finally, there are "failures" that often represent
+              recoverable conditions. For example, one might recover
+              from a nonexistent file by creating a file. Note that
+              failures in this class need not <em>always</em> be recoverable.</li>
+              </ul>
+              
+              
+              <p id="given_this_classification_i_arrive...">Given this classification, I arrive relatively quickly at
+              the following conclusions.</p>
+              
+              <h3 id="handling_recoverable_failures">Handling recoverable failures</h3>
+              
+              <p id="for_recoverable_conditions_the_failure...">For "recoverable" conditions, the failure should be typesafe.
+              The compiler should be able to verify that the calling code
+              has made an explicit decision on what to do about the failure:
+              recovering from it, or transforming it into an unrecoverable
+              failure. We want to prevent recoverable failures from going
+              unnoticed by accident.</p>
+              
+              <p id="its_clear_that_unchecked_exceptions—or...">It's clear that unchecked exceptions—or other untypesafe
+              solutions such as returning <code>null</code> in a language like Java
+              where <code>null</code> is untypesafe—don't prevent this, and allow
+              failure conditions to go unnoticed, leading to bugs.</p>
+              
+              <p id="the_most_convenient_elegant_and...">The most convenient, elegant, and efficient way to represent
+              a recoverable failure is a union-typed return value. For
+              example, if I have a function for parsing JSON, and it can
+              fail for illegal input, I could use a function with the
+              following signature:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>JsonObject|ParseError parseJson() =&gt; ... ;
+</code></pre>
+              
+              <p id="or_if_it_seems_that...">Or, if it seems that <code>ParseError</code> carries no useful information,
+              I could just use <code>Null</code> instead:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>JsonObject? parseJson() =&gt; ... ;
+</code></pre>
+              
+              <p id="alternatively_in_some_advanced_cases...">Alternatively, in some advanced cases, one could use a sum
+              (enumerated) return type.</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>interface ParseResult of ParseSuccessful | ParseError {}
+class ParseSuccessful(shared JsonObject result) satisfies ParseResult {}
+class ParseError(shared String message) satisfies ParseResult {}
+
+ParseResult parseJson() =&gt; ... ;
+</code></pre>
+              
+              <p id="this_is_not_usually_necessary...">This is not usually necessary in Ceylon, however.</p>
+              
+              <h3 id="handling_unrecoverable_failures">Handling unrecoverable failures</h3>
+              
+              <p id="now_for_unrecoverable_conditions_the...">Now, for "unrecoverable" conditions, the failure should be an
+              untyped (unchecked) exception. For an unrecoverable failure,
+              we shouldn't be polluting the calling code with concerns it
+              can't possibly do anything useful with. We want the failure
+              to propagate quickly and transparently to some centralized,
+              generic, infrastructure-level error handling.</p>
+              
+              <p id="note_that_since_unchecked_exceptions...">Note that, since unchecked exceptions don't appear in the
+              signature of the operation, the caller doesn't receive any
+              kind of "fair warning" that they can occur. They represent
+              a sort of designed-in "hole" in the type system.</p>
+              
+              <h3 id="when_in_doubt">When in doubt</h3>
+              
+              <p id="but_wait_youre_probably_thinking...">But wait, you're probably thinking, haven't I left a huge
+              question begging here?</p>
+              
+              <blockquote><p id="what_about_failure_that_doesnt...">What about failure that doesn't fall cleanly into
+              "recoverable" or "unrecoverable"?</p></blockquote>
+              
+              <p id="isnt_there_a_huge_grey...">Isn't there a huge grey area there, filled with failures that
+              are <em>sometimes</em> recoverable by the immediately-calling code?</p>
+              
+              <p id="indeed_there_is_and_i...">Indeed there is. And I would say that, as a rule of thumb,
+              <em>treat these failures as recoverable</em>.</p>
+              
+              <p id="consider_our_parsejson_function_above...">Consider our <code>parseJson()</code> function above. A syntax error in
+              the given JSON text could easily be the result of a bug in
+              our program, but, crucially, <em>it's not a bug in <code>parseJson()</code>
+              itself.</em> The code that knows whether it's a program bug or
+              something else is the calling code, not the <code>parseJson()</code>
+              function.</p>
+              
+              <p id="and_its_always_easy_for...">And it's always easy for the calling code to transform a
+              recoverable failure into an unrecoverable failure. For
+              example:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>assert (is JsonObject result = parseJson(json));
+//result must be a JsonObject here
+</code></pre>
+              
+              <p id="or">Or:</p>
+              
+              <!-- try: -->
+              
+              
+              <pre data-language="ceylon"><code>value result = parseJson(json);
+if (is ParseError result) {
+    throw AssertionError(result.message);
+}
+//result must be a JsonObject here
+</code></pre>
+              
+              <p id="that_is_when_in_doubt...">That is, when in doubt, we make the calling code explicitly
+              document its assumptions.</p>
+              
+              <p id="looking_at_this_another_way...">Looking at this another way, we err on the side of typesafety,
+              since having too many unchecked exceptions starts to undermine
+              the whole value of the static type system.</p>
+              
+              <p id="furthermore_its_quite_likely_that...">Furthermore, it's quite likely that the calling code is better
+              placed to produce an error with more meaningful information
+              than the code it's calling (though I have not shown that in
+              the snippets above).</p>
+              
+              <h2 id="three_things_to_consider">Three things to consider</h2>
+              
+              <p id="i_promised_a_partial_answer...">I promised a "partial" answer to my original question, because
+              there are still a couple of questions that I'm not sure I have
+              a completely bottled answer to, and there's debate over these
+              issues in the Ceylon community.</p>
+              
+              <h3 id="is_assertionerror_overused">Is <code>AssertionError</code> overused?</h3>
+              
+              <p id="first_what_kind_of_failures...">First, what kind of failures are legitimate uses of
+              <code>AssertionError</code>? Should every <code>AssertionError</code> represent a
+              bug in the program? Is it ever reasonable for a library to
+              throw an <code>AssertionError</code> when it encounters a situation it
+              considers misuse of its API? Is it acceptable for generic
+              exception handling code to recover from an <code>AssertionError</code>,
+              or should <code>AssertionError</code>s be considered fatal?</p>
+              
+              <p id="my_answers_would_be_yes...">My answers would be yes, yes, and yes. But perhaps that
+              implies that it was a mistake to follow Java in making
+              <code>AssertionError</code> an <code>Error</code> instead of a plain <code>Exception</code>.
+              (This leads to a larger debate about the role of <code>Error</code>.)</p>
+              
+              <h3 id="is_null_overused">Is <code>Null</code> overused?</h3>
+              
+              <p id="second_the_class_null_is...">Second, the class <code>Null</code> is a seductively convenient way to
+              represent failure of functions which return a value. But are
+              we overusing it? Would it have been better to make the return
+              type of <code>Map&lt;Key,Item&gt;.get()</code> be <code>Item|NoItem&lt;Key&gt;</code> instead
+              of the much more generic type <code>Item?</code>, that is, <code>Item|Null</code>?</p>
+              
+              <p id="perhaps_in_a_sense_returning...">Perhaps. In a sense, returning <code>null</code> is like throwing
+              <code>Exception</code>: a little too generic. But since a null return
+              value must be handled by the immediately calling code, which
+              is much better placed to know what this instance of <code>null</code>
+              represents, it's not as harmful as a generic <code>Exception</code>
+              which is handled far from its source.</p>
+              
+              <p id="whether_you_agree_with_that...">Whether you agree with that or not, it still might be best
+              to avoid operations where <code>null</code> can result from multiple
+              different failure conditions. I have broken this rule in the
+              past, and I'm going to be more careful in future.</p>
+              
+              <h3 id="functions_with_no_useful_return_value">Functions with no useful return value</h3>
+              
+              <p id="third_for_functions_with_no...">Third, for functions with no useful return value, that is,
+              functions which are called only for their side-effect—where
+              the calling code has the option of simply ignoring any return
+              value representing failure—should we err on the side of
+              throwing an exception?</p>
+              
+              <p id="or_alternatively_should_the_language...">Or, alternatively, should the language offer some way to
+              force the caller to do <em>something</em> with the return value of
+              non-<code>void</code> function?</p>
+              
+              <p id="ceylon_doesnt_have_and_wont...">Ceylon doesn't have (and won't have) checked exceptions, but
+              one could argue that this is the one situation where they
+              would be most useful.</p>
+              
+              <h2 id="conclusion">Conclusion</h2>
+              
+              <p id="so_ultimately_there_are_some...">So, ultimately, there are some unanswered questions, and grey
+              areas, but it seems to me that at least we have a rather
+              strong conceptual framework in which to investigate these
+              problems. And it's clear that the combination of
+              facilities—union types, together with unchecked
+              exceptions—is a powerful foundation for robust failure
+              handling.</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2015/12/14/failure/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="post">
+            <h1 class="title" id="troll_alert">
+              <a href="/blog/2015/12/08/troll/">Troll alert</a>
+            </h1>
+            <div class="byline">
+              <div class="author">
+                <!-- there is only one author per post but the author splitter adds an array here -->
+                <a href="/blog/authors/stephane-epardaud/">Stéphane Épardaud</a>
+              </div>
+              <div class="date">
+                08 December 2015
+              </div>
+              <div class="tags">
+              </div>
+            </div>
+            <div class="body">
+              <p id="this_is_a_rather_unusual...">This is a rather unusual blog entry, one I was not thinking we'd ever have to write, but after
+              a long debate, we've decided to go public about certain events that have happened to the Ceylon
+              community.</p>
+              
+              <p id="we_are_being_aggressively_harassed...">We are being aggressively harassed by a Troll for a month now, which is taking the following
+              forms:</p>
+              
+              <ul>
+              <li>Logging on our Gitter channels, insulting and threatening users, then renaming his GitHub account
+              so we cannot find/ban him.</li>
+              <li>Using fake identities to ask us for help on Gitter for hours on end, only to reveal later
+              he was the troll and resume insults/threats.</li>
+              <li>Impersonating Gitter users to make them look bad.</li>
+              <li>Spreading lies about Ceylon on other JVM languages discussion channels.</li>
+              <li>Using sock puppet accounts on reddit to turn many threads into Ceylon bashing or ad-hominem
+              attacks on Ceylon team members.</li>
+              <li>
+<s>Defacing the Ceylon Wikipedia page</s> [Edit: it's not clear yet, it could be a honest mistake
+              on both parts].</li>
+              <li>And other things I cannot reveal here.</li>
+              </ul>
+              
+              
+              <p id="since_i_have_no_doubt...">Since I have no doubt at all our troll is reading this, you will understand I am not revealing
+              all the information that we have on what he's done and who he is. In fact it's a pretty
+              difficult exercise.</p>
+              
+              <p id="i_also_dont_want_to...">I also don't want to explicitly name his identities here because I don't believe in mob justice,
+              I hope you will understand that.</p>
+              
+              <p id="naturally_weve_tried_many_things...">Naturally we've tried many things to make sure he stops poisoning our community, and are still
+              working on measures behind the scenes, but his impact cannot be ignored.</p>
+              
+              <p id="although_weve_always_tried_to...">Although we've always tried to follow the usual Troll-avoidance strategy of ignoring him, we
+              have many people in the Ceylon community who see these events and wonder what's going on. They
+              don't understand why every new user is suspect (our troll uses about two new fake accounts per
+              day), or why suddenly a seemingly sane person will start throwing insults at everyone. The
+              more we talk to him, and the more we talk about him, the more persisting he becomes, so we don't
+              want to make it worse.</p>
+              
+              <p id="but_there_has_to_be...">But there has to be an explanation we can point to when people ask what the hell is happening, so
+              this is it.</p>
+              
+              <p id="we_have_a_toxic_person...">We have a toxic person in our community, we haven't been able to get rid of him no matter how many
+              times we asked him, and we don't have the tools to prevent him from harassing us, and he knows it.
+              What goes on in his mind is beyond our ability to understand, but the fact is he exists, and seems
+              driven by some motive to spend hours every day annoying us.</p>
+              
+              <p id="we_are_again_withholding_information...">We are, again, withholding information about him and about the various things we are doing behind
+              the scenes to deal with him, but rest assured we are not sitting idle.</p>
+              
+              <p id="thats_pretty_much_as_i...">That's pretty much as I can say at this point. If you see someone throwing insults at people on
+              our Gitter channel, this is not something we condone at all, and we keep banning his new accounts
+              for that, so don't let our apparent lack of reaction (besides the banning) fool you into thinking
+              that we're silently condoning his attitude. We're not.</p>
+              
+              <p id="thanks_for_your_understanding">Thanks for your understanding.</p>
+            </div>
+            <div class="tail">
+               <a href="/blog/2015/12/08/troll/#disqus_thread">Comments</a>
+            </div>
+          </div>
+          <div class="pagination-links">
+<a href="/blog/page/3/" class="previous-link">Previous</a> <a href="/blog/" class="page-link">1</a> <a href="/blog/page/2/" class="page-link">2</a> <a href="/blog/page/3/" class="page-link">3</a> <span class="current-page">4</span> <a href="/blog/page/5/" class="page-link">5</a> <span class="skip">...</span><a href="/blog/page/24/" class="page-link">24</a> <a href="/blog/page/25/" class="page-link">25</a> <a href="/blog/page/5/" class="next-link">Next</a> </div>
+        </div>
+        <script type="text/javascript">
+          //<![CDATA[
+            /* place div.expandable to 
+             * - minHeight by default 
+             * - full size on click
+             * - back to minHeight on second click
+             * with a jQuery animation
+             */
+            var minHeight=150;
+            $(document).ready( function() {
+              $("div.expandable").height(minHeight);     
+              $("div.expandable").click(function(e) 
+                {
+                  if( !$(e.target).is("a")) {
+                    $this = $(this); 
+                    var currentHeight = $this.height();
+                    if(currentHeight==minHeight) {
+                      $this.css('height', 'auto');
+                    }
+                    else{
+                      $this.css('height', minHeight + 'px');
+                    };
+                    var height = $this.height();
+                    $this.css('height', currentHeight + 'px');
+                    $this.animate({'height':height}, 500);
+                }
+              })
+            });
+          //]]>
+        </script>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

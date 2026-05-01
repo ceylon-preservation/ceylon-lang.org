@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Programming with type functions in Ceylon</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2015/04/19/observable/">Unique approach to observer/observable pattern in Ceylon</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2015/06/12/more-type-functions/">A little more about type functions</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="programming_with_type_functions_in_ceylon">
+            Programming with type functions in Ceylon
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              03 Jun 2015
+            </div>
+            <div class="tags">
+            </div>
+          </div>
+          <div class="body">
+            <p id="ive_recently_been_working_on...">I've recently been working on some experimental new features
+            of Ceylon's already extremely powerful type system. What I'm
+            going to explain in this post is known, technically, as:</p>
+            
+            <ul>
+            <li>
+<strong>higher order generic types</strong> (or <em>type constructor
+            polymorphism</em>, or <em>higher kinds</em>), and</li>
+            <li>
+<strong>higher rank generic types</strong> (or <em>rank-N polymorphism</em>).</li>
+            </ul>
+            
+            
+            <p id="please_dont_worry_about_this...">Please don't worry about this jargon salad. (And please don't
+            try to google any of those terms, because the explanations
+            you'll find will only make these pretty straightforward
+            notions seem confusing.) Stick with me, and I'll do my best
+            to explain the concepts in intuitive terms, without needing
+            any of the above terminology.</p>
+            
+            <p id="but_first_lets_start_with...">But first, let's start with pair of examples that illustrate
+            a motivating problem.</p>
+            
+            <p id="this_function_simply_returns_its...">This function simply returns its argument:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Object pipeObject(Object something) =&gt; something;
+</code></pre>
+            
+            <p id="this_function_adds_floats">This function adds <code>Float</code>s:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Float addFloats(Float x, Float y) =&gt; x+y;
+</code></pre>
+            
+            <p id="modern_programming_language_let_us...">Modern programming language let us treat either of these
+            functions as a value and pass it around the system. For
+            example, I can write:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Object(Object) pipeObjectFun = pipeObject;
+</code></pre>
+            
+            <p id="or">Or:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Float(Float,Float) addFloatsFun = addFloats;
+</code></pre>
+            
+            <p id="where_objectobject_and_floatfloatfloat_represent...">Where <code>Object(Object)</code> and <code>Float(Float,Float)</code> represent
+            the <em>types</em> of the functions, and <code>pipeObject</code> and
+            <code>addFloats</code> are a <em>references</em> to the functions. So far so
+            good.</p>
+            
+            <p id="but_sometimes_its_useful_to...">But sometimes it's useful to have a function that abstracts
+            away from the concrete data type using generics. We
+            introduce a type variable, to represent the "unknown" type
+            of thing we're dealing with:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Any pipe&lt;Any&gt;(Any anything) =&gt; anything;
+</code></pre>
+            
+            <p id="and">And:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Number add&lt;Number&gt;(Number x, Number y)
+            given Number satisfies Summable&lt;Number&gt;
+        =&gt; x+y;
+</code></pre>
+            
+            <p id="sometimes_as_in_add_the...">Sometimes, as in <code>add()</code>, the unknown type is constrained
+            in some way. We express this using a type constraint:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>given Number satisfies Summable&lt;Number&gt;
+</code></pre>
+            
+            <p id="this_is_ceylons_way_of...">This is Ceylon's way of denoting that <code>Number</code> may only be a
+            type which is a subtype of the upper bound <code>Summable&lt;Number&gt;</code>,
+            i.e. that it is a type to which we can apply the addition
+            operator <code>+</code>.</p>
+            
+            <p id="now_what_if_i_want...">Now, what if I want to pass around a reference to this
+            function. Well, one thing I can typically do is nail down
+            the unknown type to a concrete value:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Object(Object) pipeObjectFun = pipe&lt;Object&gt;;
+</code></pre>
+            
+            <p>Or:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Float(Float,Float) addFloatsFun = add&lt;Float&gt;;
+</code></pre>
+            
+            <p id="but_thats_a_bit_disappointing—weve...">But that's a bit disappointing—we've lost the fact
+            that <code>add()</code> was generic. Now, in object-oriented languages
+            it's possible to define the generic function as a member of
+            a class, and pass an instance of the class around the system.
+            This is called the <em>strategy pattern</em>. But it's inconvenient
+            to have to write a whole class just to encapsulate a function
+            reference.</p>
+            
+            <p id="it_would_be_nicer_to...">It would be nicer to be able to write:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>TypeOfPipe pipeFun = pipe;
+</code></pre>
+            
+            <p>And:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>TypeOfAdd addFun = add; 
+</code></pre>
+            
+            <p id="where_typeofpipe_and_typeofadd_are...">Where <code>TypeOfPipe</code> and <code>TypeOfAdd</code> are the types of the
+            generic functions. The problem is that there's no way to
+            represent these types within the type system of most
+            languages. Let's see how we can do that in Ceylon 1.2.</p>
+            
+            <h3 id="introducing_type_functions">Introducing type functions</h3>
+            
+            <p id="i_promised_to_avoid_jargon...">I promised to avoid jargon, and avoid jargon I will. The
+            only bit of terminology we'll need is the idea of a <em>type
+            function</em>. A type function, as its name implies, is a
+            function that accepts zero or more types, and produces a
+            type. Type functions might seem exotic and abstract at
+            first, but there's one thing that will help you understand
+            them:</p>
+            
+            <blockquote><p id="you_already_know_almost_everything...">You already know almost everything you need to know about
+            type functions, because almost everything you know about
+            ordinary (value) functions is also true of type functions.</p></blockquote>
+            
+            <p id="if_you_stay_grounded_in...">If you stay grounded in the analogy to ordinary functions,
+            you'll have no problems with the rest of this post, I
+            <em>promise</em>.</p>
+            
+            <p id="so_we_all_know_what...">So, we all know what an ordinary function looks like:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>function addFloats(Float x, Float y) =&gt; x+y;
+</code></pre>
+            
+            <p id="lets_break_that_down_we...">Let's break that down, we have:</p>
+            
+            <ul>
+            <li>the function name, and list of parameters, to the left
+            of a fat arrow, and</li>
+            <li>an expression on the right of the fat arrow.</li>
+            </ul>
+            
+            
+            <p id="a_type_function_doesnt_look...">A type function doesn't look very different. It has a name
+            and (type) parameters on the left of a fat arrow, and a
+            (type) expression on the right. It looks like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>alias Pair&lt;Value&gt; =&gt; [Value,Value];
+</code></pre>
+            
+            <p id="aha_this_is_something_weve...">Aha! This is something we've already seen! So a type
+            function is nothing more than a generic type alias! This
+            particular type function accepts a type, and produces a
+            tuple type, a pair, whose elements are of the given type.</p>
+            
+            <p id="actually_not_every_type_function...">Actually not every type function is a type alias. A generic
+            class or interface is a type function. For example:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>interface List&lt;Element&gt; { ... }
+</code></pre>
+            
+            <p id="this_interface_declaration_accepts_a...">This interface declaration accepts a type <code>Element</code>, and
+            produces a type <code>List&lt;Element&gt;</code>, so it's a type function.</p>
+            
+            <p id="i_can_call_a_function...">I can call a function by providing values as arguments:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>pipe("hello")
+add(1.0, 2.0)
+</code></pre>
+            
+            <p id="these_expressions_produce_the_values...">These expressions produce the values <code>"hello"</code> and <code>3.0</code>.</p>
+            
+            <p id="i_can_apply_a_type...">I can <em>apply</em> a type function by providing types as
+            arguments:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Pair&lt;Float&gt;
+</code></pre>
+            
+            <p id="this_type_expression_produces_the...">This <em>type</em> expression produces the <em>type</em> <code>[Float,Float]</code>,
+            by applying the type function <code>Pair</code> to the type argument
+            <code>Float</code>.</p>
+            
+            <p id="similarly_i_can_apply_the...">Similarly, I can apply the type function <code>List</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>List&lt;String&gt;
+</code></pre>
+            
+            <p id="this_type_expression_just_literally...">This type expression just literally produces the type
+            <code>List&lt;String&gt;</code>, by applying the type function <code>List</code> to
+            the type argument <code>String</code>.</p>
+            
+            <p id="on_the_other_hand_i...">On the other hand, I can take a reference to a value
+            function by just writing its name, without any arguments,
+            for example, <code>pipe</code>, or <code>add</code>. I can do the same with type
+            functions, writing <code>Pair</code> or <code>List</code>.</p>
+            
+            <p id="back_in_the_quotidian_world...">Back in the quotidian world of ordinary values, I can write
+            down an <em>anonymous function</em>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>(Float x, Float y) =&gt; x+y
+</code></pre>
+            
+            <p id="in_the_platonic_world_of...">In the platonic world of types, I can do that too:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>&lt;Value&gt; =&gt; [Value,Value]
+</code></pre>
+            
+            <p id="finally_an_ordinary_value_function...">Finally, an ordinary value function can constrain its
+            arguments using a type annotation like <code>Float x</code>. A type
+            function can do the same thing, albeit with a more
+            cumbersome syntax:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>interface List&lt;Element&gt; 
+        given Element satisfies Object 
+{
+    //define the type list
+    ...
+}
+</code></pre>
+            
+            <p id="even_an_anonymous_type_function...">Even an anonymous type function may have constraints:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>&lt;Value&gt; given Value satisfies Object 
+        =&gt; [Value,Value]
+</code></pre>
+            
+            <p id="jargon_watch_most_people_including..."><strong>Jargon watch:</strong> most people, including me, use the term
+            <em>type constructor</em> instead of "type function".</p>
+            
+            <h3 id="type_functions_are_types">Type functions are types</h3>
+            
+            <p id="now_were_going_to_make...">Now we're going to make a key conceptual leap. Recall that
+            in modern languages, functions are treated as values. I can</p>
+            
+            <ol>
+            <li>take a function, and assign it to a variable, and then</li>
+            <li>call that variable within the body of the function.</li>
+            </ol>
+            
+            
+            <p id="for_example">For example:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>void secondOrder(Float(Float,Float) fun) {
+    print(fun(1.0, 2.0));
+}
+
+//apply to a function reference
+secondOrder(addFloats);
+
+//apply to an anonymous function
+secondOrder((Float x, Float y) =&gt; x+y);
+</code></pre>
+            
+            <p id="we_call_functions_which_accept...">We call functions which accept functions <em>higher order
+            functions</em>.</p>
+            
+            <p id="similarly_were_going_to_declare...">Similarly, we're going to declare that <em>type functions are
+            types</em>. That is, I can:</p>
+            
+            <ol>
+            <li>take a type function and assign it to a type variable,
+            and then</li>
+            <li>apply that type variable in the body of the declaration
+            it parameterizes.</li>
+            </ol>
+            
+            
+            <p>For example:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>interface SecondOrder&lt;Box&gt; given Box&lt;Value&gt; {
+    shared formal Box&lt;Float&gt; createBox(Float float);
+}
+
+//apply to a generic type alias
+SecondOrder&lt;Pair&gt; something;
+
+//apply to a generic interface
+SecondOrder&lt;List&gt; somethingElse;
+
+//apply to an anonymous type function
+SecondOrder&lt;&lt;Value&gt; =&gt; [Value,Value]&gt; somethingScaryLookin;
+</code></pre>
+            
+            <p id="the_type_constraint_given_boxvalue...">The type constraint <code>given Box&lt;Value&gt;</code> indicates that the
+            type variable <code>Box</code> accepts type functions with one type
+            argument.</p>
+            
+            <p id="now_theres_one_thing_to...">Now, there's one thing to take note of here. At this point,
+            the notion that type functions are types is a purely formal
+            statement. An axiom that defines what kinds of types I can
+            write down and expect the typechecker of my programming
+            language to be able to reason about. I have
+            not—yet—said that there are any actual <em>values</em>
+            of these types!</p>
+            
+            <p id="jargon_watch_the_ability_to..."><strong>Jargon watch:</strong> the ability to treat a type function as a
+            type is called <em>higher order generics</em>.</p>
+            
+            <h3 id="the_type_of_a_generic_function_is_a_type_function">The type of a generic function is a type function</h3>
+            
+            <p id="lets_come_back_to_our...">Let's come back to our motivating examples:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Any pipe&lt;Any&gt;(Any anything) =&gt; anything;
+
+Number add&lt;Number&gt;(Number x, Number y)
+            given Number satisfies Summable&lt;Number&gt;
+        =&gt; x+y;
+</code></pre>
+            
+            <p id="if_you_squint_youll_see...">If you squint, you'll see that these are actually functions
+            with <em>two</em> parameter lists. The first parameter lists are:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>&lt;Any&gt;
+</code></pre>
+            
+            <p>And:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>&lt;Number&gt; given Number satisfies Summable&lt;Number&gt;
+</code></pre>
+            
+            <p id="which_both_accept_a_type...">Which both accept a type. The second parameter lists are:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>(Any anything)
+</code></pre>
+            
+            <p>And:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>(Number x, Number y)
+</code></pre>
+            
+            <p id="therefore_we_can_view_each...">Therefore, we can view each generic function as a function
+            that accepts a type and produces an ordinary value function.
+            The resulting functions are of type <code>Any(Any)</code> and
+            <code>Value(Value,Value)</code> respectively.</p>
+            
+            <p id="thus_we_could_write_down...">Thus, we could write down the type of our first generic
+            function <code>pipe()</code> like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>&lt;Any&gt; =&gt; Any(Any)
+</code></pre>
+            
+            <p id="and_the_type_of_add...">And the type of <code>add()</code> is:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>&lt;Number&gt; given Number satisfies Summable&lt;Number&gt;
+        =&gt; Number(Number,Number)
+</code></pre>
+            
+            <p id="phew_that_looks_a_bit...">Phew. That looks a bit scary. But mainly because of the type
+            constraint. Because generic function types like this are
+            pretty verbose, we can assign them aliases:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>alias AdditionLikeOperation
+        =&gt; &lt;Number&gt; given Number satisfies Summable&lt;Number&gt;
+                =&gt; Number(Number,Number);
+</code></pre>
+            
+            <p id="or_equivalently_but_more_simply">Or, equivalently, but more simply:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>alias AdditionLikeOperation&lt;Number&gt; 
+        given Number satisfies Summable&lt;Number&gt;
+                =&gt; Number(Number,Number);
+</code></pre>
+            
+            <p id="that_was_the_hard_part—were...">That was the hard part—we're almost done.</p>
+            
+            <h3 id="references_to_generic_functions">References to generic functions</h3>
+            
+            <p id="now_we_can_use_these...">Now we can use these types as the types of references to
+            generic functions:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>&lt;Any&gt; =&gt; Any(Any) pipeFun = pipe;
+
+AdditionLikeOperation addFun = add;
+</code></pre>
+            
+            <p id="and_we_can_apply_these...">And we can apply these function references by providing type
+            arguments:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>String(String) pipeString = pipeFun&lt;String&gt;;
+Object(Object) pipeObject = pipeFun&lt;Object&gt;;
+
+Float(Float,Float) addFloats = addFun&lt;Float&gt;;
+Integer(Integer,Integer) addInts = addFun&lt;Integer&gt;;
+</code></pre>
+            
+            <p id="or_alternatively_we_can_just...">Or, alternatively, we can just immediately apply the generic
+            function references to <em>value</em> arguments, and let Ceylon
+            infer the type arguments, just as it usually does when you
+            call a function directly:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>String hi = pipeFun("hello");
+Integer zero = pipeFun(0);
+
+Float three = addFun(1.0, 2.0);
+String helloWorld = addFun("Hello", "World");
+</code></pre>
+            
+            <p id="and_now_weve_solved_the...">And now we've solved the problem posed at the beginning!</p>
+            
+            <p id="now_for_the_kicker_the...">Now for the kicker: the types <code>&lt;Any&gt; =&gt; Any(Any)</code> and
+            <code>AdditionLikeOperation</code> are both type functions. Indeed, the
+            type of <em>any</em> generic function is a type function of this
+            general form:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>&lt;TypeParameters&gt; =&gt; ReturnType(ParameterTypes)
+</code></pre>
+            
+            <p id="similarly_every_type_function_of...">Similarly, every type function of this general form is the
+            type of some generic function.</p>
+            
+            <p id="so_weve_now_shown_that...">So we've now shown that some type functions are not only
+            types, they're the types of values—the values are
+            references to generic functions like <code>pipe</code> and
+            <code>add</code>.</p>
+            
+            <p id="jargon_watch_the_ability_to_treat..."><strong>Jargon watch:</strong> the ability to treat a generic function as
+            a value is called <em>higher rank generics</em>.</p>
+            
+            <h3 id="abstraction_over_generic_functions">Abstraction over generic functions</h3>
+            
+            <p id="finally_we_can_use_all...">Finally, we can use all this for something useful. Let's
+            consider a scanner library that is abstracted away from
+            all of:</p>
+            
+            <ul>
+            <li>the character type,</li>
+            <li>the token type,</li>
+            <li>the kind of container that tokens occur in.</li>
+            </ul>
+            
+            
+            <p id="then_we_might_have_a...">Then we might have a <code>scan()</code> function with this sort
+            of signature:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>"Tokenize a stream of characters, producing
+ a stream of tokens."
+Stream&lt;Token&gt; scan&lt;Char,Token,Stream&gt;
+        (grammar, characterStream, newToken, newStream)
+            //Note: Stream is a reference to a type function!
+            given Stream&lt;Element&gt; satisfies {Element*} {
+
+    //parameters:
+
+    "The token grammar."
+    Grammar grammar;
+
+    "The character stream to tokenize."
+    Stream&lt;Char&gt; characterStream;
+
+    "Constructor for tokens, accepting a
+     substream of characters."
+    Token newToken(Stream&lt;Char&gt; chars);
+
+    "Generic function to construct a stream
+     of characters or tokens."
+     //Note: newStream is a reference to a generic function!
+     Stream&lt;Elem&gt; newStream&lt;Elem&gt;({Elem*} elements);
+
+    //implementation:
+
+    Stream&lt;Token&gt; tokenStream;
+
+    //do all the hard work
+    ...
+
+    return tokenStream;
+}
+</code></pre>
+            
+            <p id="here">Here:</p>
+            
+            <ul>
+            <li>
+<code>Char</code> is the unknown character type,</li>
+            <li>
+<code>Token</code> is the unknown token type,</li>
+            <li>
+<code>Stream</code> is a type function representing an unknown
+            container type that can contain either characters or
+            tokens,</li>
+            <li>
+<code>newToken</code> is a function that accepts a substream of
+            characters and creates a <code>Token</code>,</li>
+            <li>
+<code>characterStream</code> is a stream of characters, and, most
+            significantly,</li>
+            <li>
+<code>newStream</code> is a generic function that constructs streams
+            of any element type, used internally to create streams of
+            characters as well as tokens.</li>
+            </ul>
+            
+            
+            <p id="we_could_use_this_function...">We could use this function like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>//Let's use String as the token type, Character as the
+//character type, and Iterable as the stream type.
+
+//input a stream of characters
+{Character*} input = ... ;
+
+//and some token grammar
+Grammar grammar = ... ;
+
+//get back a stream of Strings
+{String*} tokens =
+        scan&lt;Character, String, Iterable&gt;
+            (grammar, input, String,
+                    //Note: a generic anonymous function! 
+                    &lt;Elem&gt;({Elem*} elems) =&gt; elems);
+</code></pre>
+            
+            <p id="or_like_this">Or like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>//use LinkedList as the stream type
+import ceylon.collection { LinkedList }
+
+//we don't need Unicode support, so let's use
+//Ceylon's 8-bit Byte as our character type
+alias Char =&gt; Byte;
+
+//define our own token type
+class BasicToken(LinkedList&lt;Char&gt; charList) {
+    string =&gt; String { for (b in charList) 
+                       b.unsigned.character };
+}
+
+//input a linked list of characters
+LinkedList&lt;Char&gt; input = ... ;
+
+//and some token grammar
+Grammar grammar = ... ;
+
+//get back a linked list of BasicTokens
+LinkedList&lt;BasicToken&gt; tokens =
+        scan&lt;Char, BasicToken, LinkedList&gt;
+            (grammar, input, BasicToken,
+                    //Note: a generic function ref! 
+                    LinkedList);
+</code></pre>
+            
+            <p id="as_you_can_see_our...">As you can see, our parsing algorithm is now almost
+            completely abstracted away from the concrete types we want
+            to use!</p>
+            
+            <h3 id="compiling_this_code">Compiling this code</h3>
+            
+            <p id="in_ceylon_12_programming_with...">In Ceylon 1.2, programming with type functions is an
+            experimental feature that only works in conjunction with
+            the JavaScript backend. So you can run code that uses type
+            functions on a JavaScript virtual machine, but not on the
+            JVM. This is something we're inviting you to play with to
+            see if the whole community agrees it is useful. But right
+            now it's not covered in the language specification, and it's
+            not supported by the Java backend.</p>
+            
+            <p id="the_typechecker_itself_supports_extremely...">The typechecker itself supports <em>extremely</em> sophisticated
+            reasoning about higher order and higher rank types. Type
+            functions are fully integrated with Ceylon's powerful
+            system of subtype polymorphism, including with union
+            and intersection types, and with type inference and type
+            argument inference. There's even limited support for type
+            function inference! And there's no arbitrary upper limits
+            here; not only rank-2 but arbitrary rank types are supported.</p>
+            
+            <p id="if_theres_enough_interest_ill...">If there's enough interest, I'll cover that material in a
+            future post.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2015/06/03/generic-function-refs/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

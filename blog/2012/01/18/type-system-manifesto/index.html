@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: A sort of manifesto</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2012/01/15/updated-faq/">Updated language design FAQ</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2012/01/25/enumerated-types/">Enumerated types in Ceylon</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="a_sort_of_manifesto">
+            A sort of manifesto
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              18 Jan 2012
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/language-design/">
+                language design
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <p id="the_latest_generation_of_statically...">The latest generation of statically typed languages combine
+            subtyping, type parameterization, and varying levels of support
+            for type inference. But their type systems have - reflecting
+            their development over time - grown so complex and riddled with
+            corner cases and unintuitive behavior that few programmers are
+            able to understand the reasoning of the compiler all the time.
+            Error messages are confusing, referring to concepts that only
+            language theorists care about, or to types which can't be written
+            down in the language itself. The type systems are so complex that
+            they even include corner cases which are mathematically
+            undecidable, resulting in the possibility of compile-time stack
+            overflows or non-termination.</p>
+            
+            <p id="for_example_java_features_sophisticated...">For example, Java features sophisticated support for covariance
+            and contravariance via wildcard type arguments. But most Java
+            developers avoid making use of this extremely powerful feature
+            of the type system, viewing it as a source of confusing error
+            messages and syntactic ugliness.</p>
+            
+            <p id="other_languages_introduce_even_further...">Other languages introduce even further complexity to this mix,
+            for example, implicit type conversions, which result in
+            unintuitive behavior, especially when combined with generic
+            types and covariance, or nonlocal type inference, which can
+            result in frustratingly slow compilation times.</p>
+            
+            <p id="but_the_desire_to_combine...">But the desire to combine the best of the ML family of languages
+            with the best of the C family of languages is not, in itself, a
+            misplaced goal. A type system featuring subtyping, type
+            parameterization, simplified covariance and contravariance,
+            limited type inference, and algebraic types could be a powerful
+            tool in the hands of developers, if it:</p>
+            
+            <ul>
+            <li>could be defined in terms that reflect how programmers
+            intuitively reason about types,</li>
+            <li>was packaged up in a syntax that is easy to read and understand,
+            and</li>
+            <li>constrained so as to eliminate performance problems,
+            undecidability, and confusing corner cases.</li>
+            </ul>
+            
+            
+            <p id="a_language_like_this_would...">A language like this would necessarily be simpler than some
+            other recent statically typed languages, but ultimately more
+            powerful, if its features were more accessible to developers.</p>
+            
+            <p id="ceylon_is_a_language_with...">Ceylon is a language with several goals, including readability,
+            modularity, and excellent tool support. In terms of its type
+            system, a core goal is to provide powerful mechanisms of
+            abstraction without scaring away the people who will ultimately
+            benefit from this power with confusing error messages and
+            unintuitive collisions between intersecting language features.</p>
+            
+            <p id="in_pursuit_of_that_goal...">In pursuit of that goal, we've had to start by taking some
+            things away. When you start using Ceylon, you'll find there are
+            some things you can do in Java that you can't do in Ceylon. Our
+            hope is that, as you get further into the language, you'll find
+            yourself naturally writing better code, making use of more
+            general-purpose abstractions and stronger type safety, without
+            even really needing to try. It will just feel like the most
+            natural way to do it.</p>
+            
+            <p id="at_least_thats_the_theory">At least, that's the theory. ;-)</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2012/01/18/type-system-manifesto/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

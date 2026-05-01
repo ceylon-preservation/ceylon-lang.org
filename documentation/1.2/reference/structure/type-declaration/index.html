@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Type declarations</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.2/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.2/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.2/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.2/examples">Examples</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.2/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.2/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.2/reference">Reference</a></h3>
+            
+            <ul>
+<li><a href="#usage">Usage
+            </a></li>
+<li><a href="#description">Description
+            </a></li>
+<ul>
+<li><a href="#types_versus_type_declarations">Types versus Type declarations
+            </a></li>
+<li><a href="#type_declarations">Type declarations
+            </a></li>
+<li><a href="#declarative_subtyping">Declarative subtyping
+            </a></li>
+<li><a href="#declarative_cases">Declarative cases
+            </a></li>
+<li><a href="#different_kinds_of_declaration">Different kinds of declaration
+            </a></li>
+<ul>
+<li><a href="#member_declarations">Member declarations
+            </a></li>
+<li><a href="#local_declarations">Local declarations
+            </a></li>
+<li><a href="#top_level_declarations">Top-level declarations
+            </a></li>
+</ul>
+<li><a href="#enumerated_types">Enumerated types
+            </a></li>
+<li><a href="#type_aliases">Type aliases
+            </a></li>
+<li><a href="#selected_important_type_declarations">Selected important type declarations
+            </a></li>
+<ul>
+<li><a href="#_anything"><code>Anything</code>
+            </a></li>
+<li><a href="#_nothing"><code>Nothing</code>
+            </a></li>
+<li><a href="#_null"><code>Null</code>
+            </a></li>
+<li><a href="#_object"><code>Object</code>
+            </a></li>
+<li><a href="#_basic"><code>Basic</code>
+            </a></li>
+<li><a href="#_iterable"><code>Iterable</code>
+            </a></li>
+<li><a href="#_sequential"><code>Sequential</code>
+            </a></li>
+<li><a href="#_empty"><code>Empty</code>
+            </a></li>
+<li><a href="#_sequence"><code>Sequence</code>
+            </a></li>
+<li><a href="#_tuple"><code>Tuple</code>
+            </a></li>
+</ul>
+<li><a href="#metamodel">Metamodel
+            </a></li>
+</ul>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.2/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.2/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.2/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_12_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.2, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.2/reference/structure/type-declaration.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.2/reference/structure/type-declaration.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="type_declarations-2">Type declarations</h1>
+          
+          <p id="this_page_is_about_type...">This page is about <em>type declarations</em>, which define new <em>type constructors</em>.
+          There's a separate page about the <a href="../type/">types</a> that
+          are produced by applying type arguments to such type constructors.</p>
+          
+          <h2 id="usage">Usage
+          </h2>
+          
+          
+          <p id="example_type_declarations">Example <em>type declarations</em>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>class MyClass(name) {
+    shared String name;
+}
+class MyGenericClass&lt;Arg&gt;(Arg arg) {
+}
+interface MyInterface {
+    shared formal String name;
+}
+interface MyInterface&lt;Arg&gt; {
+    shared formal Arg arg;
+}
+object myObject {
+    shared String name = "Trompon";
+}
+</code></pre>
+          
+          <h2 id="description">Description
+          </h2>
+          
+          
+          
+          
+          <h3 id="types_versus_type_declarations">Types versus Type declarations
+          </h3>
+          
+          
+          <p id="it_is_important_the_appreciate...">It is important the appreciate the difference between a
+          <em>type declaration</em> (such as the declaration of a class)
+          which introduces a <em>type constructor</em>, and an
+          <em>applied type</em> (also called a <em>produced type</em>).</p>
+          
+          <p id="theres_a_separate_reference_page...">There's a separate reference page about <a href="../type/">types</a></p>
+          
+          <h3 id="type_declarations">Type declarations
+          </h3>
+          
+          
+          <p id="in_ceylon_a_type_declaration...">In Ceylon, a <em>type declaration</em> is one of:</p>
+          
+          <ul>
+          <li>A <a href="../class"><code>class</code> declaration</a>
+</li>
+          <li>An <a href="../interface"><code>interface</code> declaration</a>
+</li>
+          <li>An <a href="../object"><code>object</code> declaration</a>
+</li>
+          </ul>
+          
+          
+          <p id="all_these_declarations_can_have...">All these declarations can have <a href="#member_declarations">members</a>.</p>
+          
+          <p id="function_and_value_declarations_to..."><a href="../function/">Function</a> and <a href="../value/">value</a> declarations to not
+          introduce new types or type constructors and do not have members.</p>
+          
+          <h3 id="declarative_subtyping">Declarative subtyping
+          </h3>
+          
+          
+          <p id="the_extends_and_satisfies_clauses...">The <a href="../class/#extending_classes"><code>extends</code></a> and
+          <code>satisfies</code> clauses of a type declaration
+          list the types that are treated as supertypes of the
+          types produced from the type declaration.</p>
+          
+          <p id="put_another_way_these_clauses...">Put another way, these clauses have the effect that
+          every type produced from the type constructor
+          of the class or interface being defined will be a subtype of the type
+          in <code>extends</code> or <code>satisfies</code> clause:</p>
+          
+          <pre data-language="ceylon"><code>class Sub() extends Generic&lt;String&gt;() {
+}
+class GenericSub&lt;Parameter&gt;() extends Generic&lt;Parameter&gt;() {
+}
+</code></pre>
+          
+          <p id="thus_the_type_sub_is...">Thus the type <code>Sub</code> is a subtype of <code>Generic&lt;String&gt;</code>, and the
+          type <code>GenericSub&lt;Boolean&gt;</code> is a subtype of <code>Generic&lt;Boolean&gt;</code>.</p>
+          
+          <h3 id="declarative_cases">Declarative cases
+          </h3>
+          
+          
+          <p id="the_of_clause_of_a...">The <code>of</code> clause of a type declaration enumerates the
+          disjoint subtypes (the <em>cases</em>) of the
+          types produced from the type declaration.</p>
+          
+          <h3 id="different_kinds_of_declaration">Different kinds of declaration
+          </h3>
+          
+          
+          
+          
+          <h4 id="member_declarations">Member declarations
+          </h4>
+          
+          
+          <p id="a_declaration_that_occurs_directly...">A declaration that occurs directly in a type declaration is called a
+          <em>member declaration</em>. Member <a href="../value/">values</a> are called
+          <em>attributes</em>. Member <a href="../function/">functions</a> are called <em>methods</em>.
+          Classes and interfaces that are members do not have an
+          alternative name they're just called member classes and interfaces.</p>
+          
+          <h4 id="local_declarations">Local declarations
+          </h4>
+          
+          
+          <p id="a_local_or_nested_declaration...">A <em>local</em> (or <em>nested</em>) declaration is a declaration that is
+          contained within another declaration or a statement.</p>
+          
+          <h4 id="top_level_declarations">Top-level declarations
+          </h4>
+          
+          
+          <p id="a_top_level_declaration_is...">A <em>top level</em> declaration is contained directly in a
+          <a href="../compilation-unit">compilation unit</a> and not contained within any other
+          declaration. In other words a top level declaration is neither
+          a <a href="#member_declarations">member</a> nor a <a href="#local_declarations">local</a> declaration.</p>
+          
+          <h3 id="enumerated_types">Enumerated types
+          </h3>
+          
+          
+          <p id="classes_can_enumerate_a_list...">Classes can <a href="../class#enumerated_classes">enumerate</a>
+          a list of their permitted subclasses.</p>
+          
+          <p id="interfaces_can_enumerate_a_list...">Interfaces can <a href="../interface#enumerated_subtypes">enumerate</a>
+          a list of their permitted subtypes.</p>
+          
+          <p id="the_subtypes_are_called_the...">The subtypes are called the <em>cases</em> of the class or interface type.</p>
+          
+          <h3 id="type_aliases">Type aliases
+          </h3>
+          
+          
+          <p id="to_avoid_having_to_repeat...">To avoid having to repeat long type expressions, you can declare a
+          <a href="../alias#type_alises">type alias</a> for a type using the <code>alias</code>
+          keyword:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>alias BasicType = String|Character|Integer|Float|Boolean;
+</code></pre>
+          
+          <h3 id="selected_important_type_declarations">Selected important type declarations
+          </h3>
+          
+          
+          
+          
+          <h4 id="_anything">
+<code>Anything</code>
+          </h4>
+          
+          
+          <p id="anything_the_ultimate_supertype_of..."><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Anything.type.html"><code>Anything</code></a>
+          the ultimate supertype of all types. That means that every
+          type has <code>Anything</code> as a supertype, which in turn means that
+          every reference is assignable to <code>Anything</code>.</p>
+          
+          <p id="you_can_also_think_of...">You can also think of <code>Anything</code> as the union of <em>all</em> types.</p>
+          
+          <p id="anything_corresponds_to_the_notion..."><code>Anything</code> corresponds to the notion of universe set in mathematics.</p>
+          
+          <p id="you_cant_do_anything_with...">You can't do anything with an instance of <code>Anything</code>, except
+          narrow it to some more specific type.</p>
+          
+          <p id="anythings_cases_are_null_and..."><code>Anything</code>'s cases are <code>Null</code> and <code>Object</code>.</p>
+          
+          <p id="anything_is_the_default_upper..."><code>Anything</code> is the default upper bound for type parameters
+          lacking an upper bound constraint.</p>
+          
+          <h4 id="_nothing">
+<code>Nothing</code>
+          </h4>
+          
+          
+          <p id="nothing_is_a_subtype_of..."><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Nothing.type.html"><code>Nothing</code></a>
+          is a subtype of all types. That means that every type has
+          <code>Nothing</code> as a subtype (even if the type is produced
+          from a <code>final</code> class declaration).</p>
+          
+          <p id="you_can_also_thing_of...">You can also thing of <code>Nothing</code> as the intersection of <em>all</em> types.</p>
+          
+          <p id="nothing_corresponds_to_the_notion..."><code>Nothing</code> corresponds to the notion of the empty set in mathematics.</p>
+          
+          <p id="because_nothing_is_the_intersection...">Because <code>Nothing</code> is the intersection of all types it is assignable to
+          all types. Similarly because it is the intersection of all types it can
+          have no instances.</p>
+          
+          <p id="there_is_a_value_called...">There is a value called <code>nothing</code> in the language module, which
+          has the type <code>Nothing</code>. At runtime trying to evaluate
+          <code>nothing</code> (that is, get an instance of <code>Nothing</code>) will
+          throw an exception.</p>
+          
+          <p id="any_function_or_value_which...">Any function or value which claims to return <code>Nothing</code> cannot return normally, it
+          must either:</p>
+          
+          <ul>
+          <li>throw an exception or</li>
+          <li>not return (for example, by looping forever, or stopping the virtual machine)</li>
+          </ul>
+          
+          
+          <h4 id="_null">
+<code>Null</code>
+          </h4>
+          
+          
+          <p id="null_is_the_type_of..."><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Null.type.html"><code>Null</code></a> is the type of
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/index.html#null"><code>null</code></a>.</p>
+          
+          <p id="conceptually_null_is_the_absence...">Conceptually <code>null</code> is the <em>absence</em> of a value.</p>
+          
+          <p id="if_an_expression_permits_null...">If an expression permits <code>null</code> then it
+          needs <code>Null</code> as a supertype. This is usually expressed as using a
+          <a href="#union_types">union type</a> such as <code>T|Null</code>, which can be <a href="../type-abbreviation">abbreviated</a>
+          as <code>T?</code>, and we may refer to it as an <em>optional type</em>.</p>
+          
+          <p id="because_null_represents_the_absence...">Because <code>null</code> represents the absence of a value (something that is not a thing),
+          it is meaningless to ask some reference is equal to <code>null</code>. Thus Ceylon does not
+          permit <code>obj == null</code> or <code>null == null</code>. In practice there are some situations
+          where you want the answer to be true and other situations where you want the
+          answer to be false.</p>
+          
+          <p id="null_is_one_of_the..."><code>Null</code> is one of the cases of <code>Anything</code>, the other being <code>Object</code>.</p>
+          
+          <h4 id="_object">
+<code>Object</code>
+          </h4>
+          
+          
+          <p id="object_is_the_class_that..."><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Object.type.html"><code>Object</code></a>
+          is the class that declares <code>equals()</code>, <code>hash</code> and <code>string</code>.</p>
+          
+          <p id="object_is_one_of_the..."><code>Object</code> is one of the cases of <code>Anything</code>, the other being <code>Null</code>.</p>
+          
+          <h4 id="_basic">
+<code>Basic</code>
+          </h4>
+          
+          
+          <p id="basic_mixes_identifiable_into_object"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Basic.type.html"><code>Basic</code></a>
+          mixes <code>Identifiable</code> into <code>Object</code>.</p>
+          
+          <p id="basic_is_the_default_superclass..."><code>Basic</code> is the default superclass of classes whose declaration lacks
+          an <code>extends</code> clause.</p>
+          
+          <h4 id="_iterable">
+<code>Iterable</code>
+          </h4>
+          
+          
+          <p id="iterable_is_a_type_that..."><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Iterable.type.html"><code>Iterable</code></a>
+          is a type that produces instances of another type when iterated.</p>
+          
+          <p id="there_are_two_flavours_of...">There are two flavours of <code>Iterable</code>:</p>
+          
+          <ul>
+          <li>the type <code>Iterable&lt;T&gt;</code>, usually <a href="../type-abbreviation">abbreviated</a>  to <code>{T*}</code>,
+          may contain zero or more elements (it is <em>possibly empty</em>),</li>
+          <li>the type <code>Iterable&lt;T,Nothing&gt;</code>, usually <a href="../type-abbreviation">abbreviated</a>  to <code>{T+}</code>,
+          contains at least one element (it is <em>non-empty</em>)</li>
+          </ul>
+          
+          
+          <h4 id="_sequential">
+<code>Sequential</code>
+          </h4>
+          
+          
+          <p id="sequential_is_an_enumerated_type..."><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Sequential.type.html"><code>Sequential</code></a>
+          is an enumerated type with subtypes
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Sequence.type.html"><code>Sequence</code></a> and
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Empty.type.html"><code>Empty</code></a>.
+          <code>Sequential&lt;T&gt;</code> is usually <a href="../type-abbreviation">abbreviated</a>
+          to <code>T[]</code> or <code>[T*]</code>.</p>
+          
+          <h4 id="_empty">
+<code>Empty</code>
+          </h4>
+          
+          
+          <p id="empty_is_the_type_of..."><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Empty.type.html"><code>Empty</code></a> is the type
+          of a <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Sequential.type.html"><code>Sequential</code></a>
+          which contains no elements.</p>
+          
+          <p id="the_expression__or_alternatively...">The expression <code>[]</code> (or alternatively the value <code>empty</code>)
+          in the language module has the type <code>Empty</code>.</p>
+          
+          <h4 id="_sequence">
+<code>Sequence</code>
+          </h4>
+          
+          
+          <p id="sequence_is_the_type_of..."><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Sequence.type.html"><code>Sequence</code></a> is the
+          type of non-empty sequences.
+          <code>Sequence&lt;T&gt;</code> is usually <a href="../type-abbreviation">abbreviated</a> to <code>[T+]</code>.</p>
+          
+          <h4 id="_tuple">
+<code>Tuple</code>
+          </h4>
+          
+          
+          <p id="tuple_is_a_subclass_of..."><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.2.2/module-doc/Tuple.type.html"><code>Tuple</code></a> is a subclass
+          of <code>Sequence</code> (and thus cannot be empty). It differs from <code>Sequence</code>
+          in that it encodes the types of each of its elements individually.</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>[Integer, Boolean, String] t = [1, true, ""];
+Integer first = t[0];
+Boolean second = t[1];
+String last = t[2];
+</code></pre>
+          
+          <p id="tuples_also_have_a_notion...">Tuples also have a notion of <em>variadicity</em>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>// A tuple of at least two elements
+// the first is an Integer and 
+// the rest are Boolean
+[Integer, Boolean+] t = [1, true, false];
+// A tuple of at least element
+// the first is an Integer and 
+// the rest are Boolean
+[Integer, Boolean*] t2 = t;
+</code></pre>
+          
+          <p id="tuple_types_may_thus_be..."><code>Tuple</code> types may thus be used to represent the type of an argument or
+          parameter list, and are therefore used to encode function types.</p>
+          
+          <p id="unabbreviated_tuple_types_are_extremely...">Unabbreviated tuple types are extremely verbose, and therefore the
+          <a href="../type-abbreviation">abbreviated</a> form is always used.</p>
+          
+          <h3 id="metamodel">Metamodel
+          </h3>
+          
+          
+          <p id="there_are_two_ways_of...">There are two ways of modelling declarations at runtime mirroring
+          the difference between a declaration and its type.</p>
+          
+          <p id="the_package_ceylonlanguagemetadeclaration_contains_interfaces...">The package <code>ceylon.language.meta.declaration</code> contains interfaces
+          which model <em>declarations</em>. As such, those declarations have
+          type parameter lists. Supplying
+          a type argument list for a declaration you can obtain an
+          instance of a <em>model</em> from <code>ceylon.language.meta.model</code>.</p>
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li>
+<a href="../type">types</a> are produced from type declarations by applying
+          type arguments</li>
+          <li>Top level types are declared in <a href="../compilation-unit">compilation units</a>
+</li>
+          <li><a href="../class"><code>class</code> declaration</a></li>
+          <li><a href="../interface"><code>interface</code> declaration</a></li>
+          <li><a href="../object"><code>object</code> declaration</a></li>
+          <li><a href="../function">method declaration</a></li>
+          <li><a href="../value">attribute declaration</a></li>
+          <li><a href="../type-abbreviation">type abbreviations</a></li>
+          <li><a href="../type-parameters">type parameters</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

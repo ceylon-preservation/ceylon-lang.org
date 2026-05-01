@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: try statement</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.3/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.3/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.3/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.3/examples">Examples</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.3/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.3/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.3/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.3/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.3/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide_for_intellij"><a href="/documentation/1.3/ide/intellij">Ceylon IDE for IntelliJ</a></h3>
+            
+            <h3 id="ceylon_ide_for_eclipse"><a href="/documentation/1.3/ide/eclipse">Ceylon IDE for Eclipse</a></h3>
+            
+            <h3 id="vertx"><a href="http://vertx.io/docs/vertx-core/ceylon/">Vert.x</a></h3>
+          </div>
+          <div class="point-dark-bottom">
+             
+          </div>
+          <div class="point-light-top"></div>
+          <div class="toc">
+            <ul>
+<li><a href="#usage">Usage
+            </a></li>
+<li><a href="#description">Description
+            </a></li>
+<ul>
+<li><a href="#execution">Execution
+            </a></li>
+<li><a href="#the_finally_guarantee">The <code>finally</code> guarantee
+            </a></li>
+<li><a href="#advice">Advice
+            </a></li>
+</ul>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+          </div>
+          <div class="point-light-end"></div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+          </div>
+        </div>
+        <div id="core-page">
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.3/reference/statement/try.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.3/reference/statement/try.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="try_statement">
+<code>try</code> statement</h1>
+          
+          <p id="the_try_statement_is_used...">The <code>try</code> statement is used to execute a block of code that may result
+          in an exception being thrown, providing additional blocks to handle the exceptional
+          circumstances, and, optionally, another block to be executed in all
+          circumstances.</p>
+          
+          <h2 id="usage">Usage
+          </h2>
+          
+          
+          <p id="an_example_of_a_basic...">An example of a basic try/catch/finally construct:</p>
+          
+          <!-- check:none -->
+          
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>try {
+    // some code
+} catch (ReadException e) {
+    // clean up code
+} catch (WriteException e) {
+    // clean up code
+} finally {
+    // clean up code
+}
+</code></pre>
+          
+          <p id="or_with_a_resource_expression">Or, with a <em>resource expression</em>:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>try (Reader input = open('/etc/passwd')) {
+    // ...
+}
+</code></pre>
+          
+          <h2 id="description">Description
+          </h2>
+          
+          
+          <p id="the_try_statment_is_used...">The <code>try</code> statment is used to handle exceptions thrown by the
+          <a href="../throw"><code>throw</code></a> statement.</p>
+          
+          <p id="the_try_clause_may_optionally...">The <code>try</code> clause may optionally have a list of one or more
+          <em>resource expressions</em>. If it does then both <code>catch</code> and <code>finally</code> clauses
+          are optional, otherwise at least one other of those clauses is required.
+          Each resource expressions must have either the type
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Destroyable.type.html"><code>Destroyable</code></a>
+          or the type <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Obtainable.type.html"><code>Obtainable</code></a>, or
+          since Ceylon 1.2.1 Java's <code>java.lang::AutoCloseable</code>.</p>
+          
+          <p id="the_catch_clause_specifies_the...">The <code>catch</code> clause specifies the <a href="../../structure/type">type</a>
+          of exception (which must be a subtype of
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Throwable.type.html"><code>Throwable</code></a>) to be handled
+          by the associated block. The block is executed only if an exception
+          assignable to that type propagates out of the <code>try</code> block and the exception
+          was not assignable to the type of any earlier <code>catch</code> clause.</p>
+          
+          <p id="the_finally_clause_specifies_a...">The <code>finally</code> clause specifies a block to be executed whether
+          or not an exception propogated out of the <code>try</code> block, and whether or not any
+          matching <code>catch</code> clause was found.</p>
+          
+          <h3 id="execution">Execution
+          </h3>
+          
+          
+          <ol>
+          <li>If there are any resource expressions they are evaluated and,
+          if they are of type <code>Obtainable</code>,
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Obtainable.type.html#obtain"><code>obtain()</code></a> is
+          invoked.</li>
+          <li>Each of the statements in the <code>try</code> block is executed until either
+          an exception propagates to the <code>try</code> block or all statements in the
+          block have executed.</li>
+          <li>Whether or not the try block executed normally,
+          each of the resources acquired in 1 is handled in turn.
+          If the resource is of type <code>Destroyable</code> then
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Destroyable.type.html#destroy"><code>destroy()</code></a> is
+          invoked.
+          If the resource is of type <code>Obtainable</code> then
+          <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Obtainable.type.html#release"><code>release()</code></a> is
+          invoked.</li>
+          <li>If an exception propogated out of the <code>try</code> block, each of the
+          <code>catch</code> clauses is considered in turn:
+          
+          <ol>
+          <li>If the propgated exception is a subtype of the exception type of
+           the <code>catch</code> clause the corresponding block is executed.</li>
+          </ol>
+          </li>
+          <li>If there is a <code>finally</code> block, it is executed.</li>
+          </ol>
+          
+          
+          <h3 id="the_finally_guarantee">The <code>finally</code> guarantee
+          </h3>
+          
+          
+          <p id="its_worth_bearing_in_mind...">It's worth bearing in mind that the virtual machine could do things
+          which prevent a <code>finally</code> clause from executing, or from executing
+          in a timely fashion, even though the application may continue to
+          execute. Such things may include:</p>
+          
+          <ul>
+          <li>Virtual machine exit</li>
+          <li>Termination or interruption of the application thread executing the
+          finally block</li>
+          <li>Non-terminating ("infinite loop") code while evaluating a <code>close()</code> or
+          executing a statement in a <code>catch</code> block.</li>
+          </ul>
+          
+          
+          <h3 id="advice">Advice
+          </h3>
+          
+          
+          <p id="note_that_union_type_expressions...">Note that <a href="../../structure/type#union_and_intersection">union type expressions</a> can and should
+          be used to avoid writing multiple <code>catch</code> blocks with the same logic to
+          handle disparate exception types:</p>
+          
+          <!-- try: -->
+          
+          
+          <pre data-language="ceylon"><code>catch (ReadException|WriteException e) {
+    // ...
+}
+</code></pre>
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li><a href="../throw"><code>throw</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Throwable.type.html"><code>Throwable</code></a></li>
+          <li><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Exception.type.html"><code>Exception</code></a></li>
+          <li><a href="/documentation/current/spec/html_single/index.html#trycatchfinally"><code>try</code> in the language specification</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

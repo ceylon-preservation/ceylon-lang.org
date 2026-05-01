@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Unique approach to observer/observable pattern in Ceylon</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2015/02/10/uk-jug-tour/">UK JUG tour</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2015/06/03/generic-function-refs/">Programming with type functions in Ceylon</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="unique_approach_to_observerobservable_pattern_in_ceylon">
+            Unique approach to observer/observable pattern in Ceylon
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              19 Apr 2015
+            </div>
+            <div class="tags">
+            </div>
+          </div>
+          <div class="body">
+            <p id="the_essence_of_the_famous...">The essence of the famous observer/observable pattern is that
+            you have an <em>observable</em> object that produces <em>events</em> of
+            various kinds, and one or more <em>observer</em> objects that register
+            themselves as interested in notification when these events
+            occur.</p>
+            
+            <p id="of_course_we_represent_each...">Of course, we represent each kind of event as a type, usually
+            a class, though nothing prevents us from using an interface
+            type as an event type.</p>
+            
+            <p id="for_example">For example:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>class Started() {}
+class Stopped() {}
+</code></pre>
+            
+            <p id="an_event_type_may_even...">An event type may even be generic:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>class Created&lt;out Entity&gt;
+        (shared Entity entity) 
+        given Entity satisfies Object {
+    string =&gt; "Created[``entity``]";
+}
+
+class Updated&lt;out Entity&gt;
+        (shared Entity entity) 
+        given Entity satisfies Object {
+    string =&gt; "Updated[``entity``]";
+}
+
+class Deleted&lt;out Entity&gt;
+        (shared Entity entity) 
+        given Entity satisfies Object {
+    string =&gt; "Deleted[``entity``]";
+}
+</code></pre>
+            
+            <p id="of_course_we_have_powerful...">Of course, we have powerful mechanisms for abstracting over
+            event types, for example:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>alias Lifecycle&lt;Entity&gt; 
+        given Entity satisfies Object
+        =&gt; Created&lt;Entity&gt; |
+           Updated&lt;Entity&gt; |
+           Deleted&lt;Entity&gt;;
+</code></pre>
+            
+            <p id="an_observer_usually_is_in...">An observer, usually, is in essence nothing more than a
+            function that accepts a certain type of event as a parameter.</p>
+            
+            <p id="for_example_this_anonymous_function...">For example, this anonymous function observes the creation
+            of <code>User</code>s:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>(Created&lt;User&gt; userCreated) 
+        =&gt; print("new user created: " + userCreated.entity.name)
+</code></pre>
+            
+            <p id="this_anonymous_function_observes_lifecycle...">This anonymous function observes lifecycle events of any
+            kind of entity:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>(Lifecycle&lt;Object&gt; event) 
+        =&gt; print("something happened: " + event)
+</code></pre>
+            
+            <p id="union_and_intersection_types_give...">Union and intersection types give us a nice way to express
+            conjunction and disjunction of event types:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>void (Created&lt;User&gt;|Deleted&lt;User&gt; userEvent) {
+    switch (userEvent)
+    case (is Created&lt;User&gt;) {
+        print("user created: " + userEvent.entity.name);
+    }
+    case (is Deleted&lt;User&gt;) {
+        print("user deleted: " + userEvent.entity.name);
+    }
+}
+</code></pre>
+            
+            <p id="now_heres_where_we_can...">Now here's where we can do something really cute. Typically,
+            in other languages, the observable object provides various
+            observer registration operations, one for each kind of event
+            the object produces. We're going to define a generic class
+            <code>Observable</code> that works for any event type, and uses reified
+            generics to map events to observer functions.</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared class Observable&lt;in Event&gt;() 
+        given Event satisfies Object {
+    ...
+}
+</code></pre>
+            
+            <p id="the_type_parameter_event_captures...">The type parameter <code>Event</code> captures the various kinds of
+            events that this object produces, for example, an
+            <code>Observable&lt;Lifecycle&lt;User&gt;&gt;</code> produces events of type
+            <code>Created&lt;User&gt;</code>, <code>Updated&lt;User&gt;</code>, and <code>Deleted&lt;User&gt;</code>.</p>
+            
+            <p id="we_need_a_list_to...">We need a list to store observers in:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>value listeners = ArrayList&lt;Anything(Nothing)&gt;();
+</code></pre>
+            
+            <p id="here_anythingnothing_is_the_supertype...">Here, <code>Anything(Nothing)</code> is the supertype of any function
+            with one parameter.</p>
+            
+            <p id="the_addobserver_method_registers_an...">The <code>addObserver()</code> method registers an observer function
+            with the <code>Observable</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared void addObserver&lt;ObservedEvent&gt;
+        (void handle(ObservedEvent event))
+        given ObservedEvent satisfies Event
+        =&gt; listeners.add(handle);
+</code></pre>
+            
+            <p id="this_method_only_accepts_observer...">This method only accepts observer functions for some subset
+            of the events actually produced by the <code>Observable</code>. This
+            constraint is enforced by the upper bound
+            <code>given ObservedEvent satisfies Event</code>.</p>
+            
+            <p id="the_raise_method_produces_an...">The <code>raise()</code> method produces an event:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared void raise&lt;RaisedEvent&gt;(RaisedEvent event)
+        given RaisedEvent satisfies Event
+        =&gt; listeners.narrow&lt;Anything(RaisedEvent)&gt;()
+            .each((handle) =&gt; handle(event));
+</code></pre>
+            
+            <p id="again_the_upper_bound_enforces...">Again, the upper bound enforces that this method only
+            accepts event objects that are of an event type produced by
+            the <code>Observable</code>.</p>
+            
+            <p id="this_method_uses_the_new...">This method uses the new <code>narrow()</code> method of <code>Iterable</code>
+            in Ceylon 1.2 to filter out observer functions that don't
+            accept the raised event type. This method is implemented
+            using reified generics. Here's its definition in
+            <code>Iterable&lt;Element&gt;</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared default {Element&amp;Type*} narrow&lt;Type&gt;() 
+        =&gt; { for (elem in this) if (is Type elem) elem };
+</code></pre>
+            
+            <p id="that_is_if_we_have...">That is, if we have a stream of <code>Element</code>s, and we call
+            <code>narrow&lt;Type&gt;()</code>, explicitly passing an arbitrary type
+            <code>Type</code>, then we get back a stream of all elements of the
+            original stream which are instances of <code>Type</code>. This is,
+            naturally, a stream of <code>Element&amp;Type</code>s.</p>
+            
+            <p id="now_finally_if_we_define...">Now, finally, if we define an instance of <code>Observable</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>object userPersistence 
+        extends Observable&lt;Lifecycle&lt;User&gt;&gt;() {
+
+    shared void create(User user) {
+        ...
+        //raise an event
+        raise(Created(user));
+    }
+
+    ...
+}
+</code></pre>
+            
+            <p id="then_we_can_register_observers...">Then we can register observers for this object like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>//observe User creation events
+userPersistence.addObserver(
+        (Created&lt;User&gt; userCreated) 
+        =&gt; print("new user created: " + userCreated.entity.name));
+
+//observe User creation and deletion events
+userPersistence.addObserver(
+        void (Created&lt;User&gt;|Deleted&lt;User&gt; userEvent) {
+    switch (userEvent)
+    case (is Created&lt;User&gt;) {
+        print("user created: " + userEvent.entity.name);
+    }
+    case (is Deleted&lt;User&gt;) {
+        print("user deleted: " + userEvent.entity.name);
+    }
+});
+</code></pre>
+            
+            <p id="notice_how_with_union_and...">Notice how with union and intersection types, subtyping, and
+            variance, we find ourselves with a powerful expression
+            language for specifying exactly which kinds of events we're
+            interested in, in a typesafe way, right in the parameter
+            list of the observer function.</p>
+            
+            <p id="for_the_record_heres_the...">For the record, here's the complete code of <code>Observable</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared class Observable&lt;in Event&gt;() 
+        given Event satisfies Object {
+    value listeners = ArrayList&lt;Anything(Nothing)&gt;();
+
+    shared void addObserver&lt;ObservedEvent&gt;
+            (void handle(ObservedEvent event))
+            given ObservedEvent satisfies Event
+            =&gt; listeners.add(handle);
+
+    shared void raise&lt;RaisedEvent&gt;(RaisedEvent event)
+            given RaisedEvent satisfies Event
+            =&gt; listeners.narrow&lt;Anything(RaisedEvent)&gt;()
+                .each((handle) =&gt; handle(event));
+
+}
+</code></pre>
+            
+            <p id="finally_a_caveat_the_precise...">Finally, a caveat: the precise code above does not compile
+            in Ceylon 1.1, because the <code>narrow()</code> method is new, and
+            because of a fixed bug in the typechecker. But it will work
+            in the upcoming 1.2 release of Ceylon.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2015/04/19/observable/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

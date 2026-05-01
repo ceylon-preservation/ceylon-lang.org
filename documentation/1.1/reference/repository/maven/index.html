@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Legacy repositories</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.1/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.1/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.1/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.1/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.1/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.1/reference">Reference</a></h3>
+            
+            <ul>
+<li><a href="#maven_repositories">Maven repositories
+            </a></li>
+<ul>
+<li><a href="#group_and_artifact_ids">Group and artifact Ids
+            </a></li>
+<li><a href="#resolving_maven_conflicts">Resolving Maven conflicts
+            </a></li>
+</ul>
+</ul>
+            
+            
+            <p id=""></p>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.1.0/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.1/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.1/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide"><a href="/documentation/1.1/ide">Ceylon IDE</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference (1.1)
+          </div>
+        </div>
+        <div id="core-page">
+          <h4 id="note_information_on_this_page_refers_to_ceylon_11_not_to_the_current_release">
+            Note: information on this page refers to Ceylon 1.1, not to the
+            <a href="/documentation/current">current release.</a>
+          </h4>
+          <h1 id="legacy_repositories">Legacy repositories</h1>
+          
+          <p id="ceylon_integrates_with_other_legacy...">Ceylon integrates with other legacy repositories, such as Maven.</p>
+          
+          <h2 id="maven_repositories">Maven repositories
+          </h2>
+          
+          
+          <p id="ceylon_supports_maven_repository_layouts...">Ceylon supports Maven repository layouts, so you can resolve module dependencies
+          for legacy Java <code>jar</code> archives from legacy Maven repositories.</p>
+          
+          <p id="right_now_there_are_two...">Right now there are two ways of enabling Maven support, the first is using the special "aether"
+          repository, like this:</p>
+          
+          <pre><code>ceylon compile --rep aether com.example.foo
+</code></pre>
+          
+          <p id="this_is_the_simplest_way...">This is the simplest way and will most likely be enough for most purposes.</p>
+          
+          <p id="if_you_have_special_requirements...">If you have special requirements that need a specific Maven <code>setting.xml</code> you can point to it:</p>
+          
+          <pre><code>ceylon compile --rep aether:/path/to/special/setting.xml com.example.foo
+</code></pre>
+          
+          <p id="but_theres_also_another_way...">But there's also another way to enable Maven support that is more limited but that allows you
+          to specify a specific Maven repository right there on the command line, for example to use
+          Maven Central you write:</p>
+          
+          <pre><code>ceylon compile --rep mvn:http://repo1.maven.org/maven2 com.example.foo
+</code></pre>
+          
+          <p id="note_this_way_of_specifying..."><strong>Note:</strong> This way of specifying Maven repositories is limited and does not resolve Maven dependencies,
+          so you only get the one <code>jar</code> you defined as a dependency.</p>
+          
+          <h3 id="group_and_artifact_ids">Group and artifact Ids
+          </h3>
+          
+          
+          <p id="ceylon_uses_a_single_identifier...">Ceylon uses a single identifier for module names, but Maven uses a pair of <code>groupId</code> and <code>artifactId</code>.
+          If you want to import the Maven module with <code>groupId</code> <code>org.hibernate</code> and <code>artifactId</code> <code>hibernate-core</code>,
+          then you simply import it by concatenating the two identifiers with a <code>:</code> (colon) and quoting the
+          resulting identifier:</p>
+          
+          <pre data-language="ceylon" data-try="false"><code>import "org.hibernate:hibernate-core" "4.3.7.Final";
+</code></pre>
+          
+          <h3 id="resolving_maven_conflicts">Resolving Maven conflicts
+          </h3>
+          
+          
+          <p id="maven_module_descriptors_are_notoriously...">Maven module descriptors are notoriously unchecked, and so a lot of module descriptors will miss direct
+          dependencies because they happen to compile and run by accident when using Maven, which uses a flat
+          classpath containing all the transitive module dependencies. Ceylon uses <code>ClassLoader</code> isolation, and
+          as such needs module descriptors to be correct. Also Maven does not support the notion of <em>sharing</em>
+          module imports, so if a module <code>A</code> makes types from its imported module <code>B</code> visible to the users of
+          <code>A</code>, the import of <code>B</code> must be made <code>shared</code>. Furthermore, Maven supports module version conflict resolution
+          by design, luck or overrides, while Ceylon uses strict module version imports. And last but not least,
+          Maven modules frequently bundles things that should not be made visible, such as other modules or tests,
+          that you may want to exclude.</p>
+          
+          <p id="for_all_these_reasons_we...">For all these reasons, we created an experimental measure that lets you override Maven module descriptors
+          in a single location, called the Maven <code>overrides.xml</code> file, which lets you:</p>
+          
+          <ul>
+          <li>replace a module import by another version (for all modules)</li>
+          <li>add/remove module dependencies (per module)</li>
+          <li>edit a module dependency, for example making it <code>shared</code> (per module)</li>
+          <li>include/exclude parts of the jar (for example, to exclude certain packages from a jar)</li>
+          </ul>
+          
+          
+          <p id="the_syntax_is_as_follows">The syntax is as follows:</p>
+          
+          <pre data-language="html"><code>&lt;maven-overrides&gt;
+    &lt;!-- Edit dependencies of org.restlet.jse:org.restlet/2.0.10 --&gt;
+    &lt;artifact groupId="org.restlet.jse" artifactId="org.restlet" version="2.0.10"&gt;
+        &lt;!-- Add/replace a dependency --&gt;
+        &lt;add groupId="org.slf4j" artifactId="slf4j-api" version="1.6.1" shared="true"/&gt;
+        &lt;!-- Remove a dependency --&gt;
+        &lt;remove groupId="org.osgi" artifactId="org.osgi.core" version="4.0.0"/&gt;
+    &lt;/artifact&gt;
+    &lt;!-- Replace all uses of org.apache.camel:camel-core/2.9.2 with version 2.10 --&gt;
+    &lt;artifact groupId="org.apache.camel" artifactId="camel-core" version="2.9.2"&gt;
+        &lt;replace groupId="org.apache.camel" artifactId="camel-core" version="2.10"/&gt;
+    &lt;/artifact&gt;
+    &lt;!-- Edit dependencies of org.osgi:org.osgi.core/4.0.0 --&gt;
+    &lt;artifact groupId="org.osgi" artifactId="org.osgi.core" version="4.0.0"&gt;
+        &lt;!-- Only include org/osgi/** and META-INF/** --&gt;
+        &lt;filter&gt;
+            &lt;!-- You can include or exclude and the matching is in sequence and stops at the first match --&gt;
+            &lt;include path="org/osgi/**"/&gt;
+            &lt;include path="META-INF/**"/&gt;
+            &lt;exclude path="**"/&gt;
+        &lt;/filter&gt;
+    &lt;/artifact&gt;
+&lt;/maven-overrides&gt;
+</code></pre>
+          
+          <p id="you_can_specify_maven_overrides...">You can specify Maven overrides on the command-line with the <code>--maven-overrides</code> flag.</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

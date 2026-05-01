@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Ceylon Ant tasks</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.3/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.3/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.3/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.3/examples">Examples</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.3/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.3/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.3/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.3/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.3/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide_for_intellij"><a href="/documentation/1.3/ide/intellij">Ceylon IDE for IntelliJ</a></h3>
+            
+            <h3 id="ceylon_ide_for_eclipse"><a href="/documentation/1.3/ide/eclipse">Ceylon IDE for Eclipse</a></h3>
+            
+            <h3 id="vertx"><a href="http://vertx.io/docs/vertx-core/ceylon/">Vert.x</a></h3>
+          </div>
+          <div class="point-dark-bottom">
+             
+          </div>
+          <div class="point-light-top"></div>
+          <div class="toc">
+            <ul>
+<li><a href="#usage">Usage
+            </a></li>
+<ul>
+<li><a href="#common_parameters">Common parameters
+            </a></li>
+<li><a href="#common_nested_elements">Common nested elements
+            </a></li>
+<ul>
+<li><a href="#_reposet"><code>&lt;reposet&gt;</code>
+            </a></li>
+<li><a href="#_moduleset"><code>&lt;moduleset&gt;</code>
+            </a></li>
+<li><a href="#_define"><code>&lt;define&gt;</code>
+            </a></li>
+</ul>
+</ul>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+          </div>
+          <div class="point-light-end"></div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+          </div>
+        </div>
+        <div id="core-page">
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.3/reference/tool/ant.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.3/reference/tool/ant.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="ceylon_ant_tasks">Ceylon Ant tasks</h1>
+          
+          <h2 id="usage">Usage
+          </h2>
+          
+          
+          <p id="before_using_any_of_the...">Before using any of the Ceylon <a href="http://ant.apache.org">Ant</a>
+          tasks they need to be declared using a <code>&lt;typedef&gt;</code>:</p>
+          
+          <pre data-language="html"><code>&lt;property name="ceylon.ant.lib" value="${ceylon.home}/lib/ceylon.ant.jar"/&gt;
+
+&lt;target name="ceylon-ant-taskdefs"&gt;
+
+  &lt;!-- Create a path to the ceylon-ant.jar --&gt; 
+  &lt;path id="ant-tasks"&gt;
+    &lt;pathelement location="${ceylon.ant.lib}"/&gt;
+  &lt;/path&gt;
+
+  &lt;!-- use a typedef to define all the ceylon tasks together --&gt;
+  &lt;typedef resource="com/redhat/ceylon/ant/antlib.xml" classpathref="ant-tasks"/&gt;
+
+&lt;/target&gt;
+</code></pre>
+          
+          <p id="note_prior_to_m5_we..."><strong>Note:</strong> Prior to M5 we used a <code>&lt;taskdef&gt;</code>, but such usage is now deprecated.</p>
+          
+          <h3 id="common_parameters">Common parameters
+          </h3>
+          
+          
+          
+          
+          <table class="ant-parameters">
+          <tbody>
+          <tr>
+          <th>Attribute</th>
+          <th>Description</th>
+          <th>Required</th>
+          </tr>
+          
+          <tr>
+          <td><code>cwd</code></td>
+          <td>Set the current directory for the task to the given path.</td>
+          <td>No</td>
+          </tr>
+          
+          <tr>
+          <td><code>sysrep</code></td>
+          <td>Set the system repository to the given directory.</td>
+          <td>No, the default is <i>$CEYLON_HOME/repo</i>.</td>
+          </tr>
+          
+          <tr>
+          <td><code>cacherep</code></td>
+          <td>Set the cache repository to the given directory.</td>
+          <td>No, the default is <i>~/.ceylon/cache</i>.</td>
+          </tr>
+          
+          <tr>
+          <td><code>nodefaultrepository</code></td>
+          <td>When set none of the default repositories will be used by the module resolver,
+          all of them will have to be specified manually using &lt;rep&gt; and/or &lt;reposet&gt;.</td>
+          <td>false</td>
+          </tr>
+          
+          </tbody>
+          </table>
+          
+          
+          
+          
+          <h3 id="common_nested_elements">Common nested elements
+          </h3>
+          
+          
+          
+          
+          <h4 id="_reposet">
+<code>&lt;reposet&gt;</code>
+          </h4>
+          
+          
+          <p id="a_reposet_element_contains_a...">A <code>&lt;reposet&gt;</code> element contains a number of <code>&lt;repo&gt;</code> and/or <code>&lt;reposet&gt;</code> elements.
+          It can be defined at the
+          top level, and then used by reference in <code>&lt;ceylon-*&gt;</code> tasks so you don't have
+          to repeat the same list of repositories all the time.</p>
+          
+          <p id="heres_an_example_from_the...">Here's an example from the <code>build.xml</code> for the Ceylon SDK:</p>
+          
+          <pre data-language="html"><code>&lt;reposet id="reposet.compile.test"&gt;
+    &lt;repo url="${out.repo}"/&gt;
+    &lt;repo url="test-deps"/&gt;&lt;!-- Needed for h2.jar dep of test.ceylon.dbc --&gt;
+&lt;/reposet&gt;
+
+&lt;!-- ... --&gt;
+
+&lt;target name="compile-test-jvm" depends="compile-jvm"&gt;
+
+    &lt;ceylon-compile executable="${ceylon.executable}"
+        src="test-source"
+        out="${test.repo}"
+        verbose="${ceylon.verbosity}"
+        encoding="UTF-8"&gt;
+        &lt;reposet refid="reposet.compile.test"/&gt; 
+        &lt;moduleset refid="modules.test.jvm"/&gt;
+    &lt;/ceylon-compile&gt;
+
+&lt;/target&gt;
+</code></pre>
+          
+          <h4 id="_moduleset">
+<code>&lt;moduleset&gt;</code>
+          </h4>
+          
+          
+          <p id="a_moduleset_element_contains_a...">A <code>&lt;moduleset&gt;</code> element contains a number of <code>&lt;sourcemodules&gt;</code> and/or <code>&lt;module&gt;</code>
+          elements. It can be defined at the
+          top level, and then used by reference in <code>&lt;ceylon-*&gt;</code> tasks so you don't have
+          to repeat the same list of modules all the time.</p>
+          
+          <p id="a_sourcemodules_element_simply_includes...">A <code>&lt;sourcemodules&gt;</code> element simply includes all the ceylon modules in a given
+          source directory, as specified by its <code>dir</code> attribute. This saves you having
+          to explicitly list all the modules to be compiled, you can instead just
+          compile all the modules in a given directory.</p>
+          
+          <p id="heres_an_example_using_modulesetsourcemodulesfrom...">Here's an example using <code>&lt;moduleset&gt;</code>/<code>&lt;sourcemodules&gt;</code>from the
+          <code>build.xml</code> for the Ceylon SDK:</p>
+          
+          <pre data-language="html"><code>&lt;moduleset id="modules.sdk.jvm"&gt;
+    &lt;sourcemodules dir="source"/&gt;
+&lt;/moduleset&gt;
+
+&lt;!-- ... --&gt;
+
+&lt;target name="compile-jvm"&gt;
+
+    &lt;ceylon-compile executable="${ceylon.executable}"
+        verbose="${ceylon.verbosity}"
+        encoding="UTF-8"&gt;
+        &lt;moduleset refid="modules.sdk.jvm"/&gt;
+    &lt;/ceylon-compile&gt;
+
+&lt;/target&gt;
+</code></pre>
+          
+          <p id="a_module_element_must_specify...">A <code>&lt;module&gt;</code> element must specify a name, and may specify a version.
+          If the relevant ceylon task don't require a version it will be ignored.</p>
+          
+          <p id="heres_an_example_using_modulesetmodulefrom...">Here's an example using <code>&lt;moduleset&gt;</code>/<code>&lt;module&gt;</code>from the
+          <code>build.xml</code> for the Ceylon SDK:</p>
+          
+          <pre data-language="html"><code>&lt;moduleset id="modules.sdk.js"&gt;
+    &lt;module name="ceylon.test"/&gt;
+    &lt;module name="ceylon.collection"/&gt;
+    &lt;module name="ceylon.json"/&gt;
+&lt;/moduleset&gt;
+
+&lt;!-- ... --&gt;
+
+&lt;target name="compile-js"&gt;
+
+    &lt;ceylon-compile-js executable="${ceylon.executable}"
+        verbose="${ceylon.verbosity}"
+        encoding="UTF-8"&gt;
+        &lt;moduleset refid="modules.sdk.js"/&gt;
+    &lt;/ceylon-compile-js&gt;
+
+&lt;/target&gt;
+</code></pre>
+          
+          <h4 id="_define">
+<code>&lt;define&gt;</code>
+          </h4>
+          
+          
+          <p id="a_define_element_is_used...">A <code>&lt;define&gt;</code> element is used to set system properties for the ant task being
+          executed. It can be used as a child element for any of the Ceylon ant tasks.
+          The value for the property can either be passed as a <code>value</code> attribute as
+          described below or it can be the text between the begin and end tags or
+          it is even posible to dispense with the attributes and use the syntax <code>key=value</code>.</p>
+          
+          <table class="ant-parameters">
+          <tbody>
+          <tr>
+          <th>Attribute</th>
+          <th>Description</th>
+          <th>Required</th>
+          </tr>
+          
+          <tr>
+          <td><code>key</code></td>
+          <td>The name of the property to pass</td>
+          <td>No</td>
+          </tr>
+          
+          <tr>
+          <td><code>value</code></td>
+          <td>The value of the property to pass</td>
+          <td>No</td>
+          </tr>
+          
+          </tbody>
+          </table>
+          
+          
+          
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li>The <a href="../ant-ceylon-compile"><code>&lt;ceylon-compile&gt;</code></a> task</li>
+          <li>The <a href="../ant-ceylon-compile-js"><code>&lt;ceylon-compile-js&gt;</code></a> task</li>
+          <li>The <a href="../ant-ceylon-test"><code>&lt;ceylon-test&gt;</code></a> task</li>
+          <li>The <a href="../ant-ceylon-test-js"><code>&lt;ceylon-test-js&gt;</code></a> task</li>
+          <li>The <a href="../ant-ceylon-run-js"><code>&lt;ceylon-run-js&gt;</code></a> task</li>
+          <li>The <a href="../ant-ceylon-run"><code>&lt;ceylon-run&gt;</code></a> task</li>
+          <li>The <a href="../ant-ceylon-doc"><code>&lt;ceylon-doc&gt;</code></a> task</li>
+          <li>The <a href="../ant-ceylon-import-jar"><code>&lt;ceylon-import-jar&gt;</code></a> task</li>
+          <li>The <a href="../ant-ceylon-module-descriptor"><code>&lt;ceylon-module-descriptor&gt;</code></a> task</li>
+          <li>The <a href="../ant-ceylon-copy"><code>&lt;ceylon-copy&gt;</code></a> task</li>
+          <li>The <a href="../ant-ceylon-war"><code>&lt;ceylon-war&gt;</code></a> task</li>
+          <li>The <a href="../ant-ceylon-plugin"><code>&lt;ceylon-plugin&gt;</code></a> task</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

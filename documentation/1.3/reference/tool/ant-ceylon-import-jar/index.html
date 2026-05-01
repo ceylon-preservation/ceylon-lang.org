@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: &lt;ceylon-import-jar&gt; Ant task</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.3/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.3/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.3/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.3/examples">Examples</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.3/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.3/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.3/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.3/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.3/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide_for_intellij"><a href="/documentation/1.3/ide/intellij">Ceylon IDE for IntelliJ</a></h3>
+            
+            <h3 id="ceylon_ide_for_eclipse"><a href="/documentation/1.3/ide/eclipse">Ceylon IDE for Eclipse</a></h3>
+            
+            <h3 id="vertx"><a href="http://vertx.io/docs/vertx-core/ceylon/">Vert.x</a></h3>
+          </div>
+          <div class="point-dark-bottom">
+             
+          </div>
+          <div class="point-light-top"></div>
+          <div class="toc">
+            <ul>
+<li><a href="#usage">Usage
+            </a></li>
+<li><a href="#description">Description
+            </a></li>
+<ul>
+<li><a href="#attributes">Attributes
+            </a></li>
+<li><a href="#nested_elements">Nested elements
+            </a></li>
+<ul>
+<li><a href="#_define"><code>&lt;define&gt;</code>
+            </a></li>
+<li><a href="#_missingdependencypackages"><code>&lt;missingDependencyPackages&gt;</code>
+            </a></li>
+<li><a href="#_rep"><code>&lt;rep&gt;</code>
+            </a></li>
+<li><a href="#_reposet"><code>&lt;reposet&gt;</code>
+            </a></li>
+</ul>
+</ul>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+          </div>
+          <div class="point-light-end"></div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+          </div>
+        </div>
+        <div id="core-page">
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.3/reference/tool/ant-ceylon-import-jar.md">
+              View source
+            </a>
+          </div>
+          
+          
+          <!-- this file was auto-generated by com.redhat.ceylon.tools.antdoc.CeylonAntTaskDocTool -->
+          
+          
+          <h1 id="ceylon_import_jar_ant_task">
+<code>&lt;ceylon-import-jar&gt;</code> Ant task</h1>
+          
+          <h2 id="usage">Usage
+          </h2>
+          
+          
+          <p id="note_you_must_declare_the..."><strong>Note</strong>: You must <a href="../ant">declare the tasks with a <code>&lt;typedef&gt;</code></a>.</p>
+          
+          <p id="to_import_the_example_foo...">To import the <code>example-foo-1.1.jar</code> file in a Ceylon repository residing
+          in the <code>build</code> directory as version 1.1 of module <code>com.example.foo</code>:</p>
+          
+          <pre data-language="html"><code>&lt;target name="import" depends="ceylon-ant-taskdefs"&gt;
+  &lt;ceylon-import-jar jar="example-foo-1.1.jar"
+    module="com.example.foo/1.1"&gt;
+    &lt;rep url="build"/&gt;
+  &lt;/ceylon-import-jar&gt;
+&lt;/target&gt;
+</code></pre>
+          
+          <h2 id="description">Description
+          </h2>
+          
+          
+          <p id="imports_a_jar_file_into...">Imports a jar file into a Ceylon module repository</p>
+          
+          <p id="the_ceylon_import_jar_ant...">The <code>&lt;ceylon-import-jar&gt;</code> ant task wraps the <a href="../ceylon/subcommands/ceylon-import-jar.html"><code>ceylon import-jar</code></a> command.</p>
+          
+          <h3 id="attributes">Attributes
+          </h3>
+          
+          
+          
+          
+          <table class="ant-parameters">
+          <tbody>
+          <tr>
+          <th>Attribute</th>
+          <th>Description</th>
+          <th>Required</th>
+          </tr>
+          <tr id="attribute-jar">
+          <td><code>jar</code></td>
+          <td>
+<p id="the_jar_file_to_import...">The jar file to import. This is equivalent to the <code>jar-file</code> argument.</p>
+          </td>
+          <td>Yes</td>
+          </tr>
+          
+          <tr id="attribute-module">
+          <td><code>module</code></td>
+          <td>
+<p id="the_module_to_import_this...">The module to import. This is equivalent to the <code>module</code> argument.</p>
+          </td>
+          <td>Yes</td>
+          </tr>
+          
+          <tr id="attribute-cacheRep">
+          <td><code>cacheRep</code></td>
+          <td>
+<p id="equivalent_to_the_cacherep_command...">Equivalent to the <a href="../ceylon/subcommands/ceylon-import-jar.html#option--cacherep"><code>--cacherep</code></a> command line option.
+          Specifies the folder to use for caching downloaded modules. (default: <code>~/.ceylon/cache</code>)</p>
+          </td>
+          <td>No</td>
+          </tr>
+          
+          <tr id="attribute-config">
+          <td><code>config</code></td>
+          <td>
+<p id="equivalent_to_the_config_command...">Equivalent to the <a href="../ceylon/subcommands/ceylon-import-jar.html#option--config"><code>--config</code></a> command line option.
+          Specifies the configuration file to use for this tool. (default: <code>./.ceylon/config</code>)</p>
+          </td>
+          <td>No</td>
+          </tr>
+          
+          <tr id="attribute-cwd">
+          <td><code>cwd</code></td>
+          <td>
+<p id="equivalent_to_the_cwd_command...">Equivalent to the <a href="../ceylon/subcommands/ceylon-import-jar.html#option--cwd"><code>--cwd</code></a> command line option.
+          Specifies the current working directory for this tool. (default: the directory where the tool is run from)</p>
+          </td>
+          <td>No</td>
+          </tr>
+          
+          <tr id="attribute-descriptor">
+          <td><code>descriptor</code></td>
+          <td>
+<p id="equivalent_to_the_descriptor_command...">Equivalent to the <a href="../ceylon/subcommands/ceylon-import-jar.html#option--descriptor"><code>--descriptor</code></a> command line option.
+          Specify a module.xml or module.properties file to be used as the module descriptor</p>
+          </td>
+          <td>No</td>
+          </tr>
+          
+          <tr id="attribute-errorProperty">
+          <td><code>errorProperty</code></td>
+          <td>
+<p id="the_ant_property_to_set...">The ant property to set to true in the event of an error</p>
+          </td>
+          <td>No</td>
+          </tr>
+          
+          <tr id="attribute-executable">
+          <td><code>executable</code></td>
+          <td>
+<p id="the_location_of_the_ceylon...">The location of the ceylon executable script.</p>
+          </td>
+          <td>No</td>
+          </tr>
+          
+          <tr id="attribute-failOnError">
+          <td><code>failOnError</code></td>
+          <td>
+<p id="whether_an_error_in_executing...">Whether an error in executing this task should fail the ant build</p>
+          </td>
+          <td>No</td>
+          </tr>
+          
+          <tr id="attribute-force">
+          <td><code>force</code></td>
+          <td>
+<p id="equivalent_to_the_force_command...">Equivalent to the <a href="../ceylon/subcommands/ceylon-import-jar.html#option--force"><code>--force</code></a> command line option.
+          Skips sanity checks and forces publication of the JAR.</p>
+          </td>
+          <td>No</td>
+          </tr>
+          
+          <tr id="attribute-fork">
+          <td><code>fork</code></td>
+          <td>
+<p id="whether_the_task_should_be...">Whether the task should be run in a separate VM (default: <code>false</code>)</p>
+          </td>
+          <td>No</td>
+          </tr>
+          
+          <tr id="attribute-inheritAll">
+          <td><code>inheritAll</code></td>
+          <td>
+<p id="whether_a_task_should_inherit...">Whether a task should inherit environment and properties. Only applies when <code>forked == true</code>.</p>
+          </td>
+          <td>No</td>
+          </tr>
+          
+          <tr id="attribute-noDefaultRepositories">
+          <td><code>noDefaultRepositories</code></td>
+          <td>
+<p id="equivalent_to_the_no_default...">Equivalent to the <a href="../ceylon/subcommands/ceylon-import-jar.html#option--no-default-repositories"><code>--no-default-repositories</code></a> command line option.
+          Indicates that the default repositories should not be used.</p>
+          </td>
+          <td>No</td>
+          </tr>
+          
+          <tr id="attribute-offline">
+          <td><code>offline</code></td>
+          <td>
+<p id="equivalent_to_the_offline_command...">Equivalent to the <a href="../ceylon/subcommands/ceylon-import-jar.html#option--offline"><code>--offline</code></a> command line option.
+          Enables offline mode that will prevent connections to remote repositories.</p>
+          </td>
+          <td>No</td>
+          </tr>
+          
+          <tr id="attribute-out">
+          <td><code>out</code></td>
+          <td>
+<p id="equivalent_to_the_out_command...">Equivalent to the <a href="../ceylon/subcommands/ceylon-import-jar.html#option--out"><code>--out</code></a> command line option.
+          Specifies the output module repository (which must be publishable). (default: <code>./modules</code>)</p>
+          </td>
+          <td>No</td>
+          </tr>
+          
+          <tr id="attribute-overrides">
+          <td><code>overrides</code></td>
+          <td>
+<p id="equivalent_to_the_overrides_command...">Equivalent to the <a href="../ceylon/subcommands/ceylon-import-jar.html#option--overrides"><code>--overrides</code></a> command line option.
+          Specifies the XML file to use to load module overrides. See http://ceylon-lang.org/documentation/current/reference/repository/maven/ for information. <em>Experimental</em>.</p>
+          </td>
+          <td>No</td>
+          </tr>
+          
+          <tr id="attribute-pass">
+          <td><code>pass</code></td>
+          <td>
+<p id="equivalent_to_the_pass_command...">Equivalent to the <a href="../ceylon/subcommands/ceylon-import-jar.html#option--pass"><code>--pass</code></a> command line option.
+          Sets the password for use with an authenticated output repository (no default).</p>
+          </td>
+          <td>No</td>
+          </tr>
+          
+          <tr id="attribute-resultProperty">
+          <td><code>resultProperty</code></td>
+          <td>
+<p id="the_ant_property_to_set_to...">The ant property to set to the Ceylon program exit code</p>
+          </td>
+          <td>No</td>
+          </tr>
+          
+          <tr id="attribute-sourceJar">
+          <td><code>sourceJar</code></td>
+          <td>
+<p id="the_jar_file_to_import_this...">The jar file to import. This is equivalent to the <code>source-jar-file</code> argument.</p>
+          </td>
+          <td>No</td>
+          </tr>
+          
+          <tr id="attribute-stacktraces">
+          <td><code>stacktraces</code></td>
+          <td>
+<p id="equivalent_to_the_stacktraces_command...">Equivalent to the <a href="../ceylon/subcommands/ceylon-import-jar.html#option--stacktraces"><code>--stacktraces</code></a> command line option.
+          If an error propagates to the top level tool, print its stack trace.</p>
+          </td>
+          <td>No</td>
+          </tr>
+          
+          <tr id="attribute-sysRep">
+          <td><code>sysRep</code></td>
+          <td>
+<p id="equivalent_to_the_sysrep_command...">Equivalent to the <a href="../ceylon/subcommands/ceylon-import-jar.html#option--sysrep"><code>--sysrep</code></a> command line option.
+          Specifies the system repository containing essential modules. (default: <code>$CEYLON_HOME/repo</code>)</p>
+          </td>
+          <td>No</td>
+          </tr>
+          
+          <tr id="attribute-user">
+          <td><code>user</code></td>
+          <td>
+<p id="equivalent_to_the_user_command...">Equivalent to the <a href="../ceylon/subcommands/ceylon-import-jar.html#option--user"><code>--user</code></a> command line option.
+          Sets the user name for use with an authenticated output repository (no default).</p>
+          </td>
+          <td>No</td>
+          </tr>
+          
+          <tr id="attribute-verbose">
+          <td><code>verbose</code></td>
+          <td>
+<p id="equivalent_to_the_verbose_command...">Equivalent to the <a href="../ceylon/subcommands/ceylon-import-jar.html#option--verbose"><code>--verbose</code></a> command line option.
+          Produce verbose output. If no <code>flags</code> are given then be verbose about everything, otherwise just be verbose about the flags which are present. Allowed flags include: <code>all</code>, <code>loader</code>.</p>
+          </td>
+          <td>No</td>
+          </tr>
+          
+          </tbody>
+          </table>
+          
+          
+          
+          
+          <h3 id="nested_elements">Nested elements
+          </h3>
+          
+          
+          
+          
+          <h4 id="_define">
+<code>&lt;define&gt;</code>
+          </h4>
+          
+          
+          
+          
+          <p id="a_define_element_is_used...">A <code>&lt;define&gt;</code> element is used to set system properties for the ant task being executed.
+          Equivalent to the <a href="../ceylon/subcommands/ceylon-import-jar.html#option--define"><code>--define</code></a> command line option.
+          Set a system property</p>
+          
+          
+          <p id="the_value_for_the_system...">The value for the system property can either be passed as a <code>value</code> attribute:</p>
+          
+          <pre data-language="ceylon"><code>&lt;define key="org.example.helloworld.greeting" value="Hi"/&gt;
+</code></pre>
+          
+          <p id="or_it_can_be_the...">or it can be the text between the begin and end tags:</p>
+          
+          <pre data-language="html"><code>&lt;define key="org.example.helloworld.greeting"&gt;Hi&lt;/define&gt;
+</code></pre>
+          
+          <p id="alternatively_it_is_posible_to...">Alternatively, it is posible to dispense with the attributes and use the syntax</p>
+          
+          <pre data-language="ceylon"><code>&lt;define&gt;org.example.helloworld.greeting=Hi&lt;/define&gt;
+</code></pre>
+          
+          <table class="ant-elements">
+          <tbody>
+          <tr>
+          <th>Element</th>
+          <th>Description</th>
+          <th>Required</th>
+          </tr>
+          <tr>
+          <td><code>key</code></td>
+          <td>
+<p id="the_property_to_be_defined">The property to be defined</p>
+          </td>
+          <td>No</td>
+          </tr>
+          <tr>
+          <td><code>value</code></td>
+          <td>
+<p id="the_value_of_the_define">The value of the define</p>
+          </td>
+          <td>No</td>
+          </tr>
+          </tbody>
+          </table>
+          
+          
+          
+          
+          <h4 id="_missingdependencypackages">
+<code>&lt;missingDependencyPackages&gt;</code>
+          </h4>
+          
+          
+          
+          
+          <p id="equivalent_to_the_missing_dependency...">Equivalent to the <a href="../ceylon/subcommands/ceylon-import-jar.html#option--missing-dependency-packages"><code>--missing-dependency-packages</code></a> command line option.
+          Specifies which packages a missing dependency contains. Can be specified multiple times. Format: <code>module-name/module-version=package-wildcard(,package-wildcard)*</code>, where <code>package-wildcard</code> supports <code>*</code>, <code>**</code> and <code>?</code> wildcards.</p>
+          
+          
+          <table class="ant-elements">
+          <tbody>
+          <tr>
+          <th>Element</th>
+          <th>Description</th>
+          <th>Required</th>
+          </tr>
+          <tr>
+          <td><code>module</code></td>
+          <td>
+<p id="the_missing_module_name_and...">The missing module name and version</p>
+          </td>
+          <td>No</td>
+          </tr>
+          </tbody>
+          </table>
+          
+          
+          
+          
+          <h4 id="_rep">
+<code>&lt;rep&gt;</code>
+          </h4>
+          
+          
+          
+          
+          <p id="a_module_repository_containing_dependencies...">A module repository containing dependencies. Can be specified multiple times. Defaults to <code>&lt;rep url="./modules"/&gt;</code>.</p>
+          
+          
+          <table class="ant-elements">
+          <tbody>
+          <tr>
+          <th>Element</th>
+          <th>Description</th>
+          <th>Required</th>
+          </tr>
+          <tr>
+          <td><code>url</code></td>
+          <td>
+<p id="the_url_or_path_of...">The URL or path of the module repository.</p>
+          </td>
+          <td>Yes, unless a `refid` is given</td>
+          </tr>
+          <tr>
+          <td><code>refid</code></td>
+          <td>
+<p id="a_reference_to_a_rep...">A reference to a <code>&lt;rep&gt;</code> defined outside this task.</p>
+          </td>
+          <td>No</td>
+          </tr>
+          </tbody>
+          </table>
+          
+          
+          
+          
+          <h4 id="_reposet">
+<code>&lt;reposet&gt;</code>
+          </h4>
+          
+          
+          
+          
+          <p id="a_set_of_module_repositories...">A set of module repositories containing dependencies. Can be specified multiple times. Default to <code>modules</code>.</p>
+          
+          
+          <p id="a_reposet_element_contains_a...">A <code>&lt;reposet&gt;</code> element contains a number of <code>&lt;repo&gt;</code> and/or <code>&lt;reposet&gt;</code> elements. It can be defined at the top level, and then used by reference using the <code>refid</code> attribute so you don't have to repeat the same list of repositories all the time.</p>
+          
+          <table class="ant-elements">
+          <tbody>
+          <tr>
+          <th>Element</th>
+          <th>Description</th>
+          <th>Required</th>
+          </tr>
+          <tr>
+          <td><code>refid</code></td>
+          <td>
+<p id="a_reference_to_a_reposet...">A reference to a <a href="../ant/#_reposet"><code>&lt;reposet&gt;</code></a> defined elsewhere.</p>
+          </td>
+          <td>No</td>
+          </tr>
+          </tbody>
+          </table>
+          
+          
+          
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li>How to <a href="../ant">declare the tasks with a <code>&lt;typedef&gt;</code></a>.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

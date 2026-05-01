@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: FAQs</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.3/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.3/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.3/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.3/examples">Examples</a></h3>
+            
+            <!-- ### [Tutorial Videos](/documentation/1.3/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.3/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.3/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.3/faq">FAQs</a></h3>
+            
+            <ul>
+            <li><a href="/documentation/1.3/faq">Common</a></li>
+            <li><a href="/documentation/1.3/faq/language-design">Language design</a></li>
+            </ul>
+            
+            
+            <h3 id="roadmap"><a href="/documentation/1.3/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide_for_intellij"><a href="/documentation/1.3/ide/intellij">Ceylon IDE for IntelliJ</a></h3>
+            
+            <h3 id="ceylon_ide_for_eclipse"><a href="/documentation/1.3/ide/eclipse">Ceylon IDE for Eclipse</a></h3>
+            
+            <h3 id="vertx"><a href="http://vertx.io/docs/vertx-core/ceylon/">Vert.x</a></h3>
+          </div>
+          <div class="point-dark-end">
+             
+          </div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            FAQs
+          </div>
+        </div>
+        <div id="core-page">
+          <h1 id="frequently_asked_questions">Frequently Asked Questions</h1>
+          
+          <p id="on_this_page_youll_find...">On this page you'll find answers to a few of the most common
+          questions about the Ceylon project.</p>
+          
+          <ul>
+<li><a href="#basics">Basics
+          </a></li>
+<ul>
+<li><a href="#what_is_ceylon">What is Ceylon?
+          </a></li>
+<li><a href="#where_can_i_run_ceylon">Where can I run Ceylon?
+          </a></li>
+<li><a href="#why_a_new_language">Why a new language?
+          </a></li>
+<li><a href="#how_is_ceylon_different">How is Ceylon different?
+          </a></li>
+<li><a href="#but_there_s_already_so_many_languages_out_there">But there's already so many languages out there!
+          </a></li>
+<li><a href="#how_about_java_interoperability">How about Java interoperability?
+          </a></li>
+<li><a href="#and_interoperation_with_javascript">And interoperation with JavaScript?
+          </a></li>
+<li><a href="#where_can_i_read_more_about_some_of_your_language_design_choices">Where can I read more about some of your language design choices?
+          </a></li>
+</ul>
+<li><a href="#the_project_and_team">The project and team
+          </a></li>
+<ul>
+<li><a href="#who_s_behind_this_project">Who's behind this project?
+          </a></li>
+<li><a href="#how_is_ceylon_pronounced">How is Ceylon pronounced?
+          </a></li>
+<li><a href="#where_can_i_read_some_user_s_opinions_of_ceylon">Where can I read some user's opinions of Ceylon?
+          </a></li>
+</ul>
+<li><a href="#contributing">Contributing
+          </a></li>
+<ul>
+<li><a href="#how_can_i_contribute_to_ceylon">How can I contribute to Ceylon?
+          </a></li>
+<li><a href="#found_a_problem_how_can_i_improve_the_website">Found a problem, how can I improve the website?
+          </a></li>
+</ul>
+<li><a href="#technical">Technical
+          </a></li>
+<ul>
+<li><a href="#what_version_of_java_is_required_to_run_ceylon">What version of Java is required to run Ceylon?
+          </a></li>
+<li><a href="#can_you_tell_me_more_about_how_it_works">Can you tell me more about how it works?
+          </a></li>
+<li><a href="#can_i_use_a_profiler_with_ceylon">Can I use a profiler with Ceylon?
+          </a></li>
+</ul>
+<li><a href="#other">Other
+          </a></li>
+<ul>
+<li><a href="#what_license_is_ceylon_released_under">What license is Ceylon released under?
+          </a></li>
+<li><a href="#what_is_the_naming_convention_for_ceylon_platform_releases">What is the naming convention for Ceylon platform releases?
+          </a></li>
+<li><a href="#am_i_allowed_to_say_ceylonish">Am I allowed to say "ceylonish"?
+          </a></li>
+<li><a href="#what_is_the_elephant_s_name">What is the elephant's name?
+          </a></li>
+</ul>
+</ul>
+          
+          
+          <p id=""></p>
+          
+          <h2 id="basics">Basics
+          </h2>
+          
+          
+          
+          
+          <h3 id="what_is_ceylon">What is Ceylon?
+          </h3>
+          
+          
+          <p id="ceylon_is_a_new_programming...">Ceylon is a new programming language that's deeply influenced
+          by Java, designed by people who are unapologetic fans of Java.
+          It's a language designed for writing large programs in teams.</p>
+          
+          <p id="in_line_with_this_purpose...">In line with this purpose, Ceylon is a language which offers
+          disciplined static typing, built-in modularity, and excellent
+          tooling.</p>
+          
+          <p id="its_also_an_extremely_elegant...">It's also an extremely elegant language, and highly readable.</p>
+          
+          <h3 id="where_can_i_run_ceylon">Where can I run Ceylon?
+          </h3>
+          
+          
+          <p id="you_can_run_ceylon_anywhere...">You can run Ceylon anywhere a Java 7 or 8 Virtual Machine is
+          available. The Ceylon compiler uses the bytecode generator
+          in Open JDK to produce Java bytecode. Ceylon modules even
+          run on Vert.x or in any OSGi container.</p>
+          
+          <p id="you_can_also_run_ceylon...">You can also run Ceylon programs on a JavaScript virtual
+          machine, for example, in a web browser or on Node.js.</p>
+          
+          <p id="note_that_not_all_ceylon...">Note that not all Ceylon modules are available for both
+          platforms. A module might be cross-platform, it might by
+          JVM-only, or it might be JavaScript-only. Of course,
+          <code>ceylon.language</code> is completely cross-platform.</p>
+          
+          <h3 id="why_a_new_language">Why a new language?
+          </h3>
+          
+          
+          <p id="well_weve_been_designing_and...">Well, we've been designing and building frameworks and
+          libraries for Java for well over a decade, and we know its
+          limitations intimately. The most recent releases of Java go
+          some distance to alleviating <em>some</em> problems, but even the
+          newest language features strain to accommodate past mistakes
+          and the requirement for full backward compatibility.</p>
+          
+          <h3 id="how_is_ceylon_different">How is Ceylon different?
+          </h3>
+          
+          
+          <p id="every_language_has_its_strengths...">Every language has its strengths and weaknesses. Ceylon is a
+          great language if you want to create easily understandable
+          and maintainable code with minimum fuss, especially if you
+          like navigating and writing code with the help of an IDE.
+          It's also an especially great language if you care about
+          modularity.</p>
+          
+          <p id="there_are_five_important_concerns...">There are <a href="/blog/2012/01/10/goals/">five important concerns</a>
+          that guide the design of the language and platform.</p>
+          
+          <h3 id="but_there_s_already_so_many_languages_out_there">But there's already so many languages out there!
+          </h3>
+          
+          
+          <p id="well_sure_but_how_many...">Well, sure, but how many of them actually meet the bare list
+          of technical requirements we have here: cross-platform
+          execution, modularity, great tooling? The requirement for
+          tooling alone rules out <em>all dynamically typed languages</em>.
+          And the requirement for execution on JavaScript VMs rules out
+          essentially all the rest. In fact, I can't really name another
+          existing language that, as of today, even arguably has the
+          same set of technical capabilities as Ceylon. And that's
+          without even getting started on any of
+          <a href="/blog/2012/01/10/goals">our other goals and principles</a>.</p>
+          
+          <p id="if_youre_not_convinced_weve...">If you're not convinced, we've written a longer post on
+          <a href="/blog/2015/10/27/why/">why you might want to choose Ceylon</a>.</p>
+          
+          <h3 id="how_about_java_interoperability">How about Java interoperability?
+          </h3>
+          
+          
+          <p id="java_interoperability_is_a_critically...">Java interoperability is a critically important feature of
+          the language. You can use the Java SDK and other Java
+          libraries directly from Ceylon. This gives Ceylon programs
+          immediate access to a huge ecosystem of reusable functionality.</p>
+          
+          <p id="on_the_other_hand_ceylon...">On the other hand, Ceylon has its own, cleaner, modular SDK,
+          and, since code written to depend on the Java SDK can't execute
+          on a JavaScript virtual machine, Ceylon will sometimes benefit
+          from frameworks designed especially for Ceylon. That's
+          reasonable, since Ceylon is a <em>very</em> comfortable language
+          for development of frameworks and libraries!</p>
+          
+          <p id="you_can_learn_more_about...">You can learn more about interoperation with Java
+          <a href="../tour/interop/">right here</a>.</p>
+          
+          <h3 id="and_interoperation_with_javascript">And interoperation with JavaScript?
+          </h3>
+          
+          
+          <p id="the_ceylon_language_features_several...">The Ceylon language features several constructs that exist
+          to support interoperation with languages with dynamic typing,
+          primarily with JavaScript:</p>
+          
+          <ul>
+          <li>
+<code>dynamic</code> blocks make it possible to write and interoperate
+          with dynamically typed code in Ceylon,</li>
+          <li>a <code>dynamic</code> instantiation expression lets you create an
+          untyped JavaScript object in Ceylon, and</li>
+          <li>
+<code>dynamic</code> interfaces allow us to ascribe static types to
+          pre-existing dynamically-typed JavaScript APIs.</li>
+          </ul>
+          
+          
+          <p id="you_can_learn_more_dynamic...">You can learn more <code>dynamic</code> <a href="../tour/dynamic">here</a>.</p>
+          
+          <h3 id="where_can_i_read_more_about_some_of_your_language_design_choices">Where can I read more about some of your language design choices?
+          </h3>
+          
+          
+          <p id="try_the_language_design_faq">Try the <a href="language-design">language design FAQ</a>.</p>
+          
+          <h2 id="the_project_and_team">The project and team
+          </h2>
+          
+          
+          
+          
+          <h3 id="who_s_behind_this_project">Who's behind this project?
+          </h3>
+          
+          
+          <p id="ceylon_is_a_community_project...">Ceylon is a community project sponsored by Red Hat. You can
+          read more about the team <a href="/community/team/">here</a>.</p>
+          
+          <h3 id="how_is_ceylon_pronounced">How is Ceylon pronounced?
+          </h3>
+          
+          
+          <p id="theres_some_debate_about_that...">There's some debate about that but the accepted pronunciation
+          in the team is <a href="http://en.wikipedia.org/wiki/Wikipedia:IPA_for_English#Key">/sɨˈlɒn/</a>.
+          Or in less fancy schmancy phoneticsy, <code>selón</code>.</p>
+          
+          <p id="on_the_other_hand_lots...">(On the other hand, lots of folks seem to pronounce it
+          <code>say-lon</code> with the emphasis on the first syllable so if you
+          say it like that we'll probably know what you're talking
+          about.)</p>
+          
+          <h3 id="where_can_i_read_some_user_s_opinions_of_ceylon">Where can I read some user's opinions of Ceylon?
+          </h3>
+          
+          
+          <p id="were_collecting_links_to_articles...">We're collecting links to <a href="/community/articles">articles about Ceylon</a>.</p>
+          
+          <h2 id="contributing">Contributing
+          </h2>
+          
+          
+          
+          
+          <h3 id="how_can_i_contribute_to_ceylon">How can I contribute to Ceylon?
+          </h3>
+          
+          
+          <p id="are_you_interested_in_joining...">Are you interested in joining the team and helping improve
+          the Ceylon language, the compiler, the class libraries, or
+          the IDE? Then contact us on our
+          <a href="http://groups.google.com/group/ceylon-dev">dev mailing list</a>.</p>
+          
+          <p id="want_to_get_your_hands...">Want to get your hands on the code? Read how to access
+          <a href="/code/source/">the source</a>.</p>
+          
+          <p id="feeling_adventurous_and_want_to...">Feeling adventurous and want to help us with the compiler
+          backend? Read about <a href="/code">how to work on that project</a>.</p>
+          
+          <h3 id="found_a_problem_how_can_i_improve_the_website">Found a problem, how can I improve the website?
+          </h3>
+          
+          
+          <p id="the_website_is_fully_open...">The website is fully open and you can easily contribute
+          typos, improvements, or new pages <a href="/code/website">very easily</a>.</p>
+          
+          <h2 id="technical">Technical
+          </h2>
+          
+          
+          
+          
+          <h3 id="what_version_of_java_is_required_to_run_ceylon">What version of Java is required to run Ceylon?
+          </h3>
+          
+          
+          <p id="both_ceylon_and_ceylon_ide...">Both Ceylon and Ceylon IDE for Eclipse require Java 7 or Java 8.</p>
+          
+          <h3 id="can_you_tell_me_more_about_how_it_works">Can you tell me more about how it works?
+          </h3>
+          
+          
+          <p id="you_can_read_up_on...">You can read up on the <a href="/code/architecture">architecture</a>.</p>
+          
+          <h3 id="can_i_use_a_profiler_with_ceylon">Can I use a profiler with Ceylon?
+          </h3>
+          
+          
+          <p id="yes_you_can_at_least...">Yes you can, at least on the JVM, like any other Java program. If your code runs using JBoss Modules (the
+          default for <code>ceylon run</code>) then you may have to use the <code>--define jboss.modules.system.pkgs=com.yourkit</code> runtime
+          flag if you use YourKit.</p>
+          
+          <h2 id="other">Other
+          </h2>
+          
+          
+          
+          
+          <h3 id="what_license_is_ceylon_released_under">What license is Ceylon released under?
+          </h3>
+          
+          
+          <p id="all_the_code_the_language...">All the code, the language specification, and even our website
+          is <a href="/code/licenses">open source</a>. It's extremely important to
+          us that the entire platform be open and unencumbered.</p>
+          
+          <h3 id="what_is_the_naming_convention_for_ceylon_platform_releases">What is the naming convention for Ceylon platform releases?
+          </h3>
+          
+          
+          <p id="ceylon_production_releases_are_named...">Ceylon production releases are named after Minds from the late
+          great Iain M. Banks' Culture series.</p>
+          
+          <h3 id="am_i_allowed_to_say_ceylonish">Am I allowed to say "ceylonish"?
+          </h3>
+          
+          
+          <p id="no_the_correct_term_is...">No, the correct term is "ceylonic".</p>
+          
+          <h3 id="what_is_the_elephant_s_name">What is the elephant's name?
+          </h3>
+          
+          
+          <p id="his_name_is_trompon">His name is "Trompon".</p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<feed xml:lang="en-US" xmlns="http://www.w3.org/2005/Atom">
+  <id>http://localhost:4242/blog/tom-bentley/</id>
+  <title>Blog of Tom Bentley</title>
+  <updated>2011-12-02T00:00:00+00:00</updated>
+  <link href="http://localhost:4242/blog/authors/tom-bentley/blog.atom" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4242/" rel="alternate" type="text/html" />
+  <entry>
+    <id>http://localhost:4242/blog/2011/12/02/positional-invocation</id>
+    <title>Implementing Method Invocation in ceylonc</title>
+    <updated>2011-12-02T00:00:00+00:00</updated>
+    <link href="http://localhost:4242/blog/2011/12/02/positional-invocation" rel="alternate" type="text/html" />
+    <author>
+      <name>Tom Bentley</name>
+    </author>
+    <summary>
+      My main involvement in the Ceylon project has been in the compiler and within
+      that one of the things I've been involved with is method invocation. So
+      I thought I'd blog about some of the details of the compiler, to show that
+      working on it isn't that hard.
+      
+      Syntactically, Ceylon has two different ways of invoking a method (and the
+      metamodel will add a third).
+      Positional invocation
+      will be very familiar to a Java programmer. In Ceylon it's conceptually
+      pretty much the same, including support for 'varargs'.
+      In this post I'm going to go into some detail about how support
+      for positional method invocation is implemented in the compiler. I...
+    </summary>
+    <content type="html">
+      &lt;p&gt;My main involvement in the Ceylon project has been in the compiler and within
+      that one of the things I've been involved with is &lt;em&gt;method invocation&lt;/em&gt;. So
+      I thought I'd blog about some of the details of the compiler, to show that
+      working on it isn't that hard.&lt;/p&gt;
+      
+      &lt;p&gt;Syntactically, Ceylon has two different ways of invoking a method (and the
+      &lt;a href=&quot;http://localhost:4242/documentation/1.0/tour/functions/&quot;&gt;metamodel&lt;/a&gt; will add a third).
+      &lt;em&gt;Positional invocation&lt;/em&gt;
+      will be very familiar to a Java programmer. In Ceylon it's conceptually
+      pretty much the same, including support for &lt;a href=&quot;http://localhost:4242/documentation/1.0/tour/named-arguments/#sequenced_parameters&quot;&gt;'varargs'&lt;/a&gt;.
+      In this post I'm going to go into some detail about how support
+      for positional method invocation is implemented in the compiler. I might cover
+      the other syntactic form, &lt;a href=&quot;http://localhost:4242/documentation/1.0/tour/named-arguments/&quot;&gt;&lt;em&gt;named argument invocation&lt;/em&gt;&lt;/a&gt;,
+      at a later date.&lt;/p&gt;
+      
+      &lt;p&gt;Before we go much further I just need to define some terminology. A method is
+      declared with zero or more &lt;em&gt;parameters&lt;/em&gt;, the last of which may be a
+      &lt;em&gt;sequenced parameter&lt;/em&gt; ('varargs'):&lt;/p&gt;
+      
+      &lt;pre&gt;&lt;code&gt;void foo(Natural n, Integer i, String... strings) {
+          // some logic
+      }
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;At a (positional) call site the method is supplied with values
+      for each of the parameters in the declaration. These values are usually called
+      the &lt;em&gt;arguments&lt;/em&gt; of the method invocation.&lt;/p&gt;
+      
+      &lt;h2&gt;How we generate code&lt;/h2&gt;
+      
+      &lt;p&gt;In the following sections I'm going to be presenting bits of Ceylon code and
+      the 'equivalent Java' code but it's
+      important to understand that the Ceylon compiler doesn't
+      actually generate Java source code. It instead constructs an abstract syntax
+      tree (AST) directly
+      using the internal OpenJDK &lt;code&gt;javac&lt;/code&gt; API. This AST is then subject to the same
+      Java type checks as normal Java source code, before it get converted to
+      bytecode. You can read more about the architecture of the Ceylon compiler
+      &lt;a href=&quot;http://localhost:4242/code/architecture/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+      
+      &lt;p&gt;The major benefit of piggy-backing on &lt;code&gt;javac&lt;/code&gt; like this is that
+      we don't have to get into the details of generating correct bytecode, such as
+      worrying about which instruction to jump to. We can
+      stick to higher level concepts that we're more familiar with, while we focus
+      on actually getting something working. In the long term, it would be nice
+      if &lt;code&gt;ceylonc&lt;/code&gt; could be &lt;a href=&quot;http://en.wikipedia.org/wiki/Bootstrapping_%28compilers%29&quot;&gt;self-hosting&lt;/a&gt;.&lt;/p&gt;
+      
+      &lt;h2&gt;Erasure&lt;/h2&gt;
+      
+      &lt;p&gt;Because of the similarity with Java, supporting positional invocation in Ceylon
+      isn't difficult: It boils down to generating a plain Java method
+      invocation. But the two certainly aren't equivalent.&lt;/p&gt;
+      
+      &lt;p&gt;Although notionally in Ceylon 'everything is an object', the compiler is
+      allowed (and does) optimise the numerical types
+      (&lt;code&gt;Natural&lt;/code&gt;,
+      &lt;a href=&quot;https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/class_Integer.html&quot;&gt;&lt;code&gt;Integer&lt;/code&gt;&lt;/a&gt;,
+      &lt;a href=&quot;https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/class_Float.html&quot;&gt;&lt;code&gt;Float&lt;/code&gt;&lt;/a&gt;,
+      &lt;a href=&quot;https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/class_Boolean.html&quot;&gt;&lt;code&gt;Boolean&lt;/code&gt;&lt;/a&gt;) to the
+      corresponding Java primitive type
+      (&lt;code&gt;long&lt;/code&gt;, &lt;code&gt;long&lt;/code&gt;, &lt;code&gt;double&lt;/code&gt; and &lt;code&gt;boolean&lt;/code&gt; respectively). This means that when you
+      write a Ceylon statement such as&lt;/p&gt;
+      
+      &lt;pre&gt;&lt;code&gt;Natural n = 1;
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;it is transformed into a Java statement like this&lt;/p&gt;
+      
+      &lt;!-- lang: java --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;final long n = 1;
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;We call this 'erasure' (yes, I know erasure has another meaning in
+      Java to do with the loss of generic type information, but it's the term
+      we use).&lt;/p&gt;
+      
+      &lt;p&gt;Erasure in itself wouldn't
+      cause a problem for method invocation because the method parameters are
+      subject to erasure just as the method arguments are. However, sometimes we
+      need to 'box' the primitive, &lt;a href=&quot;http://docs.oracle.com/javase/1.5.0/docs/guide/language/autoboxing.html&quot;&gt;just like Java does&lt;/a&gt;.&lt;/p&gt;
+      
+      &lt;p&gt;A good example of this is
+      passing a &lt;code&gt;Natural&lt;/code&gt; argument to a parameter declared
+      &lt;a href=&quot;http://localhost:4242/documentation/1.0/tour/basics/#dealing_with_objects_that_arent_there&quot;&gt;&lt;code&gt;Natural?&lt;/code&gt;&lt;/a&gt;.
+      The Java method declaration must use a boxed type (&lt;code&gt;Natural&lt;/code&gt; from the runtime)
+      as opposted to the Java primitive (&lt;code&gt;long&lt;/code&gt;) it would otherwise be erased to
+      in order to cope with the possibility of being passed a &lt;code&gt;null&lt;/code&gt;.
+      This means it is the compiler's responsibility to box the
+      erased &lt;code&gt;Natural&lt;/code&gt; (a Java &lt;code&gt;long&lt;/code&gt;) at the call site.&lt;/p&gt;
+      
+      &lt;p&gt;Ceylon uses its own boxing classes in the runtime version of the
+      language module.
+      Each class implements the API of the relevant type. Because Ceylon doesn't use
+      the same classes to box primitives as Java does we can't rely on
+      &lt;code&gt;javac&lt;/code&gt;'s auto boxing/unboxing support. Performing this boxing correctly and
+      exactly when and where it's needed is where method invocation starts to
+      get a little more complex than simply being 'A Ceylon method invocation is the
+      same as a Java method invocation'.&lt;/p&gt;
+      
+      &lt;h2&gt;Varargs&lt;/h2&gt;
+      
+      &lt;p&gt;Varargs isn't implemented in terms of Java's varargs support.
+      The reason in this case is that a Ceylon
+      sequence is not the same thing as a Java array. So when someone declares a
+      Ceylon method like this&lt;/p&gt;
+      
+      &lt;pre&gt;&lt;code&gt;void varargs(T... ts) {
+      
+      }
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;the equivalent Java looks something like this&lt;/p&gt;
+      
+      &lt;!-- lang: java --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;void varargs(Iterable&amp;lt;T&amp;gt; ts) {
+      
+      }
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;Now consider the Ceylon call site&lt;/p&gt;
+      
+      &lt;pre&gt;&lt;code&gt;varargs&amp;lt;String&amp;gt;(&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;);
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;When compiling this invocation we have to create a concrete instance of the
+      &lt;a href=&quot;https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/interface_Iterable.html&quot;&gt;&lt;code&gt;Iterable&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/a&gt; (using the arguments provided) to pass
+      to the method.
+      This is done using an &lt;code&gt;ArraySequence&lt;/code&gt; (an implementation of a Ceylon
+      &lt;a href=&quot;https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/interface_Sequence.html&quot;&gt;&lt;code&gt;Sequence&lt;/code&gt;&lt;/a&gt;
+      in the runtime), so that the generated Java looks something like this&lt;/p&gt;
+      
+      &lt;!-- lang: java --&gt;
+      
+      
+      &lt;pre&gt;&lt;code&gt;varargs(new ArraySequence(&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;));
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;Aside: The observant reader will realise that using varargs with erased types creates
+      another boxing problem...&lt;/p&gt;
+      
+      &lt;h2&gt;Conclusion&lt;/h2&gt;
+      
+      &lt;p&gt;So, after all that explanation, hopefully the &lt;a href=&quot;https://github.com/ceylon/ceylon-compiler/blob/c8ca6087e94a98654d7361c3f399a099c2cc7a97/src/com/redhat/ceylon/compiler/codegen/ExpressionTransformer.java#LC758&quot;&gt;source code&lt;/a&gt;
+      should make some kind of sense.&lt;/p&gt;
+      
+      &lt;p&gt;None of what I've discussed above should be &lt;em&gt;that&lt;/em&gt; hard to understand for
+      anyone who's done much Java programming. I will admit at this point that I
+      deliberately chose something that would be familiar and where the
+      transformation between Ceylon and Java are small. This has allowed me to focus
+      on some of the annoying-but-necessary details that are important to
+      understand if you're going to hack on the compiler.&lt;/p&gt;
+      
+      &lt;p&gt;The take-home message is
+      that you really don't have to know a great deal about compilers, or even the
+      JVM to be able to contribute something genuinely useful.&lt;/p&gt;
+      
+      &lt;h2&gt;Note&lt;/h2&gt;
+      
+      &lt;p&gt;Since this post was originally written:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;the &lt;code&gt;Natural&lt;/code&gt; type has since been remove from &lt;code&gt;ceylon.language&lt;/code&gt;.&lt;/li&gt;
+      &lt;li&gt;
+      &lt;code&gt;ceylonc&lt;/code&gt; has become &lt;code&gt;ceylon compile&lt;/code&gt;.&lt;/li&gt;
+      &lt;/ul&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>http://localhost:4242/blog/2011/10/05/syntax-highlighting</id>
+    <title>Changed syntax highlighting</title>
+    <updated>2011-10-05T00:00:00+00:00</updated>
+    <link href="http://localhost:4242/blog/2011/10/05/syntax-highlighting" rel="alternate" type="text/html" />
+    <author>
+      <name>Tom Bentley</name>
+    </author>
+    <summary>
+      I've been writing quite a lot of documentation
+      lately, and my previous decision to require an HTML
+      comment in order to get syntax highlighting of Ceylon code started to look
+      like the wrong choice.
+      Since the vast majority of the code blocks on the site are going
+      to be Ceylon source, and since we're (almost?) always going to want that
+      highlighted I've changed the rules:
+      
+      
+      Now all indented code blocks will be assumed to be Ceylon source code
+      that requires syntax highlighting, unless indicated otherwise.
+      If the source code is not Ceylon, you can use a &lt;!-- lang: foo --&gt;
+      comment (having setup the syntax highlighter and gsub transformer
+      to do...
+    </summary>
+    <content type="html">
+      &lt;p&gt;I've been writing quite a lot of &lt;a href=&quot;http://localhost:4242/documentation/1.0/reference&quot;&gt;documentation&lt;/a&gt;
+      lately, and my &lt;a href=&quot;http://localhost:4242/blog/2011/09/26/site-improvements&quot;&gt;previous decision&lt;/a&gt; to require an HTML
+      comment in order to get syntax highlighting of Ceylon code started to look
+      like the wrong choice.
+      Since the vast majority of the code blocks on the site are going
+      to be Ceylon source, and since we're (almost?) always going to want that
+      highlighted I've changed the rules:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;Now &lt;em&gt;all&lt;/em&gt; indented code blocks will be &lt;em&gt;assumed&lt;/em&gt; to be Ceylon source code
+      that requires syntax highlighting, unless indicated otherwise.&lt;/li&gt;
+      &lt;li&gt;If the source code is not Ceylon, you can use a &lt;code&gt;&amp;lt;!-- lang: foo --&amp;gt;&lt;/code&gt;
+      comment (having setup the syntax highlighter and &lt;code&gt;gsub&lt;/code&gt; transformer
+      to do highlighting for the language &lt;code&gt;foo&lt;/code&gt;).&lt;/li&gt;
+      &lt;li&gt;If you don't want any highlighting at all use &lt;code&gt;&amp;lt;!-- lang: none --&amp;gt;&lt;/code&gt;
+      &lt;/li&gt;
+      &lt;/ul&gt;
+    </content>
+  </entry>
+  <entry>
+    <id>http://localhost:4242/blog/2011/09/26/site-improvements</id>
+    <title>Improved syntax highlighting and deep linking</title>
+    <updated>2011-09-26T00:00:00+00:00</updated>
+    <link href="http://localhost:4242/blog/2011/09/26/site-improvements" rel="alternate" type="text/html" />
+    <author>
+      <name>Tom Bentley</name>
+    </author>
+    <summary>
+      A couple of improvements to the site generation have been added.
+      
+      Syntax highlighting
+      
+      We were previously using literal &lt;pre&gt; blocks in markdown pages so that we
+      could set the CSS necessary for the syntax highlighter. The big downside of
+      this was the need to HTML-escape the code within those &lt;pre&gt; blocks. Using
+      an awestruct 'transformer' it's now possible to use
+      the more natural markdown way of including example code
+      (i.e. using indentation), which means you don't have to worry about using
+      HTML entities for &lt;, &amp; etc.
+      
+      By default &lt;pre&gt; blocks will not be subject to highlighting. To enable
+      highlighting simply preceed the block with an HTML comment hinting at...
+    </summary>
+    <content type="html">
+      &lt;p&gt;A couple of improvements to the site generation have been added.&lt;/p&gt;
+      
+      &lt;h3&gt;Syntax highlighting&lt;/h3&gt;
+      
+      &lt;p&gt;We were previously using literal &lt;code&gt;&amp;lt;pre&amp;gt;&lt;/code&gt; blocks in markdown pages so that we
+      could set the CSS necessary for the syntax highlighter. The &lt;em&gt;big&lt;/em&gt; downside of
+      this was the need to HTML-escape the code within those &lt;code&gt;&amp;lt;pre&amp;gt;&lt;/code&gt; blocks. Using
+      an &lt;a href=&quot;http://awestruct.org/&quot;&gt;awestruct&lt;/a&gt; 'transformer' it's now possible to use
+      the more natural markdown way of including example code
+      (i.e. using indentation), which means you don't have to worry about using
+      HTML entities for &amp;lt;, &amp;amp; etc.&lt;/p&gt;
+      
+      &lt;p&gt;By default &lt;code&gt;&amp;lt;pre&amp;gt;&lt;/code&gt; blocks will &lt;em&gt;not&lt;/em&gt; be subject to highlighting. To enable
+      highlighting simply preceed the block with an HTML comment hinting at the
+      language being included. For example&lt;/p&gt;
+      
+      &lt;pre&gt;&lt;code&gt;    class Foo() {
+              void bar() {
+      
+              }
+          }
+      &lt;/code&gt;&lt;/pre&gt;
+      
+      &lt;p&gt;It's also easy to have a page with syntax highlighting of multiple
+      languages, by using an appropriate hint.&lt;/p&gt;
+      
+      &lt;p&gt;For those who are interested, the way this works is having a transformer
+      perform a global &lt;code&gt;gsub&lt;/code&gt; on the generated output using a suitable regular
+      expression to pick out the code blocks generated by markdown.&lt;/p&gt;
+      
+      &lt;h3&gt;Deep linking&lt;/h3&gt;
+      
+      &lt;p&gt;Markdown by itself doesn't allow the author to put &lt;code&gt;id&lt;/code&gt; attributes or anchors
+      (&lt;code&gt;&amp;lt;a name=&quot;...&quot;&amp;gt;&lt;/code&gt;) in the generated HTML, which is annoying if you want to link
+      to a particular part of the page. You can of course put &lt;code&gt;&amp;lt;a name=&quot;...&quot;&amp;gt;&lt;/code&gt;
+      elements in yourself, but:&lt;/p&gt;
+      
+      &lt;ul&gt;
+      &lt;li&gt;It clutters up the nice markdown with HTML.&lt;/li&gt;
+      &lt;li&gt;It forces you to ensure the uniqueness of the ids you use.&lt;/li&gt;
+      &lt;li&gt;It's tedious.&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      
+      &lt;p&gt;Using another transformer we now generate id attributes automatically for all
+      &lt;code&gt;&amp;lt;h*&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt; elements. For headings we use the heading text (suitably
+      munged into an XML NAME). For paragraphs we use the first few words (again
+      suitable normalized, and also worrying about uniqueness). If an element
+      already has an &lt;code&gt;id&lt;/code&gt; then it's untouched. If there's a matching &lt;code&gt;id&lt;/code&gt;
+      (or &lt;code&gt;name&lt;/code&gt;, since they share the same namespace), steps are taken to
+      disambiguate the generated one.&lt;/p&gt;
+      
+      &lt;p&gt;The long and the short of this is that we can now easily and accurately link
+      into the middle of documents. The &lt;em&gt;caveat&lt;/em&gt; is that you should be aware that
+      changing the first few words of a paragraph (or the text of a heading) is
+      likely to break any links which point to it. To prevent such broken links
+      you can always use an explicit &lt;code&gt;&amp;lt;a name=&quot;&quot;&amp;gt;&lt;/code&gt; at the relevant point.&lt;/p&gt;
+    </content>
+  </entry>
+</feed>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Improved syntax highlighting and deep linking</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2011/08/29/news-section/">Home page has a news section</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2011/10/05/syntax-highlighting/">Changed syntax highlighting</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="improved_syntax_highlighting_and_deep_linking">
+            Improved syntax highlighting and deep linking
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/tom-bentley/">Tom Bentley</a>
+            </div>
+            <div class="date">
+              26 Sep 2011
+            </div>
+            <div class="tags">
+              <a href="/blog/tags/site/">
+                site
+              </a>
+            </div>
+          </div>
+          <div class="body">
+            <p id="a_couple_of_improvements_to...">A couple of improvements to the site generation have been added.</p>
+            
+            <h3 id="syntax_highlighting">Syntax highlighting</h3>
+            
+            <p id="we_were_previously_using_literal...">We were previously using literal <code>&lt;pre&gt;</code> blocks in markdown pages so that we
+            could set the CSS necessary for the syntax highlighter. The <em>big</em> downside of
+            this was the need to HTML-escape the code within those <code>&lt;pre&gt;</code> blocks. Using
+            an <a href="http://awestruct.org/">awestruct</a> 'transformer' it's now possible to use
+            the more natural markdown way of including example code
+            (i.e. using indentation), which means you don't have to worry about using
+            HTML entities for &lt;, &amp; etc.</p>
+            
+            <p id="by_default_pre_blocks_will...">By default <code>&lt;pre&gt;</code> blocks will <em>not</em> be subject to highlighting. To enable
+            highlighting simply preceed the block with an HTML comment hinting at the
+            language being included. For example</p>
+            
+            <pre data-language="ceylon"><code>    class Foo() {
+        void bar() {
+
+        }
+    }
+</code></pre>
+            
+            <p id="its_also_easy_to_have...">It's also easy to have a page with syntax highlighting of multiple
+            languages, by using an appropriate hint.</p>
+            
+            <p id="for_those_who_are_interested...">For those who are interested, the way this works is having a transformer
+            perform a global <code>gsub</code> on the generated output using a suitable regular
+            expression to pick out the code blocks generated by markdown.</p>
+            
+            <h3 id="deep_linking">Deep linking</h3>
+            
+            <p id="markdown_by_itself_doesnt_allow...">Markdown by itself doesn't allow the author to put <code>id</code> attributes or anchors
+            (<code>&lt;a name="..."&gt;</code>) in the generated HTML, which is annoying if you want to link
+            to a particular part of the page. You can of course put <code>&lt;a name="..."&gt;</code>
+            elements in yourself, but:</p>
+            
+            <ul>
+            <li>It clutters up the nice markdown with HTML.</li>
+            <li>It forces you to ensure the uniqueness of the ids you use.</li>
+            <li>It's tedious.</li>
+            </ul>
+            
+            
+            <p id="using_another_transformer_we_now...">Using another transformer we now generate id attributes automatically for all
+            <code>&lt;h*&gt;</code> and <code>&lt;p&gt;</code> elements. For headings we use the heading text (suitably
+            munged into an XML NAME). For paragraphs we use the first few words (again
+            suitable normalized, and also worrying about uniqueness). If an element
+            already has an <code>id</code> then it's untouched. If there's a matching <code>id</code>
+            (or <code>name</code>, since they share the same namespace), steps are taken to
+            disambiguate the generated one.</p>
+            
+            <p id="the_long_and_the_short...">The long and the short of this is that we can now easily and accurately link
+            into the middle of documents. The <em>caveat</em> is that you should be aware that
+            changing the first few words of a paragraph (or the text of a heading) is
+            likely to break any links which point to it. To prevent such broken links
+            you can always use an explicit <code>&lt;a name=""&gt;</code> at the relevant point.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2011/09/26/site-improvements/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

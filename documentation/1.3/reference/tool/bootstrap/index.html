@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Ceylon Bootstrap</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="docspage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="selected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="notselected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="sidebar">
+          <div class="point-dark-top">
+             
+          </div>
+          <div class="sidebar-dark">
+            <h3 id="quick_introduction"><a href="/documentation/1.3/introduction">Quick introduction</a></h3>
+            
+            <h3 id="tour_of_ceylon"><a href="/documentation/1.3/tour">Tour of Ceylon</a></h3>
+            
+            <h3 id="ceylon_walkthrough"><a href="/documentation/1.3/walkthrough">Ceylon Walkthrough</a></h3>
+            
+            <h3 id="examples"><a href="/documentation/1.3/examples">Examples</a></h3>
+            
+            <!--  ### [Tutorial Videos](/documentation/1.3/videos) -->
+            
+            
+            <h3 id="language_specification"><a href="/documentation/1.3/spec">Language specification</a></h3>
+            
+            <h3 id="reference"><a href="/documentation/1.3/reference">Reference</a></h3>
+            
+            <h3 id="language_module_api"><a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/index.html">Language module API</a></h3>
+            
+            <h3 id="faqs"><a href="/documentation/1.3/faq">FAQs</a></h3>
+            
+            <h3 id="roadmap"><a href="/documentation/1.3/roadmap">Roadmap</a></h3>
+            
+            <h3 id="ceylon_ide_for_intellij"><a href="/documentation/1.3/ide/intellij">Ceylon IDE for IntelliJ</a></h3>
+            
+            <h3 id="ceylon_ide_for_eclipse"><a href="/documentation/1.3/ide/eclipse">Ceylon IDE for Eclipse</a></h3>
+            
+            <h3 id="vertx"><a href="http://vertx.io/docs/vertx-core/ceylon/">Vert.x</a></h3>
+          </div>
+          <div class="point-dark-bottom">
+             
+          </div>
+          <div class="point-light-top"></div>
+          <div class="toc">
+            <ul>
+<li><a href="#the_ceylon_bootstrap_command">The <code>ceylon bootstrap</code> command
+            </a></li>
+<li><a href="#the_properties_file">The <code>.properties</code> file
+            </a></li>
+<li><a href="#the_ceylon_command_itself">The <code>ceylon</code> command itself
+            </a></li>
+<li><a href="#see_also">See also
+            </a></li>
+</ul>
+            
+            
+            <p id=""></p>
+          </div>
+          <div class="point-light-end"></div>
+        </div>
+        <div id="banner">
+          <div id="text">
+            Reference
+          </div>
+        </div>
+        <div id="core-page">
+          <div class="gh-edit">
+            <a href="https://github.com/eclipse/ceylon-lang.org/blob/master/documentation/1.3/reference/tool/bootstrap.md">
+              View source
+            </a>
+            |
+            <a href="https://github.com/eclipse/ceylon-lang.org/edit/master/documentation/1.3/reference/tool/bootstrap.md">
+              Edit
+            </a>
+          </div>
+          <h1 id="ceylon_bootstrap">Ceylon Bootstrap</h1>
+          
+          <p id="the_ceylon_bootstrap_is_a...">The Ceylon Bootstrap is a script that can be copied to a Ceylon project folder
+          that, when run by a user, will act in every way as the regular <code>ceylon</code> command
+          but without having to first go through the process of downloading and installing
+          a Ceylon distribution.</p>
+          
+          <p id="on_first_execution_of_the...">On first execution of the script it will detect that no prior version exists
+          and will then proceed to download and install the required Ceylon distribution
+          into the user's home directory (by default, see below how this can be overridden).</p>
+          
+          <h2 id="the_ceylon_bootstrap_command">The <code>ceylon bootstrap</code> command
+          </h2>
+          
+          
+          <p id="to_prepare_a_ceylon_project...">To prepare a Ceylon project for bootstrapping simply run the <a href="../../tool/ceylon/subcommands/ceylon-bootstrap.html">ceylon bootstrap</a>
+          command in the project's root directory:</p>
+          
+          <pre><code>$ ceylon bootstrap
+</code></pre>
+          
+          <p id="this_will_create_2_scripts...">This will create 2 scripts: <code>ceylonb</code> for the unices and <code>ceylonb.bat</code> for Windows.
+          (It will also generate 2 support files in <code>./.ceylon/bootstrap/</code>)</p>
+          
+          <p id="those_two_files_act_in...">Those two files act in every way as the normal <code>ceylon</code> versions that you get with
+          a Ceylon distribution (in fact they are exactly the same), so you can simply do things
+          like <code>./ceylonb compile my.module</code>.</p>
+          
+          <p id="the_difference_lies_in_the...">The difference lies in the fact that if you don't have Ceylon installed the script
+          will first download it and install it in your Ceylon user folder (in <code>~/.ceylon/dists/</code>
+          in fact).</p>
+          
+          <p id="which_version_it_downloads_and...">Which version it downloads and installs depends on the Ceylon version that was used
+          to run the <code>ceylon bootstrap</code> command. Or you can pass a specific version (or even a URL)
+          to the bootstrap command like this:</p>
+          
+          <pre><code>$ ceylon bootstrap 1.2.0
+</code></pre>
+          
+          <p id="running_ceylonb_will_then_download...">Running <code>./ceylonb</code> will then download the 1.2.0 Ceylon distribution the first time it's called.</p>
+          
+          <p id="nb_using_the_bootstrap_script..."><em>NB: Using the bootstrap script means bypassing any Ceylon versions you might have installed
+          on your system by other means. So even if you already installed the required version using your
+          system's package manager, or brew, or sdkman, the bootstrap script will </em>still* download
+          its own version**</p>
+          
+          <p id="instead_of_a_version_its...">Instead of a version it's also possible to pass a URL to the bootstrap command, for
+          example a URL pointing to a nightly build. In fact when you pass a version number
+          what really happens is that a URL is formed by taking <code>https://downloads.ceylon-lang.org/cli/</code>
+          and adding <code>ceylon-YOURVERSION.zip</code> to it.</p>
+          
+          <h2 id="the_properties_file">The <code>.properties</code> file
+          </h2>
+          
+          
+          <p id="so_how_does_ceylonb_know...">So how does <code>ceylonb</code> know which distribution to download?</p>
+          
+          <p id="well_this_information_is_stored...">Well this information is stored in the <code>./.ceylon/bootstrap/ceylon-bootstrap.properties</code>
+          file found in the same directory as the <code>ceylonb</code> script.</p>
+          
+          <p id="its_a_standard_java_properties...">It's a standard Java properties file and should contain at least the following line:</p>
+          
+          <pre><code>distribution=https://downloads.ceylon-lang.org/cli/ceylon-1.2.0.zip
+</code></pre>
+          
+          <p id="where_the_actual_url_can...">(where the actual URL can be different of course)</p>
+          
+          <p id="the_script_will_check_if...">The script will check if the given distribution is already available and download
+          and install it if not.</p>
+          
+          <p id="nb_the_distribution_can_also..."><em>NB: The <code>distribution</code> can also be a relative path to a distribution zip found on
+          the local file system. The path is relative to the folder where the <code>ceylon-bootstrap.properties</code>
+          file is found. This can be useful if you want to distribute Ceylon along with your project.</em></p>
+          
+          <p id="by_default_distributions_get_installed...">By default distributions get installed to <code>~/.ceylon/dists</code> but you can override
+          this with the <code>installation</code> option in the properties file, like this:</p>
+          
+          <pre><code>installation=../dists
+</code></pre>
+          
+          <p id="the_installation_path_is_always...">The installation path is always relative to the folder where the <code>ceylon-bootstrap.properties</code>
+          file is found. In this example any distributions would get installed to the <code>./.ceylon/dists/</code>
+          folder inside the Ceylon project. This is a very useful option when dealing with CI servers
+          where writing things to the user's home directory is not allowed.</p>
+          
+          <p id="nb_the_default_installation_path..."><em>NB: The default installation path can also changed by setting either the
+          environment variable <code>CEYLON_BOOTSTRAP_DISTS</code> to the required path.
+          The <code>ceylon.bootstrap.dists</code> System property can be used for the same purpose.</em></p>
+          
+          <p id="a_similar_option_exists_for..."><em>A similar option exists for overriding where the bootstrap looks for the
+          <code>.properties</code> file: use the <code>CEYLON_BOOTSTRAP_PROPERTIES</code> environment
+          variable or the <code>ceylon.bootstrap.properties</code> System property to point
+          to the properties file that should be loaded.</em></p>
+          
+          <p id="the_final_option_that_can...">The final option that can be specified in the properties file is <code>sha256sum</code>.
+          If specified it should contains the SHA-256 sum of the distribution archive:</p>
+          
+          <pre><code>sha256sum=2e3b50e3e80ea3a356d0d62a2cff5b59104c591aa06387e55cd34a10d52c2919
+</code></pre>
+          
+          <p id="if_the_archives_sum_doesnt...">If the archive's sum doesn't match what's specified in the properties the
+          distribution will not be installed and the command execution will fail.</p>
+          
+          <h2 id="the_ceylon_command_itself">The <code>ceylon</code> command itself
+          </h2>
+          
+          
+          <p id="this_is_all_implemented_as...">This is all implemented as part of the normal Ceylon startup and launch sequence.
+          Because of that the normal <code>ceylon</code> command now also supports specifying the
+          distribution that should be used to run a command. You can do it like this:</p>
+          
+          <pre><code>ceylon --distribution=1.2.0 compile my.module
+</code></pre>
+          
+          <p id="another_example_would_be_having...">Another example would be (having 1.2.2 installed by default):</p>
+          
+          <pre><code>$ ceylon --version
+ceylon version 1.2.2 da8272d (Charming But Irrational)
+</code></pre>
+          
+          <p id="and_now_compare_this_to">and now compare this to:</p>
+          
+          <pre><code>$ ceylon --distribution=1.0.0 --version
+ceylon version 1.0.0 (No More Mr Nice Guy)
+</code></pre>
+          
+          <p id="which_like_the_ceylonb_script...">Which, like the <code>ceylonb</code> script, will do a one-time download of the 1.1.0 distribution
+          before passing execution to it.</p>
+          
+          <h2 id="see_also">See also
+          </h2>
+          
+          
+          <ul>
+          <li><a href="../../tool/ceylon/subcommands/ceylon-bootstrap.html">ceylon bootstrap</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: Tricks with iterable objects</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2012/07/11/ceylon-m3_1/">Ceylon and Ceylon IDE updated to M3.1</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2012/08/13/latest-news/">Latest news</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="tricks_with_iterable_objects">
+            Tricks with iterable objects
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              12 Jul 2012
+            </div>
+            <div class="tags">
+            </div>
+          </div>
+          <div class="body">
+            <p id="now_that_ceylon_has_full...">Now that Ceylon has full support for mixin inheritance, we've
+            been able to fill in all the interesting operations of the
+            <code>Iterable</code> interface defined in <code>ceylon.language</code>. You can
+            see the <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Iterable.ceylon.html">definition of <code>Iterable</code>
+            here</a>.
+            (But be aware that, like the rest of the language module, the
+            actual real implementation is in Java and JavaScript. The
+            Ceylon definition is never actually compiled.)</p>
+            
+            <h2 id="mapping_and_filtering_an_iterable_object">Mapping and filtering an <code>Iterable</code> object</h2>
+            
+            <p id="of_course_iterable_has_the...">Of course, <code>Iterable</code> has the famous functions <code>map()</code>, and
+            <code>filter()</code>. You can call them like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>value filtered = "Hello Word".filter((Character c) c.uppercase);
+value mapped = "Hello Word".map((Character c) c.uppercased);
+</code></pre>
+            
+            <p id="this_works_because_a_string...">(This works because a <code>String</code> is an <code>Iterable&lt;Character&gt;</code>.)</p>
+            
+            <p id="these_operations_each_return_iterable—in...">These operations each return <code>Iterable</code>—in this case,
+            <code>Iterable&lt;Character&gt;</code>—so they don't actually allocate
+            memory (except for a single object instantiation). If you want
+            to actually get a new <code>String</code>, you need to call a function to
+            do that:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>print(string(filtered...)); //prints "HW"
+print(string(mapped...)); //prints "HELLO WORLD"
+</code></pre>
+            
+            <p id="as_an_aside_we_think...">As an aside, we think this is the right approach. I understand
+            that some folks think it's better that calling <code>filter()</code> on
+            a <code>String</code> results in a <code>String</code>, or that <code>filter()</code>ing a <code>Set</code>
+            results in a <code>Set</code>, but I think it's quite common that the
+            resulting container type should <em>not</em> be the same as the
+            original container type. For example, it's unclear that calling
+            <code>map()</code> on a <code>Set</code> should result in a <code>Set</code>, and it's certainly
+            not correct that <code>map()</code>ing a <code>String</code> results in another
+            <code>String</code>, or that <code>map()</code>ing a <code>Map</code> always results in another
+            <code>Map</code>.)</p>
+            
+            <p id="now_map_and_filter_have...">Now, <code>map()</code> and <code>filter()</code> have their uses, I suppose, but in
+            fact they're not the usual way to do mapping and filtering in
+            Ceylon. We would really write the above code like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>print(string(for (c in "Hello Word") if (c.uppercase) c)); //prints "HW"
+print(string(for (c in "Hello Word") c.uppercased)); //prints "HELLO WORLD"
+</code></pre>
+            
+            <p id="likewise_iterable_has_the_methods...">Likewise, <code>Iterable</code> has the methods <code>any()</code> and <code>every()</code>,
+            but it's still usually more convenient and idiomatic to use
+            comprehensions:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>value allLowercase = every(for (c in "Hello Word") c.lowercase); //false
+value someUppercase = any(for (c in "Hello Word") c.uppercase); //true
+</code></pre>
+            
+            <h2 id="more_operations_of_iterable">More operations of <code>Iterable</code>
+</h2>
+            
+            <p id="however_there_are_some_really...">However, there are some really useful methods of <code>Iterable</code>.
+            First, <code>find()</code> and <code>findLast()</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>value char = "Hello Word".find((Character c) c&gt;`l`); //`o`
+</code></pre>
+            
+            <p id="we_can_write_this_using...">We <em>can</em> write this using a comprehension, but to be honest in
+            this case it's slightly less ergonomic:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>value char = first(for (c in "Hello World") if (c&gt;`l`) c);
+</code></pre>
+            
+            <p id="next_sorted">Next, <code>sorted()</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>value sorted = "Hello World".sorted(byIncreasing((Character c) c.uppercased)); 
+        //" deHllloorW"
+</code></pre>
+            
+            <p id="finally_fold">Finally, <code>fold()</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>value string = "Hello World".fold("", 
+        (String s, Character c) 
+            s.empty then c.string 
+                    else s + c.string + " ");
+        //"H e l l o  W o r l d"
+
+value list = "Hello World".fold({}, 
+        (Character[] seq, Character c) 
+            c.letter then append(seq,c) 
+                     else seq); 
+        //{ H, e, l, l, o, W, o, r, l, d }
+</code></pre>
+            
+            <p id="theres_also_two_very_useful...">There's also two very useful attributes declared by <code>Iterable</code>.
+            <code>coalesced</code> produces an iterable object containing the non-null
+            elements:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>value letters = { "Hello World".map((Character c) c.letter 
+        then c.uppercased).coalesced... };
+        //{ H, E, L, L, O, W, O, R, L, D }
+</code></pre>
+            
+            <p id="the_indexed_attribute_produces_an...">The <code>indexed</code> attribute produces an iterable object containing
+            the elements indexed by their position in the stream:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>value entries = { "Hello World".indexed... }; 
+        //{ 0-&gt;H, 1-&gt;e, 2-&gt;l, 3-&gt;l, 4-&gt;o, 5-&gt; , 6-&gt;W, 7-&gt;o, 8-&gt;r, 9-&gt;l, 10-&gt;d }
+</code></pre>
+            
+            <p id="its_quite_interesting_to_see...">It's quite interesting to see the
+            <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Iterable.ceylon.html#205,207">declaration</a>
+            of these operations. For example:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>shared default Iterable&lt;Element&amp;Object&gt; coalesced {
+    return elements(for (e in this) if (exists e) e);
+}
+</code></pre>
+            
+            <p id="notice_how_the_use_of...">Notice how the use of the intersection type <code>Element&amp;Object</code>
+            eliminates the need for a type parameter with a lower bound
+            type constraint, which would be required to write down the
+            signature of this operation in most other languages. Indeed,
+            we use the same trick for the operations <code>union()</code> and
+            <code>intersection()</code> of <code>Set</code>,
+            <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/Set.ceylon.html#64,67">as you can see here</a>.</p>
+            
+            <h2 id="set_union_and_intersection">Set union and intersection</h2>
+            
+            <p id="we_let_you_write_the...">We let you write the union of two <code>Set</code>s as <code>s|t</code> in Ceylon,
+            and the intersection of two <code>Set</code>s as <code>s&amp;t</code>. Now check this
+            out:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Set&lt;String&gt; strings = ... ;
+Set&lt;Integer&gt; ints = ... ;
+value stringsAndInts = strings|ints; //type Set&lt;String|Integer&gt;
+value stringsAndInts = strings&amp;ints; //type Set&lt;Bottom&gt;, since Integer&amp;String is an empty type
+</code></pre>
+            
+            <p id="that_is_the_type_of...">That is, the type of the union of a <code>Set&lt;X&gt;</code> with a <code>Set&lt;Y&gt;</code> is
+            <code>Set&lt;X|Y&gt;</code> and the type of the intersection of a <code>Set&lt;X&gt;</code> with
+            a <code>Set&lt;Y&gt;</code> is <code>Set&lt;X&amp;Y&gt;</code>. Cool, huh?</p>
+            
+            <p id="by_the_way_we_just...">By the way, we just added similar methods <code>withLeading()</code> and
+            <code>withTrailing()</code> to <code>List</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>value floatsAndInts = { 1, 2, 3.0 }; //type Sequence&lt;Integer|Float&gt;
+value stuff = floatsAndInts.withTrailing("hello", "world"); //type Sequence&lt;Integer|Float|String&gt;
+</code></pre>
+            
+            <p id="these_operations_didnt_make_it...">(These operations didn't make it into M3.1.)</p>
+            
+            <h2 id="min_and_max">
+<code>min()</code> and <code>max()</code>
+</h2>
+            
+            <p id="well_heres_something_else_thats...">Well, here's something else that's cool. Ceylon distinguishes
+            between empty and nonempty sequences within the type system.
+            An empty sequence is of type <code>Empty</code>, a <code>List&lt;Bottom&gt;</code>. A
+            non-empty sequence is a <code>Sequence&lt;Element&gt;</code>,a <code>List&lt;Element&gt;</code>.
+            (There's even a convenient <code>if (nonempty)</code> construct for
+            narrowing a sequence to a nonempty sequence without too much
+            ceremony.)</p>
+            
+            <p id="this_lets_us_do_something...">This lets us do something pretty cool with the <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/max.ceylon.html#1,21">signature of
+            <code>min()</code> and <code>max()</code></a>.</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>value nothingToMax = max({}); //type Nothing
+value somethingToMax = max({0.0, 1.0, -1.0}); //type Float
+List&lt;Character&gt; chars = "hello";
+value maybeSomethingToMax = max(chars); //type Character?
+</code></pre>
+            
+            <p id="that_is_according_to_its...">That is, according to its signature, the <code>max()</code> function
+            returns:</p>
+            
+            <ul>
+            <li>
+<code>null</code> when passed an empty sequence,</li>
+            <li>a non-<code>null</code> value when passed a nonempty sequence, or</li>
+            <li>a possibly-null value when passed an iterable object that
+            we don't know is empty or nonempty.</li>
+            </ul>
+            
+            
+            <p id="its_important_to_point_out...">It's important to point out that this is <em>not</em> some special
+            feature built in as a special case in the type system. Nor
+            is it in any way related to overloading. Indeed, until a
+            couple of weeks ago I didn't even realize that this was
+            possible. It's rather a demonstration of how expressive our
+            type system is: in this case, the combination of intersection
+            types, union types, and principal instantiation inheritance
+            of generic types lets us express something within the type
+            system that might seem almost magical. The real magic is in
+            the declaration of the language module type
+            <a href="https://modules.ceylon-lang.org/repo/1/ceylon/language/1.3.3/module-doc/ContainerWithFirstElement.ceylon.html"><code>ContainerWithFirstElement</code></a>.</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2012/07/12/tricks-with-iterable/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>

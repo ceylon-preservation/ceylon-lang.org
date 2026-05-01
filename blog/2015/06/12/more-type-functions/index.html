@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Eclipse Ceylon: A little more about type functions</title>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://plus.google.com/102481741611133754149" rel="publisher">
+    <link href="/stylesheets/themes/paraiso-dark.css" rel="stylesheet">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet">
+    <!--[if lt IE 8]>
+      <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" />
+    <![endif]-->
+    <link href="/blog/blog.atom" rel="alternate" type="application/atom+xml">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro%7CPT+Sans%7CPT+Sans:700%7CInconsolata%7CInconsolata:700%7CArvo" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/js/jquery-ui-1.8.22.custom.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/rainbow.min.js"></script>
+    <script src="/js/language/ceylon.js"></script>
+    <script src="/js/language/java.js"></script>
+    <script src="/js/language/javascript.js"></script>
+    <script src="/js/language/html.js"></script>
+    <script src="/js/language/shell.js"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     
+    ga('create', 'UA-24748553-1', 'auto');
+    ga('send', 'pageview');
+    
+    </script>
+  </head>
+  <body class="bp">
+    <div class="blogpage" id="container">
+      <div id="preservation-banner" style="background: white; color: black; text-align: center; padding: 8px 0; font-size: 14px; font-family: Courier, monospace;">
+        This site is provided as part of the
+        <a href="https://ceylon-lang.dev" style="text-decoration: underline; color: black;">Ceylon Preservation Project</a>
+      </div>
+      <div class="header-bar">
+        <!-- /cannot use a partial as it loses the page.tab context :( -->
+        <div id="header">
+          <a href="/" id="header-logo">
+            <h1 id="ceylon">
+              Ceylon
+            </h1>
+          </a>
+          <div id="header-tagline">
+            <p id="say_more_more_clearly">
+              Say more, more clearly
+            </p>
+          </div>
+          <div id="menu">
+            <ul id="menu-core">
+              <li id="notselected">
+                <a href="/">HOME</a>
+              </li>
+              <li id="notselected">
+                <a href="/documentation/current">LEARN</a>
+              </li>
+              <li id="notselected">
+                <a href="/download">DOWNLOAD</a>
+              </li>
+              <li id="notselected">
+                <a href="/community">COMMUNITY</a>
+              </li>
+              <li id="notselected">
+                <a href="/code">CODE</a>
+              </li>
+              <li id="selected">
+                <a href="/blog">BLOG</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="primary-content">
+        <div id="banner">
+          <div id="text">
+            Blog
+          </div>
+        </div>
+        <div id="post-navigation">
+          <div class="post-navigation">
+            <div id="post-nav-previous">
+              <div class="previous">
+                <div class="label">
+                  previous post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2015/06/03/generic-function-refs/">Programming with type functions in Ceylon</a>
+                </div>
+              </div>
+            </div>
+            <div id="post-nav-next">
+              <div class="next">
+                <div class="label">
+                  next post
+                </div>
+                <div class="nav-link">
+                  <a href="/blog/2015/06/21/constructors/">Constructors in Ceylon</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="core-page"></div>
+        <div class="post">
+          <h1 class="title" id="a_little_more_about_type_functions">
+            A little more about type functions
+          </h1>
+          <div class="byline">
+            <div class="author">
+              by
+              <!-- there is only one author per page but the author splitter adds an array here -->
+              <a href="/blog/authors/gavin-king/">Gavin King</a>
+            </div>
+            <div class="date">
+              12 Jun 2015
+            </div>
+            <div class="tags">
+            </div>
+          </div>
+          <div class="body">
+            <p id="my_previous_post_about_type...">My previous post about
+            <a href="/blog/2015/06/03/generic-function-refs">type functions</a>
+            generated some interesting discussion, here, and
+            <a href="http://www.reddit.com/r/programming/comments/38hsrb/programming_with_type_functions_in_ceylon/">on reddit</a>.</p>
+            
+            <p id="therefore_i_think_its_worth...">Therefore, I think it's worth tying up several loose ends
+            from the earlier post. So here's a collection of further
+            observations about type functions.</p>
+            
+            <p id="warning_this_post_addresses_some..."><em>Warning: this post addresses some very technical details of
+            how we've incorporated type functions into Ceylon's type
+            system. Don't even bother continuing any further until
+            you've read the <a href="/blog/2015/06/03/generic-function-refs">earlier post</a>.</em></p>
+            
+            <h3 id="the_why_of_this">The "why" of this</h3>
+            
+            <p id="the_most_well_known_application...">The most well-known application of higher-order generics is
+            for representing high-level abstractions of container types:
+            functors, monads, and friends. That's not what motivated me
+            to experiment with higher-order generics in Ceylon, and as a
+            practical matter I still have little interest in these
+            abstractions, though they're fun to play with.</p>
+            
+            <p id="no_what_bothered_me_was...">No, what bothered me was not that Ceylon's type system
+            wasn't powerful enough to represent <code>Functor</code> or <code>Monad</code>,
+            but rather that Ceylon's type system <em>wasn't powerful enough
+            to represent Ceylon</em>. I'll show you what I mean by that in
+            just a second. But first I want to argue that type functions
+            can be seen as a regularization of the language.</p>
+            
+            <p id="from_a_purely_syntactic_point...">From a <em>purely syntactic</em> point of view, it's always seemed
+            a little strange that every sort of type declaration in
+            Ceylon can have a list of type parameters, <em>except for a
+            type parameter itself</em>. Furthermore, it's noticeable that I
+            can take a reference, or meta reference to any program
+            element <em>unless it has a list of type parameters</em>. Now, such
+            restrictions might seem reasonable if a parameterized type
+            parameter or a reference to a generic declaration were not
+            meaningful notions at a fundamental level. But they clearly
+            <em>are</em> meaningful, and even at least <em>somewhat</em> useful.</p>
+            
+            <p id="exactly_how_useful_is_a...">Exactly <em>how</em> useful is a different question—the
+            jury's still out, at least in my mind. And so perhaps we'll
+            ultimately conclude that this stuff isn't worth its weight.
+            The weight being, substantially, the time it takes for
+            programmers new to Ceylon to understand this stuff.</p>
+            
+            <p id="in_the_original_post_i...">In the original post, I showed how type functions were
+            necessary to represent the type of a reference to a generic
+            function. One place where this problem arises is with one of
+            Ceylon's more unique features: its <em>typesafe metamodel</em>.</p>
+            
+            <h3 id="a_use_case_for_generic_function_reference_types">A use case for generic function reference types</h3>
+            
+            <p id="usually_i_can_obtain_a...">Usually, I can obtain a metamodel object that represents a
+            class or function and captures its type signature. For
+            example, the expression <code>`String`</code> evaluates to a
+            metamodel object that captures the type and initializer
+            parameters of the class <code>String</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Class&lt;String,[{Character*}]&gt; stringClass = `String`;
+</code></pre>
+            
+            <p id="for_a_generic_declaration_i...">For a generic declaration, I can do a similar thing, as long
+            as I'm prepared to nail down the type arguments. For example,
+            I can write <code>`Singleton&lt;String&gt;`</code> to get a metamodel
+            object representing the class <code>Singleton</code> after applying the
+            type argument <code>String</code>:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Class&lt;Singleton&lt;String&gt;,[String]&gt; stringSingletonClass
+        = `Singleton&lt;String&gt;`
+</code></pre>
+            
+            <p id="but_in_ceylon_as_it...">But in Ceylon as it exists today, I can't obtain a typed
+            metamodel object that represents just <code>`Singleton`</code>,
+            because to represent the type of that metamodel object I
+            would necessarily need a type function.</p>
+            
+            <p id="now_with_the_new_experimental...">Now, with the new experimental support for type functions,
+            the type of the expression <code>`Singleton`</code> could be
+            <code>&lt;T&gt; =&gt; Class&lt;Singleton&lt;T&gt;,[T]&gt;()</code>, allowing code like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>value singletonGenericClass = `Singleton`;
+...
+Class&lt;Singleton&lt;String&gt;,[String]&gt; stringSingletonClass 
+        = singletonGenericClass&lt;String&gt;();
+</code></pre>
+            
+            <p id="thats_just_one_example_of...">That's just one example of how allowing references to
+            generic functions makes Ceylon feel more "complete".</p>
+            
+            <h3 id="two_use_cases_for_anonymous_type_functions">Two use cases for anonymous type functions</h3>
+            
+            <p id="i_get_the_impression_that...">I get the impression that the "scariest" bit of what I've
+            presented in the previous post is the notation for anonymous
+            type functions. That is, the following syntax:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>&lt;X&gt; =&gt; X
+&lt;X&gt; =&gt; [X,X,X]
+&lt;X,Y&gt; =&gt; X|Y
+&lt;T&gt; given T satisfies Object =&gt; Category&lt;T&gt;(T*)
+</code></pre>
+            
+            <p id="but_im_convinced_that_this...">But I'm convinced that this notation is not really that
+            hard to understand. The reason I assert this is because if
+            I give each of these type functions a name, then most of
+            you guys have no problem understanding them:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>alias Identity&lt;X&gt; =&gt; X;
+alias Triple&lt;X&gt; =&gt; [X,X,X];
+alias Union&lt;X,Y&gt; =&gt; X|Y;
+alias CategoryCreator&lt;T&gt; given T satisfies Object =&gt; Category&lt;T&gt;(T*);
+</code></pre>
+            
+            <p id="but—one_might_reasonably_enquire—why_do..."><em>But</em>—one might reasonably enquire—<em>why do we
+            even need them, if the named versions are easier to read</em>?</p>
+            
+            <p id="well_we_need_them">Well, we need them:</p>
+            
+            <ol>
+            <li>in order to be able to denote the type of a reference to
+            a generic function—remember, we don't have
+            undenotable types in Ceylon—and</li>
+            <li>to make it easy to <em>partially apply</em> a named type
+            function like <code>Map</code>.</li>
+            </ol>
+            
+            
+            <p id="for_example_we_want_to...">For example, we want to be able to write stuff like
+            <code>&lt;T&gt; =&gt; Map&lt;String,T&gt;</code> when working with higher-order
+            generics, thus turning a type function of two type
+            parameters into a type function of one type parameter.</p>
+            
+            <h3 id="are_type_functions_type_types">Are type functions "type types"?</h3>
+            
+            <p id="one_thing_i_should_have...">One thing I should have made very clear, and forgot, is that
+            type functions don't represent an additional meta level. In
+            Ceylon's type system, type functions are types, in the very
+            same sense that function are values in Ceylon and other
+            modern languages.</p>
+            
+            <p id="there_simply_is_no_additional...">There simply is no additional meta-type system for types in
+            Ceylon. The closest thing we have to a "type type" is a
+            generic type constraint, but that's an extremely
+            impoverished sort of type type, since Ceylon provides no
+            facilities at all to abstract over type constraints—I
+            can't even assign an alias to a type constraint and reuse it
+            by name.</p>
+            
+            <p id="ceylon_reasons_about_type_constraints...">Ceylon reasons about type constraints and assignability of
+            types to type variables using hardcoded rules written
+            primitively into the language spec and type checker, not by
+            abstraction over the types of types.</p>
+            
+            <h3 id="type_functions_and_subtyping">Type functions and subtyping</h3>
+            
+            <p id="but_if_a_type_function...">But if a type function is a type, what are its subtyping
+            relationships with other types and other type functions?</p>
+            
+            <p id="well_first_recall_that_some...">Well, first, recall that some type functions have instances:
+            generic function references. We didn't want to introduce
+            values into the language that aren't <code>Object</code>s, so we've
+            declared that every type function is a subtype of <code>Object</code>.
+            This preserves the useful property that our type system has
+            a single root type <code>Anything</code>.</p>
+            
+            <p id="next_recall_that_an_ordinary...">Next, recall that an ordinary function type is <em>covariant</em>
+            in its return type, and <em>contravariant</em> in its parameter
+            types. For example, the function type:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>String(Object, Object)
+</code></pre>
+            
+            <p id="is_a_subtype_of">is a subtype of:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Object(String, String)
+</code></pre>
+            
+            <p id="since_if_a_function_accepts...">Since if a function accepts two <code>Object</code>s and returns a
+            <code>String</code>, then it's clearly also a function that accepts two
+            <code>String</code>s and returns an <code>Object</code>.</p>
+            
+            <p id="given_two_function_types_with...">Given two function types with one parameter:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>F(P)
+G(Q)
+</code></pre>
+            
+            <p id="then_fp_is_a_subtype...">Then <code>F(P)</code> is a subtype of <code>G(Q)</code> iff <code>P</code> is a supertype of
+            <code>Q</code> and <code>F</code> is a subtype of <code>G</code>.</p>
+            
+            <p id="similar_rules_apply_to_type...">Similar rules apply to type functions. Consider two type
+            functions of one type parameter:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>alias A&lt;X&gt; given X satisfies U =&gt; F&lt;X&gt;
+alias B&lt;Y&gt; given Y satisfies V =&gt; G&lt;Y&gt;
+</code></pre>
+            
+            <p id="then_a_is_a_subtype...">Then <code>A</code> is a subtype of <code>B</code> iff:</p>
+            
+            <ul>
+            <li>the upper bound <code>U</code> on <code>X</code> is a supertype of the upper
+            bound <code>V</code> on <code>Y</code>, and</li>
+            <li>for any type <code>T</code>, <code>F&lt;T&gt;</code> is a subtype of <code>G&lt;T&gt;</code>.</li>
+            </ul>
+            
+            
+            <p id="that_is_to_say_if...">That is to say, if <code>A&lt;X&gt;</code> accepts every type argument <code>T</code>
+            that <code>B&lt;Y&gt;</code> accepts, and for each such <code>T</code>, the applied type
+            <code>A&lt;T&gt;</code> is a subtype of the applied type <code>B&lt;T&gt;</code>, then we can
+            soundly replace <code>B</code> with <code>A</code> in well-typed code.</p>
+            
+            <p id="of_course_these_rules_generalize...">(Of course, these rules generalize to type functions with
+            multiple type parameters.)</p>
+            
+            <h3 id="generic_function_types_and_subtyping">Generic function types and subtyping</h3>
+            
+            <p id="now_lets_narrow_our_attention...">Now let's narrow our attention to consider only type
+            functions that represent the types of generic functions.
+            To make it easier, we'll consider generic functions of the
+            following form, with just one type parameter and just one
+            value parameter:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>F&lt;X&gt; f&lt;X&gt;(P&lt;X&gt; p) given X satisfies U =&gt; ... ;
+</code></pre>
+            
+            <p id="here_fx_is_the_return...">Here, <code>F&lt;X&gt;</code> is the return type, a type expression involving
+            the type parameter <code>X</code>, and <code>P&lt;X&gt;</code> is the parameter type,
+            which also involves <code>X</code>.</p>
+            
+            <p id="the_type_of_this_generic...">The type of this generic function—as we
+            <a href="/blog/2015/06/03/generic-function-refs/#the_type_of_a_generic_function_is_a_type_function">saw</a>
+            in the previous post— is the type function:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>&lt;X&gt; given X satisfies U =&gt; F&lt;X&gt;(P&lt;X&gt;)
+</code></pre>
+            
+            <p id="so_lets_consider_two_type...">So let's consider two type functions of the general form
+            we're considering:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>alias A&lt;X&gt; given X satisfies U =&gt; F&lt;X&gt;(P&lt;X&gt;)
+alias B&lt;Y&gt; given Y satisfies V =&gt; G&lt;Y&gt;(Q&lt;Y&gt;)
+</code></pre>
+            
+            <p id="then_we_see_quickly_that...">Then we see quickly that <code>A</code> is a subtype of <code>B</code> iff:</p>
+            
+            <ul>
+            <li>the upper bound <code>U</code> on <code>X</code> is a supertype of the upper
+            bound <code>V</code> on <code>Y</code>, and</li>
+            <li>for any type <code>T</code>, the return type <code>F&lt;T&gt;</code> of <code>A</code> is a
+            subtype of the return type <code>G&lt;T&gt;</code> of <code>B</code>, and the
+            parameter type <code>P&lt;T&gt;</code> of <code>A</code> is a supertype of the
+            parameter type <code>Q&lt;T&gt;</code> of <code>B</code>.</li>
+            </ul>
+            
+            
+            <p id="for_example_this_generic_function...">For example, this generic function type:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>&lt;X&gt; =&gt; X&amp;Object(X|Object)
+</code></pre>
+            
+            <p id="is_a_subtype_of_this...">is a subtype of this generic function type:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>&lt;X&gt; given X satisfies Object =&gt; X(X)
+</code></pre>
+            
+            <p id="take_a_minute_to_convince...">Take a minute to convince yourself that this is correct
+            intuitively.</p>
+            
+            <p id="again_these_rules_generalize_naturally...">(Again, these rules generalize naturally to functions with
+            multiple type parameters and/or multiple value parameters.)</p>
+            
+            <h3 id="type_functions_and_type_inference">Type functions and type inference</h3>
+            
+            <p id="when_we_call_a_first...">When we call a first-order generic function in Ceylon, we
+            don't usually need to explicitly specify type arguments.
+            Instead, we can usually infer them from the value arguments
+            of the invocation expression. For example, if we have this
+            generic function:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>List&lt;Out&gt; map&lt;In,Out&gt;(Out(In) fun, List&lt;In&gt; list) =&gt; ... ;
+</code></pre>
+            
+            <p id="then_we_can_always_safely...">Then we can always safely infer <code>In</code> and <code>Out</code>, because
+            there's a unique most-precise choice of type arguments:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>value list = map(Integer.string, ArrayList { 10, 20, 30 });
+</code></pre>
+            
+            <p id="in_this_example_we_can...">In this example, we can safely infer that <code>In</code> is <code>Integer</code>,
+            and <code>Out</code> is <code>String</code>, without any loss of precision.</p>
+            
+            <p id="unfortunately_once_higher_order_generics...">Unfortunately, once higher-order generics come into play,
+            inference of type functions is a much more ambiguous problem.
+            Consider this second-order generic function, which abstracts
+            the <code>map()</code> function away from the container type, by
+            introducing the type function variable <code>Box</code> to represent
+            the unknown container type:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>Box&lt;Out&gt; fmap&lt;Box,In,Out&gt;(Out(In) fun, Box&lt;In&gt; box) 
+        given Box&lt;Element&gt; { ... }
+</code></pre>
+            
+            <p id="and_now_consider_the_following...">And now consider the following invocation of this function:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>fmap(Integer.string, ArrayList { 10, 20, 30 })
+</code></pre>
+            
+            <p id="what_type_should_we_infer...">What type should we infer for <code>Element</code>, and what type
+            function for <code>Box</code>?</p>
+            
+            <ul>
+            <li>
+<code>Integer</code> and <code>List</code>?</li>
+            <li>
+<code>Integer</code> and <code>Iterable</code>?</li>
+            <li>
+<code>Integer</code> and <code>ArrayList</code>?</li>
+            <li>
+<code>Integer</code> and <code>MutableList</code>?</li>
+            <li>
+<code>Integer</code> and <code>ListMutator</code>?</li>
+            <li>
+<code>Integer</code> and <code>Collection</code>?</li>
+            <li>
+<code>Object</code> and <code>Category</code>?</li>
+            </ul>
+            
+            
+            <p id="in_general_there_might_be...">In general, there might be several different reasonable
+            choices, and no really good criteria for choosing between
+            them. So in this case, we require that the type arguments be
+            specified explicitly:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>fmap&lt;List,Integer,String&gt;(Integer.string, ArrayList { 10, 20, 30 })
+</code></pre>
+            
+            <p id="however_there_is_a_pattern...">However, there is a pattern we can use to make type function
+            inference possible. In this case, we could define the
+            following interface:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>interface Functor&lt;Box,Element&gt; given Box&lt;Value&gt; { ... }
+</code></pre>
+            
+            <p id="now_lets_imagine_that_our...">Now let's imagine that our <code>ArrayList</code> class inherits
+            <code>Functor</code>, so that any <code>ArrayList&lt;Element&gt;</code> is a
+            <code>Functor&lt;List,Element&gt;</code>.</p>
+            
+            <p id="and_lets_redefine_fmap_like...">And let's redefine <code>fmap()</code> like this:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>  Box&lt;Out&gt; fmap&lt;Box,In,Out&gt;(Out(In) fun, Functor&lt;Box,In&gt; box) 
+        given Box&lt;Element&gt; { ... }
+</code></pre>
+            
+            <p id="then_finally_for_the_same...">Then, finally, for the same instantiation expression we had
+            before:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>fmap(Integer.string, ArrayList { 10, 20, 30 })
+</code></pre>
+            
+            <p id="we_can_now_unambiguously_infer...">we can now unambiguously infer that <code>Box</code> is <code>List</code> and
+            <code>In</code> is <code>Integer</code>, since those types are encoded as type
+            arguments to <code>Functor</code> in the principal supertype
+            instantiation of <code>Functor</code> for the expression
+            <code>ArrayList { 10, 20, 30 }</code>.</p>
+            
+            <h3 id="instances_of_type_functions">Instances of type functions</h3>
+            
+            <p id="in_the_original_post_we...">In the original post, we noted that a type function that
+            returns a function type is the type of a generic function.
+            For example, the type function:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>&lt;X&gt; given X satisfies Object =&gt; X(X)
+</code></pre>
+            
+            <p id="is_the_type_of_this...">Is the type of this generic function:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>X f&lt;X&gt;(X x) given X satisfies Object =&gt; x;
+</code></pre>
+            
+            <p id="but_then_its_natural_to...">But then it's natural to enquire: if some type functions are
+            the types of generic functions, what are the <em>other</em> type
+            functions the types of?</p>
+            
+            <p id="well_if_you_reflect_for...">Well, if you reflect for a second on the relationship
+            between types and values, I think you'll see that they must
+            be the types of <em>generic value declarations</em>. That is, this
+            type function:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>&lt;X&gt; =&gt; List&lt;X&gt;
+</code></pre>
+            
+            <p id="would_be_the_type_of...">would be the type of this value, written in pseudo-Ceylon:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>List&lt;X&gt; list&lt;X&gt; =&gt; ... ;
+</code></pre>
+            
+            <p id="that_is_when_presented_with...">That is, when presented with a type <code>X</code>, <code>list&lt;X&gt;</code> evaluates
+            to a <code>List&lt;X&gt;</code>.</p>
+            
+            <p id="of_course_there_are_no...">Of course there are no actual generic values in Ceylon, the
+            closest thing we have is a nullary generic function:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>List&lt;X&gt; list&lt;X&gt;() =&gt; ... ;
+</code></pre>
+            
+            <p id="whose_type_is_actually">whose type is actually:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>&lt;X&gt; =&gt; List&lt;X&gt;()
+</code></pre>
+            
+            <p id="theres_no_plan_to_ever...">There's no plan to ever introduce generic values into Ceylon,
+            so types like <code>&lt;X&gt; =&gt; List&lt;X&gt;</code> have no instances. They're
+            useful only as type arguments to higher-order generic types.</p>
+            
+            <h3 id="type_functions_and_principal_typing">Type functions and principal typing</h3>
+            
+            <p id="finally_lets_address_a_rather...">Finally, let's address a rather technical point.</p>
+            
+            <p id="a_very_important_property_of...">A very important property of Ceylon's type system is the
+            ability to form a <em>principal instantiation</em> of any union or
+            intersection of different instantiations of a generic type.</p>
+            
+            <p id="for_example_for_the_covariant...">For, example, for the covariant type <code>List&lt;T&gt;</code>:</p>
+            
+            <ul>
+            <li>
+<code>List&lt;X&gt; | List&lt;Y&gt;</code> has the principal instantiation
+            <code>List&lt;X|Y&gt;</code>
+</li>
+            <li>
+<code>List&lt;X&gt; &amp; List&lt;Y&gt;</code> has the principal instantiation
+            <code>List&lt;X&amp;Y&gt;</code>
+</li>
+            </ul>
+            
+            
+            <p id="for_the_contravariant_type_comparablet">For the contravariant type <code>Comparable&lt;T&gt;</code>:</p>
+            
+            <ul>
+            <li>
+<code>Comparable&lt;X&gt; | Comparable&lt;Y&gt;</code> has the principal
+            instantiation <code>Comparable&lt;X&amp;Y&gt;</code>
+</li>
+            <li>
+<code>Comparable&lt;X&gt; &amp; Comparable&lt;Y&gt;</code> has the principal
+            instantiation <code>Comparable&lt;X|Y&gt;</code>
+</li>
+            </ul>
+            
+            
+            <p id="naturally_its_important_that_we...">Naturally, it's important that we can do the same tricks for
+            intersections and unions of instantiations of higher-order
+            types. As at happens, this works out extremely naturally,
+            using the following identities:</p>
+            
+            <ul>
+            <li>
+<code>&lt;&lt;X&gt; =&gt; F&lt;X&gt;&gt; | &lt;&lt;Y&gt; =&gt; G&lt;Y&gt;&gt;</code> is a subtype of
+            <code>&lt;T&gt; =&gt; F&lt;T&gt; | G&lt;T&gt;</code>, and</li>
+            <li>
+<code>&lt;&lt;X&gt; =&gt; F&lt;X&gt;&gt; &amp; &lt;&lt;Y&gt; =&gt; G&lt;Y&gt;&gt;</code> is a subtype of
+            <code>&lt;T&gt; =&gt; F&lt;T&gt; &amp; G&lt;T&gt;</code>.</li>
+            </ul>
+            
+            
+            <p id="thus_if_we_have_the...">Thus, if we have the following covariant second-order type:</p>
+            
+            <!-- try: -->
+            
+            
+            <pre data-language="ceylon"><code>interface Functor&lt;out Element, out Container&gt;
+        given Container&lt;E&gt; { ... }
+</code></pre>
+            
+            <p id="then_we_obtain_the_following...">Then we obtain the following principal instantiations:</p>
+            
+            <ul>
+            <li>
+<code>Functor&lt;E,A&gt; | Functor&lt;F,B&gt;</code> has the principal
+            instantiation <code>Functor&lt;E|F,&lt;T&gt; =&gt; A&lt;T&gt;|B&lt;T&gt;&gt;</code>, and</li>
+            <li>
+<code>Functor&lt;E,A&gt; &amp; Functor&lt;F,B&gt;</code> has the principal
+            instantiation <code>Functor&lt;E&amp;F, &lt;T&gt; =&gt; A&lt;T&gt;&amp;B&lt;T&gt;&gt;</code>.</li>
+            </ul>
+            
+            
+            <p id="you_dont_need_to_know...">You don't need to know these identities when you're writing
+            code in Ceylon, but it's nice to know that type functions
+            don't undermine the basic algebraic properties which are the
+            reason Ceylon's type system is so nice to work with.
+            Everything fits together here, without weird holes and
+            corner cases.</p>
+            
+            <h3 id="a_word_about_rank">A word about "rank"</h3>
+            
+            <p id="in_the_previous_post_i...">In the previous post I described our support for references
+            to generic functions as "arbitrary rank" polymorphism, which
+            prompted a short discussion about how to measure the rank of
+            a generic type. I now think that the term "rank" probably
+            isn't very meaningful in connection to Ceylon, since there's
+            nothing special about our function types: they're just
+            instantiations of the perfectly ordinary generic type
+            <code>Callable</code>. As suggested by Kamatsu
+            <a href="http://www.reddit.com/r/programming/comments/38hsrb/programming_with_type_functions_in_ceylon/crva8md">on reddit</a>,
+            it seems to me that a better word to use is probably
+            "impredicative".</p>
+            
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                        var disqus_shortname = 'ceylonlang';
+                        var disqus_url = "http://localhost:4242/blog/2015/06/12/more-type-functions/";
+                        
+                        (function() {
+                          var dsq = document.createElement("script"); dsq.type = "text/javascript"; dsq.async = true;
+                          dsq.src = "//ceylonlang.disqus.com/embed.js";
+                          (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+                        })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript=ceylonlang">comments powered by Disqus.</a>
+</noscript>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div id="footer">
+          <div id="footer-core">
+            <div id="sponsor">
+              <a href="http://www.eclipse.org" title="Eclipse Ceylon is an Eclipse Project"><img src="/images/Eclipse2014_RGB.svg" width="150px"></a>
+              <span>
+                Eclipse Ceylon is an <a href="http://www.eclipse.org">Eclipse Project</a>.
+              </span>
+            </div>
+            <div id="copyright">
+              <p id="copyright_©_2010_2026_red...">Copyright © 2010-2026,
+              Red Hat, Inc. or third-party contributors —
+              Ceylon is a trademark of the <a href="http://www.eclipse.org">Eclipse Foundation</a> —
+              <a href="https://eclipse.org/legal/termsofuse.php">Terms of use</a> —
+              <a href="https://eclipse.org/legal/privacy.php">Privacy policy</a> —
+              <a href="http://www.eclipse.org/legal/copyright.php">Copyright agent</a> —
+              <a href="http://www.eclipse.org/legal">Legal</a>.</p>
+              <p id="site_generated_on_may_01...">Site generated on May 01, 2026 at 01:03</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+              <script type="text/javascript">
+              var disqus_shortname = 'ceylonlang';
+              (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.src = "//disqus.com/forums/ceylonlang/count.js";
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+              }());
+              </script>
+</html>
