@@ -2,3 +2,10 @@ Gemfile
 Gemfile.lock
 Rakefile
 .rvmrc
+Dockerfile
+justfile
+BUILDING-2026.md
+RELEASE.md
+README.md
+download-urls.txt
+preservation-site
